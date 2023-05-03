@@ -1,11 +1,9 @@
 using UnityEngine;
 
-public class BasicAbility : MonoBehaviour
+public class BasicAbility : CoreAbility
 {
     [Header("Particle Pool:")]
     [SerializeField] private Transform basicAbilityProjectilePool;
-    [SerializeField] private Transform pfSprayParticleProjectile;
-    [SerializeField] private int particlePoolAmount;
 
     [Header("Particle Settings:")]
     [SerializeField] private float moveSpeed;
@@ -15,28 +13,11 @@ public class BasicAbility : MonoBehaviour
     [SerializeField] private float timeUntilChangeDirectionMin;
     [SerializeField] private float swingMagtitude;
 
-    [Header("Ability Settings:")]
-    [SerializeField] private float coolDown;
-    [SerializeField] public int damage;
-    [SerializeField] private float pushPower;
-
-    private float cooldownTimer = default;
-
     //===========================================================================
-    private void Awake()
-    {
-        // Create Pool of Particle Effect
-        for (int i = 0; i < particlePoolAmount; i++)
-        {
-            Transform _particle = Instantiate(pfSprayParticleProjectile, basicAbilityProjectilePool);
-            _particle.localPosition = Vector2.zero;
-            _particle.gameObject.SetActive(false);
-        }
-    }
 
-    private void Update()
+    protected override void Update()
     {
-        BasicAbilityCooldown();
+        base.Update();
 
         BasicAbilityInputHandler();
     }
@@ -47,23 +28,12 @@ public class BasicAbility : MonoBehaviour
     }
 
     //===========================================================================
-    private void BasicAbilityCooldown()
-    {
-        if (cooldownTimer > 0.0f)
-        {
-            cooldownTimer -= Time.deltaTime;
-
-            if (cooldownTimer < 0.0f)
-                cooldownTimer = 0.0f;
-        }
-    }
-
     private void BasicAbilityInputHandler()
     {
         if (Input.GetMouseButton(0) && cooldownTimer == 0)
         {
             SpawnParticle();
-            cooldownTimer = coolDown;
+            cooldownTimer = cooldown;
         }
     }
 

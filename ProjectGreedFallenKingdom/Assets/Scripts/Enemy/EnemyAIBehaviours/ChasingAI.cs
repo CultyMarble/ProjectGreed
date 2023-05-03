@@ -9,9 +9,6 @@ public class ChasingAI : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float distanceToKeep;
 
-    private bool stopMovement = false;
-    private float stopMovementTimer = default;
-
     private Rigidbody2D enemy_rb2D;
     private TargetingAI targetingAI;
     private Vector2 movingDirection;
@@ -25,16 +22,7 @@ public class ChasingAI : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (stopMovement)
-        {
-            stopMovementTimer -= Time.deltaTime;
-            if (stopMovementTimer <= 0.0f)
-            {
-                currentSpeed = speed;
-                stopMovement = false;
-            }
-        }
-        else if (holdMovementDirection == true)
+        if (holdMovementDirection == true)
         {
             holdtimer -= Time.deltaTime;
             if (holdtimer <= 0.0f)
@@ -53,7 +41,9 @@ public class ChasingAI : MonoBehaviour
     {
         if (targetingAI.currentTargetTransform == null)
         {
-            movingDirection = Vector2.zero;
+            if (enemy_rb2D.velocity != Vector2.zero)
+                enemy_rb2D.velocity = Vector2.zero;
+
             return;
         }
 
@@ -64,16 +54,6 @@ public class ChasingAI : MonoBehaviour
         else
             currentSpeed = speed;
 
-        enemy_rb2D.velocity = movingDirection * currentSpeed;
-    }
-
-    //===========================================================================
-    public void StopMovement(float newTime)
-    {
-        stopMovement = true;
-        currentSpeed = 0.0f;
-
-        stopMovementTimer = newTime;
         enemy_rb2D.velocity = movingDirection * currentSpeed;
     }
 }

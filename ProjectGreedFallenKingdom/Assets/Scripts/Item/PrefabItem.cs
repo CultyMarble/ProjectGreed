@@ -46,8 +46,8 @@ public class PrefabItem : MonoBehaviour
             }
 
             // PlayerOffenseControl.Instance.meleeDamage += addDamage;
-            FindObjectOfType<Player>().GetComponent<EnemyHealth>().maxHealth += addHealth;
-            //PlayerMovement.Instance.dashCD -= reduceDashCD;
+            // FindObjectOfType<Player>().GetComponent<EnemyHealth>().maxHealth += addHealth;
+            // PlayerMovement.Instance.dashCD -= reduceDashCD;
 
             Player.Instance.HideFPromtText();
 

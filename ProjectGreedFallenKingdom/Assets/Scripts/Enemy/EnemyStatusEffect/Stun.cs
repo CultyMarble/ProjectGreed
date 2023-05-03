@@ -2,10 +2,18 @@ using UnityEngine;
 
 public class Stun : StatusEffect
 {
-    //===========================================================================
+    protected override void Update()
+    {
+        base.Update();
+
+        if (Input.GetKeyDown(KeyCode.K))
+            Activate();
+    }
+
+    //======================================================================
     protected override void TriggerHandler()
     {
-        entityStatusEffect.HostEntity.GetComponent<ChasingAI>().StopMovement(triggerInterval);
+        enemyStatusEffect.HostEntity.GetComponent<TargetingAI>().currentTargetTransform = null;
     }
 
     protected override void OverstackHandler()

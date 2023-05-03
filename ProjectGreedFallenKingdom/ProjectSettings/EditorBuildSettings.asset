@@ -5,7 +5,43 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/Scenes/Scene01_ManagerScene.unity
+    guid: 40047815b2870bc499728730b663a2f1
+  - enabled: 1
+    path: Assets/Scenes/Scene02_TutorialScene.unity
+    guid: c6e186342a09d75408cf3c771dacb62a
+  - enabled: 1
+    path: Assets/Scenes/Scene03_HubArea.unity
+    guid: 71400c12fd3dab34a8f279ddfafa1091
+  - enabled: 1
+    path: Assets/Scenes/Scene04_Room1.unity
+    guid: dec3b8d21ef574c4aad3dc1a8ed9b36e
+  - enabled: 1
+    path: Assets/Scenes/Scene05_Room1_5.unity
+    guid: d369171a6e3ae5648bc49de8c784805c
+  - enabled: 1
+    path: Assets/Scenes/Scene06_Room2.unity
+    guid: 7030ee8fcb1c8af4bb9e546af9d41d2d
+  - enabled: 1
+    path: Assets/Scenes/Scene07_Room3.unity
+    guid: 7e7345edb89ccce409986944a9ef0fa1
+  - enabled: 1
+    path: Assets/Scenes/Scene08_Room4.unity
+    guid: 940b149e6dc10b9439c1b120853f0205
+  - enabled: 1
+    path: Assets/Scenes/Scene09_Room5.unity
+    guid: da0adebe370688349abfad5306036d4b
+  - enabled: 1
+    path: Assets/Scenes/Scene10_Room6.unity
+    guid: 748570c3bdd027740bd656a89820dbb2
+  - enabled: 1
+    path: Assets/Scenes/Scene11_Room7.unity
+    guid: dd4892858bc6f924083f5fdf62d2fe6c
+  - enabled: 1
+    path: Assets/Scenes/Scene12_BossRoom.unity
+    guid: 0e97be774b3ee844bb4918d74dc3b14d
   m_configObjects: {}

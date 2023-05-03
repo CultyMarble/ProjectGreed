@@ -3,7 +3,9 @@ using UnityEngine;
 [RequireComponent(typeof(EnemyStatusEffect))]
 public abstract class StatusEffect : MonoBehaviour
 {
-    protected EnemyStatusEffect entityStatusEffect = default;
+    [SerializeField] protected Sprite effectIcon;
+
+    protected EnemyStatusEffect enemyStatusEffect = default;
 
     private bool active = default;
     protected int stackAmount = default;
@@ -17,7 +19,7 @@ public abstract class StatusEffect : MonoBehaviour
     //===========================================================================
     protected virtual void Awake()
     {
-        entityStatusEffect = GetComponent<EnemyStatusEffect>();
+        enemyStatusEffect = GetComponent<EnemyStatusEffect>();
     }
 
     protected virtual void Update()
@@ -46,6 +48,7 @@ public abstract class StatusEffect : MonoBehaviour
         if (statusDurationTimer <= 0)
         {
             active = false;
+            enemyStatusEffect.EffectVFX.sprite = null;
         }
     }
 
@@ -64,5 +67,7 @@ public abstract class StatusEffect : MonoBehaviour
 
         statusDuration = newStatusDuration;
         statusDurationTimer = statusDuration;
+
+        enemyStatusEffect.EffectVFX.sprite = effectIcon;
     }
 }

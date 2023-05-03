@@ -30,12 +30,12 @@ public class DisplayPlayerHealth : MonoBehaviour
     //===========================================================================
     private void EventManager_AfterSceneLoadEventHandler()
     {
-        UpdatePlayerHealthUI(heartPoint.GetCurrentHeartPoint());
+        // UpdatePlayerHealthUI(heartPoint.GetCurrentHeartPoint());
     }
 
-    private void HeartPointBar_OnHealthChangedEventHandler(object sender, EnemyHealth.OnHitPointChangedEvenArgs e)
+    private void HeartPointBar_OnHealthChangedEventHandler(object sender, EnemyHealth.OnHealthChangedEvenArgs e)
     {
-        UpdatePlayerHealthUI(e.currentHealth);
+        UpdatePlayerHealthUI(e.healthRatio);
     }
 
     //===========================================================================

@@ -1,21 +1,18 @@
 using UnityEngine;
 
-public class RangeAbility : MonoBehaviour
+public class RangeAbility : CoreAbility
 {
     [Header("Effect Settings:")]
     [SerializeField] private GameObject pfRangeAbilityProjectile;
 
     [Header("Ability Settings:")]
-    [SerializeField] private float rangeCD;
-    [SerializeField] private float projectileSpeed;
     [SerializeField] private int rotStackApply;
-
-    private float rangeCDcounter;
+    [SerializeField] private float projectileSpeed;
 
     //===========================================================================
-    void Update()
+    protected override void Update()
     {
-        AbilityCooldown();
+        base.Update();
 
         switch (Player.Instance.playerActionState)
         {
@@ -32,23 +29,12 @@ public class RangeAbility : MonoBehaviour
     //===========================================================================
     private void InputHandler()
     {
-        if (Input.GetKeyDown(KeyCode.E) && rangeCDcounter == 0)
+        if (Input.GetKeyDown(KeyCode.E) && cooldownTimer == 0)
         {
-            rangeCDcounter = rangeCD;
+            cooldownTimer = cooldown;
 
             Transform projectile = Instantiate(pfRangeAbilityProjectile, this.transform.position, Quaternion.identity).transform;
             projectile.GetComponent<RangeAbilityProjectile>().ProjectileConfig(rotStackApply, projectileSpeed, this.transform);
-        }
-    }
-
-    private void AbilityCooldown()
-    {
-        if (rangeCDcounter > 0)
-        {
-            rangeCDcounter -= Time.deltaTime;
-
-            if (rangeCDcounter < 0)
-                rangeCDcounter = 0;
         }
     }
 }

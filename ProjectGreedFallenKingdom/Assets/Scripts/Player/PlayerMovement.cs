@@ -128,4 +128,10 @@ public class PlayerMovement : MonoBehaviour
             canMove = true;
         }
     }
+
+    //======================================================================
+    public float GetDashCDCounter()
+    {
+        return dashCDTimeCounter;
+    }
 }

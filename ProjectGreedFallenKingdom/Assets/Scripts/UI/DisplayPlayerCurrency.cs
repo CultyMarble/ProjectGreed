@@ -1,10 +1,9 @@
 using UnityEngine;
 using TMPro;
 
-public class DisplayPlayerCurrencies : SingletonMonobehaviour<DisplayPlayerCurrencies>
+public class DisplayPlayerCurrency : SingletonMonobehaviour<DisplayPlayerCurrency>
 {
     [SerializeField] private GameObject player;
-    [SerializeField] private GameObject playerCurrencyUI;
     [SerializeField] private TextMeshProUGUI tempCurrencyText;
     [SerializeField] private TextMeshProUGUI permCurrencyText;
 
@@ -34,14 +33,13 @@ public class DisplayPlayerCurrencies : SingletonMonobehaviour<DisplayPlayerCurre
     //===========================================================================
     private void EventManager_BeforeSceneUnloadEventHandler()
     {
-        playerCurrencyUI.SetActive(false);
+        return;
     }
 
     private void EventManager_AfterSceneLoadEventHandler()
     {
         UpdateTempCurrencyText();
         UpdatePermCurrencyText();
-        playerCurrencyUI.SetActive(true);
     }
 
     private void Instance_OnTempCurrencyAmountChangedHandler(object sender, PlayerCurrencies.OnTempCurrencyAmountChangedEventArgs e)

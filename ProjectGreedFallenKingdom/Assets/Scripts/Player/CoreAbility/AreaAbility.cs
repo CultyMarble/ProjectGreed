@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class AreaAbility : MonoBehaviour
+public class AreaAbility : CoreAbility
 {
-    [Header("Effect Settings:")]
+    [Header("Effect Animation Settings:")]
     [SerializeField] private SpriteRenderer abilityEffect;
     [SerializeField] private Sprite[] effectSprites;
 
@@ -10,18 +10,10 @@ public class AreaAbility : MonoBehaviour
     private float effectAnimationTimer;
     private int currentAnimationIndex;
 
-    [Header("Ability Settings:")]
-    [SerializeField] private float cooldown;
-    [SerializeField] private float damage;
-    [SerializeField] private float pushPower;
-    [SerializeField] private float pushRadius;
-
-    private float cooldownTimer = default;
-
     //============================================================================
-    private void Update()
+    protected override void Update()
     {
-        AbilityCooldown();
+        base.Update();
 
         switch (Player.Instance.playerActionState)
         {
@@ -39,16 +31,6 @@ public class AreaAbility : MonoBehaviour
     }
 
     //============================================================================
-    private void AbilityCooldown()
-    {
-        if (cooldownTimer > 0)
-        {
-            cooldownTimer -= Time.deltaTime;
-            if (cooldownTimer < 0)
-                cooldownTimer = 0;
-        }
-    }
-
     private void AbilityInputHandler()
     {
         if (Input.GetKeyDown(KeyCode.Q) && cooldownTimer == 0)

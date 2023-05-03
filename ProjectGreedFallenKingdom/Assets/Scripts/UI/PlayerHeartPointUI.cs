@@ -17,7 +17,7 @@ public class PlayerHeartPointUI : MonoBehaviour
 
         player_HeartPoint.OnHealthChanged += UI_PlayerHeartPoint_OnHealthChangedEventHandler;
 
-        CreateHeartPointUI(player_HeartPoint.GetCurrentHeartPoint());
+        // CreateHeartPointUI(player_HeartPoint.GetCurrentHeartPoint());
     }
 
     private void OnDestroy()
@@ -26,9 +26,9 @@ public class PlayerHeartPointUI : MonoBehaviour
     }
 
     //===========================================================================
-    private void UI_PlayerHeartPoint_OnHealthChangedEventHandler(object sender, EnemyHealth.OnHitPointChangedEvenArgs e)
+    private void UI_PlayerHeartPoint_OnHealthChangedEventHandler(object sender, EnemyHealth.OnHealthChangedEvenArgs e)
     {
-        CreateHeartPointUI(e.currentHealth);
+        CreateHeartPointUI(e.healthRatio);
     }
 
     private void CreateHeartPointUI(float currentHeartPoint)
