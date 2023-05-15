@@ -11,10 +11,10 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Obstacles
   - Water
   - UI
-  - 
+  - PlayerProjectiles
   - 
   - 
   - 
@@ -52,6 +52,9 @@ TagManager:
     locked: 0
   - name: Entity
     uniqueID: 237529647
+    locked: 0
+  - name: Player
+    uniqueID: 2847789825
     locked: 0
   - name: Front1
     uniqueID: 3025190747

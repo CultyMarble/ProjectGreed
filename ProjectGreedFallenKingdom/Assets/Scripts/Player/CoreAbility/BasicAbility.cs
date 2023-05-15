@@ -8,31 +8,65 @@ public class BasicAbility : CoreAbility
     [Header("Particle Settings:")]
     [SerializeField] private float moveSpeed;
     [SerializeField] private float lifeTime;
+    [SerializeField] private float maxFuel;
+    [SerializeField] private float fuelDrainRate;
+    [SerializeField] private float refuelRate;
+    [SerializeField] private float refuelDelay;
+
 
     [SerializeField] private float timeUntilChangeDirectionMax;
     [SerializeField] private float timeUntilChangeDirectionMin;
     [SerializeField] private float swingMagtitude;
+    [SerializeField] private float growthRate;
+    [SerializeField] private float size;
+
+    private float refuelCounter;
+
+    protected float currentFuel = default;
+
+    public float CurrentFuel { get => currentFuel; private set { } }
 
     //===========================================================================
-
+    private void Start()
+    {
+        currentFuel = maxFuel;
+    }
     protected override void Update()
     {
         base.Update();
 
         BasicAbilityInputHandler();
+        Fuel();
     }
 
     private void FixedUpdate()
     {
         CultyMarbleHelper.RotateGameObjectToMouseDirection(this.transform);
     }
+    void Fuel()
+    {
+        refuelCounter += Time.deltaTime;
 
+        if (currentFuel < maxFuel && refuelCounter >= refuelDelay)
+        {
+            currentFuel += refuelRate;
+            refuelCounter = 0;
+        }
+    }
     //===========================================================================
     private void BasicAbilityInputHandler()
     {
-        if (Input.GetMouseButton(0) && cooldownTimer == 0)
+        if (Input.GetMouseButton(0) && cooldownTimer == 0 && currentFuel > 0)
         {
             SpawnParticle();
+            if (currentFuel < fuelDrainRate)
+            {
+                currentFuel = 0;
+            }
+            else
+            {
+                currentFuel -= fuelDrainRate;
+            }
             cooldownTimer = cooldown;
         }
     }
@@ -43,14 +77,15 @@ public class BasicAbility : CoreAbility
         {
             if (particle.gameObject.activeInHierarchy == false)
             {
-                particle.GetComponent<SprayParticleProjectile>().ConfigParticleMovementSpeed(moveSpeed, lifeTime);
+                particle.GetComponent<SprayParticleProjectile>().ConfigParticleMovementSpeed(moveSpeed + this.GetComponentInParent<Rigidbody2D>().velocity.magnitude, lifeTime);
                 particle.GetComponent<SprayParticleProjectile>().
                     ConfigParticleMovementPattern(timeUntilChangeDirectionMax, timeUntilChangeDirectionMin, swingMagtitude);
-
+                particle.GetComponent<SprayParticleProjectile>().ConfigParticleSizeAndGrowth(size,growthRate);
                 particle.position = this.transform.position;
                 particle.gameObject.SetActive(true);
                 break;
             }
         }
     }
+    
 }
