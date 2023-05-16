@@ -4,6 +4,10 @@ public class SprayParticleProjectile : MonoBehaviour
 {
     private float moveSpeed;
     private float lifeTime = default;
+    private int particleDamage = default;
+    private float particlePushPower = default;
+
+
 
     private float timeUntilChangeDirectionMax = default;
     private float timeUntilChangeDirectionMin = default;
@@ -93,5 +97,19 @@ public class SprayParticleProjectile : MonoBehaviour
         sizeVector.y = size;
         transform.localScale = sizeVector;
         particleGrowthRate = growthRate;
+    }
+    public void ConfigParticleDamage(int damage, float pushPower)
+    {
+        particleDamage = damage;
+        particlePushPower = pushPower;
+
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            collision.gameObject.GetComponent<EnemyHealth>().UpdateCurrentHealth(-particleDamage);
+            collision.gameObject.GetComponent<Transform>().Translate(-particlePushPower * GetComponent<Rigidbody2D>().velocity.normalized);
+        }
     }
 }

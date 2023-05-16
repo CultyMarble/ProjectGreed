@@ -202,7 +202,7 @@ GameObject:
   - component: {fileID: 61916555}
   - component: {fileID: 61916556}
   - component: {fileID: 61916557}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: directionIndicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -861,7 +861,7 @@ GameObject:
   m_Component:
   - component: {fileID: 394280377}
   - component: {fileID: 394280378}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: bodySprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1249,7 +1249,7 @@ GameObject:
   - component: {fileID: 567887225}
   - component: {fileID: 567887227}
   - component: {fileID: 567887228}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -3171,7 +3171,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1291790769}
   - component: {fileID: 1291790770}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: interactTextSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4216,7 +4216,7 @@ GameObject:
   - component: {fileID: 1625022748}
   - component: {fileID: 1625022750}
   - component: {fileID: 1625022749}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BasicAbility
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4251,7 +4251,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
-  pushPower: 1
+  pushPower: 0.1
   pushRadius: 1
   cooldown: 0.015
   basicAbilityProjectilePool: {fileID: 1653082884}
@@ -5138,7 +5138,7 @@ GameObject:
   - component: {fileID: 1915535111}
   - component: {fileID: 1915535113}
   - component: {fileID: 1915535112}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AreaAbility
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5381,7 +5381,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1949211492}
   - component: {fileID: 1949211493}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RangeAbility
   m_TagString: Untagged
   m_Icon: {fileID: 0}

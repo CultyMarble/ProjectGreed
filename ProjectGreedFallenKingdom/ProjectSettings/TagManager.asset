@@ -7,6 +7,7 @@ TagManager:
   - Zombie
   - Currency
   - DemoOverUI
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -15,8 +16,8 @@ TagManager:
   - Water
   - UI
   - PlayerProjectiles
-  - 
-  - 
+  - Enemies
+  - Player
   - 
   - 
   - 
