@@ -13,7 +13,6 @@ public class BasicAbility : CoreAbility
     [SerializeField] private float refuelRate;
     [SerializeField] private float refuelDelay;
 
-
     [SerializeField] private float timeUntilChangeDirectionMax;
     [SerializeField] private float timeUntilChangeDirectionMin;
     [SerializeField] private float swingMagtitude;
@@ -21,8 +20,7 @@ public class BasicAbility : CoreAbility
     [SerializeField] private float size;
 
     private float refuelCounter;
-
-    protected float currentFuel = default;
+    private float currentFuel = default;
 
     public float CurrentFuel { get => currentFuel; private set { } }
 
@@ -31,6 +29,7 @@ public class BasicAbility : CoreAbility
     {
         currentFuel = maxFuel;
     }
+
     protected override void Update()
     {
         base.Update();
@@ -43,16 +42,7 @@ public class BasicAbility : CoreAbility
     {
         CultyMarbleHelper.RotateGameObjectToMouseDirection(this.transform);
     }
-    void Fuel()
-    {
-        refuelCounter += Time.deltaTime;
 
-        if (currentFuel < maxFuel && refuelCounter >= refuelDelay)
-        {
-            currentFuel += refuelRate;
-            refuelCounter = 0;
-        }
-    }
     //===========================================================================
     private void BasicAbilityInputHandler()
     {
@@ -89,5 +79,15 @@ public class BasicAbility : CoreAbility
             }
         }
     }
-    
+
+    void Fuel()
+    {
+        refuelCounter += Time.deltaTime;
+
+        if (currentFuel < maxFuel && refuelCounter >= refuelDelay)
+        {
+            currentFuel += refuelRate;
+            refuelCounter = 0;
+        }
+    }
 }

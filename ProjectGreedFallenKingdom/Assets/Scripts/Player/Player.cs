@@ -14,11 +14,6 @@ public class Player : SingletonMonobehaviour<Player>
     [SerializeField] private Transform fpromtText;
 
     //======================================================================
-    protected override void Awake()
-    {
-        Singleton();
-    }
-
     private void Start()
     {
         HideFPromtText();

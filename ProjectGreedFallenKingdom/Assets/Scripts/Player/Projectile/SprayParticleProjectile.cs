@@ -7,8 +7,6 @@ public class SprayParticleProjectile : MonoBehaviour
     private int particleDamage = default;
     private float particlePushPower = default;
 
-
-
     private float timeUntilChangeDirectionMax = default;
     private float timeUntilChangeDirectionMin = default;
     private float timeUntilChangeDirection = default;

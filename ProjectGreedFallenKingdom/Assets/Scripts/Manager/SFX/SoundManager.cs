@@ -17,7 +17,8 @@ public class SoundManager : SingletonMonobehaviour<SoundManager>
 
     protected override void Awake()
     {
-        Singleton();
+        base.Awake();
+
         audioSource = GetComponent<AudioSource>();
 
         soundAudioClipDictionary = new Dictionary<Sound, AudioClip>();

@@ -8,6 +8,7 @@ TagManager:
   - Currency
   - DemoOverUI
   - Enemy
+  - Collisions
   layers:
   - Default
   - TransparentFX

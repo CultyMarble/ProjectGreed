@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3187642801048505082}
   - component: {fileID: 3187642801048505083}
-  - component: {fileID: 3187642801048505077}
   - component: {fileID: 6870098197997773216}
   - component: {fileID: -508059311970561785}
+  - component: {fileID: 3187642801048505077}
   m_Layer: 6
   m_Name: pfSprayParticle
   m_TagString: Untagged
@@ -87,18 +87,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3187642801048505077
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3187642801048505080}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52db8f93dd065de498d670bc7ae5d110, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!58 &6870098197997773216
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -136,3 +124,15 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &3187642801048505077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3187642801048505080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52db8f93dd065de498d670bc7ae5d110, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

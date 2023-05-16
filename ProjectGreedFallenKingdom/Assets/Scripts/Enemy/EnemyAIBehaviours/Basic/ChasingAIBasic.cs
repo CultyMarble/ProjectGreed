@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[RequireComponent(typeof(TargetingAI))]
-public class ChasingAI : MonoBehaviour
+[RequireComponent(typeof(TargetingAIBasic))]
+public class ChasingAIBasic : MonoBehaviour
 {
     [HideInInspector] public bool holdMovementDirection = false;
     [HideInInspector] public float holdtimer;
@@ -9,8 +9,8 @@ public class ChasingAI : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float distanceToKeep;
 
-    private Rigidbody2D enemy_rb2D;
-    private TargetingAI targetingAI;
+    [HideInInspector] public Rigidbody2D enemy_rb2D;
+    private TargetingAIBasic targetingAIBasic;
     private Vector2 movingDirection;
     private float currentSpeed;
 
@@ -18,7 +18,7 @@ public class ChasingAI : MonoBehaviour
     private void Awake()
     {
         enemy_rb2D = GetComponent<Rigidbody2D>();
-        targetingAI = GetComponent<TargetingAI>();
+        targetingAIBasic = GetComponent<TargetingAIBasic>();
     }
 
     private void FixedUpdate()
@@ -40,7 +40,7 @@ public class ChasingAI : MonoBehaviour
     //===========================================================================
     private void MoveTowardCurrentTarget()
     {
-        if (targetingAI.currentTargetTransform == null)
+        if (targetingAIBasic.currentTargetTransform == null)
         {
             if (enemy_rb2D.velocity != Vector2.zero)
                 enemy_rb2D.velocity = Vector2.zero;
@@ -48,9 +48,9 @@ public class ChasingAI : MonoBehaviour
             return;
         }
 
-        movingDirection = (targetingAI.currentTargetTransform.transform.position - transform.position).normalized;
+        movingDirection = (targetingAIBasic.currentTargetTransform.transform.position - transform.position).normalized;
 
-        if (Vector2.Distance(targetingAI.currentTargetTransform.position, transform.position) <= distanceToKeep)
+        if (Vector2.Distance(targetingAIBasic.currentTargetTransform.position, transform.position) <= distanceToKeep)
             currentSpeed = 0;
         else
             currentSpeed = speed;

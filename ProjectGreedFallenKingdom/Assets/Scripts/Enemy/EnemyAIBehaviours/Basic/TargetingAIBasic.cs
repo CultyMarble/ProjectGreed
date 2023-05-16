@@ -1,7 +1,6 @@
 using UnityEngine;
-using Pathfinding;
 
-public class TargetingAI : MonoBehaviour
+public class TargetingAIBasic : MonoBehaviour
 {
     [HideInInspector] public Transform currentTargetTransform;
     [HideInInspector] public bool isAttacking;
@@ -12,45 +11,37 @@ public class TargetingAI : MonoBehaviour
     private float lookForTargetTimeCounter;
     private float lookForTargetTimeMin = 0.5f;
     private float lookForTargetTimeMax = 1.5f;
-    Pathfinding.AIDestinationSetter ai;
 
     //===========================================================================
     private void FixedUpdate()
     {
-        ai = GetComponent<AIDestinationSetter>();
         HandleTargeting();
-        if (currentTargetTransform != null)
-        {
-            ai.target = currentTargetTransform;
-        }
     }
 
     //===========================================================================
     private void HandleTargeting()
     {
-        if (currentTargetTransform != null &&
-            Vector2.Distance(currentTargetTransform.position, transform.position) >= breakDistance)
+        if (currentTargetTransform)
         {
-            currentTargetTransform = null;
-        }
-
-        if (currentTargetTransform && currentTargetTransform.gameObject.activeSelf == false)
-        {
-            currentTargetTransform = null;
+            if (Vector2.Distance(currentTargetTransform.position, transform.position) >= breakDistance ||
+                currentTargetTransform.gameObject.activeSelf == false)
+            {
+                currentTargetTransform = null;
+                return;
+            }
         }
 
         if (currentTargetTransform == null)
         {
             LookForTarget();
+            return;
         }
-        else
+
+        lookForTargetTimeCounter -= Time.deltaTime;
+        if (lookForTargetTimeCounter <= 0.0f)
         {
-            lookForTargetTimeCounter -= Time.deltaTime;
-            if (lookForTargetTimeCounter <= 0.0f)
-            {
-                lookForTargetTimeCounter += UnityEngine.Random.Range(lookForTargetTimeMin, lookForTargetTimeMax);
-                LookForTarget();
-            }
+            lookForTargetTimeCounter += UnityEngine.Random.Range(lookForTargetTimeMin, lookForTargetTimeMax);
+            LookForTarget();
         }
     }
 

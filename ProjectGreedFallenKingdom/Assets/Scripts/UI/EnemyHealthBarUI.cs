@@ -19,6 +19,6 @@ public class EnemyHealthBarUI : MonoBehaviour
     //===========================================================================
     private void Health_OnHealthChangedHandler(object sender, EnemyHealth.OnHealthChangedEvenArgs e)
     {
-        transform.localScale = new Vector3(e.healthRatio, 1.0f, 1.0f);
+        healtBar.localScale = new Vector3(e.healthRatio, 1.0f, 1.0f);
     }
 }
