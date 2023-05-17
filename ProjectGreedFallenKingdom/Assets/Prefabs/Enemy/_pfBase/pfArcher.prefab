@@ -486,7 +486,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pfEnemyBullet: {fileID: 3187642801048505082, guid: bf12e8b65b1a3eb48a9fa65e23a6eec4, type: 3}
-  bulletSpeed: 2
+  bulletSpeed: 6
   shootTimes: 3
   shootDelayInterval: 0.5
   shootCoolDown: 3

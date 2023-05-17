@@ -9,6 +9,7 @@ public class ShootAI : MonoBehaviour
     [SerializeField] private float shootDelayInterval;
     [SerializeField] private float shootCoolDown;
 
+    private Transform enemyProjectilePool;
     private TargetingAI targetingAI;
     private float shootCoolDownTimer;
     private float shootDelayIntervalTimer;
@@ -25,6 +26,8 @@ public class ShootAI : MonoBehaviour
 
     private void Start()
     {
+        enemyProjectilePool = GameObject.Find("EnemyProjectilePool").transform;
+
         isShooting = false;
 
         shootCoolDownTimer = shootCoolDown;
@@ -81,11 +84,20 @@ public class ShootAI : MonoBehaviour
             bulletDirection = (targetingAI.currentTargetTransform.position - transform.position).normalized;
             recordedBulletDirection = bulletDirection;
         }
+        foreach (Transform projectile in enemyProjectilePool)
+        {
+            if (projectile.gameObject.activeInHierarchy == false)
+            {
+                projectile.GetComponent<EnemyProjectile>().SetMoveDirectionAndSpeed(bulletDirection, bulletSpeed);
+                projectile.gameObject.SetActive(true);
+                projectile.position = this.transform.position;
+                break;
+            }
+        }
+        //Transform prefabBullet = Instantiate(pfEnemyBullet, transform);
 
-        Transform prefabBullet = Instantiate(pfEnemyBullet, transform);
+        //prefabBullet.GetComponent<EnemyProjectile>().SetMoveDirectionAndSpeed(recordedBulletDirection, bulletSpeed);
 
-        prefabBullet.GetComponent<Projectile>().SetMoveDirectionAndSpeed(recordedBulletDirection, bulletSpeed);
-
-        Destroy(prefabBullet.gameObject, 1.5f);
+        //Destroy(prefabBullet.gameObject, 1.5f);
     }
 }

@@ -4,28 +4,39 @@ using UnityEngine;
 
 [RequireComponent(typeof(CircleCollider2D))]
 
-public class Projectile : MonoBehaviour
+public class EnemyProjectile : MonoBehaviour
 {
     private int damage;
     private float moveSpeed;
     private Vector3 moveDirection;
+    private float lifeTime = 5f;
 
     //===========================================================================
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.GetComponent<Player>() != null)
+        if (collision.gameObject.tag == "Player")
         {
-            collision.GetComponent<EnemyHealth>().UpdateCurrentHealth(damage);
-            Destroy(this.gameObject);
+            
         }
-
-        Destroy(this.gameObject);
+        gameObject.SetActive(false);
+        gameObject.transform.localPosition = Vector2.zero;
     }
-
     //===========================================================================
     private void Update()
     {
         transform.position += moveSpeed * Time.deltaTime * moveDirection;
+
+        // Partical LifeTime
+        lifeTime -= Time.deltaTime;
+        if (lifeTime < 0.1f)
+        {
+
+        }
+        if (lifeTime <= 0)
+        {
+            gameObject.SetActive(false);
+            gameObject.transform.localPosition = Vector2.zero;
+        }
     }
 
     //===========================================================================
