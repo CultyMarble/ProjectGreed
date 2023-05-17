@@ -84,7 +84,7 @@ public class ShootAI : MonoBehaviour
 
         Transform prefabBullet = Instantiate(pfEnemyBullet, transform);
 
-        prefabBullet.GetComponent<PrefabEnemyBullet>().SetMoveDirectionAndSpeed(recordedBulletDirection, bulletSpeed);
+        prefabBullet.GetComponent<Projectile>().SetMoveDirectionAndSpeed(recordedBulletDirection, bulletSpeed);
 
         Destroy(prefabBullet.gameObject, 1.5f);
     }

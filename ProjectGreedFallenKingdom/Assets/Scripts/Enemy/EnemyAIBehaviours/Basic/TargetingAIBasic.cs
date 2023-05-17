@@ -1,4 +1,5 @@
 using UnityEngine;
+using Pathfinding;
 
 public class TargetingAIBasic : MonoBehaviour
 {
@@ -12,12 +13,23 @@ public class TargetingAIBasic : MonoBehaviour
     private float lookForTargetTimeMin = 0.5f;
     private float lookForTargetTimeMax = 1.5f;
 
+    Pathfinding.AIDestinationSetter ai;
+
     //===========================================================================
+
+    private void Start()
+    {
+        ai = GetComponent<AIDestinationSetter>();
+    }
+
     private void FixedUpdate()
     {
         HandleTargeting();
+        if (currentTargetTransform != null)
+        {
+            ai.target = currentTargetTransform;
+        }
     }
-
     //===========================================================================
     private void HandleTargeting()
     {

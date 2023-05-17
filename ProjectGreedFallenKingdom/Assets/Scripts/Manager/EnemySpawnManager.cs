@@ -55,6 +55,10 @@ public class EnemySpawnManager : MonoBehaviour
             else
             {
                 bool _addIndex = true;
+                if (spawnPointIndexList.Count == enemySpawnPointList.childCount)
+                {
+                    break;
+                }
 
                 // Check for unique Spawn Point Index
                 for (int index = 0; index < spawnPointIndexList.Count; index++)
@@ -89,6 +93,21 @@ public class EnemySpawnManager : MonoBehaviour
                 {
                     enemy.transform.position = enemySpawnPointList.GetChild(index).gameObject.transform.position;
                     enemy.gameObject.SetActive(true);
+                    break;
+                }
+            }
+        }
+    }
+    public void DespawnEnemies()
+    {
+        for (int i = 0; i < enemyTypePoolList.Length; i++)
+        {
+            foreach (Transform enemy in enemyTypePoolList[i])
+            {
+                if (enemy.gameObject.activeSelf == true)
+                {
+                    enemy.gameObject.SetActive(false);
+                    break;
                 }
             }
         }

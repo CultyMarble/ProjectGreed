@@ -1,7 +1,10 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(CircleCollider2D))]
-public class PrefabEnemyBullet : MonoBehaviour
+
+public class Projectile : MonoBehaviour
 {
     private int damage;
     private float moveSpeed;

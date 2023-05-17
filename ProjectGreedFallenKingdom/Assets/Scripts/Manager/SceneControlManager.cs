@@ -115,6 +115,7 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         if (isLoadingScreenActive == false)
         {
             StartCoroutine(UnloadAndSwitchScene(sceneName, spawnPosition));
+            transform.parent.GetComponentInChildren<EnemySpawnManager>().DespawnEnemies();
         }
     }
 

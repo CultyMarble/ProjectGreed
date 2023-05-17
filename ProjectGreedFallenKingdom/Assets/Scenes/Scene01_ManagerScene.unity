@@ -365,6 +365,68 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 62482335}
   m_CullTransparentMesh: 1
+--- !u!1 &106749482
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 106749483}
+  m_Layer: 0
+  m_Name: Archers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &106749483
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 106749482}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1587864734}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &134510337
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 134510338}
+  m_Layer: 0
+  m_Name: EnemyProjectilePool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &134510338
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 134510337}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1587864734}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &150120599
 GameObject:
   m_ObjectHideFlags: 0
@@ -1004,9 +1066,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnAmount: 2
   enemyTypePoolList:
-  - {fileID: 748600035}
-  - {fileID: 663029896}
-  - {fileID: 1004227785}
+  - {fileID: 669595407}
+  - {fileID: 106749483}
+  - {fileID: 981578122}
 --- !u!1 &361278162
 GameObject:
   m_ObjectHideFlags: 0
@@ -1928,7 +1990,7 @@ MonoBehaviour:
   rangeAbilityCDText: {fileID: 1492181096}
   areaAbilityCDText: {fileID: 1100159488}
   basicAbilityFuelText: {fileID: 1200162909}
---- !u!1 &663029895
+--- !u!1 &669595406
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1936,28 +1998,28 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 663029896}
+  - component: {fileID: 669595407}
   m_Layer: 0
-  m_Name: YellowTrainingDummy
+  m_Name: Bats
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &663029896
+--- !u!4 &669595407
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 663029895}
+  m_GameObject: {fileID: 669595406}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1587864734}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &695900879
 GameObject:
@@ -2100,37 +2162,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a38919c3bc18e64bae72bd3123a53ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &748600034
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 748600035}
-  m_Layer: 0
-  m_Name: RedTrainingDummy
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &748600035
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 748600034}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1587864734}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &827279360
 GameObject:
   m_ObjectHideFlags: 0
@@ -2478,7 +2509,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 946071624}
   m_CullTransparentMesh: 1
---- !u!1 &1004227784
+--- !u!1 &981578121
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2486,21 +2517,21 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1004227785}
+  - component: {fileID: 981578122}
   m_Layer: 0
-  m_Name: GreenTrainingDummy
+  m_Name: Zombies
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1004227785
+--- !u!4 &981578122
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1004227784}
+  m_GameObject: {fileID: 981578121}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -2555,15 +2586,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolTranformList:
   - {fileID: 1653082884}
-  - {fileID: 748600035}
-  - {fileID: 663029896}
-  - {fileID: 1004227785}
-  poolSizeList: c80000000a0000000a0000000a000000
+  - {fileID: 134510338}
+  - {fileID: 669595407}
+  - {fileID: 106749483}
+  - {fileID: 981578122}
+  poolSizeList: c8000000140000000a0000000a0000000a000000
   poolObjectList:
   - {fileID: 3187642801048505082, guid: c1cc9f6f696a4fb4592f6945effaa91e, type: 3}
-  - {fileID: 5384341835036376863, guid: 4c6805627e431be4fabfa1826a07335d, type: 3}
-  - {fileID: 2290856477104092857, guid: e2d602082cbae814193f7b038bdba83c, type: 3}
-  - {fileID: 3389466585290946619, guid: effa8d7c970015249a30fa576bc9fb2d, type: 3}
+  - {fileID: 3187642801048505082, guid: bf12e8b65b1a3eb48a9fa65e23a6eec4, type: 3}
+  - {fileID: 2290856477104092857, guid: 483b04c1e914f04419b3e23585831030, type: 3}
+  - {fileID: 2290856477104092857, guid: 5fdf5472e0eaacf44852e0dccde33dc3, type: 3}
+  - {fileID: 2290856477104092857, guid: 21053cd8cc854e347a7b31c1778775db, type: 3}
 --- !u!1 &1100159486
 GameObject:
   m_ObjectHideFlags: 0
@@ -4875,9 +4908,10 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1653082884}
-  - {fileID: 748600035}
-  - {fileID: 663029896}
-  - {fileID: 1004227785}
+  - {fileID: 669595407}
+  - {fileID: 106749483}
+  - {fileID: 981578122}
+  - {fileID: 134510338}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
