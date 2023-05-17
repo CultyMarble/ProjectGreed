@@ -106,8 +106,10 @@ public class SprayParticleProjectile : MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy")
         {
+            Vector2 _pushDirection = (collision.gameObject.GetComponent<Transform>().position - GetComponent<Transform>().position).normalized;
             collision.gameObject.GetComponent<EnemyHealth>().UpdateCurrentHealth(-particleDamage);
-            collision.gameObject.GetComponent<Transform>().Translate(-particlePushPower * GetComponent<Rigidbody2D>().velocity.normalized);
+            //collision.gameObject.GetComponent<Transform>().Translate(-particlePushPower * GetComponent<Rigidbody2D>().velocity.normalized);
+            collision.gameObject.GetComponent<Rigidbody2D>().AddForce(particlePushPower * _pushDirection);
         }
     }
 }

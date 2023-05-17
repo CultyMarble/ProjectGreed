@@ -12,19 +12,13 @@ public class RangeAbilityProjectile : MonoBehaviour
     //===========================================================================
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //if (collision.GetComponent<Enemy>() != null)
-        //{
-        //    collision.GetComponent<GeneralStatusEffect>().IncreaseRotStack(10);
-        //    collision.GetComponent<EnemyHealth>().DamageFeedBack();
-
-        //    gameObject.SetActive(false);
-        //    Destroy(gameObject);
-        //}
-        //else if (collision.GetComponent<CompositeCollider2D>() != null)
-        //{
-        //    gameObject.SetActive(false);
-        //    Destroy(gameObject);
-        //}
+        if (collision.GetComponent<Enemy>() != null)
+        {
+            //collision.GetComponent<GeneralStatusEffect>().IncreaseRotStack(10);
+            //collision.GetComponent<EnemyHealth>().DamageFeedBack();
+        }
+        gameObject.SetActive(false);
+        Destroy(gameObject);
     }
 
     //===========================================================================

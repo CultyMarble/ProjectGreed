@@ -84,7 +84,7 @@ public class BasicAbility : CoreAbility
     {
         refuelCounter += Time.deltaTime;
 
-        if (currentFuel < maxFuel && refuelCounter >= refuelDelay)
+        if (currentFuel < maxFuel && refuelCounter >= refuelDelay && !Input.GetMouseButton(0))
         {
             currentFuel += refuelRate;
             refuelCounter = 0;

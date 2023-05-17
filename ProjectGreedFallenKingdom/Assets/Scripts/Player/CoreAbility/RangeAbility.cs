@@ -18,14 +18,16 @@ public class RangeAbility : CoreAbility
         {
             case PlayerActionState.none:
                 InputHandler();
-                CultyMarbleHelper.RotateGameObjectToMouseDirection(this.transform);
                 break;
-
             default:
                 break;
         }
     }
 
+    private void FixedUpdate()
+    {
+        CultyMarbleHelper.RotateGameObjectToMouseDirection(this.transform);
+    }
     //===========================================================================
     private void InputHandler()
     {

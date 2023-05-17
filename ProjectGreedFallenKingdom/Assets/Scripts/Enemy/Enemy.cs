@@ -2,21 +2,23 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [HideInInspector] public bool isBeingPush;
+    [HideInInspector] public bool isKnockedBack;
 
     [SerializeField] private Stun stunStatusEffect;
 
     private float stunImmuneTime = 3.5f;
     private float stunImmuneTimer = default;
+    private float knockedTimer;
+    private float knockedCounter;
 
     //======================================================================
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Collisions") && isBeingPush && stunImmuneTimer <= 0.0f)
+        if (collision.CompareTag("Collisions") && isKnockedBack && stunImmuneTimer <= 0.0f)
         {
             stunStatusEffect.Activate();
 
-            isBeingPush = false;
+            isKnockedBack = false;
 
             stunImmuneTimer = stunImmuneTime;
         }
@@ -25,6 +27,14 @@ public class Enemy : MonoBehaviour
     //======================================================================
     private void Update()
     {
+        if (isKnockedBack)
+        {
+            knockedCounter += Time.deltaTime;
+        }
+        if(knockedCounter >= knockedTimer)
+        {
+            isKnockedBack = false;
+        }
         UpdateStunImmuneTime();
     }
 

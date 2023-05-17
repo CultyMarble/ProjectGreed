@@ -62,7 +62,7 @@ public class MeleeAI : MonoBehaviour
             return;
 
         if (Vector2.Distance(transform.position, targetingAI.currentTargetTransform.position) <= activateDistance)
-            targetingAI.currentTargetTransform.GetComponent<EnemyHealth>().UpdateCurrentHealth(damage);
+            //targetingAI.currentTargetTransform.GetComponent<PlayerPrefs>().UpdateCurrentHealth(damage);
 
         targetingAI.isAttacking = false;
     }

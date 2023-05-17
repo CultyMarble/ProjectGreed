@@ -1665,10 +1665,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseMoveSpeed: 7
-  dashCD: 3
+  dashCD: 1
   pauseTimeAfterDash: 0.1
-  dashTime: 0.1
-  dashSpeed: 20
+  dashTime: 0.2
+  dashSpeed: 25
 --- !u!50 &567887218
 Rigidbody2D:
   serializedVersion: 4
@@ -4961,20 +4961,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
-  pushPower: 0.1
+  pushPower: 100
   pushRadius: 1
   cooldown: 0.015
   basicAbilityProjectilePool: {fileID: 1653082884}
-  moveSpeed: 1
-  lifeTime: 1
+  moveSpeed: 3
+  lifeTime: 0.75
   maxFuel: 100
-  fuelDrainRate: 0.5
+  fuelDrainRate: 1
   refuelRate: 2
   refuelDelay: 0.1
   timeUntilChangeDirectionMax: 0.2
   timeUntilChangeDirectionMin: 0.1
-  swingMagtitude: 0.9
-  growthRate: 0.001
+  swingMagtitude: 0.7
+  growthRate: 0.0015
   size: 0.18
 --- !u!212 &1625022750
 SpriteRenderer:
@@ -5890,8 +5890,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be9c6eb1ba8bf3b49920ad7ca8061627, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0
-  pushPower: 5
+  damage: 1
+  pushPower: 5000
   pushRadius: 5
   cooldown: 5
   abilityEffect:
@@ -6191,7 +6191,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1949211492}
   - component: {fileID: 1949211493}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: RangeAbility
   m_TagString: Untagged
   m_Icon: {fileID: 0}

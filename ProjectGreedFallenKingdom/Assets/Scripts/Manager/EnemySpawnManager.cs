@@ -30,13 +30,19 @@ public class EnemySpawnManager : MonoBehaviour
 
     private void EventManager_AfterSceneLoadEventHandler()
     {
-        SwitchEnemySpawnPointList();
-        SpawnEnemy();
+        if (LoadEnemySpawnPointList())
+        {
+            SpawnEnemy();
+        }
     }
 
-    private void SwitchEnemySpawnPointList()
+    private bool LoadEnemySpawnPointList()
     {
-        enemySpawnPointList = GameObject.Find("EnemySpawnPointList").transform;
+        if (GameObject.Find("EnemySpawnPointList")!= null){
+            enemySpawnPointList = GameObject.Find("EnemySpawnPointList").transform;
+            return true;
+        }
+        else { return false; }
     }
 
     private void SpawnEnemy()

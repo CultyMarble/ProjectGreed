@@ -56,16 +56,18 @@ public class EnemyHealth : MonoBehaviour
     //======================================================================
     public void UpdateCurrentHealth(int amount = 0)
     {
-        currentHealth += amount;
-        currentHealth = Mathf.Clamp(currentHealth, 0.0f, maxHealth);
+        if (amount != 0) {
+                currentHealth += amount;
+            currentHealth = Mathf.Clamp(currentHealth, 0.0f, maxHealth);
 
-        if (amount < 0)
-            DamageFeedBack();
+            if (amount < 0)
+                DamageFeedBack();
 
-        // Call OnHitPointChanged Event
-        OnHealthChanged?.Invoke(this, new OnHealthChangedEvenArgs { healthRatio = currentHealth / maxHealth });
+            // Call OnHitPointChanged Event
+            OnHealthChanged?.Invoke(this, new OnHealthChangedEvenArgs { healthRatio = currentHealth / maxHealth });
 
-        if (currentHealth <= 0)
-            Despawn();
+            if (currentHealth <= 0)
+                Despawn();
+        }
     }
 }

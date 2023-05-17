@@ -109,8 +109,8 @@ public class AreaAbility : CoreAbility
                 }
 
                 // Add force
-                collider2D.GetComponent<Rigidbody2D>().AddForce(_pushDirection * pushPower, ForceMode2D.Impulse);
-                collider2D.GetComponent<Enemy>().isBeingPush = true;
+                collider2D.GetComponent<Enemy>().isKnockedBack = true;
+                collider2D.GetComponent<Rigidbody2D>().AddForce(_pushDirection * pushPower, ForceMode2D.Force);
             }
         }
     }
