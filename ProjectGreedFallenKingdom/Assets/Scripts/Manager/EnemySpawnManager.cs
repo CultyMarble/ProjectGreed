@@ -5,6 +5,7 @@ public class EnemySpawnManager : MonoBehaviour
 {
     [SerializeField] private int spawnAmount;
     [SerializeField] private Transform[] enemyTypePoolList;
+
     private int poolIndex = default;
 
     private Transform enemySpawnPointList;
@@ -15,11 +16,13 @@ public class EnemySpawnManager : MonoBehaviour
     private void OnEnable()
     {
         EventManager.AfterSceneLoadEvent += EventManager_AfterSceneLoadEventHandler;
+        EventManager.BeforeSceneUnloadEvent += EventManager_BeforeSceneUnloadEventHandler;
     }
 
     private void OnDisable()
     {
         EventManager.AfterSceneLoadEvent -= EventManager_AfterSceneLoadEventHandler;
+        EventManager.BeforeSceneUnloadEvent -= EventManager_BeforeSceneUnloadEventHandler;
     }
 
     //===========================================================================
@@ -28,6 +31,7 @@ public class EnemySpawnManager : MonoBehaviour
         spawnPointIndexList = new();
     }
 
+    //===========================================================================
     private void EventManager_AfterSceneLoadEventHandler()
     {
         if (LoadEnemySpawnPointList())
@@ -36,6 +40,12 @@ public class EnemySpawnManager : MonoBehaviour
         }
     }
 
+    private void EventManager_BeforeSceneUnloadEventHandler()
+    {
+        DespawnEnemies();
+    }
+
+    //===========================================================================
     private bool LoadEnemySpawnPointList()
     {
         if (GameObject.Find("EnemySpawnPointList")!= null){
@@ -104,7 +114,8 @@ public class EnemySpawnManager : MonoBehaviour
             }
         }
     }
-    public void DespawnEnemies()
+
+    private void DespawnEnemies()
     {
         for (int i = 0; i < enemyTypePoolList.Length; i++)
         {
