@@ -248,11 +248,10 @@ GameObject:
   - component: {fileID: 4038241797528594044}
   - component: {fileID: 4038241797528594039}
   - component: {fileID: 4038241797528594032}
-  - component: {fileID: 4038241797528594037}
+  - component: {fileID: 8621435385251548073}
   - component: {fileID: -4127356551639531183}
   - component: {fileID: -6739532130708723579}
   - component: {fileID: -5905967111970448250}
-  - component: {fileID: 8621435385251548073}
   - component: {fileID: -5573440941965824759}
   m_Layer: 7
   m_Name: pfArcher
@@ -274,6 +273,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 409081922130142282}
+  - {fileID: 399951332217022172}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -342,7 +342,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46307024b08eb6c48bff704832e11203, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isBeingPush: 0
+  isKnockedBack: 0
   stunStatusEffect: {fileID: 5741637900286417083}
 --- !u!114 &4038241797528594032
 MonoBehaviour:
@@ -357,7 +357,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
---- !u!114 &4038241797528594037
+--- !u!114 &8621435385251548073
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -366,13 +366,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 2290856477104092860}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 223c0688e579b0f4381238565dc2329b, type: 3}
+  m_Script: {fileID: 11500000, guid: a7741f6bf86e6b5459c7b83853ccdfad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentTargetTransform: {fileID: 0}
   isAttacking: 0
-  searchRadius: 5
-  breakDistance: 100
+  currentTargetTransform: {fileID: 399951332217022172}
+  keepDistance: 1
+  searchRadius: 8
+  breakDistance: 5
 --- !u!114 &-4127356551639531183
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -386,7 +387,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  target: {fileID: 0}
+  target: {fileID: 399951332217022172}
 --- !u!114 &-6739532130708723579
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -457,22 +458,6 @@ MonoBehaviour:
   slowWhenNotFacingTarget: 1
   whenCloseToDestination: 0
   constrainInsideGraph: 0
---- !u!114 &8621435385251548073
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2290856477104092860}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7741f6bf86e6b5459c7b83853ccdfad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentTargetTransform: {fileID: 0}
-  isAttacking: 0
-  searchRadius: 5
-  breakDistance: 5
 --- !u!114 &-5573440941965824759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -751,3 +736,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effectIcon: {fileID: 21300000, guid: c718d67868d482440bcf8e67dc060b03, type: 3}
+--- !u!1 &7883343058458621944
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 399951332217022172}
+  m_Layer: 7
+  m_Name: TargetTransform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &399951332217022172
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7883343058458621944}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2290856477104092857}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

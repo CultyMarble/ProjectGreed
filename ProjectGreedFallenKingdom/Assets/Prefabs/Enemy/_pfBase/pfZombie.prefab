@@ -248,11 +248,10 @@ GameObject:
   - component: {fileID: 4038241797528594044}
   - component: {fileID: 4038241797528594039}
   - component: {fileID: 4038241797528594032}
-  - component: {fileID: 4038241797528594037}
+  - component: {fileID: 7694177733069866042}
   - component: {fileID: 3044540891965255216}
   - component: {fileID: -3507880752444932462}
   - component: {fileID: 4913652249081679144}
-  - component: {fileID: 7694177733069866042}
   - component: {fileID: 1033342184048880732}
   - component: {fileID: 4985449916427847630}
   m_Layer: 7
@@ -275,6 +274,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 409081922130142282}
+  - {fileID: 6054937986330404548}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -343,7 +343,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46307024b08eb6c48bff704832e11203, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isBeingPush: 0
+  isKnockedBack: 0
   stunStatusEffect: {fileID: 5741637900286417083}
 --- !u!114 &4038241797528594032
 MonoBehaviour:
@@ -358,7 +358,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
---- !u!114 &4038241797528594037
+--- !u!114 &7694177733069866042
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -367,13 +367,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 2290856477104092860}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 223c0688e579b0f4381238565dc2329b, type: 3}
+  m_Script: {fileID: 11500000, guid: a7741f6bf86e6b5459c7b83853ccdfad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentTargetTransform: {fileID: 0}
   isAttacking: 0
-  searchRadius: 5
-  breakDistance: 100
+  currentTargetTransform: {fileID: 6054937986330404548}
+  keepDistance: 0
+  searchRadius: 10
+  breakDistance: 0
 --- !u!114 &3044540891965255216
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -418,7 +419,7 @@ MonoBehaviour:
   radius: 0.5
   height: 2
   canMove: 1
-  maxSpeed: 1
+  maxSpeed: 2
   gravity: {x: NaN, y: NaN, z: NaN}
   groundMask:
     serializedVersion: 2
@@ -457,23 +458,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  target: {fileID: 0}
---- !u!114 &7694177733069866042
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2290856477104092860}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7741f6bf86e6b5459c7b83853ccdfad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentTargetTransform: {fileID: 0}
-  isAttacking: 0
-  searchRadius: 0
-  breakDistance: 0
+  target: {fileID: 6054937986330404548}
 --- !u!114 &1033342184048880732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -693,6 +678,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &4157332352412309901
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6054937986330404548}
+  m_Layer: 7
+  m_Name: TargetTransform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6054937986330404548
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4157332352412309901}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2290856477104092857}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5741637900286417089
 GameObject:
   m_ObjectHideFlags: 0

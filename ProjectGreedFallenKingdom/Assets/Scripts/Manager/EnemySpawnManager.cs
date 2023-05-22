@@ -3,12 +3,14 @@ using UnityEngine;
 
 public class EnemySpawnManager : MonoBehaviour
 {
-    [SerializeField] private int spawnAmount;
+    //[SerializeField] private int spawnAmount;
+    private int spawnAmount;
+
     [SerializeField] private Transform[] enemyTypePoolList;
 
     private int poolIndex = default;
 
-    private Transform enemySpawnPointList;
+    private GameObject enemySpawnPointList;
     private List<int> spawnPointIndexList = default;
     private int spawnPointIndex = default;
 
@@ -49,7 +51,10 @@ public class EnemySpawnManager : MonoBehaviour
     private bool LoadEnemySpawnPointList()
     {
         if (GameObject.Find("EnemySpawnPointList")!= null){
-            enemySpawnPointList = GameObject.Find("EnemySpawnPointList").transform;
+            enemySpawnPointList = GameObject.Find("EnemySpawnPointList");
+            int spawnNum = enemySpawnPointList.GetComponent<SpawnPointList>().GetSpawnAmount();
+            if (spawnNum == 0) { return false; }
+            spawnAmount = spawnNum;
             return true;
         }
         else { return false; }
@@ -62,7 +67,7 @@ public class EnemySpawnManager : MonoBehaviour
         // Get Random Enemy Spawn Points
         for (int i = 0; i < spawnAmount; i++)
         {
-            spawnPointIndex = Random.Range(0, enemySpawnPointList.childCount);
+            spawnPointIndex = Random.Range(0, enemySpawnPointList.transform.childCount);
 
             if (spawnPointIndexList.Count == 0)
             {
@@ -71,7 +76,7 @@ public class EnemySpawnManager : MonoBehaviour
             else
             {
                 bool _addIndex = true;
-                if (spawnPointIndexList.Count == enemySpawnPointList.childCount)
+                if (spawnPointIndexList.Count == enemySpawnPointList.transform.childCount)
                 {
                     break;
                 }
@@ -107,7 +112,7 @@ public class EnemySpawnManager : MonoBehaviour
             {
                 if (enemy.gameObject.activeSelf == false)
                 {
-                    enemy.transform.position = enemySpawnPointList.GetChild(index).gameObject.transform.position;
+                    enemy.transform.position = enemySpawnPointList.transform.GetChild(index).gameObject.transform.position;
                     enemy.gameObject.SetActive(true);
                     break;
                 }
@@ -117,6 +122,7 @@ public class EnemySpawnManager : MonoBehaviour
 
     private void DespawnEnemies()
     {
+        int survivingEnemies = 0;
         for (int i = 0; i < enemyTypePoolList.Length; i++)
         {
             foreach (Transform enemy in enemyTypePoolList[i])
@@ -124,9 +130,13 @@ public class EnemySpawnManager : MonoBehaviour
                 if (enemy.gameObject.activeSelf == true)
                 {
                     enemy.gameObject.SetActive(false);
-                    break;
+                    survivingEnemies++;
                 }
             }
+        }
+        if(survivingEnemies == 0)
+        {
+            enemySpawnPointList.GetComponent<SpawnPointList>().SetSpawnAmount(0);
         }
     }
 }

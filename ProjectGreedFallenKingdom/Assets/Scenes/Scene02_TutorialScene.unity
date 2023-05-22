@@ -184,7 +184,94 @@ Transform:
   m_Children:
   - {fileID: 1851233229163647274}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &344605392
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 344605394}
+  - component: {fileID: 344605393}
+  m_Layer: 0
+  m_Name: A*
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &344605393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 344605392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78396926cbbfc4ac3b48fc5fc34a87d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  data:
+    dataString: UEsDBBQAAAgIAACAn+stoJ7vfgIAADMFAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFlVE1z2jAQ/SuMzoWxsTFxb60hpIckTGgnF1+EvcYaZMkjyQGS4b93JdvYpSfEe/vx9mnlL8KEriEzUm0Uy59lDuT7hNgz+TYZyCc404MUO/YJfcw7y01pg6iLeaOGScR9m6ZlBUax7Ic4cBvsIdgIVkhVrfMDJFIbjXBBuQaklDQ2WyD0NSFn/JnGNuWCp/nSnj7xFHuTKx4zEAbUEOrP/DAMlsFD3GVMvZm38Pxw6S2iqMudPsziKIqDaD31YlemERmnVQ25nWmoFoR938iFCZy2i7CTZZJzpjupxFxqZ0VCa93goBiQM4qjO33+LECgBHYojS04Tn8tCg2mc0bRy4op9LCtS37K1tiK6mOr7IPyxnZ6cJraks//sVPf0YWS1VPf1fdsB1Oy7PhGLxnVZuT7GF6NhDt7TpQf6Z7DewniRW6UbESOpFGNTW00zFfD39tgSQnZccBbqXdgUw9+99fcX7Kd4epmPyecVXtLzcIW2HHp/Ha7AQpv5hcKdpujuxKIWhV/NPymh/GKdcQjU9og1U0prLy9bJQNJWvnmZ2mMYlUAhzcia5BUG4uWyxj7i/wjhu1vWMeqX1MXfOO69/IXYqDh3jPu6O28nS7LF3K0zPo8rUxnAkYRFviBX1KpBDtfo096dN2jSpoNko7NCz/d7VIEC338aIIChrTZQQw9ZaRP/eD/XzuheEiy4jbPSZwTsq3rdDOHrw1MRQXuGf9N2ayUbR2u54retqwz0qOLGeikLtMAYjXtsJNOChsgq8yX+cMDdqBMUy4+yZfKeEyO0Ke3gqlbtL12SiaDlVSUrMPaSySksR9VFJi4dsubxV8MDjZ5n2xK7n+BVBLAwQUAAAICAAAgJ/rnutdMG0AAAB4AAAACQAkAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAatWKkstKs7Mz1OyUjDRM9IzNNdRUEovSizIKAaKGII4pZkpIHa0krGZeZKlaZpxWqJlorlZaqqugbmZoZGhcZKRkYGJiWlyslIsUH1JZUGqX2JuKkRPQGJJRlpmXkpmXrqee1FmijvIaKXYWgBQSwECLQAUAAAICAAAgJ/rLaCe734CAAAzBQAACwAkAAAAAAAAAAAAAAAAAAAAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFQSwECLQAUAAAICAAAgJ/rnutdMG0AAAB4AAAACQAkAAAAAAAAAAAAAADLAgAAbWV0YS5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0BUEsFBgAAAAACAAIAuAAAAIMDAAAAAA==
+    upgradeData: 
+    file_cachedStartup: {fileID: 0}
+    data_cachedStartup: 
+    cacheStartup: 0
+  showNavGraphs: 1
+  showUnwalkableNodes: 1
+  debugMode: 0
+  debugFloor: 0
+  debugRoof: 1
+  manualDebugFloorRoof: 0
+  showSearchTree: 0
+  unwalkableNodeDebugSize: 0.3
+  logPathResults: 1
+  maxNearestNodeDistance: 100
+  scanOnStartup: 1
+  fullGetNearestSearch: 0
+  prioritizeGraphs: 0
+  prioritizeGraphsLimit: 1
+  colorSettings:
+    _SolidColor: {r: 0.11764706, g: 0.4, b: 0.7882353, a: 0.9}
+    _UnwalkableNode: {r: 1, g: 0, b: 0, a: 0.5}
+    _BoundsHandles: {r: 0.29, g: 0.454, b: 0.741, a: 0.9}
+    _ConnectionLowLerp: {r: 0, g: 1, b: 0, a: 0.5}
+    _ConnectionHighLerp: {r: 1, g: 0, b: 0, a: 0.5}
+    _MeshEdgeColor: {r: 0, g: 0, b: 0, a: 0.5}
+    _AreaColors:
+    - {r: 0, g: 0, b: 0, a: 0}
+  tagNames: []
+  heuristic: 2
+  heuristicScale: 1
+  threadCount: 1
+  maxFrameTime: 1
+  batchGraphUpdates: 0
+  graphUpdateBatchingInterval: 0.2
+  euclideanEmbedding:
+    mode: 0
+    seed: 0
+    pivotPointRoot: {fileID: 0}
+    spreadOutCount: 1
+  showGraphs: 1
+--- !u!4 &344605394
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 344605392}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &717077699
 GameObject:
@@ -218,7 +305,7 @@ Transform:
   m_Children:
   - {fileID: 1265899378}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &717077701
 MonoBehaviour:
@@ -2553,7 +2640,7 @@ Transform:
   m_Children:
   - {fileID: 409081921562327072}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!70 &2290856477611092692
 CapsuleCollider2D:
@@ -2593,7 +2680,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &2290856478841279889
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2691,7 +2778,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3298783271693300003
 GameObject:
@@ -2894,7 +2981,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46307024b08eb6c48bff704832e11203, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isKnockedBack: 0
+  isPushBack: 0
   stunStatusEffect: {fileID: 5741637899777311953}
 --- !u!114 &4038241797020580383
 MonoBehaviour:
@@ -5190,7 +5277,7 @@ Transform:
   - {fileID: 1327447968}
   - {fileID: 5537893906389726551}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!156049354 &5537893906563669835
 Grid:
@@ -9709,7 +9796,7 @@ Transform:
   - {fileID: 1985399639}
   - {fileID: 991298716}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8102112068820956941
 GameObject:
@@ -9720,6 +9807,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8102112068820956938}
+  - component: {fileID: 8102112068820956942}
   m_Layer: 0
   m_Name: EnemySpawnPointList
   m_TagString: Untagged
@@ -9727,3 +9815,16 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &8102112068820956942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8102112068820956941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ebdde6ea7df6f845a7e3d9ae736debe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initSpawnAmount: 2

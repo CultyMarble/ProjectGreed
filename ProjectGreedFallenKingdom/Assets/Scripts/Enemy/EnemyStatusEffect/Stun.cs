@@ -16,7 +16,7 @@ public class Stun : StatusEffect
     protected override void TriggerHandler()
     {
         if (enemyStatusEffect.Host.GetComponent<TargetingAI>())
-            enemyStatusEffect.Host.GetComponent<TargetingAI>().currentTargetTransform = null;
+            enemyStatusEffect.Host.GetComponent<TargetingAI>().ClearTarget();
         else if (enemyStatusEffect.Host.GetComponent<TargetingAIBasic>())
             enemyStatusEffect.Host.GetComponent<TargetingAIBasic>().currentTargetTransform = null;
     }
