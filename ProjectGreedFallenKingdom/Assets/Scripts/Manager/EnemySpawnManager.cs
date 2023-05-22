@@ -122,7 +122,7 @@ public class EnemySpawnManager : MonoBehaviour
 
     private void DespawnEnemies()
     {
-        int survivingEnemies = 0;
+        //int survivingEnemies = 0;
         for (int i = 0; i < enemyTypePoolList.Length; i++)
         {
             foreach (Transform enemy in enemyTypePoolList[i])
@@ -130,13 +130,13 @@ public class EnemySpawnManager : MonoBehaviour
                 if (enemy.gameObject.activeSelf == true)
                 {
                     enemy.gameObject.SetActive(false);
-                    survivingEnemies++;
+                    //survivingEnemies++;
                 }
             }
         }
-        if(survivingEnemies == 0)
-        {
-            enemySpawnPointList.GetComponent<SpawnPointList>().SetSpawnAmount(0);
-        }
+        //if(survivingEnemies == 0)
+        //{
+        //    enemySpawnPointList.GetComponent<SpawnPointList>().SetSpawnAmount(0);
+        //}
     }
 }
