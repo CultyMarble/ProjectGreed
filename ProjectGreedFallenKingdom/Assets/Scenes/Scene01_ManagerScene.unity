@@ -263,7 +263,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 237529647
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 0afce3fb48262094a85822231f78f26b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1064,7 +1064,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82aa6f07e46391a4a99b11b407b8ff07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnAmount: 3
   enemyTypePoolList:
   - {fileID: 669595407}
   - {fileID: 106749483}
@@ -1229,8 +1228,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1447177471
-  m_SortingLayer: 4
-  m_SortingOrder: 0
+  m_SortingLayer: 2
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: fc333002c5347da428101c721f7bf7de, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1777,7 +1776,7 @@ SortingGroup:
   m_GameObject: {fileID: 567887215}
   m_Enabled: 1
   m_SortingLayerID: 237529647
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
 --- !u!61 &567887224
 BoxCollider2D:
@@ -4028,7 +4027,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 237529647
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 37c4a4c3505507044899baba09ec2bfa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -5070,13 +5069,13 @@ MonoBehaviour:
   moveSpeed: 3
   lifeTime: 0.75
   maxFuel: 100
-  fuelDrainRate: 1
-  refuelRate: 2
+  fuelDrainRate: 0.75
+  refuelRate: 4
   refuelDelay: 0.1
   timeUntilChangeDirectionMax: 0.2
   timeUntilChangeDirectionMin: 0.1
-  swingMagtitude: 0.7
-  growthRate: 0.0015
+  swingMagtitude: 0.8
+  growthRate: 0.0017
   size: 0.18
 --- !u!212 &1625022750
 SpriteRenderer:
@@ -5117,7 +5116,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 237529647
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 1
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
