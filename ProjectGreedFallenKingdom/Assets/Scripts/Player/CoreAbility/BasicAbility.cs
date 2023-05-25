@@ -34,7 +34,20 @@ public class BasicAbility : CoreAbility
     {
         base.Update();
 
-        BasicAbilityInputHandler();
+        switch (Player.Instance.playerActionState)
+        {
+            case PlayerActionState.none:
+                InputHandler();
+                break;
+            case PlayerActionState.IsUsingBasicAbility:
+                InputHandler();
+                break;
+            default:
+                break;
+        }
+
+
+        InputHandler();
         Fuel();
     }
 
@@ -44,10 +57,11 @@ public class BasicAbility : CoreAbility
     }
 
     //===========================================================================
-    private void BasicAbilityInputHandler()
+    private void InputHandler()
     {
         if (Input.GetMouseButton(0) && cooldownTimer == 0 && currentFuel > 0)
         {
+            Player.Instance.playerActionState = PlayerActionState.IsUsingBasicAbility;
             SpawnParticle();
             if (currentFuel < fuelDrainRate)
             {
@@ -58,6 +72,10 @@ public class BasicAbility : CoreAbility
                 currentFuel -= fuelDrainRate;
             }
             cooldownTimer = cooldown;
+        }
+        else if (!Input.GetMouseButton(0) && Player.Instance.playerActionState == PlayerActionState.IsUsingBasicAbility)
+        {
+            Player.Instance.playerActionState = PlayerActionState.none;
         }
     }
 

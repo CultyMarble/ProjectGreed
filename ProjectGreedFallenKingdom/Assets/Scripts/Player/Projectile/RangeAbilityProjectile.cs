@@ -9,13 +9,15 @@ public class RangeAbilityProjectile : MonoBehaviour
     private float moveSpeed;
     private Vector3 moveDirection;
 
+    private int particleDamage;
+
     //===========================================================================
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.GetComponent<Enemy>() != null)
         {
             //collision.GetComponent<GeneralStatusEffect>().IncreaseRotStack(10);
-            //collision.GetComponent<EnemyHealth>().DamageFeedBack();
+            collision.GetComponent<EnemyHealth>().UpdateCurrentHealth(-particleDamage);
         }
         gameObject.SetActive(false);
         Destroy(gameObject);
@@ -28,10 +30,10 @@ public class RangeAbilityProjectile : MonoBehaviour
     }
 
     //===========================================================================
-    public void ProjectileConfig(int newRotStack, float newMoveSpeed, Transform startPositionTransform)
+    public void ProjectileConfig(int newRotStack, float newMoveSpeed, Transform startPositionTransform, int damage)
     {
         rotStack = newRotStack;
-
+        particleDamage = damage;
         moveSpeed = newMoveSpeed;
         moveDirection = (CultyMarbleHelper.GetMouseToWorldPosition() -
             startPositionTransform.position).normalized;

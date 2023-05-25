@@ -17,7 +17,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float dashSpeed = 100.0f;
 
     private Vector2 dashVector;
-    private bool isDashing;
     private float dashTimeCounter;
     private float dashCDTimeCounter;
     private float pauseTimeAfterDashCounter;
@@ -54,7 +53,7 @@ public class PlayerMovement : MonoBehaviour
     //======================================================================
     private void PlayerInput()
     {
-        if (isDashing)
+        if (Player.Instance.playerActionState == PlayerActionState.IsDashing || Player.Instance.playerActionState == PlayerActionState.IsUsingRangeAbility)
             return;
 
         movementVector.x = Input.GetAxisRaw("Horizontal");
@@ -64,10 +63,19 @@ public class PlayerMovement : MonoBehaviour
 
     private void PlayerMovePosition()
     {
-        if (isDashing)
+        if (Player.Instance.playerActionState == PlayerActionState.IsDashing)
         {
             Rigidbody2D.MovePosition(Rigidbody2D.position +
                 dashSpeed * Time.deltaTime * dashVector);
+        }
+        else if (Player.Instance.playerActionState == PlayerActionState.IsUsingBasicAbility)
+        {
+            Rigidbody2D.MovePosition(Rigidbody2D.position +
+                (0.1f * baseMoveSpeed) * Time.deltaTime * movementVector);
+        }
+        else if (Player.Instance.playerActionState == PlayerActionState.IsUsingRangeAbility)
+        {
+            return;
         }
         else
         {
@@ -87,11 +95,11 @@ public class PlayerMovement : MonoBehaviour
     private void DashHandler()
     {
         // Trigger Dash
-        if (Input.GetKeyDown(KeyCode.Space) && isDashing == false)
+        if (Input.GetKeyDown(KeyCode.Space) && Player.Instance.playerActionState == PlayerActionState.none)
         {
             if (dashCDTimeCounter <= 0  && movementVector != Vector2.zero)
             {
-                isDashing = true;
+                Player.Instance.playerActionState = PlayerActionState.IsDashing;
                 dashTimeCounter = dashTime;
                 dashCDTimeCounter = dashCD;
                 dashVector = movementVector;
@@ -101,12 +109,12 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if (isDashing)
+        if (Player.Instance.playerActionState == PlayerActionState.IsDashing)
         {
             dashTimeCounter -= Time.deltaTime;
             if (dashTimeCounter <= 0)
             {
-                isDashing = false;
+                Player.Instance.playerActionState = PlayerActionState.none;
                 pauseTimeAfterDashCounter = pauseTimeAfterDash;
                 dashVector = Vector2.zero;
                 canMove = false;

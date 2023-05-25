@@ -5,12 +5,13 @@ public enum PlayerActionState
     IsUsingBasicAbility,
     IsUsingRangeAbility,
     IsUsingAreaAbility,
+    IsDashing,
     none,
 }
 
 public class Player : SingletonMonobehaviour<Player>
 {
-    [HideInInspector] public PlayerActionState playerActionState;
+    [SerializeField] public PlayerActionState playerActionState;
     [SerializeField] private Transform fpromtText;
 
     //======================================================================

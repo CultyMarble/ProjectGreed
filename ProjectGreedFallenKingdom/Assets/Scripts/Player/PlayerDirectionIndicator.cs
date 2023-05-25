@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerDirectionIndicator : MonoBehaviour
 {
-    private void FixedUpdate()
+    private void Update()
     {
         CultyMarbleHelper.RotateGameObjectToMouseDirection(this.transform);
     }
