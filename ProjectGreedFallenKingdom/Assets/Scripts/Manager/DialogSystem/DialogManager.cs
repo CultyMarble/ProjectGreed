@@ -12,11 +12,6 @@ public class DialogManager : SingletonMonobehaviour<DialogManager>
     private int currentLine;
 
     //===========================================================================
-    protected override void Awake()
-    {
-        Singleton();
-    }
-
     private void Start()
     {
         SetDialogPanelActiveState(false);

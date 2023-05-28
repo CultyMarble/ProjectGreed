@@ -11,11 +11,6 @@ public class PlayerCurrencies : SingletonMonobehaviour<PlayerCurrencies>
     private int permCurrencyAmount = 50;
 
     //===========================================================================
-    protected override void Awake()
-    {
-        Singleton();
-    }
-
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.PageUp))

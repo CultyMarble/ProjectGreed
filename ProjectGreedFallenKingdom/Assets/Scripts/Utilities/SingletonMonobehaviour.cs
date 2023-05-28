@@ -6,11 +6,8 @@ public abstract class SingletonMonobehaviour<T> : MonoBehaviour where T : MonoBe
     private static T instance;
 
     //Protected
-    protected abstract void Awake();
-
-    protected void Singleton()
+    protected virtual void Awake()
     {
-
         if (instance == null)
             instance = this as T;
         else

@@ -13,6 +13,7 @@ public class ChasingAI : MonoBehaviour
     private TargetingAI targetingAI;
     private Vector2 movingDirection;
     private float currentSpeed;
+
     //===========================================================================
     private void Awake()
     {

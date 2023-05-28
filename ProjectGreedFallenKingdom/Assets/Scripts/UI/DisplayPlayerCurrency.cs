@@ -8,11 +8,6 @@ public class DisplayPlayerCurrency : SingletonMonobehaviour<DisplayPlayerCurrenc
     [SerializeField] private TextMeshProUGUI permCurrencyText;
 
     //===========================================================================
-    protected override void Awake()
-    {
-        Singleton();
-    }
-
     private void OnEnable()
     {
         EventManager.BeforeSceneUnloadEvent += EventManager_BeforeSceneUnloadEventHandler;

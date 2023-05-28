@@ -8,7 +8,7 @@ public class Regeneration : StatusEffect
     //===========================================================================
     protected override void TriggerHandler()
     {
-        enemyStatusEffect.HostEntity.GetComponent<EnemyHealth>().UpdateCurrentHealth(regenAmount);
+        enemyStatusEffect.Host.GetComponent<EnemyHealth>().UpdateCurrentHealth(regenAmount);
     }
 
     protected override void OverstackHandler()

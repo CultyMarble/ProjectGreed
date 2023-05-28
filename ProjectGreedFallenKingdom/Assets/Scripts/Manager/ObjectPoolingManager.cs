@@ -27,7 +27,7 @@ public class ObjectPoolingManager : MonoBehaviour
         {
             for (int i = 0; i < poolSizeList[currentPool]; i++)
             {
-                Instantiate(poolObjectList[currentPool], pool);
+                Instantiate(poolObjectList[currentPool], pool).gameObject.SetActive(false);
             }
 
             currentPool++;

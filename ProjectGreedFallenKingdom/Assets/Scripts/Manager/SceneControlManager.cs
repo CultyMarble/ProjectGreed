@@ -28,8 +28,6 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject mainMenuUI;
     [SerializeField] private GameObject gameoverUI;
-    [SerializeField] private GameObject playerHealthUI;
-    [SerializeField] private GameObject playerCDUI;
     [SerializeField] public GameObject pauseMenuUI;
 
     [Header("Button References:")]
@@ -41,22 +39,17 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
     [SerializeField] private Button exitButton;
 
     [Header("Starting Scene:")]
-    [SerializeField] private SceneName startingAreaScene;
+    [SerializeField] private SceneName startingScene;
 
     private bool isLoadingScreenActive;
     private bool canUnload = false;
     private UnloadSceneZone unloadSceneZone;
     //===========================================================================
-    protected override void Awake()
-    {
-        Singleton();
-    }
-
     private void Start()
     {
         startGameButton.onClick.AddListener(() =>
         {
-            StartCoroutine(LoadDemoMap());
+            StartCoroutine(LoadStartingScene());
         });
 
         tutorialButton.onClick.AddListener(() =>
@@ -130,6 +123,7 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
     {
         EventManager.CallBeforeSceneUnloadLoadingScreenEvent();
         yield return StartCoroutine(LoadingScreen(1.0f));
+
         player.transform.position = spawnPosition;
 
         EventManager.CallBeforeSceneUnloadEvent();
@@ -149,10 +143,10 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
 
         player.transform.gameObject.SetActive(false);
 
+        GameplayInfoUIControl.Instance.SetGameplayInfoUIActive(true);
         gameoverUI.SetActive(false);
-        playerHealthUI.SetActive(false);
-        playerCDUI.SetActive(false);
         pauseMenuUI.SetActive(false);
+
         mainMenuUI.SetActive(true);
 
         EventManager.CallBeforeSceneUnloadEvent();
@@ -173,8 +167,7 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
 
         while (Mathf.Approximately(loadingScreenCanvasGroup.alpha, targetAlpha) == false)
         {
-            loadingScreenCanvasGroup.alpha = Mathf.MoveTowards(loadingScreenCanvasGroup.alpha, targetAlpha,
-                _loadSpeed * Time.deltaTime);
+            loadingScreenCanvasGroup.alpha = Mathf.MoveTowards(loadingScreenCanvasGroup.alpha, targetAlpha, _loadSpeed * Time.deltaTime);
             yield return null;
         }
 
@@ -192,18 +185,17 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
     }
 
     //===========================================================================
-    private IEnumerator LoadDemoMap()
+    private IEnumerator LoadStartingScene()
     {
         mainMenuUI.SetActive(false);
 
         loadingScreenImage.color = new Color(0.0f, 0.0f, 0.0f, 1.0f);
         yield return StartCoroutine(LoadingScreen(1.0f));
 
-        yield return StartCoroutine(LoadSceneAndSetActive(startingAreaScene.ToString()));
+        yield return StartCoroutine(LoadSceneAndSetActive(startingScene.ToString()));
         EventManager.CallAfterSceneLoadEvent();
 
-        playerHealthUI.SetActive(true);
-        playerCDUI.SetActive(true);
+        GameplayInfoUIControl.Instance.SetGameplayInfoUIActive(true);
         player.transform.position = this.transform.position;
         player.SetActive(true);
 
@@ -220,7 +212,7 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         yield return StartCoroutine(LoadSceneAndSetActive(SceneName.Scene02_TutorialScene.ToString()));
         EventManager.CallAfterSceneLoadEvent();
 
-        playerCDUI.SetActive(true);
+        GameplayInfoUIControl.Instance.SetGameplayInfoUIActive(true);
         player.transform.position = this.transform.position;
         player.SetActive(true);
 
