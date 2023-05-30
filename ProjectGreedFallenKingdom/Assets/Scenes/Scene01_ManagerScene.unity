@@ -6596,8 +6596,8 @@ MonoBehaviour:
   pfRangeAbilityProjectile: {fileID: 2670297803040694699, guid: c6e09434388c9e3459e9f2a142f41f4c, type: 3}
   aimIndicator: {fileID: 1745730314}
   rotStackApply: 10
-  projectileSpeed: 15
-  aimChargeTime: 0.5
+  projectileSpeed: 20
+  aimChargeTime: 0.3
 --- !u!1 &1970726822
 GameObject:
   m_ObjectHideFlags: 0

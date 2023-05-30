@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class EnemyProjectile : MonoBehaviour
 {
-    private int damage;
+    [SerializeField] private int damage;
     private float moveSpeed;
     private Vector3 moveDirection;
     private float lifeTime = 5f;
@@ -16,10 +16,14 @@ public class EnemyProjectile : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            
+            collision.gameObject.GetComponent<PlayerHealth>().UpdateCurrentHealth(-damage);
         }
-        gameObject.SetActive(false);
-        gameObject.transform.localPosition = Vector2.zero;
+        if (collision.gameObject.CompareTag("Collisions"))
+        {
+            gameObject.SetActive(false);
+            Destroy(gameObject);
+        }
+        
     }
     //===========================================================================
     private void Update()

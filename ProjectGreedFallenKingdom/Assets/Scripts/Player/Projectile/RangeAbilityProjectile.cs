@@ -8,8 +8,8 @@ public class RangeAbilityProjectile : MonoBehaviour
     private int rotStack;
     private float moveSpeed;
     private Vector3 moveDirection;
-
     private int particleDamage;
+    private float lifetime = 2;
 
     //===========================================================================
     private void OnTriggerEnter2D(Collider2D collision)
@@ -19,14 +19,23 @@ public class RangeAbilityProjectile : MonoBehaviour
             //collision.GetComponent<GeneralStatusEffect>().IncreaseRotStack(10);
             collision.GetComponent<EnemyHealth>().UpdateCurrentHealth(-particleDamage);
         }
-        gameObject.SetActive(false);
-        Destroy(gameObject);
+        if (collision.CompareTag("Collisions"))
+        {
+            gameObject.SetActive(false);
+            Destroy(gameObject);
+        }
     }
 
     //===========================================================================
     private void Update()
     {
         transform.position += moveSpeed * Time.deltaTime * moveDirection;
+        lifetime -= Time.deltaTime;
+        if(lifetime <= 0)
+        {
+            gameObject.SetActive(false);
+            Destroy(gameObject);
+        }
     }
 
     //===========================================================================

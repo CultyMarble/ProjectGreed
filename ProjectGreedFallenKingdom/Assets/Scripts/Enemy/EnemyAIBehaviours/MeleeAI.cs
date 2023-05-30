@@ -61,9 +61,17 @@ public class MeleeAI : MonoBehaviour
         if (targetingAI.currentTargetTransform == null)
             return;
 
-        if (Vector2.Distance(transform.position, targetingAI.currentTargetTransform.position) <= activateDistance)
-            //targetingAI.currentTargetTransform.GetComponent<PlayerPrefs>().UpdateCurrentHealth(damage);
+        //if (Vector2.Distance(transform.position, targetingAI.currentTargetTransform.position) <= activateDistance)
 
+        Collider2D[] collider2DArray = Physics2D.OverlapCircleAll(transform.position, activateDistance);
+        foreach (Collider2D collider2D in collider2DArray)
+        {
+            if (collider2D.GetComponent<Player>() != null)
+            {
+                collider2D.GetComponent<PlayerHealth>().UpdateCurrentHealth(-damage);
+                return;
+            }
+        }
         targetingAI.isAttacking = false;
     }
 }
