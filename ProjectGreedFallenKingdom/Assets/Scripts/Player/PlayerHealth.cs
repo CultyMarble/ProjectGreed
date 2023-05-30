@@ -1,10 +1,11 @@
 using System;
 using UnityEngine;
 
-public class EnemyHealth : MonoBehaviour
+public class PlayerHealth : MonoBehaviour
 {
     public struct OnHealthChangedEvenArgs
     {
+        public float currentHealth;
         public float healthRatio;
     }
     public event EventHandler<OnHealthChangedEvenArgs> OnHealthChanged;
@@ -27,14 +28,11 @@ public class EnemyHealth : MonoBehaviour
 
     private void Update()
     {
-        if (feedbackDamageTimer > 0)
+        UpdateDamageFeedBackTimer();
+
+        if (Input.GetKeyDown(KeyCode.Backspace))
         {
-            feedbackDamageTimer -= Time.deltaTime;
-            if (feedbackDamageTimer <= 0)
-            {
-                feedbackDamageTimer = 0;
-                this.gameObject.GetComponentInChildren<SpriteRenderer>().color = new Color(255, 255, 255);
-            }
+            UpdateCurrentHealth(-10);
         }
     }
 
@@ -46,7 +44,20 @@ public class EnemyHealth : MonoBehaviour
         feedbackDamageTimer = feedbackDamageTime;
     }
 
-    public void Despawn()
+    private void UpdateDamageFeedBackTimer()
+    {
+        if (feedbackDamageTimer > 0)
+        {
+            feedbackDamageTimer -= Time.deltaTime;
+            if (feedbackDamageTimer <= 0)
+            {
+                feedbackDamageTimer = 0;
+                this.gameObject.GetComponentInChildren<SpriteRenderer>().color = new Color(255, 255, 255);
+            }
+        }
+    }
+
+    private void Despawn()
     {
         // Call OnDestroy Event
         OnDespawnEvent?.Invoke(this, EventArgs.Empty);
@@ -59,15 +70,20 @@ public class EnemyHealth : MonoBehaviour
     //======================================================================
     public void UpdateCurrentHealth(int amount = 0)
     {
-        if (amount != 0) {
-                currentHealth += amount;
+        if (amount != 0)
+        {
+            currentHealth += amount;
             currentHealth = Mathf.Clamp(currentHealth, 0.0f, maxHealth);
 
             if (amount < 0)
                 DamageFeedBack();
 
             // Call OnHitPointChanged Event
-            OnHealthChanged?.Invoke(this, new OnHealthChangedEvenArgs { healthRatio = currentHealth / maxHealth });
+            OnHealthChanged?.Invoke(this, new OnHealthChangedEvenArgs
+            {
+                currentHealth = currentHealth,
+                healthRatio = currentHealth / maxHealth
+            });
 
             if (currentHealth <= 0)
                 Despawn();
