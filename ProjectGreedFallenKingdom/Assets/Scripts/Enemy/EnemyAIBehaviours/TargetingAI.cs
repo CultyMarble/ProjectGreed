@@ -16,6 +16,8 @@ public class TargetingAI : MonoBehaviour
     private float lookForTargetTimeMax = 1.5f;
     private float targetDistance;
     private float targetDir;
+    private bool holdMovement;
+    private float holdTimer = 0.5f;
 
     private void Start()
     {
@@ -25,7 +27,19 @@ public class TargetingAI : MonoBehaviour
     //===========================================================================
     private void FixedUpdate()
     {
-        HandleTargeting();
+        if (!holdMovement)
+        {
+            HandleTargeting();
+        }
+        else
+        {
+            ClearTarget();
+            holdTimer -= Time.deltaTime;
+            if(holdTimer <= 0)
+            {
+                holdMovement = false;
+            }
+        }
     }
 
     //===========================================================================
@@ -92,5 +106,20 @@ public class TargetingAI : MonoBehaviour
     public void ClearTarget()
     {
         currentTargetTransform.position = transform.position;
+    }
+    public bool CheckClear()
+    {
+        if(currentTargetTransform.position == transform.position)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    public void HoldMovement()
+    {
+        holdMovement = true;
     }
 }

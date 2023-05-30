@@ -63,24 +63,25 @@ public class PlayerMovement : MonoBehaviour
 
     private void PlayerMovePosition()
     {
-        if (Player.Instance.playerActionState == PlayerActionState.IsDashing)
+        switch (Player.Instance.playerActionState)
         {
-            Rigidbody2D.MovePosition(Rigidbody2D.position +
+            case PlayerActionState.IsDashing:
+                Rigidbody2D.MovePosition(Rigidbody2D.position +
                 dashSpeed * Time.deltaTime * dashVector);
-        }
-        else if (Player.Instance.playerActionState == PlayerActionState.IsUsingBasicAbility)
-        {
-            Rigidbody2D.MovePosition(Rigidbody2D.position +
+                break;
+            case PlayerActionState.IsUsingBasicAbility:
+                Rigidbody2D.MovePosition(Rigidbody2D.position +
                 (0.1f * baseMoveSpeed) * Time.deltaTime * movementVector);
-        }
-        else if (Player.Instance.playerActionState == PlayerActionState.IsUsingRangeAbility)
-        {
-            return;
-        }
-        else
-        {
-            Rigidbody2D.MovePosition(Rigidbody2D.position +
+                break;
+            case PlayerActionState.IsUsingRangeAbility:
+                break;
+            case PlayerActionState.IsUsingBombAbility:
+                break;
+            default:
+                Rigidbody2D.MovePosition(Rigidbody2D.position +
                 baseMoveSpeed * Time.deltaTime * movementVector);
+                break;
+
         }
     }
 
