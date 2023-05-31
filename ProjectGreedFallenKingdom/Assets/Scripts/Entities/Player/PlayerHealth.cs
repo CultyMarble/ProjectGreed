@@ -20,7 +20,7 @@ public class PlayerHealth : MonoBehaviour
     private float feedbackDamageTimer = default;
 
     //======================================================================
-    private void Awake()
+    private void OnEnable()
     {
         currentHealth = maxHealth;
         UpdateCurrentHealth();
@@ -59,16 +59,16 @@ public class PlayerHealth : MonoBehaviour
 
     private void Despawn()
     {
+        // Reset Parameters
+        UpdateCurrentHealth(maxHealth);
+        gameObject.SetActive(false);
+
         // Call OnDestroy Event
         OnDespawnEvent?.Invoke(this, EventArgs.Empty);
-
-        // Reset Parameters
-        currentHealth = maxHealth;
-        gameObject.SetActive(false);
     }
 
     //======================================================================
-    public void UpdateCurrentHealth(int amount = 0)
+    public void UpdateCurrentHealth(float amount = 0)
     {
         if (amount != 0)
         {
