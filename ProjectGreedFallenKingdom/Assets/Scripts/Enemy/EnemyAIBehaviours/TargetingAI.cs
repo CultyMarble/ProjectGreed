@@ -10,12 +10,14 @@ public class TargetingAI : MonoBehaviour
 
     [SerializeField] private float searchRadius;
     [SerializeField] private float breakDistance;
+    [SerializeField] private bool keepDistance;
+
 
     private float lookForTargetTimeCounter;
     private float lookForTargetTimeMin = 0.5f;
     private float lookForTargetTimeMax = 1.5f;
     private float targetDistance;
-    private float targetDir;
+    private Vector3 targetDir;
     private bool holdMovement;
     private float holdTimer = 0.5f;
 
@@ -48,27 +50,33 @@ public class TargetingAI : MonoBehaviour
         if(currentTargetTransform.position != transform.position)
         {
             targetDistance = Vector2.Distance(currentTargetTransform.position, transform.position);
-            //targetDir = (currentTargetTransform.position - GetComponent<Transform>().position).normalized;
+            targetDir = (currentTargetTransform.position - GetComponent<Transform>().position).normalized;
             //targetDir = Mathf.Atan(GetComponent<Transform>().position.y - transform.position.y / GetComponent<Transform>().position.x - transform.position.x);
         }
         if (currentTargetTransform.position != transform.position && targetDistance >= breakDistance)
         {
             ClearTarget();
         }
-        //if (keepDistance && currentTargetTransform.position != transform.position && targetDistance <= breakDistance)
+
+        //if (keepDistance && !CheckClear() && targetDistance <= breakDistance)
         //{
         //    //currentTargetTransform.Translate(Mathf.Abs(breakDistance - targetDistance) * -targetDir);
-        //    float newPosX = currentTargetTransform.position.x - (breakDistance + 0.2f * ((transform.position.x - currentTargetTransform.position.x) / Mathf.Sqrt(Mathf.Pow(transform.position.x - currentTargetTransform.position.x, 2) + Mathf.Pow(transform.position.y - currentTargetTransform.position.y, 2))));
-        //    float newPosY = currentTargetTransform.position.y - (breakDistance + 0.2f * ((transform.position.y - currentTargetTransform.position.y) / Mathf.Sqrt(Mathf.Pow(transform.position.x - currentTargetTransform.position.x, 2) + Mathf.Pow(transform.position.y - currentTargetTransform.position.y, 2))));
+        //    //float newPosX = currentTargetTransform.position.x - (breakDistance + 0.2f * ((transform.position.x - currentTargetTransform.position.x) / Mathf.Sqrt(Mathf.Pow(transform.position.x - currentTargetTransform.position.x, 2) + Mathf.Pow(transform.position.y - currentTargetTransform.position.y, 2))));
+        //    //float newPosY = currentTargetTransform.position.y - (breakDistance + 0.2f * ((transform.position.y - currentTargetTransform.position.y) / Mathf.Sqrt(Mathf.Pow(transform.position.x - currentTargetTransform.position.x, 2) + Mathf.Pow(transform.position.y - currentTargetTransform.position.y, 2))));
 
-        //    float newDistance = Vector2.Distance(currentTargetTransform.position, transform.position);
+        //    //float newDistance = Vector2.Distance(currentTargetTransform.position, transform.position);
 
-        //    currentTargetTransform.position.Set(newPosX,newPosY, 0);
+        //    //currentTargetTransform.position.Set(newPosX, newPosY, 0);
 
         //    //currentTargetTransform.position = transform.position + breakDistance * ((transform.position - currentTargetTransform.position) * (transform.position - currentTargetTransform.position).normalized);
         //    //float rise = currentTargetTransform.position.y - transform.position.y;
         //    //float run = currentTargetTransform.position.x - transform.position.x;
         //    //float slope = rise / run;
+
+        //    //currentTargetTransform.position = transform.position + (-targetDir * 5);
+
+
+
         //}
         if (currentTargetTransform.position != transform.position && currentTargetTransform.gameObject.activeSelf == false)
         {
@@ -98,7 +106,18 @@ public class TargetingAI : MonoBehaviour
         {
             if (collider2D.GetComponent<Player>() != null)
             {
-                currentTargetTransform.position = collider2D.transform.position;
+                if (keepDistance && targetDistance < breakDistance)
+                {
+                    currentTargetTransform.position = collider2D.transform.position + (-targetDir * 5);
+                }
+                else if(keepDistance && !CheckClear() && Mathf.Abs(targetDistance - breakDistance) < 0.2)
+                {
+                    ClearTarget();
+                }
+                else
+                {
+                    currentTargetTransform.position = collider2D.transform.position;
+                }
                 return;
             }
         }

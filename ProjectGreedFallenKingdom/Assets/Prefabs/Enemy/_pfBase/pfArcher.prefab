@@ -371,8 +371,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isAttacking: 0
   currentTargetTransform: {fileID: 399951332217022172}
-  searchRadius: 8
-  breakDistance: 5
+  searchRadius: 15
+  breakDistance: 10
+  keepDistance: 1
 --- !u!114 &-4127356551639531183
 MonoBehaviour:
   m_ObjectHideFlags: 0
