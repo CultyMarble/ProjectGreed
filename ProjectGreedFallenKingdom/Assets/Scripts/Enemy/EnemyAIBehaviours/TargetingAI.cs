@@ -110,7 +110,7 @@ public class TargetingAI : MonoBehaviour
                 {
                     currentTargetTransform.position = collider2D.transform.position + (-targetDir * 5);
                 }
-                else if(keepDistance && !CheckClear() && Mathf.Abs(targetDistance - breakDistance) < 0.2)
+                else if(keepDistance && !CheckClear() && Mathf.Abs(targetDistance - breakDistance) < 0.5)
                 {
                     ClearTarget();
                 }
