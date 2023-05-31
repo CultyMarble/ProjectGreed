@@ -1,10 +1,14 @@
 using UnityEngine;
-using TMPro;
+using UnityEngine.UI;
 
 public class DisplayPlayerHealth : MonoBehaviour
 {
+    [Header("Component References:")]
     [SerializeField] private PlayerHealth playerHealth;
-    [SerializeField] private TextMeshProUGUI playerHealthText;
+
+    [Header("Canvas References:")]
+    [SerializeField] private Image playerHealthFrameImage;
+    [SerializeField] private Image playerHealthBarImage;
 
     //===========================================================================
     private void OnEnable()
@@ -20,6 +24,6 @@ public class DisplayPlayerHealth : MonoBehaviour
     //===========================================================================
     private void PlayerHealth_OnHealthChangedHandler(object sender, PlayerHealth.OnHealthChangedEvenArgs e)
     {
-        playerHealthText.SetText("Player Health: " + e.currentHealth);
+        playerHealthBarImage.rectTransform.localScale = new Vector3(e.currentHealth / e.maxHealth, 1.0f, 1.0f);
     }
 }

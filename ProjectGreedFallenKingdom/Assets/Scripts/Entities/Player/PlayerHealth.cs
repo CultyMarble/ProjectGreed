@@ -6,7 +6,7 @@ public class PlayerHealth : MonoBehaviour
     public struct OnHealthChangedEvenArgs
     {
         public float currentHealth;
-        public float healthRatio;
+        public float maxHealth;
     }
     public event EventHandler<OnHealthChangedEvenArgs> OnHealthChanged;
 
@@ -82,7 +82,7 @@ public class PlayerHealth : MonoBehaviour
             OnHealthChanged?.Invoke(this, new OnHealthChangedEvenArgs
             {
                 currentHealth = currentHealth,
-                healthRatio = currentHealth / maxHealth
+                maxHealth = maxHealth
             });
 
             if (currentHealth <= 0)

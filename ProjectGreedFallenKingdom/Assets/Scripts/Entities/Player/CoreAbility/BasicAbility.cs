@@ -23,6 +23,7 @@ public class BasicAbility : CoreAbility
     private float currentFuel = default;
 
     public float CurrentFuel { get => currentFuel; private set { } }
+    public float MaxFuel { get => maxFuel; private set { } }
 
     //===========================================================================
     private void Start()
