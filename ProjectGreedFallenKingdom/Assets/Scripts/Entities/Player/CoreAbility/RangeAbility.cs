@@ -48,29 +48,40 @@ public class RangeAbility : CoreAbility
         else
         {
             Player.Instance.playerActionState = PlayerActionState.none;
+            aimIndicator.GetComponent<SpriteRenderer>().color = Color.grey;
             aimCharge = 0;
         }
     }
     private void Shoot()
     {
-        aimCharge += Time.deltaTime;
-        aimIndicator.GetComponent<SpriteRenderer>().color = Color.yellow;
-        if (Input.GetMouseButtonUp(1) && aimCharge < aimChargeTime)
+        if (aimCharge + Time.deltaTime <= aimChargeTime)
         {
-            Player.Instance.playerActionState = PlayerActionState.none;
-            aimCharge = 0;
-            return;
+            aimCharge += Time.deltaTime;
         }
-        if (aimCharge > aimChargeTime)
+        else
+        {
+            aimCharge = aimChargeTime;
+        }
+        aimIndicator.GetComponent<SpriteRenderer>().color = Color.yellow;
+        //if (Input.GetMouseButtonUp(1) && aimCharge < aimChargeTime)
+        //{
+        //    Player.Instance.playerActionState = PlayerActionState.none;
+        //    aimCharge = 0;
+        //    return;
+        //}
+        if (aimCharge >= aimChargeTime)
         {
             aimIndicator.GetComponent<SpriteRenderer>().color = Color.green;
         }
         if (Input.GetMouseButtonUp(1))
         {
+            float scaledSpeed = Mathf.Clamp((aimCharge / aimChargeTime) * projectileSpeed, projectileSpeed / 2, projectileSpeed);
+            int scaledDamage = (int)Mathf.Clamp((aimCharge / aimChargeTime) * damage, damage / 2, damage);
+
             cooldownTimer = cooldown;
 
             Transform projectile = Instantiate(pfRangeAbilityProjectile, this.transform.position, Quaternion.identity).transform;
-            projectile.GetComponent<RangeAbilityProjectile>().ProjectileConfig(rotStackApply, projectileSpeed, this.transform, damage);
+            projectile.GetComponent<RangeAbilityProjectile>().ProjectileConfig(rotStackApply, scaledSpeed, this.transform, scaledDamage);
             Player.Instance.playerActionState = PlayerActionState.none;
             aimCharge = 0;
         }

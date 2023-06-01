@@ -12,14 +12,16 @@ public class RangeAbilityProjectile : MonoBehaviour
     private float lifetime = 2;
 
     //===========================================================================
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.GetComponent<Enemy>() != null)
+        if (collision.gameObject.tag == "Enemy")
         {
             //collision.GetComponent<GeneralStatusEffect>().IncreaseRotStack(10);
-            collision.GetComponent<EnemyHealth>().UpdateCurrentHealth(-particleDamage);
+            collision.gameObject.GetComponent<EnemyHealth>().UpdateCurrentHealth(-particleDamage);
+            gameObject.SetActive(false);
+            Destroy(gameObject);
         }
-        if (collision.CompareTag("Collisions"))
+        if (collision.gameObject.tag == "Collisions")
         {
             gameObject.SetActive(false);
             Destroy(gameObject);

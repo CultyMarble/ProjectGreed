@@ -6950,15 +6950,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e51a6a9d59de7449a0c03203e7eeef8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 15
+  damage: 25
   pushPower: 10
   pushRadius: 0
   cooldown: 0.3
   pfRangeAbilityProjectile: {fileID: 2670297803040694699, guid: c6e09434388c9e3459e9f2a142f41f4c, type: 3}
   aimIndicator: {fileID: 1745730314}
   rotStackApply: 10
-  projectileSpeed: 20
-  aimChargeTime: 0.3
+  projectileSpeed: 30
+  aimChargeTime: 0.5
 --- !u!1 &1970726822
 GameObject:
   m_ObjectHideFlags: 0
