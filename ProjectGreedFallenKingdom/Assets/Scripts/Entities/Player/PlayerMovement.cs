@@ -66,18 +66,23 @@ public class PlayerMovement : MonoBehaviour
         switch (Player.Instance.playerActionState)
         {
             case PlayerActionState.IsDashing:
+                GetComponentInParent<TrailRenderer>().enabled = true;
                 Rigidbody2D.MovePosition(Rigidbody2D.position +
                 dashSpeed * Time.deltaTime * dashVector);
                 break;
             case PlayerActionState.IsUsingBasicAbility:
+                GetComponentInParent<TrailRenderer>().enabled = false;
                 Rigidbody2D.MovePosition(Rigidbody2D.position +
                 (0.1f * baseMoveSpeed) * Time.deltaTime * movementVector);
                 break;
             case PlayerActionState.IsUsingRangeAbility:
+                GetComponentInParent<TrailRenderer>().enabled = false;
                 break;
             case PlayerActionState.IsUsingBombAbility:
+                GetComponentInParent<TrailRenderer>().enabled = false;
                 break;
             default:
+                GetComponentInParent<TrailRenderer>().enabled = false;
                 Rigidbody2D.MovePosition(Rigidbody2D.position +
                 baseMoveSpeed * Time.deltaTime * movementVector);
                 break;
