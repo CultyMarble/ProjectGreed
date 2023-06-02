@@ -14,7 +14,7 @@ public class SprayParticleProjectile : MonoBehaviour
     private float particleGrowthRate = 0;
     private float swingMagtitude = default;
     private Vector3 moveDirection = default;
-
+    private AbilityStatusEffect statusEffect;
     //===========================================================================
     private void OnEnable()
     {
@@ -69,6 +69,7 @@ public class SprayParticleProjectile : MonoBehaviour
         if (lifeTime <= 0)
         {
             gameObject.SetActive(false);
+            statusEffect = AbilityStatusEffect.none;
             gameObject.transform.localPosition = Vector2.zero;
         }
     }
@@ -96,11 +97,11 @@ public class SprayParticleProjectile : MonoBehaviour
         transform.localScale = sizeVector;
         particleGrowthRate = growthRate;
     }
-    public void ConfigParticleDamage(int damage, float pushPower)
+    public void ConfigParticleDamage(int damage, float pushPower, AbilityStatusEffect _statusEffect)
     {
         particleDamage = damage;
         particlePushPower = pushPower;
-
+        statusEffect = _statusEffect;
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -110,6 +111,8 @@ public class SprayParticleProjectile : MonoBehaviour
             collision.gameObject.GetComponent<EnemyHealth>().UpdateCurrentHealth(-particleDamage);
             //collision.gameObject.GetComponent<Transform>().Translate(-particlePushPower * GetComponent<Rigidbody2D>().velocity.normalized);
             collision.gameObject.GetComponent<Rigidbody2D>().AddForce(particlePushPower * _pushDirection);
+            collision.gameObject.GetComponent<Enemy>().InflictStatusEffect(statusEffect);
+
         }
     }
 }

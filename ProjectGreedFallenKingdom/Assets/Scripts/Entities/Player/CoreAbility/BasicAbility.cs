@@ -89,7 +89,7 @@ public class BasicAbility : CoreAbility
                 particle.GetComponent<SprayParticleProjectile>().
                     ConfigParticleMovementPattern(timeUntilChangeDirectionMax, timeUntilChangeDirectionMin, swingMagtitude);
                 particle.GetComponent<SprayParticleProjectile>().ConfigParticleSizeAndGrowth(size,growthRate);
-                particle.GetComponent<SprayParticleProjectile>().ConfigParticleDamage(damage, pushPower);
+                particle.GetComponent<SprayParticleProjectile>().ConfigParticleDamage(damage, pushPower, abilityStatusEffect);
 
                 particle.position = this.transform.position;
                 particle.gameObject.SetActive(true);

@@ -13,7 +13,7 @@ public class BombObject : MonoBehaviour
     private float pushBack;
     private float maxFuseTime;
     private float currentFuseTime;
-
+    private AbilityStatusEffect statusEffect;
 
     private readonly float effectAnimationSpeed = 0.1f;
     private float effectAnimationTimer;
@@ -78,13 +78,14 @@ public class BombObject : MonoBehaviour
     }
 
     //===========================================================================
-    public void SetBombConfig(int _damage, float _pushback, float _radius, float _fuse)
+    public void SetBombConfig(int _damage, float _pushback, float _radius, float _fuse, AbilityStatusEffect _statusEffect)
     {
         damage = _damage;
         pushBack = _pushback;
         radius = _radius;
         maxFuseTime = _fuse;
         currentFuseTime = maxFuseTime;
+        statusEffect = _statusEffect;
     }
 
     private void AbilityEffectAnimation()
@@ -135,22 +136,13 @@ public class BombObject : MonoBehaviour
                 Vector2 _pushDirection = (enemyTranform.position - transform.position).normalized;
                 float _eulerAngle = CultyMarbleHelper.GetAngleFromVector(_pushDirection);
 
-                // Stop current movement
-                //if (collider2D.GetComponent<ChasingAI>() != null)
-                //{
-                //    collider2D.GetComponent<ChasingAI>().holdMovementDirection = true;
-                //    collider2D.GetComponent<ChasingAI>().holdtimer = 0.5f;
-                //}
-                //else if (collider2D.GetComponent<ChasingAIBasic>() != null)
-                //{
-                //    collider2D.GetComponent<ChasingAIBasic>().holdMovementDirection = true;
-                //    collider2D.GetComponent<ChasingAIBasic>().holdtimer = 0.5f;
-                //}
                 collider2D.GetComponent<TargetingAI>().HoldMovement();
 
                 // Add force
                 collider2D.GetComponent<Enemy>().isPushBack = true;
                 collider2D.GetComponent<Rigidbody2D>().AddForce(_pushDirection * pushBack, ForceMode2D.Force);
+                collider2D.GetComponent<Enemy>().InflictStatusEffect(statusEffect);
+
             }
         }
     }

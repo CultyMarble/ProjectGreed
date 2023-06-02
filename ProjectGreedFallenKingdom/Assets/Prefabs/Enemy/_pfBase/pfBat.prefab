@@ -344,7 +344,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPushBack: 0
-  stunStatusEffect: {fileID: 5741637900286417083}
 --- !u!114 &4038241797528594032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -690,6 +689,7 @@ GameObject:
   - component: {fileID: 5741637900286417092}
   - component: {fileID: 5741637900286417082}
   - component: {fileID: 5741637900286417083}
+  - component: {fileID: 2214104419602471422}
   m_Layer: 7
   m_Name: StatusEffect
   m_TagString: Untagged
@@ -755,6 +755,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effectIcon: {fileID: 21300000, guid: c718d67868d482440bcf8e67dc060b03, type: 3}
+--- !u!114 &2214104419602471422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5741637900286417089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1d0ca59cc145dc4c8f576e26fae3512, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectIcon: {fileID: 21300000, guid: 18db310845d756b4b91063606ca4185f, type: 3}
+  killThreshold: 0
 --- !u!1 &5766946388284678278
 GameObject:
   m_ObjectHideFlags: 0

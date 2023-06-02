@@ -50,7 +50,7 @@ public class BombAbility : CoreAbility
         if (placeTime <= 0)
         {
             Transform bomb = Instantiate(pfBomb, transform.position, Quaternion.identity).transform;
-            bomb.GetComponent<BombObject>().SetBombConfig(damage, pushPower, pushRadius, fuseTime);
+            bomb.GetComponent<BombObject>().SetBombConfig(damage, pushPower, pushRadius, fuseTime, abilityStatusEffect);
             Player.Instance.playerActionState = PlayerActionState.none;
             placeTime = 0.1f;
         }

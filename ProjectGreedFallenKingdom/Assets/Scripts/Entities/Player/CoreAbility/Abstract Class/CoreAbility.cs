@@ -1,5 +1,10 @@
 using UnityEngine;
-
+public enum AbilityStatusEffect
+{
+    Poison,
+    Rot,
+    none,
+}
 public abstract class CoreAbility : MonoBehaviour
 {
     [Header("Ability Settings:")]
@@ -9,6 +14,7 @@ public abstract class CoreAbility : MonoBehaviour
     [SerializeField] protected float pushRadius;
 
     [SerializeField] protected float cooldown;
+    [SerializeField] public AbilityStatusEffect abilityStatusEffect;
     protected float cooldownTimer = default;
 
     public float CooldownTimer { get => cooldownTimer; private set { } }

@@ -63,12 +63,7 @@ public class RangeAbility : CoreAbility
             aimCharge = aimChargeTime;
         }
         aimIndicator.GetComponent<SpriteRenderer>().color = Color.yellow;
-        //if (Input.GetMouseButtonUp(1) && aimCharge < aimChargeTime)
-        //{
-        //    Player.Instance.playerActionState = PlayerActionState.none;
-        //    aimCharge = 0;
-        //    return;
-        //}
+        
         if (aimCharge >= aimChargeTime)
         {
             aimIndicator.GetComponent<SpriteRenderer>().color = Color.green;
@@ -81,7 +76,7 @@ public class RangeAbility : CoreAbility
             cooldownTimer = cooldown;
 
             Transform projectile = Instantiate(pfRangeAbilityProjectile, this.transform.position, Quaternion.identity).transform;
-            projectile.GetComponent<RangeAbilityProjectile>().ProjectileConfig(rotStackApply, scaledSpeed, this.transform, scaledDamage);
+            projectile.GetComponent<RangeAbilityProjectile>().ProjectileConfig(rotStackApply, scaledSpeed, this.transform, scaledDamage, abilityStatusEffect);
             Player.Instance.playerActionState = PlayerActionState.none;
             aimCharge = 0;
         }

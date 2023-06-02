@@ -70,4 +70,12 @@ public abstract class StatusEffect : MonoBehaviour
 
         enemyStatusEffect.EffectVFX.sprite = effectIcon;
     }
+    public bool CheckActive()
+    {
+        if (active)
+        {
+            return true;
+        }
+        return false;
+    }
 }

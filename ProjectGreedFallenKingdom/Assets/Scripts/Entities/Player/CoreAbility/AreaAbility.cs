@@ -96,22 +96,13 @@ public class AreaAbility : CoreAbility
                 Vector2 _pushDirection = (enemyTranform.position - GetComponentInParent<Player>().transform.position).normalized;
                 float _eulerAngle = CultyMarbleHelper.GetAngleFromVector(_pushDirection);
 
-                // Stop current movement
-                //if (collider2D.GetComponent<ChasingAI>() != null)
-                //{
-                //    collider2D.GetComponent<ChasingAI>().holdMovementDirection = true;
-                //    collider2D.GetComponent<ChasingAI>().holdtimer = 0.5f;
-                //}
-                //else if (collider2D.GetComponent<ChasingAIBasic>() != null)
-                //{
-                //    collider2D.GetComponent<ChasingAIBasic>().holdMovementDirection = true;
-                //    collider2D.GetComponent<ChasingAIBasic>().holdtimer = 0.5f;
-                //}
 
                 collider2D.GetComponent<TargetingAI>().HoldMovement();
                 // Add force
                 collider2D.GetComponent<Enemy>().isPushBack = true;
                 collider2D.GetComponent<Rigidbody2D>().AddForce(_pushDirection * pushPower, ForceMode2D.Force);
+                collider2D.GetComponent<Enemy>().InflictStatusEffect(abilityStatusEffect);
+
             }
         }
     }

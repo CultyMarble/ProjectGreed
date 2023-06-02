@@ -5177,6 +5177,7 @@ MonoBehaviour:
   pushPower: 5000
   pushRadius: 5
   cooldown: 0
+  abilityStatusEffect: 0
   pfBomb: {fileID: 3187642801048505080, guid: 3cfa34a8eb634a349b1dff68a79c8163, type: 3}
   rotStackApply: 0
   fuseTime: 0.75
@@ -5701,6 +5702,7 @@ MonoBehaviour:
   pushPower: 100
   pushRadius: 1
   cooldown: 0.015
+  abilityStatusEffect: 0
   basicAbilityProjectilePool: {fileID: 1653082884}
   moveSpeed: 3
   lifeTime: 0.75
@@ -6728,6 +6730,7 @@ MonoBehaviour:
   pushPower: 5000
   pushRadius: 5
   cooldown: 5
+  abilityStatusEffect: 0
   abilityEffect:
   - {fileID: 1515639410}
   - {fileID: 231334011}
@@ -7063,6 +7066,7 @@ MonoBehaviour:
   pushPower: 10
   pushRadius: 0
   cooldown: 0.3
+  abilityStatusEffect: 0
   pfRangeAbilityProjectile: {fileID: 2670297803040694699, guid: c6e09434388c9e3459e9f2a142f41f4c, type: 3}
   aimIndicator: {fileID: 1745730314}
   rotStackApply: 10

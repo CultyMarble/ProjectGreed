@@ -10,16 +10,24 @@ public class RangeAbilityProjectile : MonoBehaviour
     private Vector3 moveDirection;
     private int particleDamage;
     private float lifetime = 2;
+    private AbilityStatusEffect statusEffect;
 
     //===========================================================================
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Enemy")
         {
+            AbilityStatusEffect enemyStatusEffect = collision.gameObject.GetComponent<Enemy>().CheckStatusEffect();
             //collision.GetComponent<GeneralStatusEffect>().IncreaseRotStack(10);
             collision.gameObject.GetComponent<EnemyHealth>().UpdateCurrentHealth(-particleDamage);
-            gameObject.SetActive(false);
-            Destroy(gameObject);
+            if(enemyStatusEffect != AbilityStatusEffect.none)
+            {
+                statusEffect = enemyStatusEffect;
+            }
+            collision.gameObject.GetComponent<Enemy>().InflictStatusEffect(statusEffect);
+
+            //gameObject.SetActive(false);
+            //Destroy(gameObject);
         }
         if (collision.gameObject.tag == "Collisions")
         {
@@ -41,12 +49,13 @@ public class RangeAbilityProjectile : MonoBehaviour
     }
 
     //===========================================================================
-    public void ProjectileConfig(int newRotStack, float newMoveSpeed, Transform startPositionTransform, int damage)
+    public void ProjectileConfig(int newRotStack, float newMoveSpeed, Transform startPositionTransform, int damage, AbilityStatusEffect _statusEffect)
     {
         rotStack = newRotStack;
         particleDamage = damage;
         moveSpeed = newMoveSpeed;
         moveDirection = (CultyMarbleHelper.GetMouseToWorldPosition() -
             startPositionTransform.position).normalized;
+        statusEffect = _statusEffect;
     }
 }
