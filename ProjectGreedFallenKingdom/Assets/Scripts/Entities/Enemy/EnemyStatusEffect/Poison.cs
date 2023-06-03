@@ -19,7 +19,7 @@ public class Poison : StatusEffect
     //===========================================================================
     protected override void TriggerHandler()
     {
-        enemyHealth.UpdateCurrentHealth(-1);
+        enemyHealth.UpdateCurrentHealth(-stackAmount * 0.1f);
     }
 
     protected override void OverstackHandler()

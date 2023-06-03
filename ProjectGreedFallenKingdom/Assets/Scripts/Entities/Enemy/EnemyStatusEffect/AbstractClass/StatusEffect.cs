@@ -58,7 +58,7 @@ public abstract class StatusEffect : MonoBehaviour
     protected abstract void OverstackHandler();
 
     //===========================================================================
-    public void Activate(float newTriggerInterval = 0.01f, float newStatusDuration = 3.0f)
+    public void Activate(float newTriggerInterval = 0.01f, float newStatusDuration = 3.0f, int _stackAmount = 1)
     {
         active = true;
 
@@ -69,6 +69,7 @@ public abstract class StatusEffect : MonoBehaviour
         statusDurationTimer = statusDuration;
 
         enemyStatusEffect.EffectVFX.sprite = effectIcon;
+        stackAmount+= _stackAmount;
     }
     public bool CheckActive()
     {

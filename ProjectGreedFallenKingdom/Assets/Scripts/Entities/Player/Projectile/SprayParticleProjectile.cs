@@ -4,7 +4,7 @@ public class SprayParticleProjectile : MonoBehaviour
 {
     private float moveSpeed;
     private float lifeTime = default;
-    private int particleDamage = default;
+    private float particleDamage = default;
     private float particlePushPower = default;
 
     private float timeUntilChangeDirectionMax = default;
@@ -97,7 +97,7 @@ public class SprayParticleProjectile : MonoBehaviour
         transform.localScale = sizeVector;
         particleGrowthRate = growthRate;
     }
-    public void ConfigParticleDamage(int damage, float pushPower, AbilityStatusEffect _statusEffect)
+    public void ConfigParticleDamage(float damage, float pushPower, AbilityStatusEffect _statusEffect)
     {
         particleDamage = damage;
         particlePushPower = pushPower;
@@ -111,7 +111,7 @@ public class SprayParticleProjectile : MonoBehaviour
             collision.gameObject.GetComponent<EnemyHealth>().UpdateCurrentHealth(-particleDamage);
             //collision.gameObject.GetComponent<Transform>().Translate(-particlePushPower * GetComponent<Rigidbody2D>().velocity.normalized);
             collision.gameObject.GetComponent<Rigidbody2D>().AddForce(particlePushPower * _pushDirection);
-            collision.gameObject.GetComponent<Enemy>().InflictStatusEffect(statusEffect);
+            collision.gameObject.GetComponent<Enemy>().InflictStatusEffect(statusEffect, 1);
 
         }
     }

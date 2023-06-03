@@ -343,6 +343,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPushBack: 0
+  stunStatusEffect: {fileID: 5741637900286417083}
 --- !u!114 &4038241797528594032
 MonoBehaviour:
   m_ObjectHideFlags: 0

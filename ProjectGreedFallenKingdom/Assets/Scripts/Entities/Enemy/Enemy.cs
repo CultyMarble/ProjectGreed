@@ -14,7 +14,7 @@ public class Enemy : MonoBehaviour
     {
         if (collision.CompareTag("Collisions") && isPushBack && stunImmuneTimer <= 0.0f)
         {
-            GetComponent<Stun>().Activate();
+            GetComponentInChildren<Stun>().Activate();
 
             isPushBack = false;
 
@@ -34,18 +34,18 @@ public class Enemy : MonoBehaviour
         if (stunImmuneTimer <= 0.0f)
         {
             //trying to fix issue where enemies get stunned while not actually being pushedback, delete if issues arise
-            isPushBack = false;
+            //isPushBack = false;
             return;
         }
 
         stunImmuneTimer -= Time.deltaTime;
     }
-    public void InflictStatusEffect(AbilityStatusEffect statusEffect)
+    public void InflictStatusEffect(AbilityStatusEffect statusEffect, int stackAmount)
     {
         switch (statusEffect)
         {
             case AbilityStatusEffect.Poison:
-                GetComponentInChildren<Poison>().Activate(0.3f, 5f);
+                GetComponentInChildren<Poison>().Activate(0.3f, 5f, stackAmount);
                 break;
             case AbilityStatusEffect.Rot:
                 GetComponentInChildren<Rot>().Activate();

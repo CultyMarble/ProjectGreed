@@ -5698,7 +5698,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2ca004a1253bf2479cb5118deb95dc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
+  damage: 0.5
   pushPower: 100
   pushRadius: 1
   cooldown: 0.015
@@ -6727,7 +6727,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
-  pushPower: 5000
+  pushPower: 7500
   pushRadius: 5
   cooldown: 5
   abilityStatusEffect: 0

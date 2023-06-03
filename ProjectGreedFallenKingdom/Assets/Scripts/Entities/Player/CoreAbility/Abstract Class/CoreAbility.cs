@@ -8,7 +8,7 @@ public enum AbilityStatusEffect
 public abstract class CoreAbility : MonoBehaviour
 {
     [Header("Ability Settings:")]
-    [SerializeField] protected int damage;
+    [SerializeField] protected float damage;
 
     [SerializeField] protected float pushPower;
     [SerializeField] protected float pushRadius;

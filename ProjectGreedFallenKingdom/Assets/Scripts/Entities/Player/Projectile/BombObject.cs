@@ -8,7 +8,7 @@ public class BombObject : MonoBehaviour
     [SerializeField] private SpriteRenderer[] abilityEffect;
     [SerializeField] private Sprite[] effectSprites;
 
-    private int damage;
+    private float damage;
     private float radius;
     private float pushBack;
     private float maxFuseTime;
@@ -78,7 +78,7 @@ public class BombObject : MonoBehaviour
     }
 
     //===========================================================================
-    public void SetBombConfig(int _damage, float _pushback, float _radius, float _fuse, AbilityStatusEffect _statusEffect)
+    public void SetBombConfig(float _damage, float _pushback, float _radius, float _fuse, AbilityStatusEffect _statusEffect)
     {
         damage = _damage;
         pushBack = _pushback;
@@ -141,7 +141,7 @@ public class BombObject : MonoBehaviour
                 // Add force
                 collider2D.GetComponent<Enemy>().isPushBack = true;
                 collider2D.GetComponent<Rigidbody2D>().AddForce(_pushDirection * pushBack, ForceMode2D.Force);
-                collider2D.GetComponent<Enemy>().InflictStatusEffect(statusEffect);
+                collider2D.GetComponent<Enemy>().InflictStatusEffect(statusEffect, 5);
 
             }
         }

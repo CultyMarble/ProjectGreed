@@ -57,7 +57,7 @@ public class EnemyHealth : MonoBehaviour
     }
 
     //======================================================================
-    public void UpdateCurrentHealth(int amount = 0)
+    public void UpdateCurrentHealth(float amount = 0)
     {
         if (amount != 0) {
                 currentHealth += amount;
