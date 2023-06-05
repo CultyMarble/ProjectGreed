@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class SaveDataManager : MonoBehaviour
+public class SaveDataManager : SingletonMonobehaviour<SaveDataManager>
 {
-
+    [SerializeField] private SOGameData save01;
+    public SOGameData SAVE01 => save01;
 }
