@@ -472,9 +472,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bef9e0c6b9173749a9063029f75e4d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activateDistance: 0.2
-  damage: 8
-  coolDownTime: 0.7
+  activateDistance: 1
+  damage: 10
+  coolDownTime: 1
 --- !u!95 &4985449916427847630
 Animator:
   serializedVersion: 4

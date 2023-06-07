@@ -39,9 +39,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.5296576
+  m_TransitionDuration: 0.4061243
   m_TransitionOffset: 0
-  m_ExitTime: 0.4503671
+  m_ExitTime: 0.08102362
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -165,7 +165,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pfTrainingDummy
+  m_Name: enemy_controller
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: isSlamming
@@ -216,9 +216,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0.11335403
   m_TransitionOffset: 0
-  m_ExitTime: 0.75
+  m_ExitTime: 0.42790622
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0

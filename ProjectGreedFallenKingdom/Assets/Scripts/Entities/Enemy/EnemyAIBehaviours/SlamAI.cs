@@ -42,9 +42,8 @@ public class SlamAI : MonoBehaviour
             {
                 if (targetingAI.isAttacking != true)
                 {
-
                     Slam();
-                    coolDownTimeCounter += coolDownTime;
+                    coolDownTimeCounter = coolDownTime;
                     canSlam = false;
                 }
             }
@@ -59,43 +58,34 @@ public class SlamAI : MonoBehaviour
         }
         if (isSlamming)
         {
-            Invoke(nameof(AbilityEffectAnimation), 0.6f);
+            Invoke(nameof(AbilityEffectAnimation), 1f);
         }
     }
 
     private void Slam()
     {
-        Collider2D player = FindPlayer();
-        if (player != null)
-        {
-            animator.SetTrigger("isSlamming");
-            isSlamming = true;
-            DealDamage(player);
-        }
+        animator.SetTrigger("isSlamming");
+        isSlamming = true;
     }
 
-    public void DealDamage(Collider2D player)
-    {
-        player.GetComponent<PlayerHealth>().UpdateCurrentHealth(-damage);
-
-        targetingAI.isAttacking = false;
-    }
-    public Collider2D FindPlayer()
+    public void DealDamage()
     {
         if (targetingAI.CheckNoTarget())
-            return null;
+            return;
 
         Collider2D[] collider2DArray = Physics2D.OverlapCircleAll(transform.position, activateDistance);
         foreach (Collider2D collider2D in collider2DArray)
         {
             if (collider2D.GetComponent<Player>() != null)
             {
-                return collider2D;
+                collider2D.GetComponent<PlayerHealth>().UpdateCurrentHealth(-damage);
+                return;
             }
         }
-        return null;
+        targetingAI.isAttacking = false;
+        return;
     }
-    private void AbilityEffectAnimation()
+    public void AbilityEffectAnimation()
     {
         effectAnimationTimer += Time.deltaTime;
         if (effectAnimationTimer >= effectAnimationSpeed)

@@ -473,7 +473,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activateDistance: 0.5
-  damage: 1
+  damage: 5
   coolDownTime: 0.3
 --- !u!95 &5005157637052946536
 Animator:
