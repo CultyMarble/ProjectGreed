@@ -35,9 +35,9 @@ public class PrefabItem : MonoBehaviour
         {
             if (GetComponent<ItemCost>() != null)
             {// item has price
-                if (PlayerCurrencies.Instance.GetTempCurrencyAmount() >= GetComponent<ItemCost>().itemCost)
+                if (PlayerCurrencies.Instance.TempCurrencyAmount >= GetComponent<ItemCost>().itemCost)
                 {// player can afford item
-                    PlayerCurrencies.Instance.IncreaseTempCurrencyAmount(-(GetComponent<ItemCost>().itemCost));
+                    PlayerCurrencies.Instance.UpdateTempCurrencyAmount(-(GetComponent<ItemCost>().itemCost));
                 }
                 else
                 {

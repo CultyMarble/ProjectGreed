@@ -5,7 +5,6 @@ using UnityEngine;
 public class SOGameData : ScriptableObject
 {
     // Overworld Data
-    private Dictionary<string, bool> SceneClearDataDictionary = new Dictionary<string, bool>();
 
     // Story Data
 
@@ -17,19 +16,12 @@ public class SOGameData : ScriptableObject
     private int playerTempCurrencyAmount = default;
     private int playerPermCurrencyAmount = default;
 
-    //===========================================================================
-    public void SaveOverworldData(SceneName sceneName, bool newBool)
-    {
-        if (SceneClearDataDictionary.ContainsKey(sceneName.ToString()) == false)
-        {
-            SceneClearDataDictionary.Add(sceneName.ToString(), newBool);
-        }
-        else
-        {
-            SceneClearDataDictionary[sceneName.ToString()] = newBool;
-        }
-    }
+    // Player Run Data
+    private SceneName checkpointScene = default;
+    private Vector3 checkpointSpawnPosition = default;
 
+    //===========================================================================
+    public void SaveOverworldData() { }
     public void SaveStoryData() { }
     public void SaveMetaProgressionData() { }
     public void SaveInventoryData() { }
@@ -47,16 +39,13 @@ public class SOGameData : ScriptableObject
                 break;
         }
     }
-
-    public bool? RetrieveOverworldData(SceneName sceneName)
+    public void SaveCheckPointData(SceneName sceneName, Vector3 spawnPosition)
     {
-        if (SceneClearDataDictionary.ContainsKey(sceneName.ToString()))
-        {
-            return SceneClearDataDictionary[sceneName.ToString()];
-        }
-
-        return null;
+        checkpointScene = sceneName;
+        checkpointSpawnPosition = spawnPosition;
     }
+
+    public void RetrieveOverworldData() { }
     public void RetrieveStoryData() { }
     public void RetrieveMetaProgressionData() { }
     public void RetrieveInventoryData() { }
@@ -71,5 +60,13 @@ public class SOGameData : ScriptableObject
             default:
                 return 0;
         }
+    }
+    public SceneName RetrieveCheckPointSceneData()
+    {
+        return checkpointScene;
+    }
+    public Vector3 RetrieveCheckPointSpawnLocation()
+    {
+        return checkpointSpawnPosition;
     }
 }
