@@ -71,6 +71,7 @@ public abstract class StatusEffect : MonoBehaviour
         enemyStatusEffect.EffectVFX.sprite = effectIcon;
         stackAmount+= _stackAmount;
     }
+
     public bool CheckActive()
     {
         if (active)

@@ -54,6 +54,7 @@ public class Enemy : MonoBehaviour
                 break;
         }
     }
+
     public AbilityStatusEffect CheckStatusEffect()
     {
         if (gameObject.GetComponentInChildren<Poison>().CheckActive())

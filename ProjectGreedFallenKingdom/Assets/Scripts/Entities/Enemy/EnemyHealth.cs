@@ -73,4 +73,9 @@ public class EnemyHealth : MonoBehaviour
                 Despawn();
         }
     }
+
+    public float GetHealthPercentage()
+    {
+        return (currentHealth / maxHealth) * 100.0f;
+    }
 }

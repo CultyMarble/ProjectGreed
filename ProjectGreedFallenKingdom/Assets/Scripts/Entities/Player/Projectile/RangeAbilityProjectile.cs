@@ -18,18 +18,17 @@ public class RangeAbilityProjectile : MonoBehaviour
         if (collision.gameObject.tag == "Enemy")
         {
             AbilityStatusEffect enemyStatusEffect = collision.gameObject.GetComponent<Enemy>().CheckStatusEffect();
-            //collision.GetComponent<GeneralStatusEffect>().IncreaseRotStack(10);
+
             collision.gameObject.GetComponent<EnemyHealth>().UpdateCurrentHealth(-particleDamage);
+
             if(statusEffect == AbilityStatusEffect.none && enemyStatusEffect != AbilityStatusEffect.none)
             {
                 statusEffect = enemyStatusEffect;
             }
-            collision.gameObject.GetComponent<Enemy>().InflictStatusEffect(statusEffect,3);
 
-            //gameObject.SetActive(false);
-            //Destroy(gameObject);
+            collision.gameObject.GetComponent<Enemy>().InflictStatusEffect(statusEffect,3);
         }
-        if (collision.gameObject.tag == "Collisions")
+        else if (collision.gameObject.tag == "Collisions")
         {
             gameObject.SetActive(false);
             Destroy(gameObject);
