@@ -10,12 +10,20 @@ public class PrefabCheckPoint : MonoBehaviour
     //======================================================================
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.GetComponent<Player>() == null)
+            return;
+
+        Player.Instance.ShowFPromtText();
         canActivateCheckPoint = true;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        canActivateCheckPoint = false;
+        if (collision.GetComponent<Player>() == null)
+            return;
+
+        Player.Instance.HideFPromtText();
+        canActivateCheckPoint = true;
     }
 
     //======================================================================

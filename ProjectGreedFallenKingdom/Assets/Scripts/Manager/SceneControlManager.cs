@@ -60,9 +60,7 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
 
 
         // Gameover Menu
-        gv_loadLastCheckPointButton.onClick.AddListener(() => 
-            LoadScene(SaveDataManager.Instance.SAVE01.RetrieveCheckPointSceneData().ToString(),
-            SaveDataManager.Instance.SAVE01.RetrieveCheckPointSpawnLocation()));
+        gv_loadLastCheckPointButton.onClick.AddListener(() => StartCoroutine(LoadLastCheckPoint()));
         gv_mainMenuButton.onClick.AddListener(() => StartCoroutine(UnloadSceneAndBackToMainMenu()));
     }
 
@@ -145,6 +143,8 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         gameOverMenu.SetActive(false);
         mainMenu.SetActive(true);
 
+        SaveDataManager.Instance.SAVE01.SaveCheckPointData(SceneName.Scene03_HubArea, Vector3.zero);
+
         EventManager.CallBeforeSceneUnloadEvent();
         yield return SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().buildIndex);
 
@@ -223,5 +223,26 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
             unloadSceneZone = GameObject.FindObjectOfType<UnloadSceneZone>();
 
         StartCoroutine(LoadingScreen(0.0f));
+    }
+
+    //===========================================================================
+    public IEnumerator LoadLastCheckPoint()
+    {
+        EventManager.CallBeforeSceneUnloadLoadingScreenEvent();
+        yield return StartCoroutine(LoadingScreen(1.0f));
+
+        gameOverMenu.SetActive(false);
+        player.transform.position = SaveDataManager.Instance.SAVE01.RetrieveCheckPointSpawnLocation();
+
+        EventManager.CallBeforeSceneUnloadEvent();
+        yield return SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().buildIndex);
+
+        yield return StartCoroutine(LoadSceneAndSetActive(SaveDataManager.Instance.SAVE01.RetrieveCheckPointSceneData().ToString()));
+        EventManager.CallAfterSceneLoadEvent();
+
+        GameplayInfoUIControl.Instance.SetGameplayInfoUIActive(true);
+
+        yield return StartCoroutine(LoadingScreen(0.0f));
+        EventManager.CallAfterSceneLoadedLoadingScreenEvent();
     }
 }
