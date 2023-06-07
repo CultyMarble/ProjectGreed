@@ -370,6 +370,7 @@ GameObject:
   - component: {fileID: 7996541414153123053}
   - component: {fileID: -5756987273502110303}
   - component: {fileID: 5005157637052946536}
+  - component: {fileID: -2194898716048574609}
   m_Layer: 7
   m_Name: pfBat
   m_TagString: Enemy
@@ -611,6 +612,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &-2194898716048574609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2290856477104092860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b299df1f3d90e540a5774715e49d214, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pfTempCurrency: {fileID: 2443823218653012819, guid: 3d947b54961e7fd49bec6bc289615a57, type: 3}
 --- !u!1 &2290856477416486733
 GameObject:
   m_ObjectHideFlags: 0

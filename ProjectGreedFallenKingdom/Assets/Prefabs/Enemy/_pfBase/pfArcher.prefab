@@ -370,6 +370,7 @@ GameObject:
   - component: {fileID: -5905967111970448250}
   - component: {fileID: -5573440941965824759}
   - component: {fileID: -247924249735247293}
+  - component: {fileID: 4480657504434461327}
   m_Layer: 7
   m_Name: pfArcher
   m_TagString: Enemy
@@ -613,6 +614,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &4480657504434461327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2290856477104092860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b299df1f3d90e540a5774715e49d214, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pfTempCurrency: {fileID: 2443823218653012819, guid: 3d947b54961e7fd49bec6bc289615a57, type: 3}
 --- !u!1 &2290856477416486733
 GameObject:
   m_ObjectHideFlags: 0
@@ -888,7 +902,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1d0ca59cc145dc4c8f576e26fae3512, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effectIcon: {fileID: 21300000, guid: 18db310845d756b4b91063606ca4185f, type: 3}
+  effectIcon: {fileID: 0}
   enemyHealth: {fileID: 4038241797528594032}
   rotBar: {fileID: 162813563379216662}
   killThreshold: 0

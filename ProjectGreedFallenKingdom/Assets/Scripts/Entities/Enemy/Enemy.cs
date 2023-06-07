@@ -48,7 +48,7 @@ public class Enemy : MonoBehaviour
                 GetComponentInChildren<Poison>().Activate(0.3f, 5f, stackAmount);
                 break;
             case AbilityStatusEffect.Rot:
-                GetComponentInChildren<Rot>().Activate();
+                GetComponentInChildren<Rot>().Activate(0.5f, 10.5f, 25);
                 break;
             case AbilityStatusEffect.none:
                 break;

@@ -254,6 +254,7 @@ GameObject:
   - component: {fileID: 4913652249081679144}
   - component: {fileID: 1033342184048880732}
   - component: {fileID: 4985449916427847630}
+  - component: {fileID: 665503268575427255}
   m_Layer: 7
   m_Name: pfZombie
   m_TagString: Enemy
@@ -495,6 +496,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &665503268575427255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2290856477104092860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b299df1f3d90e540a5774715e49d214, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pfTempCurrency: {fileID: 2443823218653012819, guid: 3d947b54961e7fd49bec6bc289615a57, type: 3}
 --- !u!1 &2290856477416486733
 GameObject:
   m_ObjectHideFlags: 0
