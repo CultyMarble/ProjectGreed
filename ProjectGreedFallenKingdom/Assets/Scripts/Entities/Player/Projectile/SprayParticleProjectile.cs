@@ -103,6 +103,7 @@ public class SprayParticleProjectile : MonoBehaviour
         particlePushPower = pushPower;
         statusEffect = _statusEffect;
     }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Enemy")
@@ -112,7 +113,6 @@ public class SprayParticleProjectile : MonoBehaviour
             //collision.gameObject.GetComponent<Transform>().Translate(-particlePushPower * GetComponent<Rigidbody2D>().velocity.normalized);
             collision.gameObject.GetComponent<Rigidbody2D>().AddForce(particlePushPower * _pushDirection);
             collision.gameObject.GetComponent<Enemy>().InflictStatusEffect(statusEffect, 1);
-
         }
     }
 }
