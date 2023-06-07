@@ -5,13 +5,21 @@ public class SlamAI : MonoBehaviour
 {
     [SerializeField] private float activateDistance;
     [SerializeField] private float damageRadius;
-    [SerializeField][Range(0, 10)] private int damage;
+    [SerializeField][Range(0, 50)] private int damage;
     [SerializeField] private float coolDownTime;
+
+    [SerializeField] private SpriteRenderer[] abilityEffect;
+    [SerializeField] private Sprite[] effectSprites;
+
+    private readonly float effectAnimationSpeed = 0.05f;
+    private float effectAnimationTimer;
+    private int currentAnimationIndex;
 
     private TargetingAI targetingAI;
     private Animator animator;
     private float coolDownTimeCounter;
     private bool canSlam;
+    private bool isSlamming;
 
     //===========================================================================
     private void Awake()
@@ -34,6 +42,7 @@ public class SlamAI : MonoBehaviour
             {
                 if (targetingAI.isAttacking != true)
                 {
+
                     Slam();
                     coolDownTimeCounter += coolDownTime;
                     canSlam = false;
@@ -48,23 +57,67 @@ public class SlamAI : MonoBehaviour
                 canSlam = true;
             }
         }
+        if (isSlamming)
+        {
+            Invoke(nameof(AbilityEffectAnimation), 0.6f);
+        }
     }
 
     private void Slam()
     {
-        animator.SetTrigger("isSlamming");
+        Collider2D player = FindPlayer();
+        if (player != null)
+        {
+            animator.SetTrigger("isSlamming");
+            isSlamming = true;
+            DealDamage(player);
+        }
     }
 
-    public void DealDamage()
+    public void DealDamage(Collider2D player)
     {
-        if (targetingAI.currentTargetTransform == null)
-            return;
-
-        if (Vector2.Distance(transform.position, targetingAI.currentTargetTransform.position) <= damageRadius)
-        {
-            targetingAI.currentTargetTransform.GetComponent<EnemyHealth>().UpdateCurrentHealth(damage);
-        }
+        player.GetComponent<PlayerHealth>().UpdateCurrentHealth(-damage);
 
         targetingAI.isAttacking = false;
     }
+    public Collider2D FindPlayer()
+    {
+        if (targetingAI.CheckNoTarget())
+            return null;
+
+        Collider2D[] collider2DArray = Physics2D.OverlapCircleAll(transform.position, activateDistance);
+        foreach (Collider2D collider2D in collider2DArray)
+        {
+            if (collider2D.GetComponent<Player>() != null)
+            {
+                return collider2D;
+            }
+        }
+        return null;
+    }
+    private void AbilityEffectAnimation()
+    {
+        effectAnimationTimer += Time.deltaTime;
+        if (effectAnimationTimer >= effectAnimationSpeed)
+        {
+            effectAnimationTimer -= effectAnimationSpeed;
+
+            if (currentAnimationIndex == effectSprites.Length)
+            {
+                // Hide effect sprite
+                foreach (SpriteRenderer spriteRenderer in abilityEffect)
+                {
+                    spriteRenderer.sprite = null;
+                }
+                isSlamming = false;
+                return;
+            }
+            foreach (SpriteRenderer spriteRenderer in abilityEffect)
+            {
+                spriteRenderer.sprite = effectSprites[currentAnimationIndex];
+            }
+            currentAnimationIndex++;
+        }
+    }
+
 }

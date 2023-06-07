@@ -119,7 +119,6 @@ public class EnemySpawnManager : MonoBehaviour
             }
         }
     }
-
     private void DespawnEnemies()
     {
         //int survivingEnemies = 0;
@@ -129,14 +128,11 @@ public class EnemySpawnManager : MonoBehaviour
             {
                 if (enemy.gameObject.activeSelf == true)
                 {
-                    enemy.gameObject.SetActive(false);
-                    //survivingEnemies++;
+                    enemy.GetComponent<EnemyHealth>().Despawn();
+                    enemy.GetComponent<Enemy>().ResetStatusEffects();
                 }
             }
         }
-        //if(survivingEnemies == 0)
-        //{
-        //    enemySpawnPointList.GetComponent<SpawnPointList>().SetSpawnAmount(0);
-        //}
+        
     }
 }

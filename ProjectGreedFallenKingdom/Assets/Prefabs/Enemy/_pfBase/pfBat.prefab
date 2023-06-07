@@ -71,7 +71,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 237529647
-  m_SortingLayer: 4
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: c4a28771b30947e468453096ec5f2790, type: 3}
   m_Color: {r: 0.7058824, g: 0, b: 0, a: 1}
@@ -187,7 +187,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 237529647
-  m_SortingLayer: 4
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -344,7 +344,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPushBack: 0
-  stunStatusEffect: {fileID: 5741637900286417083}
 --- !u!114 &4038241797528594032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -375,6 +374,8 @@ MonoBehaviour:
   searchRadius: 10
   breakDistance: 0
   keepDistance: 0
+  patrolArea: 0
+  patrolTransforms: {fileID: 0}
 --- !u!114 &1170433428690384679
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -472,8 +473,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activateDistance: 0.5
-  damage: 5
-  coolDownTime: 1
+  damage: 1
+  coolDownTime: 0.3
 --- !u!95 &5005157637052946536
 Animator:
   serializedVersion: 4
@@ -567,7 +568,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 237529647
-  m_SortingLayer: 4
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: ab95ccb620d444d49a1affe46cbb25e3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -665,7 +666,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 237529647
-  m_SortingLayer: 4
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 0be6847b0e0548c48a34ddc501ca1dda, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

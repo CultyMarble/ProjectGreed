@@ -11,6 +11,8 @@ public class TargetingAI : MonoBehaviour
     [SerializeField] private float searchRadius;
     [SerializeField] private float breakDistance;
     [SerializeField] private bool keepDistance;
+    [SerializeField] private bool patrolArea;
+    [SerializeField] GameObject patrolTransforms;
 
 
     private float lookForTargetTimeCounter;
@@ -20,6 +22,9 @@ public class TargetingAI : MonoBehaviour
     private Vector3 targetDir;
     private bool holdMovement;
     private float holdTimer = 0.5f;
+    private float patrolTime = 3f;
+    private float patrolTimeCounter;
+
 
     private void Start()
     {
@@ -53,7 +58,7 @@ public class TargetingAI : MonoBehaviour
             targetDir = (currentTargetTransform.position - GetComponent<Transform>().position).normalized;
             //targetDir = Mathf.Atan(GetComponent<Transform>().position.y - transform.position.y / GetComponent<Transform>().position.x - transform.position.x);
         }
-        if (currentTargetTransform.position != transform.position && targetDistance >= breakDistance)
+        if (!CheckNoTarget() && targetDistance >= breakDistance)
         {
             ClearTarget();
         }
@@ -74,16 +79,24 @@ public class TargetingAI : MonoBehaviour
         //    //float slope = rise / run;
 
         //    //currentTargetTransform.position = transform.position + (-targetDir * 5);
-
-
-
         //}
-        if (currentTargetTransform.position != transform.position && currentTargetTransform.gameObject.activeSelf == false)
-        {
-            ClearTarget();
-        }
+        
 
-        if (currentTargetTransform.position == transform.position)
+        //if (currentTargetTransform.position != transform.position && currentTargetTransform.gameObject.activeSelf == false)
+        //{
+        //    ClearTarget();
+        //}
+        if (patrolArea)
+        {
+            patrolTimeCounter -= Time.deltaTime;
+            if (patrolTimeCounter <= 0.0f)
+            {
+                int index = Random.Range(0, patrolTransforms.transform.childCount);
+                currentTargetTransform.position = patrolTransforms.transform.GetChild(index).transform.position;
+                patrolTimeCounter = patrolTime;
+            }
+        }
+        else if (currentTargetTransform.position == transform.position)
         {
             LookForTarget();
         }
@@ -110,7 +123,7 @@ public class TargetingAI : MonoBehaviour
                 {
                     currentTargetTransform.position = collider2D.transform.position + (-targetDir * 5);
                 }
-                else if(keepDistance && !CheckClear() && Mathf.Abs(targetDistance - breakDistance) < 0.5)
+                else if(keepDistance && !CheckNoTarget() && Mathf.Abs(targetDistance - breakDistance) < 0.5)
                 {
                     ClearTarget();
                 }
@@ -126,7 +139,7 @@ public class TargetingAI : MonoBehaviour
     {
         currentTargetTransform.position = transform.position;
     }
-    public bool CheckClear()
+    public bool CheckNoTarget()
     {
         if(currentTargetTransform.position == transform.position)
         {

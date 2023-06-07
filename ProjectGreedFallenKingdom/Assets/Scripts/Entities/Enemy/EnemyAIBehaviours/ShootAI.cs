@@ -63,7 +63,7 @@ public class ShootAI : MonoBehaviour
             return;
 
         shootDelayIntervalTimer -= Time.deltaTime;
-        if (shootDelayIntervalTimer <= 0.0f && !targetingAI.CheckClear())
+        if (shootDelayIntervalTimer <= 0.0f && !targetingAI.CheckNoTarget())
         {
             shootDelayIntervalTimer += shootDelayInterval;
 

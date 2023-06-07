@@ -29,14 +29,13 @@ public class MeleeAI : MonoBehaviour
 
     private void Update()
     {
-        if (canMelee && targetingAI.currentTargetTransform != null)
+        if (canMelee && !targetingAI.CheckNoTarget())
         {
             if (Vector2.Distance(transform.position, targetingAI.currentTargetTransform.position) <= activateDistance)
             {
                 if (targetingAI.isAttacking != true)
                 {
-                    Melee();
-                    coolDownTimeCounter += coolDownTime;
+                    coolDownTimeCounter = coolDownTime;
                     canMelee = false;
                 }
             }
@@ -49,17 +48,28 @@ public class MeleeAI : MonoBehaviour
                 canMelee = true;
             }
         }
+        if (canMelee)
+        {
+            Melee();
+        }
     }
 
     private void Melee()
     {
-        animator.SetTrigger("isMeleeing");
+        Collider2D player = FindPlayer();
+        if (player != null)
+        {
+            animator.SetTrigger("isMeleeing");
+            DealDamage(player);
+            canMelee = false;
+            coolDownTimeCounter = coolDownTime;
+        }
     }
 
-    public void DealDamage()
+    private Collider2D FindPlayer()
     {
         if (targetingAI.currentTargetTransform == null)
-            return;
+            return null;
 
         //if (Vector2.Distance(transform.position, targetingAI.currentTargetTransform.position) <= activateDistance)
 
@@ -69,9 +79,17 @@ public class MeleeAI : MonoBehaviour
             if (collider2D.GetComponent<Player>() != null)
             {
                 collider2D.GetComponent<PlayerHealth>().UpdateCurrentHealth(-damage);
-                return;
+                return collider2D;
             }
         }
+        return null;
+
+    }
+
+    public void DealDamage(Collider2D collider)
+    {
+        collider.GetComponent<PlayerHealth>().UpdateCurrentHealth(-damage);
+
         targetingAI.isAttacking = false;
     }
 }

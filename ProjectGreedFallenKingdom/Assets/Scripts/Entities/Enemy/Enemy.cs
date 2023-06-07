@@ -69,4 +69,10 @@ public class Enemy : MonoBehaviour
             return AbilityStatusEffect.none;
         }
     }
+
+    public void ResetStatusEffects()
+    {
+        gameObject.GetComponentInChildren<Poison>().Deactivate();
+        gameObject.GetComponentInChildren<Rot>().Deactivate();
+    }
 }
