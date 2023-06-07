@@ -17,7 +17,7 @@ public class MoveToPlayer : MonoBehaviour
             if (Mathf.Approximately(transform.position.x, player.position.x) &&
                 Mathf.Approximately(transform.position.y, player.position.y))
             {
-                PlayerCurrencies.Instance.IncreaseTempCurrencyAmount(5);
+                PlayerCurrencies.Instance.UpdateTempCurrencyAmount(5);
                 Destroy(this.gameObject);
             }
         }

@@ -2,50 +2,35 @@ using UnityEngine;
 
 public class PlayerCurrencies : SingletonMonobehaviour<PlayerCurrencies>
 {
-    public class OnTempCurrencyAmountChangedEventArgs { public int amount;}
-    public event System.EventHandler<OnTempCurrencyAmountChangedEventArgs> OnTempCurrencyAmountChanged;
-    public class OnPermCurrencyAmountChangedEventArgs { public int amount; }
-    public event System.EventHandler<OnPermCurrencyAmountChangedEventArgs> OnPermCurrencyAmountChanged;
+    [SerializeField] private DisplayPlayerCurrency displayPlayerCurrency;
 
     private int tempCurrencyAmount = 1500;
     private int permCurrencyAmount = 50;
 
-    //===========================================================================
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.PageUp))
-        {
-            IncreaseTempCurrencyAmount(20);
-        }
+    public int TempCurrencyAmount => tempCurrencyAmount;
+    public int PermCurrencyAmount => tempCurrencyAmount;
 
-        if (Input.GetKeyDown(KeyCode.PageDown))
-        {
-            IncreasePermCurrencyAmount(1);
-        }
+    //===========================================================================
+    private void OnEnable()
+    {
+        UpdatePermCurrencyAmount();
+        UpdateTempCurrencyAmount();
     }
 
     //===========================================================================
-    public int GetTempCurrencyAmount()
-    {
-        return tempCurrencyAmount;
-    }
-
-    public int GetPermCurrencyAmount()
-    {
-        return permCurrencyAmount;
-    }
-
-    public void IncreaseTempCurrencyAmount(int amount)
+    public void UpdateTempCurrencyAmount(int amount = 0)
     {
         tempCurrencyAmount += amount;
+        tempCurrencyAmount = Mathf.Clamp(tempCurrencyAmount, 0, 10000);
 
-        OnTempCurrencyAmountChanged?.Invoke(this, new OnTempCurrencyAmountChangedEventArgs { amount = tempCurrencyAmount });
+        displayPlayerCurrency.UpdateTempCurrencyText(tempCurrencyAmount);
     }
 
-    public void IncreasePermCurrencyAmount(int amount)
+    public void UpdatePermCurrencyAmount(int amount = 0)
     {
         permCurrencyAmount += amount;
+        permCurrencyAmount = Mathf.Clamp(permCurrencyAmount, 0, 10000);
 
-        OnPermCurrencyAmountChanged?.Invoke(this, new OnPermCurrencyAmountChangedEventArgs { amount = permCurrencyAmount });
+        displayPlayerCurrency.UpdatePermCurrencyText(permCurrencyAmount);
     }
 }

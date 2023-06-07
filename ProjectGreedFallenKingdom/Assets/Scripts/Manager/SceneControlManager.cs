@@ -60,7 +60,9 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
 
 
         // Gameover Menu
-        gv_loadLastCheckPointButton.onClick.AddListener(() => { });
+        gv_loadLastCheckPointButton.onClick.AddListener(() => 
+            LoadScene(SaveDataManager.Instance.SAVE01.RetrieveCheckPointSceneData().ToString(),
+            SaveDataManager.Instance.SAVE01.RetrieveCheckPointSpawnLocation()));
         gv_mainMenuButton.onClick.AddListener(() => StartCoroutine(UnloadSceneAndBackToMainMenu()));
     }
 
@@ -119,6 +121,7 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         yield return StartCoroutine(LoadingScreen(1.0f));
 
         player.transform.position = spawnPosition;
+        gameOverMenu.SetActive(false);
 
         EventManager.CallBeforeSceneUnloadEvent();
         yield return SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().buildIndex);
