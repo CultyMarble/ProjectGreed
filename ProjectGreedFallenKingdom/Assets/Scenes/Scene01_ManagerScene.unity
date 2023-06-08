@@ -5544,7 +5544,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2ca004a1253bf2479cb5118deb95dc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0.5
+  damage: 1
   pushPower: 100
   pushRadius: 1
   cooldown: 0.015
@@ -5559,7 +5559,7 @@ MonoBehaviour:
   timeUntilChangeDirectionMax: 0.2
   timeUntilChangeDirectionMin: 0.1
   swingMagtitude: 0.8
-  growthRate: 0.0017
+  growthRate: 0.75
   size: 0.18
 --- !u!212 &1625022750
 SpriteRenderer:
@@ -7038,7 +7038,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e51a6a9d59de7449a0c03203e7eeef8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 25
+  damage: 5
   pushPower: 10
   pushRadius: 0
   cooldown: 0.3

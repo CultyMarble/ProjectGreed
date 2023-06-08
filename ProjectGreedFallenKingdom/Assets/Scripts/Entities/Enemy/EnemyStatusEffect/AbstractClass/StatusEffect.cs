@@ -48,6 +48,7 @@ public abstract class StatusEffect : MonoBehaviour
         if (statusDurationTimer <= 0)
         {
             active = false;
+            stackAmount = 0;
             enemyStatusEffect.EffectVFX.sprite = null;
         }
     }
