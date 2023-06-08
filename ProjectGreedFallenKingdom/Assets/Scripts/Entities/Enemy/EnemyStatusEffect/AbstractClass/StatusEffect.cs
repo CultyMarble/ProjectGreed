@@ -80,6 +80,7 @@ public abstract class StatusEffect : MonoBehaviour
         }
         return false;
     }
+
     public void Deactivate()
     {
         active = false;

@@ -128,8 +128,8 @@ public class EnemySpawnManager : MonoBehaviour
             {
                 if (enemy.gameObject.activeSelf == true)
                 {
-                    enemy.GetComponent<EnemyHealth>().Despawn();
                     enemy.GetComponent<Enemy>().ResetStatusEffects();
+                    enemy.GetComponent<EnemyHealth>().Despawn();
                 }
             }
         }

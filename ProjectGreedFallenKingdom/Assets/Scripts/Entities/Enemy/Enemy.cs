@@ -3,7 +3,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [HideInInspector] public bool isPushBack;
-
+    [SerializeField] private Animator animator;
     //[SerializeField] private Stun stunStatusEffect;
 
     private float stunImmuneTime = 3.5f;
@@ -17,7 +17,7 @@ public class Enemy : MonoBehaviour
             GetComponentInChildren<Stun>().Activate();
 
             isPushBack = false;
-
+            animator.SetBool("isStunned", true);
             stunImmuneTimer = stunImmuneTime;
         }
     }

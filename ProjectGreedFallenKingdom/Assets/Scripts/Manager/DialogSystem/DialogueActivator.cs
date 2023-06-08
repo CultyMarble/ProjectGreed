@@ -77,6 +77,8 @@ public class DialogueActivator : MonoBehaviour
                 {
                     DialogManager.Instance.SetDialogLines(dialogueLines);
                     DialogManager.Instance.SetDialogPanelActiveState(true);
+
+                    Time.timeScale = 0.0f;
                     isActivated = true;
                 }
                 break;
@@ -85,6 +87,8 @@ public class DialogueActivator : MonoBehaviour
                 {
                     DialogManager.Instance.SetDialogLines(dialogueLines);
                     DialogManager.Instance.SetDialogPanelActiveState(true);
+
+                    Time.timeScale = 0.0f;
                     isActivated = true;
                 }
                 break;

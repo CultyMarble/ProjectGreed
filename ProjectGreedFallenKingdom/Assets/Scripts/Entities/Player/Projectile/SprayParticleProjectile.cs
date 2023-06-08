@@ -56,7 +56,7 @@ public class SprayParticleProjectile : MonoBehaviour
             //}
             else
             {
-                transform.localScale += growthVector;
+                transform.localScale += growthVector * Time.deltaTime;
             }
         }
 

@@ -461,6 +461,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPushBack: 0
+  animator: {fileID: 0}
 --- !u!114 &4038241797528594032
 MonoBehaviour:
   m_ObjectHideFlags: 0

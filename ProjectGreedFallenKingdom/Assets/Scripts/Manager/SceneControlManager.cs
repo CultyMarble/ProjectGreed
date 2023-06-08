@@ -37,6 +37,7 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
 
     [Header("Pause Menu")]
     [SerializeField] public GameObject pauseMenu;
+    [SerializeField] private Button pm_loadMainMenuButton;
 
     [Header("Gameover Menu")]
     [SerializeField] private GameObject gameOverMenu;
@@ -57,7 +58,12 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         mm_exitButton.onClick.AddListener(() => Application.Quit());
 
         // Pause Menu
-
+        pm_loadMainMenuButton.onClick.AddListener(() =>
+        {
+            Time.timeScale = 1.0f;
+            pauseMenu.SetActive(false);
+            StartCoroutine(UnloadSceneAndBackToMainMenu());
+        });
 
         // Gameover Menu
         gv_loadLastCheckPointButton.onClick.AddListener(() => StartCoroutine(LoadLastCheckPoint()));
@@ -88,6 +94,20 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
             {
                 Time.timeScale = 0.0f;
                 pauseMenu.SetActive(false);
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape) && mainMenu.activeSelf == false)
+        {
+            if (pauseMenu.activeSelf)
+            {
+                Time.timeScale = 1;
+                pauseMenu.SetActive(false);
+            }
+            else
+            {
+                Time.timeScale = 0;
+                pauseMenu.SetActive(true);
             }
         }
 

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8097864274877811756}
   - component: {fileID: 5204710604847039245}
   - component: {fileID: 2486282011418803586}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: pfPlayerRangeAbilityProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,7 +98,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -122,9 +122,9 @@ Rigidbody2D:
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
+  m_SleepingMode: 0
+  m_CollisionDetection: 1
+  m_Constraints: 4
 --- !u!114 &5204710604847039245
 MonoBehaviour:
   m_ObjectHideFlags: 0

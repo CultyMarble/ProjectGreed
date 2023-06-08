@@ -20,12 +20,7 @@ public class DialogManager : SingletonMonobehaviour<DialogManager>
     private void Update()
     {
         if (dialogPanel.gameObject.activeSelf == false)
-        {
-            Time.timeScale = 1.0f;
             return;
-        }
-
-        Time.timeScale = 0.0f;
 
         if (Input.GetMouseButtonUp(0))
         {
@@ -34,7 +29,10 @@ public class DialogManager : SingletonMonobehaviour<DialogManager>
             if (currentLine >= dialogLines.Length)
             {
                 currentLine = 0;
+
                 SetDialogPanelActiveState(false);
+                Time.timeScale = 1.0f;
+
                 return;
             }
 

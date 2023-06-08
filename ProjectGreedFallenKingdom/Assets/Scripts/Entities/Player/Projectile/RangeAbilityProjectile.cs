@@ -13,26 +13,32 @@ public class RangeAbilityProjectile : MonoBehaviour
     private AbilityStatusEffect statusEffect;
 
     //===========================================================================
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Enemy")
+        if (collision.gameObject.CompareTag("Enemy"))
         {
             AbilityStatusEffect enemyStatusEffect = collision.gameObject.GetComponent<Enemy>().CheckStatusEffect();
 
             collision.gameObject.GetComponent<EnemyHealth>().UpdateCurrentHealth(-particleDamage);
 
-            if(statusEffect == AbilityStatusEffect.none && enemyStatusEffect != AbilityStatusEffect.none)
+            if (statusEffect == AbilityStatusEffect.none && enemyStatusEffect != AbilityStatusEffect.none)
             {
                 statusEffect = enemyStatusEffect;
             }
 
-            collision.gameObject.GetComponent<Enemy>().InflictStatusEffect(statusEffect,3);
+            collision.gameObject.GetComponent<Enemy>().InflictStatusEffect(statusEffect, 3);
         }
-        else if (collision.gameObject.tag == "Collisions")
+
+        if (collision.gameObject.CompareTag("Collisions"))
         {
             gameObject.SetActive(false);
             Destroy(gameObject);
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+
     }
 
     //===========================================================================
