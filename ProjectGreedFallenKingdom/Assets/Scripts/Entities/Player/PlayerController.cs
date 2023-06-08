@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class PlayerMovement : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     [Header("Basic Movement")]
     [SerializeField] private float baseMoveSpeed;
@@ -16,6 +16,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float dashTime = 0.1f;
     [SerializeField] private float dashSpeed = 100.0f;
 
+    [Header("Animation")]
+    [SerializeField] private Animator animator;
+    [SerializeField] private SpriteRenderer playerSpriteRenderer;
+    
+    private Vector3 toMouseDirectionVector = default;
     private Vector2 dashVector;
     private float dashTimeCounter;
     private float dashCDTimeCounter;
@@ -40,6 +45,8 @@ public class PlayerMovement : MonoBehaviour
     {
         PlayerInput();
 
+        UpdateAnimator();
+
         DashCoolDownTimeCounter();
 
         DashHandler();
@@ -61,7 +68,66 @@ public class PlayerMovement : MonoBehaviour
         movementVector = movementVector.normalized;
     }
 
-    private void PlayerMovePosition()
+    private void UpdateAnimator()
+    {
+        toMouseDirectionVector = (CultyMarbleHelper.GetMouseToWorldPosition() - transform.position).normalized;
+        Vector2 direction;
+        
+        switch (Player.Instance.playerActionState)
+        {
+            case PlayerActionState.IsUsingBasicAbility:
+            case PlayerActionState.IsUsingRangeAbility:
+                direction = toMouseDirectionVector;
+                break;
+            default:
+                direction = movementVector.normalized;
+                break;
+        }
+
+        if (direction.x > 0.5)
+        {
+            animator.SetBool("IsWalkingRight", true);
+            animator.SetBool("IsIdle", false);
+            playerSpriteRenderer.flipX = false;
+        }
+        else if (direction.x < -0.5)
+        {
+            animator.SetBool("IsWalkingRight", true);
+            animator.SetBool("IsIdle", false);
+            playerSpriteRenderer.flipX = true;
+        }
+        if (direction.y < -0.5)
+        {
+            animator.SetBool("IsWalkingDown", true);
+            animator.SetBool("IsWalkingUp", false);
+            animator.SetBool("IsIdle", false);
+        }
+        else if (direction.y > 0.5)
+        {
+            animator.SetBool("IsWalkingUp", true);
+            animator.SetBool("IsWalkingDown", false);
+            animator.SetBool("IsIdle", false);
+        }
+        
+        if (Mathf.Abs(direction.y) <= 0.5 && Mathf.Abs(direction.x) <= 0.5)
+        {
+            animator.SetBool("IsWalkingRight", false);
+            animator.SetBool("IsWalkingDown", false);
+            animator.SetBool("IsWalkingUp", false);
+            animator.SetBool("IsIdle", true);
+        }
+        else if (direction.y == 0)
+        {
+            animator.SetBool("IsWalkingDown", false);
+            animator.SetBool("IsWalkingUp", false);
+        }
+        else if (direction.x == 0)
+        {
+            animator.SetBool("IsWalkingRight", false);
+        }
+    }
+
+    private void PlayerMovePosition() 
     {
         switch (Player.Instance.playerActionState)
         {
@@ -86,7 +152,6 @@ public class PlayerMovement : MonoBehaviour
                 Rigidbody2D.MovePosition(Rigidbody2D.position +
                 baseMoveSpeed * Time.deltaTime * movementVector);
                 break;
-
         }
     }
 

@@ -12,9 +12,9 @@ public enum PlayerActionState
 
 public class Player : SingletonMonobehaviour<Player>
 {
-    [SerializeField] public PlayerActionState playerActionState;
     [SerializeField] private Transform fpromtText;
 
+    [HideInInspector] public PlayerActionState playerActionState;
     //======================================================================
     private void Start()
     {

@@ -3,7 +3,7 @@ using TMPro;
 
 public class DisplayPlayerAbilityCooldown : MonoBehaviour
 {
-    [SerializeField] private PlayerMovement playerMovement;
+    [SerializeField] private PlayerController playerMovement;
     [SerializeField] private CoreAbility rangeAbility;
     [SerializeField] private CoreAbility areaAbility;
     [SerializeField] private BasicAbility basicAbility;
