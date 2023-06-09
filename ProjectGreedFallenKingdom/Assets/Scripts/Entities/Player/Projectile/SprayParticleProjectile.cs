@@ -19,7 +19,6 @@ public class SprayParticleProjectile : MonoBehaviour
     private void OnEnable()
     {
         timeUntilChangeDirection = Random.Range(timeUntilChangeDirectionMin, timeUntilChangeDirectionMax);
-        moveDirection = (CultyMarbleHelper.GetMouseToWorldPosition() - this.transform.position).normalized;
     }
 
     private void Update()
@@ -75,10 +74,11 @@ public class SprayParticleProjectile : MonoBehaviour
     }
 
     //===========================================================================
-    public void ConfigParticleMovementSpeed(float newMoveSpeed, float newLifeTime)
+    public void ConfigParticleMovementSpeed(Vector3 dir, float newMoveSpeed, float newLifeTime)
     {
         moveSpeed = newMoveSpeed;
         lifeTime = newLifeTime;
+        moveDirection = dir;
     }
 
 

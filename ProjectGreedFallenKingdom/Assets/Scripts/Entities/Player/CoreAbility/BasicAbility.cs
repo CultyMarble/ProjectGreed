@@ -82,19 +82,20 @@ public class BasicAbility : CoreAbility
 
     private void SpawnParticle()
     {
+        Vector3 mouseDir = (CultyMarbleHelper.GetMouseToWorldPosition() - this.transform.position).normalized;
         foreach (Transform particle in basicAbilityProjectilePool)
         {
             if (particle.gameObject.activeInHierarchy == false)
             {
-                particle.GetComponent<SprayParticleProjectile>().ConfigParticleMovementSpeed(moveSpeed + this.GetComponentInParent<Rigidbody2D>().velocity.magnitude, lifeTime);
+                particle.GetComponent<SprayParticleProjectile>().ConfigParticleMovementSpeed(mouseDir, moveSpeed + this.GetComponentInParent<Rigidbody2D>().velocity.magnitude, lifeTime);
                 particle.GetComponent<SprayParticleProjectile>().
                     ConfigParticleMovementPattern(timeUntilChangeDirectionMax, timeUntilChangeDirectionMin, swingMagtitude);
                 particle.GetComponent<SprayParticleProjectile>().ConfigParticleSizeAndGrowth(size,growthRate);
                 particle.GetComponent<SprayParticleProjectile>().ConfigParticleDamage(damage, pushPower, abilityStatusEffect);
 
-                particle.position = this.transform.position;
+                particle.position = this.transform.position + 0.5f * mouseDir;
                 particle.gameObject.SetActive(true);
-                break;
+                break; 
             }
         }
     }

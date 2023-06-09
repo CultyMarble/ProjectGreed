@@ -125,6 +125,10 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetBool("IsWalkingRight", false);
         }
+        if (Mathf.Abs(movementVector.y) <= 0.5 && Mathf.Abs(movementVector.x) <= 0.5)
+        {
+            animator.SetBool("IsIdle", true);
+        }
     }
 
     private void PlayerMovePosition() 
