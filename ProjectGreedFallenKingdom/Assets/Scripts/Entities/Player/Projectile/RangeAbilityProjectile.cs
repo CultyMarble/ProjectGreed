@@ -15,7 +15,7 @@ public class RangeAbilityProjectile : MonoBehaviour
     //===========================================================================
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (collision.gameObject.CompareTag("Enemy") && collision.GetType().ToString() != Tags.CAPSULECOLLIDER2D)
         {
             AbilityStatusEffect enemyStatusEffect = collision.gameObject.GetComponent<Enemy>().CheckStatusEffect();
 
@@ -34,11 +34,6 @@ public class RangeAbilityProjectile : MonoBehaviour
             gameObject.SetActive(false);
             Destroy(gameObject);
         }
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-
     }
 
     //===========================================================================
