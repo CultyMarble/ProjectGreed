@@ -37,6 +37,7 @@ public class RangeAbility : CoreAbility
     {
         CultyMarbleHelper.RotateGameObjectToMouseDirection(this.transform);
     }
+
     //===========================================================================
     private void InputHandler()
     {
@@ -52,6 +53,7 @@ public class RangeAbility : CoreAbility
             aimCharge = 0;
         }
     }
+
     private void Shoot()
     {
         if (aimCharge + Time.deltaTime <= aimChargeTime)

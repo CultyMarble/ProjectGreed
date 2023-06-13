@@ -81,7 +81,6 @@ public class SprayParticleProjectile : MonoBehaviour
         moveDirection = dir;
     }
 
-
     public void ConfigParticleMovementPattern(float newTimeMax, float newTimeMin, float newSwingMagnitude)
     {
         timeUntilChangeDirectionMax = newTimeMax;
@@ -97,6 +96,7 @@ public class SprayParticleProjectile : MonoBehaviour
         transform.localScale = sizeVector;
         particleGrowthRate = growthRate;
     }
+
     public void ConfigParticleDamage(float damage, float pushPower, AbilityStatusEffect _statusEffect)
     {
         particleDamage = damage;
