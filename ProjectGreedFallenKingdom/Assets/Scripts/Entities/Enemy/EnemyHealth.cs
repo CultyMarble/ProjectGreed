@@ -72,7 +72,10 @@ public class EnemyHealth : MonoBehaviour
             OnHealthChanged?.Invoke(this, new OnHealthChangedEvenArgs { healthRatio = currentHealth / maxHealth });
 
             if (currentHealth <= 0)
+            {
+                GetComponent<Enemy>().ResetStatusEffects();
                 Despawn();
+            }
         }
     }
 

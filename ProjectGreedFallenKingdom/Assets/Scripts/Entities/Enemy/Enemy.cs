@@ -6,8 +6,9 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Animator animator;
     //[SerializeField] private Stun stunStatusEffect;
 
-    private float stunImmuneTime = 3.5f;
+    private float stunImmuneTime = 1.5f;
     private float stunImmuneTimer = default;
+    private float pushBackTime = 1.0f;
 
     //======================================================================
     private void OnTriggerEnter2D(Collider2D collision)
@@ -26,6 +27,14 @@ public class Enemy : MonoBehaviour
     private void Update()
     {
         UpdateStunImmuneTime();
+        if (isPushBack)
+        {
+            pushBackTime -= Time.deltaTime;
+            if(pushBackTime <= 0)
+            {
+                isPushBack = false;
+            }
+        }
     }
 
     //======================================================================

@@ -106,7 +106,7 @@ public class SprayParticleProjectile : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Enemy")
+        if (collision.gameObject.CompareTag("Enemy") && collision.GetType().ToString() != Tags.CIRCLECOLLIDER2D)
         {
             Vector2 _pushDirection = (collision.gameObject.GetComponent<Transform>().position - GetComponent<Transform>().position).normalized;
             collision.gameObject.GetComponent<EnemyHealth>().UpdateCurrentHealth(-particleDamage);

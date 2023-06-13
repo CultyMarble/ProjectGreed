@@ -3082,7 +3082,7 @@ MonoBehaviour:
   - {fileID: 3187642801048505082, guid: bf12e8b65b1a3eb48a9fa65e23a6eec4, type: 3}
   - {fileID: 2290856477104092857, guid: 483b04c1e914f04419b3e23585831030, type: 3}
   - {fileID: 2290856477104092857, guid: 5fdf5472e0eaacf44852e0dccde33dc3, type: 3}
-  - {fileID: 2290856477104092857, guid: 21053cd8cc854e347a7b31c1778775db, type: 3}
+  - {fileID: 8301459616188158169, guid: 21053cd8cc854e347a7b31c1778775db, type: 3}
 --- !u!1 &1100159486
 GameObject:
   m_ObjectHideFlags: 0
@@ -7030,7 +7030,7 @@ MonoBehaviour:
   pushPower: 10
   pushRadius: 0
   cooldown: 0.3
-  abilityStatusEffect: 1
+  abilityStatusEffect: 2
   pfRangeAbilityProjectile: {fileID: 2670297803040694699, guid: c6e09434388c9e3459e9f2a142f41f4c, type: 3}
   aimIndicator: {fileID: 1745730314}
   rotStackApply: 10
