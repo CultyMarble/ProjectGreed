@@ -7,18 +7,20 @@ public class Enemy : MonoBehaviour
     //[SerializeField] private Stun stunStatusEffect;
 
     private float stunImmuneTime = 1.5f;
-    private float stunImmuneTimer = default;
+    private float stunImmuneTimer = 0.0f;
     private float pushBackTime = 1.0f;
 
     //======================================================================
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.CompareTag("Collisions") && isPushBack && stunImmuneTimer <= 0.0f)
+        if (collision.gameObject.CompareTag("Collisions") && isPushBack && stunImmuneTimer <= 0.0f)
         {
             GetComponentInChildren<Stun>().Activate();
 
             isPushBack = false;
+
             animator.SetBool("isStunned", true);
+
             stunImmuneTimer = stunImmuneTime;
         }
     }
@@ -49,6 +51,7 @@ public class Enemy : MonoBehaviour
 
         stunImmuneTimer -= Time.deltaTime;
     }
+
     public void InflictStatusEffect(AbilityStatusEffect statusEffect, int stackAmount)
     {
         switch (statusEffect)

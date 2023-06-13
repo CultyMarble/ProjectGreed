@@ -103,8 +103,8 @@ public class AreaAbility : CoreAbility
                 // Add force
                 collider2D.GetComponent<Enemy>().isPushBack = true;
                 collider2D.GetComponent<Rigidbody2D>().AddForce(_pushDirection * pushPower, ForceMode2D.Force);
-                collider2D.GetComponent<Enemy>().InflictStatusEffect(abilityStatusEffect,5);
 
+                collider2D.GetComponent<Enemy>().InflictStatusEffect(abilityStatusEffect, 5);
             }
         }
     }
