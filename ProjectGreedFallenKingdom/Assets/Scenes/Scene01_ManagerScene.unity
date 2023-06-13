@@ -1882,7 +1882,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b275af9f751f6e74eb1122877e8a7566, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseMoveSpeed: 5
+  baseMoveSpeed: 6
   dashCD: 1
   pauseTimeAfterDash: 0.1
   dashTime: 0.2
