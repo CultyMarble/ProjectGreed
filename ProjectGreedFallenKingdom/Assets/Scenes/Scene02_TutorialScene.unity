@@ -896,6 +896,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPushBack: 0
+  animator: {fileID: 0}
 --- !u!50 &290517290
 Rigidbody2D:
   serializedVersion: 4
@@ -1713,6 +1714,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPushBack: 0
+  animator: {fileID: 0}
 --- !u!50 &961215646
 Rigidbody2D:
   serializedVersion: 4
@@ -8435,6 +8437,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPushBack: 0
+  animator: {fileID: 0}
 --- !u!50 &1382302961
 Rigidbody2D:
   serializedVersion: 4
@@ -8729,7 +8732,7 @@ Transform:
   - {fileID: 1635781257}
   - {fileID: 1011288221}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1630144124
 GameObject:
@@ -10148,7 +10151,7 @@ RectTransform:
   m_Children:
   - {fileID: 1393547959}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -15397,7 +15400,7 @@ Transform:
   - {fileID: 1789505475}
   - {fileID: 5537893906389726551}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!156049354 &5537893906563669835
 Grid:
@@ -35363,6 +35366,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPushBack: 0
+  animator: {fileID: 0}
 --- !u!114 &8961660741874002567
 MonoBehaviour:
   m_ObjectHideFlags: 0

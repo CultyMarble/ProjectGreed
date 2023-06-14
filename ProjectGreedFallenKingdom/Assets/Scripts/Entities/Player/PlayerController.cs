@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     private bool canMove = true;
 
     [Header("Dash")]
-    [SerializeField] public float dashCD = 3.0f;
+    public float dashCD = 3.0f;
     [SerializeField] private float pauseTimeAfterDash = 1.0f;
     [SerializeField] private float dashTime = 0.1f;
     [SerializeField] private float dashSpeed = 100.0f;

@@ -10,11 +10,15 @@ public class BombAbility : CoreAbility
     [SerializeField] private float fuseTime;
     private float placeTime = 0.1f;
 
+    [HideInInspector] public bool canUseAbility = default;
 
     //===========================================================================
     protected override void Update()
     {
         base.Update();
+
+        if (canUseAbility == false)
+            return;
 
         switch (Player.Instance.playerActionState)
         {
@@ -33,6 +37,7 @@ public class BombAbility : CoreAbility
     {
         CultyMarbleHelper.RotateGameObjectToMouseDirection(this.transform);
     }
+
     //===========================================================================
     private void InputHandler()
     {
@@ -45,6 +50,7 @@ public class BombAbility : CoreAbility
             Player.Instance.playerActionState = PlayerActionState.none;
         }
     }
+
     private void PlaceBomb()
     {
         if (placeTime <= 0)

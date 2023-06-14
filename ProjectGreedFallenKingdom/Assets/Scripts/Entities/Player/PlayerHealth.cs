@@ -3,27 +3,26 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public struct OnHealthChangedEvenArgs
-    {
-        public float currentHealth;
-        public float maxHealth;
-    }
-    public event EventHandler<OnHealthChangedEvenArgs> OnHealthChanged;
+    public struct OnHealthChangedEventArgs { public float currentHealth; }
+    public event EventHandler<OnHealthChangedEventArgs> OnHealthChanged;
+
+    public struct OnMaxHealthChangedEventArgs { public float currentMaxHealth; }
+    public event EventHandler<OnMaxHealthChangedEventArgs> OnMaxHealthEventChanged;
 
     public event EventHandler OnDespawnEvent;
 
-    [SerializeField] private float maxHealth;
+    private readonly float maxHealth = 100.0f;
 
+    private float currentMaxHealth;
     private float currentHealth;
 
     private float feedbackDamageTime = 0.10f;
     private float feedbackDamageTimer = default;
 
     //======================================================================
-    private void OnEnable()
+    private void Start()
     {
-        currentHealth = maxHealth;
-        UpdateCurrentHealth();
+        ResetPlayerHealth();
     }
 
     private void Update()
@@ -68,25 +67,47 @@ public class PlayerHealth : MonoBehaviour
     }
 
     //======================================================================
+    public void ResetPlayerHealth()
+    {
+        currentMaxHealth = maxHealth;
+        currentHealth = maxHealth;
+
+        UpdateCurrentMaxHealth();
+        UpdateCurrentHealth();
+    }
+
+    public void UpdateCurrentMaxHealth(float amount = 0)
+    {
+        float _healthRatio = currentHealth / currentMaxHealth;
+
+        currentMaxHealth += amount;
+        if (currentMaxHealth <= 0) currentMaxHealth = 0;
+
+        //Invoke Event
+        OnMaxHealthEventChanged?.Invoke(this, new OnMaxHealthChangedEventArgs { currentMaxHealth = currentMaxHealth });
+
+        if (amount > 0)
+        {
+            float _amount = (currentMaxHealth * _healthRatio) - currentHealth;
+            UpdateCurrentHealth(_amount);
+        }
+    }
+
     public void UpdateCurrentHealth(float amount = 0)
     {
         if (amount != 0)
         {
             currentHealth += amount;
-            currentHealth = Mathf.Clamp(currentHealth, 0.0f, maxHealth);
+            currentHealth = Mathf.Clamp(currentHealth, 0.0f, currentMaxHealth);
 
             if (amount < 0)
                 DamageFeedBack();
 
-            // Call OnHitPointChanged Event
-            OnHealthChanged?.Invoke(this, new OnHealthChangedEvenArgs
-            {
-                currentHealth = currentHealth,
-                maxHealth = maxHealth
-            });
-
             if (currentHealth <= 0)
                 Despawn();
         }
+
+        //Invoke Event
+        OnHealthChanged?.Invoke(this, new OnHealthChangedEventArgs { currentHealth = currentHealth });
     }
 }

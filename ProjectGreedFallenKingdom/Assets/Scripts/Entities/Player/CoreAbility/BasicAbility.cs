@@ -47,7 +47,6 @@ public class BasicAbility : CoreAbility
                 break;
         }
 
-
         InputHandler();
         Fuel();
     }
@@ -100,14 +99,29 @@ public class BasicAbility : CoreAbility
         }
     }
 
-    void Fuel()
+    private void Fuel()
     {
         refuelCounter += Time.deltaTime;
 
         if (currentFuel < maxFuel && refuelCounter >= refuelDelay && !Input.GetMouseButton(0))
         {
             currentFuel += refuelRate;
+
+            if (currentFuel >= maxFuel)
+                currentFuel = maxFuel;
+
             refuelCounter = 0;
         }
+    }
+
+    //===========================================================================
+    public void UpdateMaxFuel(int amount)
+    {
+        maxFuel += amount;
+    }
+
+    public void ResetMaxFuel()
+    {
+        maxFuel = 100.0f;
     }
 }

@@ -36,4 +36,15 @@ public abstract class CoreAbility : MonoBehaviour
         if (cooldownTimer <= 0.0f)
             cooldownTimer = 0.0f;
     }
+
+    //===========================================================================
+    public void UpdateDamage(int amount)
+    {
+        damage += amount;
+    }
+
+    public void ResetDamage()
+    {
+        damage = 1;
+    }
 }

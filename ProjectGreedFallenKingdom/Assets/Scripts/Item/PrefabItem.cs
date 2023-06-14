@@ -3,40 +3,44 @@ using UnityEngine;
 public class PrefabItem : MonoBehaviour
 {
     [SerializeField] private string itemName;
-    [SerializeField] private int addDamage;
-    [SerializeField] private int addHealth;
+    [SerializeField] private int IncreaseDamage;
+    [SerializeField] private int IncreaseMaxHealth;
+    [SerializeField] private int IncreaseMaxFuel;
     [SerializeField] private float reduceDashCD;
 
-    private bool pickedUp;
+    private bool canPickedUp;
 
+    //===========================================================================
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
-            Player.Instance.ShowFPromtText();
-    }
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (Input.GetKey(KeyCode.F) && pickedUp == false)
         {
-            pickedUp = true;
+            Player.Instance.ShowFPromtText();
+            canPickedUp = true;
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
+        {
             Player.Instance.HideFPromtText();
+            canPickedUp = false;
+        }
     }
 
+    //===========================================================================
     private void Update()
     {
-        if (pickedUp)
+        if (canPickedUp == false)
+            return;
+
+        if (Input.GetKeyDown(KeyCode.F))
         {
             if (GetComponent<ItemCost>() != null)
-            {// item has price
+            {
                 if (PlayerCurrencies.Instance.TempCurrencyAmount >= GetComponent<ItemCost>().itemCost)
-                {// player can afford item
+                {
                     PlayerCurrencies.Instance.UpdateTempCurrencyAmount(-(GetComponent<ItemCost>().itemCost));
                 }
                 else
@@ -45,9 +49,19 @@ public class PrefabItem : MonoBehaviour
                 }
             }
 
-            // PlayerOffenseControl.Instance.meleeDamage += addDamage;
-            // FindObjectOfType<Player>().GetComponent<EnemyHealth>().maxHealth += addHealth;
-            // PlayerMovement.Instance.dashCD -= reduceDashCD;
+            GameObject player = FindObjectOfType<Player>().gameObject;
+
+            // Item Effect
+            player.GetComponentInChildren<BasicAbility>().UpdateDamage(IncreaseDamage);
+
+            player.GetComponent<PlayerHealth>().UpdateCurrentMaxHealth(IncreaseMaxHealth);
+
+            player.GetComponent<PlayerController>().dashCD -= reduceDashCD;
+            if (player.GetComponent<PlayerController>().dashCD <= 0)
+                player.GetComponent<PlayerController>().dashCD = 0;
+
+            player.GetComponentInChildren<BasicAbility>().UpdateMaxFuel(IncreaseMaxFuel);
+            //
 
             Player.Instance.HideFPromtText();
 
