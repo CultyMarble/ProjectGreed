@@ -17,6 +17,9 @@ public enum SceneName
     Scene10_Room6,
     Scene11_Room7,
     Scene12_BossRoom,
+    Scene13_Room8,
+    Scene14_Room9,
+    Scene15_Room10,
 }
 
 public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>

@@ -41,7 +41,7 @@ public class RangeAbility : CoreAbility
     //===========================================================================
     private void InputHandler()
     {
-        if (Input.GetMouseButtonDown(1) && cooldownTimer == 0)
+        if (Input.GetMouseButtonDown(1))
         {
             Player.Instance.playerActionState = PlayerActionState.IsUsingRangeAbility;
             aimCharge += Time.deltaTime;
@@ -49,38 +49,49 @@ public class RangeAbility : CoreAbility
         else
         {
             Player.Instance.playerActionState = PlayerActionState.none;
-            aimIndicator.GetComponent<SpriteRenderer>().color = Color.grey;
             aimCharge = 0;
         }
     }
 
     private void Shoot()
     {
-        if (aimCharge + Time.deltaTime <= aimChargeTime)
+        if (cooldownTimer == 0)
         {
-            aimCharge += Time.deltaTime;
+            if (aimCharge + Time.deltaTime <= aimChargeTime)
+            {
+                aimCharge += Time.deltaTime;
+            }
+            else
+            {
+                aimCharge = aimChargeTime;
+            }
+            aimIndicator.GetComponent<SpriteRenderer>().color = Color.yellow;
+
+            if (aimCharge >= aimChargeTime)
+            {
+                aimIndicator.GetComponent<SpriteRenderer>().color = Color.green;
+            }
+            if (Input.GetMouseButtonUp(1))
+            {
+                float scaledSpeed = Mathf.Clamp((aimCharge / aimChargeTime) * projectileSpeed, projectileSpeed / 2, projectileSpeed);
+                int scaledDamage = (int)Mathf.Clamp((aimCharge / aimChargeTime) * damage, damage / 2, damage);
+
+                cooldownTimer = cooldown;
+
+                Transform projectile = Instantiate(pfRangeAbilityProjectile, this.transform.position, Quaternion.identity).transform;
+                projectile.GetComponent<RangeAbilityProjectile>().ProjectileConfig(rotStackApply, scaledSpeed, this.transform, scaledDamage, abilityStatusEffect);
+                Player.Instance.playerActionState = PlayerActionState.none;
+                aimCharge = 0;
+            }
         }
         else
         {
-            aimCharge = aimChargeTime;
-        }
-        aimIndicator.GetComponent<SpriteRenderer>().color = Color.yellow;
-        
-        if (aimCharge >= aimChargeTime)
-        {
-            aimIndicator.GetComponent<SpriteRenderer>().color = Color.green;
-        }
-        if (Input.GetMouseButtonUp(1))
-        {
-            float scaledSpeed = Mathf.Clamp((aimCharge / aimChargeTime) * projectileSpeed, projectileSpeed / 2, projectileSpeed);
-            int scaledDamage = (int)Mathf.Clamp((aimCharge / aimChargeTime) * damage, damage / 2, damage);
-
-            cooldownTimer = cooldown;
-
-            Transform projectile = Instantiate(pfRangeAbilityProjectile, this.transform.position, Quaternion.identity).transform;
-            projectile.GetComponent<RangeAbilityProjectile>().ProjectileConfig(rotStackApply, scaledSpeed, this.transform, scaledDamage, abilityStatusEffect);
-            Player.Instance.playerActionState = PlayerActionState.none;
-            aimCharge = 0;
+            aimIndicator.GetComponent<SpriteRenderer>().color = Color.red;
+            if (Input.GetMouseButtonUp(1))
+            {
+                Player.Instance.playerActionState = PlayerActionState.none;
+                aimCharge = 0;
+            }
         }
     }
 }
