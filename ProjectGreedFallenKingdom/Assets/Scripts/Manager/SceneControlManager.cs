@@ -157,6 +157,11 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         yield return StartCoroutine(LoadingScreen(1.0f));
 
         player.transform.gameObject.SetActive(false);
+        player.GetComponentInChildren<BasicAbility>().ResetDamage();
+        player.GetComponentInChildren<BasicAbility>().ResetMaxFuel();
+        player.GetComponent<PlayerHealth>().ResetPlayerHealth();
+        player.GetComponent<PlayerController>().dashCD = 3.0f;
+
         GameplayInfoUIControl.Instance.SetGameplayInfoUIActive(false);
 
         pauseMenu.SetActive(false);

@@ -13,7 +13,10 @@ public class DisplayPlayerFuel : MonoBehaviour
     //===========================================================================
     private void Update()
     {
+        playerFuelFrameImage.rectTransform.localScale =
+            new Vector3(basicAbility.MaxFuel / 100.0f, 1.0f, 1.0f);
+
         playerFuelBarImage.rectTransform.localScale = 
-            new Vector3(basicAbility.CurrentFuel / basicAbility.MaxFuel, 1.0f, 1.0f);
+            new Vector3(basicAbility.CurrentFuel / 100.0f, 1.0f, 1.0f);
     }
 }

@@ -10,10 +10,15 @@ public class AreaAbility : CoreAbility
     private float effectAnimationTimer;
     private int currentAnimationIndex;
 
+    [HideInInspector] public bool canUseAbility = default;
+
     //============================================================================
     protected override void Update()
     {
         base.Update();
+
+        if (canUseAbility == false)
+            return;
 
         switch (Player.Instance.playerActionState)
         {
