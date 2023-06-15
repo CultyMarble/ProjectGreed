@@ -31,6 +31,7 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
 
     [Header("Starting Scene:")]
     [SerializeField] private SceneName startingScene;
+    [SerializeField] private Transform startingPosition;
 
     [Header("Main Menu")]
     [SerializeField] private GameObject mainMenu;
@@ -214,6 +215,7 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         player.SetActive(true);
 
         player.transform.position = this.transform.position;
+
         player.GetComponent<PlayerHealth>().UpdateCurrentHealth();
     }
 
@@ -229,7 +231,9 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         EventManager.CallAfterSceneLoadEvent();
 
         GameplayInfoUIControl.Instance.SetGameplayInfoUIActive(true);
+
         SetPlayerActiveTrue();
+        player.transform.position = startingPosition.transform.position;
 
         StartCoroutine(LoadingScreen(0.0f));
     }
