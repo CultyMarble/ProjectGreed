@@ -284,6 +284,7 @@ GameObject:
   - component: {fileID: 1724149695}
   - component: {fileID: 1724149697}
   - component: {fileID: 4329569637422133730}
+  - component: {fileID: 4329569637422133731}
   m_Layer: 3
   m_Name: pfCheckpoint
   m_TagString: Untagged
@@ -1185,6 +1186,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &4329569637422133731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1724149693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db72d1d72515f5f42836ac068a7a4127, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueLines:
+  - Checkpoint Set!
+  autoActive: 0
 --- !u!1 &4435286941782981528
 GameObject:
   m_ObjectHideFlags: 0
