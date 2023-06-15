@@ -17080,7 +17080,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueLines:
-  - '*Theres a note on the flore*'
+  - '*Theres a note on the floor*'
   - It reads "Why is this happening... I can't find my mom"
   - The rest was illegible
   autoActive: 0

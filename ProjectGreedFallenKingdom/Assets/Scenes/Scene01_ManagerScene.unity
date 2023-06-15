@@ -4878,7 +4878,7 @@ MonoBehaviour:
   damage: 50
   pushPower: 5000
   pushRadius: 5
-  cooldown: 0
+  cooldown: 5
   abilityStatusEffect: 2
   pfBomb: {fileID: 3187642801048505080, guid: 3cfa34a8eb634a349b1dff68a79c8163, type: 3}
   rotStackApply: 0
@@ -6626,10 +6626,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be9c6eb1ba8bf3b49920ad7ca8061627, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
+  damage: 5
   pushPower: 7500
   pushRadius: 5
-  cooldown: 5
+  cooldown: 3
   abilityStatusEffect: 2
   abilityEffect:
   - {fileID: 1515639410}
@@ -7747,7 +7747,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 888837197470845527}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.1, y: -1.1, z: 0}
+  m_LocalPosition: {x: -0.01, y: -2.78, z: 0}
   m_LocalScale: {x: 0.75, y: 0.75, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8140,7 +8140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Bloody Knife
-  IncreaseDamage: 1
+  IncreaseDamage: 0.5
   IncreaseMaxHealth: 0
   IncreaseMaxFuel: 0
   reduceDashCD: 0
@@ -8241,7 +8241,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Bloody Knife
-  IncreaseDamage: 1
+  IncreaseDamage: 0.5
   IncreaseMaxHealth: 0
   IncreaseMaxFuel: 0
   reduceDashCD: 0
@@ -8766,7 +8766,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2569570005352627923}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.11000013, y: -1.6799994, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

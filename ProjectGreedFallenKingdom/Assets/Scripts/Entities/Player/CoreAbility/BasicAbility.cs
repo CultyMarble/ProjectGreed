@@ -115,7 +115,7 @@ public class BasicAbility : CoreAbility
     }
 
     //===========================================================================
-    public void UpdateMaxFuel(int amount)
+    public void UpdateMaxFuel(float amount)
     {
         maxFuel += amount;
     }

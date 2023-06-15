@@ -38,7 +38,7 @@ public abstract class CoreAbility : MonoBehaviour
     }
 
     //===========================================================================
-    public void UpdateDamage(int amount)
+    public void UpdateDamage(float amount)
     {
         damage += amount;
     }

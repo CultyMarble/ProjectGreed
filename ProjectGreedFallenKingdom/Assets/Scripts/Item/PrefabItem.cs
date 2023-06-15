@@ -3,9 +3,9 @@ using UnityEngine;
 public class PrefabItem : MonoBehaviour
 {
     [SerializeField] private string itemName;
-    [SerializeField] private int IncreaseDamage;
-    [SerializeField] private int IncreaseMaxHealth;
-    [SerializeField] private int IncreaseMaxFuel;
+    [SerializeField] private float IncreaseDamage;
+    [SerializeField] private float IncreaseMaxHealth;
+    [SerializeField] private float IncreaseMaxFuel;
     [SerializeField] private float reduceDashCD;
 
     private bool canPickedUp;

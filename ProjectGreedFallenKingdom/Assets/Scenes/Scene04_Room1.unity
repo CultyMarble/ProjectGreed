@@ -9164,7 +9164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueLines:
-  - 'Tip: The main attack currently applies posion which gradually deals damage'
+  - 'Tip: The main attack currently applies poison which gradually deals damage'
   autoActive: 0
 --- !u!58 &6899511952690640447
 CircleCollider2D:
