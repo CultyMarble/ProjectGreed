@@ -45,8 +45,12 @@ public class PrefabUnlockAbilityItem : MonoBehaviour
 
             Player.Instance.HideFPromtText();
 
-            this.gameObject.SetActive(false);
-            Destroy(this.gameObject);
+            Invoke(nameof(Destroy), 0.1f);
         }
+    }
+    private void Destroy()
+    {
+        this.gameObject.SetActive(false);
+        Destroy(this.gameObject);
     }
 }

@@ -7043,7 +7043,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueLines:
-  - 'Tip: The ranged attack can take on a status effect when piercing an enemy'
+  - The King did this to us.... His greed will kill us all
   autoActive: 0
 --- !u!70 &4124020313472499721
 CapsuleCollider2D:
@@ -7197,7 +7197,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7577617199736997959}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.22, y: 1.61, z: 0}
+  m_LocalPosition: {x: -0.66, y: 3.54, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7238,7 +7238,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 13.9736595, y: 15.9413395}
+  m_AnchoredPosition: {x: 16.39, y: 18.56}
   m_SizeDelta: {x: 1, y: 0.444}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &8402329458688793245
