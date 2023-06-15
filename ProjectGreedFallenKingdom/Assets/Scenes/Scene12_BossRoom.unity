@@ -7866,6 +7866,39 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &3114453479340474415
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8277149918513576902}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 17.700544, y: -65.13211, z: 4.215303}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4296976054156680373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8277149918513576902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db72d1d72515f5f42836ac068a7a4127, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueLines:
+  - 'Grave Keeper: HUH?? Who''s there? Who dares challenge me...?'
+  - 'Grave Keeper: ....'
+  - 'Grave Keeper: YOU?? You little weakling??'
+  - 'Grave Keeper: We will see... My undead will see to it!'
+  autoActive: 1
 --- !u!1001 &4746090273248820426
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7883,11 +7916,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4422130485644021209, guid: 056797ae4c473e348bd4644ce690fe32, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 65
+      value: 64.57
       objectReference: {fileID: 0}
     - target: {fileID: 4422130485644021209, guid: 056797ae4c473e348bd4644ce690fe32, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 65.15
+      value: 60.15
       objectReference: {fileID: 0}
     - target: {fileID: 4422130485644021209, guid: 056797ae4c473e348bd4644ce690fe32, type: 3}
       propertyPath: m_LocalPosition.z
@@ -8172,3 +8205,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneNameGoTo: 7
   spawnLocation: {fileID: 7577617199571746164}
+--- !u!1 &8277149918513576902
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3114453479340474415}
+  - component: {fileID: 4296976054156680373}
+  m_Layer: 0
+  m_Name: DialogueTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
