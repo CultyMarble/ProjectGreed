@@ -41,6 +41,7 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
 
     [Header("Pause Menu")]
     [SerializeField] public GameObject pauseMenu;
+    [SerializeField] private Animator pm_animator;
     [SerializeField] private Button pm_loadMainMenuButton;
 
     [Header("Gameover Menu")]
@@ -65,7 +66,7 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         pm_loadMainMenuButton.onClick.AddListener(() =>
         {
             Time.timeScale = 1.0f;
-            pauseMenu.SetActive(false);
+            pm_animator.SetTrigger("Close");
             StartCoroutine(UnloadSceneAndBackToMainMenu());
         });
 
@@ -87,26 +88,13 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P) && player.activeInHierarchy == true)
-        {
-            if (pauseMenu.activeSelf == false)
-            {
-                Time.timeScale = 1.0f;
-                pauseMenu.SetActive(true);
-            }
-            else if (pauseMenu.activeSelf == true)
-            {
-                Time.timeScale = 0.0f;
-                pauseMenu.SetActive(false);
-            }
-        }
-
-        if (Input.GetKeyDown(KeyCode.Escape) && mainMenu.activeSelf == false)
+        if (Input.GetKeyDown(KeyCode.Escape) && mainMenu.activeSelf == false || Input.GetKeyDown(KeyCode.P) && player.activeInHierarchy == false)
         {
             if (pauseMenu.activeSelf)
             {
                 Time.timeScale = 1;
-                pauseMenu.SetActive(false);
+                //pauseMenu.SetActive(false);
+                pm_animator.SetTrigger("Close");
             }
             else
             {
@@ -168,7 +156,7 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
 
         GameplayInfoUIControl.Instance.SetGameplayInfoUIActive(false);
 
-        pauseMenu.SetActive(false);
+        pm_animator.SetTrigger("Close");
         gameOverMenu.SetActive(false);
         mainMenu.SetActive(true);
 
