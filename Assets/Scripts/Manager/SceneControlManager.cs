@@ -88,12 +88,11 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && mainMenu.activeSelf == false || Input.GetKeyDown(KeyCode.P) && player.activeInHierarchy == false)
+        if (Input.GetKeyDown(KeyCode.Escape) && mainMenu.activeSelf == false || Input.GetKeyDown(KeyCode.P) && player.activeInHierarchy != false)
         {
             if (pauseMenu.activeSelf)
             {
                 Time.timeScale = 1;
-                //pauseMenu.SetActive(false);
                 pm_animator.SetTrigger("Close");
             }
             else
