@@ -40,6 +40,7 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
     [SerializeField] private Button mm_exitButton;
 
     [Header("Pause Menu")]
+    [SerializeField] private PlayerCurrencies playerCurrencies;
     [SerializeField] public GameObject pauseMenu;
     [SerializeField] private Animator pm_animator;
     [SerializeField] private Button pm_loadMainMenuButton;
@@ -94,11 +95,13 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
             {
                 Time.timeScale = 1;
                 pm_animator.SetTrigger("Close");
+                playerCurrencies.Close();
             }
             else
             {
                 Time.timeScale = 0;
                 pauseMenu.SetActive(true);
+                playerCurrencies.Open();
             }
         }
 

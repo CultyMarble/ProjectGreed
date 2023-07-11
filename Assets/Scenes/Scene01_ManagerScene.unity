@@ -1548,6 +1548,7 @@ MonoBehaviour:
   mm_startGameButton: {fileID: 1253790839}
   mm_tutorialButton: {fileID: 1996994390}
   mm_exitButton: {fileID: 321535577}
+  playerCurrencies: {fileID: 567887227}
   pauseMenu: {fileID: 285883997}
   pm_animator: {fileID: 285883999}
   pm_loadMainMenuButton: {fileID: 1529662757}

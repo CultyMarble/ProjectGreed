@@ -26,9 +26,9 @@ public class PlayerCurrencies : SingletonMonobehaviour<PlayerCurrencies>
     //===========================================================================
     public void UpdateTempCurrencyAmount(int amount = 0)
     {
-        if (!displayLock)
+        if (displayLock == false)
         {
-            StartCoroutine(DisplayandDisable(displayTime));
+            StartCoroutine(DisplayOpenandClose(displayTime));
         }
 
         tempCurrencyAmount += amount;
@@ -45,7 +45,7 @@ public class PlayerCurrencies : SingletonMonobehaviour<PlayerCurrencies>
         displayPlayerCurrency.UpdatePermCurrencyText(permCurrencyAmount);
     }
 
-    private IEnumerator DisplayandDisable(float delay)
+    private IEnumerator DisplayOpenandClose(float delay)
     {
         displayLock = true;
         displayPlayerCurrencyAnimator.SetTrigger("Open");
@@ -56,6 +56,24 @@ public class PlayerCurrencies : SingletonMonobehaviour<PlayerCurrencies>
 
         yield return new WaitForSeconds(0.66F);
         displayLock = false;
+    }
+
+    public void Open()
+    {
+        if (displayLock == false)
+        {
+            displayLock = true;
+            displayPlayerCurrencyAnimator.SetTrigger("Open");
+        }
+    }
+
+    public void Close()
+    {
+        if (displayLock == true)
+        {
+            displayLock = false;
+            displayPlayerCurrencyAnimator.SetTrigger("Close");
+        }
     }
 
 }
