@@ -45,6 +45,9 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
     [SerializeField] private Animator pm_animator;
     [SerializeField] private Button pm_loadMainMenuButton;
 
+    [Header("Option Menu")]
+    [SerializeField] public GameObject optionMenu;
+
     [Header("Gameover Menu")]
     [SerializeField] private GameObject gameOverMenu;
     [SerializeField] private Button gv_loadLastCheckPointButton;
@@ -267,4 +270,17 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         yield return StartCoroutine(LoadingScreen(0.0f));
         EventManager.CallAfterSceneLoadedLoadingScreenEvent();
     }
+
+    //===========================================================================
+    public void OpenOptionMenuButton()
+    {
+        optionMenu.SetActive(true);
+    }
+
+    public void ExitGameButton()
+    {
+        Application.Quit();
+        Debug.Log("Quit Game");
+    }
+
 }
