@@ -4,10 +4,6 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
-    [Header("New Input System")]
-    private GreedControllers greedAction;
-    private InputAction movement;
-
     [Header("Basic Movement")]
     [SerializeField] private float baseMoveSpeed;
 
@@ -24,7 +20,7 @@ public class PlayerController : MonoBehaviour
     [Header("Animation")]
     [SerializeField] private Animator animator;
     [SerializeField] private SpriteRenderer playerSpriteRenderer;
-    
+
     private Vector3 toMouseDirectionVector = default;
     private Vector2 dashVector;
     private float dashTimeCounter;
@@ -37,20 +33,8 @@ public class PlayerController : MonoBehaviour
     //======================================================================
     private void Awake()
     {
-        greedAction = new GreedAction();
-
         Rigidbody2D = GetComponent<Rigidbody2D>();
         CapsuleCollider2D = GetComponent<CapsuleCollider2D>();
-    }
-
-    private void OnEnable()
-    {
-        movement = greedAction.Player.Movement; 
-    }
-
-    private void OnDisable()
-    {
-    
     }
 
     private void FixedUpdate()
@@ -89,7 +73,7 @@ public class PlayerController : MonoBehaviour
     {
         toMouseDirectionVector = (CultyMarbleHelper.GetMouseToWorldPosition() - transform.position).normalized;
         Vector2 direction;
-        
+
         switch (Player.Instance.playerActionState)
         {
             case PlayerActionState.IsUsingBasicAbility:
@@ -125,7 +109,7 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("IsWalkingDown", false);
             animator.SetBool("IsIdle", false);
         }
-        
+
         if (Mathf.Abs(direction.y) <= 0.5 && Mathf.Abs(direction.x) <= 0.5)
         {
             animator.SetBool("IsWalkingRight", false);
@@ -148,7 +132,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void PlayerMovePosition() 
+    private void PlayerMovePosition()
     {
         switch (Player.Instance.playerActionState)
         {
@@ -189,7 +173,7 @@ public class PlayerController : MonoBehaviour
         // Trigger Dash
         if (Input.GetKeyDown(KeyCode.Space) && Player.Instance.playerActionState == PlayerActionState.none)
         {
-            if (dashCDTimeCounter <= 0  && movementVector != Vector2.zero)
+            if (dashCDTimeCounter <= 0 && movementVector != Vector2.zero)
             {
                 Player.Instance.playerActionState = PlayerActionState.IsDashing;
                 dashTimeCounter = dashTime;
