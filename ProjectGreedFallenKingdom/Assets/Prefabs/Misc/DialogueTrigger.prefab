@@ -45,7 +45,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueLines:
-  - 'You: Huh? Where am I?'
-  - 'You: Wait.... Who am I?!'
-  - 'You: It''s quiet... I should look around.'
+  - {fileID: 11400000, guid: 72bf83f9eed018e4681acf2399442226, type: 2}
   autoActive: 1

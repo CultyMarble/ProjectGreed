@@ -8569,10 +8569,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db72d1d72515f5f42836ac068a7a4127, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueLines:
-  - You have unlocked the Area of effect blast attack. Press [Q] to push enemies
-    in all directions away
+  dialogueEntries: []
+  quickText: You have now unlocked the Blast Ability! Press"Q" to push enemies away
+    from you. Enemies pushed into objstacles will also get stunned!
   autoActive: 0
+  dialogueIndicator: {fileID: 0}
 --- !u!212 &2569570004873548576
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -9098,10 +9099,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db72d1d72515f5f42836ac068a7a4127, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueLines:
-  - You have unlocked the bomb ability. Press [G] to place a bomb and blow up nearby
-    enemies
+  dialogueEntries: []
+  quickText: You have now unlocked the Bomb Ability! Press"G" to place a bomb that
+    damages and knocks enemies away!
   autoActive: 0
+  dialogueIndicator: {fileID: 0}
 --- !u!4 &5472378712302641892
 Transform:
   m_ObjectHideFlags: 0
