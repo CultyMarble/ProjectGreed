@@ -2817,6 +2817,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b275af9f751f6e74eb1122877e8a7566, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerInput: {fileID: 0}
   baseMoveSpeed: 6
   dashCD: 3
   pauseTimeAfterDash: 0.1

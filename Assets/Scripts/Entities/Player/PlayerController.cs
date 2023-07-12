@@ -1,8 +1,13 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
+    [Header("New Input System")]
+    private GreedControllers greedAction;
+    private InputAction movement;
+
     [Header("Basic Movement")]
     [SerializeField] private float baseMoveSpeed;
 
@@ -32,8 +37,20 @@ public class PlayerController : MonoBehaviour
     //======================================================================
     private void Awake()
     {
+        greedAction = new GreedAction();
+
         Rigidbody2D = GetComponent<Rigidbody2D>();
         CapsuleCollider2D = GetComponent<CapsuleCollider2D>();
+    }
+
+    private void OnEnable()
+    {
+        movement = greedAction.Player.Movement; 
+    }
+
+    private void OnDisable()
+    {
+    
     }
 
     private void FixedUpdate()
