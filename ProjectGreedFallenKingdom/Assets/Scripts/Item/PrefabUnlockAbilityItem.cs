@@ -2,6 +2,10 @@ using UnityEngine;
 
 public class PrefabUnlockAbilityItem : MonoBehaviour
 {
+    [Header("Loading Data")]
+    [SerializeField] private SOBoolean canLoad;
+
+    [Header("Item Function")]
     [SerializeField] private bool unlockAoEAbility;
     [SerializeField] private bool unlockBombAbility;
 
@@ -42,6 +46,8 @@ public class PrefabUnlockAbilityItem : MonoBehaviour
             {
                 FindObjectOfType<Player>().GetComponentInChildren<BombAbility>().canUseAbility = true;
             }
+
+            canLoad.value = false;
 
             Player.Instance.HideFPromtText();
 

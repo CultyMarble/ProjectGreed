@@ -3,6 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(EnemyStatusEffect))]
 public abstract class StatusEffect : MonoBehaviour
 {
+    [SerializeField] private EnemyHealth enemyHealth;
     [SerializeField] protected Sprite effectIcon;
 
     protected EnemyStatusEffect enemyStatusEffect = default;
@@ -20,6 +21,7 @@ public abstract class StatusEffect : MonoBehaviour
     protected virtual void Awake()
     {
         enemyStatusEffect = GetComponent<EnemyStatusEffect>();
+        enemyHealth.OnDespawnEvent += EnemyHealth_OnDespawnEvent;
     }
 
     protected virtual void Update()
@@ -29,6 +31,18 @@ public abstract class StatusEffect : MonoBehaviour
 
         UpdateTriggerInterval();
         UpdateStatusDuration();
+    }
+
+    private void OnDisable()
+    {
+        if (enemyHealth != null)
+            enemyHealth.OnDespawnEvent -= EnemyHealth_OnDespawnEvent;
+    }
+
+    //===========================================================================
+    private void EnemyHealth_OnDespawnEvent(object sender, System.EventArgs e)
+    {
+        Deactivate();
     }
 
     //===========================================================================
@@ -84,8 +98,15 @@ public abstract class StatusEffect : MonoBehaviour
 
     public void Deactivate()
     {
-        active = false;
         enemyStatusEffect.EffectVFX.sprite = null;
+
+        active = false;
         stackAmount = 0;
+
+        triggerInterval = 0.0f;
+        triggerIntervalTimer = 0.0f;
+
+        statusDuration = 0.0f;
+        statusDurationTimer = 0.0f;
     }
 }
