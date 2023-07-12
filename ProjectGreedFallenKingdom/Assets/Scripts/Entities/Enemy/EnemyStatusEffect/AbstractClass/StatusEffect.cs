@@ -3,7 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(EnemyStatusEffect))]
 public abstract class StatusEffect : MonoBehaviour
 {
-    [SerializeField] private EnemyHealth enemyHealth;
+    protected EnemyHealth enemyHealth;
     [SerializeField] protected Sprite effectIcon;
 
     protected EnemyStatusEffect enemyStatusEffect = default;
@@ -20,6 +20,8 @@ public abstract class StatusEffect : MonoBehaviour
     //===========================================================================
     protected virtual void Awake()
     {
+        enemyHealth = transform.parent.GetComponentInParent<EnemyHealth>();
+
         enemyStatusEffect = GetComponent<EnemyStatusEffect>();
         enemyHealth.OnDespawnEvent += EnemyHealth_OnDespawnEvent;
     }

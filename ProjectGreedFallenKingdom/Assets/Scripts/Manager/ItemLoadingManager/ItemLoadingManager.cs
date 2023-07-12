@@ -10,9 +10,6 @@ public class ItemLoadingManager : MonoBehaviour
     {
         foreach (ItemLoadData itemLoad in itemLoadingDataList)
         {
-
-            Debug.Log(itemLoad.canLoad);
-
             if (itemLoad.canLoad.value == true)
             {
                 itemLoad.item.gameObject.SetActive(true);

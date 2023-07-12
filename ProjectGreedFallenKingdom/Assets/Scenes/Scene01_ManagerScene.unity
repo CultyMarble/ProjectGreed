@@ -8091,6 +8091,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fde8ec076e4489b43a76020b61c82be6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canLoad: {fileID: 0}
   unlockAoEAbility: 0
   unlockBombAbility: 1
 --- !u!95 &2253545471255273656

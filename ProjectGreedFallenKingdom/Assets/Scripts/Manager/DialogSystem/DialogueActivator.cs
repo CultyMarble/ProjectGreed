@@ -54,6 +54,9 @@ public class DialogueActivator : MonoBehaviour
     //===========================================================================
     private void Start()
     {
+        if (dialogueEntries == null)
+            return;
+
         if (autoActive)
         {
             dialogueState = DialogueState.auto;
@@ -63,6 +66,7 @@ public class DialogueActivator : MonoBehaviour
             dialogueState = DialogueState.manual;
             canAuto = false;
         }
+
         dialogueEntryIndex = Random.Range(0, dialogueEntries.Length);
 
         EventManager.AfterSceneLoadedLoadingScreenEvent += EventManager_AfterSceneLoadedLoadingScreenEventHandler;
@@ -79,6 +83,9 @@ public class DialogueActivator : MonoBehaviour
         //{
         //    previouslyActivated = true;
         //}
+        if (dialogueEntries == null)
+            return;
+
         if (dialogueEntries.Length > 0)
         {
             if (dialogueEntries[dialogueEntryIndex].hasBeenUsed)
