@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class Rot : StatusEffect
 {
-    [SerializeField] private EnemyHealth enemyHealth = default;
     [SerializeField] private Transform rotBar;
 
     [Header("Rot Config:")]

@@ -59,7 +59,7 @@ public class PlayerHealth : MonoBehaviour
     private void Despawn()
     {
         // Reset Parameters
-        UpdateCurrentHealth(maxHealth);
+        UpdateCurrentHealth(currentMaxHealth);
         gameObject.SetActive(false);
 
         // Call OnDestroy Event
