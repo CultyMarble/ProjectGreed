@@ -3,10 +3,7 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
-    public struct OnHealthChangedEvenArgs
-    {
-        public float healthRatio;
-    }
+    public struct OnHealthChangedEvenArgs { public float healthRatio; }
     public event EventHandler<OnHealthChangedEvenArgs> OnHealthChanged;
 
     public event EventHandler OnDespawnEvent;

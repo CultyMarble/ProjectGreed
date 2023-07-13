@@ -2,12 +2,18 @@ using UnityEngine;
 
 public class DialogueActivator : MonoBehaviour
 {
-    [SerializeField] private string[] dialogueLines;
-    [SerializeField] private bool autoActive;
+    [SerializeField] private DialogueEntry[] dialogueEntries;
+    [SerializeField] private string quickText;
 
+    [SerializeField] private bool autoActive;
+    [SerializeField] private GameObject dialogueIndicator;
+
+    private int dialogueEntryIndex;
     private bool canActivate;
     private bool isActivated;
     private bool canAuto = false;
+    private bool previouslyActivated = false;
+
 
     private enum DialogueState
     {
@@ -48,6 +54,9 @@ public class DialogueActivator : MonoBehaviour
     //===========================================================================
     private void Start()
     {
+        if (dialogueEntries == null)
+            return;
+
         if (autoActive)
         {
             dialogueState = DialogueState.auto;
@@ -57,6 +66,8 @@ public class DialogueActivator : MonoBehaviour
             dialogueState = DialogueState.manual;
             canAuto = false;
         }
+
+        dialogueEntryIndex = Random.Range(0, dialogueEntries.Length);
 
         EventManager.AfterSceneLoadedLoadingScreenEvent += EventManager_AfterSceneLoadedLoadingScreenEventHandler;
     }
@@ -68,14 +79,38 @@ public class DialogueActivator : MonoBehaviour
 
     private void Update()
     {
-        if (isActivated) return;
+        //if (!previouslyActivated)
+        //{
+        //    previouslyActivated = true;
+        //}
+        if (dialogueEntries == null)
+            return;
 
-        switch(dialogueState)
+        if (dialogueEntries.Length > 0)
+        {
+            if (dialogueEntries[dialogueEntryIndex].hasBeenUsed)
+            {
+                dialogueIndicator.SetActive(false);
+            }
+            else
+            {
+                dialogueIndicator.SetActive(true);
+            }
+        }
+        switch (dialogueState)
         {
             case DialogueState.manual:
                 if (canActivate && Input.GetKeyDown(KeyCode.F))
                 {
-                    DialogManager.Instance.SetDialogLines(dialogueLines);
+                    dialogueEntries[dialogueEntryIndex].hasBeenUsed = true;
+                    if (quickText.Length <= 0)
+                    {
+                        DialogManager.Instance.SetDialogLines(dialogueEntries[dialogueEntryIndex].dialogueLines);
+                    }
+                    else
+                    {
+                        DialogManager.Instance.SetDialogLines(quickText);
+                    }
                     DialogManager.Instance.SetDialogPanelActiveState(true);
 
                     Time.timeScale = 0.0f;
@@ -85,7 +120,7 @@ public class DialogueActivator : MonoBehaviour
             case DialogueState.auto:
                 if (canAuto)
                 {
-                    DialogManager.Instance.SetDialogLines(dialogueLines);
+                    DialogManager.Instance.SetDialogLines(dialogueEntries[dialogueEntryIndex].dialogueLines);
                     DialogManager.Instance.SetDialogPanelActiveState(true);
 
                     Time.timeScale = 0.0f;

@@ -3,7 +3,6 @@ using UnityEngine;
 public class Poison : StatusEffect
 {
     [Header("Poison Config:")]
-    [SerializeField] private EnemyHealth enemyHealth;
     [SerializeField] private float spreadRadius;
 
     //===========================================================================

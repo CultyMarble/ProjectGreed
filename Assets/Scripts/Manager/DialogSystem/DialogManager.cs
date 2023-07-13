@@ -52,4 +52,11 @@ public class DialogManager : SingletonMonobehaviour<DialogManager>
         currentLine = 0;
         dialogText.SetText(dialogLines[currentLine]);
     }
+    public void SetDialogLines(string newDialogLines)
+    {
+        dialogLines = new string[1];
+        dialogLines[0] = newDialogLines;
+        currentLine = 0;
+        dialogText.SetText(dialogLines[currentLine]);
+    }
 }

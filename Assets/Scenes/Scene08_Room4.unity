@@ -8610,15 +8610,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4123117941042898597}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: db72d1d72515f5f42836ac068a7a4127, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueLines:
-  - '*cough* Don''t go in there.... The Grave.. *cough*'
-  - The Grave Digger is in there with his neverending supply of undead
+  dialogueEntries: []
+  quickText: 
   autoActive: 0
+  dialogueIndicator: {fileID: 0}
 --- !u!70 &4123117941042898601
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
