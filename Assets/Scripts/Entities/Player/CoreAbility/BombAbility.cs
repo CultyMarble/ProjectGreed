@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class BombAbility : CoreAbility
 {
@@ -10,7 +11,43 @@ public class BombAbility : CoreAbility
     [SerializeField] private float fuseTime;
     private float placeTime = 0.1f;
 
-    [HideInInspector] public bool canUseAbility = default;
+    public bool canUseAbility = default;
+
+    //===========================================================================
+    // NEW INPUT SYSTEM
+
+    private GreedControls input = null;
+    private bool bombButtonCheck = false;
+    private bool bombPlaced = false;
+
+    private void Awake()
+    {
+        input = new GreedControls();
+    }
+
+    private void OnEnable()
+    {
+        input.Enable();
+        input.Player.Bomb.performed += ActionPerformed;
+        input.Player.Bomb.canceled += ActionCanceled;
+    }
+
+    private void OnDisable()
+    {
+        input.Disable();
+        input.Player.Bomb.performed -= ActionPerformed;
+        input.Player.Bomb.canceled -= ActionCanceled;
+    }
+
+    private void ActionPerformed(InputAction.CallbackContext obj)
+    {
+        bombButtonCheck = true;
+    }
+
+    private void ActionCanceled(InputAction.CallbackContext obj)
+    {
+        bombButtonCheck = false;
+    }
 
     //===========================================================================
     protected override void Update()
@@ -39,15 +76,18 @@ public class BombAbility : CoreAbility
     }
 
     //===========================================================================
+
     private void InputHandler()
     {
-        if (Input.GetKeyDown(KeyCode.G) && cooldownTimer == 0)
+        if (bombButtonCheck && !bombPlaced && cooldownTimer == 0)
         {
             Player.Instance.playerActionState = PlayerActionState.IsUsingBombAbility;
+            bombPlaced = true;
         }
-        else
+        else if (!bombButtonCheck)
         {
             Player.Instance.playerActionState = PlayerActionState.none;
+            bombPlaced = false;
         }
     }
 
@@ -60,7 +100,8 @@ public class BombAbility : CoreAbility
             Player.Instance.playerActionState = PlayerActionState.none;
             placeTime = 0.1f;
         }
-        else {
+        else
+        {
             placeTime -= Time.deltaTime;
         }
     }

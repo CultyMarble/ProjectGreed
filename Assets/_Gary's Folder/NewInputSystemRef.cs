@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class TEST : MonoBehaviour
+public class NewInputSystemRef : MonoBehaviour
 {
     private GreedControls input = null;
-    private Vector2 moveVector = Vector2.zero;
 
     private void Awake()
     {
@@ -27,19 +26,14 @@ public class TEST : MonoBehaviour
         input.Player.Move.canceled -= Movement_canceled;
     }
 
-    private void FixedUpdate()
+    private void Movement_canceled(InputAction.CallbackContext obj)
     {
-        Debug.Log(moveVector);
+
     }
 
-    private void Movement_canceled(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    private void Movement_performed(InputAction.CallbackContext obj)
     {
-        moveVector = Vector2.zero;
-    }
 
-    private void Movement_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
-    {
-        moveVector = obj.ReadValue<Vector2>();
     }
 
 }

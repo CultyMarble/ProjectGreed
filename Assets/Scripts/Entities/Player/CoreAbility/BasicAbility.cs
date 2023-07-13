@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class BasicAbility : CoreAbility
 {
@@ -26,6 +27,42 @@ public class BasicAbility : CoreAbility
     public float MaxFuel { get => maxFuel; private set { } }
 
     //===========================================================================
+    // NEW INPUT SYSTEM
+
+    private GreedControls input = null;
+    private bool leftClickButtonCheck = false;
+
+    private void Awake()
+    {
+        input = new GreedControls();
+    }
+
+    private void OnEnable()
+    {
+        input.Enable();
+        input.Player.LeftClick.performed += ActionPerformed;
+        input.Player.LeftClick.canceled += ActionCanceled;
+    }
+
+    private void OnDisable()
+    {
+        input.Disable();
+        input.Player.LeftClick.performed -= ActionPerformed;
+        input.Player.LeftClick.canceled -= ActionCanceled;
+    }
+
+    private void ActionPerformed(InputAction.CallbackContext obj)
+    {
+        leftClickButtonCheck = true;
+    }
+
+    private void ActionCanceled(InputAction.CallbackContext obj)
+    {
+        leftClickButtonCheck = false;
+    }
+
+    //===========================================================================
+
     private void Start()
     {
         currentFuel = maxFuel;
@@ -57,9 +94,10 @@ public class BasicAbility : CoreAbility
     }
 
     //===========================================================================
+
     private void InputHandler()
     {
-        if (Input.GetMouseButton(0) && cooldownTimer == 0 && currentFuel > 0)
+        if (leftClickButtonCheck && cooldownTimer == 0 && currentFuel > 0)
         {
             Player.Instance.playerActionState = PlayerActionState.IsUsingBasicAbility;
             SpawnParticle();
@@ -73,7 +111,7 @@ public class BasicAbility : CoreAbility
             }
             cooldownTimer = cooldown;
         }
-        else if (!Input.GetMouseButton(0) && Player.Instance.playerActionState == PlayerActionState.IsUsingBasicAbility)
+        else if (!leftClickButtonCheck && Player.Instance.playerActionState == PlayerActionState.IsUsingBasicAbility)
         {
             Player.Instance.playerActionState = PlayerActionState.none;
         }
@@ -89,12 +127,12 @@ public class BasicAbility : CoreAbility
                 particle.GetComponent<SprayParticleProjectile>().ConfigParticleMovementSpeed(mouseDir, moveSpeed + this.GetComponentInParent<Rigidbody2D>().velocity.magnitude, lifeTime);
                 particle.GetComponent<SprayParticleProjectile>().
                     ConfigParticleMovementPattern(timeUntilChangeDirectionMax, timeUntilChangeDirectionMin, swingMagtitude);
-                particle.GetComponent<SprayParticleProjectile>().ConfigParticleSizeAndGrowth(size,growthRate);
+                particle.GetComponent<SprayParticleProjectile>().ConfigParticleSizeAndGrowth(size, growthRate);
                 particle.GetComponent<SprayParticleProjectile>().ConfigParticleDamage(damage, pushPower, abilityStatusEffect);
 
                 particle.position = this.transform.position + 0.5f * mouseDir;
                 particle.gameObject.SetActive(true);
-                break; 
+                break;
             }
         }
     }

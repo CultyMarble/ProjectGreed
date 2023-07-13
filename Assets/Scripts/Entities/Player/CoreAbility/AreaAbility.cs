@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class AreaAbility : CoreAbility
 {
@@ -10,7 +11,42 @@ public class AreaAbility : CoreAbility
     private float effectAnimationTimer;
     private int currentAnimationIndex;
 
-    [HideInInspector] public bool canUseAbility = default;
+    public bool canUseAbility = default;
+
+    //===========================================================================
+    // NEW INPUT SYSTEM
+
+    private GreedControls input = null;
+    private bool areaButtonCheck = false;
+
+    private void Awake()
+    {
+        input = new GreedControls();
+    }
+
+    private void OnEnable()
+    {
+        input.Enable();
+        input.Player.Area.performed += ActionPerformed;
+        input.Player.Area.canceled += ActionCanceled;
+    }
+
+    private void OnDisable()
+    {
+        input.Disable();
+        input.Player.Area.performed -= ActionPerformed;
+        input.Player.Area.canceled -= ActionCanceled;
+    }
+
+    private void ActionPerformed(InputAction.CallbackContext obj)
+    {
+        areaButtonCheck = true;
+    }
+
+    private void ActionCanceled(InputAction.CallbackContext obj)
+    {
+        areaButtonCheck = false;
+    }
 
     //============================================================================
     protected override void Update()
@@ -38,7 +74,7 @@ public class AreaAbility : CoreAbility
     //============================================================================
     private void AbilityInputHandler()
     {
-        if (Input.GetKeyDown(KeyCode.Q) && cooldownTimer == 0)
+        if (areaButtonCheck && cooldownTimer == 0)
         {
             // Reset Animation Settings
             effectAnimationTimer = 0.0f;
@@ -62,7 +98,7 @@ public class AreaAbility : CoreAbility
             if (currentAnimationIndex == effectSprites.Length)
             {
                 // Hide effect sprite
-                foreach(SpriteRenderer spriteRenderer in abilityEffect)
+                foreach (SpriteRenderer spriteRenderer in abilityEffect)
                 {
                     spriteRenderer.sprite = null;
                 }

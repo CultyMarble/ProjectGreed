@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class RangeAbility : CoreAbility
 {
@@ -14,6 +15,42 @@ public class RangeAbility : CoreAbility
     private float aimCharge;
 
     //===========================================================================
+    // NEW INPUT SYSTEM
+
+    private GreedControls input = null;
+    private bool rightButtonCheck = false;
+
+    private void Awake()
+    {
+        input = new GreedControls();
+    }
+
+    private void OnEnable()
+    {
+        input.Enable();
+        input.Player.RightClick.performed += ActionPerformed;
+        input.Player.RightClick.canceled += ActionCanceled;
+    }
+
+    private void OnDisable()
+    {
+        input.Disable();
+        input.Player.RightClick.performed -= ActionPerformed;
+        input.Player.RightClick.canceled -= ActionCanceled;
+    }
+
+    private void ActionPerformed(InputAction.CallbackContext obj)
+    {
+        rightButtonCheck = true;
+    }
+
+    private void ActionCanceled(InputAction.CallbackContext obj)
+    {
+        rightButtonCheck = false;
+    }
+
+    //===========================================================================
+
     protected override void Update()
     {
         base.Update();
@@ -41,7 +78,7 @@ public class RangeAbility : CoreAbility
     //===========================================================================
     private void InputHandler()
     {
-        if (Input.GetMouseButtonDown(1))
+        if (rightButtonCheck)
         {
             Player.Instance.playerActionState = PlayerActionState.IsUsingRangeAbility;
             aimCharge += Time.deltaTime;
@@ -71,7 +108,7 @@ public class RangeAbility : CoreAbility
             {
                 aimIndicator.GetComponent<SpriteRenderer>().color = Color.green;
             }
-            if (Input.GetMouseButtonUp(1))
+            if (!rightButtonCheck)
             {
                 float scaledSpeed = Mathf.Clamp((aimCharge / aimChargeTime) * projectileSpeed, projectileSpeed / 2, projectileSpeed);
                 int scaledDamage = (int)Mathf.Clamp((aimCharge / aimChargeTime) * damage, damage / 2, damage);
@@ -87,11 +124,12 @@ public class RangeAbility : CoreAbility
         else
         {
             aimIndicator.GetComponent<SpriteRenderer>().color = Color.red;
-            if (Input.GetMouseButtonUp(1))
+            if (!rightButtonCheck)
             {
                 Player.Instance.playerActionState = PlayerActionState.none;
                 aimCharge = 0;
             }
         }
     }
+
 }
