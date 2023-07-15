@@ -16,39 +16,14 @@ public class AreaAbility : CoreAbility
     //===========================================================================
     // NEW INPUT SYSTEM
 
-    private GreedControls input = null;
-    private bool areaButtonCheck = false;
+    private PlayerInput playerInput;
 
     private void Awake()
     {
-        input = new GreedControls();
+        playerInput = FindObjectOfType<PlayerInput>();
     }
 
-    private void OnEnable()
-    {
-        input.Enable();
-        input.Player.Area.performed += ActionPerformed;
-        input.Player.Area.canceled += ActionCanceled;
-    }
-
-    private void OnDisable()
-    {
-        input.Disable();
-        input.Player.Area.performed -= ActionPerformed;
-        input.Player.Area.canceled -= ActionCanceled;
-    }
-
-    private void ActionPerformed(InputAction.CallbackContext obj)
-    {
-        areaButtonCheck = true;
-    }
-
-    private void ActionCanceled(InputAction.CallbackContext obj)
-    {
-        areaButtonCheck = false;
-    }
-
-    //============================================================================
+    //===========================================================================
     protected override void Update()
     {
         base.Update();
@@ -74,7 +49,7 @@ public class AreaAbility : CoreAbility
     //============================================================================
     private void AbilityInputHandler()
     {
-        if (areaButtonCheck && cooldownTimer == 0)
+        if (playerInput.actions["Area"].triggered && cooldownTimer == 0)
         {
             // Reset Animation Settings
             effectAnimationTimer = 0.0f;

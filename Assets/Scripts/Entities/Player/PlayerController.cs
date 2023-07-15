@@ -33,37 +33,12 @@ public class PlayerController : MonoBehaviour
     //===========================================================================
     // NEW INPUT SYSTEM
 
-    private GreedControls input = null;
-    private bool dashButtonCheck = false;
-
-    private void OnEnable()
-    {
-        input.Enable();
-        input.Player.Dash.performed += ActionPerformed;
-        input.Player.Dash.canceled += ActionCanceled;
-    }
-
-    private void OnDisable()
-    {
-        input.Disable();
-        input.Player.Dash.performed -= ActionPerformed;
-        input.Player.Dash.canceled -= ActionCanceled;
-    }
-
-    private void ActionPerformed(InputAction.CallbackContext obj)
-    {
-        dashButtonCheck = true;
-    }
-
-    private void ActionCanceled(InputAction.CallbackContext obj)
-    {
-        dashButtonCheck = false;
-    }
+    private PlayerInput playerInput;
 
     //===========================================================================
     private void Awake()
     {
-        input = new GreedControls();
+        playerInput = FindObjectOfType<PlayerInput>();
 
         Rigidbody2D = GetComponent<Rigidbody2D>();
         CapsuleCollider2D = GetComponent<CapsuleCollider2D>();
@@ -96,8 +71,11 @@ public class PlayerController : MonoBehaviour
         if (Player.Instance.playerActionState == PlayerActionState.IsDashing || Player.Instance.playerActionState == PlayerActionState.IsUsingRangeAbility)
             return;
 
-        movementVector.x = input.Player.Move.ReadValue<Vector2>().x;
-        movementVector.y = input.Player.Move.ReadValue<Vector2>().y;
+        Vector2 input = playerInput.actions["Move"].ReadValue<Vector2>();
+
+
+        movementVector.x = input.x;
+        movementVector.y = input.y;
         movementVector = movementVector.normalized;
     }
 
@@ -203,7 +181,7 @@ public class PlayerController : MonoBehaviour
     private void DashHandler()
     {
         // Trigger Dash
-        if (dashButtonCheck && Player.Instance.playerActionState == PlayerActionState.none)
+        if (playerInput.actions["Dash"].triggered && Player.Instance.playerActionState == PlayerActionState.none)
         {
             if (dashCDTimeCounter <= 0 && movementVector != Vector2.zero)
             {

@@ -16,37 +16,11 @@ public class BombAbility : CoreAbility
     //===========================================================================
     // NEW INPUT SYSTEM
 
-    private GreedControls input = null;
-    private bool bombButtonCheck = false;
-    private bool bombPlaced = false;
+    private PlayerInput playerInput;
 
     private void Awake()
     {
-        input = new GreedControls();
-    }
-
-    private void OnEnable()
-    {
-        input.Enable();
-        input.Player.Bomb.performed += ActionPerformed;
-        input.Player.Bomb.canceled += ActionCanceled;
-    }
-
-    private void OnDisable()
-    {
-        input.Disable();
-        input.Player.Bomb.performed -= ActionPerformed;
-        input.Player.Bomb.canceled -= ActionCanceled;
-    }
-
-    private void ActionPerformed(InputAction.CallbackContext obj)
-    {
-        bombButtonCheck = true;
-    }
-
-    private void ActionCanceled(InputAction.CallbackContext obj)
-    {
-        bombButtonCheck = false;
+        playerInput = FindObjectOfType<PlayerInput>();
     }
 
     //===========================================================================
@@ -79,15 +53,13 @@ public class BombAbility : CoreAbility
 
     private void InputHandler()
     {
-        if (bombButtonCheck && !bombPlaced && cooldownTimer == 0)
+        if (playerInput.actions["Bomb"].triggered && cooldownTimer == 0)
         {
             Player.Instance.playerActionState = PlayerActionState.IsUsingBombAbility;
-            bombPlaced = true;
         }
-        else if (!bombButtonCheck)
+        else
         {
             Player.Instance.playerActionState = PlayerActionState.none;
-            bombPlaced = false;
         }
     }
 

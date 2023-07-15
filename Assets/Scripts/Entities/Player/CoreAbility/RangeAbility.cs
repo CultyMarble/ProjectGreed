@@ -17,26 +17,24 @@ public class RangeAbility : CoreAbility
     //===========================================================================
     // NEW INPUT SYSTEM
 
-    private GreedControls input = null;
+    private PlayerInput playerInput;
     private bool rightButtonCheck = false;
 
     private void Awake()
     {
-        input = new GreedControls();
+        playerInput = FindObjectOfType<PlayerInput>();
     }
 
     private void OnEnable()
     {
-        input.Enable();
-        input.Player.RightClick.performed += ActionPerformed;
-        input.Player.RightClick.canceled += ActionCanceled;
+        playerInput.actions["RightClick"].started += ActionPerformed;
+        playerInput.actions["RightClick"].canceled += ActionCanceled;
     }
 
     private void OnDisable()
     {
-        input.Disable();
-        input.Player.RightClick.performed -= ActionPerformed;
-        input.Player.RightClick.canceled -= ActionCanceled;
+        playerInput.actions["RightClick"].started -= ActionPerformed;
+        playerInput.actions["RightClick"].canceled -= ActionCanceled;
     }
 
     private void ActionPerformed(InputAction.CallbackContext obj)

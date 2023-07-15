@@ -29,26 +29,24 @@ public class BasicAbility : CoreAbility
     //===========================================================================
     // NEW INPUT SYSTEM
 
-    private GreedControls input = null;
+    private PlayerInput playerInput;
     private bool leftClickButtonCheck = false;
 
     private void Awake()
     {
-        input = new GreedControls();
+        playerInput = FindObjectOfType<PlayerInput>();
     }
 
     private void OnEnable()
     {
-        input.Enable();
-        input.Player.LeftClick.performed += ActionPerformed;
-        input.Player.LeftClick.canceled += ActionCanceled;
+        playerInput.actions["LeftClick"].started += ActionPerformed;
+        playerInput.actions["LeftClick"].canceled += ActionCanceled;
     }
 
     private void OnDisable()
     {
-        input.Disable();
-        input.Player.LeftClick.performed -= ActionPerformed;
-        input.Player.LeftClick.canceled -= ActionCanceled;
+        playerInput.actions["LeftClick"].started -= ActionPerformed;
+        playerInput.actions["LeftClick"].canceled -= ActionCanceled;
     }
 
     private void ActionPerformed(InputAction.CallbackContext obj)
