@@ -217,6 +217,13 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
             if (!ResolveActionAndBinding(out var action, out var bindingIndex))
                 return;
 
+            // Check for duplicate bindings before resetting to default, and if found, swap the two controls.
+            if (SwapResetBindings(action, bindingIndex))
+            {
+                UpdateBindingDisplay();
+                return;
+            }
+
             if (action.bindings[bindingIndex].isComposite)
             {
                 // It's a composite. Remove overrides from part bindings.
@@ -228,6 +235,36 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
                 action.RemoveBindingOverride(bindingIndex);
             }
             UpdateBindingDisplay();
+        }
+
+        /// <summary>
+        /// Check for duplicate rebindings when the binding is going to be set to default.
+        /// </summary>
+        /// <param name="action">InputAction we are resetting.</param>
+        /// <param name="bindingIndex">Current index of the control we are rebinding.</param>
+        /// <returns></returns>
+        private bool SwapResetBindings(InputAction action, int bindingIndex)
+        {
+            // Cache a reference to the current binding.
+            InputBinding newBinding = action.bindings[bindingIndex];
+            // Check all of the bindings in the current action map to make sure there are no duplicates.
+            for (int i = 0; i < action.actionMap.bindings.Count; ++i)
+            {
+                InputBinding binding = action.actionMap.bindings[i];
+                if (binding.action == newBinding.action)
+                {
+                    continue;
+                }
+                if (binding.effectivePath == newBinding.path)
+                {
+                    Debug.Log("Duplicate binding found for reset to default: " + newBinding.effectivePath);
+                    // Swap the two actions.
+                    action.actionMap.FindAction(binding.action).ApplyBindingOverride(i, newBinding.overridePath);
+                    action.RemoveBindingOverride(bindingIndex);
+                    return true;
+                }
+            }
+            return false;
         }
 
         /// <summary>
