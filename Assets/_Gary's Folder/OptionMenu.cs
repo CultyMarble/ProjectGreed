@@ -7,6 +7,18 @@ using TMPro;
 
 public class OptionMenu : MonoBehaviour
 {
+    [SerializeField] private Animator animator;
+    public Animator paperAnimator;
+
+    [Space]
+
+    [Header("Submenu Components")]
+    [SerializeField] private PaperAnimation paperAnimation;
+    [SerializeField] private GameObject[] subMenus;
+    public int currentSelected = 0;
+
+    [Space]
+
     [Header("Settings Volume Components")]
     [SerializeField] private AudioMixer audioMixer;
     [SerializeField] private Scrollbar musicScrollbar;
@@ -20,6 +32,24 @@ public class OptionMenu : MonoBehaviour
     void OnEnable()
     {
         SetVolumeSettings();
+    }
+
+    public void ChangeMenu(int value)
+    {
+        if (subMenus[value].activeInHierarchy) return;
+
+        paperAnimator.SetTrigger("In");
+        currentSelected = value;
+    }
+
+    public void ShowMenu(int value)
+    {
+        foreach (var menu in subMenus)
+        {
+            menu.SetActive(false);
+        }
+
+        subMenus[value].SetActive(true);
     }
 
     private void SetVolumeSettings()
@@ -67,7 +97,12 @@ public class OptionMenu : MonoBehaviour
         saveSFXVaule = sFXScrollbar.value;
     }
 
-    public void CloseButton()
+    public void PlayCloseAnimation()
+    {
+        animator.SetTrigger("Close");
+    }
+
+    public void CloseGameObject()
     {
         gameObject.SetActive(false);
     }

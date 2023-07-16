@@ -33,18 +33,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Area",
+                    "name": "Interact",
                     "type": "Button",
-                    "id": "bb6fd0d1-f790-4b78-94cf-56fc4db4445d",
+                    "id": "c00fab9c-a0fa-4ab5-99f9-d9c40f38dfd7",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Interact",
+                    "name": "Area",
                     "type": "Button",
-                    "id": "c00fab9c-a0fa-4ab5-99f9-d9c40f38dfd7",
+                    "id": "bb6fd0d1-f790-4b78-94cf-56fc4db4445d",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -268,17 +268,6 @@
                 },
                 {
                     "name": "",
-                    "id": "7ab5dd16-2c69-46a5-9ba0-0964000a8780",
-                    "path": "<Keyboard>/f",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad;Keyboard&Mouse",
-                    "action": "Interact",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "89b9866f-67d4-42bc-b9e5-38cbae74ddc0",
                     "path": "<Keyboard>/q",
                     "interactions": "",
@@ -329,6 +318,17 @@
                     "processors": "",
                     "groups": "Gamepad;Keyboard&Mouse",
                     "action": "Escape",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7ab5dd16-2c69-46a5-9ba0-0964000a8780",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad;Keyboard&Mouse",
+                    "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

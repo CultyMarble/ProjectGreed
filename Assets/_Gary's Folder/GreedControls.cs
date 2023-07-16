@@ -55,18 +55,18 @@ public partial class @GreedControls : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Area"",
+                    ""name"": ""Interact"",
                     ""type"": ""Button"",
-                    ""id"": ""bb6fd0d1-f790-4b78-94cf-56fc4db4445d"",
+                    ""id"": ""c00fab9c-a0fa-4ab5-99f9-d9c40f38dfd7"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Interact"",
+                    ""name"": ""Area"",
                     ""type"": ""Button"",
-                    ""id"": ""c00fab9c-a0fa-4ab5-99f9-d9c40f38dfd7"",
+                    ""id"": ""bb6fd0d1-f790-4b78-94cf-56fc4db4445d"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -290,17 +290,6 @@ public partial class @GreedControls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""7ab5dd16-2c69-46a5-9ba0-0964000a8780"",
-                    ""path"": ""<Keyboard>/f"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad;Keyboard&Mouse"",
-                    ""action"": ""Interact"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""89b9866f-67d4-42bc-b9e5-38cbae74ddc0"",
                     ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
@@ -351,6 +340,17 @@ public partial class @GreedControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Gamepad;Keyboard&Mouse"",
                     ""action"": ""Escape"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7ab5dd16-2c69-46a5-9ba0-0964000a8780"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad;Keyboard&Mouse"",
+                    ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -941,8 +941,8 @@ public partial class @GreedControls : IInputActionCollection2, IDisposable
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_LeftClick = m_Player.FindAction("LeftClick", throwIfNotFound: true);
         m_Player_RightClick = m_Player.FindAction("RightClick", throwIfNotFound: true);
-        m_Player_Area = m_Player.FindAction("Area", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
+        m_Player_Area = m_Player.FindAction("Area", throwIfNotFound: true);
         m_Player_Bomb = m_Player.FindAction("Bomb", throwIfNotFound: true);
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
         m_Player_Escape = m_Player.FindAction("Escape", throwIfNotFound: true);
@@ -1020,8 +1020,8 @@ public partial class @GreedControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_LeftClick;
     private readonly InputAction m_Player_RightClick;
-    private readonly InputAction m_Player_Area;
     private readonly InputAction m_Player_Interact;
+    private readonly InputAction m_Player_Area;
     private readonly InputAction m_Player_Bomb;
     private readonly InputAction m_Player_Dash;
     private readonly InputAction m_Player_Escape;
@@ -1032,8 +1032,8 @@ public partial class @GreedControls : IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @LeftClick => m_Wrapper.m_Player_LeftClick;
         public InputAction @RightClick => m_Wrapper.m_Player_RightClick;
-        public InputAction @Area => m_Wrapper.m_Player_Area;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
+        public InputAction @Area => m_Wrapper.m_Player_Area;
         public InputAction @Bomb => m_Wrapper.m_Player_Bomb;
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
         public InputAction @Escape => m_Wrapper.m_Player_Escape;
@@ -1055,12 +1055,12 @@ public partial class @GreedControls : IInputActionCollection2, IDisposable
                 @RightClick.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRightClick;
                 @RightClick.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRightClick;
                 @RightClick.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRightClick;
-                @Area.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnArea;
-                @Area.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnArea;
-                @Area.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnArea;
                 @Interact.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                 @Interact.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                 @Interact.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                @Area.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnArea;
+                @Area.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnArea;
+                @Area.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnArea;
                 @Bomb.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBomb;
                 @Bomb.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBomb;
                 @Bomb.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBomb;
@@ -1083,12 +1083,12 @@ public partial class @GreedControls : IInputActionCollection2, IDisposable
                 @RightClick.started += instance.OnRightClick;
                 @RightClick.performed += instance.OnRightClick;
                 @RightClick.canceled += instance.OnRightClick;
-                @Area.started += instance.OnArea;
-                @Area.performed += instance.OnArea;
-                @Area.canceled += instance.OnArea;
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
+                @Area.started += instance.OnArea;
+                @Area.performed += instance.OnArea;
+                @Area.canceled += instance.OnArea;
                 @Bomb.started += instance.OnBomb;
                 @Bomb.performed += instance.OnBomb;
                 @Bomb.canceled += instance.OnBomb;
@@ -1257,8 +1257,8 @@ public partial class @GreedControls : IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnLeftClick(InputAction.CallbackContext context);
         void OnRightClick(InputAction.CallbackContext context);
-        void OnArea(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnArea(InputAction.CallbackContext context);
         void OnBomb(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
         void OnEscape(InputAction.CallbackContext context);
