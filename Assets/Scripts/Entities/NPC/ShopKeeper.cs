@@ -88,8 +88,11 @@ public class ShopKeeper : MonoBehaviour
         // Delete Old Items
         foreach (Transform itemPosition in itemPositionList)
         {
-            itemPosition.GetChild(0).gameObject.SetActive(false);
-            Destroy(itemPosition.GetChild(0).gameObject);
+            if (itemPosition.childCount != 0)
+            {
+                itemPosition.GetChild(0).gameObject.SetActive(false);
+                Destroy(itemPosition.GetChild(0).gameObject);
+            }
         }
 
         GenerateNewListOfItemForSale();
