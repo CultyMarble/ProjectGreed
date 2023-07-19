@@ -100,12 +100,14 @@ public class RangeAbility : CoreAbility
             {
                 aimCharge = aimChargeTime;
             }
+
             aimIndicator.GetComponent<SpriteRenderer>().color = Color.yellow;
 
             if (aimCharge >= aimChargeTime)
             {
                 aimIndicator.GetComponent<SpriteRenderer>().color = Color.green;
             }
+
             if (!rightButtonCheck)
             {
                 float scaledSpeed = Mathf.Clamp((aimCharge / aimChargeTime) * projectileSpeed, projectileSpeed / 2, projectileSpeed);
@@ -122,6 +124,7 @@ public class RangeAbility : CoreAbility
         else
         {
             aimIndicator.GetComponent<SpriteRenderer>().color = Color.red;
+
             if (!rightButtonCheck)
             {
                 Player.Instance.playerActionState = PlayerActionState.none;

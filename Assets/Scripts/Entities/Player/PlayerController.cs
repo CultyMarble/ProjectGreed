@@ -6,8 +6,10 @@ public class PlayerController : MonoBehaviour
 {
     [Header("Basic Movement")]
     [SerializeField] private float baseMoveSpeed;
+    [SerializeField] private float lowerSpeedPercentage = 0.5F;
 
-    private Rigidbody2D Rigidbody2D;
+    [Header("Movement Checks")]
+    private Rigidbody2D rigidbody;
     private Vector2 movementVector;
     private bool canMove = true;
 
@@ -40,7 +42,7 @@ public class PlayerController : MonoBehaviour
     {
         playerInput = FindObjectOfType<PlayerInput>();
 
-        Rigidbody2D = GetComponent<Rigidbody2D>();
+        rigidbody = GetComponent<Rigidbody2D>();
         CapsuleCollider2D = GetComponent<CapsuleCollider2D>();
     }
 
@@ -148,13 +150,12 @@ public class PlayerController : MonoBehaviour
         {
             case PlayerActionState.IsDashing:
                 GetComponentInParent<TrailRenderer>().enabled = true;
-                Rigidbody2D.MovePosition(Rigidbody2D.position +
+                rigidbody.MovePosition(rigidbody.position +
                 dashSpeed * Time.deltaTime * dashVector);
                 break;
             case PlayerActionState.IsUsingBasicAbility:
                 GetComponentInParent<TrailRenderer>().enabled = false;
-                Rigidbody2D.MovePosition(Rigidbody2D.position +
-                (0.1f * baseMoveSpeed) * Time.deltaTime * movementVector);
+                rigidbody.MovePosition(rigidbody.position + (lowerSpeedPercentage * baseMoveSpeed) * Time.deltaTime * movementVector);
                 break;
             case PlayerActionState.IsUsingRangeAbility:
                 GetComponentInParent<TrailRenderer>().enabled = false;
@@ -164,7 +165,7 @@ public class PlayerController : MonoBehaviour
                 break;
             default:
                 GetComponentInParent<TrailRenderer>().enabled = false;
-                Rigidbody2D.MovePosition(Rigidbody2D.position +
+                rigidbody.MovePosition(rigidbody.position +
                 baseMoveSpeed * Time.deltaTime * movementVector);
                 break;
         }

@@ -14,7 +14,7 @@ public class Player : SingletonMonobehaviour<Player>
 {
     [SerializeField] private Transform fpromtText;
 
-    [HideInInspector] public PlayerActionState playerActionState;
+    public PlayerActionState playerActionState;
     //======================================================================
     private void Start()
     {

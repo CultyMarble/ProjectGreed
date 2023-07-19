@@ -4062,10 +4062,10 @@ PrefabInstance:
     - target: {fileID: 6680292650503350826, guid: f25dcd618d3acd64795bf8bb32edb6c9, type: 3}
       propertyPath: m_Action
       value: 
-      objectReference: {fileID: 4053732215274948253, guid: 7dead05c54ca85b4681351aafd8bd03a, type: 3}
+      objectReference: {fileID: 8924510526764286455, guid: 0622e2be1e665f84da62e5a34dc90691, type: 3}
     - target: {fileID: 6680292650503350826, guid: f25dcd618d3acd64795bf8bb32edb6c9, type: 3}
       propertyPath: m_BindingId
-      value: 076f1159-4d00-4240-9bb2-d48719a9446e
+      value: 00ca640b-d935-4593-8157-c05846ea39b3
       objectReference: {fileID: 0}
     - target: {fileID: 6680292650503350826, guid: f25dcd618d3acd64795bf8bb32edb6c9, type: 3}
       propertyPath: m_RebindText
@@ -5026,8 +5026,8 @@ GameObject:
   - component: {fileID: 567887217}
   - component: {fileID: 567887227}
   - component: {fileID: 567887228}
-  - component: {fileID: 567887233}
   - component: {fileID: 567887234}
+  - component: {fileID: 567887233}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -5069,10 +5069,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b275af9f751f6e74eb1122877e8a7566, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseMoveSpeed: 6
-  dashCD: 3
+  baseMoveSpeed: 7.5
+  lowerSpeedPercentage: 0.55
+  dashCD: 0.275
   pauseTimeAfterDash: 0.1
-  dashTime: 0.2
+  dashTime: 0.225
   dashSpeed: 25
   animator: {fileID: 567887231}
   playerSpriteRenderer: {fileID: 394280378}
