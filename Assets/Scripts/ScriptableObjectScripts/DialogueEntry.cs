@@ -2,14 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[CreateAssetMenu]
 [System.Serializable]
 
 public class Dialogue
 {
-    public string dialogue;
+    [TextArea(2,2)]public string dialogue;
     public bool playerSpeaking = false;
 }
+[CreateAssetMenu]
 
 public class DialogueEntry : ScriptableObject
 {

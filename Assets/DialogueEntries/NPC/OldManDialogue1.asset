@@ -18,4 +18,4 @@ MonoBehaviour:
   - dialogue: Oh.. I'm sorry...
     playerSpeaking: 1
   portrait: {fileID: 21300000, guid: 83c1857e53fc0354dadafecdbd172bbc, type: 3}
-  hasBeenUsed: 1
+  hasBeenUsed: 0
