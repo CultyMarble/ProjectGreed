@@ -53,6 +53,9 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
     [SerializeField] private Button gv_loadLastCheckPointButton;
     [SerializeField] private Button gv_mainMenuButton;
 
+    [Header("Gameplay Runtime Data")]
+    [SerializeField] private SOListInt generatedItemForSale;
+
     private readonly float loadingScreenDuration = 0.75f;
     private bool isLoadingScreenActive;
     private bool canUnload = false;
@@ -120,6 +123,11 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         }
     }
 
+    private void OnDisable()
+    {
+        generatedItemForSale.itemList.Clear();
+    }
+
     //===========================================================================
     public void LoadScene(string sceneName, Vector3 spawnPosition)
     {
@@ -158,6 +166,9 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         player.GetComponentInChildren<BasicAbility>().ResetMaxFuel();
         player.GetComponent<PlayerHealth>().ResetPlayerHealth();
         player.GetComponent<PlayerController>().dashCD = 3.0f;
+
+        // GameplayRuntimeData
+        generatedItemForSale.itemList.Clear();
 
         GameplayInfoUIControl.Instance.SetGameplayInfoUIActive(false);
 

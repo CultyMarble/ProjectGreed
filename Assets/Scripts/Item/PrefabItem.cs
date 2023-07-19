@@ -42,6 +42,8 @@ public class PrefabItem : MonoBehaviour
                 if (PlayerCurrencies.Instance.TempCurrencyAmount >= GetComponent<ItemCost>().itemCost)
                 {
                     PlayerCurrencies.Instance.UpdateTempCurrencyAmount(-(GetComponent<ItemCost>().itemCost));
+
+                    transform.parent.GetComponentInParent<ShopKeeper>().SetItemPurchase(transform.parent.GetSiblingIndex());
                 }
                 else
                 {

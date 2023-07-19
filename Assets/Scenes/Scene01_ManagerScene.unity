@@ -3151,6 +3151,7 @@ MonoBehaviour:
   gameOverMenu: {fileID: 928610203}
   gv_loadLastCheckPointButton: {fileID: 1296372049}
   gv_mainMenuButton: {fileID: 1854480143}
+  generatedItemForSale: {fileID: 11400000, guid: 885640ba893b4de46af1fed9b53f94e6, type: 2}
 --- !u!1 &366010443
 GameObject:
   m_ObjectHideFlags: 0
@@ -5026,6 +5027,7 @@ GameObject:
   - component: {fileID: 567887227}
   - component: {fileID: 567887228}
   - component: {fileID: 567887233}
+  - component: {fileID: 567887234}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -5360,6 +5362,18 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &567887234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 567887215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8785f36754890bf428d8039421b68030, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &578814107
 GameObject:
   m_ObjectHideFlags: 0
