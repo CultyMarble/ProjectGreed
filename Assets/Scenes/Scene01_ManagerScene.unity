@@ -1703,6 +1703,7 @@ MonoBehaviour:
   gameOverMenu: {fileID: 928610203}
   gv_loadLastCheckPointButton: {fileID: 1296372049}
   gv_mainMenuButton: {fileID: 1854480143}
+  generatedItemForSale: {fileID: 11400000, guid: 885640ba893b4de46af1fed9b53f94e6, type: 2}
 --- !u!1 &366010443
 GameObject:
   m_ObjectHideFlags: 0

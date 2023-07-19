@@ -9077,7 +9077,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2738946286732052797
 RectTransform:
   m_ObjectHideFlags: 0
@@ -29733,11 +29733,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db72d1d72515f5f42836ac068a7a4127, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueLines:
-  - 'You: This place is... unfamiliar..'
-  - 'You: In fact I can''t remember why I''m here... or even who I am...'
-  - 'You: It''s quiet... I should check out that cave'
+  dialogueEntries: []
+  quickText: 
   autoActive: 1
+  dialogueIndicator: {fileID: 0}
 --- !u!58 &7949680610775227349
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -29782,12 +29781,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db72d1d72515f5f42836ac068a7a4127, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueLines:
-  - 'The note reads: Beware of the mausoleum.'
-  - 'Monster''s roam under the command of the '
-  - wicked and powerful Grave Keeper
-  - continue at your own risk
+  dialogueEntries: []
+  quickText: 
   autoActive: 0
+  dialogueIndicator: {fileID: 0}
 --- !u!1 &7949680610775227354
 GameObject:
   m_ObjectHideFlags: 0
