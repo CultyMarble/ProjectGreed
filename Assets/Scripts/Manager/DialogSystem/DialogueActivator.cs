@@ -8,6 +8,7 @@ public class DialogueActivator : MonoBehaviour
     [SerializeField] private bool autoActive;
     [SerializeField] private GameObject dialogueIndicator;
 
+    private DialogueEntry currentDialogueEntry;
     private int dialogueEntryIndex;
     private bool canActivate;
     private bool isActivated;
@@ -83,8 +84,12 @@ public class DialogueActivator : MonoBehaviour
         //{
         //    previouslyActivated = true;
         //}
-        if (dialogueEntries == null)
+        if (dialogueEntries == null )
             return;
+        if (dialogueEntries.Length > 0)
+        {
+            currentDialogueEntry = dialogueEntries[dialogueEntryIndex];
+        }
 
         if (dialogueEntries.Length > 0)
         {
@@ -102,14 +107,14 @@ public class DialogueActivator : MonoBehaviour
             case DialogueState.manual:
                 if (canActivate && Input.GetKeyDown(KeyCode.F))
                 {
-                    dialogueEntries[dialogueEntryIndex].hasBeenUsed = true;
+                    currentDialogueEntry.hasBeenUsed = true;
                     if (quickText.Length <= 0)
                     {
-                        DialogManager.Instance.SetDialogLines(dialogueEntries[dialogueEntryIndex].dialogueLines);
+                        DialogManager.Instance.SetupDialoguePanel(currentDialogueEntry.GetLines(), currentDialogueEntry.portrait);
                     }
                     else
                     {
-                        DialogManager.Instance.SetDialogLines(quickText);
+                        DialogManager.Instance.SetQuickText(quickText);
                     }
                     DialogManager.Instance.SetDialogPanelActiveState(true);
 
@@ -120,7 +125,7 @@ public class DialogueActivator : MonoBehaviour
             case DialogueState.auto:
                 if (canAuto)
                 {
-                    DialogManager.Instance.SetDialogLines(dialogueEntries[dialogueEntryIndex].dialogueLines);
+                    DialogManager.Instance.SetupDialoguePanel(currentDialogueEntry.GetLines(), currentDialogueEntry.portrait);
                     DialogManager.Instance.SetDialogPanelActiveState(true);
 
                     Time.timeScale = 0.0f;

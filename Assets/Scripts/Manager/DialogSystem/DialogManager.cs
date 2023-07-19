@@ -1,15 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
+using System;
+
 
 public class DialogManager : SingletonMonobehaviour<DialogManager>
 {
     [SerializeField] private Transform dialogPanel;
     [SerializeField] private TextMeshProUGUI dialogText;
+    [SerializeField] private Image portraitSprite;
+    [SerializeField] private Sprite playerPortrait;
 
-    private string[] dialogLines;
+    private Tuple<string,bool>[] dialogLines;
+    private string quickText;
     private int currentLine;
+    private Sprite npcPortrait;
 
     //===========================================================================
     private void Start()
@@ -25,7 +32,7 @@ public class DialogManager : SingletonMonobehaviour<DialogManager>
         if (Input.GetMouseButtonUp(0))
         {
             currentLine++;
-
+            
             if (currentLine >= dialogLines.Length)
             {
                 currentLine = 0;
@@ -35,8 +42,15 @@ public class DialogManager : SingletonMonobehaviour<DialogManager>
 
                 return;
             }
-
-            dialogText.SetText(dialogLines[currentLine]);
+            if (dialogLines[currentLine].Item2 == true)
+            {
+                portraitSprite.sprite = playerPortrait;
+            }
+            else
+            {
+                portraitSprite.sprite = npcPortrait;
+            }
+            dialogText.SetText(dialogLines[currentLine].Item1);
         }
     }
 
@@ -46,17 +60,36 @@ public class DialogManager : SingletonMonobehaviour<DialogManager>
         dialogPanel.gameObject.SetActive(newBool);
     }
 
-    public void SetDialogLines(string[] newDialogLines)
+    //public void SetDialogLines(string[] newDialogLines)
+    //{
+    //    dialogLines = newDialogLines;
+    //    currentLine = 0;
+    //    dialogText.SetText(dialogLines[currentLine]);
+
+    //}
+    public void SetQuickText(string newDialogLines)
     {
-        dialogLines = newDialogLines;
+        quickText = newDialogLines;
         currentLine = 0;
-        dialogText.SetText(dialogLines[currentLine]);
+        dialogText.SetText(quickText);
     }
-    public void SetDialogLines(string newDialogLines)
+    public void SetPortrait(Sprite portrait)
     {
-        dialogLines = new string[1];
-        dialogLines[0] = newDialogLines;
+        npcPortrait = portrait;
+    }
+    public void SetupDialoguePanel(Tuple<string,bool>[] newDialogueLines, Sprite portrait)
+    {
+        dialogLines = newDialogueLines;
+        npcPortrait = portrait;
         currentLine = 0;
-        dialogText.SetText(dialogLines[currentLine]);
+        if (dialogLines[currentLine].Item2 == true)
+        {
+            portraitSprite.sprite = playerPortrait;
+        }
+        else
+        {
+            portraitSprite.sprite = npcPortrait;
+        }
+        dialogText.SetText(dialogLines[currentLine].Item1);
     }
 }
