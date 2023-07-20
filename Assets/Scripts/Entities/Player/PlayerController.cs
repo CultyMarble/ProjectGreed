@@ -6,7 +6,8 @@ public class PlayerController : MonoBehaviour
 {
     [Header("Basic Movement")]
     [SerializeField] private float baseMoveSpeed;
-    [SerializeField] private float lowerSpeedPercentage = 0.5F;
+    [SerializeField] private float primaryAttackLowSpeedPercentage = 0.5F;
+    [SerializeField] private float secondaryAttackLowSpeedPercentage = 0.5F;
 
     [Header("Movement Checks")]
     private Rigidbody2D rigidbody;
@@ -70,11 +71,10 @@ public class PlayerController : MonoBehaviour
     //======================================================================
     private void PlayerInput()
     {
-        if (Player.Instance.playerActionState == PlayerActionState.IsDashing || Player.Instance.playerActionState == PlayerActionState.IsUsingRangeAbility)
+        if (Player.Instance.playerActionState == PlayerActionState.IsDashing)
             return;
 
         Vector2 input = playerInput.actions["Move"].ReadValue<Vector2>();
-
 
         movementVector.x = input.x;
         movementVector.y = input.y;
@@ -155,10 +155,11 @@ public class PlayerController : MonoBehaviour
                 break;
             case PlayerActionState.IsUsingBasicAbility:
                 GetComponentInParent<TrailRenderer>().enabled = false;
-                rigidbody.MovePosition(rigidbody.position + (lowerSpeedPercentage * baseMoveSpeed) * Time.deltaTime * movementVector);
+                rigidbody.MovePosition(rigidbody.position + (primaryAttackLowSpeedPercentage * baseMoveSpeed) * Time.deltaTime * movementVector);
                 break;
             case PlayerActionState.IsUsingRangeAbility:
                 GetComponentInParent<TrailRenderer>().enabled = false;
+                rigidbody.MovePosition(rigidbody.position + (secondaryAttackLowSpeedPercentage * baseMoveSpeed) * Time.deltaTime * movementVector);
                 break;
             case PlayerActionState.IsUsingBombAbility:
                 GetComponentInParent<TrailRenderer>().enabled = false;

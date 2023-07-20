@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,11 +15,15 @@ public class BasicAbility : CoreAbility
     [SerializeField] private float refuelRate;
     [SerializeField] private float refuelDelay;
 
+    [Space]
+
     [SerializeField] private float timeUntilChangeDirectionMax;
     [SerializeField] private float timeUntilChangeDirectionMin;
     [SerializeField] private float swingMagtitude;
     [SerializeField] private float growthRate;
     [SerializeField] private float size;
+
+    [SerializeField] private GameObject warning;
 
     private float refuelCounter;
     private float currentFuel = default;
@@ -99,17 +104,21 @@ public class BasicAbility : CoreAbility
         {
             Player.Instance.playerActionState = PlayerActionState.IsUsingBasicAbility;
             SpawnParticle();
+
             if (currentFuel < fuelDrainRate)
             {
+                StartCoroutine(FuelRanOutWarning());
+                leftClickButtonCheck = false;
                 currentFuel = 0;
             }
             else
             {
                 currentFuel -= fuelDrainRate;
             }
+
             cooldownTimer = cooldown;
         }
-        else if (!leftClickButtonCheck && Player.Instance.playerActionState == PlayerActionState.IsUsingBasicAbility)
+        else if (!leftClickButtonCheck && Player.Instance.playerActionState == PlayerActionState.IsUsingBasicAbility || currentFuel <= 0)
         {
             Player.Instance.playerActionState = PlayerActionState.none;
         }
@@ -123,8 +132,7 @@ public class BasicAbility : CoreAbility
             if (particle.gameObject.activeInHierarchy == false)
             {
                 particle.GetComponent<SprayParticleProjectile>().ConfigParticleMovementSpeed(mouseDir, moveSpeed + this.GetComponentInParent<Rigidbody2D>().velocity.magnitude, lifeTime);
-                particle.GetComponent<SprayParticleProjectile>().
-                    ConfigParticleMovementPattern(timeUntilChangeDirectionMax, timeUntilChangeDirectionMin, swingMagtitude);
+                particle.GetComponent<SprayParticleProjectile>().ConfigParticleMovementPattern(timeUntilChangeDirectionMax, timeUntilChangeDirectionMin, swingMagtitude);
                 particle.GetComponent<SprayParticleProjectile>().ConfigParticleSizeAndGrowth(size, growthRate);
                 particle.GetComponent<SprayParticleProjectile>().ConfigParticleDamage(damage, pushPower, abilityStatusEffect);
 
@@ -135,11 +143,18 @@ public class BasicAbility : CoreAbility
         }
     }
 
+    private IEnumerator FuelRanOutWarning()
+    {
+        warning.SetActive(true);
+        yield return new WaitForSeconds(2F);
+        warning.SetActive(false);
+    }
+
     private void Fuel()
     {
         refuelCounter += Time.deltaTime;
 
-        if (currentFuel < maxFuel && refuelCounter >= refuelDelay && !Input.GetMouseButton(0))
+        if (currentFuel < maxFuel && refuelCounter >= refuelDelay && !leftClickButtonCheck)
         {
             currentFuel += refuelRate;
 

@@ -80,6 +80,7 @@ public class RangeAbility : CoreAbility
         {
             Player.Instance.playerActionState = PlayerActionState.IsUsingRangeAbility;
             aimCharge += Time.deltaTime;
+
         }
         else
         {
