@@ -28,12 +28,20 @@ public class DialogManager : SingletonMonobehaviour<DialogManager>
     {
         if (dialogPanel.gameObject.activeSelf == false)
             return;
-
+        
         if (Input.GetMouseButtonUp(0))
         {
             currentLine++;
-            
-            if (currentLine >= dialogLines.Length)
+            if (quickText != null)
+            {
+                currentLine = 0;
+
+                SetDialogPanelActiveState(false);
+                Time.timeScale = 1.0f;
+
+                return;
+            }
+            else if (currentLine >= dialogLines.Length)
             {
                 currentLine = 0;
 

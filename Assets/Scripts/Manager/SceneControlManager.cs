@@ -202,6 +202,8 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
 
         isLoadingScreenActive = false;
         loadingScreenCanvasGroup.blocksRaycasts = false;
+
+        EventManager.CallAfterSceneLoadedLoadingScreenEvent();
     }
 
     private IEnumerator LoadSceneAndSetActive(string sceneName)
