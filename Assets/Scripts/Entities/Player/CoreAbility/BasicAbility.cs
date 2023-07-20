@@ -100,6 +100,11 @@ public class BasicAbility : CoreAbility
 
     private void InputHandler()
     {
+        if (Player.Instance.playerActionState == PlayerActionState.IsDashing)
+        {
+            return;
+        }
+
         if (leftClickButtonCheck && cooldownTimer == 0 && currentFuel > 0)
         {
             Player.Instance.playerActionState = PlayerActionState.IsUsingBasicAbility;

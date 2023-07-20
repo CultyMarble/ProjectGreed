@@ -150,8 +150,7 @@ public class PlayerController : MonoBehaviour
         {
             case PlayerActionState.IsDashing:
                 GetComponentInParent<TrailRenderer>().enabled = true;
-                rigidbody.MovePosition(rigidbody.position +
-                dashSpeed * Time.deltaTime * dashVector);
+                rigidbody.MovePosition(rigidbody.position + dashSpeed * Time.deltaTime * dashVector);
                 break;
             case PlayerActionState.IsUsingBasicAbility:
                 GetComponentInParent<TrailRenderer>().enabled = false;
@@ -166,8 +165,7 @@ public class PlayerController : MonoBehaviour
                 break;
             default:
                 GetComponentInParent<TrailRenderer>().enabled = false;
-                rigidbody.MovePosition(rigidbody.position +
-                baseMoveSpeed * Time.deltaTime * movementVector);
+                rigidbody.MovePosition(rigidbody.position + baseMoveSpeed * Time.deltaTime * movementVector);
                 break;
         }
     }
@@ -183,7 +181,7 @@ public class PlayerController : MonoBehaviour
     private void DashHandler()
     {
         // Trigger Dash
-        if (playerInput.actions["Dash"].triggered && Player.Instance.playerActionState == PlayerActionState.none)
+        if (playerInput.actions["Dash"].triggered)
         {
             if (dashCDTimeCounter <= 0 && movementVector != Vector2.zero)
             {
