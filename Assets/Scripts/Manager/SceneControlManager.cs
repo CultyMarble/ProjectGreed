@@ -56,6 +56,12 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
     [Header("Gameplay Runtime Data")]
     [SerializeField] private SOListInt generatedItemForSale;
 
+    [Space]
+
+    [Header("DEVELOPER MODE [TURN IT OFF IN BUILD!] <------------------------------")]
+    [SerializeField] private bool developerMode = false;
+    [SerializeField] private Vector2 playerSpawnPosition;
+
     private readonly float loadingScreenDuration = 0.75f;
     private bool isLoadingScreenActive;
     private bool canUnload = false;
@@ -88,7 +94,15 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         loadingScreenImage.color = new Color(0.0f, 0.0f, 0.0f, 1.0f);
         loadingScreenCanvasGroup.alpha = 1.0f;
 
-        mainMenu.SetActive(true);
+        if (!developerMode)
+        {
+            mainMenu.SetActive(true);
+        }
+        else
+        {
+            player.SetActive(true);
+            player.transform.position = playerSpawnPosition;
+        }
 
         StartCoroutine(LoadingScreen(0.0f));
     }
