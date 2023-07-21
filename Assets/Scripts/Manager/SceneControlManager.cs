@@ -24,6 +24,10 @@ public enum SceneName
 
 public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
 {
+    [SerializeField] private DeveloperScriptable developerScriptable;
+
+    [Space]
+
     [SerializeField] private CanvasGroup loadingScreenCanvasGroup;
     [SerializeField] private Image loadingScreenImage;
 
@@ -55,12 +59,6 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
 
     [Header("Gameplay Runtime Data")]
     [SerializeField] private SOListInt generatedItemForSale;
-
-    [Space]
-
-    [Header("DEVELOPER MODE [TURN IT OFF IN BUILD!] <------------------------------")]
-    [SerializeField] private bool developerMode = false;
-    [SerializeField] private Vector2 playerSpawnPosition;
 
     private readonly float loadingScreenDuration = 0.75f;
     private bool isLoadingScreenActive;
@@ -94,14 +92,14 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         loadingScreenImage.color = new Color(0.0f, 0.0f, 0.0f, 1.0f);
         loadingScreenCanvasGroup.alpha = 1.0f;
 
-        if (!developerMode)
+        if (!developerScriptable.developerMode)
         {
             mainMenu.SetActive(true);
         }
         else
         {
             player.SetActive(true);
-            player.transform.position = playerSpawnPosition;
+            player.transform.position = developerScriptable.playerSpawnPosition;
         }
 
         StartCoroutine(LoadingScreen(0.0f));

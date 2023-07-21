@@ -1468,7 +1468,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effectIcon: {fileID: 0}
-  enemyHealth: {fileID: 961215644}
   rotBar: {fileID: 1813396644}
   killThreshold: 0
 --- !u!114 &832686824
@@ -1497,7 +1496,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effectIcon: {fileID: 21300000, guid: aebb7b1266346274bbdb45a6ac1fa9e1, type: 3}
-  enemyHealth: {fileID: 961215644}
   spreadRadius: 3
 --- !u!114 &832686826
 MonoBehaviour:
@@ -2632,7 +2630,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effectIcon: {fileID: 0}
-  enemyHealth: {fileID: 1382302959}
   rotBar: {fileID: 363869487}
   killThreshold: 0
 --- !u!114 &1247303117
@@ -2661,7 +2658,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effectIcon: {fileID: 21300000, guid: aebb7b1266346274bbdb45a6ac1fa9e1, type: 3}
-  enemyHealth: {fileID: 1382302959}
   spreadRadius: 3
 --- !u!114 &1247303119
 MonoBehaviour:
@@ -10207,7 +10203,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effectIcon: {fileID: 0}
-  enemyHealth: {fileID: 290517288}
   rotBar: {fileID: 175709870}
   killThreshold: 0
 --- !u!114 &2101916690
@@ -10236,7 +10231,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effectIcon: {fileID: 21300000, guid: aebb7b1266346274bbdb45a6ac1fa9e1, type: 3}
-  enemyHealth: {fileID: 290517288}
   spreadRadius: 3
 --- !u!114 &2101916692
 MonoBehaviour:
@@ -10585,7 +10579,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effectIcon: {fileID: 21300000, guid: aebb7b1266346274bbdb45a6ac1fa9e1, type: 3}
-  enemyHealth: {fileID: 8961660741874002567}
   spreadRadius: 3
 --- !u!114 &863253301135201358
 MonoBehaviour:
@@ -10600,7 +10593,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effectIcon: {fileID: 0}
-  enemyHealth: {fileID: 8961660741874002567}
   rotBar: {fileID: 1114376999}
   killThreshold: 0
 --- !u!1 &4754069086230675541

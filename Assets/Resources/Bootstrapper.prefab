@@ -3950,6 +3950,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 569621e9980bf5e46b12776910f6836c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  developerScriptable: {fileID: 11400000, guid: a69acc13c4b03224e893d533b6bf0427, type: 2}
   loadingScreenCanvasGroup: {fileID: 1932179065721358917}
   loadingScreenImage: {fileID: 1932179065721358915}
   player: {fileID: 1932179065982322478}
@@ -3968,8 +3969,6 @@ MonoBehaviour:
   gv_loadLastCheckPointButton: {fileID: 1932179067668189968}
   gv_mainMenuButton: {fileID: 1932179067101175118}
   generatedItemForSale: {fileID: 11400000, guid: 885640ba893b4de46af1fed9b53f94e6, type: 2}
-  developerMode: 1
-  playerSpawnPosition: {x: 0, y: 0}
 --- !u!1 &1932179066184213002
 GameObject:
   m_ObjectHideFlags: 0
