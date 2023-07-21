@@ -5126,8 +5126,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseMoveSpeed: 7.5
   primaryAttackLowSpeedPercentage: 0.6
-  secondaryAttackLowSpeedPercentage: 0.35
-  dashCD: 0.275
+  secondaryAttackLowSpeedPercentage: 0.4
+  dashCD: 0.3
   pauseTimeAfterDash: 0.1
   dashTime: 0.225
   dashSpeed: 20
@@ -13907,7 +13907,7 @@ MonoBehaviour:
   moveSpeed: 3
   lifeTime: 0.75
   maxFuel: 100
-  fuelDrainRate: 0.75
+  fuelDrainRate: 0.4
   refuelRate: 4
   refuelDelay: 0.1
   timeUntilChangeDirectionMax: 0.2
