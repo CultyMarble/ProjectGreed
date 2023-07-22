@@ -259,12 +259,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      regenerateEffect_sheet_0: -1043553164371855291
-      regenerateEffect_sheet_1: 7790255770320118959
       regenerateEffect_sheet_2: -1796724265605624132
       regenerateEffect_sheet_3: -123850447830559678
-      regenerateEffect_sheet_4: 7204961505429210177
       regenerateEffect_sheet_5: 8265710912780126899
+      regenerateEffect_sheet_0: -1043553164371855291
+      regenerateEffect_sheet_4: 7204961505429210177
+      regenerateEffect_sheet_1: 7790255770320118959
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

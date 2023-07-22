@@ -4,16 +4,20 @@ using UnityEngine;
 
 public class RoomSpawner : MonoBehaviour
 {
-    [Tooltip(" 1 --> Need Bottom Door\r\n 2 --> Need Top Door\r\n 3 --> Need Left Door\r\n 4 --> Need Right Door")]
-    public int openingDirection;
-
     private RoomTemplates templates;
-    private bool spawned = false;
+
+    [Tooltip(" 1 --> Need Bottom Door\r\n 2 --> Need Top Door\r\n 3 --> Need Left Door\r\n 4 --> Need Right Door")]
+    [SerializeField] private int openingDirection;
+    [SerializeField] private bool spawned = false;
+
+    private float waitTime = 4F;
 
     private void Start()
     {
+        Destroy(gameObject, waitTime);
+
         templates = FindObjectOfType<RoomTemplates>();
-        Invoke("Spawn", 0.1F);
+        Invoke("Spawn", 0.05F);
     }
 
     private void Spawn()
@@ -51,7 +55,13 @@ public class RoomSpawner : MonoBehaviour
     {
         if (collision.CompareTag("RoomSpawnPoint"))
         {
-            Destroy(gameObject);
+            if (collision.GetComponent<RoomSpawner>().spawned == false && spawned == false && transform.position.x != 0 && transform.position.y != 0)
+            {
+                InstantiateRandomRoom(templates.closedRooms.Length, templates.closedRooms);
+                Destroy(gameObject);
+            }
+
+            spawned = true;
         }
     }
 

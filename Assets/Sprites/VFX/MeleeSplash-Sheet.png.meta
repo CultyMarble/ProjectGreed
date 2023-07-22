@@ -284,11 +284,11 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       MeleeSplash-Sheet_0: -7694382798450982115
-      MeleeSplash-Sheet_1: 7968040942952945892
       MeleeSplash-Sheet_2: 3110989289405185938
+      MeleeSplash-Sheet_1: 7968040942952945892
+      MeleeSplash-Sheet_5: 1306698473146442276
       MeleeSplash-Sheet_3: 538856791110927837
       MeleeSplash-Sheet_4: 6898250832886271762
-      MeleeSplash-Sheet_5: 1306698473146442276
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
