@@ -1,9 +1,12 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
+    public static event UnityAction<Transform> OnPlayerReady;
+
     [Header("Basic Movement")]
     [SerializeField] private float baseMoveSpeed;
     [SerializeField] private float primaryAttackLowSpeedPercentage = 0.5F;
@@ -45,6 +48,11 @@ public class PlayerController : MonoBehaviour
 
         rigidbody = GetComponent<Rigidbody2D>();
         CapsuleCollider2D = GetComponent<CapsuleCollider2D>();
+    }
+
+    private void Start()
+    {
+        OnPlayerReady?.Invoke(transform);
     }
 
     private void FixedUpdate()

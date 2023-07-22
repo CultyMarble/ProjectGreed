@@ -19,15 +19,26 @@ public class RoomTemplates : MonoBehaviour
 
     [Space]
 
-    [Header("Special Room")]
+    [Header("Room Delay")]
     public float delayTime;
     private bool delayTimeCheck;
 
+    [Header("Room Spawn Chance")]
+    public float tresureRoomChance;
+    public float abandonShopChance;
+
     [Space]
 
-    public GameObject boss;
+    [Header("Dead End Room")]
+    public GameObject tresure;
+
+    [Space]
+
+    [Header("Dead End Room")]
     public GameObject key;
+    public GameObject boss;
     public GameObject shop;
+    public GameObject abandonShop;
 
     private void Update()
     {
@@ -36,7 +47,7 @@ public class RoomTemplates : MonoBehaviour
             ReloadScene();
         }
 
-        SpawnSpecialRoomType();
+        SpawnRoomType();
     }
 
     private void ReloadScene()
@@ -45,12 +56,13 @@ public class RoomTemplates : MonoBehaviour
         SceneManager.LoadScene(currentSceneIndex);
     }
 
-    private void SpawnSpecialRoomType()
+    private void SpawnRoomType()
     {
         if (delayTime <= 0F && !delayTimeCheck)
         {
             SetBossRoom();
-            SetSpeicalRoom();
+            SetDeadEndRoomType();
+            SetNoramlRoomType();
 
             delayTimeCheck = true;
             delayTime = 0F;
@@ -76,7 +88,40 @@ public class RoomTemplates : MonoBehaviour
         }
     }
 
-    private void SetSpeicalRoom()
+    private void SetNoramlRoomType()
+    {
+        List<AddRooms> roomsList = new List<AddRooms>();
+
+        foreach (AddRooms room in rooms)
+        {
+            if (room.currentRoomType == RoomType.normal)
+            {
+                roomsList.Add(room);
+            }
+        }
+
+        // SPAWN TREASURE ROOM
+        if (rooms.Count >= 6 && Random.value < tresureRoomChance || rooms.Count >= 10) // 6 Rooms or less (Gives a chance of spawn) | 6 Rooms or more (100%)
+        {
+            int randomIndex = Random.Range(0, roomsList.Count);
+            roomsList[randomIndex].currentRoomType = RoomType.treasure;
+            Instantiate(tresure, roomsList[randomIndex].transform.position, Quaternion.identity);
+            roomsList.RemoveAt(randomIndex);
+        }
+
+
+
+
+
+
+
+
+
+
+
+    }
+
+    private void SetDeadEndRoomType()
     {
         List<AddRooms> roomsList = new List<AddRooms>();
 
@@ -96,24 +141,48 @@ public class RoomTemplates : MonoBehaviour
             Instantiate(key, roomsList[randomIndex].transform.position, Quaternion.identity);
             roomsList.RemoveAt(randomIndex);
         }
+        else
+        {
+            int randomIndex = Random.Range(0, rooms.Count);
+            roomsList[randomIndex].currentRoomType = RoomType.key;
+            Instantiate(key, rooms[randomIndex].transform.position, Quaternion.identity);
+            Debug.LogError("THERE IS NO KEY IN THE DUNGEON!");
+        }
 
         // SPAWN SHOP ROOM
         if (roomsList.Count > 0)
         {
             int randomIndex = Random.Range(0, roomsList.Count);
-            roomsList[randomIndex].currentRoomType = RoomType.shop;
-            Instantiate(shop, roomsList[randomIndex].transform.position, Quaternion.identity);
+            RoomType roomType = Random.value < abandonShopChance ? RoomType.abandonShop : RoomType.shop;
+
+            roomsList[randomIndex].currentRoomType = roomType;
+
+            if (roomType == RoomType.shop)
+            {
+                Instantiate(shop, roomsList[randomIndex].transform.position, Quaternion.identity);
+            }
+            else if (roomType == RoomType.abandonShop)
+            {
+                Instantiate(abandonShop, roomsList[randomIndex].transform.position, Quaternion.identity);
+            }
+
             roomsList.RemoveAt(randomIndex);
         }
 
-
-
-
-
-
-
-
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

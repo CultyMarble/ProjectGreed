@@ -190,9 +190,13 @@ MonoBehaviour:
   rooms: []
   deadEndRooms: []
   delayTime: 1
-  boss: {fileID: 4422130485644021212, guid: bc67c52f8c921bc438efeab25f755a2d, type: 3}
+  tresureRoomChance: 0
+  abandonShopChance: 0.1
+  tresure: {fileID: 4422130485644021212, guid: 933f06a9b51104540a8ddee8a72bc6ae, type: 3}
   key: {fileID: 4422130485644021212, guid: 3e337ec34c699ac44b0da2191163d8c0, type: 3}
+  boss: {fileID: 4422130485644021212, guid: bc67c52f8c921bc438efeab25f755a2d, type: 3}
   shop: {fileID: 4422130485644021212, guid: b98d4cd8232524f4c904daf97c2e9436, type: 3}
+  abandonShop: {fileID: 4422130485644021212, guid: 5e265e2fd525acc4ca57c09e913bafb4, type: 3}
 --- !u!1001 &399540623783743364
 PrefabInstance:
   m_ObjectHideFlags: 0

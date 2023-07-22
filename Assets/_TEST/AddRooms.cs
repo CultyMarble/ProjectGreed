@@ -4,11 +4,20 @@ using UnityEngine;
 
 public enum RoomType
 {
+    // Default
     normal,
     entry,
+
+    // Normal
+    trap,
+    treasure,
+
+
+    // Dead End
     key,
-    shop,
     boss,
+    shop,
+    abandonShop,
 }
 
 public class AddRooms : MonoBehaviour
@@ -47,6 +56,5 @@ public class AddRooms : MonoBehaviour
         roomType[random].SetActive(true);
 
     }
-
 
 }
