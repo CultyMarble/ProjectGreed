@@ -9,6 +9,7 @@ TagManager:
   - DemoOverUI
   - Enemy
   - Collisions
+  - RoomSpawnPoint
   layers:
   - Default
   - TransparentFX
