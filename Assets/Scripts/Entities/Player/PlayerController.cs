@@ -8,9 +8,9 @@ public class PlayerController : MonoBehaviour
     public static event UnityAction<Transform> OnPlayerReady;
 
     [Header("Basic Movement")]
-    [SerializeField] private float baseMoveSpeed;
-    [SerializeField] private float primaryAttackLowSpeedPercentage = 0.5F;
-    [SerializeField] private float secondaryAttackLowSpeedPercentage = 0.5F;
+    [SerializeField] private float baseMoveSpeed = 7.5F;
+    [SerializeField] private float primaryAttackLowSpeedPercentage = 0.6F;
+    [SerializeField] private float secondaryAttackLowSpeedPercentage = 0.4F;
 
     [Header("Movement Checks")]
     private Rigidbody2D rigidbody;
@@ -18,10 +18,11 @@ public class PlayerController : MonoBehaviour
     private bool canMove = true;
 
     [Header("Dash")]
-    public float dashCD = 3.0f;
-    [SerializeField] private float pauseTimeAfterDash = 1.0f;
-    [SerializeField] private float dashTime = 0.1f;
-    [SerializeField] private float dashSpeed = 100.0f;
+    public float dashCD = 0.275F;
+    [SerializeField] private float pauseTimeAfterDash = 0.1F;
+    [SerializeField] private float dashTime = 0.225F;
+    [SerializeField] private float dashSpeed = 20F;
+    private Vector2 preDashVelocity;
 
     [Header("Animation")]
     [SerializeField] private Animator animator;
@@ -215,6 +216,10 @@ public class PlayerController : MonoBehaviour
 
                 // Player Collision
                 CapsuleCollider2D.enabled = !CapsuleCollider2D.enabled;
+                preDashVelocity = rigidbody.velocity;
+
+                //rigidbody.velocity = Vector2.zero; // <-- TEST CODE
+                rigidbody.AddForce(movementVector * baseMoveSpeed, ForceMode2D.Impulse);// <-- TEST CODE
             }
         }
     }
@@ -228,6 +233,8 @@ public class PlayerController : MonoBehaviour
         if (pauseTimeAfterDashCounter <= 0)
         {
             canMove = true;
+
+            rigidbody.velocity = preDashVelocity * 100;
         }
     }
 
