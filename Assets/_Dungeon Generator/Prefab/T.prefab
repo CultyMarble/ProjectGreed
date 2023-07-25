@@ -15,7 +15,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8601539028242567053
 Transform:
   m_ObjectHideFlags: 0
@@ -17664,7 +17664,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1568111951344208365}
   m_Layer: 0
-  m_Name: Room 4 (Basic c)
+  m_Name: Room 4 (Open Snake)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17698,7 +17698,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1759513736297842081}
   m_Layer: 0
-  m_Name: Room 3 (Basic e)
+  m_Name: Room 3 (Snake)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17732,7 +17732,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4868673485231859735}
   m_Layer: 0
-  m_Name: Room 2 (Small Basic)
+  m_Name: Room 2 (Small)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20969,7 +20969,33 @@ CompositeCollider2D:
   m_GeometryType: 0
   m_GenerationType: 0
   m_EdgeRadius: 0
-  m_ColliderPaths: []
+  m_ColliderPaths:
+  - m_Collider: {fileID: 4021261305779932453}
+    m_ColliderPaths:
+    - - X: -150000000
+        Y: -150000000
+      - X: 150000000
+        Y: -150000000
+      - X: 150000000
+        Y: 150000000
+      - X: 30000000
+        Y: 150000000
+      - X: 30000000
+        Y: 140000000
+      - X: 140000000
+        Y: 140000000
+      - X: 140000000
+        Y: -140000000
+      - X: -140000000
+        Y: -140000000
+      - X: -140000000
+        Y: 140000000
+      - X: -30000000
+        Y: 140000000
+      - X: -30000000
+        Y: 150000000
+      - X: -150000000
+        Y: 150000000
   m_CompositePaths:
     m_Paths:
     - - {x: 14.999971, y: -15}
@@ -41699,30 +41725,30 @@ CompositeCollider2D:
   m_ColliderPaths: []
   m_CompositePaths:
     m_Paths:
-    - - {x: 14.999974, y: -15.00001}
+    - - {x: 14.999971, y: -15}
       - {x: 14.999971, y: 15}
       - {x: 3, y: 14.999971}
-      - {x: 3.0000253, y: 8.99999}
-      - {x: 9.99999, y: 8.999961}
-      - {x: 9.999961, y: -8.99999}
-      - {x: -9.99999, y: -8.999961}
-      - {x: -9.999961, y: 8.99999}
-      - {x: -2.99999, y: 9.000026}
+      - {x: 3.0000293, y: 9}
+      - {x: 10, y: 8.99997}
+      - {x: 9.99997, y: -9}
+      - {x: -10, y: -8.99997}
+      - {x: -9.99997, y: 9}
+      - {x: -3, y: 9.00003}
       - {x: -3.0000293, y: 15}
       - {x: -15, y: 14.999971}
-      - {x: -14.999974, y: -15.00001}
-    - - {x: 13.99999, y: -13.99996}
-      - {x: -13.99999, y: -13.99996}
-      - {x: -13.99996, y: 14}
-      - {x: -4.00001, y: 13.999971}
-      - {x: -4.000039, y: 11.00001}
-      - {x: -11.00001, y: 10.999974}
-      - {x: -10.999974, y: -11.00001}
-      - {x: 11.00001, y: -10.999974}
-      - {x: 10.999974, y: 11.00001}
-      - {x: 4.00001, y: 11.000039}
-      - {x: 4.000039, y: 14}
-      - {x: 13.99999, y: 13.999971}
+      - {x: -14.999971, y: -15}
+    - - {x: 14, y: -13.999971}
+      - {x: -14, y: -13.999971}
+      - {x: -13.999971, y: 14}
+      - {x: -4, y: 13.999971}
+      - {x: -4.0000296, y: 11}
+      - {x: -11, y: 10.99997}
+      - {x: -10.99997, y: -11}
+      - {x: 11, y: -10.99997}
+      - {x: 10.99997, y: 11}
+      - {x: 4, y: 11.00003}
+      - {x: 4.0000296, y: 14}
+      - {x: 14, y: 13.999971}
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
 --- !u!1 &5932036407875239888
@@ -53665,8 +53691,8 @@ CompositeCollider2D:
       - {x: -14.999971, y: -15}
     - - {x: 7.9999704, y: -8}
       - {x: 7.9999704, y: 9}
-      - {x: -7.9999905, y: 8.99997}
-      - {x: -7.999961, y: 4}
+      - {x: -8, y: 8.99997}
+      - {x: -7.9999704, y: 4}
       - {x: 4, y: 3.9999704}
       - {x: 3.9999704, y: -3}
       - {x: -8, y: -3.0000293}
@@ -53676,8 +53702,8 @@ CompositeCollider2D:
       - {x: -6.9999704, y: -5}
       - {x: 5, y: -4.999971}
       - {x: 4.999971, y: 6}
-      - {x: -6.9999905, y: 6.0000296}
-      - {x: -6.999961, y: 7}
+      - {x: -7, y: 6.0000296}
+      - {x: -6.9999704, y: 7}
       - {x: 7, y: 6.9999704}
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
