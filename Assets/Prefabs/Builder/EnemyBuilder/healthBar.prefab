@@ -52,7 +52,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -81,7 +81,7 @@ SpriteRenderer:
   m_Size: {x: 1.75, y: 0.4375}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &8201220331791968944
@@ -129,14 +129,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4739fcfca02a85e429873cd79a880b19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthbarSprite:
-  - {fileID: -1264772288087964892, guid: 3e7919a0cdf3b6f4eb39b36bf554750e, type: 3}
-  - {fileID: -1246487339369159825, guid: 3e7919a0cdf3b6f4eb39b36bf554750e, type: 3}
-  - {fileID: -6581021228822345160, guid: 3e7919a0cdf3b6f4eb39b36bf554750e, type: 3}
-  - {fileID: 5235216049511467275, guid: 3e7919a0cdf3b6f4eb39b36bf554750e, type: 3}
-  - {fileID: -7552136332903361755, guid: 3e7919a0cdf3b6f4eb39b36bf554750e, type: 3}
-  - {fileID: -3237176403118713384, guid: 3e7919a0cdf3b6f4eb39b36bf554750e, type: 3}
-  - {fileID: -8378351623246559817, guid: 3e7919a0cdf3b6f4eb39b36bf554750e, type: 3}
-  - {fileID: 2862982656841944581, guid: 3e7919a0cdf3b6f4eb39b36bf554750e, type: 3}
-  - {fileID: -2023636800237536137, guid: 3e7919a0cdf3b6f4eb39b36bf554750e, type: 3}
-  - {fileID: 8808383841745980431, guid: 3e7919a0cdf3b6f4eb39b36bf554750e, type: 3}
+  health: {fileID: 0}
+  healtBar: {fileID: 0}
