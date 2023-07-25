@@ -193,6 +193,7 @@ MonoBehaviour:
   roomVariant: Null
   roomType:
   - {fileID: 6104586359643093913}
+  shopRoom: {fileID: 0}
 --- !u!1 &8493812128081450291
 GameObject:
   m_ObjectHideFlags: 0

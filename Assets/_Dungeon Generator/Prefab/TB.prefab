@@ -156,7 +156,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 56
-      m_TileSpriteIndex: 56
+      m_TileSpriteIndex: 59
       m_TileMatrixIndex: 3
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -166,7 +166,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 57
-      m_TileSpriteIndex: 57
+      m_TileSpriteIndex: 58
       m_TileMatrixIndex: 3
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -1881,14 +1881,14 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 1
-    m_Data: {fileID: 4241448057504268673, guid: 79c7509a6a48c4545a952a7dce1d8425, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 1
     m_Data: {fileID: -8171596118493254252, guid: 79c7509a6a48c4545a952a7dce1d8425, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: 4241448057504268673, guid: 79c7509a6a48c4545a952a7dce1d8425, type: 3}
   - m_RefCount: 118
     m_Data: {fileID: 4632450837527124749, guid: 79c7509a6a48c4545a952a7dce1d8425, type: 3}
   - m_RefCount: 20
@@ -13023,7 +13023,41 @@ CompositeCollider2D:
   m_GeometryType: 0
   m_GenerationType: 0
   m_EdgeRadius: 0
-  m_ColliderPaths: []
+  m_ColliderPaths:
+  - m_Collider: {fileID: 1338217174893611297}
+    m_ColliderPaths:
+    - - X: 150000000
+        Y: 150000000
+      - X: 30000000
+        Y: 150000000
+      - X: 30000000
+        Y: 140000000
+      - X: 140000000
+        Y: 140000000
+      - X: 140000000
+        Y: -140000000
+      - X: 30000000
+        Y: -140000000
+      - X: 30000000
+        Y: -150000000
+      - X: 150000000
+        Y: -150000000
+    - - X: -30000000
+        Y: -140000000
+      - X: -140000000
+        Y: -140000000
+      - X: -140000000
+        Y: 140000000
+      - X: -30000000
+        Y: 140000000
+      - X: -30000000
+        Y: 150000000
+      - X: -150000000
+        Y: 150000000
+      - X: -150000000
+        Y: -150000000
+      - X: -30000000
+        Y: -150000000
   m_CompositePaths:
     m_Paths:
     - - {x: 14.999971, y: -15}
@@ -14784,6 +14818,7 @@ MonoBehaviour:
   roomType:
   - {fileID: 4629390161651250776}
   - {fileID: 3895037764081182585}
+  shopRoom: {fileID: 0}
 --- !u!1 &1732595921868845736
 GameObject:
   m_ObjectHideFlags: 0
@@ -20065,89 +20100,7 @@ CompositeCollider2D:
   m_GeometryType: 0
   m_GenerationType: 0
   m_EdgeRadius: 0
-  m_ColliderPaths:
-  - m_Collider: {fileID: 8300658366703622087}
-    m_ColliderPaths:
-    - - X: 150000000
-        Y: -140000100
-      - X: 150000041
-        Y: -140000100
-      - X: 150000100
-        Y: -140000041
-      - X: 150000100
-        Y: 140000041
-      - X: 150000041
-        Y: 140000100
-      - X: 150000000
-        Y: 140000100
-      - X: 150000000
-        Y: 150000000
-      - X: 30000000
-        Y: 150000000
-      - X: 30000000
-        Y: 140000100
-      - X: 29999959
-        Y: 140000100
-      - X: 29999900
-        Y: 140000041
-      - X: 29999900
-        Y: -140000041
-      - X: 29999959
-        Y: -140000100
-      - X: 30000000
-        Y: -140000100
-      - X: 30000000
-        Y: -150000000
-      - X: 150000000
-        Y: -150000000
-    - - X: -30000000
-        Y: -140000100
-      - X: -29999959
-        Y: -140000100
-      - X: -29999900
-        Y: -140000041
-      - X: -29999900
-        Y: 140000041
-      - X: -29999959
-        Y: 140000100
-      - X: -30000000
-        Y: 140000100
-      - X: -30000000
-        Y: 150000000
-      - X: -150000000
-        Y: 150000000
-      - X: -150000000
-        Y: 140000100
-      - X: -150000041
-        Y: 140000100
-      - X: -150000100
-        Y: 140000041
-      - X: -150000100
-        Y: -140000041
-      - X: -150000041
-        Y: -140000100
-      - X: -150000000
-        Y: -140000100
-      - X: -150000000
-        Y: -150000000
-      - X: -30000000
-        Y: -150000000
-    - - X: -139999900
-        Y: -140000000
-      - X: -139999900
-        Y: 140000000
-      - X: -40000100
-        Y: 140000000
-      - X: -40000100
-        Y: -140000000
-    - - X: 40000100
-        Y: -140000000
-      - X: 40000100
-        Y: 140000000
-      - X: 139999900
-        Y: 140000000
-      - X: 139999900
-        Y: -140000000
+  m_ColliderPaths: []
   m_CompositePaths:
     m_Paths:
     - - {x: 14.999971, y: -15}
@@ -20178,12 +20131,12 @@ GameObject:
   m_Component:
   - component: {fileID: 8791931630147270288}
   m_Layer: 0
-  m_Name: Room 2 (Small Basic w/ Wall)
+  m_Name: Room Hallway
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8791931630147270288
 Transform:
   m_ObjectHideFlags: 0
@@ -20217,7 +20170,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2055988656485300149
 Transform:
   m_ObjectHideFlags: 0

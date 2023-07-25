@@ -2,9 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 public class RoomTemplates : MonoBehaviour
 {
+    public static event UnityAction OnBossChange;
+    public static event UnityAction OnShopChange;
+
     [Header("Rooms")]
     public GameObject[] bottomRooms;
     public GameObject[] topRooms;
@@ -84,6 +88,7 @@ public class RoomTemplates : MonoBehaviour
             {
                 rooms[i].currentRoomType = RoomType.boss;
                 Instantiate(boss, rooms[i].transform.position, Quaternion.identity);
+                OnBossChange?.Invoke();
             }
         }
     }
@@ -109,16 +114,7 @@ public class RoomTemplates : MonoBehaviour
             roomsList.RemoveAt(randomIndex);
         }
 
-
-
-
-
-
-
-
-
-
-
+        // <----------------------------------------------------------------------------------------------------------------------------------------------------------------------- FOR FUTRUE GARY
     }
 
     private void SetDeadEndRoomType()
@@ -167,23 +163,9 @@ public class RoomTemplates : MonoBehaviour
             }
 
             roomsList.RemoveAt(randomIndex);
+            OnShopChange?.Invoke();
         }
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }
