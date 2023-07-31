@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GateManager : MonoBehaviour
 {
+    private EnemyRoomManager enemyRoomManager;
+
     [Header("Gate Data")]
     [SerializeField] private bool playerInsideRoom = false;
     [SerializeField] private bool clearedRoom = false;
@@ -11,6 +13,11 @@ public class GateManager : MonoBehaviour
 
     [Header("Gate Referance")]
     [SerializeField] private GameObject[] gates;
+
+    private void Awake()
+    {
+        enemyRoomManager = FindObjectOfType<EnemyRoomManager>();
+    }
 
     private void ActiveGates(bool active)
     {
@@ -48,9 +55,11 @@ public class GateManager : MonoBehaviour
         }
     }
 
+    // <-- 
+
     private void Test()
     {
-
+        enemyRoomManager.SpawnRandomEnemies(gameObject.transform);
     }
 
 
