@@ -7,11 +7,11 @@ public enum RoomType
     // Default
     normal,
     entry,
+    empty,
 
     // Normal
     trap,
     treasure,
-
 
     // Dead End
     key,
