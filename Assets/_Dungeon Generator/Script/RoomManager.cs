@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Events;
 
-public class RoomTemplates : MonoBehaviour
+public class RoomManager : MonoBehaviour
 {
     public static event UnityAction OnBossChange;
     public static event UnityAction OnShopChange;
@@ -18,23 +18,23 @@ public class RoomTemplates : MonoBehaviour
 
     [Space]
 
-    public List<AddRooms> rooms;
-    public List<AddRooms> deadEndRooms;
+    public List<RoomController> currentRooms;
+    public List<RoomController> currentDeadEndRooms;
 
     [Space]
 
     [Header("Room Delay")]
-    public float delayTime;
-    private bool delayTimeCheck;
+    public float delaySpawnRoomType = 0.75F;
+    private bool delaySpawnRoomCheck = false;
 
     [Header("Room Spawn Chance")]
-    public float tresureRoomChance;
-    public float abandonShopChance;
+    public float tresureRoomChance = 0.5F;
+    public float abandonShopChance = 0.1F;
 
     [Space]
 
-    [Header("Dead End Room")]
-    public GameObject tresure;
+    [Header("Special Room")]
+    public GameObject treasure;
 
     [Space]
 
@@ -56,72 +56,45 @@ public class RoomTemplates : MonoBehaviour
 
     private void ReloadScene()
     {
-        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene(currentSceneIndex);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     private void SpawnRoomType()
     {
-        if (delayTime <= 0F && !delayTimeCheck)
+        if (delaySpawnRoomType <= 0F && !delaySpawnRoomCheck)
         {
             SetBossRoom();
             SetDeadEndRoomType();
             SetNoramlRoomType();
 
-            delayTimeCheck = true;
-            delayTime = 0F;
+            delaySpawnRoomCheck = true;
+            delaySpawnRoomType = 0F;
         }
-        else
+        else if (!delaySpawnRoomCheck)
         {
-            if (!delayTimeCheck)
-            {
-                delayTime -= Time.deltaTime;
-            }
+            delaySpawnRoomType -= Time.deltaTime;
         }
     }
 
-    private void SetBossRoom()
+    private void SetBossRoom() // LOOPS UNTIL FIND THE FIRST NON NULL ROOM
     {
-        for (int i = 0; i < rooms.Count; i++)
+        for (int i = currentRooms.Count - 1; i >= 0; i--)
         {
-            if (i == rooms.Count - 1)
+            if (currentRooms[i].currentRoomType != RoomType.empty)
             {
-                rooms[i].currentRoomType = RoomType.boss;
-                Instantiate(boss, rooms[i].transform.position, Quaternion.identity);
+                currentRooms[i].currentRoomType = RoomType.boss;
+                Instantiate(boss, currentRooms[i].transform.position, Quaternion.identity);
                 OnBossChange?.Invoke();
+                break;
             }
         }
-    }
-
-    private void SetNoramlRoomType()
-    {
-        List<AddRooms> roomsList = new List<AddRooms>();
-
-        foreach (AddRooms room in rooms)
-        {
-            if (room.currentRoomType == RoomType.normal)
-            {
-                roomsList.Add(room);
-            }
-        }
-
-        // SPAWN TREASURE ROOM
-        if (rooms.Count >= 6 && Random.value < tresureRoomChance || rooms.Count >= 10) // 6 Rooms or less (Gives a chance of spawn) | 6 Rooms or more (100%)
-        {
-            int randomIndex = Random.Range(0, roomsList.Count);
-            roomsList[randomIndex].currentRoomType = RoomType.treasure;
-            Instantiate(tresure, roomsList[randomIndex].transform.position, Quaternion.identity);
-            roomsList.RemoveAt(randomIndex);
-        }
-
-        // <----------------------------------------------------------------------------------------------------------------------------------------------------------------------- FOR FUTRUE GARY
     }
 
     private void SetDeadEndRoomType()
     {
-        List<AddRooms> roomsList = new List<AddRooms>();
+        List<RoomController> roomsList = new List<RoomController>();
 
-        foreach (AddRooms room in deadEndRooms)
+        foreach (RoomController room in currentDeadEndRooms)
         {
             if (room.currentRoomType == RoomType.normal)
             {
@@ -139,9 +112,10 @@ public class RoomTemplates : MonoBehaviour
         }
         else
         {
-            int randomIndex = Random.Range(0, rooms.Count);
-            roomsList[randomIndex].currentRoomType = RoomType.key;
-            Instantiate(key, rooms[randomIndex].transform.position, Quaternion.identity);
+            // NO DEAD-END ROOMS!!! SPAWN KEY ROOM IN A RANDOM ROOM!!!
+            int randomIndex = Random.Range(0, currentRooms.Count);
+            currentRooms[randomIndex].currentRoomType = RoomType.key;
+            Instantiate(key, currentRooms[randomIndex].transform.position, Quaternion.identity);
             Debug.LogError("THERE IS NO KEY IN THE DUNGEON!");
         }
 
@@ -165,7 +139,30 @@ public class RoomTemplates : MonoBehaviour
             roomsList.RemoveAt(randomIndex);
             OnShopChange?.Invoke();
         }
+    }
 
+    private void SetNoramlRoomType()
+    {
+        List<RoomController> roomsList = new List<RoomController>();
+
+        foreach (RoomController room in currentRooms)
+        {
+            if (room.currentRoomType == RoomType.normal)
+            {
+                roomsList.Add(room);
+            }
+        }
+
+        // SPAWN TREASURE ROOM
+        if (currentRooms.Count >= 6 && Random.value < tresureRoomChance || currentRooms.Count >= 10) // 6 Rooms or less (Gives a chance of spawn) | 6 Rooms or more (100%)
+        {
+            int randomIndex = Random.Range(0, roomsList.Count);
+            roomsList[randomIndex].currentRoomType = RoomType.treasure;
+            Instantiate(treasure, roomsList[randomIndex].transform.position, Quaternion.identity);
+            roomsList.RemoveAt(randomIndex);
+        }
+
+        // <----------------------------------------------------------------------------------------------------------------------------------------------------------------------- FOR FUTRUE GARY
     }
 
 }

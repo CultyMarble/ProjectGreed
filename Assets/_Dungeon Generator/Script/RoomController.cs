@@ -9,7 +9,7 @@ public enum RoomType
     entry,
     empty,
 
-    // Normal
+    // Special
     trap,
     treasure,
 
@@ -20,11 +20,11 @@ public enum RoomType
     abandonShop,
 }
 
-public class AddRooms : MonoBehaviour
+public class RoomController : MonoBehaviour
 {
-    private RoomTemplates templates;
+    private RoomManager roomManager;
 
-    [Header("Rooms")]
+    [Header("Rooms ID")]
     public RoomType currentRoomType = RoomType.normal;
     public string roomVariant;
 
@@ -38,32 +38,32 @@ public class AddRooms : MonoBehaviour
     [Header("Special Rooms")]
     [SerializeField] private GameObject shopRoom;
 
+    private void OnEnable()
+    {
+        RoomManager.OnBossChange += SetBossActive;
+        RoomManager.OnShopChange += SetShopActive;
+    }
+
+    private void OnDisable()
+    {
+        RoomManager.OnBossChange -= SetBossActive;
+        RoomManager.OnShopChange -= SetShopActive;
+    }
+
     private void Start()
     {
-        templates = FindObjectOfType<RoomTemplates>();
-        templates.rooms.Add(this);
+        roomManager = FindObjectOfType<RoomManager>();
+        roomManager.currentRooms.Add(this);
 
         if (roomVariant == "T" || roomVariant == "L" || roomVariant == "R" || roomVariant == "B")
         {
-            templates.deadEndRooms.Add(this);
+            roomManager.currentDeadEndRooms.Add(this);
         }
 
         SetRandomRoomType();
     }
 
-    private void OnEnable()
-    {
-        RoomTemplates.OnBossChange += SetBossActive;
-        RoomTemplates.OnShopChange += SetShopActive;
-    }
-
-    private void OnDisable()
-    {
-        RoomTemplates.OnBossChange -= SetBossActive;
-        RoomTemplates.OnShopChange -= SetShopActive;
-    }
-
-    private void SetAllRoomActiveFalse()
+    private void SetAllRoomActiveFalse() // TURN ALL ROOMS FALSE
     {
         foreach (var room in roomType)
         {
@@ -71,7 +71,7 @@ public class AddRooms : MonoBehaviour
         }
     }
 
-    private void SetRandomRoomType()
+    private void SetRandomRoomType() // SET ONE RANDOM ROOM TO BE ACTIVE
     {
         SetAllRoomActiveFalse();
 
@@ -96,6 +96,13 @@ public class AddRooms : MonoBehaviour
             if (shopRoom != null) shopRoom.SetActive(true);
         }
     }
+
+    // <--
+
+
+
+
+
 
 
 }

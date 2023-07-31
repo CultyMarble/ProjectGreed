@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RoomSpawner : MonoBehaviour
 {
-    private RoomTemplates templates;
+    private RoomManager templates;
 
     [Tooltip(" 1 --> Need Bottom Door\r\n 2 --> Need Top Door\r\n 3 --> Need Left Door\r\n 4 --> Need Right Door")]
     [SerializeField] private int openingDirection;
@@ -15,7 +15,7 @@ public class RoomSpawner : MonoBehaviour
     {
         Destroy(gameObject, waitTime);
 
-        templates = FindObjectOfType<RoomTemplates>();
+        templates = FindObjectOfType<RoomManager>();
         Invoke("Spawn", 0.05F);
     }
 
