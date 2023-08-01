@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RoomSpawner : MonoBehaviour
 {
-    private RoomManager templates;
+    private RoomManager roomManager;
 
     [Tooltip(" 1 --> Need Bottom Door\r\n 2 --> Need Top Door\r\n 3 --> Need Left Door\r\n 4 --> Need Right Door")]
     [SerializeField] private int openingDirection;
@@ -15,7 +15,7 @@ public class RoomSpawner : MonoBehaviour
     {
         Destroy(gameObject, waitTime);
 
-        templates = FindObjectOfType<RoomManager>();
+        roomManager = FindObjectOfType<RoomManager>();
         Invoke("Spawn", 0.05F);
     }
 
@@ -25,19 +25,19 @@ public class RoomSpawner : MonoBehaviour
         {
             if (openingDirection == 1)
             {
-                InstantiateRandomRoom(templates.bottomRooms.Length, templates.bottomRooms);
+                InstantiateRandomRoom(roomManager.bottomRooms.Length, roomManager.bottomRooms);
             }
             else if (openingDirection == 2)
             {
-                InstantiateRandomRoom(templates.topRooms.Length, templates.topRooms);
+                InstantiateRandomRoom(roomManager.topRooms.Length, roomManager.topRooms);
             }
             else if (openingDirection == 3)
             {
-                InstantiateRandomRoom(templates.leftRooms.Length, templates.leftRooms);
+                InstantiateRandomRoom(roomManager.leftRooms.Length, roomManager.leftRooms);
             }
             else if (openingDirection == 4)
             {
-                InstantiateRandomRoom(templates.rightRooms.Length, templates.rightRooms);
+                InstantiateRandomRoom(roomManager.rightRooms.Length, roomManager.rightRooms);
             }
 
             spawned = true;
@@ -56,7 +56,7 @@ public class RoomSpawner : MonoBehaviour
         {
             if (collision.GetComponent<RoomSpawner>().spawned == false && spawned == false && transform.position.x != 0 && transform.position.y != 0)
             {
-                InstantiateRandomRoom(templates.closedRooms.Length, templates.closedRooms);
+                InstantiateRandomRoom(roomManager.closedRooms.Length, roomManager.closedRooms);
                 Destroy(gameObject);
             }
 

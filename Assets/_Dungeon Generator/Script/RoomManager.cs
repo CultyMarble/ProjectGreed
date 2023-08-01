@@ -136,6 +136,8 @@ public class RoomManager : MonoBehaviour
                 Instantiate(abandonShop, roomsList[randomIndex].transform.position, Quaternion.identity);
             }
 
+            roomsList[randomIndex].GetComponentInChildren<GateManager>().disableGate = true;
+
             roomsList.RemoveAt(randomIndex);
             OnShopChange?.Invoke();
         }
@@ -158,6 +160,8 @@ public class RoomManager : MonoBehaviour
         {
             int randomIndex = Random.Range(0, roomsList.Count);
             roomsList[randomIndex].currentRoomType = RoomType.treasure;
+            roomsList[randomIndex].GetComponentInChildren<GateManager>().disableGate = true;
+
             Instantiate(treasure, roomsList[randomIndex].transform.position, Quaternion.identity);
             roomsList.RemoveAt(randomIndex);
         }
