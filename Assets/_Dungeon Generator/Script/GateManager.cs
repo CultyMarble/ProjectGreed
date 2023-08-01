@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class GateManager : MonoBehaviour
 {
-    private EnemyRoomManager enemyRoomManager;
+    [Header("Enemy Spawn")]
+    [SerializeField] private EnemySpawnScriptable enemySpawnScriptable;
+    [SerializeField] private List<GameObject> currentEnemies;
 
     [Header("Gate Data")]
     [SerializeField] private bool playerInsideRoom = false;
@@ -14,9 +17,9 @@ public class GateManager : MonoBehaviour
     [Header("Gate Referance")]
     [SerializeField] private GameObject[] gates;
 
-    private void Awake()
+    private void OnEnable()
     {
-        enemyRoomManager = FindObjectOfType<EnemyRoomManager>();
+        EnemyHealth.OnDespawnCallAll += RoomEnemyCheck;
     }
 
     private void ActiveGates(bool active)
@@ -43,7 +46,7 @@ public class GateManager : MonoBehaviour
 
             ActiveGates(true);
 
-            Test();
+            SpawnRandomEnemy();
         }
     }
 
@@ -55,13 +58,43 @@ public class GateManager : MonoBehaviour
         }
     }
 
-    // <-- 
+    // ---------------------------------------------------------------------------
 
-    private void Test()
+    private void SpawnRandomEnemy()
     {
-        enemyRoomManager.SpawnRandomEnemies(gameObject.transform);
+        int random = Random.Range(0, enemySpawnScriptable.commonEnemies.Length);
+        var enemy = Instantiate(enemySpawnScriptable.commonEnemies[random], gameObject.transform);
+        currentEnemies.Add(enemy);
     }
 
+
+    private void RoomEnemyCheck()
+    {
+        if (!playerInsideRoom) return;
+
+        StartCoroutine(RoomEnemyCheckDelay());
+    }
+
+
+    private IEnumerator RoomEnemyCheckDelay()
+    {
+        yield return 0;
+
+        for (int i = currentEnemies.Count - 1; i >= 0; i--)
+        {
+            var enemy = currentEnemies[i];
+
+            if (!enemy.activeInHierarchy)
+            {
+                currentEnemies.RemoveAt(i);
+            }
+        }
+
+        if (currentEnemies.Count == 0)
+        {
+            RoomCleared();
+        }
+    }
 
 
 

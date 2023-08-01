@@ -123,63 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &1114410843
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2290856477104092857, guid: 483b04c1e914f04419b3e23585831030, type: 3}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2290856477104092857, guid: 483b04c1e914f04419b3e23585831030, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -8.84
-      objectReference: {fileID: 0}
-    - target: {fileID: 2290856477104092857, guid: 483b04c1e914f04419b3e23585831030, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.18
-      objectReference: {fileID: 0}
-    - target: {fileID: 2290856477104092857, guid: 483b04c1e914f04419b3e23585831030, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2290856477104092857, guid: 483b04c1e914f04419b3e23585831030, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2290856477104092857, guid: 483b04c1e914f04419b3e23585831030, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2290856477104092857, guid: 483b04c1e914f04419b3e23585831030, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2290856477104092857, guid: 483b04c1e914f04419b3e23585831030, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2290856477104092857, guid: 483b04c1e914f04419b3e23585831030, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2290856477104092857, guid: 483b04c1e914f04419b3e23585831030, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2290856477104092857, guid: 483b04c1e914f04419b3e23585831030, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2290856477104092860, guid: 483b04c1e914f04419b3e23585831030, type: 3}
-      propertyPath: m_Name
-      value: pfBat
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 483b04c1e914f04419b3e23585831030, type: 3}
 --- !u!1 &1290686696
 GameObject:
   m_ObjectHideFlags: 0
@@ -190,7 +133,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1290686697}
   - component: {fileID: 1290686698}
-  - component: {fileID: 1290686699}
   m_Layer: 0
   m_Name: Room Manager
   m_TagString: Untagged
@@ -255,20 +197,6 @@ MonoBehaviour:
   boss: {fileID: 4422130485644021212, guid: bc67c52f8c921bc438efeab25f755a2d, type: 3}
   shop: {fileID: 4422130485644021212, guid: b98d4cd8232524f4c904daf97c2e9436, type: 3}
   abandonShop: {fileID: 4422130485644021212, guid: 5e265e2fd525acc4ca57c09e913bafb4, type: 3}
---- !u!114 &1290686699
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1290686696}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b87410ca4dc023b4ebb614ab271a5733, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  commonEnemies:
-  - {fileID: 2290856477104092860, guid: 483b04c1e914f04419b3e23585831030, type: 3}
 --- !u!1001 &399540623783743364
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -276,9 +204,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 399540624941842276, guid: c0f4c6c034e43d34cbb3c9e1a4ae0791, type: 3}
+      propertyPath: m_ColliderPaths.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 399540625238344219, guid: c0f4c6c034e43d34cbb3c9e1a4ae0791, type: 3}
       propertyPath: m_Name
       value: Entry Room
+      objectReference: {fileID: 0}
+    - target: {fileID: 399540625238344219, guid: c0f4c6c034e43d34cbb3c9e1a4ae0791, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 399540625238344229, guid: c0f4c6c034e43d34cbb3c9e1a4ae0791, type: 3}
       propertyPath: m_RootOrder

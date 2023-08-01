@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class EnemyHealth : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class EnemyHealth : MonoBehaviour
     public event EventHandler<OnHealthChangedEvenArgs> OnHealthChanged;
 
     public event EventHandler OnDespawnEvent;
+    public static event UnityAction OnDespawnCallAll; // Gary's method to call all scripts that this enemy has despawned. (Don't want to break the out call, but yes. it's the same)
 
     [SerializeField] private float maxHealth;
 
@@ -47,6 +49,7 @@ public class EnemyHealth : MonoBehaviour
     {
         // Call OnDestroy Event
         OnDespawnEvent?.Invoke(this, EventArgs.Empty);
+        OnDespawnCallAll?.Invoke();
 
         // Reset Parameters
         currentHealth = maxHealth;
@@ -58,8 +61,9 @@ public class EnemyHealth : MonoBehaviour
     //======================================================================
     public void UpdateCurrentHealth(float amount = 0)
     {
-        if (amount != 0) {
-                currentHealth += amount;
+        if (amount != 0)
+        {
+            currentHealth += amount;
             currentHealth = Mathf.Clamp(currentHealth, 0.0f, maxHealth);
 
             if (amount < 0)
