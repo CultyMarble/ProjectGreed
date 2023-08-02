@@ -83,6 +83,8 @@ public class RoomManager : MonoBehaviour
             if (currentRooms[i].currentRoomType != RoomType.empty)
             {
                 currentRooms[i].currentRoomType = RoomType.boss;
+                currentRooms[i].GetComponentInChildren<GateManager>().disableGate = true;
+
                 Instantiate(boss, currentRooms[i].transform.position, Quaternion.identity);
                 OnBossChange?.Invoke();
                 break;
