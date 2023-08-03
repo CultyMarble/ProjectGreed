@@ -187,9 +187,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      SlashEffect-Sheet_0: 7625357739108737673
-      SlashEffect-Sheet_1: -4840182499886594793
       SlashEffect-Sheet_2: 2618486890160016645
+      SlashEffect-Sheet_1: -4840182499886594793
+      SlashEffect-Sheet_0: 7625357739108737673
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

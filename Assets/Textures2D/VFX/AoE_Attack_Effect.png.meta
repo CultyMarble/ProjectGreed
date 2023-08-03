@@ -259,12 +259,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      AoE_Attack_Effect_0: 8186684499587358708
       AoE_Attack_Effect_1: -8076549493819745640
+      AoE_Attack_Effect_5: -3762765328932587921
       AoE_Attack_Effect_2: -7663398513600896233
       AoE_Attack_Effect_3: -3630560445886990394
+      AoE_Attack_Effect_0: 8186684499587358708
       AoE_Attack_Effect_4: -4146873370213637158
-      AoE_Attack_Effect_5: -3762765328932587921
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
