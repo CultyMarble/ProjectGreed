@@ -95,19 +95,22 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            StartCoroutine(LoadTutorialRoom());
+        }
+
         if (Input.GetKeyDown(KeyCode.Escape) && mainMenu.activeSelf == false || Input.GetKeyDown(KeyCode.P) && player.activeInHierarchy != false)
         {
             if (pauseMenu.activeSelf)
             {
                 Time.timeScale = 1;
                 pm_animator.SetTrigger("Close");
-                playerCurrencies.Close();
             }
             else
             {
                 Time.timeScale = 0;
                 pauseMenu.SetActive(true);
-                playerCurrencies.Open();
             }
         }
 

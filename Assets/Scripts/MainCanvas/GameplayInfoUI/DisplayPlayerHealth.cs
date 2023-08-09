@@ -3,34 +3,56 @@ using UnityEngine.UI;
 
 public class DisplayPlayerHealth : MonoBehaviour
 {
-    [Header("Component References:")]
+    [Header("UI Settings")]
     [SerializeField] private PlayerHealth playerHealth;
 
     [Header("Canvas References:")]
-    [SerializeField] private Image playerHealthFrameImage;
-    [SerializeField] private Image playerHealthBarImage;
+    [SerializeField] private Transform fullHeartPool = default;
+    [SerializeField] private Transform emptyHeartPool = default;
 
     //===========================================================================
     private void OnEnable()
     {
-        playerHealth.OnMaxHealthEventChanged += PlayerHealth_OnMaxHealthEventChanged;
+        playerHealth.OnMaxHealthChangedEvent += PlayerHealth_OnMaxHealthEventChanged;
         playerHealth.OnHealthChanged += PlayerHealth_OnHealthChanged;
     }
 
     private void OnDisable()
     {
-        playerHealth.OnMaxHealthEventChanged -= PlayerHealth_OnMaxHealthEventChanged;
+        playerHealth.OnMaxHealthChangedEvent -= PlayerHealth_OnMaxHealthEventChanged;
         playerHealth.OnHealthChanged -= PlayerHealth_OnHealthChanged;
     }
 
     //===========================================================================
     private void PlayerHealth_OnMaxHealthEventChanged(object sender, PlayerHealth.OnMaxHealthChangedEventArgs e)
     {
-        playerHealthFrameImage.rectTransform.localScale = new Vector3(e.currentMaxHealth / 100.0f, 1.0f, 1.0f);
+        foreach (Transform fullHeart in emptyHeartPool)
+        {
+            fullHeart.gameObject.SetActive(false);
+        }
+
+        for (int i = 0; i < e.currentMaxHealth; i++)
+        {
+            if (emptyHeartPool.GetChild(i).gameObject.activeInHierarchy == false)
+            {
+                emptyHeartPool.GetChild(i).gameObject.SetActive(true);
+            }
+        }
     }
 
     private void PlayerHealth_OnHealthChanged(object sender, PlayerHealth.OnHealthChangedEventArgs e)
     {
-        playerHealthBarImage.rectTransform.localScale = new Vector3(e.currentHealth / 100.0f, 1.0f, 1.0f);
+        foreach (Transform fullHeart in fullHeartPool)
+        {
+            fullHeart.gameObject.SetActive(false);
+        }
+
+        for (int i = 0; i < e.currentHealth; i++)
+        {
+            if (fullHeartPool.GetChild(i).gameObject.activeInHierarchy == false)
+            {
+                fullHeartPool.GetChild(i).gameObject.SetActive(true);
+            }
+        }
     }
 }

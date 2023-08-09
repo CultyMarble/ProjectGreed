@@ -13,7 +13,7 @@ public class PrefabCheckPoint : MonoBehaviour
         if (collision.GetComponent<Player>() == null)
             return;
 
-        Player.Instance.ShowFPromtText();
+        Player.Instance.SetInteractPromtTextActive(true);
         canActivateCheckPoint = true;
     }
 
@@ -22,7 +22,7 @@ public class PrefabCheckPoint : MonoBehaviour
         if (collision.GetComponent<Player>() == null)
             return;
 
-        Player.Instance.HideFPromtText();
+        Player.Instance.SetInteractPromtTextActive(false);
         canActivateCheckPoint = true;
     }
 

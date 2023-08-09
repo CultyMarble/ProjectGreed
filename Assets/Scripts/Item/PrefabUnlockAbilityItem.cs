@@ -3,7 +3,7 @@ using UnityEngine;
 public class PrefabUnlockAbilityItem : MonoBehaviour
 {
     [Header("Loading Data")]
-    [SerializeField] private SOBoolean canLoad;
+    [SerializeField] private SOBool canLoad;
 
     [Header("Item Function")]
     [SerializeField] private bool unlockAoEAbility;
@@ -16,7 +16,7 @@ public class PrefabUnlockAbilityItem : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            Player.Instance.ShowFPromtText();
+            Player.Instance.SetInteractPromtTextActive(true);
             canPickedUp = true;
         }
     }
@@ -25,7 +25,7 @@ public class PrefabUnlockAbilityItem : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            Player.Instance.HideFPromtText();
+            Player.Instance.SetInteractPromtTextActive(false);
             canPickedUp = false;
         }
     }
@@ -49,7 +49,7 @@ public class PrefabUnlockAbilityItem : MonoBehaviour
 
             canLoad.value = false;
 
-            Player.Instance.HideFPromtText();
+            Player.Instance.SetInteractPromtTextActive(false);
 
             Invoke(nameof(Destroy), 0.1f);
         }

@@ -16,7 +16,7 @@ public class DisplayPlayerAbilityCooldown : MonoBehaviour
     //===========================================================================
     private void Update()
     {
-        dashCooldownText.SetText("[Space] Dash CD: " + playerMovement.GetDashCDCounter().ToString("F1"));
+        dashCooldownText.SetText("[Space] Dash CD: " + playerMovement.DashCDTimeCounter.ToString("F1"));
         rangeAbilityCDText.SetText("[Right-click] Range Ability CD: " + rangeAbility.CooldownTimer.ToString("F1"));
         areaAbilityCDText.SetText("[Q] AoE Ability CD: " + areaAbility.CooldownTimer.ToString("F1"));
     }

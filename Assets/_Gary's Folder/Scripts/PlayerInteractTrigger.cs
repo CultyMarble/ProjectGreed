@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -29,5 +27,4 @@ public class PlayerInteractTrigger : MonoBehaviour
             Debug.Log("Interact!!!");
         }
     }
-
 }

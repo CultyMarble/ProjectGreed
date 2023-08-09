@@ -4,9 +4,10 @@ public class GameplayInfoUIControl : SingletonMonobehaviour<GameplayInfoUIContro
 {
     [SerializeField] private PlayerHealth playerHealth;
 
-    [SerializeField] private GameObject playerUI;
-    [SerializeField] private GameObject playerCurrencies;
-    [SerializeField] private GameObject playerAbilityCoolDown;
+    [SerializeField] private GameObject playerHeartUI;
+    [SerializeField] private GameObject playerFuelUI;
+    [SerializeField] private GameObject playerCurrenciesUI;
+    [SerializeField] private GameObject playerAbilityCoolDownUI;
 
     //===========================================================================
     private void OnEnable()
@@ -28,8 +29,9 @@ public class GameplayInfoUIControl : SingletonMonobehaviour<GameplayInfoUIContro
     //===========================================================================
     public void SetGameplayInfoUIActive(bool newBool)
     {
-        playerUI.SetActive(newBool);
-        playerCurrencies.SetActive(newBool);
-        playerAbilityCoolDown.SetActive(newBool);
+        playerHeartUI.SetActive(newBool);
+        playerFuelUI.SetActive(newBool);
+        playerCurrenciesUI.SetActive(newBool);
+        playerAbilityCoolDownUI.SetActive(newBool);
     }
 }

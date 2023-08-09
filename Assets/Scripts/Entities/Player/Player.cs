@@ -18,7 +18,7 @@ public class Player : SingletonMonobehaviour<Player>
     //======================================================================
     private void Start()
     {
-        HideFPromtText();
+        SetInteractPromtTextActive(false);
 
         EventManager.AfterSceneLoadEvent += EventManager_AfterSceneLoadEventHandler;
 
@@ -28,25 +28,17 @@ public class Player : SingletonMonobehaviour<Player>
     //======================================================================
     private void EventManager_AfterSceneLoadEventHandler()
     {
-        HideFPromtText();
+        SetInteractPromtTextActive(false);
 
         this.gameObject.SetActive(true);
     }
 
     //======================================================================
-    public void ShowFPromtText()
+    public void SetInteractPromtTextActive(bool newBool)
     {
         if (fpromtText == null)
             return;
 
-        fpromtText.gameObject.SetActive(true);
-    }
-
-    public void HideFPromtText()
-    {
-        if (fpromtText == null)
-            return;
-
-        fpromtText.gameObject.SetActive(false);
+        fpromtText.gameObject.SetActive(newBool);
     }
 }

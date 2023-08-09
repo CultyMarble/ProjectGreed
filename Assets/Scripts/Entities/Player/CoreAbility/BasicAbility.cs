@@ -28,7 +28,6 @@ public class BasicAbility : CoreAbility
 
     //===========================================================================
     // NEW INPUT SYSTEM
-
     private PlayerInput playerInput;
     private bool leftClickButtonCheck = false;
 
@@ -47,6 +46,8 @@ public class BasicAbility : CoreAbility
     {
         playerInput.actions["LeftClick"].started -= ActionPerformed;
         playerInput.actions["LeftClick"].canceled -= ActionCanceled;
+
+        refuelRate = 0.2f;
     }
 
     private void ActionPerformed(InputAction.CallbackContext obj)
@@ -60,7 +61,6 @@ public class BasicAbility : CoreAbility
     }
 
     //===========================================================================
-
     private void Start()
     {
         currentFuel = maxFuel;
@@ -92,7 +92,6 @@ public class BasicAbility : CoreAbility
     }
 
     //===========================================================================
-
     private void InputHandler()
     {
         if (leftClickButtonCheck && cooldownTimer == 0 && currentFuel > 0)
@@ -159,5 +158,10 @@ public class BasicAbility : CoreAbility
     public void ResetMaxFuel()
     {
         maxFuel = 100.0f;
+    }
+
+    public void UpdateRefuelRate(float amount)
+    {
+        refuelRate += amount;
     }
 }

@@ -50,7 +50,6 @@ public class BombAbility : CoreAbility
     }
 
     //===========================================================================
-
     private void InputHandler()
     {
         if (playerInput.actions["Bomb"].triggered && cooldownTimer == 0)
@@ -76,5 +75,16 @@ public class BombAbility : CoreAbility
         {
             placeTime -= Time.deltaTime;
         }
+    }
+
+    //===========================================================================
+    public void BombUpdateDamage(float newDamage)
+    {
+        damage += newDamage;
+    }
+
+    public void UpdateRadius(float newRadius)
+    {
+        pushRadius = newRadius;
     }
 }

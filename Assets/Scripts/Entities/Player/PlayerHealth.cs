@@ -7,20 +7,20 @@ public class PlayerHealth : MonoBehaviour
     public event EventHandler<OnHealthChangedEventArgs> OnHealthChanged;
 
     public struct OnMaxHealthChangedEventArgs { public float currentMaxHealth; }
-    public event EventHandler<OnMaxHealthChangedEventArgs> OnMaxHealthEventChanged;
+    public event EventHandler<OnMaxHealthChangedEventArgs> OnMaxHealthChangedEvent;
 
     public event EventHandler OnDespawnEvent;
 
-    private readonly float maxHealth = 100.0f;
+    private readonly int maxHealth = 3;
 
-    private float currentMaxHealth;
-    private float currentHealth;
+    private int currentMaxHealth;
+    private int currentHealth;
 
     private float feedbackDamageTime = 0.10f;
     private float feedbackDamageTimer = default;
 
     //======================================================================
-    private void Start()
+    private void OnEnable()
     {
         ResetPlayerHealth();
     }
@@ -31,7 +31,7 @@ public class PlayerHealth : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Backspace))
         {
-            UpdateCurrentHealth(-10);
+            UpdateCurrentHealth(-1);
         }
     }
 
@@ -76,29 +76,31 @@ public class PlayerHealth : MonoBehaviour
         UpdateCurrentHealth();
     }
 
-    public void UpdateCurrentMaxHealth(float amount = 0)
+    public void UpdateCurrentMaxHealth(int amount = 0)
     {
-        float _healthRatio = currentHealth / currentMaxHealth;
-
         currentMaxHealth += amount;
-        if (currentMaxHealth <= 0) currentMaxHealth = 0;
+        if (currentMaxHealth <= 0)
+            currentMaxHealth = 0;
+
+        if (currentHealth > currentMaxHealth)
+            currentHealth = currentMaxHealth;
 
         //Invoke Event
-        OnMaxHealthEventChanged?.Invoke(this, new OnMaxHealthChangedEventArgs { currentMaxHealth = currentMaxHealth });
+        OnMaxHealthChangedEvent?.Invoke(this, new OnMaxHealthChangedEventArgs { currentMaxHealth = currentMaxHealth });
 
-        if (amount > 0)
-        {
-            float _amount = (currentMaxHealth * _healthRatio) - currentHealth;
-            UpdateCurrentHealth(_amount);
-        }
+        //Invoke Event
+        OnHealthChanged?.Invoke(this, new OnHealthChangedEventArgs { currentHealth = currentHealth });
     }
 
-    public void UpdateCurrentHealth(float amount = 0)
+    public void UpdateCurrentHealth(int amount = 0)
     {
         if (amount != 0)
         {
             currentHealth += amount;
-            currentHealth = Mathf.Clamp(currentHealth, 0.0f, currentMaxHealth);
+            if (currentHealth <= 0)
+                currentHealth = 0;
+            else if (currentHealth > currentMaxHealth)
+                currentHealth = currentMaxHealth;
 
             if (amount < 0)
                 DamageFeedBack();
