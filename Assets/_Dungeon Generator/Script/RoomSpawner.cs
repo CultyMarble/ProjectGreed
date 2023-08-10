@@ -52,7 +52,7 @@ public class RoomSpawner : MonoBehaviour
     {
         int random = Random.Range(0, length);
         GameObject newRoom = Instantiate(room[random], new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
-        newRoom.transform.parent = this.transform.parent;
+        newRoom.transform.parent = this.transform.parent.parent;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
