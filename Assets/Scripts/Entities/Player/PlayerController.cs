@@ -71,8 +71,7 @@ public class PlayerController : MonoBehaviour
     //======================================================================
     private void PlayerInput()
     {
-        if (Player.Instance.playerActionState == PlayerActionState.IsDashing ||
-            Player.Instance.playerActionState == PlayerActionState.IsUsingRangeAbility)
+        if (Player.Instance.playerActionState == PlayerActionState.IsDashing)
             return;
 
         Vector2 input = playerInput.actions["Move"].ReadValue<Vector2>();
@@ -156,6 +155,7 @@ public class PlayerController : MonoBehaviour
                 Rigidbody2D.MovePosition(Rigidbody2D.position + (0.1f * baseMoveSpeed) * Time.deltaTime * movementVector);
                 break;
             case PlayerActionState.IsUsingRangeAbility:
+                Rigidbody2D.MovePosition(Rigidbody2D.position + baseMoveSpeed * Time.deltaTime * movementVector);
                 break;
             case PlayerActionState.IsUsingBombAbility:
                 break;
@@ -228,5 +228,10 @@ public class PlayerController : MonoBehaviour
     public void UpdateDashTime(float duration)
     {
         dashTime += duration;
+    }
+
+    public void SetMoveSpeed(float newMoveSpeed)
+    {
+        baseMoveSpeed = newMoveSpeed;
     }
 }

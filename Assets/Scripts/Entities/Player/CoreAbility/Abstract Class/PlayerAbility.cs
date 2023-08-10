@@ -21,8 +21,5 @@ public abstract class PlayerAbility : MonoBehaviour
             return;
 
         cooldownTimer -= Time.deltaTime;
-
-        if (cooldownTimer <= 0.0f)
-            cooldownTimer = 0.0f;
     }
 }

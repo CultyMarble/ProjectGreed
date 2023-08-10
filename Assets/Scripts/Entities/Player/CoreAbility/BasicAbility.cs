@@ -79,6 +79,8 @@ public class BasicAbility : PlayerAbility
     {
         base.Update();
 
+        Debug.Log(cooldownTimer);
+
         switch (Player.Instance.playerActionState)
         {
             case PlayerActionState.none:
@@ -105,7 +107,7 @@ public class BasicAbility : PlayerAbility
     //===========================================================================
     private void InputHandler()
     {
-        if (leftClickButtonCheck && cooldownTimer == 0 && currentFuel > 0)
+        if (leftClickButtonCheck && cooldownTimer <= 0 && currentFuel > 0)
         {
             Player.Instance.playerActionState = PlayerActionState.IsUsingBasicAbility;
             SpawnParticle();
