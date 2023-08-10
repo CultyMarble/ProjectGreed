@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class BombAbility : CoreAbility
+public class BombAbility : PlayerAbility
 {
     [Header("Effect Settings:")]
     [SerializeField] private GameObject pfBomb;
@@ -67,7 +67,7 @@ public class BombAbility : CoreAbility
         if (placeTime <= 0)
         {
             Transform bomb = Instantiate(pfBomb, transform.position, Quaternion.identity).transform;
-            bomb.GetComponent<BombObject>().SetBombConfig(damage, pushPower, pushRadius, fuseTime, abilityStatusEffect);
+            // bomb.GetComponent<BombObject>().SetBombConfig(damage, pushPower, pushRadius, fuseTime, abilityStatusEffect);
             Player.Instance.playerActionState = PlayerActionState.none;
             placeTime = 0.1f;
         }
@@ -75,16 +75,5 @@ public class BombAbility : CoreAbility
         {
             placeTime -= Time.deltaTime;
         }
-    }
-
-    //===========================================================================
-    public void BombUpdateDamage(float newDamage)
-    {
-        damage += newDamage;
-    }
-
-    public void UpdateRadius(float newRadius)
-    {
-        pushRadius = newRadius;
     }
 }

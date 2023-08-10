@@ -94,11 +94,9 @@ public class SprayParticleProjectile : MonoBehaviour
         particleGrowthRate = growthRate;
     }
 
-    public void ConfigParticleDamage(float damage, float pushPower, AbilityStatusEffect _statusEffect)
+    public void ConfigParticleDamage(float damage)
     {
         particleDamage = damage;
-        particlePushPower = pushPower;
-        statusEffect = _statusEffect;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

@@ -1,27 +1,31 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class BasicAbility : CoreAbility
+public class BasicAbility : PlayerAbility
 {
-    [Header("Particle Pool:")]
+    // Utility
+    public readonly float moveSpeed = 3.0f;
+    public readonly float lifeTime = 0.75f;
+    public readonly float rechargeDelay = 1.0f;
+
+    public readonly float timeUntilChangeDirectionMax = 0.2f;
+    public readonly float timeUntilChangeDirectionMin = 0.1f;
+    public readonly float swingMagtitude = 0.8f;
+    public readonly float growthRate = 0.75f;
+    public readonly float size = 0.18f;
+
+    // Pooling System
     [SerializeField] private Transform basicAbilityProjectilePool;
 
-    [Header("Particle Settings:")]
-    [SerializeField] private float moveSpeed;
-    [SerializeField] private float lifeTime;
-    [SerializeField] private float maxFuel;
-    [SerializeField] private float fuelDrainRate;
-    [SerializeField] private float refuelRate;
-    [SerializeField] private float refuelDelay;
+    // Ability Stats
+    private float maxFuel = default;
+    private float drainRate = default;
+    private float rechargeRate = default;
 
-    [SerializeField] private float timeUntilChangeDirectionMax;
-    [SerializeField] private float timeUntilChangeDirectionMin;
-    [SerializeField] private float swingMagtitude;
-    [SerializeField] private float growthRate;
-    [SerializeField] private float size;
-
-    private float refuelCounter;
+    private float rechargeTimer = default;
     private float currentFuel = default;
+
+    private float damage = default;
 
     public float CurrentFuel { get => currentFuel; private set { } }
     public float MaxFuel { get => maxFuel; private set { } }
@@ -31,6 +35,7 @@ public class BasicAbility : CoreAbility
     private PlayerInput playerInput;
     private bool leftClickButtonCheck = false;
 
+    //===========================================================================
     private void Awake()
     {
         playerInput = FindObjectOfType<PlayerInput>();
@@ -42,14 +47,23 @@ public class BasicAbility : CoreAbility
         playerInput.actions["LeftClick"].canceled += ActionCanceled;
     }
 
+    private void Start()
+    {
+        maxFuel = Player.Instance.PlayerStat.ba_baseMaxFuel;
+        drainRate = Player.Instance.PlayerStat.ba_baseDrainRate;
+        rechargeRate = Player.Instance.PlayerStat.ba_baseRechargeRate;
+        damage = Player.Instance.PlayerStat.ba_baseDamage;
+
+        currentFuel = maxFuel;
+    }
+
     private void OnDisable()
     {
         playerInput.actions["LeftClick"].started -= ActionPerformed;
         playerInput.actions["LeftClick"].canceled -= ActionCanceled;
-
-        refuelRate = 0.2f;
     }
 
+    //===========================================================================
     private void ActionPerformed(InputAction.CallbackContext obj)
     {
         leftClickButtonCheck = true;
@@ -61,11 +75,6 @@ public class BasicAbility : CoreAbility
     }
 
     //===========================================================================
-    private void Start()
-    {
-        currentFuel = maxFuel;
-    }
-
     protected override void Update()
     {
         base.Update();
@@ -82,8 +91,10 @@ public class BasicAbility : CoreAbility
                 break;
         }
 
-        InputHandler();
-        Fuel();
+        UpdateRechargeTimerCheck();
+
+        if (currentFuel != maxFuel && rechargeTimer <= 0)
+            RechargeFuel();
     }
 
     private void FixedUpdate()
@@ -98,14 +109,10 @@ public class BasicAbility : CoreAbility
         {
             Player.Instance.playerActionState = PlayerActionState.IsUsingBasicAbility;
             SpawnParticle();
-            if (currentFuel < fuelDrainRate)
-            {
-                currentFuel = 0;
-            }
-            else
-            {
-                currentFuel -= fuelDrainRate;
-            }
+
+            currentFuel -= drainRate * Time.deltaTime;
+
+            rechargeTimer = rechargeDelay;
             cooldownTimer = cooldown;
         }
         else if (!leftClickButtonCheck && Player.Instance.playerActionState == PlayerActionState.IsUsingBasicAbility)
@@ -125,7 +132,7 @@ public class BasicAbility : CoreAbility
                 particle.GetComponent<SprayParticleProjectile>().
                     ConfigParticleMovementPattern(timeUntilChangeDirectionMax, timeUntilChangeDirectionMin, swingMagtitude);
                 particle.GetComponent<SprayParticleProjectile>().ConfigParticleSizeAndGrowth(size, growthRate);
-                particle.GetComponent<SprayParticleProjectile>().ConfigParticleDamage(damage, pushPower, abilityStatusEffect);
+                particle.GetComponent<SprayParticleProjectile>().ConfigParticleDamage(damage);
 
                 particle.position = this.transform.position + 0.5f * mouseDir;
                 particle.gameObject.SetActive(true);
@@ -134,19 +141,18 @@ public class BasicAbility : CoreAbility
         }
     }
 
-    private void Fuel()
+    private void UpdateRechargeTimerCheck()
     {
-        refuelCounter += Time.deltaTime;
+        if (rechargeTimer <= 0)
+            return;
 
-        if (currentFuel < maxFuel && refuelCounter >= refuelDelay && !Input.GetMouseButton(0))
-        {
-            currentFuel += refuelRate;
+        rechargeTimer -= Time.deltaTime;
+    }
 
-            if (currentFuel >= maxFuel)
-                currentFuel = maxFuel;
-
-            refuelCounter = 0;
-        }
+    private void RechargeFuel()
+    {
+        currentFuel += rechargeRate * Time.deltaTime;
+        currentFuel = Mathf.Clamp(currentFuel, 0.0f, maxFuel);
     }
 
     //===========================================================================
@@ -162,6 +168,6 @@ public class BasicAbility : CoreAbility
 
     public void UpdateRefuelRate(float amount)
     {
-        refuelRate += amount;
+        rechargeRate += amount;
     }
 }

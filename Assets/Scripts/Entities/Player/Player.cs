@@ -1,20 +1,14 @@
 using UnityEngine;
 
-public enum PlayerActionState
-{
-    IsUsingBasicAbility,
-    IsUsingRangeAbility,
-    IsUsingAreaAbility,
-    IsUsingBombAbility,
-    IsDashing,
-    none,
-}
-
 public class Player : SingletonMonobehaviour<Player>
 {
     [SerializeField] private Transform fpromtText;
 
     [HideInInspector] public PlayerActionState playerActionState;
+
+    [SerializeField] private PlayerStat playerStat = default;
+    public PlayerStat PlayerStat => playerStat;
+
     //======================================================================
     private void Start()
     {

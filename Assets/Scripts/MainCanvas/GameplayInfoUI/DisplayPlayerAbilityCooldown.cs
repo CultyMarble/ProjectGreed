@@ -5,8 +5,8 @@ public class DisplayPlayerAbilityCooldown : MonoBehaviour
 {
     [SerializeField] private PlayerController playerMovement;
 
-    [SerializeField] private CoreAbility rangeAbility;
-    [SerializeField] private CoreAbility areaAbility;
+    [SerializeField] private PlayerAbility rangeAbility;
+    [SerializeField] private PlayerAbility areaAbility;
     [SerializeField] private BasicAbility basicAbility;
 
     [SerializeField] private TextMeshProUGUI dashCooldownText;
@@ -16,8 +16,8 @@ public class DisplayPlayerAbilityCooldown : MonoBehaviour
     //===========================================================================
     private void Update()
     {
-        dashCooldownText.SetText("[Space] Dash CD: " + playerMovement.DashCDTimeCounter.ToString("F1"));
-        rangeAbilityCDText.SetText("[Right-click] Range Ability CD: " + rangeAbility.CooldownTimer.ToString("F1"));
-        areaAbilityCDText.SetText("[Q] AoE Ability CD: " + areaAbility.CooldownTimer.ToString("F1"));
+        //dashCooldownText.SetText("[Space] Dash CD: " + playerMovement.DashCDTimeCounter.ToString("F1"));
+        //rangeAbilityCDText.SetText("[Right-click] Range Ability CD: " + rangeAbility.CooldownTimer.ToString("F1"));
+        //areaAbilityCDText.SetText("[Q] AoE Ability CD: " + areaAbility.CooldownTimer.ToString("F1"));
     }
 }

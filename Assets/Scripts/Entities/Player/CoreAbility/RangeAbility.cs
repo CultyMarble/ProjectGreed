@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class RangeAbility : CoreAbility
+public class RangeAbility : PlayerAbility
 {
     [Header("Effect Settings:")]
     [SerializeField] private GameObject pfRangeAbilityProjectile;
@@ -100,6 +100,7 @@ public class RangeAbility : CoreAbility
             {
                 aimCharge = aimChargeTime;
             }
+
             aimIndicator.GetComponent<SpriteRenderer>().color = Color.yellow;
 
             if (aimCharge >= aimChargeTime)
@@ -109,12 +110,11 @@ public class RangeAbility : CoreAbility
             if (!rightButtonCheck)
             {
                 float scaledSpeed = Mathf.Clamp((aimCharge / aimChargeTime) * projectileSpeed, projectileSpeed / 2, projectileSpeed);
-                int scaledDamage = (int)Mathf.Clamp((aimCharge / aimChargeTime) * damage, damage / 2, damage);
+                // int scaledDamage = (int)Mathf.Clamp((aimCharge / aimChargeTime) * damage, damage / 2, damage);
 
                 cooldownTimer = cooldown;
 
                 Transform projectile = Instantiate(pfRangeAbilityProjectile, this.transform.position, Quaternion.identity).transform;
-                projectile.GetComponent<RangeAbilityProjectile>().ProjectileConfig(rotStackApply, scaledSpeed, this.transform, scaledDamage, abilityStatusEffect);
                 Player.Instance.playerActionState = PlayerActionState.none;
                 aimCharge = 0;
             }

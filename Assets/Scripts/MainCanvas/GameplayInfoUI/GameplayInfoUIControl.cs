@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class GameplayInfoUIControl : SingletonMonobehaviour<GameplayInfoUIControl>
 {
-    [SerializeField] private PlayerHealth playerHealth;
+    [SerializeField] private PlayerHeartManager playerHealth;
 
     [SerializeField] private GameObject playerHeartUI;
     [SerializeField] private GameObject playerFuelUI;

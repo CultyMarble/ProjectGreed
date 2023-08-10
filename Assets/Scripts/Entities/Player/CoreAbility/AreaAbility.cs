@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class AreaAbility : CoreAbility
+public class AreaAbility : PlayerAbility
 {
     [Header("Effect Animation Settings:")]
     [SerializeField] private SpriteRenderer[] abilityEffect;
@@ -95,33 +95,33 @@ public class AreaAbility : CoreAbility
 
     private void PushEnemyInRadius()
     {
-        Collider2D[] collider2DArray = Physics2D.OverlapCircleAll(transform.position, pushRadius);
-        if (collider2DArray.Length == 0)
-            return;
+        //Collider2D[] collider2DArray = Physics2D.OverlapCircleAll(transform.position, pushRadius);
+        //if (collider2DArray.Length == 0)
+        //    return;
 
-        foreach (Collider2D collider2D in collider2DArray)
-        {
-            if (collider2D.CompareTag("Enemy"))
-            {
-                // Reduce health
-                collider2D.GetComponent<EnemyHealth>().UpdateCurrentHealth((int)damage);
+        //foreach (Collider2D collider2D in collider2DArray)
+        //{
+        //    if (collider2D.CompareTag("Enemy"))
+        //    {
+        //        // Reduce health
+        //        collider2D.GetComponent<EnemyHealth>().UpdateCurrentHealth((int)damage);
 
-                // Push back
-                Transform enemyTranform = collider2D.GetComponent<Transform>();
+        //        // Push back
+        //        Transform enemyTranform = collider2D.GetComponent<Transform>();
 
-                Vector2 _pushDirection = (enemyTranform.position - GetComponentInParent<Player>().transform.position).normalized;
-                float _eulerAngle = CultyMarbleHelper.GetAngleFromVector(_pushDirection);
+        //        Vector2 _pushDirection = (enemyTranform.position - GetComponentInParent<Player>().transform.position).normalized;
+        //        float _eulerAngle = CultyMarbleHelper.GetAngleFromVector(_pushDirection);
 
-                if (collider2D.GetComponent<TargetingAI>() != null)
-                {
-                    collider2D.GetComponent<TargetingAI>().HoldMovement();
-                }
-                // Add force
-                collider2D.GetComponent<Enemy>().isPushBack = true;
-                collider2D.GetComponent<Rigidbody2D>().AddForce(_pushDirection * pushPower, ForceMode2D.Force);
+        //        if (collider2D.GetComponent<TargetingAI>() != null)
+        //        {
+        //            collider2D.GetComponent<TargetingAI>().HoldMovement();
+        //        }
+        //        // Add force
+        //        collider2D.GetComponent<Enemy>().isPushBack = true;
+        //        collider2D.GetComponent<Rigidbody2D>().AddForce(_pushDirection * pushPower, ForceMode2D.Force);
 
-                collider2D.GetComponent<Enemy>().InflictStatusEffect(abilityStatusEffect, 5);
-            }
-        }
+        //        collider2D.GetComponent<Enemy>().InflictStatusEffect(abilityStatusEffect, 5);
+        //    }
+        //}
     }
 }

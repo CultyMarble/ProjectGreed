@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class PlayerHealth : MonoBehaviour
+public class PlayerHeartManager : MonoBehaviour
 {
     public struct OnHealthChangedEventArgs { public float currentHealth; }
     public event EventHandler<OnHealthChangedEventArgs> OnHealthChanged;
@@ -11,20 +11,13 @@ public class PlayerHealth : MonoBehaviour
 
     public event EventHandler OnDespawnEvent;
 
-    private readonly int maxHealth = 3;
+    private int currentMaxHealth = default;
+    private int currentHealth = default;
 
-    private int currentMaxHealth;
-    private int currentHealth;
-
-    private float feedbackDamageTime = 0.10f;
+    private readonly float feedbackDamageTime = 0.10f;
     private float feedbackDamageTimer = default;
 
     //======================================================================
-    private void OnEnable()
-    {
-        ResetPlayerHealth();
-    }
-
     private void Update()
     {
         UpdateDamageFeedBackTimer();
@@ -59,7 +52,7 @@ public class PlayerHealth : MonoBehaviour
     private void Despawn()
     {
         // Reset Parameters
-        UpdateCurrentHealth(currentMaxHealth);
+        UpdateCurrentHealth(currentHealth);
         gameObject.SetActive(false);
 
         // Call OnDestroy Event
@@ -67,13 +60,16 @@ public class PlayerHealth : MonoBehaviour
     }
 
     //======================================================================
-    public void ResetPlayerHealth()
+    public void ResetPlayerHealth(int baseMaxHealth)
     {
-        currentMaxHealth = maxHealth;
-        currentHealth = maxHealth;
+        currentMaxHealth = baseMaxHealth;
+        currentHealth = baseMaxHealth;
 
-        UpdateCurrentMaxHealth();
-        UpdateCurrentHealth();
+        //Invoke Event
+        OnMaxHealthChangedEvent?.Invoke(this, new OnMaxHealthChangedEventArgs { currentMaxHealth = currentMaxHealth });
+
+        //Invoke Event
+        OnHealthChanged?.Invoke(this, new OnHealthChangedEventArgs { currentHealth = currentHealth });
     }
 
     public void UpdateCurrentMaxHealth(int amount = 0)

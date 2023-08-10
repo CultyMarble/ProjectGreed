@@ -10,7 +10,7 @@ public class BearTrap : Trap
         if (playerInside)
         {
             Player.Instance.gameObject.transform.position = this.transform.position;
-            Player.Instance.GetComponent<PlayerHealth>().UpdateCurrentHealth(-trapDamage);
+            Player.Instance.GetComponent<PlayerHeartManager>().UpdateCurrentHealth(-trapDamage);
         }
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class DisplayPlayerHealth : MonoBehaviour
 {
     [Header("UI Settings")]
-    [SerializeField] private PlayerHealth playerHealth;
+    [SerializeField] private PlayerHeartManager playerHealth;
 
     [Header("Canvas References:")]
     [SerializeField] private Transform fullHeartPool = default;
@@ -24,7 +24,7 @@ public class DisplayPlayerHealth : MonoBehaviour
     }
 
     //===========================================================================
-    private void PlayerHealth_OnMaxHealthEventChanged(object sender, PlayerHealth.OnMaxHealthChangedEventArgs e)
+    private void PlayerHealth_OnMaxHealthEventChanged(object sender, PlayerHeartManager.OnMaxHealthChangedEventArgs e)
     {
         foreach (Transform fullHeart in emptyHeartPool)
         {
@@ -40,7 +40,7 @@ public class DisplayPlayerHealth : MonoBehaviour
         }
     }
 
-    private void PlayerHealth_OnHealthChanged(object sender, PlayerHealth.OnHealthChangedEventArgs e)
+    private void PlayerHealth_OnHealthChanged(object sender, PlayerHeartManager.OnHealthChangedEventArgs e)
     {
         foreach (Transform fullHeart in fullHeartPool)
         {
