@@ -21501,9 +21501,17 @@ TextureImporter:
       gentle tree wall, canopy only_636: -642151805
       gentle tree wall, canopy only_877: -723080374
       gentle tree wall, canopy only_138: 1384989661
+<<<<<<< HEAD:Assets/Sprites/TileTexture/gentle tree wall, canopy only.png.meta
       gentle tree wall, canopy only_783: -1229239466
       gentle tree wall, canopy only_36: -774459421
       gentle tree wall, canopy only_96: 22941780
+=======
+      gentle tree wall, canopy only_36: -774459421
+      gentle tree wall, canopy only_780: -1193956345
+      gentle tree wall, canopy only_96: 22941780
+      gentle tree wall, canopy only_783: -1229239466
+      gentle tree wall, canopy only_169: 1667464755
+>>>>>>> BeforeNewMapSystem:Assets/Textures2D/TileTexture/gentle tree wall, canopy only.png.meta
       gentle tree wall, canopy only_623: 1921530811
       gentle tree wall, canopy only_169: 1667464755
       gentle tree wall, canopy only_780: -1193956345

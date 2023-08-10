@@ -15,7 +15,7 @@ public class SceneTransitZone : MonoBehaviour
     {
         if (collision.GetComponent<Player>() != null)
         {
-            Player.Instance.ShowFPromtText();
+            Player.Instance.SetInteractPromtTextActive(true);
 
             if (Input.GetKey(KeyCode.F))
             {
@@ -34,7 +34,7 @@ public class SceneTransitZone : MonoBehaviour
     {
         if (collision.GetComponent<Player>() != null)
         {
-            Player.Instance.HideFPromtText();
+            Player.Instance.SetInteractPromtTextActive(false);
         }
     }
 }

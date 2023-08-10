@@ -78,7 +78,7 @@ public class SlamAI : MonoBehaviour
         {
             if (collider2D.GetComponent<Player>() != null)
             {
-                collider2D.GetComponent<PlayerHealth>().UpdateCurrentHealth(-damage);
+                collider2D.GetComponent<PlayerHeartManager>().UpdateCurrentHealth(-damage);
                 return;
             }
         }

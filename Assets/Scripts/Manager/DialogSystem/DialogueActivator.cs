@@ -1,137 +1,100 @@
 using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class DialogueActivator : MonoBehaviour
 {
-    [SerializeField] private DialogueEntry[] dialogueEntries;
-    [SerializeField] private string quickText;
+    private enum DialogueActivateType { AutoTrigger, ManualTrigger, }
 
-    [SerializeField] private bool autoActive;
-    [SerializeField] private GameObject dialogueIndicator;
+    [Header("Set Dialogue Trigger Method:")]
+    [SerializeField] private DialogueActivateType activateType = default;
+    [SerializeField] private SOBool haveActivated = default;
 
-    private int dialogueEntryIndex;
-    private bool canActivate;
-    private bool isActivated;
-    private bool canAuto = false;
-    private bool previouslyActivated = false;
+    [Header("Dialog Entry Data:")]
+    [SerializeField] private SODialogueEntry[] dialogueEntryArray = default;
 
-
-    private enum DialogueState
-    {
-        auto,
-        manual,
-    }
-    private DialogueState dialogueState;
+    private int dialogueEntryIndex = default;
+    private bool canActivateDialogBox = default;
 
     //===========================================================================
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
-            Player.Instance.ShowFPromtText();
-    }
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (dialogueState == DialogueState.auto)
+        if (collision.CompareTag("Player") == false)
             return;
 
-        if (collision.CompareTag("Player"))
-            canActivate = true;
+        if (activateType == DialogueActivateType.ManualTrigger)
+            Player.Instance.SetInteractPromtTextActive(true);
+
+        canActivateDialogBox = true;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (dialogueState == DialogueState.auto)
+        if (collision.CompareTag("Player") == false)
             return;
 
-        if (collision.CompareTag("Player"))
-        {
-            Player.Instance.HideFPromtText();
-            canActivate = false;
-            isActivated = false;
-        }
+        if (activateType == DialogueActivateType.ManualTrigger)
+            Player.Instance.SetInteractPromtTextActive(false);
+        
+        canActivateDialogBox = false;
     }
 
     //===========================================================================
-    private void Start()
+    private void Update()
     {
-        if (dialogueEntries == null)
+        if (canActivateDialogBox == false)
             return;
 
-        if (autoActive)
+        switch (activateType)
         {
-            dialogueState = DialogueState.auto;
+            case DialogueActivateType.ManualTrigger:
+                ManualTriggerDialogHandler();
+                break;
+            case DialogueActivateType.AutoTrigger:
+                AutoTriggerDialogHandler();
+                break;
         }
-        else
-        {
-            dialogueState = DialogueState.manual;
-            canAuto = false;
-        }
-
-        dialogueEntryIndex = Random.Range(0, dialogueEntries.Length);
-
-        EventManager.AfterSceneLoadedLoadingScreenEvent += EventManager_AfterSceneLoadedLoadingScreenEventHandler;
     }
 
     private void OnDisable()
     {
-        EventManager.AfterSceneLoadedLoadingScreenEvent -= EventManager_AfterSceneLoadedLoadingScreenEventHandler;
+        haveActivated.value = false;
     }
 
-    private void Update()
+    //===========================================================================
+    private void ActivateDialogueManager(SODialogueEntry entry)
     {
-        //if (!previouslyActivated)
-        //{
-        //    previouslyActivated = true;
-        //}
-        if (dialogueEntries == null)
+        DialogManager.Instance.SetDialogLines(entry.dialogueLines);
+        DialogManager.Instance.SetDialogPanelActiveState(true);
+    }
+
+    private void ManualTriggerDialogHandler()
+    {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            foreach(SODialogueEntry entry in dialogueEntryArray)
+            {
+                if (entry.hasBeenUsed == false)
+                {
+                    entry.hasBeenUsed = true;
+                    ActivateDialogueManager(entry);
+
+                    return;
+                }
+            }
+
+            dialogueEntryIndex = Random.Range(0, dialogueEntryArray.Length);
+            ActivateDialogueManager(dialogueEntryArray[dialogueEntryIndex]);
+        }
+    }
+
+    private void AutoTriggerDialogHandler()
+    {
+        if (haveActivated.value)
             return;
 
-        if (dialogueEntries.Length > 0)
-        {
-            if (dialogueEntries[dialogueEntryIndex].hasBeenUsed)
-            {
-                dialogueIndicator.SetActive(false);
-            }
-            else
-            {
-                dialogueIndicator.SetActive(true);
-            }
-        }
-        switch (dialogueState)
-        {
-            case DialogueState.manual:
-                if (canActivate && Input.GetKeyDown(KeyCode.F))
-                {
-                    dialogueEntries[dialogueEntryIndex].hasBeenUsed = true;
-                    if (quickText.Length <= 0)
-                    {
-                        DialogManager.Instance.SetDialogLines(dialogueEntries[dialogueEntryIndex].dialogueLines);
-                    }
-                    else
-                    {
-                        DialogManager.Instance.SetDialogLines(quickText);
-                    }
-                    DialogManager.Instance.SetDialogPanelActiveState(true);
+        haveActivated.value = true;
 
-                    Time.timeScale = 0.0f;
-                    isActivated = true;
-                }
-                break;
-            case DialogueState.auto:
-                if (canAuto)
-                {
-                    DialogManager.Instance.SetDialogLines(dialogueEntries[dialogueEntryIndex].dialogueLines);
-                    DialogManager.Instance.SetDialogPanelActiveState(true);
-
-                    Time.timeScale = 0.0f;
-                    isActivated = true;
-                }
-                break;
-        }
-    }
-
-    private void EventManager_AfterSceneLoadedLoadingScreenEventHandler()
-    {
-        canAuto = true;
+        dialogueEntryIndex = Random.Range(0, dialogueEntryArray.Length);
+        ActivateDialogueManager(dialogueEntryArray[dialogueEntryIndex]);
     }
 }

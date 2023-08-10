@@ -15,6 +15,7 @@ public class SprayParticleProjectile : MonoBehaviour
     private float swingMagtitude = default;
     private Vector3 moveDirection = default;
     private AbilityStatusEffect statusEffect;
+
     //===========================================================================
     private void OnEnable()
     {
@@ -29,7 +30,7 @@ public class SprayParticleProjectile : MonoBehaviour
         {
             timeUntilChangeDirection = Random.Range(timeUntilChangeDirectionMin, timeUntilChangeDirectionMax);
 
-            moveDirection += new Vector3(moveDirection.x,
+            moveDirection += new Vector3(Random.Range(moveDirection.x - swingMagtitude, moveDirection.x + swingMagtitude),
                 Random.Range(moveDirection.y - swingMagtitude, moveDirection.y + swingMagtitude), moveDirection.z).normalized;
         }
 
@@ -49,10 +50,6 @@ public class SprayParticleProjectile : MonoBehaviour
                 Vector3 emberVector = new Vector3(0.1f, 0.1f, 0.1f);
                 transform.localScale = emberVector;
             }
-            //else if (lifeTime < 0.1 && Random.Range(0,3) == 3)
-            //{
-            //    transform.localScale += growthVector;
-            //}
             else
             {
                 transform.localScale += growthVector * Time.deltaTime;
@@ -97,11 +94,9 @@ public class SprayParticleProjectile : MonoBehaviour
         particleGrowthRate = growthRate;
     }
 
-    public void ConfigParticleDamage(float damage, float pushPower, AbilityStatusEffect _statusEffect)
+    public void ConfigParticleDamage(float damage)
     {
         particleDamage = damage;
-        particlePushPower = pushPower;
-        statusEffect = _statusEffect;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -110,7 +105,6 @@ public class SprayParticleProjectile : MonoBehaviour
         {
             Vector2 _pushDirection = (collision.gameObject.GetComponent<Transform>().position - GetComponent<Transform>().position).normalized;
             collision.gameObject.GetComponent<EnemyHealth>().UpdateCurrentHealth(-particleDamage);
-            //collision.gameObject.GetComponent<Transform>().Translate(-particlePushPower * GetComponent<Rigidbody2D>().velocity.normalized);
             collision.gameObject.GetComponent<Rigidbody2D>().AddForce(particlePushPower * _pushDirection);
             collision.gameObject.GetComponent<Enemy>().InflictStatusEffect(statusEffect, 1);
         }

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BombObject : MonoBehaviour
@@ -27,10 +25,6 @@ public class BombObject : MonoBehaviour
     //===========================================================================
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player")
-        {
-            collision.gameObject.GetComponent<PlayerHealth>().UpdateCurrentHealth(-damage);
-        }
         if (collision.gameObject.CompareTag("Collisions"))
         {
             gameObject.SetActive(false);

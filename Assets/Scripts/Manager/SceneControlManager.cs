@@ -107,19 +107,22 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            StartCoroutine(LoadTutorialRoom());
+        }
+
         if (Input.GetKeyDown(KeyCode.Escape) && mainMenu.activeSelf == false || Input.GetKeyDown(KeyCode.P) && player.activeInHierarchy != false)
         {
             if (pauseMenu.activeSelf)
             {
                 Time.timeScale = 1;
                 pm_animator.SetTrigger("Close");
-                playerCurrencies.Close();
             }
             else
             {
                 Time.timeScale = 0;
                 pauseMenu.SetActive(true);
-                playerCurrencies.Open();
             }
         }
 
@@ -174,9 +177,7 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         yield return StartCoroutine(LoadingScreen(1.0f));
 
         player.transform.gameObject.SetActive(false);
-        player.GetComponentInChildren<BasicAbility>().ResetDamage();
         player.GetComponentInChildren<BasicAbility>().ResetMaxFuel();
-        player.GetComponent<PlayerHealth>().ResetPlayerHealth();
         player.GetComponent<PlayerController>().dashCD = 3.0f;
 
         // GameplayRuntimeData
@@ -231,8 +232,6 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         player.SetActive(true);
 
         player.transform.position = this.transform.position;
-
-        player.GetComponent<PlayerHealth>().UpdateCurrentHealth();
     }
 
     //===========================================================================

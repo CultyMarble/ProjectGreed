@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
@@ -9,12 +7,13 @@ public class DialogManager : SingletonMonobehaviour<DialogManager>
     [SerializeField] private TextMeshProUGUI dialogText;
 
     private string[] dialogLines;
-    private int currentLine;
+    private int lineIndex;
 
     //===========================================================================
     private void Start()
     {
         SetDialogPanelActiveState(false);
+        Time.timeScale = 1.0f;
     }
 
     private void Update()
@@ -24,39 +23,36 @@ public class DialogManager : SingletonMonobehaviour<DialogManager>
 
         if (Input.GetMouseButtonUp(0))
         {
-            currentLine++;
+            lineIndex++;
 
-            if (currentLine >= dialogLines.Length)
+            if (lineIndex >= dialogLines.Length)
             {
-                currentLine = 0;
+                lineIndex = 0;
 
                 SetDialogPanelActiveState(false);
-                Time.timeScale = 1.0f;
 
                 return;
             }
 
-            dialogText.SetText(dialogLines[currentLine]);
+            dialogText.SetText(dialogLines[lineIndex]);
         }
     }
 
     //===========================================================================
     public void SetDialogPanelActiveState(bool newBool)
     {
+        if (newBool == true)
+            Time.timeScale = 0.0f;
+        else
+            Time.timeScale = 1.0f;
+
         dialogPanel.gameObject.SetActive(newBool);
     }
 
     public void SetDialogLines(string[] newDialogLines)
     {
         dialogLines = newDialogLines;
-        currentLine = 0;
-        dialogText.SetText(dialogLines[currentLine]);
-    }
-    public void SetDialogLines(string newDialogLines)
-    {
-        dialogLines = new string[1];
-        dialogLines[0] = newDialogLines;
-        currentLine = 0;
-        dialogText.SetText(dialogLines[currentLine]);
+
+        dialogText.SetText(dialogLines[lineIndex]);
     }
 }

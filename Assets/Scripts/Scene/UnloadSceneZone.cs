@@ -13,7 +13,7 @@ public class UnloadSceneZone : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            Player.Instance.ShowFPromtText();
+            Player.Instance.SetInteractPromtTextActive(true);
             canUnload = true;
         }
     }
@@ -22,7 +22,7 @@ public class UnloadSceneZone : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            Player.Instance.HideFPromtText();
+            Player.Instance.SetInteractPromtTextActive(false);
             canUnload = false;
         }
     }
