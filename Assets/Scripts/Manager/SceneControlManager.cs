@@ -34,7 +34,7 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
     [SerializeField] private GameObject player;
 
     [Header("Starting Scene:")]
-    [SerializeField] private SceneName startingScene;
+    [SerializeField] private GameObject startingScene;
     [SerializeField] private Transform startingPosition;
 
     [Header("Main Menu")]
@@ -92,15 +92,15 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         loadingScreenImage.color = new Color(0.0f, 0.0f, 0.0f, 1.0f);
         loadingScreenCanvasGroup.alpha = 1.0f;
 
-        if (!developerScriptable.developerMode)
-        {
-            mainMenu.SetActive(true);
-        }
-        else
-        {
-            player.SetActive(true);
-            player.transform.position = developerScriptable.playerSpawnPosition;
-        }
+        //if (!developerScriptable.developerMode)
+        //{
+        //    mainMenu.SetActive(true);
+        //}
+        //else
+        //{
+        //    player.SetActive(true);
+        //    player.transform.position = developerScriptable.playerSpawnPosition;
+        //}
 
         StartCoroutine(LoadingScreen(0.0f));
     }
@@ -243,7 +243,8 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         loadingScreenImage.color = new Color(0.0f, 0.0f, 0.0f, 1.0f);
         yield return StartCoroutine(LoadingScreen(1.0f));
 
-        yield return StartCoroutine(LoadSceneAndSetActive(startingScene.ToString()));
+        startingScene.gameObject.SetActive(true);
+        //yield return StartCoroutine(LoadSceneAndSetActive(startingScene.ToString()));
         EventManager.CallAfterSceneLoadEvent();
 
         GameplayInfoUIControl.Instance.SetGameplayInfoUIActive(true);

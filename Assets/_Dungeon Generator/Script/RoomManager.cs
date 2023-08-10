@@ -103,21 +103,21 @@ public class RoomManager : MonoBehaviour
         }
 
         // SPAWN KEY ROOM
-        if (roomsList.Count > 0)
-        {
-            int randomIndex = Random.Range(0, roomsList.Count);
-            roomsList[randomIndex].currentRoomType = RoomType.key;
-            Instantiate(key, roomsList[randomIndex].transform.position, Quaternion.identity);
-            roomsList.RemoveAt(randomIndex);
-        }
-        else
-        {
-            // NO DEAD-END ROOMS!!! SPAWN KEY ROOM IN A RANDOM ROOM!!!
-            int randomIndex = Random.Range(0, currentRooms.Count);
-            currentRooms[randomIndex].currentRoomType = RoomType.key;
-            Instantiate(key, currentRooms[randomIndex].transform.position, Quaternion.identity);
-            Debug.LogError("THERE IS NO KEY IN THE DUNGEON!");
-        }
+        //if (roomsList.Count > 0)
+        //{
+        //    int randomIndex = Random.Range(0, roomsList.Count);
+        //    roomsList[randomIndex].currentRoomType = RoomType.key;
+        //    Instantiate(key, roomsList[randomIndex].transform.position, Quaternion.identity);
+        //    roomsList.RemoveAt(randomIndex);
+        //}
+        //else
+        //{
+        //    // NO DEAD-END ROOMS!!! SPAWN KEY ROOM IN A RANDOM ROOM!!!
+        //    int randomIndex = Random.Range(0, currentRooms.Count);
+        //    currentRooms[randomIndex].currentRoomType = RoomType.key;
+        //    Instantiate(key, currentRooms[randomIndex].transform.position, Quaternion.identity);
+        //    Debug.LogError("THERE IS NO KEY IN THE DUNGEON!");
+        //}
 
         // SPAWN SHOP ROOM
         if (roomsList.Count > 0)
