@@ -240,9 +240,9 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         mainMenu.SetActive(false);
 
         loadingScreenImage.color = new Color(0.0f, 0.0f, 0.0f, 1.0f);
-        yield return StartCoroutine(LoadingScreen(1.0f));
+        yield return StartCoroutine(LoadingScreen(0.0f));
 
-        startingScene.gameObject.SetActive(true);
+        startingScene.SetActive(true);
         //yield return StartCoroutine(LoadSceneAndSetActive(startingScene.ToString()));
         EventManager.CallAfterSceneLoadEvent();
 
@@ -259,7 +259,7 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         mainMenu.SetActive(false);
 
         loadingScreenImage.color = new Color(0.0f, 0.0f, 0.0f, 1.0f);
-        yield return StartCoroutine(LoadingScreen(1.0f));
+        yield return StartCoroutine(LoadingScreen(0.0f));
 
         yield return StartCoroutine(LoadSceneAndSetActive(SceneName.Scene02_TutorialScene.ToString()));
         EventManager.CallAfterSceneLoadEvent();

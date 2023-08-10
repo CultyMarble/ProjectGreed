@@ -3362,10 +3362,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 569621e9980bf5e46b12776910f6836c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  developerScriptable: {fileID: 0}
   loadingScreenCanvasGroup: {fileID: 827279364}
   loadingScreenImage: {fileID: 827279362}
   player: {fileID: 567887215}
-  startingScene: 13
+  startingScene: {fileID: 0}
   startingPosition: {fileID: 1832746032}
   mainMenu: {fileID: 273606564}
   mm_startGameButton: {fileID: 1253790839}
