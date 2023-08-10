@@ -35,6 +35,7 @@ public class GateManager : MonoBehaviour
     {
         RoomManager.OnBossChange += RoomBossCheck;
         //EnemyHealth.OnDespawnCallAll += RoomEnemyCheck;
+        //GetComponent<EnemyHealth>().OnDespawnEvent += RoomEnemyCheck;
         enemySpawnManager = GameObject.Find("EnemySpawnManager").GetComponent<EnemySpawnManager>();
     }
 
@@ -42,6 +43,8 @@ public class GateManager : MonoBehaviour
     {
         RoomManager.OnBossChange += RoomBossCheck;
         //EnemyHealth.OnDespawnCallAll -= RoomEnemyCheck;
+        //GetComponent<EnemyHealth>().OnDespawnEvent -= RoomEnemyCheck;
+
     }
 
     private void ActiveGates(bool active)
@@ -112,14 +115,12 @@ public class GateManager : MonoBehaviour
     //    var enemy = Instantiate(enemySpawnScriptable.commonEnemies[random], spawnPosition, Quaternion.identity);
     //    currentEnemies.Add(enemy);
     //}
-
-    private void RoomEnemyCheck()
+    private void FixedUpdate()
     {
         if (!playerInsideRoom) return;
 
         StartCoroutine(RoomEnemyCheckDelay());
     }
-
     private IEnumerator RoomEnemyCheckDelay()
     {
         yield return 0;
