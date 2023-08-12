@@ -41,7 +41,7 @@ public class PlayerHeartManager : MonoBehaviour
     //======================================================================
     private void EventManager_AfterSceneLoadEvent()
     {
-        currentMaxHeart = 3;
+        currentMaxHeart = Player.Instance.PlayerData.baseMaxHealth;
         currentHeart = currentMaxHeart;
 
         UpdateCurrentMaxHeart();

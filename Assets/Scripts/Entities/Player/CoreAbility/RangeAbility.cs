@@ -1,13 +1,22 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static PlayerHeartManager;
 
-public class RangeAbility : PlayerAbility
+public class RangeAbility : MonoBehaviour
 {
+    public struct OnMaxChargeChangedEventArgs { public int maxCharge; }
+    public event System.EventHandler<OnMaxChargeChangedEventArgs> OnMaxChargeChangedEvent;
+
+    public struct OnCurrentChargeChangedEventArgs { public int currentCharge; }
+    public event System.EventHandler<OnCurrentChargeChangedEventArgs> OnCurrentChargeChangedEvent;
+
     [Header("Effect Settings:")]
     [SerializeField] private GameObject pfRangeAbilityProjectile;
     [SerializeField] private SpriteRenderer aimIndicator;
 
-    [Header("Ability Settings:")]
+    private int currentMaxCharge = default;
+    private int currentCharge = default;
+
     private float projectileSpeed = default;
     private float projectileDamage = default;
 
@@ -27,12 +36,12 @@ public class RangeAbility : PlayerAbility
     {
         playerInput.actions["RightClick"].started += ActionPerformed;
         playerInput.actions["RightClick"].canceled += ActionCanceled;
+
+        EventManager.AfterSceneLoadEvent += EventManager_AfterSceneLoadEvent;
     }
 
-    protected override void Update()
+    private void Update()
     {
-        base.Update();
-
         if (Player.Instance.actionState == PlayerActionState.none ||
             Player.Instance.actionState == PlayerActionState.IsUsingRangeAbility)
         {
@@ -41,6 +50,11 @@ public class RangeAbility : PlayerAbility
 
         if (channelTimer > 0)
             Player.Instance.actionState = PlayerActionState.IsUsingRangeAbility;
+
+        if (Input.GetKeyDown(KeyCode.Numlock))
+        {
+            UpdateCurrentCharge(1);
+        }
     }
 
     private void FixedUpdate()
@@ -52,6 +66,8 @@ public class RangeAbility : PlayerAbility
     {
         playerInput.actions["RightClick"].started -= ActionPerformed;
         playerInput.actions["RightClick"].canceled -= ActionCanceled;
+
+        EventManager.AfterSceneLoadEvent -= EventManager_AfterSceneLoadEvent;
     }
 
     //===========================================================================
@@ -63,6 +79,15 @@ public class RangeAbility : PlayerAbility
     private void ActionCanceled(InputAction.CallbackContext obj)
     {
         rightButtonCheck = false;
+    }
+
+    private void EventManager_AfterSceneLoadEvent()
+    {
+        currentMaxCharge = Player.Instance.PlayerData.ra_baseCharge;
+        currentCharge = currentMaxCharge;
+
+        UpdateCurrentMaxCharge();
+        UpdateCurrentCharge();
     }
 
     //===========================================================================
@@ -166,7 +191,7 @@ public class RangeAbility : PlayerAbility
 
     private void ChannelHandler()
     {
-        if (cooldownTimer <= 0)
+        if (currentCharge != 0)
         {
             channelTimer += Time.deltaTime;
 
@@ -187,11 +212,62 @@ public class RangeAbility : PlayerAbility
         SetProjectileSpeed();
         SetProjectileDamage();
 
-        cooldownTimer = 0.5f;
-
         RangeAbilityProjectile projectile = Instantiate(pfRangeAbilityProjectile, this.transform.position, Quaternion.identity).
             GetComponent<RangeAbilityProjectile>();
 
         projectile.ProjectileConfig(projectileSpeed, this.transform, projectileDamage);
+
+        Player.Instance.actionState = PlayerActionState.none;
+
+        currentCharge--;
+        // Invoke Event
+        OnCurrentChargeChangedEvent?.Invoke(this, new OnCurrentChargeChangedEventArgs { currentCharge = currentCharge });
+    }
+
+    //===========================================================================
+    public void ResetAbilityCharge()
+    {
+        currentMaxCharge = Player.Instance.PlayerData.ra_baseCharge;
+        currentCharge = currentMaxCharge;
+
+        //Invoke Event
+        OnMaxChargeChangedEvent?.Invoke(this, new OnMaxChargeChangedEventArgs { maxCharge = currentMaxCharge });
+
+        //Invoke Event
+        OnCurrentChargeChangedEvent?.Invoke(this, new OnCurrentChargeChangedEventArgs { currentCharge = currentCharge });
+    }
+
+    public void UpdateCurrentMaxCharge(int amount = 0)
+    {
+        currentMaxCharge += amount;
+
+        if (currentMaxCharge <= 0)
+            currentMaxCharge = 0;
+
+        if (currentCharge > currentMaxCharge)
+            currentCharge = currentMaxCharge;
+
+        //Invoke Event
+        OnMaxChargeChangedEvent?.Invoke(this, new OnMaxChargeChangedEventArgs { maxCharge = currentMaxCharge });
+
+        //Invoke Event
+        OnCurrentChargeChangedEvent?.Invoke(this, new OnCurrentChargeChangedEventArgs { currentCharge = currentCharge });
+    }
+
+    public void UpdateCurrentCharge(int amount = 0)
+    {
+        currentCharge += amount;
+
+        if (currentCharge <= 0)
+        {
+            currentCharge = 0;
+        }
+        else if (currentCharge > currentMaxCharge)
+        {
+            currentCharge = currentMaxCharge;
+        }
+
+        //Invoke Event
+        OnCurrentChargeChangedEvent?.Invoke(this, new OnCurrentChargeChangedEventArgs { currentCharge = currentCharge });
     }
 }

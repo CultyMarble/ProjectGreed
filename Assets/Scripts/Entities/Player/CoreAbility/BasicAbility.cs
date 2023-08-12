@@ -32,7 +32,6 @@ public class BasicAbility : PlayerAbility
     // Pooling System
     [SerializeField] private Transform basicAbilityProjectilePool;
 
-    //===========================================================================
     // NEW INPUT SYSTEM
     private PlayerInput playerInput;
     private bool leftClickButtonCheck = false;

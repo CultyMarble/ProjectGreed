@@ -22,7 +22,7 @@ public class PlayerCurrencies : SingletonMonobehaviour<PlayerCurrencies>
     public void UpdateTempCurrencyAmount(int amount = 0)
     {
         tempCurrencyAmount += amount;
-        tempCurrencyAmount = Mathf.Clamp(tempCurrencyAmount, 0, 10000);
+        tempCurrencyAmount = Mathf.Clamp(tempCurrencyAmount, 0, int.MaxValue);
 
         displayPlayerCurrency.UpdateTempCurrencyText(tempCurrencyAmount);
     }
@@ -30,7 +30,7 @@ public class PlayerCurrencies : SingletonMonobehaviour<PlayerCurrencies>
     public void UpdatePermCurrencyAmount(int amount = 0)
     {
         permCurrencyAmount += amount;
-        permCurrencyAmount = Mathf.Clamp(permCurrencyAmount, 0, 10000);
+        permCurrencyAmount = Mathf.Clamp(permCurrencyAmount, 0, int.MaxValue);
 
         displayPlayerCurrency.UpdatePermCurrencyText(permCurrencyAmount);
     }

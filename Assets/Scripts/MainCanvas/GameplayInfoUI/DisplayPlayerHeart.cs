@@ -20,17 +20,17 @@ public class DisplayPlayerHeart : MonoBehaviour
     private readonly float offsetX = 17.0f;
 
     //===========================================================================
-    private void OnEnable()
-    {
-        playerHeartManager.OnMaxHeartChangedEvent += UpdateMaxHeartUI;
-        playerHeartManager.OnHeartChangedEvent += UpdateCurrentHeartUI;
-    }
-
-    private void Start()
+    private void Awake()
     {
         PopulatePool(pfFullHeart, fullHeartPool);
         PopulatePool(pfEmptyHeart, emptyHeartPool);
         PopulatePool(pfFalseHeart, falseHeartPool);
+    }
+
+    private void OnEnable()
+    {
+        playerHeartManager.OnMaxHeartChangedEvent += UpdateMaxHeartUI;
+        playerHeartManager.OnHeartChangedEvent += UpdateCurrentHeartUI;
     }
 
     private void OnDisable()

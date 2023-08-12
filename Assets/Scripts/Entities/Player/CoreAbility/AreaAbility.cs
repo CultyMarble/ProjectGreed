@@ -13,11 +13,10 @@ public class AreaAbility : PlayerAbility
 
     public bool canUseAbility = default;
 
-    //===========================================================================
     // NEW INPUT SYSTEM
-
     private PlayerInput playerInput;
 
+    //===========================================================================
     private void Awake()
     {
         playerInput = FindObjectOfType<PlayerInput>();

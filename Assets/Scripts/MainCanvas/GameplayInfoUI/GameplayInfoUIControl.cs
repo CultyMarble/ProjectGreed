@@ -2,16 +2,17 @@ using UnityEngine;
 
 public class GameplayInfoUIControl : SingletonMonobehaviour<GameplayInfoUIControl>
 {
-    [SerializeField] private PlayerHeartManager playerHealth;
+    [SerializeField] private PlayerHeartManager playerHeartManager;
 
     [SerializeField] private GameObject playerHeartUI;
     [SerializeField] private GameObject playerFuelUI;
-    [SerializeField] private GameObject playerCurrenciesUI;
+    [SerializeField] private GameObject playerRangeAbilityChargeUI;
+    [SerializeField] private GameObject playerCurrencyUI;
 
     //===========================================================================
     private void OnEnable()
     {
-        playerHealth.OnDespawnPlayerEvent += PlayerHealth_OnDespawnEventHandler;
+        playerHeartManager.OnDespawnPlayerEvent += PlayerHealth_OnDespawnEventHandler;
 
         EventManager.BeforeSceneUnloadEvent += EventManager_BeforeSceneUnloadEvent;
         EventManager.AfterSceneLoadEvent += EventManager_AfterSceneLoadEvent;
@@ -19,7 +20,7 @@ public class GameplayInfoUIControl : SingletonMonobehaviour<GameplayInfoUIContro
 
     private void OnDisable()
     {
-        playerHealth.OnDespawnPlayerEvent -= PlayerHealth_OnDespawnEventHandler;
+        playerHeartManager.OnDespawnPlayerEvent -= PlayerHealth_OnDespawnEventHandler;
 
         EventManager.BeforeSceneUnloadEvent -= EventManager_BeforeSceneUnloadEvent;
         EventManager.AfterSceneLoadEvent -= EventManager_AfterSceneLoadEvent;
@@ -46,6 +47,7 @@ public class GameplayInfoUIControl : SingletonMonobehaviour<GameplayInfoUIContro
     {
         playerHeartUI.SetActive(newBool);
         playerFuelUI.SetActive(newBool);
-        playerCurrenciesUI.SetActive(newBool);
+        playerRangeAbilityChargeUI.SetActive(newBool);
+        playerCurrencyUI.SetActive(newBool);
     }
 }
