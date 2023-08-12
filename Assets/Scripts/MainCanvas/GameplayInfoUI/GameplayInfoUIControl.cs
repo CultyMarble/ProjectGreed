@@ -7,17 +7,22 @@ public class GameplayInfoUIControl : SingletonMonobehaviour<GameplayInfoUIContro
     [SerializeField] private GameObject playerHeartUI;
     [SerializeField] private GameObject playerFuelUI;
     [SerializeField] private GameObject playerCurrenciesUI;
-    [SerializeField] private GameObject playerAbilityCoolDownUI;
 
     //===========================================================================
     private void OnEnable()
     {
-        playerHealth.OnDespawnEvent += PlayerHealth_OnDespawnEventHandler;
+        playerHealth.OnDespawnPlayerEvent += PlayerHealth_OnDespawnEventHandler;
+
+        EventManager.BeforeSceneUnloadEvent += EventManager_BeforeSceneUnloadEvent;
+        EventManager.AfterSceneLoadEvent += EventManager_AfterSceneLoadEvent;
     }
 
     private void OnDisable()
     {
-        playerHealth.OnDespawnEvent -= PlayerHealth_OnDespawnEventHandler;
+        playerHealth.OnDespawnPlayerEvent -= PlayerHealth_OnDespawnEventHandler;
+
+        EventManager.BeforeSceneUnloadEvent -= EventManager_BeforeSceneUnloadEvent;
+        EventManager.AfterSceneLoadEvent -= EventManager_AfterSceneLoadEvent;
     }
 
     //===========================================================================
@@ -26,12 +31,21 @@ public class GameplayInfoUIControl : SingletonMonobehaviour<GameplayInfoUIContro
         SetGameplayInfoUIActive(false);
     }
 
+    private void EventManager_BeforeSceneUnloadEvent()
+    {
+        SetGameplayInfoUIActive(false);
+    }
+
+    private void EventManager_AfterSceneLoadEvent()
+    {
+        SetGameplayInfoUIActive(true);
+    }
+
     //===========================================================================
     public void SetGameplayInfoUIActive(bool newBool)
     {
         playerHeartUI.SetActive(newBool);
         playerFuelUI.SetActive(newBool);
         playerCurrenciesUI.SetActive(newBool);
-        playerAbilityCoolDownUI.SetActive(newBool);
     }
 }

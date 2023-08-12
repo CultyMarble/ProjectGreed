@@ -46,7 +46,7 @@ public abstract class Trap : MonoBehaviour
             currentAnimationIndex = 1;
 
             if (movementImpair)
-                Player.Instance.GetComponent<PlayerController>().SetImpairDuration(movementImpairDuration);
+                Player.Instance.GetComponent<PlayerMovement>().SetImpairDuration(movementImpairDuration);
         }
     }
 

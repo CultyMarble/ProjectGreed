@@ -1,37 +1,20 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public enum SceneName
-{
-    Scene01_ManagerScene,
-    Scene02_TutorialScene,
-    Scene03_HubArea,
-    Scene04_Room1,
-    Scene05_Room1_5,
-    Scene06_Room2,
-    Scene07_Room3,
-    Scene08_Room4,
-    Scene09_Room5,
-    Scene10_Room6,
-    Scene11_Room7,
-    Scene12_BossRoom,
-    Scene13_Room8,
-    Scene14_Room9,
-    Scene15_Room10,
-}
-
 public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
 {
+    public event EventHandler OnUnloadRuntimeDataEvent;
+
     [SerializeField] private CanvasGroup loadingScreenCanvasGroup;
     [SerializeField] private Image loadingScreenImage;
-
-    [SerializeField] private GameObject player;
 
     [Header("Starting Scene:")]
     [SerializeField] private SceneName startingScene;
     [SerializeField] private Transform startingPosition;
+    public Transform StartingPosition => startingPosition;
 
     [Header("Main Menu")]
     [SerializeField] private GameObject mainMenu;
@@ -52,9 +35,6 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
     [SerializeField] private GameObject gameOverMenu;
     [SerializeField] private Button gv_loadLastCheckPointButton;
     [SerializeField] private Button gv_mainMenuButton;
-
-    [Header("Gameplay Runtime Data")]
-    [SerializeField] private SOListInt generatedItemForSale;
 
     private readonly float loadingScreenDuration = 0.75f;
     private bool isLoadingScreenActive;
@@ -100,7 +80,7 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
             StartCoroutine(LoadTutorialRoom());
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape) && mainMenu.activeSelf == false || Input.GetKeyDown(KeyCode.P) && player.activeInHierarchy != false)
+        if (Input.GetKeyDown(KeyCode.Escape) && mainMenu.activeSelf == false)
         {
             if (pauseMenu.activeSelf)
             {
@@ -126,28 +106,13 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         }
     }
 
-    private void OnDisable()
-    {
-        generatedItemForSale.itemList.Clear();
-    }
-
-    //===========================================================================
-    public void LoadScene(string sceneName, Vector3 spawnPosition)
-    {
-        if (isLoadingScreenActive == false)
-        {
-            StartCoroutine(UnloadAndSwitchScene(sceneName, spawnPosition));
-        }
-    }
-
     //===========================================================================
     private IEnumerator UnloadAndSwitchScene(string sceneName, Vector3 spawnPosition)
     {
         EventManager.CallBeforeSceneUnloadLoadingScreenEvent();
         yield return StartCoroutine(LoadingScreen(1.0f));
 
-        player.transform.position = spawnPosition;
-        gameOverMenu.SetActive(false);
+        Player.Instance.transform.position = spawnPosition;
 
         EventManager.CallBeforeSceneUnloadEvent();
         yield return SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().buildIndex);
@@ -164,14 +129,7 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         EventManager.CallBeforeSceneUnloadLoadingScreenEvent();
         yield return StartCoroutine(LoadingScreen(1.0f));
 
-        player.transform.gameObject.SetActive(false);
-        player.GetComponentInChildren<BasicAbility>().ResetMaxFuel();
-        player.GetComponent<PlayerController>().dashCD = 3.0f;
-
-        // GameplayRuntimeData
-        generatedItemForSale.itemList.Clear();
-
-        GameplayInfoUIControl.Instance.SetGameplayInfoUIActive(false);
+        OnUnloadRuntimeDataEvent?.Invoke(this, EventArgs.Empty);
 
         pm_animator.SetTrigger("Close");
         gameOverMenu.SetActive(false);
@@ -215,30 +173,18 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
     }
 
     //===========================================================================
-    private void SetPlayerActiveTrue()
-    {
-        player.SetActive(true);
-
-        player.transform.position = this.transform.position;
-    }
-
-    //===========================================================================
     private IEnumerator LoadStartingScene()
     {
-        mainMenu.SetActive(false);
-
-        loadingScreenImage.color = new Color(0.0f, 0.0f, 0.0f, 1.0f);
+        EventManager.CallBeforeSceneUnloadLoadingScreenEvent();
         yield return StartCoroutine(LoadingScreen(1.0f));
+
+        mainMenu.SetActive(false);
 
         yield return StartCoroutine(LoadSceneAndSetActive(startingScene.ToString()));
         EventManager.CallAfterSceneLoadEvent();
 
-        GameplayInfoUIControl.Instance.SetGameplayInfoUIActive(true);
-
-        SetPlayerActiveTrue();
-        player.transform.position = startingPosition.transform.position;
-
         StartCoroutine(LoadingScreen(0.0f));
+        EventManager.CallAfterSceneLoadedLoadingScreenEvent();
     }
 
     private IEnumerator LoadTutorialRoom()
@@ -250,9 +196,6 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
 
         yield return StartCoroutine(LoadSceneAndSetActive(SceneName.Scene02_TutorialScene.ToString()));
         EventManager.CallAfterSceneLoadEvent();
-
-        GameplayInfoUIControl.Instance.SetGameplayInfoUIActive(true);
-        SetPlayerActiveTrue();
 
         if (unloadSceneZone == null)
             unloadSceneZone = GameObject.FindObjectOfType<UnloadSceneZone>();
@@ -267,7 +210,7 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         yield return StartCoroutine(LoadingScreen(1.0f));
 
         gameOverMenu.SetActive(false);
-        player.transform.position = SaveDataManager.Instance.SAVE01.RetrieveCheckPointSpawnLocation();
+        Player.Instance.transform.position = SaveDataManager.Instance.SAVE01.RetrieveCheckPointSpawnLocation();
 
         EventManager.CallBeforeSceneUnloadEvent();
         yield return SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().buildIndex);
@@ -282,6 +225,14 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
     }
 
     //===========================================================================
+    public void LoadScene(string sceneName, Vector3 spawnPosition)
+    {
+        if (isLoadingScreenActive == false)
+        {
+            StartCoroutine(UnloadAndSwitchScene(sceneName, spawnPosition));
+        }
+    }
+
     public void OpenOptionMenuButton()
     {
         optionMenu.SetActive(true);
@@ -292,5 +243,4 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         Application.Quit();
         Debug.Log("Quit Game");
     }
-
 }

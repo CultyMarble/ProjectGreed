@@ -31,7 +31,7 @@ public class AreaAbility : PlayerAbility
         if (canUseAbility == false)
             return;
 
-        switch (Player.Instance.playerActionState)
+        switch (Player.Instance.actionState)
         {
             case PlayerActionState.none:
                 AbilityInputHandler();
@@ -59,7 +59,7 @@ public class AreaAbility : PlayerAbility
             PushEnemyInRadius();
 
             // Set player is Attacking
-            Player.Instance.playerActionState = PlayerActionState.IsUsingAreaAbility;
+            Player.Instance.actionState = PlayerActionState.IsUsingAreaAbility;
         }
     }
 
@@ -79,9 +79,9 @@ public class AreaAbility : PlayerAbility
                 }
 
                 // Put ability on CD
-                cooldownTimer = cooldown;
+                cooldownTimer = 5f;
 
-                Player.Instance.playerActionState = PlayerActionState.none;
+                Player.Instance.actionState = PlayerActionState.none;
                 return;
             }
 

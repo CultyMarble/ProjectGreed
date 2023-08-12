@@ -31,7 +31,7 @@ public class BombAbility : PlayerAbility
         if (canUseAbility == false)
             return;
 
-        switch (Player.Instance.playerActionState)
+        switch (Player.Instance.actionState)
         {
             case PlayerActionState.none:
                 InputHandler();
@@ -54,11 +54,11 @@ public class BombAbility : PlayerAbility
     {
         if (playerInput.actions["Bomb"].triggered && cooldownTimer == 0)
         {
-            Player.Instance.playerActionState = PlayerActionState.IsUsingBombAbility;
+            Player.Instance.actionState = PlayerActionState.IsUsingBombAbility;
         }
         else
         {
-            Player.Instance.playerActionState = PlayerActionState.none;
+            Player.Instance.actionState = PlayerActionState.none;
         }
     }
 
@@ -68,7 +68,7 @@ public class BombAbility : PlayerAbility
         {
             Transform bomb = Instantiate(pfBomb, transform.position, Quaternion.identity).transform;
             // bomb.GetComponent<BombObject>().SetBombConfig(damage, pushPower, pushRadius, fuseTime, abilityStatusEffect);
-            Player.Instance.playerActionState = PlayerActionState.none;
+            Player.Instance.actionState = PlayerActionState.none;
             placeTime = 0.1f;
         }
         else

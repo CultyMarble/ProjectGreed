@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2670297803040694697}
-  - component: {fileID: 2670297803040694698}
   - component: {fileID: 6571663715805889835}
+  - component: {fileID: 2670297803040694698}
   - component: {fileID: 8097864274877811756}
   - component: {fileID: 5204710604847039245}
   - component: {fileID: 2486282011418803586}
@@ -29,13 +29,29 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2670297803040694699}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2, y: 0, z: 0}
-  m_LocalScale: {x: 0.27664497, y: 0.27664497, z: 0.36885995}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &6571663715805889835
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2670297803040694699}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.5, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.25
 --- !u!212 &2670297803040694698
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -76,34 +92,18 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 237529647
   m_SortingLayer: 3
-  m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
+  m_SortingOrder: 1
+  m_Sprite: {fileID: -1359823526, guid: 427cad3ca33e4eb48b1d173064db2143, type: 3}
   m_Color: {r: 0.39024377, g: 1, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.5, y: 1.5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &6571663715805889835
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2670297803040694699}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
 --- !u!50 &8097864274877811756
 Rigidbody2D:
   serializedVersion: 4
@@ -138,6 +138,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectileRigidbody2D: {fileID: 8097864274877811756}
+  abilityEffect: {fileID: 2670297803040694698}
+  effectSprites:
+  - {fileID: -1359823526, guid: 427cad3ca33e4eb48b1d173064db2143, type: 3}
+  - {fileID: 1347986634, guid: 427cad3ca33e4eb48b1d173064db2143, type: 3}
+  - {fileID: -1467332964, guid: 427cad3ca33e4eb48b1d173064db2143, type: 3}
+  - {fileID: 227220114, guid: 427cad3ca33e4eb48b1d173064db2143, type: 3}
 --- !u!96 &2486282011418803586
 TrailRenderer:
   serializedVersion: 2

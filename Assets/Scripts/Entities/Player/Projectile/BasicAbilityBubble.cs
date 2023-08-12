@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SprayParticleProjectile : MonoBehaviour
+public class BasicAbilityBubble : MonoBehaviour
 {
     private float moveSpeed;
     private float lifeTime = default;
@@ -71,21 +71,21 @@ public class SprayParticleProjectile : MonoBehaviour
     }
 
     //===========================================================================
-    public void ConfigParticleMovementSpeed(Vector3 dir, float newMoveSpeed, float newLifeTime)
+    public void SetMovementSpeed(Vector3 dir, float newMoveSpeed, float newLifeTime)
     {
         moveSpeed = newMoveSpeed;
         lifeTime = newLifeTime;
         moveDirection = dir;
     }
 
-    public void ConfigParticleMovementPattern(float newTimeMax, float newTimeMin, float newSwingMagnitude)
+    public void SetMovementPattern(float newTimeMax, float newTimeMin, float newSwingMagnitude)
     {
         timeUntilChangeDirectionMax = newTimeMax;
         timeUntilChangeDirectionMin = newTimeMin;
         swingMagtitude = newSwingMagnitude;
     }
 
-    public void ConfigParticleSizeAndGrowth(float  size, float growthRate)
+    public void SetSizeAndGrowth(float  size, float growthRate)
     {
         Vector3 sizeVector = new Vector3();
         sizeVector.x = size;
@@ -94,7 +94,7 @@ public class SprayParticleProjectile : MonoBehaviour
         particleGrowthRate = growthRate;
     }
 
-    public void ConfigParticleDamage(float damage)
+    public void SetDamage(float damage)
     {
         particleDamage = damage;
     }

@@ -2,22 +2,21 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class PlayerController : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
-    [Header("Basic Movement")]
-    [SerializeField] private float baseMoveSpeed;
+    private float moveSpeed = default;
 
     private Rigidbody2D Rigidbody2D;
     private Vector2 movementVector;
     private bool canMove = true;
 
-    private float impairDurationTimer = default;
+    private float impairTimer = default;
 
     [Header("Dash")]
-    private readonly float dashSpeed = 20.0f;
-    public float dashCD = default;
-    [SerializeField] private float impairAfterDashDuration = default;
-    [SerializeField] private float dashTime = default;
+    private float dashPenalty = default;
+    private float dashCooldown = default;
+    private float dashTime = default;
+    private float dashSpeed = default;
 
     [Header("Animation")]
     [SerializeField] private Animator animator;
@@ -26,16 +25,15 @@ public class PlayerController : MonoBehaviour
     private Vector3 toMouseDirectionVector = default;
     private Vector2 dashVector;
     private float dashTimeCounter;
-    private float dashCDTimeCounter;
+    private float dashCooldownTimer;
 
-    public float DashCDTimeCounter => dashCDTimeCounter;
+    public float DashCDTimeCounter => dashCooldownTimer;
 
     // Components
     private CapsuleCollider2D CapsuleCollider2D;
 
     //===========================================================================
     // NEW INPUT SYSTEM
-
     private PlayerInput playerInput;
 
     //===========================================================================
@@ -47,9 +45,14 @@ public class PlayerController : MonoBehaviour
         CapsuleCollider2D = GetComponent<CapsuleCollider2D>();
     }
 
-    private void FixedUpdate()
+    private void Start()
     {
-        MovePlayerPosition();
+        moveSpeed = Player.Instance.PlayerData.baseMoveSpeed;
+
+        dashPenalty = Player.Instance.PlayerData.baseDashPenalty;
+        dashCooldown = Player.Instance.PlayerData.baseDashCooldown;
+        dashTime = Player.Instance.PlayerData.baseDashTime;
+        dashSpeed = Player.Instance.PlayerData.baseDashSpeed;
     }
 
     private void Update()
@@ -62,16 +65,21 @@ public class PlayerController : MonoBehaviour
 
         DashHandler();
 
-        PauseAfterDash();
+        UpdateImpairTimer();
 
         if (canMove == false)
             movementVector = Vector2.zero;
     }
 
+    private void FixedUpdate()
+    {
+        MovePlayerPosition();
+    }
+
     //======================================================================
     private void PlayerInput()
     {
-        if (Player.Instance.playerActionState == PlayerActionState.IsDashing)
+        if (Player.Instance.actionState == PlayerActionState.IsDashing)
             return;
 
         Vector2 input = playerInput.actions["Move"].ReadValue<Vector2>();
@@ -86,7 +94,7 @@ public class PlayerController : MonoBehaviour
         toMouseDirectionVector = (CultyMarbleHelper.GetMouseToWorldPosition() - transform.position).normalized;
         Vector2 direction;
 
-        switch (Player.Instance.playerActionState)
+        switch (Player.Instance.actionState)
         {
             case PlayerActionState.IsUsingBasicAbility:
             case PlayerActionState.IsUsingRangeAbility:
@@ -146,43 +154,43 @@ public class PlayerController : MonoBehaviour
 
     private void MovePlayerPosition()
     {
-        switch (Player.Instance.playerActionState)
+        switch (Player.Instance.actionState)
         {
             case PlayerActionState.IsDashing:
                 Rigidbody2D.MovePosition(Rigidbody2D.position + dashSpeed * Time.deltaTime * dashVector);
                 break;
             case PlayerActionState.IsUsingBasicAbility:
-                Rigidbody2D.MovePosition(Rigidbody2D.position + (0.1f * baseMoveSpeed) * Time.deltaTime * movementVector);
+                Rigidbody2D.MovePosition(Rigidbody2D.position + (moveSpeed * 0.25f) * Time.deltaTime * movementVector);
                 break;
             case PlayerActionState.IsUsingRangeAbility:
-                Rigidbody2D.MovePosition(Rigidbody2D.position + baseMoveSpeed * Time.deltaTime * movementVector);
+                Rigidbody2D.MovePosition(Rigidbody2D.position + moveSpeed * Time.deltaTime * movementVector);
                 break;
             case PlayerActionState.IsUsingBombAbility:
                 break;
             default:
-                Rigidbody2D.MovePosition(Rigidbody2D.position + baseMoveSpeed * Time.deltaTime * movementVector);
+                Rigidbody2D.MovePosition(Rigidbody2D.position + moveSpeed * Time.deltaTime * movementVector);
                 break;
         }
     }
 
     private void DashCoolDownTimeCounter()
     {
-        if (dashCDTimeCounter <= 0)
+        if (dashCooldownTimer <= 0)
             return;
 
-        dashCDTimeCounter -= Time.deltaTime;
+        dashCooldownTimer -= Time.deltaTime;
     }
 
     private void DashHandler()
     {
         // Trigger Dash
-        if (playerInput.actions["Dash"].triggered && Player.Instance.playerActionState == PlayerActionState.none)
+        if (playerInput.actions["Dash"].triggered)
         {
-            if (dashCDTimeCounter <= 0 && movementVector != Vector2.zero)
+            if (dashCooldownTimer <= 0 && movementVector != Vector2.zero)
             {
-                Player.Instance.playerActionState = PlayerActionState.IsDashing;
+                Player.Instance.actionState = PlayerActionState.IsDashing;
                 dashTimeCounter = dashTime;
-                dashCDTimeCounter = dashCD;
+                dashCooldownTimer = dashCooldown;
                 dashVector = movementVector;
 
                 // Player Collision
@@ -190,14 +198,14 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Player.Instance.playerActionState == PlayerActionState.IsDashing)
+        if (Player.Instance.actionState == PlayerActionState.IsDashing)
         {
             dashTimeCounter -= Time.deltaTime;
             if (dashTimeCounter <= 0)
             {
-                Player.Instance.playerActionState = PlayerActionState.none;
+                Player.Instance.actionState = PlayerActionState.none;
 
-                SetImpairDuration(impairAfterDashDuration);
+                SetImpairDuration(dashPenalty);
 
                 // Player Collision
                 CapsuleCollider2D.enabled = !CapsuleCollider2D.enabled;
@@ -205,13 +213,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void PauseAfterDash()
+    private void UpdateImpairTimer()
     {
-        if (impairDurationTimer <= 0)
+        if (impairTimer <= 0)
             return;
 
-        impairDurationTimer -= Time.deltaTime;
-        if (impairDurationTimer <= 0)
+        impairTimer -= Time.deltaTime;
+        if (impairTimer <= 0)
         {
             canMove = true;
         }
@@ -220,7 +228,7 @@ public class PlayerController : MonoBehaviour
     //======================================================================
     public void SetImpairDuration(float impairDuration)
     {
-        impairDurationTimer = impairDuration;
+        impairTimer = impairDuration;
         dashVector = Vector2.zero;
         canMove = false;
     }
@@ -232,6 +240,6 @@ public class PlayerController : MonoBehaviour
 
     public void SetMoveSpeed(float newMoveSpeed)
     {
-        baseMoveSpeed = newMoveSpeed;
+        moveSpeed = newMoveSpeed;
     }
 }

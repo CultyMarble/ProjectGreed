@@ -2,21 +2,31 @@ using UnityEngine;
 
 public class Player : SingletonMonobehaviour<Player>
 {
+    [HideInInspector] public PlayerActionState actionState;
+
+    [SerializeField] private PlayerData playerData = default;
+    [SerializeField] private PlayerMovement playerMovement = default;
+
+    public PlayerData PlayerData => playerData;
+    public PlayerMovement PlayerMovement => playerMovement;
+
+    [Header("Misc:")]
     [SerializeField] private Transform fpromtText;
 
-    [HideInInspector] public PlayerActionState playerActionState;
-
-    [SerializeField] private PlayerStat playerStat = default;
-    public PlayerStat PlayerStat => playerStat;
-
     //======================================================================
-    private void Start()
+    private void OnEnable()
     {
-        SetInteractPromtTextActive(false);
-
         EventManager.AfterSceneLoadEvent += EventManager_AfterSceneLoadEventHandler;
+    }
 
-        playerActionState = PlayerActionState.none;
+    private void Update()
+    {
+        Debug.Log(actionState.ToString());
+    }
+
+    private void OnDisable()
+    {
+        EventManager.AfterSceneLoadEvent -= EventManager_AfterSceneLoadEventHandler;
     }
 
     //======================================================================
@@ -24,7 +34,10 @@ public class Player : SingletonMonobehaviour<Player>
     {
         SetInteractPromtTextActive(false);
 
-        this.gameObject.SetActive(true);
+        actionState = PlayerActionState.none;
+
+        transform.position = SceneControlManager.Instance.StartingPosition.position;
+        gameObject.SetActive(true);
     }
 
     //======================================================================

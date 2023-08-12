@@ -2,9 +2,6 @@ using UnityEngine;
 
 public abstract class PlayerAbility : MonoBehaviour
 {
-    [Header("Ability Settings:")]
-    [SerializeField] protected float cooldown;
-
     protected float cooldownTimer = default;
     public float CooldownTimer => cooldownTimer;
 
