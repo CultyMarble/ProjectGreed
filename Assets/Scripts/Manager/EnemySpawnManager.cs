@@ -17,13 +17,13 @@ public class EnemySpawnManager : MonoBehaviour
     //===========================================================================
     private void OnEnable()
     {
-        EventManager.AfterSceneLoadEvent += EventManager_AfterSceneLoadEventHandler;
+        //EventManager.AfterSceneLoadEvent += EventManager_AfterSceneLoadEventHandler;
         EventManager.BeforeSceneUnloadEvent += EventManager_BeforeSceneUnloadEventHandler;
     }
 
     private void OnDisable()
     {
-        EventManager.AfterSceneLoadEvent -= EventManager_AfterSceneLoadEventHandler;
+        //EventManager.AfterSceneLoadEvent -= EventManager_AfterSceneLoadEventHandler;
         EventManager.BeforeSceneUnloadEvent -= EventManager_BeforeSceneUnloadEventHandler;
     }
 
@@ -34,12 +34,16 @@ public class EnemySpawnManager : MonoBehaviour
     }
 
     //===========================================================================
-    private void EventManager_AfterSceneLoadEventHandler()
+    public void SpawnEnemies(GameObject spawnPoints)
     {
-        if (LoadEnemySpawnPointList())
+        if (spawnPoints != null)
         {
-            SpawnEnemy();
+            enemySpawnPointList = spawnPoints;
+            int spawnNum = enemySpawnPointList.GetComponent<SpawnPointList>().GetSpawnAmount();
+            if (spawnNum == 0) { return; }
+            spawnAmount = spawnNum;
         }
+        SpawnEnemy();
     }
 
     private void EventManager_BeforeSceneUnloadEventHandler()
@@ -48,17 +52,17 @@ public class EnemySpawnManager : MonoBehaviour
     }
 
     //===========================================================================
-    private bool LoadEnemySpawnPointList()
-    {
-        if (GameObject.Find("EnemySpawnPointList")!= null){
-            enemySpawnPointList = GameObject.Find("EnemySpawnPointList");
-            int spawnNum = enemySpawnPointList.GetComponent<SpawnPointList>().GetSpawnAmount();
-            if (spawnNum == 0) { return false; }
-            spawnAmount = spawnNum;
-            return true;
-        }
-        else { return false; }
-    }
+    //private bool LoadEnemySpawnPointList()
+    //{
+    //    if (GameObject.Find("EnemySpawnPointList")!= null){
+    //        enemySpawnPointList = GameObject.Find("EnemySpawnPointList");
+    //        int spawnNum = enemySpawnPointList.GetComponent<SpawnPointList>().GetSpawnAmount();
+    //        if (spawnNum == 0) { return false; }
+    //        spawnAmount = spawnNum;
+    //        return true;
+    //    }
+    //    else { return false; }
+    //}
 
     private void SpawnEnemy()
     {
@@ -112,7 +116,8 @@ public class EnemySpawnManager : MonoBehaviour
             {
                 if (enemy.gameObject.activeSelf == false)
                 {
-                    enemy.transform.position = enemySpawnPointList.transform.GetChild(index).gameObject.transform.position;
+                    enemy.transform.position = enemySpawnPointList.transform.GetChild(index).transform.position;
+                    Debug.Log("Transform Position:" + enemySpawnPointList.transform.GetChild(index).transform.position);
                     enemy.gameObject.SetActive(true);
                     break;
                 }

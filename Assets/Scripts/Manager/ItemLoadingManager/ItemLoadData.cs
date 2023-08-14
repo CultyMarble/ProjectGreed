@@ -6,5 +6,5 @@ using UnityEngine;
 public class ItemLoadData
 {
     public Transform item = default;
-    public SOBoolean canLoad = default;
+    public SOBool canLoad = default;
 }

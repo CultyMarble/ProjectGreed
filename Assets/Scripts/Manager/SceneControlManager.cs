@@ -34,7 +34,7 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
     [SerializeField] private GameObject player;
 
     [Header("Starting Scene:")]
-    [SerializeField] private SceneName startingScene;
+    [SerializeField] private GameObject startingScene;
     [SerializeField] private Transform startingPosition;
 
     [Header("Main Menu")]
@@ -92,34 +92,37 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         loadingScreenImage.color = new Color(0.0f, 0.0f, 0.0f, 1.0f);
         loadingScreenCanvasGroup.alpha = 1.0f;
 
-        if (!developerScriptable.developerMode)
-        {
-            mainMenu.SetActive(true);
-        }
-        else
-        {
-            player.SetActive(true);
-            player.transform.position = developerScriptable.playerSpawnPosition;
-        }
+        //if (!developerScriptable.developerMode)
+        //{
+        //    mainMenu.SetActive(true);
+        //}
+        //else
+        //{
+        //    player.SetActive(true);
+        //    player.transform.position = developerScriptable.playerSpawnPosition;
+        //}
 
         StartCoroutine(LoadingScreen(0.0f));
     }
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            StartCoroutine(LoadTutorialRoom());
+        }
+
         if (Input.GetKeyDown(KeyCode.Escape) && mainMenu.activeSelf == false || Input.GetKeyDown(KeyCode.P) && player.activeInHierarchy != false)
         {
             if (pauseMenu.activeSelf)
             {
                 Time.timeScale = 1;
                 pm_animator.SetTrigger("Close");
-                playerCurrencies.Close();
             }
             else
             {
                 Time.timeScale = 0;
                 pauseMenu.SetActive(true);
-                playerCurrencies.Open();
             }
         }
 
@@ -174,9 +177,7 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         yield return StartCoroutine(LoadingScreen(1.0f));
 
         player.transform.gameObject.SetActive(false);
-        player.GetComponentInChildren<BasicAbility>().ResetDamage();
         player.GetComponentInChildren<BasicAbility>().ResetMaxFuel();
-        player.GetComponent<PlayerHealth>().ResetPlayerHealth();
         player.GetComponent<PlayerController>().dashCD = 3.0f;
 
         // GameplayRuntimeData
@@ -231,8 +232,6 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         player.SetActive(true);
 
         player.transform.position = this.transform.position;
-
-        player.GetComponent<PlayerHealth>().UpdateCurrentHealth();
     }
 
     //===========================================================================
@@ -241,9 +240,10 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         mainMenu.SetActive(false);
 
         loadingScreenImage.color = new Color(0.0f, 0.0f, 0.0f, 1.0f);
-        yield return StartCoroutine(LoadingScreen(1.0f));
+        yield return StartCoroutine(LoadingScreen(0.0f));
 
-        yield return StartCoroutine(LoadSceneAndSetActive(startingScene.ToString()));
+        startingScene.SetActive(true);
+        //yield return StartCoroutine(LoadSceneAndSetActive(startingScene.ToString()));
         EventManager.CallAfterSceneLoadEvent();
 
         GameplayInfoUIControl.Instance.SetGameplayInfoUIActive(true);
@@ -259,7 +259,7 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         mainMenu.SetActive(false);
 
         loadingScreenImage.color = new Color(0.0f, 0.0f, 0.0f, 1.0f);
-        yield return StartCoroutine(LoadingScreen(1.0f));
+        yield return StartCoroutine(LoadingScreen(0.0f));
 
         yield return StartCoroutine(LoadSceneAndSetActive(SceneName.Scene02_TutorialScene.ToString()));
         EventManager.CallAfterSceneLoadEvent();

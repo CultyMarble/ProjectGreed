@@ -57,4 +57,10 @@ public class ChasingAI : MonoBehaviour
 
         enemy_rb2D.velocity = movingDirection * currentSpeed;
     }
+
+    //===========================================================================
+    public void SetMovementSpeed(float modifier)
+    {
+        speed = speed * (1 + (modifier * 0.01f));
+    }
 }

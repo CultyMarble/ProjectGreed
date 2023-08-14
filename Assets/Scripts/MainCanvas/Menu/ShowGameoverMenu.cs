@@ -2,18 +2,18 @@ using UnityEngine;
 
 public class ShowGameoverMenu : MonoBehaviour
 {
-    [SerializeField] private PlayerHealth playerHealth;
+    [SerializeField] private PlayerHeartManager playerHeart;
     [SerializeField] private GameObject gameOverMenu;
 
     //===========================================================================
     private void OnEnable()
     {
-        playerHealth.OnDespawnEvent += DisplayGameOverUI_OnDespawnEventHandler; ;
+        playerHeart.OnDespawnEvent += DisplayGameOverUI_OnDespawnEventHandler; ;
     }
 
     private void OnDisable()
     {
-        playerHealth.OnDespawnEvent -= DisplayGameOverUI_OnDespawnEventHandler; ;
+        playerHeart.OnDespawnEvent -= DisplayGameOverUI_OnDespawnEventHandler; ;
     }
 
     //===========================================================================

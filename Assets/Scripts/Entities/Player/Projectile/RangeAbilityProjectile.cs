@@ -5,10 +5,9 @@ public class RangeAbilityProjectile : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D projectileRigidbody2D;
 
-    private int rotStack;
     private float moveSpeed;
     private Vector3 moveDirection;
-    private int particleDamage;
+    private float particleDamage;
     private float lifetime = 2;
     private AbilityStatusEffect statusEffect;
 
@@ -48,13 +47,10 @@ public class RangeAbilityProjectile : MonoBehaviour
     }
 
     //===========================================================================
-    public void ProjectileConfig(int newRotStack, float newMoveSpeed, Transform startPositionTransform, int damage, AbilityStatusEffect _statusEffect)
+    public void ProjectileConfig(float newMoveSpeed, Transform startPositionTransform, float damage)
     {
-        rotStack = newRotStack;
         particleDamage = damage;
         moveSpeed = newMoveSpeed;
-        moveDirection = (CultyMarbleHelper.GetMouseToWorldPosition() -
-            startPositionTransform.position).normalized;
-        statusEffect = _statusEffect;
+        moveDirection = (CultyMarbleHelper.GetMouseToWorldPosition() - startPositionTransform.position).normalized;
     }
 }

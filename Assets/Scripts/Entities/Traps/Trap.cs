@@ -1,0 +1,121 @@
+﻿using Mono.Cecil.Cil;
+using UnityEngine;
+
+public abstract class Trap : MonoBehaviour
+{
+    [SerializeField] private Sprite[] trapSprites = default;
+    [SerializeField] private float animationSpeed = default;
+    [SerializeField] private int triggerIndex = default;
+
+    [Header("Trap Settings:")]
+    [SerializeField] private bool oneTimeTrigger = default;
+    [SerializeField] private float reaimDuration = default;
+    [SerializeField] private bool movementImpair = default;
+    [SerializeField] private float movementImpairDuration = default;
+
+    private SpriteRenderer trapSpriteRenderer = default;
+    private bool playAnimation = default;
+    private float effectAnimationTimer = default;
+    private int currentAnimationIndex = default;
+    private float reaimTimer = default;
+
+    private bool haveTriggered = default;
+    protected bool playerInside = default;
+
+    //===========================================================================
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.TryGetComponent(out Player player) && collision.GetType().ToString() == Tags.CAPSULECOLLIDER2D)
+        {
+            playerInside = true;
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (oneTimeTrigger && haveTriggered)
+            return;
+
+        if (haveTriggered)
+            return;
+
+        if (collision.TryGetComponent(out Player player) && collision.GetType().ToString() == Tags.CAPSULECOLLIDER2D)
+        {
+            haveTriggered = true;
+            playAnimation = true;
+            currentAnimationIndex = 1;
+
+            if (movementImpair)
+                Player.Instance.GetComponent<PlayerController>().SetImpairDuration(movementImpairDuration);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.TryGetComponent(out Player player) && collision.GetType().ToString() == Tags.CAPSULECOLLIDER2D)
+        {
+            playerInside = false;
+        }
+    }
+
+    //===========================================================================
+    private void Awake()
+    {
+        trapSpriteRenderer = GetComponentInChildren<SpriteRenderer>();
+    }
+
+    //===========================================================================
+    private void Update()
+    {
+        if (playAnimation)
+        {
+            TrapAnimation();
+        }
+
+        if (oneTimeTrigger)
+            return;
+
+        ReaimDurationCheck();
+    }
+
+    //===========================================================================
+    private void TrapAnimation()
+    {
+        effectAnimationTimer += Time.deltaTime;
+        if (effectAnimationTimer >= animationSpeed)
+        {
+            effectAnimationTimer -= animationSpeed;
+
+            if (currentAnimationIndex == triggerIndex)
+                TriggerTrapEffect();
+
+            if (currentAnimationIndex == trapSprites.Length)
+            {
+                playAnimation = false;
+                reaimTimer = reaimDuration;
+                return;
+            }
+
+            trapSpriteRenderer.sprite = trapSprites[currentAnimationIndex];
+            currentAnimationIndex++;
+        }
+    }
+
+    private void ReaimDurationCheck()
+    {
+        if (reaimTimer <= 0)
+            return;
+
+        reaimTimer -= Time.deltaTime;
+        if (reaimTimer <= 0)
+        {
+            currentAnimationIndex = 0;
+            trapSpriteRenderer.sprite = trapSprites[currentAnimationIndex];
+
+            haveTriggered = false;
+        }
+    }
+
+    //===========================================================================
+    protected abstract void TriggerTrapEffect();
+}

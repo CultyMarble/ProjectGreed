@@ -1,24 +1,18 @@
 using UnityEngine;
 
-public enum PlayerActionState
-{
-    IsUsingBasicAbility,
-    IsUsingRangeAbility,
-    IsUsingAreaAbility,
-    IsUsingBombAbility,
-    IsDashing,
-    none,
-}
-
 public class Player : SingletonMonobehaviour<Player>
 {
     [SerializeField] private Transform fpromtText;
 
-    public PlayerActionState playerActionState;
+    [HideInInspector] public PlayerActionState playerActionState;
+
+    [SerializeField] private PlayerStat playerStat = default;
+    public PlayerStat PlayerStat => playerStat;
+
     //======================================================================
     private void Start()
     {
-        HideFPromtText();
+        SetInteractPromtTextActive(false);
 
         EventManager.AfterSceneLoadEvent += EventManager_AfterSceneLoadEventHandler;
 
@@ -28,25 +22,17 @@ public class Player : SingletonMonobehaviour<Player>
     //======================================================================
     private void EventManager_AfterSceneLoadEventHandler()
     {
-        HideFPromtText();
+        SetInteractPromtTextActive(false);
 
         this.gameObject.SetActive(true);
     }
 
     //======================================================================
-    public void ShowFPromtText()
+    public void SetInteractPromtTextActive(bool newBool)
     {
         if (fpromtText == null)
             return;
 
-        fpromtText.gameObject.SetActive(true);
-    }
-
-    public void HideFPromtText()
-    {
-        if (fpromtText == null)
-            return;
-
-        fpromtText.gameObject.SetActive(false);
+        fpromtText.gameObject.SetActive(newBool);
     }
 }

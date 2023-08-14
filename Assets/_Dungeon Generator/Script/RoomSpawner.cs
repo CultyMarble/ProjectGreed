@@ -21,6 +21,10 @@ public class RoomSpawner : MonoBehaviour
 
     private void Spawn()
     {
+        if (templates == null)
+        {
+            templates = FindObjectOfType<RoomManager>();
+        }
         if (!spawned)
         {
             if (openingDirection == 1)
@@ -47,11 +51,16 @@ public class RoomSpawner : MonoBehaviour
     private void InstantiateRandomRoom(int length, GameObject[] room)
     {
         int random = Random.Range(0, length);
-        Instantiate(room[random], new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
+        GameObject newRoom = Instantiate(room[random], new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
+        newRoom.transform.parent = this.transform.parent.parent;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (templates == null)
+        {
+            templates = FindObjectOfType<RoomManager>();
+        }
         if (collision.CompareTag("RoomSpawnPoint"))
         {
             if (collision.GetComponent<RoomSpawner>().spawned == false && spawned == false && transform.position.x != 0 && transform.position.y != 0)

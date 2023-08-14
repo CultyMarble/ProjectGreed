@@ -14,7 +14,10 @@ public class CameraTrigger : MonoBehaviour
     private void Start()
     {
         PlayerController.OnPlayerReady += SetPlayerFollow;
-
+        if(controller == null)
+        {
+            controller = FindObjectOfType<PlayerController>();
+        }
         if (virtualCamera.Follow == null)
         {
             virtualCamera.Follow = controller.transform;

@@ -1,22 +1,20 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class RangeAbility : CoreAbility
+public class RangeAbility : PlayerAbility
 {
     [Header("Effect Settings:")]
     [SerializeField] private GameObject pfRangeAbilityProjectile;
-    [SerializeField] private GameObject aimIndicator;
+    [SerializeField] private SpriteRenderer aimIndicator;
 
     [Header("Ability Settings:")]
-    [SerializeField] private int rotStackApply;
-    [SerializeField] private float projectileSpeed;
-    [SerializeField] private float aimChargeTime;
+    private float projectileSpeed = default;
+    private float projectileDamage = default;
 
-    private float aimCharge;
+    private float channelTimer = default;
 
     //===========================================================================
     // NEW INPUT SYSTEM
-
     private PlayerInput playerInput;
     private bool rightButtonCheck = false;
 
@@ -48,24 +46,26 @@ public class RangeAbility : CoreAbility
     }
 
     //===========================================================================
-
     protected override void Update()
     {
         base.Update();
 
-        switch (Player.Instance.playerActionState)
+        if (rightButtonCheck)
         {
-            case PlayerActionState.none:
-                aimIndicator.SetActive(false);
-                InputHandler();
-                break;
-            case PlayerActionState.IsUsingRangeAbility:
-                aimIndicator.SetActive(true);
-                Shoot();
-                break;
-            default:
-                break;
+            aimIndicator.gameObject.SetActive(true);
+            ChannelHandler();
         }
+        else
+        {
+            aimIndicator.gameObject.SetActive(false);
+            ShootHandler();
+
+            channelTimer = 0;
+            SetPlayerMovementSpeed();
+        }
+
+        if (channelTimer > 0)
+            Player.Instance.playerActionState = PlayerActionState.IsUsingRangeAbility;
     }
 
     private void FixedUpdate()
@@ -74,64 +74,120 @@ public class RangeAbility : CoreAbility
     }
 
     //===========================================================================
-    private void InputHandler()
+    private void UpdateIndicatorColor()
     {
-        if (rightButtonCheck)
+        if (channelTimer >= Player.Instance.PlayerStat.ra_baseMaxChargeTime)
         {
-            Player.Instance.playerActionState = PlayerActionState.IsUsingRangeAbility;
-            aimCharge += Time.deltaTime;
-
+            aimIndicator.color = Color.green;
+        }
+        else if (channelTimer >= Player.Instance.PlayerStat.ra_baseMidChargeTime)
+        {
+            aimIndicator.color = Color.cyan;
+        }
+        else if (channelTimer >= Player.Instance.PlayerStat.ra_baseMinChargeTime)
+        {
+            aimIndicator.color = Color.yellow;
         }
         else
+        {
+            aimIndicator.color = Color.red;
+        }
+    }
+
+    private void SetProjectileSpeed()
+    {
+        if (channelTimer >= Player.Instance.PlayerStat.ra_baseMaxChargeTime)
+        {
+            projectileSpeed = Player.Instance.PlayerStat.ra_baseMaxSpeed;
+        }
+        else if (channelTimer >= Player.Instance.PlayerStat.ra_baseMidChargeTime)
+        {
+            projectileSpeed = Player.Instance.PlayerStat.ra_baseMidSpeed;
+        }
+        else if (channelTimer >= Player.Instance.PlayerStat.ra_baseMinChargeTime)
+        {
+            projectileSpeed = Player.Instance.PlayerStat.ra_baseMinSpeed;
+        }
+        else
+        {
+            projectileSpeed = 0.0f;
+        }
+    }
+
+    private void SetProjectileDamage()
+    {
+        if (channelTimer >= Player.Instance.PlayerStat.ra_baseMaxChargeTime)
+        {
+            projectileDamage = Player.Instance.PlayerStat.ra_baseMaxDamage;
+        }
+        else if (channelTimer >= Player.Instance.PlayerStat.ra_baseMidChargeTime)
+        {
+            projectileDamage = Player.Instance.PlayerStat.ra_baseMidDamage;
+        }
+        else if (channelTimer >= Player.Instance.PlayerStat.ra_baseMinChargeTime)
+        {
+            projectileDamage = Player.Instance.PlayerStat.ra_baseMinDamage;
+        }
+        else
+        {
+            projectileDamage = 0.0f;
+        }
+    }
+
+    private void SetPlayerMovementSpeed()
+    {
+        if (channelTimer >= Player.Instance.PlayerStat.ra_baseMaxChargeTime)
+        {
+            Player.Instance.GetComponent<PlayerController>().SetMoveSpeed(
+                Player.Instance.PlayerStat.ra_basePlayerMinSpeed);
+        }
+        else if (channelTimer >= Player.Instance.PlayerStat.ra_baseMidChargeTime)
+        {
+            Player.Instance.GetComponent<PlayerController>().SetMoveSpeed(
+                Player.Instance.PlayerStat.ra_basePlayerMidSpeed);
+        }
+        else if (channelTimer >= Player.Instance.PlayerStat.ra_baseMinChargeTime)
+        {
+            Player.Instance.GetComponent<PlayerController>().SetMoveSpeed(
+                Player.Instance.PlayerStat.ra_basePlayerMaxSpeed);
+        }
+        else
+        {
+            Player.Instance.GetComponent<PlayerController>().SetMoveSpeed(6.0f);
+        }
+    }
+
+    private void ChannelHandler()
+    {
+        if (cooldownTimer <= 0)
+        {
+            channelTimer += Time.deltaTime;
+
+            SetPlayerMovementSpeed();
+            UpdateIndicatorColor();
+        }
+        else
+        {
+            aimIndicator.color = Color.red;
+        }
+    }
+
+    private void ShootHandler()
+    {
+        if (channelTimer < Player.Instance.PlayerStat.ra_baseMinChargeTime)
         {
             Player.Instance.playerActionState = PlayerActionState.none;
-            aimCharge = 0;
+            return;
         }
+
+        SetProjectileSpeed();
+        SetProjectileDamage();
+
+        cooldownTimer = cooldown;
+
+        RangeAbilityProjectile projectile = Instantiate(pfRangeAbilityProjectile, this.transform.position, Quaternion.identity).
+            GetComponent<RangeAbilityProjectile>();
+
+        projectile.ProjectileConfig(projectileSpeed, this.transform, projectileDamage);
     }
-
-    private void Shoot()
-    {
-        if (cooldownTimer == 0)
-        {
-            if (aimCharge + Time.deltaTime <= aimChargeTime)
-            {
-                aimCharge += Time.deltaTime;
-            }
-            else
-            {
-                aimCharge = aimChargeTime;
-            }
-
-            aimIndicator.GetComponent<SpriteRenderer>().color = Color.yellow;
-
-            if (aimCharge >= aimChargeTime)
-            {
-                aimIndicator.GetComponent<SpriteRenderer>().color = Color.green;
-            }
-
-            if (!rightButtonCheck)
-            {
-                float scaledSpeed = Mathf.Clamp((aimCharge / aimChargeTime) * projectileSpeed, projectileSpeed / 2, projectileSpeed);
-                int scaledDamage = (int)Mathf.Clamp((aimCharge / aimChargeTime) * damage, damage / 2, damage);
-
-                cooldownTimer = cooldown;
-
-                Transform projectile = Instantiate(pfRangeAbilityProjectile, this.transform.position, Quaternion.identity).transform;
-                projectile.GetComponent<RangeAbilityProjectile>().ProjectileConfig(rotStackApply, scaledSpeed, this.transform, scaledDamage, abilityStatusEffect);
-                Player.Instance.playerActionState = PlayerActionState.none;
-                aimCharge = 0;
-            }
-        }
-        else
-        {
-            aimIndicator.GetComponent<SpriteRenderer>().color = Color.red;
-
-            if (!rightButtonCheck)
-            {
-                Player.Instance.playerActionState = PlayerActionState.none;
-                aimCharge = 0;
-            }
-        }
-    }
-
 }

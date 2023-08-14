@@ -85,7 +85,14 @@ public class Enemy : MonoBehaviour
 
     public void ResetStatusEffects()
     {
-        gameObject.GetComponentInChildren<Poison>().Deactivate();
-        gameObject.GetComponentInChildren<Rot>().Deactivate();
+        if (gameObject.GetComponentInChildren<Poison>())
+        {
+            gameObject.GetComponentInChildren<Poison>().Deactivate();
+        }
+
+        if (gameObject.GetComponentInChildren<Rot>())
+        {
+            gameObject.GetComponentInChildren<Rot>().Deactivate();
+        }
     }
 }
