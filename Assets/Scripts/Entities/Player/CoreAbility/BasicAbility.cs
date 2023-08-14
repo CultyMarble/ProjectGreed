@@ -79,7 +79,7 @@ public class BasicAbility : PlayerAbility
     {
         base.Update();
 
-        Debug.Log(cooldownTimer);
+        //Debug.Log(cooldownTimer);
 
         switch (Player.Instance.playerActionState)
         {

@@ -3084,7 +3084,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activateType: 0
-  haveActivated: {fileID: 0}
+  haveActivated: {fileID: 11400000, guid: 064b4593e65fa84409f5a53b55c953d2, type: 2}
   dialogueEntryArray: []
 --- !u!114 &405288957
 MonoBehaviour:
@@ -3098,7 +3098,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fde8ec076e4489b43a76020b61c82be6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canLoad: {fileID: 0}
+  canLoad: {fileID: 11400000, guid: 064b4593e65fa84409f5a53b55c953d2, type: 2}
   unlockAoEAbility: 0
   unlockBombAbility: 1
 --- !u!95 &405288958
@@ -6775,11 +6775,11 @@ MonoBehaviour:
   currentRoomType: 1
   roomVariant: Entry
   roomType:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 4422130485644021212, guid: b98d4cd8232524f4c904daf97c2e9436, type: 3}
+  - {fileID: 4422130485644021212, guid: 3e337ec34c699ac44b0da2191163d8c0, type: 3}
+  - {fileID: 4422130485644021212, guid: bc67c52f8c921bc438efeab25f755a2d, type: 3}
+  - {fileID: 4422130485644021212, guid: 933f06a9b51104540a8ddee8a72bc6ae, type: 3}
+  - {fileID: 4422130485644021212, guid: 5e265e2fd525acc4ca57c09e913bafb4, type: 3}
   shopRoom: {fileID: 399540625238344219, guid: c0f4c6c034e43d34cbb3c9e1a4ae0791, type: 3}
 --- !u!1 &780078992
 GameObject:
@@ -19696,7 +19696,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 0.015
-  basicAbilityProjectilePool: {fileID: 0}
+  basicAbilityProjectilePool: {fileID: 1302638206}
 --- !u!4 &6758964162254272939
 Transform:
   m_ObjectHideFlags: 0
