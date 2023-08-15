@@ -1833,7 +1833,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effectIcon: {fileID: 21300000, guid: aebb7b1266346274bbdb45a6ac1fa9e1, type: 3}
-  enemyHealth: {fileID: 1918223858622422288}
   spreadRadius: 3
 --- !u!114 &7870661386830881755
 MonoBehaviour:
@@ -1861,7 +1860,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effectIcon: {fileID: 0}
-  enemyHealth: {fileID: 1918223858622422288}
   rotBar: {fileID: 3383236213181767750}
   killThreshold: 0
 --- !u!1 &8533341496994182868

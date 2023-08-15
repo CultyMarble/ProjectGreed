@@ -620,7 +620,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2290856477104092860}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3b299df1f3d90e540a5774715e49d214, type: 3}
   m_Name: 
@@ -874,7 +874,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effectIcon: {fileID: 21300000, guid: aebb7b1266346274bbdb45a6ac1fa9e1, type: 3}
-  enemyHealth: {fileID: 4038241797528594032}
   spreadRadius: 3
 --- !u!114 &5741637900286417083
 MonoBehaviour:
@@ -902,7 +901,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effectIcon: {fileID: 21300000, guid: 18db310845d756b4b91063606ca4185f, type: 3}
-  enemyHealth: {fileID: 4038241797528594032}
   rotBar: {fileID: 170730537554964476}
   killThreshold: 0
 --- !u!1 &5766946388284678278
