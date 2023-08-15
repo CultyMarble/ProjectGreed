@@ -8,12 +8,12 @@ public class ShowGameoverMenu : MonoBehaviour
     //===========================================================================
     private void OnEnable()
     {
-        playerHeartManager.OnDespawnPlayerEvent += DisplayGameOverUI_OnDespawnEventHandler; ;
+        playerHeartManager.OnDespawnPlayerEvent += DisplayGameOverUI_OnDespawnEventHandler;
     }
 
     private void OnDisable()
     {
-        playerHeartManager.OnDespawnPlayerEvent -= DisplayGameOverUI_OnDespawnEventHandler; ;
+        playerHeartManager.OnDespawnPlayerEvent -= DisplayGameOverUI_OnDespawnEventHandler;
     }
 
     //===========================================================================

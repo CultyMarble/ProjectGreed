@@ -1,9 +1,12 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
 {
+    public static event UnityAction<Transform> OnPlayerReady;
+
     private float moveSpeed = default;
 
     private Rigidbody2D Rigidbody2D;
@@ -53,6 +56,8 @@ public class PlayerMovement : MonoBehaviour
         dashCooldown = Player.Instance.PlayerData.baseDashCooldown;
         dashTime = Player.Instance.PlayerData.baseDashTime;
         dashSpeed = Player.Instance.PlayerData.baseDashSpeed;
+
+        OnPlayerReady?.Invoke(transform);
     }
 
     private void Update()

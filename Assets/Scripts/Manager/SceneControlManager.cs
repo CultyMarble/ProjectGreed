@@ -11,10 +11,11 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
     [SerializeField] private CanvasGroup loadingScreenCanvasGroup;
     [SerializeField] private Image loadingScreenImage;
 
+    [SerializeField] private GameObject player;
+
     [Header("Starting Scene:")]
-    [SerializeField] private SceneName startingScene;
+    [SerializeField] private GameObject startingScene;
     [SerializeField] private Transform startingPosition;
-    public Transform StartingPosition => startingPosition;
 
     [Header("Main Menu")]
     [SerializeField] private GameObject mainMenu;
@@ -32,9 +33,12 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
     [SerializeField] public GameObject optionMenu;
 
     [Header("Gameover Menu")]
-    [SerializeField] private GameObject gameOverMenu;
-    [SerializeField] private Button gv_loadLastCheckPointButton;
-    [SerializeField] private Button gv_mainMenuButton;
+    //[SerializeField] private GameObject gameOverMenu;
+    //[SerializeField] private Button gv_loadLastCheckPointButton;
+    //[SerializeField] private Button gv_mainMenuButton;
+
+    [Header("Gameplay Runtime Data")]
+    [SerializeField] private SOListInt generatedItemForSale;
 
     private readonly float loadingScreenDuration = 0.75f;
     private bool isLoadingScreenActive;
@@ -58,8 +62,8 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         });
 
         // Gameover Menu
-        gv_loadLastCheckPointButton.onClick.AddListener(() => StartCoroutine(LoadLastCheckPoint()));
-        gv_mainMenuButton.onClick.AddListener(() => StartCoroutine(UnloadSceneAndBackToMainMenu()));
+        //gv_loadLastCheckPointButton.onClick.AddListener(() => StartCoroutine(LoadLastCheckPoint()));
+        //gv_mainMenuButton.onClick.AddListener(() => StartCoroutine(UnloadSceneAndBackToMainMenu()));
     }
 
     private void Start()
@@ -80,7 +84,7 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
             StartCoroutine(LoadTutorialRoom());
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape) && mainMenu.activeSelf == false)
+        if (Input.GetKeyDown(KeyCode.Escape) && mainMenu.activeSelf == false || Input.GetKeyDown(KeyCode.P) && player.activeInHierarchy != false)
         {
             if (pauseMenu.activeSelf)
             {
@@ -132,7 +136,7 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         OnUnloadRuntimeDataEvent?.Invoke(this, EventArgs.Empty);
 
         pm_animator.SetTrigger("Close");
-        gameOverMenu.SetActive(false);
+        // gameOverMenu.SetActive(false);
         mainMenu.SetActive(true);
 
         SaveDataManager.Instance.SAVE01.SaveCheckPointData(SceneName.Scene03_HubArea, Vector3.zero);
@@ -173,6 +177,14 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
     }
 
     //===========================================================================
+    private void SetPlayerActiveTrue()
+    {
+        player.SetActive(true);
+
+        player.transform.position = this.transform.position;
+    }
+
+    //===========================================================================
     private IEnumerator LoadStartingScene()
     {
         EventManager.CallBeforeSceneUnloadLoadingScreenEvent();
@@ -180,7 +192,8 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
 
         mainMenu.SetActive(false);
 
-        yield return StartCoroutine(LoadSceneAndSetActive(startingScene.ToString()));
+        startingScene.SetActive(true);
+        //yield return StartCoroutine(LoadSceneAndSetActive(startingScene.ToString()));
         EventManager.CallAfterSceneLoadEvent();
 
         Player.Instance.transform.position = startingPosition.position;
@@ -206,12 +219,20 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
     }
 
     //===========================================================================
+    public void LoadScene(string sceneName, Vector3 spawnPosition)
+    {
+        if (isLoadingScreenActive == false)
+        {
+            StartCoroutine(UnloadAndSwitchScene(sceneName, spawnPosition));
+        }
+    }
+
     public IEnumerator LoadLastCheckPoint()
     {
         EventManager.CallBeforeSceneUnloadLoadingScreenEvent();
         yield return StartCoroutine(LoadingScreen(1.0f));
 
-        gameOverMenu.SetActive(false);
+        // gameOverMenu.SetActive(false);
         Player.Instance.transform.position = SaveDataManager.Instance.SAVE01.RetrieveCheckPointSpawnLocation();
 
         EventManager.CallBeforeSceneUnloadEvent();
@@ -224,13 +245,6 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
 
         yield return StartCoroutine(LoadingScreen(0.0f));
         EventManager.CallAfterSceneLoadedLoadingScreenEvent();
-    }
-
-    //===========================================================================
-    public void LoadScene(string sceneName, Vector3 spawnPosition)
-    {
-        if (isLoadingScreenActive == false)
-            StartCoroutine(UnloadAndSwitchScene(sceneName, spawnPosition));
     }
 
     public void OpenOptionMenuButton()

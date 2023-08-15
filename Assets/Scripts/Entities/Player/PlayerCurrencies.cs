@@ -11,7 +11,7 @@ public class PlayerCurrencies : SingletonMonobehaviour<PlayerCurrencies>
     public int PermCurrencyAmount => tempCurrencyAmount;
 
     //===========================================================================
-    private void OnEnable()
+    private void Start()
     {
         UpdatePermCurrencyAmount();
         UpdateTempCurrencyAmount();
