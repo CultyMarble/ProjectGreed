@@ -228,7 +228,7 @@ public class RangeAbility : MonoBehaviour
             if (projectile.gameObject.activeInHierarchy == false)
             {
                 RangeAbilityProjectile _projectile = projectile.GetComponent<RangeAbilityProjectile>();
-                _projectile.ProjectileConfig(projectileSpeed, this.transform, projectileDamage);
+                _projectile.ProjectileConfig(projectileSpeed, transform, projectileDamage);
 
                 projectile.gameObject.SetActive(true);
                 break;
