@@ -36,7 +36,6 @@ public class Player : SingletonMonobehaviour<Player>
 
         actionState = PlayerActionState.none;
 
-        transform.position = SceneControlManager.Instance.StartingPosition.position;
         gameObject.SetActive(true);
     }
 

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class GameplayInfoUIControl : SingletonMonobehaviour<GameplayInfoUIControl>
+public class GameplayInfoController : SingletonMonobehaviour<GameplayInfoController>
 {
     [SerializeField] private PlayerHeartManager playerHeartManager;
 
@@ -8,6 +8,16 @@ public class GameplayInfoUIControl : SingletonMonobehaviour<GameplayInfoUIContro
     [SerializeField] private GameObject playerFuelUI;
     [SerializeField] private GameObject playerRangeAbilityChargeUI;
     [SerializeField] private GameObject playerCurrencyUI;
+
+    [SerializeField] private DisplayPlayerHeart displayPlayerHeart = default;
+    [SerializeField] private DisplayPlayerFuel displayPlayerFuel = default;
+    [SerializeField] private DisplayPlayerRangeAbilityCharge displayPlayerRangeAbilityCharge = default;
+    [SerializeField] private DisplayPlayerCurrency displayPlayerCurrency = default;
+
+    public DisplayPlayerHeart DisplayPlayerHeart => displayPlayerHeart;
+    public DisplayPlayerFuel DisplayPlayerFuel => displayPlayerFuel;
+    public DisplayPlayerRangeAbilityCharge DisplayPlayerRangeAbilityCharge => displayPlayerRangeAbilityCharge;
+    public DisplayPlayerCurrency DisplayPlayerCurrency => displayPlayerCurrency;
 
     //===========================================================================
     private void OnEnable()

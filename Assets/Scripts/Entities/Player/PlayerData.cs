@@ -18,7 +18,7 @@ public class PlayerData : MonoBehaviour
     public readonly float ba_baseMaxFuel = 100.0f;
     public readonly float ba_fuelConsumePerTrigger = 1.0f;
     public readonly float ba_baseRechargeRate = 100.0f;
-    public readonly float ba_baseDamage = 1.0f;
+    public readonly float ba_baseDamage = 3.0f;
 
     // Range Ability Stat
     public readonly int ra_baseCharge = 2;
@@ -28,17 +28,21 @@ public class PlayerData : MonoBehaviour
     public readonly float ra_baseMaxChargeTime = 2.0f;
 
     public readonly float ra_baseMinDamage = 10.0f;
-    public readonly float ra_baseMidDamage = 20.0f;
-    public readonly float ra_baseMaxDamage = 30.0f;
+    public readonly float ra_baseMidDamage = 30.0f;
+    public readonly float ra_baseMaxDamage = 60.0f;
 
-    public readonly float ra_baseMinSpeed = 10.0f;
-    public readonly float ra_baseMidSpeed = 15.0f;
-    public readonly float ra_baseMaxSpeed = 20.0f;
+    public readonly float ra_baseMinSpeed = 15.0f;
+    public readonly float ra_baseMidSpeed = 20.0f;
+    public readonly float ra_baseMaxSpeed = 30.0f;
 
     public readonly float ra_basePlayerMinSpeed = 1.0f;
     public readonly float ra_basePlayerMidSpeed = 3.0f;
     public readonly float ra_basePlayerMaxSpeed = 5.0f;
 
     // Bomb Ability Stat
+    public readonly int bomb_baseCharge = 0;
 
+    public readonly float bomb_baseDamage = 50.0f;
+    public readonly float bomb_baseDelayTime = 1.5f;
+    public readonly float bomb_baseRadius = 3.0f;
 }

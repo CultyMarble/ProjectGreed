@@ -11,7 +11,6 @@ public class RangeAbility : MonoBehaviour
     public event System.EventHandler<OnCurrentChargeChangedEventArgs> OnCurrentChargeChangedEvent;
 
     [Header("Effect Settings:")]
-    [SerializeField] private GameObject pfRangeAbilityProjectile;
     [SerializeField] private SpriteRenderer aimIndicator;
 
     private int currentMaxCharge = default;
@@ -22,6 +21,12 @@ public class RangeAbility : MonoBehaviour
 
     private float channelTimer = default;
 
+    // Pooling
+    [Header("Pooling Settings:")]
+    [SerializeField] private Transform rangeAbilityProjectilePool = default;
+    [SerializeField] private Transform pfRangeAbilityProjectile = default;
+    private readonly int poolSize = 10;
+
     // NEW INPUT SYSTEM
     private PlayerInput playerInput;
     private bool rightButtonCheck = false;
@@ -30,14 +35,23 @@ public class RangeAbility : MonoBehaviour
     private void Awake()
     {
         playerInput = FindObjectOfType<PlayerInput>();
+
+        PopulatePool();
+    }
+
+    private void Start()
+    {
+        currentMaxCharge = Player.Instance.PlayerData.ra_baseCharge;
+        currentCharge = currentMaxCharge;
+
+        UpdateCurrentMaxCharge();
+        UpdateCurrentCharge();
     }
 
     private void OnEnable()
     {
         playerInput.actions["RightClick"].started += ActionPerformed;
         playerInput.actions["RightClick"].canceled += ActionCanceled;
-
-        EventManager.AfterSceneLoadEvent += EventManager_AfterSceneLoadEvent;
     }
 
     private void Update()
@@ -66,8 +80,6 @@ public class RangeAbility : MonoBehaviour
     {
         playerInput.actions["RightClick"].started -= ActionPerformed;
         playerInput.actions["RightClick"].canceled -= ActionCanceled;
-
-        EventManager.AfterSceneLoadEvent -= EventManager_AfterSceneLoadEvent;
     }
 
     //===========================================================================
@@ -81,16 +93,15 @@ public class RangeAbility : MonoBehaviour
         rightButtonCheck = false;
     }
 
-    private void EventManager_AfterSceneLoadEvent()
+    //===========================================================================
+    private void PopulatePool()
     {
-        currentMaxCharge = Player.Instance.PlayerData.ra_baseCharge;
-        currentCharge = currentMaxCharge;
-
-        UpdateCurrentMaxCharge();
-        UpdateCurrentCharge();
+        for (int i = 0; i < poolSize; i++)
+        {
+            Instantiate(pfRangeAbilityProjectile, rangeAbilityProjectilePool).gameObject.SetActive(false);
+        }
     }
 
-    //===========================================================================
     private void InputHandler()
     {
         if (rightButtonCheck)
@@ -212,14 +223,22 @@ public class RangeAbility : MonoBehaviour
         SetProjectileSpeed();
         SetProjectileDamage();
 
-        RangeAbilityProjectile projectile = Instantiate(pfRangeAbilityProjectile, this.transform.position, Quaternion.identity).
-            GetComponent<RangeAbilityProjectile>();
+        foreach (Transform projectile in rangeAbilityProjectilePool)
+        {
+            if (projectile.gameObject.activeInHierarchy == false)
+            {
+                RangeAbilityProjectile _projectile = projectile.GetComponent<RangeAbilityProjectile>();
+                _projectile.ProjectileConfig(projectileSpeed, this.transform, projectileDamage);
 
-        projectile.ProjectileConfig(projectileSpeed, this.transform, projectileDamage);
+                projectile.gameObject.SetActive(true);
+                break;
+            }
+        }
 
         Player.Instance.actionState = PlayerActionState.none;
 
         currentCharge--;
+
         // Invoke Event
         OnCurrentChargeChangedEvent?.Invoke(this, new OnCurrentChargeChangedEventArgs { currentCharge = currentCharge });
     }

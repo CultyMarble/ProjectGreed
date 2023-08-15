@@ -29,8 +29,10 @@ public class BasicAbility : PlayerAbility
     public float CurrentFuel => currentFuel;
     public float MaxFuel => maxFuel;
 
-    // Pooling System
-    [SerializeField] private Transform basicAbilityProjectilePool;
+    // Pooling
+    [SerializeField] private Transform basicAbilityProjectilePool = default;
+    [SerializeField] private Transform pfBasicAbilityProjectile = default;
+    private readonly int poolSize = 50;
 
     // NEW INPUT SYSTEM
     private PlayerInput playerInput;
@@ -40,6 +42,8 @@ public class BasicAbility : PlayerAbility
     private void Awake()
     {
         playerInput = FindObjectOfType<PlayerInput>();
+
+        PopulatePool();
     }
 
     private void OnEnable()
@@ -98,6 +102,14 @@ public class BasicAbility : PlayerAbility
     }
 
     //===========================================================================
+    private void PopulatePool()
+    {
+        for (int i = 0; i < poolSize; i++)
+        {
+            Instantiate(pfBasicAbilityProjectile, basicAbilityProjectilePool).gameObject.SetActive(false);
+        }
+    }
+
     private void InputHandler()
     {
         if (leftClickButtonCheck)

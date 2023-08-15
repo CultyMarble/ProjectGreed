@@ -9,7 +9,6 @@ public class RangeAbilityProjectile : MonoBehaviour
     private Vector3 moveDirection;
     private float particleDamage;
     private float duration = 2;
-    private AbilityStatusEffect statusEffect;
 
     [Header("Effect Animation Settings:")]
     [SerializeField] private SpriteRenderer abilityEffect;
@@ -24,21 +23,17 @@ public class RangeAbilityProjectile : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy") && collision.GetType().ToString() != Tags.CIRCLECOLLIDER2D)
         {
-            AbilityStatusEffect enemyStatusEffect = collision.gameObject.GetComponent<Enemy>().CheckStatusEffect();
-
+            // Deal Damage
             collision.gameObject.GetComponent<EnemyHealth>().UpdateCurrentHealth(-particleDamage);
-            collision.gameObject.GetComponent<Enemy>().InflictStatusEffect(statusEffect, 3);
 
-            if (statusEffect == AbilityStatusEffect.none && enemyStatusEffect != AbilityStatusEffect.none)
-            {
-                statusEffect = enemyStatusEffect;
-            }
+            // Deal Status Effect
+
         }
 
         if (collision.gameObject.CompareTag("Collisions"))
         {
             gameObject.SetActive(false);
-            Destroy(gameObject);
+            gameObject.transform.position = Vector3.zero;
         }
     }
 
@@ -83,6 +78,7 @@ public class RangeAbilityProjectile : MonoBehaviour
     {
         particleDamage = damage;
         moveSpeed = newMoveSpeed;
+
         moveDirection = (CultyMarbleHelper.GetMouseToWorldPosition() - startPositionTransform.position).normalized;
         transform.up = moveDirection;
     }

@@ -165,8 +165,6 @@ public class PlayerMovement : MonoBehaviour
             case PlayerActionState.IsUsingRangeAbility:
                 Rigidbody2D.MovePosition(Rigidbody2D.position + moveSpeed * Time.deltaTime * movementVector);
                 break;
-            case PlayerActionState.IsUsingBombAbility:
-                break;
             default:
                 Rigidbody2D.MovePosition(Rigidbody2D.position + moveSpeed * Time.deltaTime * movementVector);
                 break;

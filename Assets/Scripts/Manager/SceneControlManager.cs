@@ -183,6 +183,8 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         yield return StartCoroutine(LoadSceneAndSetActive(startingScene.ToString()));
         EventManager.CallAfterSceneLoadEvent();
 
+        Player.Instance.transform.position = startingPosition.position;
+
         StartCoroutine(LoadingScreen(0.0f));
         EventManager.CallAfterSceneLoadedLoadingScreenEvent();
     }
@@ -218,7 +220,7 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         yield return StartCoroutine(LoadSceneAndSetActive(SaveDataManager.Instance.SAVE01.RetrieveCheckPointSceneData().ToString()));
         EventManager.CallAfterSceneLoadEvent();
 
-        GameplayInfoUIControl.Instance.SetGameplayInfoUIActive(true);
+        GameplayInfoController.Instance.SetGameplayInfoUIActive(true);
 
         yield return StartCoroutine(LoadingScreen(0.0f));
         EventManager.CallAfterSceneLoadedLoadingScreenEvent();
@@ -228,9 +230,7 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
     public void LoadScene(string sceneName, Vector3 spawnPosition)
     {
         if (isLoadingScreenActive == false)
-        {
             StartCoroutine(UnloadAndSwitchScene(sceneName, spawnPosition));
-        }
     }
 
     public void OpenOptionMenuButton()

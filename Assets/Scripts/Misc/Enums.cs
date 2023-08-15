@@ -16,7 +16,6 @@ public enum PlayerActionState
     IsUsingBasicAbility,
     IsUsingRangeAbility,
     IsUsingAreaAbility,
-    IsUsingBombAbility,
     IsDashing,
     none,
 }

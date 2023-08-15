@@ -1,79 +1,103 @@
+using System.Drawing;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class BombAbility : PlayerAbility
+public class BombAbility : MonoBehaviour
 {
-    [Header("Effect Settings:")]
-    [SerializeField] private GameObject pfBomb;
+    private int currentCharge = default;
 
-    [Header("Ability Settings:")]
-    [SerializeField] private int rotStackApply;
-    [SerializeField] private float fuseTime;
-    private float placeTime = 0.1f;
+    private float damage = default;
+    private float radius = default;
+    private float delayTime = default;
 
-    public bool canUseAbility = default;
+    private readonly float inputDelayDuration = 0.5f;
+    private float inputDelayTimer = default;
+
+    // Pooling
+    [Header("Pooling Settings:")]
+    [SerializeField] private Transform bombAbilityBombPool = default;
+    [SerializeField] private Transform pfBombAbilityBomb = default;
+    private readonly int poolSize = 10;
+
+    // NEW INPUT SYSTEM
+    private PlayerInput playerInput = default;
 
     //===========================================================================
-    // NEW INPUT SYSTEM
-
-    private PlayerInput playerInput;
-
     private void Awake()
     {
         playerInput = FindObjectOfType<PlayerInput>();
+
+        PopulatePool();
+    }
+
+    private void Start()
+    {
+        currentCharge = 3;
+
+        damage = Player.Instance.PlayerData.bomb_baseDamage;
+        radius = Player.Instance.PlayerData.bomb_baseRadius;
+        delayTime = Player.Instance.PlayerData.bomb_baseDelayTime;
+    }
+
+    private void Update()
+    {
+        UpdateInputDelay();
+
+        if (Player.Instance.actionState == PlayerActionState.none ||
+            Player.Instance.actionState == PlayerActionState.IsDashing)
+        {
+            InputHandler();
+        }
     }
 
     //===========================================================================
-    protected override void Update()
+    private void PopulatePool()
     {
-        base.Update();
+        for (int i = 0; i < poolSize; i++)
+        {
+            Instantiate(pfBombAbilityBomb, bombAbilityBombPool).gameObject.SetActive(false);
+        }
+    }
 
-        if (canUseAbility == false)
+    private void UpdateInputDelay()
+    {
+        if (inputDelayTimer <= 0)
             return;
 
-        switch (Player.Instance.actionState)
-        {
-            case PlayerActionState.none:
-                InputHandler();
-                break;
-            case PlayerActionState.IsUsingBombAbility:
-                PlaceBomb();
-                break;
-            default:
-                break;
-        }
+        inputDelayTimer -= Time.deltaTime;
     }
 
-    private void FixedUpdate()
-    {
-        CultyMarbleHelper.RotateGameObjectToMouseDirection(this.transform);
-    }
-
-    //===========================================================================
     private void InputHandler()
     {
-        if (playerInput.actions["Bomb"].triggered && cooldownTimer == 0)
+        if (inputDelayTimer > 0)
+            return;
+
+        if (playerInput.actions["Bomb"].triggered && currentCharge != 0)
         {
-            Player.Instance.actionState = PlayerActionState.IsUsingBombAbility;
-        }
-        else
-        {
-            Player.Instance.actionState = PlayerActionState.none;
+            PlaceBomb();
+
+            inputDelayTimer = inputDelayDuration;
         }
     }
 
     private void PlaceBomb()
     {
-        if (placeTime <= 0)
+        foreach (Transform bomb in bombAbilityBombPool)
         {
-            Transform bomb = Instantiate(pfBomb, transform.position, Quaternion.identity).transform;
-            // bomb.GetComponent<BombObject>().SetBombConfig(damage, pushPower, pushRadius, fuseTime, abilityStatusEffect);
-            Player.Instance.actionState = PlayerActionState.none;
-            placeTime = 0.1f;
-        }
-        else
-        {
-            placeTime -= Time.deltaTime;
+            if (bomb.gameObject.activeInHierarchy == false)
+            {
+                BombAbilityBomb _bomb = bomb.GetComponent<BombAbilityBomb>();
+                _bomb.SetDamage(damage);
+                _bomb.SetRadius(radius);
+                _bomb.SetDelayTime(delayTime);
+
+                bomb.position = transform.position;
+                bomb.gameObject.SetActive(true);
+
+                currentCharge--;
+
+                break;
+            }
         }
     }
 }

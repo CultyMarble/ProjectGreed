@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2486282011418803586}
   - component: {fileID: 5204710604847039245}
   m_Layer: 10
-  m_Name: pfPlayerRangeAbilityProjectile
+  m_Name: pfRangeAbilityProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
