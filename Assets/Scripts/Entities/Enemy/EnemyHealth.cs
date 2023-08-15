@@ -45,21 +45,22 @@ public class EnemyHealth : MonoBehaviour
 
     public void Despawn()
     {
+        gameObject.SetActive(false);
+
         // Call OnDestroy Event
         OnDespawnEvent?.Invoke(this, EventArgs.Empty);
 
         // Reset Parameters
         currentHealth = maxHealth;
         OnHealthChanged?.Invoke(this, new OnHealthChangedEvenArgs { healthRatio = currentHealth / maxHealth });
-
-        gameObject.SetActive(false);
     }
 
     //======================================================================
     public void UpdateCurrentHealth(float amount = 0)
     {
-        if (amount != 0) {
-                currentHealth += amount;
+        if (amount != 0)
+        {
+            currentHealth += amount;
             currentHealth = Mathf.Clamp(currentHealth, 0.0f, maxHealth);
 
             if (amount < 0)
