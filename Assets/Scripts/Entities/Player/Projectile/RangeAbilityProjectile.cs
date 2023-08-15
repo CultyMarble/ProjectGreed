@@ -8,29 +8,32 @@ public class RangeAbilityProjectile : MonoBehaviour
     private float moveSpeed;
     private Vector3 moveDirection;
     private float particleDamage;
-    private float lifetime = 2;
-    private AbilityStatusEffect statusEffect;
+    private float duration = 2;
+
+    [Header("Effect Animation Settings:")]
+    [SerializeField] private SpriteRenderer abilityEffect;
+    [SerializeField] private Sprite[] effectSprites;
+
+    private readonly float animationSpeed = 0.1f;
+    private float animationTimer;
+    private int currentAnimationIndex;
 
     //===========================================================================
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy") && collision.GetType().ToString() != Tags.CIRCLECOLLIDER2D)
         {
-            AbilityStatusEffect enemyStatusEffect = collision.gameObject.GetComponent<Enemy>().CheckStatusEffect();
-
+            // Deal Damage
             collision.gameObject.GetComponent<EnemyHealth>().UpdateCurrentHealth(-particleDamage);
-            collision.gameObject.GetComponent<Enemy>().InflictStatusEffect(statusEffect, 3);
 
-            if (statusEffect == AbilityStatusEffect.none && enemyStatusEffect != AbilityStatusEffect.none)
-            {
-                statusEffect = enemyStatusEffect;
-            }
+            // Deal Status Effect
+
         }
 
         if (collision.gameObject.CompareTag("Collisions"))
         {
             gameObject.SetActive(false);
-            Destroy(gameObject);
+            gameObject.transform.position = Vector3.zero;
         }
     }
 
@@ -38,11 +41,35 @@ public class RangeAbilityProjectile : MonoBehaviour
     private void Update()
     {
         transform.position += moveSpeed * Time.deltaTime * moveDirection;
-        lifetime -= Time.deltaTime;
-        if(lifetime <= 0)
+
+        DurationCheck();
+
+        ProjectileAnimation();
+    }
+
+    //===========================================================================
+    private void DurationCheck()
+    {
+        duration -= Time.deltaTime;
+        if (duration <= 0)
         {
             gameObject.SetActive(false);
             Destroy(gameObject);
+        }
+    }
+
+    private void ProjectileAnimation()
+    {
+        animationTimer += Time.deltaTime;
+        if (animationTimer >= animationSpeed)
+        {
+            animationTimer -= animationSpeed;
+
+            if (currentAnimationIndex == effectSprites.Length)
+                currentAnimationIndex = 0;
+
+            abilityEffect.sprite = effectSprites[currentAnimationIndex];
+            currentAnimationIndex++;
         }
     }
 
@@ -51,6 +78,8 @@ public class RangeAbilityProjectile : MonoBehaviour
     {
         particleDamage = damage;
         moveSpeed = newMoveSpeed;
+
         moveDirection = (CultyMarbleHelper.GetMouseToWorldPosition() - startPositionTransform.position).normalized;
+        transform.up = moveDirection;
     }
 }

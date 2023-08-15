@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 public class PlayerCurrencies : SingletonMonobehaviour<PlayerCurrencies>
@@ -12,7 +11,7 @@ public class PlayerCurrencies : SingletonMonobehaviour<PlayerCurrencies>
     public int PermCurrencyAmount => tempCurrencyAmount;
 
     //===========================================================================
-    private void OnEnable()
+    private void Start()
     {
         UpdatePermCurrencyAmount();
         UpdateTempCurrencyAmount();
@@ -22,16 +21,16 @@ public class PlayerCurrencies : SingletonMonobehaviour<PlayerCurrencies>
     public void UpdateTempCurrencyAmount(int amount = 0)
     {
         tempCurrencyAmount += amount;
-        tempCurrencyAmount = Mathf.Clamp(tempCurrencyAmount, 0, 10000);
+        tempCurrencyAmount = Mathf.Clamp(tempCurrencyAmount, 0, int.MaxValue);
 
-        displayPlayerCurrency.UpdateTempCurrencyText(tempCurrencyAmount);
+        GameplayInfoController.Instance.DisplayPlayerCurrency.UpdateTempCurrencyText(tempCurrencyAmount);
     }
 
     public void UpdatePermCurrencyAmount(int amount = 0)
     {
         permCurrencyAmount += amount;
-        permCurrencyAmount = Mathf.Clamp(permCurrencyAmount, 0, 10000);
+        permCurrencyAmount = Mathf.Clamp(permCurrencyAmount, 0, int.MaxValue);
 
-        displayPlayerCurrency.UpdatePermCurrencyText(permCurrencyAmount);
+        GameplayInfoController.Instance.DisplayPlayerCurrency.UpdatePermCurrencyText(permCurrencyAmount);
     }
 }

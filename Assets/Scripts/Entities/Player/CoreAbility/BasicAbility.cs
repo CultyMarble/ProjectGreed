@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 public class BasicAbility : PlayerAbility
 {
     // Utility
-    public readonly float moveSpeed = 3.0f;
+    public readonly float moveSpeed = 2.0f;
     public readonly float lifeTime = 0.75f;
     public readonly float rechargeDelay = 1.0f;
 
@@ -14,12 +14,11 @@ public class BasicAbility : PlayerAbility
     public readonly float growthRate = 0.75f;
     public readonly float size = 0.18f;
 
-    // Pooling System
-    [SerializeField] private Transform basicAbilityProjectilePool;
-
     // Ability Stats
+    private float cooldown = default;
+
     private float maxFuel = default;
-    private float drainRate = default;
+    private float fuelConsumePerTrigger = default;
     private float rechargeRate = default;
 
     private float rechargeTimer = default;
@@ -27,10 +26,14 @@ public class BasicAbility : PlayerAbility
 
     private float damage = default;
 
-    public float CurrentFuel { get => currentFuel; private set { } }
-    public float MaxFuel { get => maxFuel; private set { } }
+    public float CurrentFuel => currentFuel;
+    public float MaxFuel => maxFuel;
 
-    //===========================================================================
+    // Pooling
+    [SerializeField] private Transform basicAbilityProjectilePool = default;
+    [SerializeField] private Transform pfBasicAbilityProjectile = default;
+    private readonly int poolSize = 50;
+
     // NEW INPUT SYSTEM
     private PlayerInput playerInput;
     private bool leftClickButtonCheck = false;
@@ -39,6 +42,8 @@ public class BasicAbility : PlayerAbility
     private void Awake()
     {
         playerInput = FindObjectOfType<PlayerInput>();
+
+        PopulatePool();
     }
 
     private void OnEnable()
@@ -49,12 +54,34 @@ public class BasicAbility : PlayerAbility
 
     private void Start()
     {
-        maxFuel = Player.Instance.PlayerStat.ba_baseMaxFuel;
-        drainRate = Player.Instance.PlayerStat.ba_baseDrainRate;
-        rechargeRate = Player.Instance.PlayerStat.ba_baseRechargeRate;
-        damage = Player.Instance.PlayerStat.ba_baseDamage;
+        cooldown = Player.Instance.PlayerData.ba_baseCooldown;
+
+        maxFuel = Player.Instance.PlayerData.ba_baseMaxFuel;
+        fuelConsumePerTrigger = Player.Instance.PlayerData.ba_fuelConsumePerTrigger;
+        rechargeRate = Player.Instance.PlayerData.ba_baseRechargeRate;
+        damage = Player.Instance.PlayerData.ba_baseDamage;
 
         currentFuel = maxFuel;
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+
+        UpdateRechargeTimer();
+
+        RechargeFuel();
+
+        if (Player.Instance.actionState == PlayerActionState.none ||
+            Player.Instance.actionState == PlayerActionState.IsUsingBasicAbility)
+        {
+            InputHandler();
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        CultyMarbleHelper.RotateGameObjectToMouseDirection(this.transform);
     }
 
     private void OnDisable()
@@ -75,75 +102,60 @@ public class BasicAbility : PlayerAbility
     }
 
     //===========================================================================
-    protected override void Update()
+    private void PopulatePool()
     {
-        base.Update();
-
-        //Debug.Log(cooldownTimer);
-
-        switch (Player.Instance.playerActionState)
+        for (int i = 0; i < poolSize; i++)
         {
-            case PlayerActionState.none:
-                InputHandler();
-                break;
-            case PlayerActionState.IsUsingBasicAbility:
-                InputHandler();
-                break;
-            default:
-                break;
+            Instantiate(pfBasicAbilityProjectile, basicAbilityProjectilePool).gameObject.SetActive(false);
         }
-
-        UpdateRechargeTimerCheck();
-
-        if (currentFuel != maxFuel && rechargeTimer <= 0)
-            RechargeFuel();
     }
 
-    private void FixedUpdate()
-    {
-        CultyMarbleHelper.RotateGameObjectToMouseDirection(this.transform);
-    }
-
-    //===========================================================================
     private void InputHandler()
     {
-        if (leftClickButtonCheck && cooldownTimer <= 0 && currentFuel > 0)
+        if (leftClickButtonCheck)
         {
-            Player.Instance.playerActionState = PlayerActionState.IsUsingBasicAbility;
-            SpawnParticle();
+            if (cooldownTimer <= 0 && currentFuel > 0)
+            {
+                Player.Instance.actionState = PlayerActionState.IsUsingBasicAbility;
+                SpawnParticle();
 
-            currentFuel -= drainRate * Time.deltaTime;
+                currentFuel -= fuelConsumePerTrigger;
 
-            rechargeTimer = rechargeDelay;
-            cooldownTimer = cooldown;
+                rechargeTimer = rechargeDelay;
+                cooldownTimer = cooldown;
+            }
         }
-        else if (!leftClickButtonCheck && Player.Instance.playerActionState == PlayerActionState.IsUsingBasicAbility)
+        else
         {
-            Player.Instance.playerActionState = PlayerActionState.none;
+            if (Player.Instance.actionState == PlayerActionState.IsUsingBasicAbility)
+            {
+                Player.Instance.actionState = PlayerActionState.none;
+            }
         }
     }
 
     private void SpawnParticle()
     {
-        Vector3 mouseDir = (CultyMarbleHelper.GetMouseToWorldPosition() - this.transform.position).normalized;
+        Vector3 mouseDir = (CultyMarbleHelper.GetMouseToWorldPosition() - transform.position).normalized;
         foreach (Transform particle in basicAbilityProjectilePool)
         {
             if (particle.gameObject.activeInHierarchy == false)
             {
-                particle.GetComponent<SprayParticleProjectile>().ConfigParticleMovementSpeed(mouseDir, moveSpeed + this.GetComponentInParent<Rigidbody2D>().velocity.magnitude, lifeTime);
-                particle.GetComponent<SprayParticleProjectile>().
-                    ConfigParticleMovementPattern(timeUntilChangeDirectionMax, timeUntilChangeDirectionMin, swingMagtitude);
-                particle.GetComponent<SprayParticleProjectile>().ConfigParticleSizeAndGrowth(size, growthRate);
-                particle.GetComponent<SprayParticleProjectile>().ConfigParticleDamage(damage);
+                BasicAbilityBubble _bubble = particle.GetComponent<BasicAbilityBubble>();
 
-                particle.position = this.transform.position + 0.5f * mouseDir;
+                _bubble.SetMovementSpeed(mouseDir, moveSpeed + GetComponentInParent<Rigidbody2D>().velocity.magnitude, lifeTime);
+                _bubble.SetMovementPattern(timeUntilChangeDirectionMax, timeUntilChangeDirectionMin, swingMagtitude);
+                _bubble.SetSizeAndGrowth(size, growthRate);
+                _bubble.SetDamage(damage);
+
+                particle.position = transform.position + (0.5f * mouseDir);
                 particle.gameObject.SetActive(true);
                 break;
             }
         }
     }
 
-    private void UpdateRechargeTimerCheck()
+    private void UpdateRechargeTimer()
     {
         if (rechargeTimer <= 0)
             return;
@@ -153,6 +165,9 @@ public class BasicAbility : PlayerAbility
 
     private void RechargeFuel()
     {
+        if (currentFuel == maxFuel || rechargeTimer > 0)
+            return;
+
         currentFuel += rechargeRate * Time.deltaTime;
         currentFuel = Mathf.Clamp(currentFuel, 0.0f, maxFuel);
     }

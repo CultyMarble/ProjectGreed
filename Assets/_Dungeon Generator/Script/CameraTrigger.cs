@@ -4,24 +4,29 @@ using Cinemachine;
 public class CameraTrigger : MonoBehaviour
 {
     [SerializeField] private CinemachineVirtualCamera virtualCamera;
-    private PlayerController controller;
+    private PlayerMovement controller = default;
 
     private void Awake()
     {
-        controller = FindObjectOfType<PlayerController>();
+        controller = FindObjectOfType<PlayerMovement>();
     }
 
     private void Start()
     {
-        PlayerController.OnPlayerReady += SetPlayerFollow;
-        if(controller == null)
+        PlayerMovement.OnPlayerReady += SetPlayerFollow;
+        if (controller == null)
         {
-            controller = FindObjectOfType<PlayerController>();
+            controller = FindObjectOfType<PlayerMovement>();
         }
         if (virtualCamera.Follow == null)
         {
             virtualCamera.Follow = controller.transform;
         }
+    }
+
+    private void OnDisable()
+    {
+        PlayerMovement.OnPlayerReady -= SetPlayerFollow;
     }
 
     private void SetPlayerFollow(Transform playerTransform)

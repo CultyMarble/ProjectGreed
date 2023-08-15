@@ -51,12 +51,15 @@ EditorBuildSettings:
     path: Assets/Scenes/Obselete/Scene15_Room10.unity
     guid: 06a71696eb8912a43b7ee715bf8511d3
   - enabled: 0
-    path: Assets/_Dungeon Generator/ManagerScene.unity
+    path: 
     guid: 6890214ffe829474385f8270bf734b0d
   - enabled: 0
-    path: Assets/Scenes/Main Map.unity
+    path: 
     guid: c604eeca701b52f43bf2f67e3fed3d20
   - enabled: 1
     path: Assets/Scenes/Obselete/Scene02_TutorialScene.unity
     guid: c6e186342a09d75408cf3c771dacb62a
+  - enabled: 1
+    path: Assets/Scenes/MainScene.unity
+    guid: 45d372bea41f6d2489035c6bd5d4a74e
   m_configObjects: {}
