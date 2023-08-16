@@ -5,61 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
   - enabled: 1
-    path: Assets/Scenes/Obselete/Scene01_ManagerScene.unity
-    guid: 40047815b2870bc499728730b663a2f1
-  - enabled: 0
-    path: Assets/Scenes/Obselete/Scene03_HubArea.unity
-    guid: 71400c12fd3dab34a8f279ddfafa1091
-  - enabled: 0
-    path: Assets/Scenes/Obselete/Scene04_Room1.unity
-    guid: dec3b8d21ef574c4aad3dc1a8ed9b36e
-  - enabled: 0
-    path: Assets/Scenes/Obselete/Scene05_Room1_5.unity
-    guid: d369171a6e3ae5648bc49de8c784805c
-  - enabled: 0
-    path: Assets/Scenes/Obselete/Scene06_Room2.unity
-    guid: 7030ee8fcb1c8af4bb9e546af9d41d2d
-  - enabled: 0
-    path: Assets/Scenes/Obselete/Scene07_Room3.unity
-    guid: 7e7345edb89ccce409986944a9ef0fa1
-  - enabled: 0
-    path: Assets/Scenes/Obselete/Scene08_Room4.unity
-    guid: 940b149e6dc10b9439c1b120853f0205
-  - enabled: 0
-    path: Assets/Scenes/Obselete/Scene09_Room5.unity
-    guid: da0adebe370688349abfad5306036d4b
-  - enabled: 0
-    path: Assets/Scenes/Obselete/Scene10_Room6.unity
-    guid: 748570c3bdd027740bd656a89820dbb2
-  - enabled: 0
-    path: Assets/Scenes/Obselete/Scene11_Room7.unity
-    guid: dd4892858bc6f924083f5fdf62d2fe6c
-  - enabled: 0
-    path: Assets/Scenes/Obselete/Scene12_BossRoom.unity
-    guid: 0e97be774b3ee844bb4918d74dc3b14d
-  - enabled: 0
-    path: Assets/Scenes/Obselete/Scene14_Room9.unity
-    guid: 793595f57329d754aa02eb8580d22ef3
-  - enabled: 0
-    path: Assets/Scenes/Obselete/Scene13_Room8.unity
-    guid: 35631649325f7da47b08fb7e834c3730
-  - enabled: 0
-    path: Assets/Scenes/Obselete/Scene15_Room10.unity
-    guid: 06a71696eb8912a43b7ee715bf8511d3
-  - enabled: 0
-    path: 
-    guid: 6890214ffe829474385f8270bf734b0d
-  - enabled: 0
-    path: 
-    guid: c604eeca701b52f43bf2f67e3fed3d20
-  - enabled: 1
-    path: Assets/Scenes/Obselete/Scene02_TutorialScene.unity
-    guid: c6e186342a09d75408cf3c771dacb62a
-  - enabled: 1
-    path: Assets/Scenes/MainScene.unity
+    path: Assets/Scenes/ManagerScene.unity
     guid: 45d372bea41f6d2489035c6bd5d4a74e
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 70a04b26ec099594b863682ae4673c05
+  - enabled: 1
+    path: Assets/Scenes/DemoSceneHub.unity
+    guid: 5d3d33281818275499360670d0c4408c
   m_configObjects: {}

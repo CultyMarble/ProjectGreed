@@ -68,7 +68,7 @@ public class MeleeAI : MonoBehaviour
         {
             if (collider2D.GetComponent<Player>() != null)
             {
-                collider2D.GetComponent<PlayerHeartManager>().UpdateCurrentHeart(-damage);
+                collider2D.GetComponent<PlayerHeart>().UpdateCurrentHeart(-damage);
                 return collider2D;
             }
         }
@@ -88,7 +88,7 @@ public class MeleeAI : MonoBehaviour
         {
             if (collider2D.GetComponent<Player>() != null)
             {
-                collider2D.GetComponent<PlayerHeartManager>().UpdateCurrentHeart(-damage);
+                collider2D.GetComponent<PlayerHeart>().UpdateCurrentHeart(-damage);
                 return;
             }
         }

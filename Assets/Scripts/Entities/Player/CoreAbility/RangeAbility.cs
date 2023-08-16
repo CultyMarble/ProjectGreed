@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static PlayerHeartManager;
+using static PlayerHeart;
 
 public class RangeAbility : MonoBehaviour
 {
@@ -15,6 +15,8 @@ public class RangeAbility : MonoBehaviour
 
     private int currentMaxCharge = default;
     private int currentCharge = default;
+    private int maxRecharge = default;
+    private int currentRecharge = default;
 
     private float projectileSpeed = default;
     private float projectileDamage = default;
@@ -41,8 +43,9 @@ public class RangeAbility : MonoBehaviour
 
     private void Start()
     {
-        currentMaxCharge = Player.Instance.PlayerData.ra_baseCharge;
+        currentMaxCharge = Player.Instance.PlayerData.ra_baseMaxCharge;
         currentCharge = currentMaxCharge;
+        maxRecharge = Player.Instance.PlayerData.ra_baseMaxRecharge;
 
         UpdateCurrentMaxCharge();
         UpdateCurrentCharge();
@@ -67,7 +70,7 @@ public class RangeAbility : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Numlock))
         {
-            UpdateCurrentCharge(1);
+            UpdateCurrentRecharge(100);
         }
     }
 
@@ -246,7 +249,7 @@ public class RangeAbility : MonoBehaviour
     //===========================================================================
     public void ResetAbilityCharge()
     {
-        currentMaxCharge = Player.Instance.PlayerData.ra_baseCharge;
+        currentMaxCharge = Player.Instance.PlayerData.ra_baseMaxCharge;
         currentCharge = currentMaxCharge;
 
         //Invoke Event
@@ -288,5 +291,15 @@ public class RangeAbility : MonoBehaviour
 
         //Invoke Event
         OnCurrentChargeChangedEvent?.Invoke(this, new OnCurrentChargeChangedEventArgs { currentCharge = currentCharge });
+    }
+
+    public void UpdateCurrentRecharge(int amount)
+    {
+        currentRecharge += amount;
+        if (currentRecharge > maxRecharge)
+        {
+            currentRecharge -= maxRecharge;
+            UpdateCurrentCharge(1);
+        }
     }
 }
