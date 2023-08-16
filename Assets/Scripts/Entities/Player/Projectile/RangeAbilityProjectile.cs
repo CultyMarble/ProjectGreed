@@ -32,7 +32,7 @@ public class RangeAbilityProjectile : MonoBehaviour
         if (collision.gameObject.CompareTag("Collisions"))
         {
             gameObject.SetActive(false);
-            gameObject.transform.position = Vector3.zero;
+            gameObject.transform.localPosition = Vector2.zero;
         }
     }
 
