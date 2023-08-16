@@ -37,7 +37,6 @@ public class RoomController : MonoBehaviour
 
     [Header("Special Rooms")]
     [SerializeField] private GameObject shopRoom;
-    [SerializeField] private GameObject bossRoom;
 
 
     private void OnEnable()
@@ -67,9 +66,12 @@ public class RoomController : MonoBehaviour
 
     private void SetAllRoomActiveFalse() // TURN ALL ROOMS FALSE
     {
-        foreach (var room in roomType)
+        if (currentRoomType != RoomType.entry)
         {
-            room.SetActive(false);
+            foreach (var room in roomType)
+            {
+                room.SetActive(false);
+            }
         }
     }
 
@@ -86,7 +88,7 @@ public class RoomController : MonoBehaviour
         if (currentRoomType == RoomType.boss)
         {
             SetAllRoomActiveFalse();
-            if (shopRoom != null) bossRoom.SetActive(true);
+            if (shopRoom != null) shopRoom.SetActive(true);
         }
     }
 
