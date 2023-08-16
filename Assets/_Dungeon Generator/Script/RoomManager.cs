@@ -9,7 +9,10 @@ public class RoomManager : MonoBehaviour
     public static event UnityAction OnBossChange;
     public static event UnityAction OnShopChange;
 
-    [SerializeField]  private GameObject entryRoom;
+    [SerializeField] private GameObject entryRoom;
+    [SerializeField] public int minRooms;
+    [SerializeField] public int maxRooms;
+    [HideInInspector] public int potentialRooms;
 
     [Header("Rooms")]
     public GameObject[] bottomRooms;

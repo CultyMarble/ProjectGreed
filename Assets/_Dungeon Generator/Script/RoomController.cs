@@ -51,7 +51,7 @@ public class RoomController : MonoBehaviour
         RoomManager.OnShopChange -= SetShopActive;
     }
 
-    private void Start()
+    private void Awake()
     {
         roomManager = FindObjectOfType<RoomManager>();
         roomManager.currentRooms.Add(this);
@@ -63,7 +63,6 @@ public class RoomController : MonoBehaviour
 
         SetRandomRoomType();
     }
-
     private void SetAllRoomActiveFalse() // TURN ALL ROOMS FALSE
     {
         if (currentRoomType != RoomType.entry)

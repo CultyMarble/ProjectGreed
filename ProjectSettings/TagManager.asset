@@ -10,6 +10,7 @@ TagManager:
   - Enemy
   - Collisions
   - RoomSpawnPoint
+  - Destroyer
   layers:
   - Default
   - TransparentFX
