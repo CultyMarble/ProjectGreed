@@ -179,8 +179,8 @@ public class RoomManager : MonoBehaviour
             GameObject treasureRoom;
             int randomIndex = Random.Range(0, roomsList.Count);
             roomsList[randomIndex].currentRoomType = RoomType.treasure;
-            treasureRoom =Instantiate(treasure, roomsList[randomIndex].transform.position, Quaternion.identity);
-            treasureRoom.transform.parent = this.transform.parent;
+            treasureRoom = Instantiate(treasure, roomsList[randomIndex].transform.position, Quaternion.identity);
+            treasureRoom.transform.parent = this.transform;
             roomsList.RemoveAt(randomIndex);
         }
 
