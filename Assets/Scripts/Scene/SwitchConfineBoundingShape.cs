@@ -16,7 +16,12 @@ public class SwitchConfineBoundingShape : MonoBehaviour
     //===========================================================================
     private void SwitchBoundingShape()
     {
-        PolygonCollider2D polygonCollider2D = GameObject.FindGameObjectWithTag(Tags.VCAMBoundsConfiner).GetComponent<PolygonCollider2D>();
+        GameObject VCAMBoundsConfiner = GameObject.FindGameObjectWithTag(Tags.VCAMBoundsConfiner);
+
+        if (VCAMBoundsConfiner == null)
+            return;
+
+        PolygonCollider2D polygonCollider2D = VCAMBoundsConfiner.GetComponent<PolygonCollider2D>();
 
         CinemachineConfiner2D _cinemachineConfiner2D = GetComponent<CinemachineConfiner2D>();
 

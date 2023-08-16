@@ -25,12 +25,5 @@ public enum SceneName
     ManagerScene,
     MainMenu,
     DemoSceneHub,
-    DemoSceneRoom01,
-    DemoSceneRoom02,
-    DemoSceneRoom03,
-    DemoSceneRoom04,
-    DemoSceneRoom05,
-    DemoSceneRoom06,
-    DemoSceneRoom07,
-    DemoSceneBoss,
+    DemoSceneDungeon,
 }
