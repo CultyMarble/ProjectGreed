@@ -95,6 +95,7 @@ public class BombAbility : MonoBehaviour
                 bomb.gameObject.SetActive(true);
 
                 currentCharge--;
+                Debug.Log(currentCharge);
 
                 break;
             }
