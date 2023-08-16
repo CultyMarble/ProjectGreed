@@ -9,7 +9,7 @@ public class SpikeTrap : Trap
     {
         if (playerInside)
         {
-            Player.Instance.GetComponent<PlayerHeartManager>().UpdateCurrentHeart(-trapDamage);
+            Player.Instance.GetComponent<PlayerHeart>().UpdateCurrentHeart(-trapDamage);
         }
     }
 }

@@ -21,7 +21,8 @@ public class PlayerData : MonoBehaviour
     public readonly float ba_baseDamage = 3.0f;
 
     // Range Ability Stat
-    public readonly int ra_baseCharge = 2;
+    public readonly int ra_baseMaxCharge = 2;
+    public readonly int ra_baseMaxRecharge = 100;
 
     public readonly float ra_baseMinChargeTime = 0.5f;
     public readonly float ra_baseMidChargeTime = 1.0f;

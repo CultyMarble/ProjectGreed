@@ -16,7 +16,7 @@ public class EnemyProjectile : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            collision.gameObject.GetComponent<PlayerHeartManager>().UpdateCurrentHeart(-damage);
+            collision.gameObject.GetComponent<PlayerHeart>().UpdateCurrentHeart(-damage);
             gameObject.SetActive(false);
             Destroy(gameObject);
         }
