@@ -84,6 +84,8 @@ public class RoomManager : MonoBehaviour
         if (delaySpawnRoomType <= 0F && !delaySpawnRoomCheck)
         {
             SetBossRoom();
+            SetShopRoom();
+
             SetDeadEndRoomType();
             SetNormalRoomType();
 
@@ -107,6 +109,33 @@ public class RoomManager : MonoBehaviour
                 newBoss = Instantiate(boss, currentRooms[i].transform.position, Quaternion.identity);
                 newBoss.transform.parent = currentRooms[i].transform;
                 OnBossChange?.Invoke();
+                break;
+            }
+        }
+    }
+    private void SetShopRoom()
+    {
+        GameObject newShop;
+        int randomIndex = Random.Range(0, currentRooms.Count);
+        RoomType roomType = Random.value < abandonShopChance ? RoomType.abandonShop : RoomType.shop;
+
+        for (int i = currentRooms.Count - 1; i >= 0; i--)
+        {
+            if (currentRooms[i].currentRoomType != RoomType.empty)
+            {
+                currentRooms[randomIndex].currentRoomType = roomType;
+
+                if (roomType == RoomType.shop)
+                {
+                    newShop = Instantiate(shop, currentRooms[randomIndex].transform.position, Quaternion.identity);
+                    newShop.transform.parent = currentRooms[randomIndex].transform;
+                }
+                else if (roomType == RoomType.abandonShop)
+                {
+                    newShop = Instantiate(abandonShop, currentRooms[randomIndex].transform.position, Quaternion.identity);
+                    newShop.transform.parent = currentRooms[randomIndex].transform;
+                }
+                OnShopChange?.Invoke();
                 break;
             }
         }
@@ -142,28 +171,28 @@ public class RoomManager : MonoBehaviour
         //}
 
         // SPAWN SHOP ROOM
-        if (roomsList.Count > 0)
-        {
-            GameObject newShop;
-            int randomIndex = Random.Range(0, roomsList.Count);
-            RoomType roomType = Random.value < abandonShopChance ? RoomType.abandonShop : RoomType.shop;
+        //if (roomsList.Count > 0)
+        //{
+        //    GameObject newShop;
+        //    int randomIndex = Random.Range(0, roomsList.Count);
+        //    RoomType roomType = Random.value < abandonShopChance ? RoomType.abandonShop : RoomType.shop;
 
-            roomsList[randomIndex].currentRoomType = roomType;
+        //    roomsList[randomIndex].currentRoomType = roomType;
 
-            if (roomType == RoomType.shop)
-            {
-                newShop = Instantiate(shop, roomsList[randomIndex].transform.position, Quaternion.identity);
-                newShop.transform.parent = roomsList[randomIndex].transform;
-            }
-            else if (roomType == RoomType.abandonShop)
-            {
-                newShop = Instantiate(abandonShop, roomsList[randomIndex].transform.position, Quaternion.identity);
-                newShop.transform.parent = roomsList[randomIndex].transform;
-            }
+        //    if (roomType == RoomType.shop)
+        //    {
+        //        newShop = Instantiate(shop, roomsList[randomIndex].transform.position, Quaternion.identity);
+        //        newShop.transform.parent = roomsList[randomIndex].transform;
+        //    }
+        //    else if (roomType == RoomType.abandonShop)
+        //    {
+        //        newShop = Instantiate(abandonShop, roomsList[randomIndex].transform.position, Quaternion.identity);
+        //        newShop.transform.parent = roomsList[randomIndex].transform;
+        //    }
 
-            roomsList.RemoveAt(randomIndex);
-            OnShopChange?.Invoke();
-        }
+        //    roomsList.RemoveAt(randomIndex);
+        //    OnShopChange?.Invoke();
+        //}
     }
 
     private void SetNormalRoomType()

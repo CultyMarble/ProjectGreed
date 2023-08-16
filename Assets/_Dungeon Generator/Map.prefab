@@ -45,6 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entryRoom: {fileID: 0}
+  minRooms: 10
+  maxRooms: 15
+  potentialRooms: 0
   bottomRooms:
   - {fileID: 4506294034837938322, guid: 3f7fe1a09c04bcf4e999b6b8d225b726, type: 3}
   - {fileID: 7741260060544441628, guid: c2de81c25ab7e6246a5b3a48e8a28e8f, type: 3}
@@ -59,8 +62,8 @@ MonoBehaviour:
   - {fileID: 261532820643789861, guid: a53912b6b0b5cec4a8781f444d1b4a0b, type: 3}
   - {fileID: 2955065820043591103, guid: 929af46479afc7d4a99d007f6b8b318a, type: 3}
   rightRooms:
-  - {fileID: 261532820643789861, guid: a53912b6b0b5cec4a8781f444d1b4a0b, type: 3}
   - {fileID: 4556654252960075518, guid: 86f3897a026db89428441203558d5cda, type: 3}
+  - {fileID: 261532820643789861, guid: a53912b6b0b5cec4a8781f444d1b4a0b, type: 3}
   - {fileID: 7741260060544441628, guid: c2de81c25ab7e6246a5b3a48e8a28e8f, type: 3}
   - {fileID: 5332306837567287648, guid: 74267c56a246b3241ac83e1b6b06fa77, type: 3}
   closedRooms:

@@ -53,7 +53,7 @@ public class RoomSpawner : MonoBehaviour
         GameObject newRoom;
         //GameObject[] spawnPoints = GameObject.FindGameObjectsWithTag("RoomSpawnPoint");
 
-//int roomsLeft = roomManager.maxRooms - (roomManager.currentRooms.Count + spawnPoints.Length);
+        //int roomsLeft = roomManager.maxRooms - (roomManager.currentRooms.Count + spawnPoints.Length);
         if(roomManager.currentRooms.Count >= roomManager.maxRooms || length == 1)
         {
             newRoom = Instantiate(room[0], new Vector2(transform.position.x, transform.position.y), Quaternion.identity); //First room in list (index 0) must be dead end (T,B,R,L)
