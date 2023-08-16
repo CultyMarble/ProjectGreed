@@ -37,7 +37,7 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
     [Header("Gameplay Runtime Data")]
     [SerializeField] private SOListInt generatedItemForSale;
 
-    private readonly float loadingScreenDuration = 0.75f;
+    private readonly float loadingScreenDuration = 0.5f;
     private bool isLoadingScreenActive;
     private bool canUnload = false;
     private UnloadSceneZone unloadSceneZone;
@@ -115,6 +115,7 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         yield return StartCoroutine(LoadSceneAndSetActive(sceneName));
         EventManager.CallAfterSceneLoadEvent();
 
+        yield return new WaitForSecondsRealtime(1.0f);
         yield return StartCoroutine(LoadingScreen(0.0f));
         EventManager.CallAfterSceneLoadedLoadingScreenEvent();
     }
