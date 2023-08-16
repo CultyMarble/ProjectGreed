@@ -51,7 +51,6 @@ public class RangeAbilityProjectile : MonoBehaviour
         if (animationTimer >= animationSpeed)
         {
             animationTimer -= animationSpeed;
-            animationTimer -= animationSpeed;
 
             if (currentAnimationIndex == effectSprites.Length)
                 currentAnimationIndex = 0;

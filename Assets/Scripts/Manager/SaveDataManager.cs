@@ -14,20 +14,8 @@ public class SaveDataManager : SingletonMonobehaviour<SaveDataManager>
     {
         base.Awake();
 
-        save01.SaveCheckPointData(SceneName.Scene03_HubArea, Vector3.zero);
     }
 
-    private void OnEnable()
-    {
-        SceneControlManager.Instance.OnUnloadRuntimeDataEvent += Instance_OnUnloadRuntimeDataEvent;
-    }
-
-    private void OnDisable()
-    {
-        ClearGameplayRuntimeData();
-
-        SceneControlManager.Instance.OnUnloadRuntimeDataEvent -= Instance_OnUnloadRuntimeDataEvent;
-    }
 
     //===========================================================================
     private void Instance_OnUnloadRuntimeDataEvent(object sender, System.EventArgs e)

@@ -21,7 +21,10 @@ public class Player : SingletonMonobehaviour<Player>
 
     private void Update()
     {
-        Debug.Log(actionState.ToString());
+        if (Input.GetKeyDown(KeyCode.F5))
+        {
+            SceneControlManager.Instance.LoadScene(SceneName.DemoSceneHub, Vector3.zero);
+        }
     }
 
     private void OnDisable()

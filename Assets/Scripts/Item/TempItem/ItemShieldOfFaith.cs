@@ -7,6 +7,6 @@ public class ItemShieldOfFaith : TempItem
     //===========================================================================
     protected override void AddItemEffect()
     {
-        Player.Instance.GetComponent<PlayerHeartManager>().UpdateCurrentMaxHeart(increaseMaxHeart);
+        Player.Instance.GetComponent<PlayerHeart>().UpdateCurrentMaxHeart(increaseMaxHeart);
     }
 }
