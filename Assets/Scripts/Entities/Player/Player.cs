@@ -23,7 +23,7 @@ public class Player : SingletonMonobehaviour<Player>
     {
         if (Input.GetKeyDown(KeyCode.F5))
         {
-            SceneControlManager.Instance.LoadScene(SceneName.DemoSceneHub, Vector3.zero);
+            SceneControlManager.Instance.LoadScene(SceneName.DemoSceneHub.ToString(), Vector3.zero);
         }
     }
 
