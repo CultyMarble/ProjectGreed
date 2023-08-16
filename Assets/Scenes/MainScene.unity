@@ -12530,7 +12530,7 @@ GameObject:
   - component: {fileID: 1634915384}
   - component: {fileID: 1634915385}
   m_Layer: 0
-  m_Name: EnemySpawnManager
+  m_Name: RandomSpawnManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12560,13 +12560,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1634915383}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82aa6f07e46391a4a99b11b407b8ff07, type: 3}
+  m_Script: {fileID: 11500000, guid: 90bdf594ddf938e49bbbd64f37d51e8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   enemyTypePoolList:
   - {fileID: 1789458785}
   - {fileID: 1763321876}
   - {fileID: 515802272}
+  objectList:
+  - {fileID: 7565985644124066584, guid: e389fcd3ca0d2c246825ae68b52252cf, type: 3}
+  objectSpawnChance: 0.2
+  spawnNum: 5
 --- !u!1 &1652565419
 GameObject:
   m_ObjectHideFlags: 0
