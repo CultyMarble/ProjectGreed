@@ -8606,7 +8606,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 8.4375
+  orthographic size: 16.875
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -11131,6 +11131,7 @@ MonoBehaviour:
   - {fileID: 515802272}
   objectList:
   - {fileID: 7565985644124066584, guid: e389fcd3ca0d2c246825ae68b52252cf, type: 3}
+  - {fileID: 9030462796631019687, guid: c7e45db25b76ecd4e9bc45807842e78c, type: 3}
   objectSpawnChance: 0.5
   spawnNum: 5
 --- !u!1 &1652565419

@@ -126,7 +126,7 @@ public class RandomSpawnManager : MonoBehaviour
                 if (enemy.gameObject.activeSelf == false)
                 {
                     enemy.transform.position = spawnPointList.transform.GetChild(index).transform.position;
-                    Debug.Log("Transform Position:" + spawnPointList.transform.GetChild(index).transform.position);
+                    //Debug.Log("Transform Position:" + spawnPointList.transform.GetChild(index).transform.position);
                     enemy.gameObject.SetActive(true);
                     break;
                 }

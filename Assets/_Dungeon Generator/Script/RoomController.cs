@@ -65,12 +65,9 @@ public class RoomController : MonoBehaviour
     }
     private void SetAllRoomActiveFalse() // TURN ALL ROOMS FALSE
     {
-        if (currentRoomType != RoomType.entry)
+        foreach (var room in roomType)
         {
-            foreach (var room in roomType)
-            {
-                room.SetActive(false);
-            }
+            room.SetActive(false);
         }
     }
 

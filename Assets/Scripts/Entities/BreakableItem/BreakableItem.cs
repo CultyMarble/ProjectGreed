@@ -13,6 +13,7 @@ public class ItemAndDropChance
 public class BreakableItem : MonoBehaviour
 {
     [SerializeField] ItemAndDropChance[] itemAndDropChances;
+    [SerializeField] private SpawnCurrency spawnCurrency = default;
 
     private int itemHealth = 10;
 
@@ -37,12 +38,20 @@ public class BreakableItem : MonoBehaviour
     //===========================================================================
     private void SpawnItem()
     {
-        foreach(var item in itemAndDropChances)
+        var _value = Random.Range(0, 2);
+        if (_value == 1)
         {
-            if ((Random.value * 100) < item.Chance)
+            foreach (var item in itemAndDropChances)
             {
-                Instantiate(item.Item).position = transform.position;
+                if ((Random.value * 100) < item.Chance)
+                {
+                    Instantiate(item.Item).position = transform.position;
+                }
             }
+        }
+        else
+        {
+            spawnCurrency.SpewOutCurrency();
         }
     }
 
