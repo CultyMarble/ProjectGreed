@@ -39,17 +39,17 @@ public class RoomController : MonoBehaviour
     [SerializeField] private GameObject shopRoom;
 
 
-    private void OnEnable()
-    {
-        RoomManager.OnBossChange += SetBossActive;
-        RoomManager.OnShopChange += SetShopActive;
-    }
+    //private void OnEnable()
+    //{
+    //    RoomManager.OnBossChange += SetBossActive;
+    //    RoomManager.OnShopChange += SetShopActive;
+    //}
 
-    private void OnDisable()
-    {
-        RoomManager.OnBossChange -= SetBossActive;
-        RoomManager.OnShopChange -= SetShopActive;
-    }
+    //private void OnDisable()
+    //{
+    //    RoomManager.OnBossChange -= SetBossActive;
+    //    RoomManager.OnShopChange -= SetShopActive;
+    //}
 
     private void Awake()
     {
@@ -79,7 +79,7 @@ public class RoomController : MonoBehaviour
         roomType[random].SetActive(true);
     }
 
-    private void SetBossActive()
+    public void SetBossActive()
     {
         if (currentRoomType == RoomType.boss)
         {
@@ -88,7 +88,7 @@ public class RoomController : MonoBehaviour
         }
     }
 
-    private void SetShopActive()
+    public void SetShopActive()
     {
         if (currentRoomType == RoomType.shop || currentRoomType == RoomType.abandonShop)
         {
