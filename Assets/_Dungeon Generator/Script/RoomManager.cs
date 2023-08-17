@@ -12,6 +12,7 @@ public class RoomManager : MonoBehaviour
     [SerializeField] private GameObject entryRoom;
     [SerializeField] public int minRooms;
     [SerializeField] public int maxRooms;
+    [SerializeField] public float centerRoomChance;
     [HideInInspector] public int potentialRooms;
 
     [Header("Rooms")]
@@ -19,6 +20,7 @@ public class RoomManager : MonoBehaviour
     public GameObject[] topRooms;
     public GameObject[] leftRooms;
     public GameObject[] rightRooms;
+    public GameObject[] centerRoom;
     public GameObject[] closedRooms;
 
     [Space]

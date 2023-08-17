@@ -9,6 +9,7 @@ public class RoomSpawner : MonoBehaviour
     [Tooltip(" 1 --> Need Bottom Door\r\n 2 --> Need Top Door\r\n 3 --> Need Left Door\r\n 4 --> Need Right Door")]
     [SerializeField] private int openingDirection;
     [SerializeField] private bool spawned = false;
+
     private float waitTime = 4F;
 
     private void Start()
@@ -27,6 +28,10 @@ public class RoomSpawner : MonoBehaviour
         }
         if (!spawned)
         {
+            if(Random.value < roomManager.centerRoomChance)
+            {
+                InstantiateRandomRoom(1, roomManager.centerRoom);
+            }
             if (openingDirection == 1)
             {
                 InstantiateRandomRoom(roomManager.bottomRooms.Length, roomManager.bottomRooms);
