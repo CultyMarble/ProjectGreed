@@ -44,7 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d12d6590925dee74ba2bce55ed48d885, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  map: {fileID: 399540625238344219, guid: c0f4c6c034e43d34cbb3c9e1a4ae0791, type: 3}
+  entryRoom: {fileID: 0}
+  minRooms: 10
+  maxRooms: 15
+  potentialRooms: 0
   bottomRooms:
   - {fileID: 4506294034837938322, guid: 3f7fe1a09c04bcf4e999b6b8d225b726, type: 3}
   - {fileID: 7741260060544441628, guid: c2de81c25ab7e6246a5b3a48e8a28e8f, type: 3}
@@ -59,8 +62,8 @@ MonoBehaviour:
   - {fileID: 261532820643789861, guid: a53912b6b0b5cec4a8781f444d1b4a0b, type: 3}
   - {fileID: 2955065820043591103, guid: 929af46479afc7d4a99d007f6b8b318a, type: 3}
   rightRooms:
-  - {fileID: 261532820643789861, guid: a53912b6b0b5cec4a8781f444d1b4a0b, type: 3}
   - {fileID: 4556654252960075518, guid: 86f3897a026db89428441203558d5cda, type: 3}
+  - {fileID: 261532820643789861, guid: a53912b6b0b5cec4a8781f444d1b4a0b, type: 3}
   - {fileID: 7741260060544441628, guid: c2de81c25ab7e6246a5b3a48e8a28e8f, type: 3}
   - {fileID: 5332306837567287648, guid: 74267c56a246b3241ac83e1b6b06fa77, type: 3}
   closedRooms:
@@ -84,7 +87,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4317000767536815821}
-  - component: {fileID: 4317000767536815820}
   m_Layer: 0
   m_Name: Map
   m_TagString: Untagged
@@ -109,27 +111,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4317000767536815820
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4317000767536815822}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07b42ee8c7df08745973f3a5452a1c4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentRoomType: 1
-  roomVariant: Entry
-  roomType:
-  - {fileID: 4422130485644021212, guid: b98d4cd8232524f4c904daf97c2e9436, type: 3}
-  - {fileID: 4422130485644021212, guid: 3e337ec34c699ac44b0da2191163d8c0, type: 3}
-  - {fileID: 4422130485644021212, guid: bc67c52f8c921bc438efeab25f755a2d, type: 3}
-  - {fileID: 4422130485644021212, guid: 933f06a9b51104540a8ddee8a72bc6ae, type: 3}
-  - {fileID: 4422130485644021212, guid: 5e265e2fd525acc4ca57c09e913bafb4, type: 3}
-  shopRoom: {fileID: 0}
 --- !u!1 &4317000767816634783
 GameObject:
   m_ObjectHideFlags: 0

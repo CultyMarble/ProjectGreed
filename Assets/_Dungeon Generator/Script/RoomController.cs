@@ -39,19 +39,19 @@ public class RoomController : MonoBehaviour
     [SerializeField] private GameObject shopRoom;
 
 
-    private void OnEnable()
-    {
-        RoomManager.OnBossChange += SetBossActive;
-        RoomManager.OnShopChange += SetShopActive;
-    }
+    //private void OnEnable()
+    //{
+    //    RoomManager.OnBossChange += SetBossActive;
+    //    RoomManager.OnShopChange += SetShopActive;
+    //}
 
-    private void OnDisable()
-    {
-        RoomManager.OnBossChange -= SetBossActive;
-        RoomManager.OnShopChange -= SetShopActive;
-    }
+    //private void OnDisable()
+    //{
+    //    RoomManager.OnBossChange -= SetBossActive;
+    //    RoomManager.OnShopChange -= SetShopActive;
+    //}
 
-    private void Start()
+    private void Awake()
     {
         roomManager = FindObjectOfType<RoomManager>();
         roomManager.currentRooms.Add(this);
@@ -63,15 +63,11 @@ public class RoomController : MonoBehaviour
 
         SetRandomRoomType();
     }
-
     private void SetAllRoomActiveFalse() // TURN ALL ROOMS FALSE
     {
-        if (currentRoomType != RoomType.entry)
+        foreach (var room in roomType)
         {
-            foreach (var room in roomType)
-            {
-                room.SetActive(false);
-            }
+            room.SetActive(false);
         }
     }
 
@@ -83,7 +79,7 @@ public class RoomController : MonoBehaviour
         roomType[random].SetActive(true);
     }
 
-    private void SetBossActive()
+    public void SetBossActive()
     {
         if (currentRoomType == RoomType.boss)
         {
@@ -92,7 +88,7 @@ public class RoomController : MonoBehaviour
         }
     }
 
-    private void SetShopActive()
+    public void SetShopActive()
     {
         if (currentRoomType == RoomType.shop || currentRoomType == RoomType.abandonShop)
         {

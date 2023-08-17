@@ -9,8 +9,8 @@ public class GateManager : MonoBehaviour
     [Header("Enemy Spawn")]
     //[SerializeField] private EnemySpawnScriptable enemySpawnScriptable;
     //[SerializeField] private List<GameObject> currentEnemies;
-    private EnemySpawnManager enemySpawnManager;
-    private GameObject enemySpawnPoints;
+    private RandomSpawnManager randomSpawnManager;
+    private GameObject randomSpawnPoints;
     private GameObject[] enemyPool;
 
     private BoxCollider2D spawnTrigger;
@@ -36,7 +36,7 @@ public class GateManager : MonoBehaviour
         RoomManager.OnBossChange += RoomBossCheck;
         //EnemyHealth.OnDespawnCallAll += RoomEnemyCheck;
         //GetComponent<EnemyHealth>().OnDespawnEvent += RoomEnemyCheck;
-        enemySpawnManager = GameObject.Find("EnemySpawnManager").GetComponent<EnemySpawnManager>();
+        randomSpawnManager = GameObject.Find("RandomSpawnManager").GetComponent<RandomSpawnManager>();
     }
 
     private void OnDisable()
@@ -65,7 +65,7 @@ public class GateManager : MonoBehaviour
     {
         //Vector2 randomPoint = GetRandomPointInTrigger(trigger);
         //SpawnRandomEnemy(randomPoint);
-        enemySpawnManager.GetComponent<EnemySpawnManager>().SpawnEnemies(enemySpawnPoints);
+        randomSpawnManager.GetComponent<RandomSpawnManager>().SpawnRandom(randomSpawnPoints);
     }
 
     //private Vector2 GetRandomPointInTrigger(BoxCollider2D trigger)
@@ -90,9 +90,13 @@ public class GateManager : MonoBehaviour
             for (int i = 0; i < roomVariants.transform.childCount; i++)
             {
                 GameObject variant = roomVariants.transform.GetChild(i).gameObject;
-                if (variant.activeSelf)
+                if (!variant.activeSelf)
                 {
-                    enemySpawnPoints = variant.transform.Find("SpawnPointList").gameObject;
+                    continue;
+                }
+                if (variant.transform.Find("SpawnPointList") != null) 
+                {
+                    randomSpawnPoints = variant.transform.Find("SpawnPointList").gameObject;
                 }
             }
             SpawnWithinTrigger(spawnTrigger);

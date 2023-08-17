@@ -1,16 +1,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawnManager : MonoBehaviour
+public class RandomSpawnManager : MonoBehaviour
 {
     //[SerializeField] private int spawnAmount;
     private int spawnAmount;
 
     [SerializeField] private Transform[] enemyTypePoolList;
+    [SerializeField] private GameObject[] objectList;
+    [SerializeField] private float objectSpawnChance;
+    [SerializeField] private int spawnNum;
+
+    private GameObject spawnPointList;
+
 
     private int poolIndex = default;
 
-    private GameObject enemySpawnPointList;
     private List<int> spawnPointIndexList = default;
     private int spawnPointIndex = default;
 
@@ -34,16 +39,15 @@ public class EnemySpawnManager : MonoBehaviour
     }
 
     //===========================================================================
-    public void SpawnEnemies(GameObject spawnPoints)
+    public void SpawnRandom(GameObject spawnPoints)
     {
         if (spawnPoints != null)
         {
-            enemySpawnPointList = spawnPoints;
-            int spawnNum = enemySpawnPointList.GetComponent<SpawnPointList>().GetSpawnAmount();
+            spawnPointList = spawnPoints;
             if (spawnNum == 0) { return; }
             spawnAmount = spawnNum;
         }
-        SpawnEnemy();
+        Spawn();
     }
 
     private void EventManager_BeforeSceneUnloadEventHandler()
@@ -64,14 +68,14 @@ public class EnemySpawnManager : MonoBehaviour
     //    else { return false; }
     //}
 
-    private void SpawnEnemy()
+    private void Spawn()
     {
         spawnPointIndexList.Clear();
 
-        // Get Random Enemy Spawn Points
+        // Get Random Spawn Points
         for (int i = 0; i < spawnAmount; i++)
         {
-            spawnPointIndex = Random.Range(0, enemySpawnPointList.transform.childCount);
+            spawnPointIndex = Random.Range(0, spawnPointList.transform.childCount);
 
             if (spawnPointIndexList.Count == 0)
             {
@@ -80,7 +84,7 @@ public class EnemySpawnManager : MonoBehaviour
             else
             {
                 bool _addIndex = true;
-                if (spawnPointIndexList.Count == enemySpawnPointList.transform.childCount)
+                if (spawnPointIndexList.Count == spawnPointList.transform.childCount)
                 {
                     break;
                 }
@@ -105,9 +109,14 @@ public class EnemySpawnManager : MonoBehaviour
             }
         }
 
-        // Spawn Enemy
+        // Random Spawn
         foreach (int index in spawnPointIndexList)
         {
+            if(Random.value < objectSpawnChance)
+            {
+                Instantiate(objectList[Random.Range(0, objectList.Length)], spawnPointList.transform.GetChild(index).transform.position, Quaternion.identity);
+                continue;
+            }
             // Random Enemy Type Pool
             poolIndex = Random.Range(0, enemyTypePoolList.Length);
 
@@ -116,8 +125,8 @@ public class EnemySpawnManager : MonoBehaviour
             {
                 if (enemy.gameObject.activeSelf == false)
                 {
-                    enemy.transform.position = enemySpawnPointList.transform.GetChild(index).transform.position;
-                    Debug.Log("Transform Position:" + enemySpawnPointList.transform.GetChild(index).transform.position);
+                    enemy.transform.position = spawnPointList.transform.GetChild(index).transform.position;
+                    //Debug.Log("Transform Position:" + spawnPointList.transform.GetChild(index).transform.position);
                     enemy.gameObject.SetActive(true);
                     break;
                 }

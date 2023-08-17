@@ -423,7 +423,7 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -2118696673
+  m_SortingLayerID: 76381407
   m_SortingLayer: 4
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
@@ -1452,6 +1452,7 @@ MonoBehaviour:
   itemAndDropChances:
   - item: {fileID: 2443823218653012819, guid: 3d947b54961e7fd49bec6bc289615a57, type: 3}
     chance: 50
+  spawnCurrency: {fileID: 0}
 --- !u!212 &395648391
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2414,6 +2415,7 @@ MonoBehaviour:
   itemAndDropChances:
   - item: {fileID: 2443823218653012819, guid: 3d947b54961e7fd49bec6bc289615a57, type: 3}
     chance: 50
+  spawnCurrency: {fileID: 0}
 --- !u!212 &639579689
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2598,6 +2600,7 @@ MonoBehaviour:
   itemAndDropChances:
   - item: {fileID: 2443823218653012819, guid: 3d947b54961e7fd49bec6bc289615a57, type: 3}
     chance: 50
+  spawnCurrency: {fileID: 0}
 --- !u!212 &717267857
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3253,6 +3256,7 @@ MonoBehaviour:
   itemAndDropChances:
   - item: {fileID: 2443823218653012819, guid: 3d947b54961e7fd49bec6bc289615a57, type: 3}
     chance: 50
+  spawnCurrency: {fileID: 0}
 --- !u!212 &954598856
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3628,7 +3632,7 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 217617789
+  m_SortingLayerID: 1940940611
   m_SortingLayer: 3
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
@@ -4897,6 +4901,7 @@ MonoBehaviour:
   itemAndDropChances:
   - item: {fileID: 2443823218653012819, guid: 3d947b54961e7fd49bec6bc289615a57, type: 3}
     chance: 50
+  spawnCurrency: {fileID: 0}
 --- !u!212 &1526048304
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5081,6 +5086,7 @@ MonoBehaviour:
   itemAndDropChances:
   - item: {fileID: 2443823218653012819, guid: 3d947b54961e7fd49bec6bc289615a57, type: 3}
     chance: 50
+  spawnCurrency: {fileID: 0}
 --- !u!212 &1613108632
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5317,6 +5323,7 @@ MonoBehaviour:
   itemAndDropChances:
   - item: {fileID: 2443823218653012819, guid: 3d947b54961e7fd49bec6bc289615a57, type: 3}
     chance: 50
+  spawnCurrency: {fileID: 0}
 --- !u!1 &1711564569
 GameObject:
   m_ObjectHideFlags: 0
@@ -5449,6 +5456,7 @@ MonoBehaviour:
   itemAndDropChances:
   - item: {fileID: 2443823218653012819, guid: 3d947b54961e7fd49bec6bc289615a57, type: 3}
     chance: 50
+  spawnCurrency: {fileID: 0}
 --- !u!212 &1737990426
 SpriteRenderer:
   m_ObjectHideFlags: 0

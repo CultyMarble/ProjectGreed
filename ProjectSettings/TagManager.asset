@@ -4,10 +4,13 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - Zombie
   - Currency
+  - DemoOverUI
   - Enemy
   - Collisions
   - RoomSpawnPoint
+  - Destroyer
   - VCAMBoundsConfiner
   layers:
   - Default
@@ -52,11 +55,11 @@ TagManager:
   - name: Background2
     uniqueID: 839852185
     locked: 0
-  - name: BackGroundDeco1
-    uniqueID: 217617789
+  - name: BackgroundDeco1
+    uniqueID: 1940940611
     locked: 0
-  - name: BackGroundDeco2
-    uniqueID: 2176270623
+  - name: BackgroundDeco2
+    uniqueID: 76381407
     locked: 0
   - name: Entity
     uniqueID: 237529647
