@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -30,15 +29,15 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
     [SerializeField] public GameObject optionMenu;
 
     [Header("Gameover Menu")]
-    //[SerializeField] private GameObject gameOverMenu;
-    //[SerializeField] private Button gv_loadLastCheckPointButton;
-    //[SerializeField] private Button gv_mainMenuButton;
+    [SerializeField] private GameObject gameOverMenu;
+    [SerializeField] private Button gv_respawnButton;
+    [SerializeField] private Button gv_mainMenuButton;
 
     [Header("Gameplay Runtime Data")]
     [SerializeField] private SOListInt generatedItemForSale;
 
     private readonly float loadingScreenDuration = 0.5f;
-    private bool isLoadingScreenActive;
+    public bool isLoadingScreenActive;
     private bool canUnload = false;
     private UnloadSceneZone unloadSceneZone;
 
@@ -58,8 +57,8 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         });
 
         // Gameover Menu
-        //gv_loadLastCheckPointButton.onClick.AddListener(() => StartCoroutine(LoadLastCheckPoint()));
-        //gv_mainMenuButton.onClick.AddListener(() => StartCoroutine(UnloadSceneAndBackToMainMenu()));
+        gv_mainMenuButton.onClick.AddListener(() => StartCoroutine(UnloadSceneAndBackToMainMenu()));
+        gv_respawnButton.onClick.AddListener(() => StartCoroutine(UnloadAndSwitchScene(SceneName.DemoSceneHub.ToString(), Vector3.zero)));
     }
 
     private void Start()
@@ -108,6 +107,7 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         yield return StartCoroutine(LoadingScreen(1.0f));
 
         Player.Instance.transform.position = spawnPosition;
+        gameOverMenu.SetActive(false);
 
         EventManager.CallBeforeSceneUnloadEvent();
         yield return SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().buildIndex);
@@ -126,7 +126,7 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         yield return StartCoroutine(LoadingScreen(1.0f));
 
         pm_animator.SetTrigger("Close");
-        // gameOverMenu.SetActive(false);
+        gameOverMenu.SetActive(false);
         mainMenu.SetActive(true);
 
         EventManager.CallBeforeSceneUnloadEvent();
@@ -165,20 +165,13 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
     }
 
     //===========================================================================
-    private void SetPlayerActiveTrue()
-    {
-        player.SetActive(true);
-
-        player.transform.position = this.transform.position;
-    }
-
-    //===========================================================================
     private IEnumerator LoadStartingScene()
     {
         EventManager.CallBeforeSceneUnloadLoadingScreenEvent();
         yield return StartCoroutine(LoadingScreen(1.0f));
 
         mainMenu.SetActive(false);
+        Player.Instance.gameObject.SetActive(true);
 
         yield return StartCoroutine(LoadSceneAndSetActive(startingScene.ToString()));
         EventManager.CallAfterSceneLoadEvent();

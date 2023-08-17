@@ -18,6 +18,11 @@ public class PlayerHeart : MonoBehaviour
     private float feedbackDamageTimer = default;
 
     //======================================================================
+    private void OnEnable()
+    {
+        EventManager.AfterSceneLoadEvent += EventManager_AfterSceneLoadEvent;
+    }
+
     private void Start()
     {
         currentMaxHeart = Player.Instance.PlayerData.baseMaxHealth;
@@ -25,11 +30,6 @@ public class PlayerHeart : MonoBehaviour
 
         UpdateCurrentMaxHeart();
         UpdateCurrentHeart();
-    }
-
-    private void OnEnable()
-    {
-        EventManager.AfterSceneLoadEvent += EventManager_AfterSceneLoadEvent;
     }
 
     private void Update()
@@ -127,18 +127,18 @@ public class PlayerHeart : MonoBehaviour
     {
         if (amount != 0)
         {
+            feedbackDamageTimer = feedbackDamageTime;
+
             currentHeart += amount;
             if (currentHeart <= 0)
             {
                 currentHeart = 0;
+                DespawnPlayer();
             }
             else if (currentHeart > currentMaxHeart)
             {
                 currentHeart = currentMaxHeart;
             }
-
-            if (currentHeart <= 0)
-                DespawnPlayer();
         }
 
         //Invoke Event
