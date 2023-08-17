@@ -29,6 +29,12 @@ public class RangeAbilityProjectile : MonoBehaviour
 
         }
 
+        if (collision.gameObject.CompareTag("Breakable"))
+        {
+            collision.gameObject.GetComponent<BreakableItem>().UpdateCurrentHealth(-damage);
+
+        }
+
         if (collision.gameObject.CompareTag("Collisions"))
         {
             gameObject.SetActive(false);

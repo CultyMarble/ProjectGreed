@@ -22,7 +22,7 @@ public class EnemyHealth : MonoBehaviour
     {
         currentHealth = maxHealth;
         UpdateCurrentHealth();
-        player = GameObject.Find("RangeAbility").GetComponent<RangeAbility>();
+        player = GameObject.Find("Player").GetComponentInChildren<RangeAbility>();
     }
 
     private void Update()
