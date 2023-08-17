@@ -9,6 +9,8 @@ public class RangeAbility : MonoBehaviour
     public struct OnCurrentChargeChangedEventArgs { public int currentCharge; }
     public event System.EventHandler<OnCurrentChargeChangedEventArgs> OnCurrentChargeChangedEvent;
 
+    private EnemyHealth enemyHealth;
+
     [Header("Effect Settings:")]
     [SerializeField] private SpriteRenderer aimIndicator;
 
@@ -36,7 +38,6 @@ public class RangeAbility : MonoBehaviour
     private void Awake()
     {
         playerInput = FindObjectOfType<PlayerInput>();
-
         PopulatePool();
     }
 

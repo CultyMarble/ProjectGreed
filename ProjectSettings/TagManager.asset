@@ -12,6 +12,7 @@ TagManager:
   - RoomSpawnPoint
   - Destroyer
   - VCAMBoundsConfiner
+  - Breakable
   layers:
   - Default
   - TransparentFX

@@ -94,6 +94,7 @@ public class RoomController : MonoBehaviour
         {
             SetAllRoomActiveFalse();
             if (shopRoom != null) shopRoom.SetActive(true);
+            GetComponentInChildren<GateManager>().disableGate = true;
         }
     }
 

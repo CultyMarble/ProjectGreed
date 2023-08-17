@@ -24,6 +24,11 @@ public class BasicAbilityBubble : MonoBehaviour
             collision.gameObject.GetComponent<EnemyHealth>().UpdateCurrentHealth(-particleDamage);
             collision.gameObject.GetComponent<Rigidbody2D>().AddForce(particlePushPower * _pushDirection);
         }
+        if (collision.gameObject.CompareTag("Breakable"))
+        {
+            collision.gameObject.GetComponent<BreakableItem>().UpdateCurrentHealth(-particleDamage);
+
+        }
     }
 
     //===========================================================================

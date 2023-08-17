@@ -15,7 +15,7 @@ public class BreakableItem : MonoBehaviour
     [SerializeField] ItemAndDropChance[] itemAndDropChances;
     [SerializeField] private SpawnCurrency spawnCurrency = default;
 
-    private int itemHealth = 10;
+    private float itemHealth = 10;
 
     //===========================================================================
     private void Update()
@@ -54,5 +54,25 @@ public class BreakableItem : MonoBehaviour
             spawnCurrency.SpewOutCurrency();
         }
     }
+
+    public void UpdateCurrentHealth(float amount)
+    {
+        itemHealth += amount;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player")) { 
+            if(collision.gameObject.GetComponent<Player>().actionState == PlayerActionState.IsDashing)
+            {
+                SpawnItem();
+
+                gameObject.SetActive(false);
+                Destroy(gameObject);
+            }
+        }
+    }
+
+
 
 }
