@@ -33,8 +33,8 @@ public class RoomManager : MonoBehaviour
     private bool delaySpawnRoomCheck = false;
 
     [Header("Room Spawn Chance")]
-    public float tresureRoomChance = 1.0F;
-    public float abandonShopChance = 0.1F;
+    public float treasureRoomChance = 1.0F;
+    public float abandonedShopChance = 0.1F;
 
     [Space]
 
@@ -117,23 +117,23 @@ public class RoomManager : MonoBehaviour
     {
         GameObject newShop;
         int randomIndex = Random.Range(0, currentRooms.Count);
-        RoomType roomType = Random.value < abandonShopChance ? RoomType.abandonShop : RoomType.shop;
+        RoomType roomType = Random.value < abandonedShopChance ? RoomType.abandonShop : RoomType.shop;
 
         for (int i = currentRooms.Count - 1; i >= 0; i--)
         {
-            if (currentRooms[i].currentRoomType != RoomType.empty)
+            if (currentRooms[i].currentRoomType != RoomType.empty && currentRooms[i].currentRoomType != RoomType.boss)
             {
-                currentRooms[randomIndex].currentRoomType = roomType;
+                //currentRooms[randomIndex].currentRoomType = roomType;
 
                 if (roomType == RoomType.shop)
                 {
-                    newShop = Instantiate(shop, currentRooms[randomIndex].transform.position, Quaternion.identity);
-                    newShop.transform.parent = currentRooms[randomIndex].transform;
+                    newShop = Instantiate(shop, currentRooms[i].transform.position, Quaternion.identity);
+                    newShop.transform.parent = currentRooms[i].transform;
                 }
                 else if (roomType == RoomType.abandonShop)
                 {
-                    newShop = Instantiate(abandonShop, currentRooms[randomIndex].transform.position, Quaternion.identity);
-                    newShop.transform.parent = currentRooms[randomIndex].transform;
+                    newShop = Instantiate(abandonShop, currentRooms[i].transform.position, Quaternion.identity);
+                    newShop.transform.parent = currentRooms[i].transform;
                 }
                 OnShopChange?.Invoke();
                 break;
@@ -208,7 +208,7 @@ public class RoomManager : MonoBehaviour
         }
 
         // SPAWN TREASURE ROOM
-        if (currentRooms.Count >= 6 && Random.value < tresureRoomChance || currentRooms.Count >= 10) // 6 Rooms or less (Gives a chance of spawn) | 6 Rooms or more (100%)
+        if (currentRooms.Count >= 6 && Random.value < treasureRoomChance || currentRooms.Count >= 10) // 6 Rooms or less (Gives a chance of spawn) | 6 Rooms or more (100%)
         {
             GameObject newTreasure;
             int randomIndex = Random.Range(0, roomsList.Count);
