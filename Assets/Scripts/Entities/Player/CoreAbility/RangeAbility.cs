@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static PlayerHeart;
 
 public class RangeAbility : MonoBehaviour
 {

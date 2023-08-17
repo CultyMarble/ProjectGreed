@@ -23,6 +23,7 @@ public class SceneTransitZone : MonoBehaviour
                     playFootStep = false;
                 }
 
+                Debug.Log(spawnLocation.position);
                 SceneControlManager.Instance.LoadScene(sceneNameGoTo.ToString(), spawnLocation.position);
             }
         }
