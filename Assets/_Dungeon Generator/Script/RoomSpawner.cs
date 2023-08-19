@@ -32,7 +32,7 @@ public class RoomSpawner : MonoBehaviour
             {
                 InstantiateRandomRoom(1, roomManager.centerRoom);
             }
-            if (openingDirection == 1)
+            else if (openingDirection == 1)
             {
                 InstantiateRandomRoom(roomManager.bottomRooms.Length, roomManager.bottomRooms);
             }

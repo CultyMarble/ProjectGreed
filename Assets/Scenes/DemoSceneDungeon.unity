@@ -123,6 +123,75 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &1706668770
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4317000766357431429, guid: fb3a06f6d6e204a43b619d5eb2dd4e7d, type: 3}
+      propertyPath: entryRoom
+      value: 
+      objectReference: {fileID: 399540625238344219, guid: 2747354fa09c2e2418e4a0f805802360, type: 3}
+    - target: {fileID: 4317000766357431429, guid: fb3a06f6d6e204a43b619d5eb2dd4e7d, type: 3}
+      propertyPath: centerRoomChance
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4317000767536815821, guid: fb3a06f6d6e204a43b619d5eb2dd4e7d, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4317000767536815821, guid: fb3a06f6d6e204a43b619d5eb2dd4e7d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4317000767536815821, guid: fb3a06f6d6e204a43b619d5eb2dd4e7d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4317000767536815821, guid: fb3a06f6d6e204a43b619d5eb2dd4e7d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4317000767536815821, guid: fb3a06f6d6e204a43b619d5eb2dd4e7d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4317000767536815821, guid: fb3a06f6d6e204a43b619d5eb2dd4e7d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4317000767536815821, guid: fb3a06f6d6e204a43b619d5eb2dd4e7d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4317000767536815821, guid: fb3a06f6d6e204a43b619d5eb2dd4e7d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4317000767536815821, guid: fb3a06f6d6e204a43b619d5eb2dd4e7d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4317000767536815821, guid: fb3a06f6d6e204a43b619d5eb2dd4e7d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4317000767536815821, guid: fb3a06f6d6e204a43b619d5eb2dd4e7d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4317000767536815822, guid: fb3a06f6d6e204a43b619d5eb2dd4e7d, type: 3}
+      propertyPath: m_Name
+      value: Map w Old Tiles
+      objectReference: {fileID: 0}
+    - target: {fileID: 4317000767536815822, guid: fb3a06f6d6e204a43b619d5eb2dd4e7d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: fb3a06f6d6e204a43b619d5eb2dd4e7d, type: 3}
 --- !u!1001 &4317000767897309406
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -134,6 +203,10 @@ PrefabInstance:
       propertyPath: entryRoom
       value: 
       objectReference: {fileID: 399540625238344219, guid: c0f4c6c034e43d34cbb3c9e1a4ae0791, type: 3}
+    - target: {fileID: 4317000766357431429, guid: e90a428d2ac65fa40ab9c4269c5a6558, type: 3}
+      propertyPath: abandonedShop
+      value: 
+      objectReference: {fileID: 4422130485644021212, guid: 5e265e2fd525acc4ca57c09e913bafb4, type: 3}
     - target: {fileID: 4317000766357431429, guid: e90a428d2ac65fa40ab9c4269c5a6558, type: 3}
       propertyPath: centerRoomChance
       value: 0.1
@@ -232,7 +305,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4317000767536815822, guid: e90a428d2ac65fa40ab9c4269c5a6558, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4317000767816634783, guid: e90a428d2ac65fa40ab9c4269c5a6558, type: 3}
       propertyPath: m_IsActive
