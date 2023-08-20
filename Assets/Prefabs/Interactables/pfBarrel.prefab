@@ -101,7 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemAndDropChances:
   - item: {fileID: 7565985644124066583, guid: e389fcd3ca0d2c246825ae68b52252cf, type: 3}
-    chance: 20
+    chance: 50
   spawnCurrency: {fileID: 6063696349042203140}
 --- !u!114 &6063696349042203140
 MonoBehaviour:
