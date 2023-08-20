@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entryRoom: {fileID: 0}
-  minRooms: 10
-  maxRooms: 15
+  minRooms: 15
+  maxRooms: 20
   centerRoomChance: 0
   potentialRooms: 0
   bottomRooms:
