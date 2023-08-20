@@ -16,17 +16,22 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
 
     [Header("Main Menu")]
     [SerializeField] private GameObject mainMenu;
+    [SerializeField] public GameObject mm_optionMenu;
     [SerializeField] private Button mm_startGameButton;
     [SerializeField] private Button mm_exitButton;
+    [SerializeField] private Button mm_optionsButton;
 
     [Header("Pause Menu")]
     [SerializeField] private PlayerCurrencies playerCurrencies;
     [SerializeField] public GameObject pauseMenu;
     [SerializeField] private Animator pm_animator;
     [SerializeField] private Button pm_loadMainMenuButton;
+    [SerializeField] private Button pm_exitButton;
+    [SerializeField] private Button pm_optionsButton;
 
     [Header("Option Menu")]
     [SerializeField] public GameObject optionMenu;
+    [SerializeField] private Animator om_animator;
 
     [Header("Gameover Menu")]
     [SerializeField] private GameObject gameOverMenu;
@@ -47,6 +52,7 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         // Main Menu
         mm_startGameButton.onClick.AddListener(() => StartCoroutine(LoadStartingScene()));
         mm_exitButton.onClick.AddListener(() => Application.Quit());
+        mm_optionsButton.onClick.AddListener(() => optionMenu.SetActive(true));
 
         // Pause Menu
         pm_loadMainMenuButton.onClick.AddListener(() =>
@@ -55,6 +61,9 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
             pm_animator.SetTrigger("Close");
             StartCoroutine(UnloadSceneAndBackToMainMenu());
         });
+        pm_exitButton.onClick.AddListener(() => Application.Quit());
+        pm_optionsButton.onClick.AddListener(() => optionMenu.SetActive(true));
+
 
         // Gameover Menu
         gv_mainMenuButton.onClick.AddListener(() => StartCoroutine(UnloadSceneAndBackToMainMenu()));
@@ -74,12 +83,13 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && mainMenu.activeSelf == false || Input.GetKeyDown(KeyCode.P) && player.activeInHierarchy != false)
+        if (Input.GetKeyDown(KeyCode.Escape) && mainMenu.activeSelf == false && player.activeInHierarchy != false)
         {
             if (pauseMenu.activeSelf)
             {
                 Time.timeScale = 1;
                 pm_animator.SetTrigger("Close");
+                om_animator.SetTrigger("Close");
             }
             else
             {
