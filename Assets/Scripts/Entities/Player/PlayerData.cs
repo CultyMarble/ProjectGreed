@@ -3,10 +3,10 @@ using UnityEngine;
 public class PlayerData : MonoBehaviour
 {
     // Basic Stat
-    public readonly int baseMaxHealth = 3;
+    public readonly int baseMaxHealth = 6;
 
     // Movement
-    public readonly float baseMoveSpeed = 6.0f;
+    public readonly float baseMoveSpeed = 8.0f;
 
     public readonly float baseDashPenalty = 0.1f;
     public readonly float baseDashCooldown = 1.0f;
@@ -36,9 +36,9 @@ public class PlayerData : MonoBehaviour
     public readonly float ra_baseMidSpeed = 20.0f;
     public readonly float ra_baseMaxSpeed = 30.0f;
 
-    public readonly float ra_basePlayerMinSpeed = 1.0f;
-    public readonly float ra_basePlayerMidSpeed = 3.0f;
-    public readonly float ra_basePlayerMaxSpeed = 5.0f;
+    public readonly float ra_basePlayerMinSpeed = 3.0f;
+    public readonly float ra_basePlayerMidSpeed = 5.0f;
+    public readonly float ra_basePlayerMaxSpeed = 8.0f;
 
     // Bomb Ability Stat
     public readonly int bomb_baseCharge = 0;

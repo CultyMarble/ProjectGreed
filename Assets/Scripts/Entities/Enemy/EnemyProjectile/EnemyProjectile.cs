@@ -17,13 +17,11 @@ public class EnemyProjectile : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             collision.gameObject.GetComponent<PlayerHeart>().UpdateCurrentHeart(-damage);
-            gameObject.SetActive(false);
-            Destroy(gameObject);
+            Despawn();
         }
         if (collision.gameObject.CompareTag("Collisions"))
         {
-            gameObject.SetActive(false);
-            Destroy(gameObject);
+            Despawn();
         }
         
     }
@@ -40,9 +38,15 @@ public class EnemyProjectile : MonoBehaviour
         }
         if (lifeTime <= 0)
         {
-            gameObject.SetActive(false);
-            gameObject.transform.localPosition = Vector2.zero;
+            Despawn();
         }
+    }
+
+    private void Despawn()
+    {
+        lifeTime = 5;
+        gameObject.SetActive(false);
+        gameObject.transform.localPosition = Vector2.zero;
     }
 
     //===========================================================================

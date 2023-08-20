@@ -199,7 +199,7 @@ public class RangeAbility : MonoBehaviour
         }
         else
         {
-            Player.Instance.PlayerMovement.SetMoveSpeed(6.0f);
+            Player.Instance.PlayerMovement.SetMoveSpeed(Player.Instance.PlayerData.baseMoveSpeed);
         }
     }
 

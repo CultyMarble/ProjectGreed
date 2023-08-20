@@ -28,11 +28,11 @@ public class RoomSpawner : MonoBehaviour
         }
         if (!spawned)
         {
-            if(Random.value < roomManager.centerRoomChance)
-            {
-                InstantiateRandomRoom(1, roomManager.centerRoom);
-            }
-            else if (openingDirection == 1)
+            //if(Random.value < roomManager.centerRoomChance)
+            //{
+            //    InstantiateRandomRoom(1, roomManager.centerRoom);
+            //}
+            /*else */if (openingDirection == 1)
             {
                 InstantiateRandomRoom(roomManager.bottomRooms.Length, roomManager.bottomRooms);
             }

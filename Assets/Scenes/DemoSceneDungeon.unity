@@ -131,6 +131,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4317000766357431429, guid: fb3a06f6d6e204a43b619d5eb2dd4e7d, type: 3}
+      propertyPath: maxRooms
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4317000766357431429, guid: fb3a06f6d6e204a43b619d5eb2dd4e7d, type: 3}
+      propertyPath: minRooms
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4317000766357431429, guid: fb3a06f6d6e204a43b619d5eb2dd4e7d, type: 3}
       propertyPath: entryRoom
       value: 
       objectReference: {fileID: 399540625238344219, guid: 2747354fa09c2e2418e4a0f805802360, type: 3}
