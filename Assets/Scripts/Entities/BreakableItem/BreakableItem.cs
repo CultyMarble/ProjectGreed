@@ -46,6 +46,12 @@ public class BreakableItem : MonoBehaviour
                 if ((Random.value * 100) < item.Chance)
                 {
                     Instantiate(item.Item).position = transform.position;
+                    break;
+                }
+                else
+                {
+                    spawnCurrency.SpewOutCurrency();
+                    break;
                 }
             }
         }

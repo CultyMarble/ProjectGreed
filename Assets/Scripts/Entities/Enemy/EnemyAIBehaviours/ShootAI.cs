@@ -44,7 +44,7 @@ public class ShootAI : MonoBehaviour
     //===========================================================================
     private void ShootCoolDown()
     {
-        if (targetingAI.currentTargetTransform == null || isShooting == true)
+        if (targetingAI.CheckNoTarget() || isShooting == true)
             return;
 
         shootCoolDownTimer -= Time.deltaTime;
@@ -70,7 +70,7 @@ public class ShootAI : MonoBehaviour
             SpawnBullet();
 
             --shootTimeCounter;
-            if (shootTimeCounter == 0)
+            if (shootTimeCounter <= 0)
             {
                 isShooting = false;
             }
@@ -88,9 +88,9 @@ public class ShootAI : MonoBehaviour
         {
             if (projectile.gameObject.activeInHierarchy == false)
             {
+                projectile.position = this.transform.position;
                 projectile.GetComponent<EnemyProjectile>().SetMoveDirectionAndSpeed(bulletDirection, bulletSpeed);
                 projectile.gameObject.SetActive(true);
-                projectile.position = this.transform.position;
                 break;
             }
         }
