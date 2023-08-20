@@ -167,7 +167,7 @@ public class PlayerMovement : MonoBehaviour
                 Rigidbody2D.MovePosition(Rigidbody2D.position + dashSpeed * Time.deltaTime * dashVector);
                 break;
             case PlayerActionState.IsUsingBasicAbility:
-                Rigidbody2D.MovePosition(Rigidbody2D.position + (moveSpeed * 0.25f) * Time.deltaTime * movementVector);
+                Rigidbody2D.MovePosition(Rigidbody2D.position + (moveSpeed * 0.75f) * Time.deltaTime * movementVector);
                 break;
             case PlayerActionState.IsUsingRangeAbility:
                 Rigidbody2D.MovePosition(Rigidbody2D.position + moveSpeed * Time.deltaTime * movementVector);
