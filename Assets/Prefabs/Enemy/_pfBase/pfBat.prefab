@@ -439,7 +439,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 1000
   m_LinearDrag: 1
   m_AngularDrag: 1
   m_GravityScale: 0
@@ -489,7 +489,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isAttacking: 0
   currentTargetTransform: {fileID: 6186633300706691329}
-  searchRadius: 10
+  searchRadius: 20
   breakDistance: 0
   keepDistance: 0
   patrolArea: 0

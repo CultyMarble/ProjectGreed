@@ -36,9 +36,9 @@ public class PlayerData : MonoBehaviour
     public readonly float ra_baseMidSpeed = 20.0f;
     public readonly float ra_baseMaxSpeed = 30.0f;
 
-    public readonly float ra_basePlayerMinSpeed = 3.0f;
+    public readonly float ra_basePlayerMinSpeed = 2.0f;
     public readonly float ra_basePlayerMidSpeed = 5.0f;
-    public readonly float ra_basePlayerMaxSpeed = 8.0f;
+    public readonly float ra_basePlayerMaxSpeed = 7.0f;
 
     // Bomb Ability Stat
     public readonly int bomb_baseCharge = 0;
