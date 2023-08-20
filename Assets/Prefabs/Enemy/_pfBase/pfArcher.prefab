@@ -489,9 +489,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isAttacking: 0
   currentTargetTransform: {fileID: 399951332217022172}
-  searchRadius: 8
-  breakDistance: 5
-  keepDistance: 0
+  searchRadius: 12
+  breakDistance: 10
+  keepDistance: 1
   patrolArea: 0
   patrolTransforms: {fileID: 0}
 --- !u!114 &-4127356551639531183
