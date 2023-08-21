@@ -5,7 +5,6 @@ public class BasicAbilityBubble : MonoBehaviour
     private float moveSpeed;
     private float lifeTime = default;
     private float particleDamage = default;
-    private float particlePushPower = default;
 
     private float timeUntilChangeDirectionMax = default;
     private float timeUntilChangeDirectionMin = default;
@@ -14,27 +13,30 @@ public class BasicAbilityBubble : MonoBehaviour
     private float particleGrowthRate = 0;
     private float swingMagtitude = default;
     private Vector3 moveDirection = default;
+    private Animator animator;
+
 
     //===========================================================================
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy") && collision.GetType().ToString() != Tags.CIRCLECOLLIDER2D)
         {
-            Vector2 _pushDirection = (collision.gameObject.GetComponent<Transform>().position - GetComponent<Transform>().position).normalized;
             collision.gameObject.GetComponent<EnemyHealth>().UpdateCurrentHealth(-particleDamage);
-            collision.gameObject.GetComponent<Rigidbody2D>().AddForce(particlePushPower * _pushDirection);
         }
-        if (collision.gameObject.CompareTag("Breakable"))
+        else if (collision.gameObject.CompareTag("Breakable"))
         {
             collision.gameObject.GetComponent<BreakableItem>().UpdateCurrentHealth(-particleDamage);
-
         }
+        
+        //StopMovement();
+        animator.SetTrigger("Pop");
     }
 
     //===========================================================================
     private void OnEnable()
     {
         timeUntilChangeDirection = Random.Range(timeUntilChangeDirectionMin, timeUntilChangeDirectionMax);
+        animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -58,17 +60,17 @@ public class BasicAbilityBubble : MonoBehaviour
             Vector3 growthVector = new Vector3();
             growthVector.x = particleGrowthRate;
             growthVector.y = particleGrowthRate;
-            int rnd = Random.Range(1, 20);
+            //int rnd = Random.Range(1, 20);
 
-            if (lifeTime < 0.1 && rnd == 3)
-            {
-                Vector3 emberVector = new Vector3(0.1f, 0.1f, 0.1f);
-                transform.localScale = emberVector;
-            }
-            else
-            {
+            //if (lifeTime < 0.1 && rnd == 3)
+            //{
+            //    Vector3 emberVector = new Vector3(0.1f, 0.1f, 0.1f);
+            //    transform.localScale = emberVector;
+            //}
+            //else
+            //{
                 transform.localScale += growthVector * Time.deltaTime;
-            }
+            //}
         }
 
         // Partical LifeTime
@@ -79,9 +81,19 @@ public class BasicAbilityBubble : MonoBehaviour
         }
         if (lifeTime <= 0)
         {
-            gameObject.SetActive(false);
-            gameObject.transform.localPosition = Vector2.zero;
+            animator.SetTrigger("Pop");
         }
+    }
+
+    private void Despawn()
+    {
+        gameObject.SetActive(false);
+        gameObject.transform.localPosition = Vector2.zero;
+    }
+    private void StopMovement()
+    {
+        moveSpeed = 0;
+        particleGrowthRate = 0;
     }
 
     //===========================================================================
