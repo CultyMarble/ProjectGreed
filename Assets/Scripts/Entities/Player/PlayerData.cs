@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 
 public class PlayerData : MonoBehaviour
@@ -7,7 +8,6 @@ public class PlayerData : MonoBehaviour
 
     // Movement
     public readonly float baseMoveSpeed = 8.0f;
-
     public readonly float baseDashPenalty = 0.1f;
     public readonly float baseDashCooldown = 1.0f;
     public readonly float baseDashTime = 0.25f;
@@ -19,6 +19,7 @@ public class PlayerData : MonoBehaviour
     public readonly float ba_fuelConsumePerTrigger = 1.0f;
     public readonly float ba_baseRechargeRate = 100.0f;
     public readonly float ba_baseDamage = 3.0f;
+    public readonly float ba_basePlayerSpeedPenalty = 0.5f;
 
     // Range Ability Stat
     public readonly int ra_baseMaxCharge = 2;

@@ -14,59 +14,27 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
     [SerializeField] private SceneName startingScene;
     [SerializeField] private Transform startingPosition;
 
-    [Header("Main Menu")]
+    [Header("Menu Settings:")]
     [SerializeField] private GameObject mainMenu;
-    [SerializeField] public GameObject mm_optionMenu;
-    [SerializeField] private Button mm_startGameButton;
-    [SerializeField] private Button mm_exitButton;
-    [SerializeField] private Button mm_optionsButton;
-
-    [Header("Pause Menu")]
-    [SerializeField] private PlayerCurrencies playerCurrencies;
-    [SerializeField] public GameObject pauseMenu;
-    [SerializeField] private Animator pm_animator;
-    [SerializeField] private Button pm_loadMainMenuButton;
-    [SerializeField] private Button pm_exitButton;
-    [SerializeField] private Button pm_optionsButton;
-
-    [Header("Option Menu")]
-    [SerializeField] public GameObject optionMenu;
-    [SerializeField] private Animator om_animator;
+    [SerializeField] private PauseMenuGUI pauseMenu;
 
     [Header("Gameover Menu")]
     [SerializeField] private GameObject gameOverMenu;
     [SerializeField] private Button gv_respawnButton;
     [SerializeField] private Button gv_mainMenuButton;
 
-    [Header("Gameplay Runtime Data")]
-    [SerializeField] private SOListInt generatedItemForSale;
+    private readonly float loadingScreenDuration = 0.75f;
 
-    private readonly float loadingScreenDuration = 0.5f;
-    public bool isLoadingScreenActive;
-    private bool canUnload = false;
-    private UnloadSceneZone unloadSceneZone;
+    private bool isLoadingScreenActive = default;
+    public bool IsLoadingScreenActive => isLoadingScreenActive;
+
+    public GameState CurrentGameState = default;
 
     //===========================================================================
     private void OnEnable()
     {
-        // Main Menu
-        mm_startGameButton.onClick.AddListener(() => StartCoroutine(LoadStartingScene()));
-        mm_exitButton.onClick.AddListener(() => Application.Quit());
-        mm_optionsButton.onClick.AddListener(() => optionMenu.SetActive(true));
-
-        // Pause Menu
-        pm_loadMainMenuButton.onClick.AddListener(() =>
-        {
-            Time.timeScale = 1.0f;
-            pm_animator.SetTrigger("Close");
-            StartCoroutine(UnloadSceneAndBackToMainMenu());
-        });
-        pm_exitButton.onClick.AddListener(() => Application.Quit());
-        pm_optionsButton.onClick.AddListener(() => optionMenu.SetActive(true));
-
-
         // Gameover Menu
-        gv_mainMenuButton.onClick.AddListener(() => StartCoroutine(UnloadSceneAndBackToMainMenu()));
+        gv_mainMenuButton.onClick.AddListener(() => StartCoroutine(BackToMainMenu()));
         gv_respawnButton.onClick.AddListener(() => StartCoroutine(UnloadAndSwitchScene(SceneName.DemoSceneHub.ToString(), Vector3.zero)));
     }
 
@@ -80,36 +48,6 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
 
         StartCoroutine(LoadingScreen(0.0f));
     }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape) && mainMenu.activeSelf == false && player.activeInHierarchy != false)
-        {
-            if (pauseMenu.activeSelf)
-            {
-                Time.timeScale = 1;
-                pm_animator.SetTrigger("Close");
-                om_animator.SetTrigger("Close");
-            }
-            else
-            {
-                Time.timeScale = 0;
-                pauseMenu.SetActive(true);
-            }
-        }
-
-        if (unloadSceneZone == null)
-            return;
-
-        this.canUnload = unloadSceneZone.canUnload;
-
-        if (Input.GetKeyUp(KeyCode.F))
-        {
-            if (canUnload)
-                StartCoroutine(UnloadSceneAndBackToMainMenu());
-        }
-    }
-
     //===========================================================================
     private IEnumerator UnloadAndSwitchScene(string sceneName, Vector3 spawnPosition)
     {
@@ -126,22 +64,6 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         EventManager.CallAfterSceneLoadEvent();
 
         yield return new WaitForSecondsRealtime(1.0f);
-        yield return StartCoroutine(LoadingScreen(0.0f));
-        EventManager.CallAfterSceneLoadedLoadingScreenEvent();
-    }
-
-    private IEnumerator UnloadSceneAndBackToMainMenu()
-    {
-        EventManager.CallBeforeSceneUnloadLoadingScreenEvent();
-        yield return StartCoroutine(LoadingScreen(1.0f));
-
-        pm_animator.SetTrigger("Close");
-        gameOverMenu.SetActive(false);
-        mainMenu.SetActive(true);
-
-        EventManager.CallBeforeSceneUnloadEvent();
-        yield return SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().buildIndex);
-
         yield return StartCoroutine(LoadingScreen(0.0f));
         EventManager.CallAfterSceneLoadedLoadingScreenEvent();
     }
@@ -190,45 +112,54 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
 
         StartCoroutine(LoadingScreen(0.0f));
         EventManager.CallAfterSceneLoadedLoadingScreenEvent();
+
+        CurrentGameState = GameState.GameplayHub;
+    }
+
+    private IEnumerator BackToMainMenu()
+    {
+        EventManager.CallBeforeSceneUnloadLoadingScreenEvent();
+        yield return StartCoroutine(LoadingScreen(1.0f));
+
+        gameOverMenu.SetActive(false);
+        mainMenu.SetActive(true);
+        pauseMenu.SetPauseMenuActive(false);
+
+        EventManager.CallBeforeSceneUnloadEvent();
+        yield return SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().buildIndex);
+
+        yield return StartCoroutine(LoadingScreen(0.0f));
+        EventManager.CallAfterSceneLoadedLoadingScreenEvent();
+
+        CurrentGameState = GameState.MainMenu;
     }
 
     //===========================================================================
+    public void LoadStartingSceneWrapper()
+    {
+        if (isLoadingScreenActive == false)
+        {
+            StartCoroutine(LoadStartingScene());
+        }
+    }
+
+    public void BackToMainMenuWrapper()
+    {
+        if (isLoadingScreenActive == false)
+        {
+            StartCoroutine(BackToMainMenu());
+            CurrentGameState = GameState.MainMenu;
+        }
+    }
+
     public void LoadScene(string sceneName, Vector3 spawnPosition)
     {
         if (isLoadingScreenActive == false)
         {
             StartCoroutine(UnloadAndSwitchScene(sceneName, spawnPosition));
+
+            if (sceneName == SceneName.DemoSceneDungeon.ToString())
+                CurrentGameState = GameState.GameplayDungeon;
         }
-    }
-
-    public IEnumerator LoadLastCheckPoint()
-    {
-        EventManager.CallBeforeSceneUnloadLoadingScreenEvent();
-        yield return StartCoroutine(LoadingScreen(1.0f));
-
-        // gameOverMenu.SetActive(false);
-        Player.Instance.transform.position = SaveDataManager.Instance.SAVE01.RetrieveCheckPointSpawnLocation();
-
-        EventManager.CallBeforeSceneUnloadEvent();
-        yield return SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().buildIndex);
-
-        yield return StartCoroutine(LoadSceneAndSetActive(SaveDataManager.Instance.SAVE01.RetrieveCheckPointSceneData().ToString()));
-        EventManager.CallAfterSceneLoadEvent();
-
-        GameplayInfoController.Instance.SetGameplayInfoUIActive(true);
-
-        yield return StartCoroutine(LoadingScreen(0.0f));
-        EventManager.CallAfterSceneLoadedLoadingScreenEvent();
-    }
-
-    public void OpenOptionMenuButton()
-    {
-        optionMenu.SetActive(true);
-    }
-
-    public void ExitGameButton()
-    {
-        Application.Quit();
-        Debug.Log("Quit Game");
     }
 }

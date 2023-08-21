@@ -27,3 +27,11 @@ public enum SceneName
     DemoSceneHub,
     DemoSceneDungeon,
 }
+
+public enum GameState
+{
+    MainMenu,
+    GameplayHub,
+    GameplayDungeon,
+    PausedGameplay,
+}

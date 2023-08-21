@@ -7,16 +7,19 @@ public class GameplayInfoController : SingletonMonobehaviour<GameplayInfoControl
     [SerializeField] private GameObject playerHeartUI;
     [SerializeField] private GameObject playerFuelUI;
     [SerializeField] private GameObject playerRangeAbilityChargeUI;
+    [SerializeField] private GameObject playerBombAbilityChargeUI;
     [SerializeField] private GameObject playerCurrencyUI;
 
     [SerializeField] private DisplayPlayerHeart displayPlayerHeart = default;
     [SerializeField] private DisplayPlayerFuel displayPlayerFuel = default;
     [SerializeField] private DisplayPlayerRangeAbilityCharge displayPlayerRangeAbilityCharge = default;
+    [SerializeField] private DisplayPlayerBombAbilityCharge displayPlayerBombAbilityCharge = default;
     [SerializeField] private DisplayPlayerCurrency displayPlayerCurrency = default;
 
     public DisplayPlayerHeart DisplayPlayerHeart => displayPlayerHeart;
     public DisplayPlayerFuel DisplayPlayerFuel => displayPlayerFuel;
     public DisplayPlayerRangeAbilityCharge DisplayPlayerRangeAbilityCharge => displayPlayerRangeAbilityCharge;
+    public DisplayPlayerBombAbilityCharge DisplayPlayerBombAbilityCharge => displayPlayerBombAbilityCharge;
     public DisplayPlayerCurrency DisplayPlayerCurrency => displayPlayerCurrency;
 
     //===========================================================================
@@ -58,6 +61,7 @@ public class GameplayInfoController : SingletonMonobehaviour<GameplayInfoControl
         playerHeartUI.SetActive(newBool);
         playerFuelUI.SetActive(newBool);
         playerRangeAbilityChargeUI.SetActive(newBool);
+        playerBombAbilityChargeUI.SetActive(newBool);
         playerCurrencyUI.SetActive(newBool);
     }
 }

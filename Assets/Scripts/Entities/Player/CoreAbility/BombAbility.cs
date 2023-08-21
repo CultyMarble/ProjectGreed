@@ -1,9 +1,11 @@
-using System.Drawing;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class BombAbility : MonoBehaviour
 {
+    public struct OnChargeChangedEventArgs { public float charge; }
+    public event System.EventHandler<OnChargeChangedEventArgs> OnChargeChangedEvent;
+
     private int currentCharge = default;
 
     private float damage = default;
@@ -32,11 +34,11 @@ public class BombAbility : MonoBehaviour
 
     private void Start()
     {
-        currentCharge = 3;
-
         damage = Player.Instance.PlayerData.bomb_baseDamage;
         radius = Player.Instance.PlayerData.bomb_baseRadius;
         delayTime = Player.Instance.PlayerData.bomb_baseDelayTime;
+
+        UpdateBombCharge(3);
     }
 
     private void Update()
@@ -94,11 +96,21 @@ public class BombAbility : MonoBehaviour
                 bomb.position = transform.position;
                 bomb.gameObject.SetActive(true);
 
-                currentCharge--;
-                Debug.Log(currentCharge);
+                UpdateBombCharge(-1);
 
                 break;
             }
         }
+    }
+
+    //===========================================================================
+    public void UpdateBombCharge(int amount)
+    {
+        currentCharge += amount;
+        if (currentCharge < 0)
+            currentCharge = 0;
+
+        // Invoke Event
+        OnChargeChangedEvent?.Invoke(this, new OnChargeChangedEventArgs { charge = currentCharge });
     }
 }

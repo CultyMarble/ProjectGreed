@@ -25,7 +25,7 @@ public abstract class Trap : MonoBehaviour
     //===========================================================================
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent(out Player player) && collision.GetType().ToString() == Tags.CAPSULECOLLIDER2D)
+        if (collision.TryGetComponent(out Player player) && collision.GetType().ToString() == Tags.BOXCOLLIDER2D)
         {
             playerInside = true;
         }
@@ -39,7 +39,7 @@ public abstract class Trap : MonoBehaviour
         if (haveTriggered)
             return;
 
-        if (collision.TryGetComponent(out Player player) && collision.GetType().ToString() == Tags.CAPSULECOLLIDER2D)
+        if (collision.TryGetComponent(out Player player) && collision.GetType().ToString() == Tags.BOXCOLLIDER2D)
         {
             haveTriggered = true;
             playAnimation = true;
@@ -52,7 +52,7 @@ public abstract class Trap : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.TryGetComponent(out Player player) && collision.GetType().ToString() == Tags.CAPSULECOLLIDER2D)
+        if (collision.TryGetComponent(out Player player) && collision.GetType().ToString() == Tags.BOXCOLLIDER2D)
         {
             playerInside = false;
         }
