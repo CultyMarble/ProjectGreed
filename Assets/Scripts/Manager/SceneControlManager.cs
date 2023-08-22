@@ -55,6 +55,7 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         yield return StartCoroutine(LoadingScreen(1.0f));
 
         Player.Instance.transform.position = spawnPosition;
+        player.SetActive(true);
         gameOverMenu.SetActive(false);
 
         EventManager.CallBeforeSceneUnloadEvent();
