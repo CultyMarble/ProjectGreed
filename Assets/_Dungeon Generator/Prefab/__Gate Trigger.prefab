@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 6912739987536384817}
   - component: {fileID: 1599189475652705515}
-  m_Layer: 0
+  - component: {fileID: 5029983572528879425}
+  m_Layer: 3
   m_Name: East Gate
-  m_TagString: Untagged
+  m_TagString: Collisions
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -84,6 +85,32 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!61 &5029983572528879425
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4628829824945007377}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.020369291}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 6}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 1
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 6.010855}
+  m_EdgeRadius: 0
 --- !u!1 &5758849717937450301
 GameObject:
   m_ObjectHideFlags: 0
@@ -166,7 +193,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.00000047683716, y: -0.028203964}
+  m_Offset: {x: 0.027973175, y: -0.032273293}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -177,7 +204,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 28.075546, y: 28.019135}
+  m_Size: {x: 27.99636, y: 27.911348}
   m_EdgeRadius: 0
 --- !u!114 &652434581073750935
 MonoBehaviour:
@@ -194,6 +221,7 @@ MonoBehaviour:
   playerInsideRoom: 0
   clearedRoom: 0
   disableGate: 0
+  roomVariants: {fileID: 0}
   gates: {fileID: 5758849717937450301}
 --- !u!1 &6506945865013676168
 GameObject:
@@ -205,9 +233,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4046143650484939465}
   - component: {fileID: 4716756639303519431}
-  m_Layer: 0
+  - component: {fileID: 7219254471097297450}
+  m_Layer: 3
   m_Name: West Gate
-  m_TagString: Untagged
+  m_TagString: Collisions
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -279,6 +308,32 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!61 &7219254471097297450
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6506945865013676168}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.02036953}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 6}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 1
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 6.0108557}
+  m_EdgeRadius: 0
 --- !u!1 &6829769716949678131
 GameObject:
   m_ObjectHideFlags: 0
@@ -289,9 +344,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1195033681840804918}
   - component: {fileID: 5730792793248592840}
-  m_Layer: 0
+  - component: {fileID: 4952005343139764132}
+  m_Layer: 3
   m_Name: North Gate
-  m_TagString: Untagged
+  m_TagString: Collisions
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -363,6 +419,32 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!61 &4952005343139764132
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6829769716949678131}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.020369053, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 6, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 1
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 6.0108557, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &7978080178599730094
 GameObject:
   m_ObjectHideFlags: 0
@@ -373,9 +455,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3648689456161604931}
   - component: {fileID: 5091001421025960453}
-  m_Layer: 0
+  - component: {fileID: 5684515231971137971}
+  m_Layer: 3
   m_Name: South Gate
-  m_TagString: Untagged
+  m_TagString: Collisions
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -447,3 +530,29 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!61 &5684515231971137971
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7978080178599730094}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.02036941, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 6, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 1
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 6.0108557, y: 1}
+  m_EdgeRadius: 0

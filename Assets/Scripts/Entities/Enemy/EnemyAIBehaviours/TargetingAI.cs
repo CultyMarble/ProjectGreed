@@ -4,13 +4,13 @@ public class TargetingAI : MonoBehaviour
 {
     [HideInInspector] public bool isAttacking;
 
-    [SerializeField] public Transform targetTransform;
-    public Vector3 targetPosition;
+    [SerializeField] public Transform currentDestination;
+    public Vector3 currentTarget;
 
     [SerializeField] private float searchRadius;
     [SerializeField] private float breakDistanceMin;
     [SerializeField] private float breakDistanceMax;
-
+    [SerializeField] private bool requireLineOfSight = false;
     [SerializeField] private bool keepDistance;
     [SerializeField] private bool patrolArea;
     [SerializeField] GameObject patrolTransforms;
@@ -21,11 +21,12 @@ public class TargetingAI : MonoBehaviour
     private float holdTimer = 0.5f;
     private float patrolTime = 3f;
     private float patrolTimeCounter;
+    private Vector3 lastKnownPosition;
 
     private void Start()
     {
-        targetPosition = transform.position;
-        targetTransform.position = transform.position;
+        currentTarget = transform.position;
+        currentDestination.position = transform.position;
     }
 
     //===========================================================================
@@ -55,7 +56,7 @@ public class TargetingAI : MonoBehaviour
             if (patrolTimeCounter <= 0.0f)
             {
                 int index = Random.Range(0, patrolTransforms.transform.childCount);
-                targetPosition = patrolTransforms.transform.GetChild(index).transform.position;
+                currentDestination.position = patrolTransforms.transform.GetChild(index).transform.position;
                 patrolTimeCounter = patrolTime;
             }
         }
@@ -72,47 +73,83 @@ public class TargetingAI : MonoBehaviour
         }
         else if(keepDistance && Mathf.Abs(targetDistance) < breakDistanceMax && Mathf.Abs(targetDistance) > breakDistanceMin)
         {
-            targetTransform.position = transform.position;
+            currentDestination.position = transform.position;
         }
         else if (keepDistance && Mathf.Abs(targetDistance) < breakDistanceMin)
         {
             Vector3 newPosition;
-            newPosition.x = targetPosition.x + (-targetDir.x * breakDistanceMin);
-            newPosition.y = targetPosition.y + (-targetDir.y * breakDistanceMin);
+            newPosition.x = currentTarget.x + (-targetDir.x * breakDistanceMin);
+            newPosition.y = currentTarget.y + (-targetDir.y * breakDistanceMin);
             newPosition.z = 0;
-            targetTransform.position = newPosition;
+            currentDestination.position = newPosition;
         }
         else
         {
-            targetTransform.position = targetPosition;
+            currentDestination.position = currentTarget;
         }
     }
 
     private void LookForTarget()
     {
-        ClearTarget();
         Collider2D[] collider2DArray = Physics2D.OverlapCircleAll(transform.position, searchRadius);
         foreach (Collider2D collider2D in collider2DArray)
         {
             if (collider2D.gameObject.CompareTag("Player"))
             {
-                targetPosition = collider2D.transform.position;
-                targetDistance = Vector2.Distance(targetPosition, transform.position);
-                targetDir = (targetPosition - GetComponent<Transform>().position).normalized;
-                
-                UpdateTargetTransform();
+                currentTarget = collider2D.transform.position;
+                targetDistance = Vector2.Distance(currentTarget, transform.position);
+                targetDir = (currentTarget - transform.position).normalized;
+                if (!requireLineOfSight)
+                {
+                    UpdateTargetTransform();
+                    break;
+                }
+                else if (CheckLineOfSight())
+                {
+                    UpdateTargetTransform();
+                    lastKnownPosition = currentTarget;
+                }
+                else if (lastKnownPosition != Vector3.zero)
+                {
+                    currentDestination.position = lastKnownPosition;
+                }
                 break;
             }
         }
     }
+    public bool CheckLineOfSight()
+    {
+        if (!requireLineOfSight)
+        {
+            return true;
+        }
+        RaycastHit2D hit;
+        LayerMask playerMask = LayerMask.GetMask("Player");
+        LayerMask collisionMask = LayerMask.GetMask("Obstacles");
+        LayerMask mask = playerMask | collisionMask;
+
+        hit = Physics2D.Raycast(transform.position, targetDir, searchRadius, mask, 0, 0);
+        
+        if(hit.collider == null)
+        {
+            return false;
+        }
+        Debug.DrawRay(transform.position, (targetDir * searchRadius) - (targetDir * Vector2.Distance(currentTarget, hit.collider.transform.position)), Color.red);
+        if (hit.collider.gameObject.CompareTag("Player"))
+        {
+            return true;
+        }
+        return false;
+    }
     public void ClearTarget()
     {
-        targetPosition = transform.position;
-        targetTransform.position = transform.position;
+        //currentTarget = transform.position;
+        currentDestination.position = transform.position;
+        lastKnownPosition = Vector3.zero;
     }
     public bool CheckNoTarget()
     {
-        if(targetPosition == transform.position)
+        if(currentDestination.position == transform.position)
         {
             return true;
         }
