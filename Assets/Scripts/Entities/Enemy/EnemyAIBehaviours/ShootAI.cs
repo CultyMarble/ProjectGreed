@@ -79,9 +79,9 @@ public class ShootAI : MonoBehaviour
 
     private void SpawnBullet()
     {
-        if (targetingAI.currentTargetTransform != null)
+        if (targetingAI.targetPosition != null)
         {
-            bulletDirection = (targetingAI.currentTargetTransform.position - transform.position).normalized;
+            bulletDirection = (targetingAI.targetPosition - transform.position).normalized;
             recordedBulletDirection = bulletDirection;
         }
         foreach (Transform projectile in enemyProjectilePool)
@@ -94,10 +94,5 @@ public class ShootAI : MonoBehaviour
                 break;
             }
         }
-        //Transform prefabBullet = Instantiate(pfEnemyBullet, transform);
-
-        //prefabBullet.GetComponent<EnemyProjectile>().SetMoveDirectionAndSpeed(recordedBulletDirection, bulletSpeed);
-
-        //Destroy(prefabBullet.gameObject, 1.5f);
     }
 }
