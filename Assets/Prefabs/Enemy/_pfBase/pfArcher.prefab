@@ -340,7 +340,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 409081922130142283}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.506, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -408,8 +408,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 1}
-  m_Size: {x: 1, y: 2}
+  m_Offset: {x: 0, y: 0.46090066}
+  m_Size: {x: 1, y: 1.9245703}
   m_Direction: 0
 --- !u!58 &4038241797528594043
 CircleCollider2D:
@@ -424,9 +424,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.25}
+  m_Offset: {x: 0, y: 0.0015262961}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.49999994
 --- !u!50 &4038241797528594044
 Rigidbody2D:
   serializedVersion: 4
@@ -488,11 +488,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isAttacking: 0
-  targetTransform: {fileID: 399951332217022172}
-  targetPosition: {x: 0, y: 0, z: 0}
+  currentDestination: {fileID: 399951332217022172}
+  currentTarget: {x: 0, y: 0, z: 0}
   searchRadius: 20
   breakDistanceMin: 6
   breakDistanceMax: 8
+  requireLineOfSight: 1
   keepDistance: 1
   patrolArea: 0
   patrolTransforms: {fileID: 0}
@@ -919,7 +920,7 @@ GameObject:
   m_Component:
   - component: {fileID: 399951332217022172}
   m_Layer: 7
-  m_Name: TargetTransform
+  m_Name: Destination
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -933,7 +934,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7883343058458621944}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.506, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -40,7 +40,7 @@ public class ChasingAI : MonoBehaviour
     //===========================================================================
     private void MoveTowardCurrentTarget()
     {
-        if (targetingAI.targetTransform == null)
+        if (targetingAI.currentDestination == null)
         {
             if (enemy_rb2D.velocity != Vector2.zero)
                 enemy_rb2D.velocity = Vector2.zero;
@@ -48,9 +48,9 @@ public class ChasingAI : MonoBehaviour
             return;
         }
 
-        movingDirection = (targetingAI.targetTransform.transform.position - transform.position).normalized;
+        movingDirection = (targetingAI.currentDestination.transform.position - transform.position).normalized;
 
-        if (Vector2.Distance(targetingAI.targetTransform.position, transform.position) <= distanceToKeep)
+        if (Vector2.Distance(targetingAI.currentDestination.position, transform.position) <= distanceToKeep)
             currentSpeed = 0;
         else
             currentSpeed = speed;

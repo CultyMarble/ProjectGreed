@@ -31,7 +31,7 @@ public class MeleeAI : MonoBehaviour
     {
         if (canMelee && !targetingAI.CheckNoTarget())
         {
-            if (Vector2.Distance(transform.position, targetingAI.targetTransform.position) <= activateDistance)
+            if (Vector2.Distance(transform.position, targetingAI.currentTarget) <= activateDistance)
             {
                 if (targetingAI.isAttacking != true)
                 {
@@ -58,7 +58,7 @@ public class MeleeAI : MonoBehaviour
 
     private Collider2D FindPlayer()
     {
-        if (targetingAI.targetTransform == null)
+        if (targetingAI.currentDestination == null)
             return null;
 
         //if (Vector2.Distance(transform.position, targetingAI.currentTargetTransform.position) <= activateDistance)
@@ -78,7 +78,7 @@ public class MeleeAI : MonoBehaviour
 
     public void DealDamage()
     {
-        if (targetingAI.targetTransform == null)
+        if (targetingAI.currentDestination == null)
             return;
 
         //if (Vector2.Distance(transform.position, targetingAI.currentTargetTransform.position) <= activateDistance)

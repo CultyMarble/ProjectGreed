@@ -66,7 +66,10 @@ public class ShootAI : MonoBehaviour
         if (shootDelayIntervalTimer <= 0.0f && !targetingAI.CheckNoTarget())
         {
             shootDelayIntervalTimer += shootDelayInterval;
-
+            if (!targetingAI.CheckLineOfSight())
+            {
+                return;
+            }
             SpawnBullet();
 
             --shootTimeCounter;
@@ -79,9 +82,9 @@ public class ShootAI : MonoBehaviour
 
     private void SpawnBullet()
     {
-        if (targetingAI.targetPosition != null)
+        if (targetingAI.currentTarget != null)
         {
-            bulletDirection = (targetingAI.targetPosition - transform.position).normalized;
+            bulletDirection = (targetingAI.currentTarget - transform.position).normalized;
             recordedBulletDirection = bulletDirection;
         }
         foreach (Transform projectile in enemyProjectilePool)
