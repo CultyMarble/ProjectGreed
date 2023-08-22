@@ -36,9 +36,9 @@ public class SlamAI : MonoBehaviour
 
     private void Update()
     {
-        if (canSlam && targetingAI.currentTargetTransform != null)
+        if (canSlam && targetingAI.targetTransform != null)
         {
-            if (Vector2.Distance(transform.position, targetingAI.currentTargetTransform.position) <= activateDistance)
+            if (Vector2.Distance(transform.position, targetingAI.targetTransform.position) <= activateDistance)
             {
                 if (targetingAI.isAttacking != true)
                 {
