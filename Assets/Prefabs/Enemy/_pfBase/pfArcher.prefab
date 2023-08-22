@@ -491,7 +491,7 @@ MonoBehaviour:
   targetTransform: {fileID: 399951332217022172}
   targetPosition: {x: 0, y: 0, z: 0}
   searchRadius: 20
-  breakDistanceMin: 7
+  breakDistanceMin: 6
   breakDistanceMax: 8
   keepDistance: 1
   patrolArea: 0

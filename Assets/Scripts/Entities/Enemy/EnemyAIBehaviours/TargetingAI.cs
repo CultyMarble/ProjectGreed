@@ -77,8 +77,8 @@ public class TargetingAI : MonoBehaviour
         else if (keepDistance && Mathf.Abs(targetDistance) < breakDistanceMin)
         {
             Vector3 newPosition;
-            newPosition.x = targetPosition.x + (-targetDir.x * 10);
-            newPosition.y = targetPosition.y + (-targetDir.y * 10);
+            newPosition.x = targetPosition.x + (-targetDir.x * breakDistanceMin);
+            newPosition.y = targetPosition.y + (-targetDir.y * breakDistanceMin);
             newPosition.z = 0;
             targetTransform.position = newPosition;
         }
