@@ -483,7 +483,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1834127665
-  m_SortingLayer: 6
+  m_SortingLayer: 8
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -2326,7 +2326,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7893,10 +7893,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db72d1d72515f5f42836ac068a7a4127, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueEntries: []
-  quickText: 
-  autoActive: 1
-  dialogueIndicator: {fileID: 0}
+  activateType: 0
+  haveActivated: {fileID: 11400000, guid: 064b4593e65fa84409f5a53b55c953d2, type: 2}
+  dialogueEntryArray:
+  - {fileID: 11400000, guid: 64523b3707502f34ea2269220321b7c1, type: 2}
 --- !u!1001 &4746090273248820426
 PrefabInstance:
   m_ObjectHideFlags: 0

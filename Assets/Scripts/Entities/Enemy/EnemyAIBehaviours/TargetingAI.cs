@@ -19,13 +19,13 @@ public class TargetingAI : MonoBehaviour
     private Vector3 targetDir;
     private bool holdMovement;
     private float holdTimer = 0.5f;
-    private float patrolTime = 3f;
+    private readonly float patrolTime = 3f;
     private float patrolTimeCounter;
     private Vector3 lastKnownPosition;
 
     private void Start()
     {
-        currentTarget = transform.position;
+        currentTarget = Vector3.zero;
         currentDestination.position = transform.position;
         lastKnownPosition = transform.position;
     }
@@ -53,13 +53,8 @@ public class TargetingAI : MonoBehaviour
     {
         if (patrolArea)
         {
-            patrolTimeCounter -= Time.deltaTime;
-            if (patrolTimeCounter <= 0.0f)
-            {
-                int index = Random.Range(0, patrolTransforms.transform.childCount);
-                currentDestination.position = patrolTransforms.transform.GetChild(index).transform.position;
-                patrolTimeCounter = patrolTime;
-            }
+            LookForTarget();
+            
         }
         else
         {
@@ -68,7 +63,7 @@ public class TargetingAI : MonoBehaviour
     }
     private void UpdateTargetTransform()
     {
-        if (targetDistance >= searchRadius)
+        if (!patrolArea && targetDistance >= searchRadius)
         {
             ClearTarget();
         }
@@ -83,6 +78,16 @@ public class TargetingAI : MonoBehaviour
             newPosition.y = currentTarget.y + (-targetDir.y * breakDistanceMin);
             newPosition.z = 0;
             currentDestination.position = newPosition;
+        }
+        else if (patrolArea)
+        {
+            patrolTimeCounter -= Time.deltaTime;
+            if (patrolTimeCounter <= 0.0f)
+            {
+                int index = Random.Range(0, patrolTransforms.transform.childCount);
+                currentDestination.position = patrolTransforms.transform.GetChild(index).transform.position;
+                patrolTimeCounter = patrolTime;
+            }
         }
         else
         {
@@ -158,6 +163,10 @@ public class TargetingAI : MonoBehaviour
         {
             return false;
         }
+    }
+    public void TogglePatrol(bool toggle)
+    {
+        patrolArea = toggle;
     }
     public void HoldMovement()
     {

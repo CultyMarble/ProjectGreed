@@ -47,36 +47,17 @@ public class MeleeAI : MonoBehaviour
             if (coolDownTimeCounter <= 0.0f)
             {
                 canMelee = true;
+                coolDownTimeCounter = 0.0f;
             }
         }
     }
 
     private void Melee()
     {
-        animator.SetTrigger("isMeleeing");
+        animator.SetBool("isMeleeing",true);
     }
 
-    private Collider2D FindPlayer()
-    {
-        if (targetingAI.currentDestination == null)
-            return null;
-
-        //if (Vector2.Distance(transform.position, targetingAI.currentTargetTransform.position) <= activateDistance)
-
-        Collider2D[] collider2DArray = Physics2D.OverlapCircleAll(transform.position, activateDistance);
-        foreach (Collider2D collider2D in collider2DArray)
-        {
-            if (collider2D.GetComponent<Player>() != null)
-            {
-                collider2D.GetComponent<PlayerHeart>().UpdateCurrentHeart(-damage);
-                return collider2D;
-            }
-        }
-        return null;
-
-    }
-
-    public void DealDamage()
+    public void DealMeleeDamage()
     {
         if (targetingAI.currentDestination == null)
             return;
@@ -93,5 +74,7 @@ public class MeleeAI : MonoBehaviour
             }
         }
         targetingAI.isAttacking = false;
+        animator.SetBool("isMeleeing", false);
+
     }
 }

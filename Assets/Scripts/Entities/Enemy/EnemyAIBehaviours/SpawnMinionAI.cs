@@ -10,14 +10,12 @@ public class SpawnMinionAI : MonoBehaviour
     [SerializeField] private float minSpawnRadius = 0.0f;
     [SerializeField] private float maxSpawnRadius = 5.0f;
 
+    [SerializeField] private bool noEnemiesNoPatrol;
     [SerializeField] private bool spawnWhenTargetIsValid;
-
     [SerializeField] private bool spawnAtInterval;
     [SerializeField] private float spawnIntervalTime;
-
     [SerializeField] private bool spawnAtCertainHPThreshold;
     [SerializeField] private List<float> hpThresholdRatio;
-
     [SerializeField] private bool spawnWhenAllMinionsAreKilled;
 
     private Transform minionPool;
@@ -49,6 +47,11 @@ public class SpawnMinionAI : MonoBehaviour
         if (spawnWhenTargetIsValid == true && targetingAI.CheckNoTarget())
             return;
 
+        if(noEnemiesNoPatrol && CheckNoMinions())
+        {
+            targetingAI.TogglePatrol(false);
+        }
+
         if (spawnWhenAllMinionsAreKilled)
             CheckNoMinions(); 
 
@@ -67,6 +70,7 @@ public class SpawnMinionAI : MonoBehaviour
         if (canSpawn)
         {
             SpawnMinion(spawnAmount);
+            targetingAI.TogglePatrol(true);
         }
     }
 
@@ -114,7 +118,7 @@ public class SpawnMinionAI : MonoBehaviour
             }
         }
     }
-    private void CheckNoMinions()
+    private bool CheckNoMinions()
     {
         int minionCount = 0;
         foreach (Transform minion in minionPool)
@@ -127,10 +131,12 @@ public class SpawnMinionAI : MonoBehaviour
         if (minionCount > 0)
         {
             noMinions = false;
+            return false;
         }
         else
         {
             noMinions = true;
+            return true;
         }
     }
 }
