@@ -46,7 +46,7 @@ public class RoomManager : MonoBehaviour
     [Space]
 
     [Header("Special Room")]
-    public GameObject treasure;
+    public GameObject[] treasureItems;
 
     [Space]
 
@@ -232,12 +232,13 @@ public class RoomManager : MonoBehaviour
         if (currentRooms.Count >= 6 && Random.value < treasureRoomChance || currentRooms.Count >= 10) // 6 Rooms or less (Gives a chance of spawn) | 6 Rooms or more (100%)
         {
             GameObject newTreasure;
-            int randomIndex = Random.Range(0, roomsList.Count);
-            roomsList[randomIndex].currentRoomType = RoomType.treasure;
-            newTreasure = Instantiate(treasure, roomsList[randomIndex].transform.position, Quaternion.identity);
-            newTreasure.transform.parent = roomsList[randomIndex].transform;
+            int randomItemIndex = Random.Range(0, treasureItems.Length);  
+            int randomRoomIndex = Random.Range(0, roomsList.Count);
+            roomsList[randomRoomIndex].currentRoomType = RoomType.treasure;
+            newTreasure = Instantiate(treasureItems[randomItemIndex], roomsList[randomRoomIndex].transform.position, Quaternion.identity);
+            newTreasure.transform.parent = roomsList[randomRoomIndex].transform;
 
-            roomsList.RemoveAt(randomIndex);
+            roomsList.RemoveAt(randomRoomIndex);
         }
 
     }

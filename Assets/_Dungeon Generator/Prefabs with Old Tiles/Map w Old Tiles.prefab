@@ -79,7 +79,12 @@ MonoBehaviour:
   shopSpawned: 0
   treasureRoomChance: 1
   abandonedShopChance: 0.1
-  treasure: {fileID: 4422130485644021212, guid: 933f06a9b51104540a8ddee8a72bc6ae, type: 3}
+  treasureItems:
+  - {fileID: 4446321246598847940, guid: d974aab052fa6db499b30ac557f012fe, type: 3}
+  - {fileID: 4536764660341095808, guid: ee4dfc2ed2ae5ef4e9e9ad90e01f7539, type: 3}
+  - {fileID: 468550890004570437, guid: 6c16ad1641df33041b6bbd485d64debd, type: 3}
+  - {fileID: 7128766739216337673, guid: bedf7cd3e1e901b4990168bcdf126b0d, type: 3}
+  - {fileID: 8864901915701653083, guid: 90767ee69fb143d4dafbee60cdace558, type: 3}
   key: {fileID: 4422130485644021212, guid: 3e337ec34c699ac44b0da2191163d8c0, type: 3}
   boss: {fileID: 4422130485644021212, guid: bc67c52f8c921bc438efeab25f755a2d, type: 3}
   shop: {fileID: 8439679027966053120, guid: 174ff5aef0fe7df41b304cd6624c3040, type: 3}
