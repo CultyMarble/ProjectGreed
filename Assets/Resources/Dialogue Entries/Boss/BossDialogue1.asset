@@ -10,11 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4ff3c4f7f7d428845a057991df0c0973, type: 3}
-  m_Name: ShopkeeperDialogue
+  m_Name: BossDialogue1
   m_EditorClassIdentifier: 
-  hasBeenUsed: 1
+  hasBeenUsed: 0
   dialogueLines:
-  - 'Shopkeeper: Hello, welcome to my shop!'
-  - 'You: Oh.. Hello there..'
-  - Please take a look! My items are best prrice
-  - 'You: Sure.. thanks.'
+  - 'GraveDigger: What?! Who hath entered my domain?'
+  - 'You: Uhh... hey'
+  - 'GraveDigger: You will regret coming here! Face my minions!'
