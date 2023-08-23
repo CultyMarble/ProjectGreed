@@ -101,7 +101,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemAndDropChances:
   - item: {fileID: 7565985644124066583, guid: e389fcd3ca0d2c246825ae68b52252cf, type: 3}
-    chance: 50
+    chance: 25
+  - item: {fileID: 4446321246598847943, guid: d974aab052fa6db499b30ac557f012fe, type: 3}
+    chance: 10
+  - item: {fileID: 4536764660341095812, guid: ee4dfc2ed2ae5ef4e9e9ad90e01f7539, type: 3}
+    chance: 10
+  - item: {fileID: 468550890004570433, guid: 6c16ad1641df33041b6bbd485d64debd, type: 3}
+    chance: 10
+  - item: {fileID: 7128766739216337674, guid: bedf7cd3e1e901b4990168bcdf126b0d, type: 3}
+    chance: 10
+  - item: {fileID: 8864901915701653087, guid: 90767ee69fb143d4dafbee60cdace558, type: 3}
+    chance: 10
   spawnCurrency: {fileID: 6063696349042203140}
 --- !u!114 &6063696349042203140
 MonoBehaviour:

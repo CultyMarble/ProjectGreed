@@ -27,6 +27,10 @@ public class ShopKeeper : MonoBehaviour
             }
         }
     }
+    private void Awake()
+    {
+        GenerateItemForSale();
+    }
 
     //===========================================================================
     public void GenerateItemForSale()

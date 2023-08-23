@@ -38,24 +38,23 @@ public class BreakableItem : MonoBehaviour
     //===========================================================================
     private void SpawnItem()
     {
+        int totalItems = itemAndDropChances.Length;
+        bool spawned = false;
         var _value = Random.Range(0, 2);
         if (_value == 1)
         {
-            foreach (var item in itemAndDropChances)
+            for(int i = 0; i < totalItems; i++ )
             {
-                if ((Random.value * 100) < item.Chance)
+                int randomIndex = Random.Range(0, totalItems);
+                if ((Random.value * 100) < itemAndDropChances[randomIndex].Chance)
                 {
-                    Instantiate(item.Item).position = transform.position;
-                    break;
-                }
-                else
-                {
-                    spawnCurrency.SpewOutCurrency();
+                    Instantiate(itemAndDropChances[randomIndex].Item).position = transform.position;
+                    spawned = true;
                     break;
                 }
             }
         }
-        else
+        if(_value == 0 || !spawned)
         {
             spawnCurrency.SpewOutCurrency();
         }

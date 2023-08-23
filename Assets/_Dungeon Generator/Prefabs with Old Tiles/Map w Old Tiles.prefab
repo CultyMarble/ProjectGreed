@@ -82,7 +82,7 @@ MonoBehaviour:
   treasure: {fileID: 4422130485644021212, guid: 933f06a9b51104540a8ddee8a72bc6ae, type: 3}
   key: {fileID: 4422130485644021212, guid: 3e337ec34c699ac44b0da2191163d8c0, type: 3}
   boss: {fileID: 4422130485644021212, guid: bc67c52f8c921bc438efeab25f755a2d, type: 3}
-  shop: {fileID: 4422130485644021212, guid: b98d4cd8232524f4c904daf97c2e9436, type: 3}
+  shop: {fileID: 8439679027966053120, guid: 174ff5aef0fe7df41b304cd6624c3040, type: 3}
   abandonedShop: {fileID: 4422130485644021212, guid: 5e265e2fd525acc4ca57c09e913bafb4, type: 3}
 --- !u!1 &4317000767536815822
 GameObject:
