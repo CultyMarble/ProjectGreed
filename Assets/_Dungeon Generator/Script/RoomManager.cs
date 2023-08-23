@@ -35,9 +35,9 @@ public class RoomManager : MonoBehaviour
     [Header("Room Delay")]
     public float delaySpawnRoomType = 0.75F;
     private bool delaySpawnRoomCheck = false;
-    [HideInInspector] public float roomCheckDelay = 0.3f;
-    [HideInInspector] public float roomCheckTimer;
-    private bool roomChecked = false;
+    public bool bossSpawned = false;
+    public bool shopSpawned = false;
+
 
     [Header("Room Spawn Chance")]
     public float treasureRoomChance = 1.0F;
@@ -62,7 +62,6 @@ public class RoomManager : MonoBehaviour
     private void Start()
     {
         LoadScene();
-        //aStar.SetActive(true);
         pathfinder = aStar.GetComponent<AstarPath>();
     }
 
@@ -75,13 +74,18 @@ public class RoomManager : MonoBehaviour
         }
 
         SpawnRoomType();
-        if (!roomChecked && roomCheckTimer <= 0)
+        if (bossSpawned && shopSpawned)
         {
-            CheckRooms();
-        }
-        else
-        {
-            roomCheckTimer -= Time.deltaTime;
+            //if (currentRooms.Count < 20)
+            //{
+            //    SceneControlManager.Instance.LoadScene("DemoSceneDungeon", Vector3.zero);
+            //}
+            //else
+            //{
+            //    aStar.SetActive(true);
+            //}
+            aStar.SetActive(true);
+
         }
     }
 
@@ -236,25 +240,6 @@ public class RoomManager : MonoBehaviour
             roomsList.RemoveAt(randomIndex);
         }
 
-        // <----------------------------------------------------------------------------------------------------------------------------------------------------------------------- FOR FUTRUE GARY
     }
 
-    public void CheckRooms()
-    {
-        GameObject[] rooms = GameObject.FindGameObjectsWithTag("RoomSpawnPoint");
-        foreach(GameObject room in rooms)
-        {
-            if (!room.GetComponent<RoomSpawner>().spawned)
-            {
-                return;
-            }
-            else
-            {
-                //aStar.SetActive(true);
-                var graphToScan = AstarPath.active.data.gridGraph;
-                AstarPath.active.Scan(graphToScan);
-                roomChecked = true;
-            }
-        }
-    }
 }

@@ -77,7 +77,6 @@ public class RoomController : MonoBehaviour
 
         int random = Random.Range(0, roomType.Length);
         roomType[random].SetActive(true);
-        roomManager.roomCheckTimer = roomManager.roomCheckDelay;
     }
 
     public void SetBossActive()
@@ -87,7 +86,7 @@ public class RoomController : MonoBehaviour
             SetAllRoomActiveFalse();
             if (shopRoom != null) shopRoom.SetActive(true);
             GetComponentInChildren<GateManager>().disableGate = true;
-            roomManager.roomCheckTimer = roomManager.roomCheckDelay;
+            roomManager.bossSpawned = true;
         }
     }
 
@@ -98,7 +97,8 @@ public class RoomController : MonoBehaviour
             SetAllRoomActiveFalse();
             if (shopRoom != null) shopRoom.SetActive(true);
             GetComponentInChildren<GateManager>().disableGate = true;
-            roomManager.roomCheckTimer = roomManager.roomCheckDelay;
+            roomManager.shopSpawned = true;
+
         }
     }
 
