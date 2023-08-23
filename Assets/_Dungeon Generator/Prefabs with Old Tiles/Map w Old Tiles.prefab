@@ -75,8 +75,8 @@ MonoBehaviour:
   currentRooms: []
   currentDeadEndRooms: []
   delaySpawnRoomType: 0.75
-  roomCheckDelay: 0.5
-  roomCheckTimer: 0
+  bossSpawned: 0
+  shopSpawned: 0
   treasureRoomChance: 1
   abandonedShopChance: 0.1
   treasure: {fileID: 4422130485644021212, guid: 933f06a9b51104540a8ddee8a72bc6ae, type: 3}
@@ -168,7 +168,7 @@ MonoBehaviour:
     file_cachedStartup: {fileID: 0}
     data_cachedStartup: 
     cacheStartup: 0
-  showNavGraphs: 1
+  showNavGraphs: 0
   showUnwalkableNodes: 1
   debugMode: 0
   debugFloor: 0
