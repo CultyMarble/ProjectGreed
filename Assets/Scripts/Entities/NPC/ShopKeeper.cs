@@ -45,7 +45,9 @@ public class ShopKeeper : MonoBehaviour
                 }
             }
 
-            Instantiate(itemList[randomItemIndex], itemPosition).transform.position = itemPosition.transform.position;
+            Transform _item = Instantiate(itemList[randomItemIndex], itemPosition);
+            _item.GetComponent<ItemCost>().itemCost = 299;
+            _item.transform.position = itemPosition.transform.position;
         }
     }
 
