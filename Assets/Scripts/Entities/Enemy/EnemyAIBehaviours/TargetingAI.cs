@@ -5,7 +5,7 @@ public class TargetingAI : MonoBehaviour
     [HideInInspector] public bool isAttacking;
 
     [SerializeField] public Transform currentDestination;
-    public Vector3 currentTarget;
+    [HideInInspector] public Vector3 currentTarget;
 
     [SerializeField] private float searchRadius;
     [SerializeField] private float breakDistanceMin;
@@ -27,6 +27,7 @@ public class TargetingAI : MonoBehaviour
     {
         currentTarget = transform.position;
         currentDestination.position = transform.position;
+        lastKnownPosition = transform.position;
     }
 
     //===========================================================================

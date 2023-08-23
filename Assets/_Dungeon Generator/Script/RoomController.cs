@@ -86,6 +86,7 @@ public class RoomController : MonoBehaviour
             SetAllRoomActiveFalse();
             if (shopRoom != null) shopRoom.SetActive(true);
             GetComponentInChildren<GateManager>().disableGate = true;
+            roomManager.bossSpawned = true;
         }
     }
 
@@ -96,6 +97,8 @@ public class RoomController : MonoBehaviour
             SetAllRoomActiveFalse();
             if (shopRoom != null) shopRoom.SetActive(true);
             GetComponentInChildren<GateManager>().disableGate = true;
+            roomManager.shopSpawned = true;
+
         }
     }
 

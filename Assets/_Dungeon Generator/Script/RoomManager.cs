@@ -9,6 +9,8 @@ public class RoomManager : MonoBehaviour
     public static event UnityAction OnBossChange;
     public static event UnityAction OnShopChange;
 
+    [SerializeField] private GameObject aStar;
+
     [SerializeField] private GameObject entryRoom;
     [SerializeField] public int minRooms;
     [SerializeField] public int maxRooms;
@@ -33,6 +35,9 @@ public class RoomManager : MonoBehaviour
     [Header("Room Delay")]
     public float delaySpawnRoomType = 0.75F;
     private bool delaySpawnRoomCheck = false;
+    public bool bossSpawned = false;
+    public bool shopSpawned = false;
+
 
     [Header("Room Spawn Chance")]
     public float treasureRoomChance = 1.0F;
@@ -51,9 +56,13 @@ public class RoomManager : MonoBehaviour
     public GameObject shop;
     public GameObject abandonedShop;
 
+
+    AstarPath pathfinder;
+
     private void Start()
     {
         LoadScene();
+        pathfinder = aStar.GetComponent<AstarPath>();
     }
 
 
@@ -65,6 +74,19 @@ public class RoomManager : MonoBehaviour
         }
 
         SpawnRoomType();
+        if (bossSpawned && shopSpawned)
+        {
+            //if (currentRooms.Count < 20)
+            //{
+            //    SceneControlManager.Instance.LoadScene("DemoSceneDungeon", Vector3.zero);
+            //}
+            //else
+            //{
+            //    aStar.SetActive(true);
+            //}
+            aStar.SetActive(true);
+
+        }
     }
 
     private void LoadScene()
@@ -97,6 +119,7 @@ public class RoomManager : MonoBehaviour
         {
             delaySpawnRoomType -= Time.deltaTime;
         }
+        
     }
 
     private void SetBossRoom() // LOOPS UNTIL FIND THE FIRST NON NULL ROOM
@@ -217,7 +240,6 @@ public class RoomManager : MonoBehaviour
             roomsList.RemoveAt(randomIndex);
         }
 
-        // <----------------------------------------------------------------------------------------------------------------------------------------------------------------------- FOR FUTRUE GARY
     }
 
 }

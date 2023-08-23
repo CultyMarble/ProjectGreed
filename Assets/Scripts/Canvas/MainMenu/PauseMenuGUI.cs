@@ -16,7 +16,7 @@ public class PauseMenuGUI : MonoBehaviour
     private void OnEnable()
     {
         // Pause Menu
-        pm_AbandonRunButton.onClick.AddListener(() => { });
+        pm_AbandonRunButton.onClick.AddListener(() => SceneControlManager.Instance.Respawn());
         pm_MainMenuButton.onClick.AddListener(() => SceneControlManager.Instance.BackToMainMenuWrapper());
     }
 

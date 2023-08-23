@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6870098197997773216}
   - component: {fileID: -508059311970561785}
   - component: {fileID: 3187642801048505077}
-  - component: {fileID: 597613176114608416}
+  - component: {fileID: 2686651014324607960}
   m_Layer: 6
   m_Name: pfBasicAbilityProjectile
   m_TagString: Untagged
@@ -137,7 +137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52db8f93dd065de498d670bc7ae5d110, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!95 &597613176114608416
+--- !u!95 &2686651014324607960
 Animator:
   serializedVersion: 4
   m_ObjectHideFlags: 0
