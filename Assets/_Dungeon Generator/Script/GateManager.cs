@@ -27,16 +27,6 @@ public class GateManager : MonoBehaviour
 
     }
 
-    private void OnEnable()
-    {
-        RoomManager.OnBossChange += RoomBossCheck;
-    }
-
-    private void OnDisable()
-    {
-        RoomManager.OnBossChange += RoomBossCheck;
-    }
-
     private void ActiveGates(bool active)
     {
          gates.SetActive(active);

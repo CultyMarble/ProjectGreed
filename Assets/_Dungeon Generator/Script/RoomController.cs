@@ -38,19 +38,6 @@ public class RoomController : MonoBehaviour
     [Header("Special Rooms")]
     [SerializeField] private GameObject shopRoom;
 
-
-    //private void OnEnable()
-    //{
-    //    RoomManager.OnBossChange += SetBossActive;
-    //    RoomManager.OnShopChange += SetShopActive;
-    //}
-
-    //private void OnDisable()
-    //{
-    //    RoomManager.OnBossChange -= SetBossActive;
-    //    RoomManager.OnShopChange -= SetShopActive;
-    //}
-
     private void Awake()
     {
         roomManager = FindObjectOfType<RoomManager>();
@@ -63,6 +50,7 @@ public class RoomController : MonoBehaviour
 
         SetRandomRoomType();
     }
+
     private void SetAllRoomActiveFalse() // TURN ALL ROOMS FALSE
     {
         foreach (var room in roomType)
@@ -101,13 +89,4 @@ public class RoomController : MonoBehaviour
 
         }
     }
-
-    // <--
-
-
-
-
-
-
-
 }

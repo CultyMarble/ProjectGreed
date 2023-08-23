@@ -6,9 +6,6 @@ using UnityEngine.Events;
 
 public class RoomManager : MonoBehaviour
 {
-    public static event UnityAction OnBossChange;
-    public static event UnityAction OnShopChange;
-
     [SerializeField] private GameObject aStar;
 
     [SerializeField] private GameObject entryRoom;
@@ -38,7 +35,6 @@ public class RoomManager : MonoBehaviour
     public bool bossSpawned = false;
     public bool shopSpawned = false;
 
-
     [Header("Room Spawn Chance")]
     public float treasureRoomChance = 1.0F;
     public float abandonedShopChance = 0.1F;
@@ -56,16 +52,10 @@ public class RoomManager : MonoBehaviour
     public GameObject shop;
     public GameObject abandonedShop;
 
-
-    AstarPath pathfinder;
-
     private void Start()
     {
         LoadScene();
-        pathfinder = aStar.GetComponent<AstarPath>();
     }
-
-
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.R))
@@ -85,7 +75,6 @@ public class RoomManager : MonoBehaviour
             //    aStar.SetActive(true);
             //}
             aStar.SetActive(true);
-
         }
     }
 
@@ -119,9 +108,7 @@ public class RoomManager : MonoBehaviour
         {
             delaySpawnRoomType -= Time.deltaTime;
         }
-        
     }
-
     private void SetBossRoom() // LOOPS UNTIL FIND THE FIRST NON NULL ROOM
     {
         GameObject newBoss;
@@ -138,6 +125,7 @@ public class RoomManager : MonoBehaviour
             }
         }
     }
+
     private void SetShopRoom()
     {
         GameObject newShop;
@@ -190,30 +178,6 @@ public class RoomManager : MonoBehaviour
         //    Instantiate(key, currentRooms[randomIndex].transform.position, Quaternion.identity);
         //    Debug.LogError("THERE IS NO KEY IN THE DUNGEON!");
         //}
-
-        // SPAWN SHOP ROOM
-        //if (roomsList.Count > 0)
-        //{
-        //    GameObject newShop;
-        //    int randomIndex = Random.Range(0, roomsList.Count);
-        //    RoomType roomType = Random.value < abandonShopChance ? RoomType.abandonShop : RoomType.shop;
-
-        //    roomsList[randomIndex].currentRoomType = roomType;
-
-        //    if (roomType == RoomType.shop)
-        //    {
-        //        newShop = Instantiate(shop, roomsList[randomIndex].transform.position, Quaternion.identity);
-        //        newShop.transform.parent = roomsList[randomIndex].transform;
-        //    }
-        //    else if (roomType == RoomType.abandonShop)
-        //    {
-        //        newShop = Instantiate(abandonShop, roomsList[randomIndex].transform.position, Quaternion.identity);
-        //        newShop.transform.parent = roomsList[randomIndex].transform;
-        //    }
-
-        //    roomsList.RemoveAt(randomIndex);
-        //    OnShopChange?.Invoke();
-        //}
     }
 
     private void SetNormalRoomType()
@@ -242,5 +206,4 @@ public class RoomManager : MonoBehaviour
         }
 
     }
-
 }
