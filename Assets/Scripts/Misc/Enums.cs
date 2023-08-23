@@ -26,6 +26,8 @@ public enum SceneName
     MainMenu,
     DemoSceneHub,
     DemoSceneDungeon,
+    DemoSceneBossRoom1,
+    DemoSceneBossRoom2,
 }
 
 public enum GameState

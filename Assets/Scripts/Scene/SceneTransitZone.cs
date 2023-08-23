@@ -24,7 +24,7 @@ public class SceneTransitZone : MonoBehaviour
                 }
 
                 Debug.Log(spawnLocation.position);
-                SceneControlManager.Instance.LoadScene(sceneNameGoTo.ToString(), spawnLocation.position);
+                SceneControlManager.Instance.LoadScene(sceneNameGoTo.ToString(), Vector3.zero);
             }
         }
     }
