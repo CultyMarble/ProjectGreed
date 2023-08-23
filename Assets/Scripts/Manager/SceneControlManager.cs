@@ -28,6 +28,9 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
     private bool isLoadingScreenActive = default;
     public bool IsLoadingScreenActive => isLoadingScreenActive;
 
+    private bool isLoadingScene = default;
+    public bool IsLoadingScene => isLoadingScene;
+
     public GameState CurrentGameState = default;
 
     //===========================================================================
@@ -67,6 +70,8 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         yield return new WaitForSecondsRealtime(1.0f);
         yield return StartCoroutine(LoadingScreen(0.0f));
         EventManager.CallAfterSceneLoadedLoadingScreenEvent();
+
+        isLoadingScene = false;
     }
 
     //===========================================================================
@@ -165,6 +170,7 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
     {
         if (isLoadingScreenActive == false)
         {
+            isLoadingScene = true;
             StartCoroutine(UnloadAndSwitchScene(sceneName, spawnPosition));
 
             if (sceneName == SceneName.DemoSceneDungeon.ToString())

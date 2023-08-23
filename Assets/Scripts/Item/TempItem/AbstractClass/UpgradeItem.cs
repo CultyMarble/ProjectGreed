@@ -12,6 +12,10 @@ public abstract class UpgradeItem : MonoBehaviour
     {
         if (collision.CompareTag("Player") && collision.GetType().ToString() == Tags.BOXCOLLIDER2D)
         {
+            RunInfoController.Instance.SetItemInfoPanelActive(true);
+            RunInfoController.Instance.SetItemNameText(itemName);
+            RunInfoController.Instance.SetItemDescriptionText(itemDescription);
+
             Player.Instance.SetInteractPromtTextActive(true);
             canPickedUp = true;
         }
@@ -21,6 +25,10 @@ public abstract class UpgradeItem : MonoBehaviour
     {
         if (collision.CompareTag("Player") && collision.GetType().ToString() == Tags.BOXCOLLIDER2D)
         {
+            RunInfoController.Instance.SetItemNameText("");
+            RunInfoController.Instance.SetItemDescriptionText("");
+            RunInfoController.Instance.SetItemInfoPanelActive(false);
+
             Player.Instance.SetInteractPromtTextActive(false);
             canPickedUp = false;
         }

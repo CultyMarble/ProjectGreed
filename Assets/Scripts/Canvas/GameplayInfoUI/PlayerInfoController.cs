@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class GameplayInfoController : SingletonMonobehaviour<GameplayInfoController>
+public class PlayerInfoController : SingletonMonobehaviour<PlayerInfoController>
 {
     [SerializeField] private PlayerHeart playerHeartManager;
 

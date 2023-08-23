@@ -23,7 +23,7 @@ public class PlayerCurrencies : SingletonMonobehaviour<PlayerCurrencies>
         tempCurrencyAmount += amount;
         tempCurrencyAmount = Mathf.Clamp(tempCurrencyAmount, 0, int.MaxValue);
 
-        GameplayInfoController.Instance.DisplayPlayerCurrency.UpdateTempCurrencyText(tempCurrencyAmount);
+        PlayerInfoController.Instance.DisplayPlayerCurrency.UpdateTempCurrencyText(tempCurrencyAmount);
     }
 
     public void UpdatePermCurrencyAmount(int amount = 0)
@@ -31,6 +31,6 @@ public class PlayerCurrencies : SingletonMonobehaviour<PlayerCurrencies>
         permCurrencyAmount += amount;
         permCurrencyAmount = Mathf.Clamp(permCurrencyAmount, 0, int.MaxValue);
 
-        GameplayInfoController.Instance.DisplayPlayerCurrency.UpdatePermCurrencyText(permCurrencyAmount);
+        PlayerInfoController.Instance.DisplayPlayerCurrency.UpdatePermCurrencyText(permCurrencyAmount);
     }
 }

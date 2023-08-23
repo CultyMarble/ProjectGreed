@@ -40,6 +40,9 @@ public class DialogueActivator : MonoBehaviour
     //===========================================================================
     private void Update()
     {
+        if (SceneControlManager.Instance.IsLoadingScene == true)
+            return;
+
         if (canActivateDialogBox == false)
             return;
 
