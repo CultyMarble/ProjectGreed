@@ -1,15 +1,16 @@
 using UnityEngine;
 
-public abstract class TempItem : MonoBehaviour
+public abstract class UpgradeItem : MonoBehaviour
 {
     [SerializeField] private string itemName;
+    [SerializeField] private string itemDescription;
 
     private bool canPickedUp;
 
     //===========================================================================
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player") && collision.GetType().ToString() == Tags.BOXCOLLIDER2D)
         {
             Player.Instance.SetInteractPromtTextActive(true);
             canPickedUp = true;
@@ -18,7 +19,7 @@ public abstract class TempItem : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player") && collision.GetType().ToString() == Tags.BOXCOLLIDER2D)
         {
             Player.Instance.SetInteractPromtTextActive(false);
             canPickedUp = false;
@@ -56,9 +57,6 @@ public abstract class TempItem : MonoBehaviour
         if (PlayerCurrencies.Instance.TempCurrencyAmount >= GetComponent<ItemCost>().itemCost)
         {
             PlayerCurrencies.Instance.UpdateTempCurrencyAmount(-(GetComponent<ItemCost>().itemCost));
-
-            transform.parent.GetComponentInParent<ShopKeeper>().SetItemPurchase(transform.parent.GetSiblingIndex());
-
             return true;
         }
 
@@ -67,4 +65,5 @@ public abstract class TempItem : MonoBehaviour
 
     //===========================================================================
     protected abstract void AddItemEffect();
+    protected abstract void RemoveItemEffect();
 }

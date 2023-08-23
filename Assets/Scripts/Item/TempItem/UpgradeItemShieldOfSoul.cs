@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ItemShieldOfSoul : TempItem
+public class UpgradeItemShieldOfSoul : UpgradeItem
 {
     [SerializeField] private int increaseMaxFuel = default;
 
@@ -8,5 +8,10 @@ public class ItemShieldOfSoul : TempItem
     protected override void AddItemEffect()
     {
         Player.Instance.GetComponentInChildren<BasicAbility>().UpdateMaxFuel(increaseMaxFuel);
+    }
+
+    protected override void RemoveItemEffect()
+    {
+        Player.Instance.GetComponentInChildren<BasicAbility>().UpdateMaxFuel(-increaseMaxFuel);
     }
 }
