@@ -86,7 +86,7 @@ MonoBehaviour:
   - {fileID: 7128766739216337673, guid: bedf7cd3e1e901b4990168bcdf126b0d, type: 3}
   - {fileID: 8864901915701653083, guid: 90767ee69fb143d4dafbee60cdace558, type: 3}
   key: {fileID: 4422130485644021212, guid: 3e337ec34c699ac44b0da2191163d8c0, type: 3}
-  boss: {fileID: 4422130485644021212, guid: bc67c52f8c921bc438efeab25f755a2d, type: 3}
+  boss: {fileID: 6503859017374133296, guid: f0defaa3df4d4854ba674518f9ea3250, type: 3}
   shop: {fileID: 8439679027966053120, guid: 174ff5aef0fe7df41b304cd6624c3040, type: 3}
   abandonedShop: {fileID: 4422130485644021212, guid: 5e265e2fd525acc4ca57c09e913bafb4, type: 3}
 --- !u!1 &4317000767536815822

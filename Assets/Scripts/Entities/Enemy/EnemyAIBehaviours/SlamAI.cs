@@ -36,9 +36,9 @@ public class SlamAI : MonoBehaviour
 
     private void Update()
     {
-        if (canSlam && targetingAI.currentDestination != null)
+        if (canSlam && !targetingAI.CheckNoTarget())
         {
-            if (Vector2.Distance(transform.position, targetingAI.currentDestination.position) <= activateDistance)
+            if (Vector2.Distance(transform.position, targetingAI.currentTarget) <= activateDistance)
             {
                 if (targetingAI.isAttacking != true)
                 {
@@ -58,17 +58,17 @@ public class SlamAI : MonoBehaviour
         }
         if (isSlamming)
         {
-            Invoke(nameof(AbilityEffectAnimation), 1f);
+            //Invoke(nameof(AbilityEffectAnimation), 1f);
+            AbilityEffectAnimation();
         }
     }
 
     private void Slam()
     {
-        animator.SetTrigger("isSlamming");
-        isSlamming = true;
+        animator.SetBool("isSlamming",true);
     }
 
-    public void DealDamage()
+    public void DealSlamDamage()
     {
         if (targetingAI.CheckNoTarget())
             return;
@@ -83,7 +83,13 @@ public class SlamAI : MonoBehaviour
             }
         }
         targetingAI.isAttacking = false;
+        animator.SetBool("isSlamming",false);
+
         return;
+    }
+    public void StartAbilityAnimation()
+    {
+        isSlamming = true;
     }
     public void AbilityEffectAnimation()
     {
@@ -99,6 +105,7 @@ public class SlamAI : MonoBehaviour
                 {
                     spriteRenderer.sprite = null;
                 }
+                currentAnimationIndex = 0;
                 isSlamming = false;
                 return;
             }

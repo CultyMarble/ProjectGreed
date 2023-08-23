@@ -112,6 +112,8 @@ MonoBehaviour:
     chance: 10
   - item: {fileID: 8864901915701653087, guid: 90767ee69fb143d4dafbee60cdace558, type: 3}
     chance: 10
+  - item: {fileID: 3149911069759178359, guid: 6bbf2c19df10b0b429c4d3397145783f, type: 3}
+    chance: 25
   spawnCurrency: {fileID: 6063696349042203140}
 --- !u!114 &6063696349042203140
 MonoBehaviour:
