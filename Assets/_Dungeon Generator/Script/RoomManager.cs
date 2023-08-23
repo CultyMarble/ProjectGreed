@@ -9,6 +9,8 @@ public class RoomManager : MonoBehaviour
     public static event UnityAction OnBossChange;
     public static event UnityAction OnShopChange;
 
+    [SerializeField] private GameObject aStar;
+
     [SerializeField] private GameObject entryRoom;
     [SerializeField] public int minRooms;
     [SerializeField] public int maxRooms;
@@ -33,6 +35,9 @@ public class RoomManager : MonoBehaviour
     [Header("Room Delay")]
     public float delaySpawnRoomType = 0.75F;
     private bool delaySpawnRoomCheck = false;
+    [HideInInspector] public float roomCheckDelay = 0.3f;
+    [HideInInspector] public float roomCheckTimer;
+    private bool roomChecked = false;
 
     [Header("Room Spawn Chance")]
     public float treasureRoomChance = 1.0F;
@@ -51,9 +56,14 @@ public class RoomManager : MonoBehaviour
     public GameObject shop;
     public GameObject abandonedShop;
 
+
+    AstarPath pathfinder;
+
     private void Start()
     {
         LoadScene();
+        //aStar.SetActive(true);
+        pathfinder = aStar.GetComponent<AstarPath>();
     }
 
 
@@ -65,6 +75,14 @@ public class RoomManager : MonoBehaviour
         }
 
         SpawnRoomType();
+        if (!roomChecked && roomCheckTimer <= 0)
+        {
+            CheckRooms();
+        }
+        else
+        {
+            roomCheckTimer -= Time.deltaTime;
+        }
     }
 
     private void LoadScene()
@@ -97,6 +115,7 @@ public class RoomManager : MonoBehaviour
         {
             delaySpawnRoomType -= Time.deltaTime;
         }
+        
     }
 
     private void SetBossRoom() // LOOPS UNTIL FIND THE FIRST NON NULL ROOM
@@ -220,4 +239,22 @@ public class RoomManager : MonoBehaviour
         // <----------------------------------------------------------------------------------------------------------------------------------------------------------------------- FOR FUTRUE GARY
     }
 
+    public void CheckRooms()
+    {
+        GameObject[] rooms = GameObject.FindGameObjectsWithTag("RoomSpawnPoint");
+        foreach(GameObject room in rooms)
+        {
+            if (!room.GetComponent<RoomSpawner>().spawned)
+            {
+                return;
+            }
+            else
+            {
+                //aStar.SetActive(true);
+                var graphToScan = AstarPath.active.data.gridGraph;
+                AstarPath.active.Scan(graphToScan);
+                roomChecked = true;
+            }
+        }
+    }
 }

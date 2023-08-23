@@ -717,7 +717,7 @@ MonoBehaviour:
   searchRadius: 12
   breakDistanceMin: 0
   breakDistanceMax: 0
-  requireLineOfSight: 1
+  requireLineOfSight: 0
   keepDistance: 0
   patrolArea: 0
   patrolTransforms: {fileID: 0}
