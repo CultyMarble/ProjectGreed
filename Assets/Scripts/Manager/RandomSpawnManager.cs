@@ -8,6 +8,7 @@ public class RandomSpawnManager : MonoBehaviour
 
     [SerializeField] private Transform[] enemyTypePoolList;
     [SerializeField] private GameObject[] objectList;
+
     [SerializeField] private float objectSpawnChance;
     [SerializeField] private int spawnNum;
 
