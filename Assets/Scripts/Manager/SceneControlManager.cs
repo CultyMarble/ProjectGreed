@@ -152,6 +152,14 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
             CurrentGameState = GameState.MainMenu;
         }
     }
+    public void Respawn()
+    {
+        if (isLoadingScreenActive == false)
+        {
+            pauseMenu.SetPauseMenuActive(false);
+            StartCoroutine(UnloadAndSwitchScene(SceneName.DemoSceneHub.ToString(), Vector3.zero));
+        }
+    }
 
     public void LoadScene(string sceneName, Vector3 spawnPosition)
     {
