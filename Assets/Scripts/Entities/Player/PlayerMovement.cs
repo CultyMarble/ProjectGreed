@@ -247,4 +247,10 @@ public class PlayerMovement : MonoBehaviour
     {
         moveSpeed = newMoveSpeed;
     }
+
+    public void SetDashParameter(float newDashTime, float newDashSpeed)
+    {
+        dashTime = newDashTime;
+        dashSpeed = newDashSpeed;
+    }
 }

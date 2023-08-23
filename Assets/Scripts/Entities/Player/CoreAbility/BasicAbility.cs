@@ -183,7 +183,7 @@ public class BasicAbility : PlayerAbility
         maxFuel = 100.0f;
     }
 
-    public void UpdateRefuelRate(float amount)
+    public void UpdateFuelRechargeRate(float amount)
     {
         rechargeRate += amount;
     }
