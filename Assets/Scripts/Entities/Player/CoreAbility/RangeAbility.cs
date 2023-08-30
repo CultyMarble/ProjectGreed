@@ -77,6 +77,12 @@ public class RangeAbility : MonoBehaviour
     private void FixedUpdate()
     {
         CultyMarbleHelper.RotateGameObjectToMouseDirection(this.transform);
+
+        if (Player.Instance.actionState == PlayerActionState.IsUsingRangeAbility
+            && Input.GetMouseButton(1) == false)
+        {
+            Player.Instance.actionState = PlayerActionState.none;
+        }
     }
 
     private void OnDisable()
