@@ -157,11 +157,12 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
             CurrentGameState = GameState.MainMenu;
         }
     }
-    public void Respawn()
+    public void RespawnPlayerAtHub()
     {
         if (isLoadingScreenActive == false)
         {
             pauseMenu.SetPauseMenuActive(false);
+            DemoOverMenuGUI.Instance.SetMenuActive(false);
             StartCoroutine(UnloadAndSwitchScene(SceneName.DemoSceneHub.ToString(), Vector3.zero));
         }
     }

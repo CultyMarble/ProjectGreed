@@ -16,7 +16,7 @@ public class PauseMenuGUI : MonoBehaviour
     private void OnEnable()
     {
         // Pause Menu
-        pm_AbandonRunButton.onClick.AddListener(() => SceneControlManager.Instance.Respawn());
+        pm_AbandonRunButton.onClick.AddListener(() => SceneControlManager.Instance.RespawnPlayerAtHub());
         pm_MainMenuButton.onClick.AddListener(() => SceneControlManager.Instance.BackToMainMenuWrapper());
     }
 
@@ -32,14 +32,14 @@ public class PauseMenuGUI : MonoBehaviour
                 case GameState.GameplayHub:
                     SetPauseMenuActive(true);
                     pm_priorGameState = SceneControlManager.Instance.CurrentGameState;
-                    SceneControlManager.Instance.CurrentGameState = GameState.PausedGameplay;
+                    SceneControlManager.Instance.CurrentGameState = GameState.GameplayMenu;
                     break;
                 case GameState.GameplayDungeon:
                     SetPauseMenuActive(true);
                     pm_priorGameState = SceneControlManager.Instance.CurrentGameState;
-                    SceneControlManager.Instance.CurrentGameState = GameState.PausedGameplay;
+                    SceneControlManager.Instance.CurrentGameState = GameState.GameplayMenu;
                     break;
-                case GameState.PausedGameplay:
+                case GameState.GameplayMenu:
                     SetPauseMenuActive(false);
                     SceneControlManager.Instance.CurrentGameState = GameState.GameplayHub;
                     break;
