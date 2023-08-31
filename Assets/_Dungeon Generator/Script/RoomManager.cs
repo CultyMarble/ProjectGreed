@@ -52,6 +52,9 @@ public class RoomManager : MonoBehaviour
     public GameObject shop;
     public GameObject abandonedShop;
 
+    public delegate void OnRoomsGenerated();
+    public static event OnRoomsGenerated onRoomsGenerated;
+
     private void Start()
     {
         LoadScene();
@@ -74,7 +77,7 @@ public class RoomManager : MonoBehaviour
             //{
             //    aStar.SetActive(true);
             //}
-            aStar.SetActive(true);
+            RoomsFinished();
         }
     }
 
@@ -205,5 +208,13 @@ public class RoomManager : MonoBehaviour
             roomsList.RemoveAt(randomRoomIndex);
         }
 
+    }
+    public void RoomsFinished()
+    {
+        aStar.SetActive(true);
+        if(onRoomsGenerated != null)
+        {
+            onRoomsGenerated();
+        }
     }
 }
