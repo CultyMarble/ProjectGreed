@@ -52,18 +52,6 @@ public class BasicAbility : PlayerAbility
         playerInput.actions["LeftClick"].canceled += ActionCanceled;
     }
 
-    private void Start()
-    {
-        cooldown = Player.Instance.PlayerData.ba_baseCooldown;
-
-        maxFuel = Player.Instance.PlayerData.ba_baseMaxFuel;
-        fuelConsumePerTrigger = Player.Instance.PlayerData.ba_fuelConsumePerTrigger;
-        rechargeRate = Player.Instance.PlayerData.ba_baseRechargeRate;
-        damage = Player.Instance.PlayerData.ba_baseDamage;
-
-        currentFuel = maxFuel;
-    }
-
     protected override void Update()
     {
         base.Update();
@@ -173,9 +161,24 @@ public class BasicAbility : PlayerAbility
     }
 
     //===========================================================================
+    public void UpdateAbilityParameters()
+    {
+        cooldown = PlayerDataManager.Instance.PlayerDataRuntime.Ba_baseCooldown;
+
+        maxFuel = PlayerDataManager.Instance.PlayerDataRuntime.Ba_baseMaxFuel;
+        fuelConsumePerTrigger = PlayerDataManager.Instance.PlayerDataRuntime.Ba_fuelConsumePerTrigger;
+        rechargeRate = PlayerDataManager.Instance.PlayerDataRuntime.Ba_baseRechargeRate;
+        damage = PlayerDataManager.Instance.PlayerDataRuntime.Ba_baseDamage;
+
+        currentFuel = maxFuel;
+    }
+
     public void UpdateMaxFuel(float amount)
     {
         maxFuel += amount;
+
+        if (currentFuel > maxFuel)
+            currentFuel = maxFuel;
     }
 
     public void ResetMaxFuel()

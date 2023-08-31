@@ -11,7 +11,11 @@ public class DemoOverMenuGUI : SingletonMonobehaviour<DemoOverMenuGUI>
     //===========================================================================
     private void OnEnable()
     {
-        do_ReturnButton.onClick.AddListener(() => SceneControlManager.Instance.RespawnPlayerAtHub());
+        do_ReturnButton.onClick.AddListener(() =>
+        {
+            SetMenuActive(false);
+            SceneControlManager.Instance.RespawnPlayerAtHub();
+        });
     }
 
     //===========================================================================

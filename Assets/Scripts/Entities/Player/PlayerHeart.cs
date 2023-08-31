@@ -25,7 +25,7 @@ public class PlayerHeart : MonoBehaviour
 
     private void Start()
     {
-        currentMaxHeart = Player.Instance.PlayerData.baseMaxHealth;
+        currentMaxHeart = PlayerDataManager.Instance.PlayerDataRuntime.BaseMaxHealth;
         currentHeart = currentMaxHeart;
 
         UpdateCurrentMaxHeart();
@@ -42,6 +42,9 @@ public class PlayerHeart : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.PageUp))
             UpdateCurrentHeart(1);
 
+        if (Input.GetKeyDown(KeyCode.Home))
+            UpdateCurrentMaxHeart(1);
+
     }
 
     private void OnDisable()
@@ -52,7 +55,7 @@ public class PlayerHeart : MonoBehaviour
     //======================================================================
     private void EventManager_AfterSceneLoadEvent()
     {
-        currentMaxHeart = Player.Instance.PlayerData.baseMaxHealth;
+        currentMaxHeart = PlayerDataManager.Instance.PlayerDataRuntime.BaseMaxHealth;
         currentHeart = currentMaxHeart;
 
         UpdateCurrentMaxHeart();

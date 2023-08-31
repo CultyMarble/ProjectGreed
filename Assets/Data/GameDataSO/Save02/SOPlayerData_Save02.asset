@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ef50ec0a2bd4f44097faee1635ab648, type: 3}
+  m_Name: SOPlayerData_Save02
+  m_EditorClassIdentifier: 
+  baseMaxHealth: 0
+  baseMoveSpeed: 0
+  baseDashPenalty: 0
+  baseDashCooldown: 0
+  baseDashTime: 0
+  baseDashSpeed: 0
+  ba_baseCooldown: 0
+  ba_baseMaxFuel: 0
+  ba_fuelConsumePerTrigger: 0
+  ba_baseRechargeRate: 0
+  ba_baseDamage: 0
+  ba_basePlayerSpeedPenalty: 0
+  ra_baseMaxCharge: 0
+  ra_baseMaxRecharge: 0
+  ra_baseMinChargeTime: 0
+  ra_baseMidChargeTime: 0
+  ra_baseMaxChargeTime: 0
+  ra_baseMinDamage: 0
+  ra_baseMidDamage: 0
+  ra_baseMaxDamage: 0
+  ra_baseMinSpeed: 0
+  ra_baseMidSpeed: 0
+  ra_baseMaxSpeed: 0
+  ra_basePlayerMinSpeed: 0
+  ra_basePlayerMidSpeed: 0
+  ra_basePlayerMaxSpeed: 0
+  bomb_baseCharge: 0
+  bomb_baseDamage: 0
+  bomb_baseDelayTime: 0
+  bomb_baseRadius: 0

@@ -38,32 +38,20 @@ public class RangeAbility : MonoBehaviour
     private void Awake()
     {
         playerInput = FindObjectOfType<PlayerInput>();
-        PopulatePool();
-    }
-
-    private void Start()
-    {
-        currentMaxCharge = Player.Instance.PlayerData.ra_baseMaxCharge;
-        currentCharge = currentMaxCharge;
-        maxRecharge = Player.Instance.PlayerData.ra_baseMaxRecharge;
-
-        UpdateCurrentMaxCharge();
-        UpdateCurrentCharge();
     }
 
     private void OnEnable()
     {
         playerInput.actions["RightClick"].started += ActionPerformed;
         playerInput.actions["RightClick"].canceled += ActionCanceled;
+
+        PopulatePool();
     }
 
     private void Update()
     {
-        if (Player.Instance.actionState == PlayerActionState.none ||
-            Player.Instance.actionState == PlayerActionState.IsUsingRangeAbility)
-        {
+        if (Player.Instance.actionState == PlayerActionState.none || Player.Instance.actionState == PlayerActionState.IsUsingRangeAbility)
             InputHandler();
-        }
 
         if (channelTimer > 0)
             Player.Instance.actionState = PlayerActionState.IsUsingRangeAbility;
@@ -131,15 +119,15 @@ public class RangeAbility : MonoBehaviour
 
     private void UpdateIndicatorColor()
     {
-        if (channelTimer >= Player.Instance.PlayerData.ra_baseMaxChargeTime)
+        if (channelTimer >= PlayerDataManager.Instance.PlayerDataRuntime.Ra_baseMaxChargeTime)
         {
             aimIndicator.color = Color.green;
         }
-        else if (channelTimer >= Player.Instance.PlayerData.ra_baseMidChargeTime)
+        else if (channelTimer >= PlayerDataManager.Instance.PlayerDataRuntime.Ra_baseMidChargeTime)
         {
             aimIndicator.color = Color.cyan;
         }
-        else if (channelTimer >= Player.Instance.PlayerData.ra_baseMinChargeTime)
+        else if (channelTimer >= PlayerDataManager.Instance.PlayerDataRuntime.Ra_baseMinChargeTime)
         {
             aimIndicator.color = Color.yellow;
         }
@@ -151,17 +139,17 @@ public class RangeAbility : MonoBehaviour
 
     private void SetProjectileSpeed()
     {
-        if (channelTimer >= Player.Instance.PlayerData.ra_baseMaxChargeTime)
+        if (channelTimer >= PlayerDataManager.Instance.PlayerDataRuntime.Ra_baseMaxChargeTime)
         {
-            projectileSpeed = Player.Instance.PlayerData.ra_baseMaxSpeed;
+            projectileSpeed = PlayerDataManager.Instance.PlayerDataRuntime.Ra_baseMaxSpeed;
         }
-        else if (channelTimer >= Player.Instance.PlayerData.ra_baseMidChargeTime)
+        else if (channelTimer >= PlayerDataManager.Instance.PlayerDataRuntime.Ra_baseMidChargeTime)
         {
-            projectileSpeed = Player.Instance.PlayerData.ra_baseMidSpeed;
+            projectileSpeed = PlayerDataManager.Instance.PlayerDataRuntime.Ra_baseMidSpeed;
         }
-        else if (channelTimer >= Player.Instance.PlayerData.ra_baseMinChargeTime)
+        else if (channelTimer >= PlayerDataManager.Instance.PlayerDataRuntime.Ra_baseMinChargeTime)
         {
-            projectileSpeed = Player.Instance.PlayerData.ra_baseMinSpeed;
+            projectileSpeed = PlayerDataManager.Instance.PlayerDataRuntime.Ra_baseMinSpeed;
         }
         else
         {
@@ -171,17 +159,17 @@ public class RangeAbility : MonoBehaviour
 
     private void SetProjectileDamage()
     {
-        if (channelTimer >= Player.Instance.PlayerData.ra_baseMaxChargeTime)
+        if (channelTimer >= PlayerDataManager.Instance.PlayerDataRuntime.Ra_baseMaxChargeTime)
         {
-            projectileDamage = Player.Instance.PlayerData.ra_baseMaxDamage;
+            projectileDamage = PlayerDataManager.Instance.PlayerDataRuntime.Ra_baseMaxDamage;
         }
-        else if (channelTimer >= Player.Instance.PlayerData.ra_baseMidChargeTime)
+        else if (channelTimer >= PlayerDataManager.Instance.PlayerDataRuntime.Ra_baseMidChargeTime)
         {
-            projectileDamage = Player.Instance.PlayerData.ra_baseMidDamage;
+            projectileDamage = PlayerDataManager.Instance.PlayerDataRuntime.Ra_baseMidDamage;
         }
-        else if (channelTimer >= Player.Instance.PlayerData.ra_baseMinChargeTime)
+        else if (channelTimer >= PlayerDataManager.Instance.PlayerDataRuntime.Ra_baseMinChargeTime)
         {
-            projectileDamage = Player.Instance.PlayerData.ra_baseMinDamage;
+            projectileDamage = PlayerDataManager.Instance.PlayerDataRuntime.Ra_baseMinDamage;
         }
         else
         {
@@ -191,21 +179,21 @@ public class RangeAbility : MonoBehaviour
 
     private void SetPlayerMovementSpeed()
     {
-        if (channelTimer >= Player.Instance.PlayerData.ra_baseMaxChargeTime)
+        if (channelTimer >= PlayerDataManager.Instance.PlayerDataRuntime.Ra_baseMaxChargeTime)
         {
-            Player.Instance.PlayerMovement.SetMoveSpeed(Player.Instance.PlayerData.ra_basePlayerMinSpeed);
+            Player.Instance.PlayerMovement.SetMoveSpeed(PlayerDataManager.Instance.PlayerDataRuntime.Ra_basePlayerMinSpeed);
         }
-        else if (channelTimer >= Player.Instance.PlayerData.ra_baseMidChargeTime)
+        else if (channelTimer >= PlayerDataManager.Instance.PlayerDataRuntime.Ra_baseMidChargeTime)
         {
-            Player.Instance.PlayerMovement.SetMoveSpeed(Player.Instance.PlayerData.ra_basePlayerMidSpeed);
+            Player.Instance.PlayerMovement.SetMoveSpeed(PlayerDataManager.Instance.PlayerDataRuntime.Ra_basePlayerMidSpeed);
         }
-        else if (channelTimer >= Player.Instance.PlayerData.ra_baseMinChargeTime)
+        else if (channelTimer >= PlayerDataManager.Instance.PlayerDataRuntime.Ra_baseMinChargeTime)
         {
-            Player.Instance.PlayerMovement.SetMoveSpeed(Player.Instance.PlayerData.ra_basePlayerMaxSpeed);
+            Player.Instance.PlayerMovement.SetMoveSpeed(PlayerDataManager.Instance.PlayerDataRuntime.Ra_basePlayerMaxSpeed);
         }
         else
         {
-            Player.Instance.PlayerMovement.SetMoveSpeed(Player.Instance.PlayerData.baseMoveSpeed);
+            Player.Instance.PlayerMovement.SetMoveSpeed(PlayerDataManager.Instance.PlayerDataRuntime.BaseMoveSpeed);
         }
     }
 
@@ -226,7 +214,10 @@ public class RangeAbility : MonoBehaviour
 
     private void ShootHandler()
     {
-        if (channelTimer < Player.Instance.PlayerData.ra_baseMinChargeTime)
+        if (Player.Instance.actionState == PlayerActionState.none)
+            return;
+
+        if (channelTimer < PlayerDataManager.Instance.PlayerDataRuntime.Ra_baseMinChargeTime)
             return;
 
         SetProjectileSpeed();
@@ -253,9 +244,19 @@ public class RangeAbility : MonoBehaviour
     }
 
     //===========================================================================
+    public void UpdateAbilityParameters()
+    {
+        currentMaxCharge = PlayerDataManager.Instance.PlayerDataRuntime.Ra_baseMaxCharge;
+        currentCharge = currentMaxCharge;
+        maxRecharge = PlayerDataManager.Instance.PlayerDataRuntime.Ra_baseMaxRecharge;
+
+        UpdateCurrentMaxCharge();
+        UpdateCurrentCharge();
+    }
+
     public void ResetAbilityCharge()
     {
-        currentMaxCharge = Player.Instance.PlayerData.ra_baseMaxCharge;
+        currentMaxCharge = PlayerDataManager.Instance.PlayerDataRuntime.Ra_baseMaxCharge;
         currentCharge = currentMaxCharge;
 
         //Invoke Event

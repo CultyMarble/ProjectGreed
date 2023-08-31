@@ -1,30 +1,46 @@
 using UnityEngine;
 
+public enum SaveDataSlot
+{
+    save01,
+    save02,
+    save03,
+}
+
 public class SaveDataManager : SingletonMonobehaviour<SaveDataManager>
 {
-    [Header("SaveFile")]
-    [SerializeField] private SOGameData save01 = default;
-    public SOGameData SAVE01 => save01;
+    [Header("Default Data:")]
+    [SerializeField] private SOPlayerData playerDataDefault = default;
 
-    [Header("Gameplay Runtime Data:")]
-    [SerializeField] private SOListInt generatedItemForSale = default;
-
-    //===========================================================================
-    protected override void Awake()
-    {
-        base.Awake();
-
-    }
-
+    [Header("Data Save 01:")]
+    [SerializeField] private SOPlayerData playerDataSave01 = default;
+    [SerializeField] private SOPlayerData playerDataSave02 = default;
+    [SerializeField] private SOPlayerData playerDataSave03 = default;
 
     //===========================================================================
-    private void Instance_OnUnloadRuntimeDataEvent(object sender, System.EventArgs e)
+    private void OnDisable()
     {
-        ClearGameplayRuntimeData();
+        playerDataSave01.ClearData();
     }
 
-    private void ClearGameplayRuntimeData()
+    //===========================================================================
+    public void LoadPlayerDataToRuntimeData(SaveDataSlot saveData)
     {
-        generatedItemForSale.itemList.Clear();
+        playerDataSave01.TransferData(playerDataDefault);
+
+        switch (saveData)
+        {
+            case SaveDataSlot.save01:
+                PlayerDataManager.Instance.TransferData(playerDataSave01);
+                break;
+            case SaveDataSlot.save02:
+                PlayerDataManager.Instance.TransferData(playerDataSave02);
+                break;
+            case SaveDataSlot.save03:
+                PlayerDataManager.Instance.TransferData(playerDataSave03);
+                break;
+            default:
+                break;
+        }
     }
 }
