@@ -20,16 +20,8 @@ public class PlayerHeart : MonoBehaviour
     //======================================================================
     private void OnEnable()
     {
-        EventManager.AfterSceneLoadEvent += EventManager_AfterSceneLoadEvent;
-    }
-
-    private void Start()
-    {
-        currentMaxHeart = PlayerDataManager.Instance.PlayerDataRuntime.BaseMaxHealth;
-        currentHeart = currentMaxHeart;
-
-        UpdateCurrentMaxHeart();
-        UpdateCurrentHeart();
+        Debug.Log(currentMaxHeart);
+        ResetPlayerHealth();
     }
 
     private void Update()
@@ -49,21 +41,6 @@ public class PlayerHeart : MonoBehaviour
             PlayerDataManager.Instance.PlayerDataRuntime.SetBaseMaxHealth(currentMaxHeart);
             PlayerDataManager.Instance.SaveRunTimeDataToPlayerDataSlot();
         }
-    }
-
-    private void OnDisable()
-    {
-        EventManager.AfterSceneLoadEvent -= EventManager_AfterSceneLoadEvent;
-    }
-
-    //======================================================================
-    private void EventManager_AfterSceneLoadEvent()
-    {
-        currentMaxHeart = PlayerDataManager.Instance.PlayerDataRuntime.BaseMaxHealth;
-        currentHeart = currentMaxHeart;
-
-        UpdateCurrentMaxHeart();
-        UpdateCurrentHeart();
     }
 
     //======================================================================
@@ -99,10 +76,9 @@ public class PlayerHeart : MonoBehaviour
     }
 
     //======================================================================
-    public void ResetPlayerHealth(int baseMaxHealth)
+    public void ResetPlayerHealth()
     {
-        currentMaxHeart = baseMaxHealth;
-        currentHeart = baseMaxHealth;
+        currentHeart = currentMaxHeart;
 
         //Invoke Event
         OnMaxHeartChangedEvent?.Invoke(this, new OnMaxHealthChangedEventArgs { maxHeart = currentMaxHeart });
@@ -150,5 +126,14 @@ public class PlayerHeart : MonoBehaviour
 
         //Invoke Event
         OnHeartChangedEvent?.Invoke(this, new OnHealthChangedEventArgs { currentHeart = currentHeart });
+    }
+
+    public void UpdatePlayerHeartParameters()
+    {
+        currentMaxHeart = PlayerDataManager.Instance.PlayerDataRuntime.BaseMaxHealth;
+        currentHeart = currentMaxHeart;
+
+        UpdateCurrentMaxHeart();
+        UpdateCurrentHeart();
     }
 }

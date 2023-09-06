@@ -21,16 +21,6 @@ public class PlayerDataManager : SingletonMonobehaviour<PlayerDataManager>
     }
 
     //===========================================================================
-    public void TransferData(SOPlayerData saveData)
-    {
-        playerDataRuntime.TransferData(saveData);
-
-        Player.Instance.GetComponent<PlayerMovement>().UpdateMovementParameters();
-        Player.Instance.GetComponentInChildren<BasicAbility>().UpdateAbilityParameters();
-        Player.Instance.GetComponentInChildren<RangeAbility>().UpdateAbilityParameters();
-        Player.Instance.GetComponentInChildren<BombAbility>().UpdateAbilityParameters();
-    }
-
     public void SetActiveSlot(SaveDataSlot newActiveSlot)
     {
         activeSlot = newActiveSlot;
@@ -39,5 +29,19 @@ public class PlayerDataManager : SingletonMonobehaviour<PlayerDataManager>
     public void SaveRunTimeDataToPlayerDataSlot()
     {
         SaveDataManager.Instance.SaveRuntimeDataToPlayerDataSlot(activeSlot, playerDataRuntime);
+    }
+
+    public void TransferData(SOPlayerData saveData)
+    {
+        Destroy(playerDataRuntime);
+
+        playerDataRuntime = ScriptableObject.CreateInstance<SOPlayerData>();
+        playerDataRuntime.TransferData(saveData);
+
+        Player.Instance.GetComponent<PlayerMovement>().UpdateMovementParameters();
+        Player.Instance.GetComponent<PlayerHeart>().UpdatePlayerHeartParameters();
+        Player.Instance.GetComponentInChildren<BasicAbility>().UpdateAbilityParameters();
+        Player.Instance.GetComponentInChildren<RangeAbility>().UpdateAbilityParameters();
+        Player.Instance.GetComponentInChildren<BombAbility>().UpdateAbilityParameters();
     }
 }

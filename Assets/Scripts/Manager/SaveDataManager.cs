@@ -49,20 +49,18 @@ public class SaveDataManager : SingletonMonobehaviour<SaveDataManager>
         }
     }
 
-    public void SaveRuntimeDataToPlayerDataSlot(SaveDataSlot saveSlot, SOPlayerData runtimeData)
+    public void SaveRuntimeDataToPlayerDataSlot(SaveDataSlot activeSlot, SOPlayerData runtimeData)
     {
-        switch (saveSlot)
+        switch (activeSlot)
         {
             case SaveDataSlot.save01:
                 playerDataSave01.TransferData(runtimeData);
                 break;
             case SaveDataSlot.save02:
                 playerDataSave02.TransferData(runtimeData);
-                CheckIfNewSaveSlot(playerDataSave02);
                 break;
             case SaveDataSlot.save03:
                 playerDataSave03.TransferData(runtimeData);
-                CheckIfNewSaveSlot(playerDataSave03);
                 break;
         }
     }

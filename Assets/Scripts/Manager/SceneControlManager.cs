@@ -58,13 +58,15 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         yield return StartCoroutine(LoadingScreen(1.0f));
 
         gameOverMenu.SetActive(false);
-        Player.Instance.transform.position = spawnPosition;
 
         EventManager.CallBeforeSceneUnloadEvent();
         yield return SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().buildIndex);
 
         yield return StartCoroutine(LoadSceneAndSetActive(sceneName));
         EventManager.CallAfterSceneLoadEvent();
+
+        Player.Instance.transform.position = spawnPosition;
+        Player.Instance.gameObject.SetActive(true);
 
         yield return new WaitForSecondsRealtime(1.0f);
         yield return StartCoroutine(LoadingScreen(0.0f));
@@ -110,12 +112,11 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         MainMenuGUI.Instance.SetActive(false);
         gameOverMenu.SetActive(false);
 
-        SaveDataManager.Instance.LoadPlayerDataToRuntimeData(SaveDataSlot.save01);
-
         yield return StartCoroutine(LoadSceneAndSetActive(startingScene.ToString()));
         EventManager.CallAfterSceneLoadEvent();
 
         Player.Instance.transform.position = startingPosition.position;
+        Player.Instance.gameObject.SetActive(true);
 
         StartCoroutine(LoadingScreen(0.0f));
         EventManager.CallAfterSceneLoadedLoadingScreenEvent();

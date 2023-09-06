@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ef50ec0a2bd4f44097faee1635ab648, type: 3}
   m_Name: SOPlayerData_Save01
   m_EditorClassIdentifier: 
-  baseMaxHealth: 0
+  baseMaxHealth: 5
   baseMoveSpeed: 8
   baseDashPenalty: 0.1
   baseDashCooldown: 1
