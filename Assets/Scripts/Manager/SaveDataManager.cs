@@ -18,28 +18,51 @@ public class SaveDataManager : SingletonMonobehaviour<SaveDataManager>
     [SerializeField] private SOPlayerData playerDataSave03 = default;
 
     //===========================================================================
-    private void OnDisable()
+    private void CheckIfNewSaveSlot(SOPlayerData saveData)
     {
-        playerDataSave01.ClearData();
+        if (saveData.BaseMaxHealth == 0)
+        {
+            saveData.TransferData(playerDataDefault);
+        }
     }
 
     //===========================================================================
     public void LoadPlayerDataToRuntimeData(SaveDataSlot saveData)
     {
-        playerDataSave01.TransferData(playerDataDefault);
-
         switch (saveData)
         {
             case SaveDataSlot.save01:
+                CheckIfNewSaveSlot(playerDataSave01);
                 PlayerDataManager.Instance.TransferData(playerDataSave01);
+                PlayerDataManager.Instance.SetActiveSlot(SaveDataSlot.save01);
                 break;
             case SaveDataSlot.save02:
+                CheckIfNewSaveSlot(playerDataSave02);
                 PlayerDataManager.Instance.TransferData(playerDataSave02);
+                PlayerDataManager.Instance.SetActiveSlot(SaveDataSlot.save02);
                 break;
             case SaveDataSlot.save03:
+                CheckIfNewSaveSlot(playerDataSave03);
                 PlayerDataManager.Instance.TransferData(playerDataSave03);
+                PlayerDataManager.Instance.SetActiveSlot(SaveDataSlot.save03);
                 break;
-            default:
+        }
+    }
+
+    public void SaveRuntimeDataToPlayerDataSlot(SaveDataSlot saveSlot, SOPlayerData runtimeData)
+    {
+        switch (saveSlot)
+        {
+            case SaveDataSlot.save01:
+                playerDataSave01.TransferData(runtimeData);
+                break;
+            case SaveDataSlot.save02:
+                playerDataSave02.TransferData(runtimeData);
+                CheckIfNewSaveSlot(playerDataSave02);
+                break;
+            case SaveDataSlot.save03:
+                playerDataSave03.TransferData(runtimeData);
+                CheckIfNewSaveSlot(playerDataSave03);
                 break;
         }
     }

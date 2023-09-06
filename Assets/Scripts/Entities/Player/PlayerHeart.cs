@@ -36,15 +36,19 @@ public class PlayerHeart : MonoBehaviour
     {
         UpdateDamageFeedBackTimer();
 
-        if (Input.GetKeyDown(KeyCode.PageDown))
-            UpdateCurrentHeart(-1);
+        if (Input.GetKeyDown(KeyCode.Home))
+        {
+            UpdateCurrentMaxHeart(1);
+        }
 
         if (Input.GetKeyDown(KeyCode.PageUp))
-            UpdateCurrentHeart(1);
-
-        if (Input.GetKeyDown(KeyCode.Home))
+        {
             UpdateCurrentMaxHeart(1);
+            UpdateCurrentHeart(currentMaxHeart);
 
+            PlayerDataManager.Instance.PlayerDataRuntime.SetBaseMaxHealth(currentMaxHeart);
+            PlayerDataManager.Instance.SaveRunTimeDataToPlayerDataSlot();
+        }
     }
 
     private void OnDisable()

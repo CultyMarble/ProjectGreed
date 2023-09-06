@@ -15,7 +15,6 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
     [SerializeField] private Transform startingPosition;
 
     [Header("Menu Settings:")]
-    [SerializeField] private GameObject mainMenu;
     [SerializeField] private PauseMenuGUI pauseMenu;
 
     [Header("Gameover Menu")]
@@ -47,7 +46,7 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         loadingScreenImage.color = new Color(0.0f, 0.0f, 0.0f, 1.0f);
         loadingScreenCanvasGroup.alpha = 1.0f;
 
-        mainMenu.SetActive(true);
+        MainMenuGUI.Instance.SetActive(true);
 
         StartCoroutine(LoadingScreen(0.0f));
     }
@@ -108,7 +107,7 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         EventManager.CallBeforeSceneUnloadLoadingScreenEvent();
         yield return StartCoroutine(LoadingScreen(1.0f));
 
-        mainMenu.SetActive(false);
+        MainMenuGUI.Instance.SetActive(false);
         gameOverMenu.SetActive(false);
 
         SaveDataManager.Instance.LoadPlayerDataToRuntimeData(SaveDataSlot.save01);
@@ -129,7 +128,7 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         EventManager.CallBeforeSceneUnloadLoadingScreenEvent();
         yield return StartCoroutine(LoadingScreen(1.0f));
 
-        mainMenu.SetActive(true);
+        MainMenuGUI.Instance.SetActive(true);
         gameOverMenu.SetActive(false);
         pauseMenu.SetPauseMenuActive(false);
 
@@ -164,7 +163,7 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
     {
         if (isLoadingScreenActive == false)
         {
-            mainMenu.SetActive(false);
+            MainMenuGUI.Instance.SetActive(false);
             pauseMenu.SetPauseMenuActive(false);
             gameOverMenu.SetActive(false);
 

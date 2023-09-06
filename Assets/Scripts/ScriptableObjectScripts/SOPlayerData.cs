@@ -87,6 +87,9 @@ public class SOPlayerData : ScriptableObject
     public float Bomb_baseRadius => bomb_baseRadius;
 
     //===========================================================================
+    public void SetBaseMaxHealth(int amount) { baseMaxHealth = amount; }
+
+    //===========================================================================
     public void TransferData(SOPlayerData saveData)
     {
         baseMaxHealth = saveData.baseMaxHealth;
