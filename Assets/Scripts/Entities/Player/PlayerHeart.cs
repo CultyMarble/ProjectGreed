@@ -12,6 +12,8 @@ public class PlayerHeart : MonoBehaviour
     public event EventHandler OnDespawnPlayerEvent;
 
     private int currentMaxHeart = default;
+    public int CurrentMaxHeart => currentMaxHeart;
+
     private int currentHeart = default;
 
     private readonly float feedbackDamageTime = 0.10f;
@@ -20,8 +22,7 @@ public class PlayerHeart : MonoBehaviour
     //======================================================================
     private void OnEnable()
     {
-        Debug.Log(currentMaxHeart);
-        ResetPlayerHealth();
+        ResetPlayerHeart();
     }
 
     private void Update()
@@ -31,15 +32,6 @@ public class PlayerHeart : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Home))
         {
             UpdateCurrentMaxHeart(1);
-        }
-
-        if (Input.GetKeyDown(KeyCode.PageUp))
-        {
-            UpdateCurrentMaxHeart(1);
-            UpdateCurrentHeart(currentMaxHeart);
-
-            PlayerDataManager.Instance.PlayerDataRuntime.SetBaseMaxHealth(currentMaxHeart);
-            PlayerDataManager.Instance.SaveRunTimeDataToPlayerDataSlot();
         }
     }
 
@@ -76,7 +68,7 @@ public class PlayerHeart : MonoBehaviour
     }
 
     //======================================================================
-    public void ResetPlayerHealth()
+    public void ResetPlayerHeart()
     {
         currentHeart = currentMaxHeart;
 
