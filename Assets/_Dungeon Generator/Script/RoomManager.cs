@@ -213,12 +213,12 @@ public class RoomManager : MonoBehaviour
         {
             GameObject newNPC;
             int randomItemIndex = Random.Range(0, npcList.Length);
-            int randomRoomIndex = Random.Range(0, roomsList.Count);
-            roomsList[randomRoomIndex].currentRoomType = RoomType.npc;
-            newNPC = Instantiate(npcList[randomItemIndex], roomsList[randomRoomIndex].transform.position, Quaternion.identity);
+            int randomRoomIndex = Random.Range(0, currentRooms.Count);
+            currentRooms[randomRoomIndex].currentRoomType = RoomType.npc;
+            newNPC = Instantiate(npcList[randomItemIndex], currentRooms[randomRoomIndex].transform.position, Quaternion.identity);
             newNPC.transform.parent = roomsList[randomRoomIndex].transform;
 
-            roomsList.RemoveAt(randomRoomIndex);
+            //roomsList.RemoveAt(randomRoomIndex);
             currentRooms[randomRoomIndex].SetSpecialRoomActive();
         }
     }
