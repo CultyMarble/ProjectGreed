@@ -59,7 +59,7 @@ public class DialogueActivator : MonoBehaviour
 
     private void OnDisable()
     {
-        haveActivated.value = false;
+        //haveActivated.value = false;
     }
 
     //===========================================================================

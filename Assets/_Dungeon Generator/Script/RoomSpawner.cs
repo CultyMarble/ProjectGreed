@@ -82,7 +82,7 @@ public class RoomSpawner : MonoBehaviour
         {
             if (collision.GetComponent<RoomSpawner>().spawned == false && spawned == false && transform.position.x != 0 && transform.position.y != 0)
             {
-                InstantiateRandomRoom(roomManager.closedRooms.Length, roomManager.closedRooms);
+                //InstantiateRandomRoom(roomManager.closedRooms.Length, roomManager.closedRooms);
                 Destroy(gameObject);
             }
 
