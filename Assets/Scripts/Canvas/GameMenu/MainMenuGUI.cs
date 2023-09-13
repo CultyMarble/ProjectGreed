@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class MainMenuGUI : MonoBehaviour
+public class MainMenuGUI : SingletonMonobehaviour<MainMenuGUI>
 {
     [Header("Main Menu Animation:")]
     [SerializeField] private Image mainMenuBGImage = default;
@@ -11,6 +11,9 @@ public class MainMenuGUI : MonoBehaviour
     private readonly float effectAnimationSpeed = 0.15f;
     private float effectAnimationTimer = default;
     private int currentAnimationIndex = default;
+
+    [Header("Main Menu Title Text")]
+    [SerializeField] private GameObject mm_TitleText = default;
 
     [Header("Button Settings:")]
     [SerializeField] private Button mm_startButton = default;
@@ -23,17 +26,26 @@ public class MainMenuGUI : MonoBehaviour
 
     private float targetAlpha = 0.1f;
 
+    private bool isMenuActive = default;
+
     //===========================================================================
     private void Start()
     {
         // Main Menu
-        mm_startButton.onClick.AddListener(() => SceneControlManager.Instance.LoadStartingSceneWrapper());
+        mm_startButton.onClick.AddListener(() =>
+        {
+            SetActive(false);
+            SaveSelectMenuGUI.Instance.SetActive(true);
+        });
 
-        mm_exitButton.onClick.AddListener(() => Application.Quit());
+        mm_exitButton.onClick.AddListener(Application.Quit);
     }
 
     private void Update()
     {
+        if (isMenuActive == false)
+            return;
+
         BackgroundAnimation();
 
         StartButtonInteract();
@@ -73,5 +85,16 @@ public class MainMenuGUI : MonoBehaviour
                 targetAlpha = targetAlphaMax;
             }
         }
+    }
+
+    //===========================================================================
+    public void SetActive(bool newBool)
+    {
+        isMenuActive = newBool;
+
+        mainMenuBGImage.gameObject.SetActive(newBool);
+        mm_TitleText.SetActive(newBool);
+        mm_startButton.gameObject.SetActive(newBool);
+        mm_exitButton.gameObject.SetActive(newBool);
     }
 }

@@ -12,6 +12,8 @@ public class PlayerHeart : MonoBehaviour
     public event EventHandler OnDespawnPlayerEvent;
 
     private int currentMaxHeart = default;
+    public int CurrentMaxHeart => currentMaxHeart;
+
     private int currentHeart = default;
 
     private readonly float feedbackDamageTime = 0.10f;
@@ -20,43 +22,17 @@ public class PlayerHeart : MonoBehaviour
     //======================================================================
     private void OnEnable()
     {
-        EventManager.AfterSceneLoadEvent += EventManager_AfterSceneLoadEvent;
-    }
-
-    private void Start()
-    {
-        currentMaxHeart = Player.Instance.PlayerData.baseMaxHealth;
-        currentHeart = currentMaxHeart;
-
-        UpdateCurrentMaxHeart();
-        UpdateCurrentHeart();
+        ResetPlayerHeart();
     }
 
     private void Update()
     {
         UpdateDamageFeedBackTimer();
 
-        if (Input.GetKeyDown(KeyCode.PageDown))
-            UpdateCurrentHeart(-1);
-
-        if (Input.GetKeyDown(KeyCode.PageUp))
-            UpdateCurrentHeart(1);
-
-    }
-
-    private void OnDisable()
-    {
-        EventManager.AfterSceneLoadEvent -= EventManager_AfterSceneLoadEvent;
-    }
-
-    //======================================================================
-    private void EventManager_AfterSceneLoadEvent()
-    {
-        currentMaxHeart = Player.Instance.PlayerData.baseMaxHealth;
-        currentHeart = currentMaxHeart;
-
-        UpdateCurrentMaxHeart();
-        UpdateCurrentHeart();
+        if (Input.GetKeyDown(KeyCode.Home))
+        {
+            UpdateCurrentMaxHeart(1);
+        }
     }
 
     //======================================================================
@@ -92,10 +68,9 @@ public class PlayerHeart : MonoBehaviour
     }
 
     //======================================================================
-    public void ResetPlayerHealth(int baseMaxHealth)
+    public void ResetPlayerHeart()
     {
-        currentMaxHeart = baseMaxHealth;
-        currentHeart = baseMaxHealth;
+        currentHeart = currentMaxHeart;
 
         //Invoke Event
         OnMaxHeartChangedEvent?.Invoke(this, new OnMaxHealthChangedEventArgs { maxHeart = currentMaxHeart });
@@ -143,5 +118,14 @@ public class PlayerHeart : MonoBehaviour
 
         //Invoke Event
         OnHeartChangedEvent?.Invoke(this, new OnHealthChangedEventArgs { currentHeart = currentHeart });
+    }
+
+    public void UpdatePlayerHeartParameters()
+    {
+        currentMaxHeart = PlayerDataManager.Instance.PlayerDataRuntime.BaseMaxHealth;
+        currentHeart = currentMaxHeart;
+
+        UpdateCurrentMaxHeart();
+        UpdateCurrentHeart();
     }
 }

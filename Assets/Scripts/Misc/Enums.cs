@@ -35,5 +35,5 @@ public enum GameState
     MainMenu,
     GameplayHub,
     GameplayDungeon,
-    PausedGameplay,
+    GameplayMenu,
 }

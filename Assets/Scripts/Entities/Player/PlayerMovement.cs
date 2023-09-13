@@ -48,22 +48,8 @@ public class PlayerMovement : MonoBehaviour
         CapsuleCollider2D = GetComponent<CapsuleCollider2D>();
     }
 
-    private void Start()
-    {
-        moveSpeed = Player.Instance.PlayerData.baseMoveSpeed;
-
-        dashPenalty = Player.Instance.PlayerData.baseDashPenalty;
-        dashCooldown = Player.Instance.PlayerData.baseDashCooldown;
-        dashTime = Player.Instance.PlayerData.baseDashTime;
-        dashSpeed = Player.Instance.PlayerData.baseDashSpeed;
-
-        OnPlayerReady?.Invoke(transform);
-    }
-
     private void Update()
     {
-
-
         PlayerInput();
 
         UpdateAnimator();
@@ -167,7 +153,7 @@ public class PlayerMovement : MonoBehaviour
                 Rigidbody2D.MovePosition(Rigidbody2D.position + dashSpeed * Time.deltaTime * dashVector);
                 break;
             case PlayerActionState.IsUsingBasicAbility:
-                Rigidbody2D.MovePosition(Rigidbody2D.position + (moveSpeed * Player.Instance.PlayerData.ba_basePlayerSpeedPenalty) * Time.deltaTime * movementVector);
+                Rigidbody2D.MovePosition(Rigidbody2D.position + (moveSpeed * PlayerDataManager.Instance.PlayerDataRuntime.Ba_basePlayerSpeedPenalty) * Time.deltaTime * movementVector);
                 break;
             case PlayerActionState.IsUsingRangeAbility:
                 Rigidbody2D.MovePosition(Rigidbody2D.position + moveSpeed * Time.deltaTime * movementVector);
@@ -231,6 +217,18 @@ public class PlayerMovement : MonoBehaviour
     }
 
     //======================================================================
+    public void UpdateMovementParameters()
+    {
+        moveSpeed = PlayerDataManager.Instance.PlayerDataRuntime.BaseMoveSpeed;
+
+        dashPenalty = PlayerDataManager.Instance.PlayerDataRuntime.BaseDashPenalty;
+        dashCooldown = PlayerDataManager.Instance.PlayerDataRuntime.BaseDashCooldown;
+        dashTime = PlayerDataManager.Instance.PlayerDataRuntime.BaseDashTime;
+        dashSpeed = PlayerDataManager.Instance.PlayerDataRuntime.BaseDashSpeed;
+
+        OnPlayerReady?.Invoke(transform);
+    }
+
     public void SetImpairDuration(float impairDuration)
     {
         impairTimer = impairDuration;

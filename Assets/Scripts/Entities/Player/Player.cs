@@ -4,10 +4,10 @@ public class Player : SingletonMonobehaviour<Player>
 {
     [HideInInspector] public PlayerActionState actionState;
 
-    [SerializeField] private PlayerData playerData = default;
+    [SerializeField] private PlayerDataManager playerData = default;
     [SerializeField] private PlayerMovement playerMovement = default;
 
-    public PlayerData PlayerData => playerData;
+    public PlayerDataManager PlayerData => playerData;
     public PlayerMovement PlayerMovement => playerMovement;
 
     [Header("Misc:")]

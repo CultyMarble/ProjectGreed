@@ -32,15 +32,6 @@ public class BombAbility : MonoBehaviour
         PopulatePool();
     }
 
-    private void Start()
-    {
-        damage = Player.Instance.PlayerData.bomb_baseDamage;
-        radius = Player.Instance.PlayerData.bomb_baseRadius;
-        delayTime = Player.Instance.PlayerData.bomb_baseDelayTime;
-
-        UpdateBombCharge(3);
-    }
-
     private void Update()
     {
         UpdateInputDelay();
@@ -104,6 +95,16 @@ public class BombAbility : MonoBehaviour
     }
 
     //===========================================================================
+    public void UpdateAbilityParameters()
+    {
+        currentCharge = PlayerDataManager.Instance.PlayerDataRuntime.Bomb_baseCharge;
+        damage = PlayerDataManager.Instance.PlayerDataRuntime.Bomb_baseDamage;
+        radius = PlayerDataManager.Instance.PlayerDataRuntime.Bomb_baseRadius;
+        delayTime = PlayerDataManager.Instance.PlayerDataRuntime.Bomb_baseDelayTime;
+
+        UpdateBombCharge(3);
+    }
+
     public void UpdateBombCharge(int amount)
     {
         currentCharge += amount;
