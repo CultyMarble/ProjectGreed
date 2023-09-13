@@ -8,9 +8,12 @@ public class RandomSpawnManager : MonoBehaviour
 
     [SerializeField] private Transform[] enemyTypePoolList;
     [SerializeField] private GameObject[] objectList;
+    [SerializeField] private GameObject[] noteList;
 
     [SerializeField] private float objectSpawnChance;
+    [SerializeField] private float noteSpawnChance;
     [SerializeField] private int spawnNum;
+    private int totalSpawned = 0;
 
     private GameObject spawnPointList;
 
@@ -113,7 +116,8 @@ public class RandomSpawnManager : MonoBehaviour
         // Random Spawn
         foreach (int index in spawnPointIndexList)
         {
-            if(Random.value < objectSpawnChance)
+            // Spawn Item
+            if (Random.value < objectSpawnChance)
             {
                 Instantiate(objectList[Random.Range(0, objectList.Length)], spawnPointList.transform.GetChild(index).transform.position, Quaternion.identity);
                 continue;
@@ -124,14 +128,26 @@ public class RandomSpawnManager : MonoBehaviour
             // Spawn Enemy
             foreach(Transform enemy in enemyTypePoolList[poolIndex])
             {
+                if(totalSpawned >= spawnNum)
+                {
+                    break;
+                }
                 if (enemy.gameObject.activeSelf == false)
                 {
                     enemy.transform.position = spawnPointList.transform.GetChild(index).transform.position;
                     //Debug.Log("Transform Position:" + spawnPointList.transform.GetChild(index).transform.position);
                     enemy.gameObject.SetActive(true);
+                    totalSpawned++;
                     break;
                 }
             }
+            // Spawn Note
+            if (Random.value < noteSpawnChance)
+            {
+                Instantiate(noteList[Random.Range(0, noteList.Length)], spawnPointList.transform.GetChild(index).transform.position, Quaternion.identity);
+                continue;
+            }
+            totalSpawned = 0;
         }
     }
     private void DespawnEnemies()

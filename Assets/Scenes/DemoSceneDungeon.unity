@@ -155,6 +155,14 @@ PrefabInstance:
       propertyPath: centerRoomChance
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 4317000766357431429, guid: fb3a06f6d6e204a43b619d5eb2dd4e7d, type: 3}
+      propertyPath: npcList.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4317000766357431429, guid: fb3a06f6d6e204a43b619d5eb2dd4e7d, type: 3}
+      propertyPath: npcList.Array.data[0]
+      value: 
+      objectReference: {fileID: 4123117941785069872, guid: 227bdb8fdf996ef49aacae88b09b155d, type: 3}
     - target: {fileID: 4317000767536815821, guid: fb3a06f6d6e204a43b619d5eb2dd4e7d, type: 3}
       propertyPath: m_RootOrder
       value: 1

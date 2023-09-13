@@ -32,17 +32,18 @@ public class RoomManager : MonoBehaviour
     [Header("Room Delay")]
     public float delaySpawnRoomType = 0.75F;
     private bool delaySpawnRoomCheck = false;
-    public bool bossSpawned = false;
-    public bool shopSpawned = false;
+    [HideInInspector] public bool bossSpawned = false;
+    [HideInInspector] public bool shopSpawned = false;
 
     [Header("Room Spawn Chance")]
-    public float treasureRoomChance = 1.0F;
+    public float npcRoomChance = 1.0F;
     public float abandonedShopChance = 0.1F;
 
     [Space]
 
     [Header("Special Room")]
     public GameObject[] treasureItems;
+    public GameObject[] npcList;
 
     [Space]
 
@@ -122,7 +123,7 @@ public class RoomManager : MonoBehaviour
                 currentRooms[i].currentRoomType = RoomType.boss;
                 newBoss = Instantiate(boss, currentRooms[i].transform.position, Quaternion.identity);
                 newBoss.transform.parent = currentRooms[i].transform;
-                currentRooms[i].SetBossActive();
+                currentRooms[i].SetSpecialRoomActive();
 
                 break;
             }
@@ -150,7 +151,7 @@ public class RoomManager : MonoBehaviour
             newShop = Instantiate(abandonedShop, currentRooms[randomIndex].transform.position, Quaternion.identity);
             newShop.transform.parent = currentRooms[randomIndex].transform;
         }
-        currentRooms[randomIndex].SetShopActive();
+        currentRooms[randomIndex].SetSpecialRoomActive();
     }
 
     private void SetDeadEndRoomType()
@@ -196,7 +197,7 @@ public class RoomManager : MonoBehaviour
         }
 
         // SPAWN TREASURE ROOM
-        if (currentRooms.Count >= 6 && Random.value < treasureRoomChance || currentRooms.Count >= 10) // 6 Rooms or less (Gives a chance of spawn) | 6 Rooms or more (100%)
+        if (currentRooms.Count >= 6 && currentRooms.Count >= 10) // 6 Rooms or less (Gives a chance of spawn) | 6 Rooms or more (100%)
         {
             GameObject newTreasure;
             int randomItemIndex = Random.Range(0, treasureItems.Length);  
@@ -207,7 +208,19 @@ public class RoomManager : MonoBehaviour
 
             roomsList.RemoveAt(randomRoomIndex);
         }
+        // SPAWN NPC ROOM
+        if (currentRooms.Count >= 6 && Random.value < npcRoomChance || currentRooms.Count >= 10) // 6 Rooms or less (Gives a chance of spawn) | 6 Rooms or more (100%)
+        {
+            GameObject newNPC;
+            int randomItemIndex = Random.Range(0, npcList.Length);
+            int randomRoomIndex = Random.Range(0, roomsList.Count);
+            roomsList[randomRoomIndex].currentRoomType = RoomType.npc;
+            newNPC = Instantiate(npcList[randomItemIndex], roomsList[randomRoomIndex].transform.position, Quaternion.identity);
+            newNPC.transform.parent = roomsList[randomRoomIndex].transform;
 
+            roomsList.RemoveAt(randomRoomIndex);
+            currentRooms[randomRoomIndex].SetSpecialRoomActive();
+        }
     }
     public void RoomsFinished()
     {

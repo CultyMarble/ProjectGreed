@@ -18,6 +18,7 @@ public enum RoomType
     boss,
     shop,
     abandonShop,
+    npc,
 }
 
 public class RoomController : MonoBehaviour
@@ -36,7 +37,7 @@ public class RoomController : MonoBehaviour
     [Space]
 
     [Header("Special Rooms")]
-    [SerializeField] private GameObject shopRoom;
+    [SerializeField] private GameObject specialRoom;
 
     private void Awake()
     {
@@ -67,26 +68,44 @@ public class RoomController : MonoBehaviour
         roomType[random].SetActive(true);
     }
 
-    public void SetBossActive()
+    //public void SetBossActive()
+    //{
+    //    if (currentRoomType == RoomType.boss)
+    //    {
+    //        SetAllRoomActiveFalse();
+    //        if (specialRoom != null) specialRoom.SetActive(true);
+    //        GetComponentInChildren<GateManager>().disableGate = true;
+    //        roomManager.bossSpawned = true;
+    //    }
+    //}
+
+    //public void SetShopActive()
+    //{
+    //    if (currentRoomType == RoomType.shop || currentRoomType == RoomType.abandonShop)
+    //    {
+    //        SetAllRoomActiveFalse();
+    //        if (specialRoom != null) specialRoom.SetActive(true);
+    //        GetComponentInChildren<GateManager>().disableGate = true;
+    //        roomManager.shopSpawned = true;
+
+    //    }
+    //}
+    public void SetSpecialRoomActive()
     {
         if (currentRoomType == RoomType.boss)
         {
-            SetAllRoomActiveFalse();
-            if (shopRoom != null) shopRoom.SetActive(true);
-            GetComponentInChildren<GateManager>().disableGate = true;
             roomManager.bossSpawned = true;
         }
-    }
-
-    public void SetShopActive()
-    {
         if (currentRoomType == RoomType.shop || currentRoomType == RoomType.abandonShop)
         {
-            SetAllRoomActiveFalse();
-            if (shopRoom != null) shopRoom.SetActive(true);
-            GetComponentInChildren<GateManager>().disableGate = true;
             roomManager.shopSpawned = true;
-
         }
+        else
+        {
+            return;
+        }
+        SetAllRoomActiveFalse();
+        if (specialRoom != null) specialRoom.SetActive(true);
+        GetComponentInChildren<GateManager>().disableGate = true;
     }
 }

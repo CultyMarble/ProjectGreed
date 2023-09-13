@@ -10943,7 +10943,10 @@ MonoBehaviour:
   objectList:
   - {fileID: 7565985644124066584, guid: e389fcd3ca0d2c246825ae68b52252cf, type: 3}
   - {fileID: 9030462796631019687, guid: c7e45db25b76ecd4e9bc45807842e78c, type: 3}
+  noteList:
+  - {fileID: 2485148985364739039, guid: 3504d16640fe27a48a6ec58f6ef1780e, type: 3}
   objectSpawnChance: 0.3
+  noteSpawnChance: 0.05
   spawnNum: 5
 --- !u!1 &1652565419
 GameObject:

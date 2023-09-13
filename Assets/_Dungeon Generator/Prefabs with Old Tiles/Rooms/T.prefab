@@ -15040,7 +15040,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9200851228720532925}
   m_Layer: 0
-  m_Name: ROOM SHOP ---
+  m_Name: Special Room
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -61101,7 +61101,7 @@ MonoBehaviour:
   - {fileID: 4723029823828407659}
   - {fileID: 421554818376094136}
   - {fileID: 4048937506540142631}
-  shopRoom: {fileID: 847855793759852863}
+  specialRoom: {fileID: 847855793759852863}
 --- !u!1 &4021261307375679504
 GameObject:
   m_ObjectHideFlags: 0

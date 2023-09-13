@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ff3c4f7f7d428845a057991df0c0973, type: 3}
+  m_Name: NPCDialogue1
+  m_EditorClassIdentifier: 
+  hasBeenUsed: 1
+  dialogueLines:
+  - 'Confused Citizen: Hello there friend!'
+  - 'You: Oh.. Hello. What are you doing in here?'
+  - Confused Citizen:What am I.. What am I doing here? I'm.. I'm not sure..
+  - 'You: You''re not sure why you''re here? Do you even know where you are right
+    now?'
+  - 'Confused Citizen: Of course I do. We are in the great kingdom of Gold. The greates
+    kingdom there is. Where no one ever hungers and everyone is always happy.'
+  - 'You: Right.. Anyways. See ya.'

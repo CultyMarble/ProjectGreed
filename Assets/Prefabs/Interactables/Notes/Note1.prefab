@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2485148985364739024}
   - component: {fileID: 2485148985364739026}
   m_Layer: 0
-  m_Name: Note
+  m_Name: Note1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -84,10 +84,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db72d1d72515f5f42836ac068a7a4127, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueEntries: []
-  quickText: 
-  autoActive: 0
-  dialogueIndicator: {fileID: 0}
+  activateType: 1
+  haveActivated: {fileID: 0}
+  dialogueEntryArray:
+  - {fileID: 11400000, guid: 5dc31dfbb0318c84884aaf1701d6096f, type: 2}
 --- !u!1 &6640207986461867672
 GameObject:
   m_ObjectHideFlags: 0
@@ -145,7 +145,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
