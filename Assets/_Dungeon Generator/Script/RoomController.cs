@@ -96,9 +96,13 @@ public class RoomController : MonoBehaviour
         {
             roomManager.bossSpawned = true;
         }
-        if (currentRoomType == RoomType.shop || currentRoomType == RoomType.abandonShop)
+        else if (currentRoomType == RoomType.shop || currentRoomType == RoomType.abandonShop)
         {
             roomManager.shopSpawned = true;
+        }
+        else if (currentRoomType == RoomType.npc)
+        {
+
         }
         else
         {
