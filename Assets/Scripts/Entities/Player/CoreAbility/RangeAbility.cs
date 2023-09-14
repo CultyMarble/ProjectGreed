@@ -60,17 +60,18 @@ public class RangeAbility : MonoBehaviour
         {
             UpdateCurrentRecharge(100);
         }
+        if (Player.Instance.actionState == PlayerActionState.IsUsingRangeAbility
+            && Input.GetMouseButton(1) == false)
+        {
+            Player.Instance.actionState = PlayerActionState.none;
+        }
     }
 
     private void FixedUpdate()
     {
         CultyMarbleHelper.RotateGameObjectToMouseDirection(this.transform);
 
-        if (Player.Instance.actionState == PlayerActionState.IsUsingRangeAbility
-            && Input.GetMouseButton(1) == false)
-        {
-            Player.Instance.actionState = PlayerActionState.none;
-        }
+        
     }
 
     private void OnDisable()

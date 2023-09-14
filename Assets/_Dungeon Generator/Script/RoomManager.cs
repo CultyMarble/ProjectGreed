@@ -214,6 +214,10 @@ public class RoomManager : MonoBehaviour
             GameObject newNPC;
             int randomItemIndex = Random.Range(0, npcList.Length);
             int randomRoomIndex = Random.Range(0, currentRooms.Count);
+            if (currentRooms[randomRoomIndex].currentRoomType == RoomType.entry)
+            {
+                return;
+            }
             currentRooms[randomRoomIndex].currentRoomType = RoomType.npc;
             newNPC = Instantiate(npcList[randomItemIndex], currentRooms[randomRoomIndex].transform.position, Quaternion.identity);
             newNPC.transform.parent = roomsList[randomRoomIndex].transform;
