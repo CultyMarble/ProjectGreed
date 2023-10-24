@@ -54,6 +54,10 @@ public class BasicAbility : PlayerAbility
 
     protected override void Update()
     {
+        if (SceneControlManager.Instance.GameState == GameState.PauseMenu ||
+            SceneControlManager.Instance.GameState == GameState.OptionMenu)
+            return;
+
         base.Update();
 
         UpdateRechargeTimer();
@@ -69,6 +73,10 @@ public class BasicAbility : PlayerAbility
 
     private void FixedUpdate()
     {
+        if (SceneControlManager.Instance.GameState == GameState.PauseMenu ||
+            SceneControlManager.Instance.GameState == GameState.OptionMenu)
+            return;
+
         CultyMarbleHelper.RotateGameObjectToMouseDirection(this.transform);
     }
 
