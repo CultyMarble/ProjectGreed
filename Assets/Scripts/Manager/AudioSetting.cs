@@ -13,20 +13,36 @@ public class AudioSetting : SingletonMonobehaviour<AudioSetting>
 
     [SerializeField] private AudioSource musicSource;
     [SerializeField] private AudioSource SFXSource;
-    [SerializeField] private AudioClip[] musicSoundClips;
-    [SerializeField] private AudioClip[] SFXSoundClips;
 
-    private static AudioSetting instance;
-    private void Awake()
+    public enum SFXSound
     {
-        if (instance == null)
+        magicSplash,
+        zombieDeath,
+        batDeath,
+        maleDeathSound,
+        footstep,
+    }
+    public enum musicSound
+    {
+        BGMusic,
+    }
+    private Dictionary<SFXSound, AudioClip> SFXSoundAudioClipDictionary;
+    private Dictionary<musicSound, AudioClip> musicSoundAudioClipDictionary;
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        SFXSoundAudioClipDictionary = new Dictionary<SFXSound, AudioClip>();
+        foreach (SFXSound sound in System.Enum.GetValues(typeof(SFXSound)))
         {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
+            SFXSoundAudioClipDictionary[sound] = Resources.Load<AudioClip>(sound.ToString());
         }
-        else
+
+        musicSoundAudioClipDictionary = new Dictionary<musicSound, AudioClip>();
+        foreach (musicSound sound in System.Enum.GetValues(typeof(musicSound)))
         {
-            Destroy(gameObject);
+            musicSoundAudioClipDictionary[sound] = Resources.Load<AudioClip>(sound.ToString());
         }
     }
     private void Start()
@@ -78,20 +94,14 @@ public class AudioSetting : SingletonMonobehaviour<AudioSetting>
             setSFXVolume();
         }
     }
-    public void playMusicClip(int index)
+    public void playMusicClip(musicSound sound)
     {
-        if (index - 1 >= 0)
-        {
-            musicSource.clip = musicSoundClips[index - 1];
-            musicSource.Play();
-        }
+        musicSource.clip = musicSoundAudioClipDictionary[sound];
+        musicSource.Play();
     }
-    public void playSFXClip(int index)
+    public void playSFXClip(SFXSound sound)
     {
-        if (index - 1 >= 0)
-        {
-            SFXSource.clip = SFXSoundClips[index - 1];
-            SFXSource.Play();
-        }
+        SFXSource.clip = SFXSoundAudioClipDictionary[sound];
+        SFXSource.Play();
     }
 }
