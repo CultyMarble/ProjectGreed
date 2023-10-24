@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 
-public class AudioSetting : SingletonMonobehaviour<AudioSetting>
+public class AudioManager : SingletonMonobehaviour<AudioManager>
 {
     [SerializeField] private AudioMixer myMixer;
     [SerializeField] private Slider masterSlider;
