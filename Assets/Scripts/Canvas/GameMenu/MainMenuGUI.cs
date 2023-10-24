@@ -12,21 +12,12 @@ public class MainMenuGUI : SingletonMonobehaviour<MainMenuGUI>
     private float effectAnimationTimer = default;
     private int currentAnimationIndex = default;
 
-    [Header("Main Menu Title Text")]
-    [SerializeField] private GameObject mm_TitleText = default;
-
     [Header("Button Settings:")]
     [SerializeField] private Button mm_startButton = default;
-    [SerializeField] private TextMeshProUGUI mm_startButtonText = default;
     [SerializeField] private Button mm_exitButton = default;
 
-    private readonly float targetAlphaMax = 1.0f;
-    private readonly float targetAlphaMin = 0.1f;
-    private readonly float fadeSpeed = 1.25f;
-
-    private float targetAlpha = 0.1f;
-
-    private bool isMenuActive = default;
+    [Header("Content")]
+    [SerializeField] private GameObject content = default;
 
     //===========================================================================
     private void Start()
@@ -43,12 +34,7 @@ public class MainMenuGUI : SingletonMonobehaviour<MainMenuGUI>
 
     private void Update()
     {
-        if (isMenuActive == false)
-            return;
-
         BackgroundAnimation();
-
-        StartButtonInteract();
     }
 
     //===========================================================================
@@ -68,33 +54,9 @@ public class MainMenuGUI : SingletonMonobehaviour<MainMenuGUI>
         }
     }
 
-    private void StartButtonInteract()
-    {
-        mm_startButtonText.alpha = Mathf.MoveTowards(mm_startButtonText.alpha, targetAlpha, fadeSpeed * Time.deltaTime);
-
-        if (Mathf.Abs(mm_startButtonText.alpha - targetAlpha) <= 0.01f)
-        {
-            mm_startButtonText.alpha = targetAlpha;
-
-            if (mm_startButtonText.alpha == targetAlphaMax)
-            {
-                targetAlpha = targetAlphaMin;
-            }
-            else if (mm_startButtonText.alpha == targetAlphaMin)
-            {
-                targetAlpha = targetAlphaMax;
-            }
-        }
-    }
-
     //===========================================================================
-    public void SetActive(bool newBool)
+    public void SetActive(bool active)
     {
-        isMenuActive = newBool;
-
-        mainMenuBGImage.gameObject.SetActive(newBool);
-        mm_TitleText.SetActive(newBool);
-        mm_startButton.gameObject.SetActive(newBool);
-        mm_exitButton.gameObject.SetActive(newBool);
+        content.SetActive(active);
     }
 }

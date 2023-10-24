@@ -14,8 +14,11 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
     [SerializeField] private SceneName startingScene;
     [SerializeField] private Transform startingPosition;
 
-    [Header("Menu Settings:")]
+    [Header("Pause Menu:")]
     [SerializeField] private PauseMenuGUI pauseMenu;
+
+    [Header("Options Menu:")]
+    [SerializeField] private GameObject optionsMenu;
 
     [Header("Gameover Menu")]
     [SerializeField] private GameObject gameOverMenu;
@@ -30,7 +33,7 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
     private bool isLoadingScene = default;
     public bool IsLoadingScene => isLoadingScene;
 
-    public GameState CurrentGameState = default;
+    public GameState GameState = default;
 
     //===========================================================================
     private void OnEnable()
@@ -121,7 +124,7 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         StartCoroutine(LoadingScreen(0.0f));
         EventManager.CallAfterSceneLoadedLoadingScreenEvent();
 
-        CurrentGameState = GameState.GameplayHub;
+        GameState = GameState.Hub;
     }
 
     private IEnumerator BackToMainMenu()
@@ -131,7 +134,7 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
 
         MainMenuGUI.Instance.SetActive(true);
         gameOverMenu.SetActive(false);
-        pauseMenu.SetPauseMenuActive(false);
+        pauseMenu.SetActive(false);
 
         EventManager.CallBeforeSceneUnloadEvent();
         yield return SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().buildIndex);
@@ -139,7 +142,7 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         yield return StartCoroutine(LoadingScreen(0.0f));
         EventManager.CallAfterSceneLoadedLoadingScreenEvent();
 
-        CurrentGameState = GameState.MainMenu;
+        GameState = GameState.MainMenu;
     }
 
     //===========================================================================
@@ -156,7 +159,6 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         if (isLoadingScreenActive == false)
         {
             StartCoroutine(BackToMainMenu());
-            CurrentGameState = GameState.MainMenu;
         }
     }
 
@@ -165,7 +167,7 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         if (isLoadingScreenActive == false)
         {
             MainMenuGUI.Instance.SetActive(false);
-            pauseMenu.SetPauseMenuActive(false);
+            pauseMenu.SetActive(false);
             gameOverMenu.SetActive(false);
 
             SaveDataManager.Instance.LoadPlayerDataToRuntimeData(SaveDataSlot.save01);
@@ -184,7 +186,7 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
 
             if (sceneName == SceneName.DemoSceneDungeon.ToString())
             {
-                CurrentGameState = GameState.GameplayDungeon;
+                GameState = GameState.Dungeon;
             }
         }
     }

@@ -1,21 +1,29 @@
-using System.Net.NetworkInformation;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PauseMenuGUI : MonoBehaviour
+public class PauseMenuGUI : SingletonMonobehaviour<PauseMenuGUI>
 {
-    [Header("Pause Menu")]
-    [SerializeField] private GameObject pm_BGIMage = default;
-    [SerializeField] private GameObject pm_Text = default;
+    [SerializeField] private GameObject content = default;
+
+    [Header("Menu Content:")]
+    [SerializeField] private Button pm_OptionsMenuButton = default;
     [SerializeField] private Button pm_AbandonRunButton = default;
     [SerializeField] private Button pm_MainMenuButton = default;
 
-    private GameState pm_priorGameState = default;
+    private GameState priorGameState = default;
 
     //===========================================================================
     private void OnEnable()
     {
         // Pause Menu
+        pm_OptionsMenuButton.onClick.AddListener(() =>
+        {
+            OptionMenuGUI.Instance.SetActive(true);
+            SceneControlManager.Instance.GameState = GameState.OptionMenu;
+
+            SetActive(false);
+        });
+
         pm_AbandonRunButton.onClick.AddListener(() => SceneControlManager.Instance.RespawnPlayerAtHub());
         pm_MainMenuButton.onClick.AddListener(() => SceneControlManager.Instance.BackToMainMenuWrapper());
     }
@@ -25,51 +33,27 @@ public class PauseMenuGUI : MonoBehaviour
         if (SceneControlManager.Instance.IsLoadingScreenActive)
             return;
 
+        if (SceneControlManager.Instance.GameState == GameState.MainMenu)
+            return;
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            switch (SceneControlManager.Instance.CurrentGameState)
+            if (SceneControlManager.Instance.GameState == GameState.PauseMenu)
             {
-                case GameState.GameplayHub:
-                    SetPauseMenuActive(true);
-                    pm_priorGameState = SceneControlManager.Instance.CurrentGameState;
-                    SceneControlManager.Instance.CurrentGameState = GameState.GameplayMenu;
-                    break;
-                case GameState.GameplayDungeon:
-                    SetPauseMenuActive(true);
-                    pm_priorGameState = SceneControlManager.Instance.CurrentGameState;
-                    SceneControlManager.Instance.CurrentGameState = GameState.GameplayMenu;
-                    break;
-                case GameState.GameplayMenu:
-                    SetPauseMenuActive(false);
-                    SceneControlManager.Instance.CurrentGameState = GameState.GameplayHub;
-                    break;
-                default:
-                    break;
+                SetActive(false);
+                SceneControlManager.Instance.GameState = priorGameState;
+                return;
             }
+
+            SetActive(true);
+            priorGameState = SceneControlManager.Instance.GameState;
+            SceneControlManager.Instance.GameState = GameState.PauseMenu;
         }
     }
 
     //===========================================================================
-    public void SetPauseMenuActive(bool newBool)
+    public void SetActive(bool active)
     {
-        if (newBool)
-        {
-            pm_Text.SetActive(newBool);
-            pm_BGIMage.SetActive(newBool);
-
-            if (SceneControlManager.Instance.CurrentGameState == GameState.GameplayDungeon)
-                pm_AbandonRunButton.gameObject.SetActive(newBool);
-
-            pm_MainMenuButton.gameObject.SetActive(newBool);
-        }
-        else
-        {
-            SceneControlManager.Instance.CurrentGameState = pm_priorGameState;
-
-            pm_Text.SetActive(newBool);
-            pm_BGIMage.SetActive(newBool);
-            pm_AbandonRunButton.gameObject.SetActive(newBool);
-            pm_MainMenuButton.gameObject.SetActive(newBool);
-        }
+        content.SetActive(active);
     }
 }

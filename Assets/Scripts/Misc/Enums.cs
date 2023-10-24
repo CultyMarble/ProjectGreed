@@ -33,7 +33,8 @@ public enum SceneName
 public enum GameState
 {
     MainMenu,
-    GameplayHub,
-    GameplayDungeon,
-    GameplayMenu,
+    Hub,
+    Dungeon,
+    PauseMenu,
+    OptionMenu,
 }
