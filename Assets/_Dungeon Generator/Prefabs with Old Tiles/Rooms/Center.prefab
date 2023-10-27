@@ -71976,6 +71976,10 @@ PrefabInstance:
       propertyPath: roomVariants
       value: 
       objectReference: {fileID: 4790525360005978941}
+    - target: {fileID: 5758849717937450301, guid: 81b946a92ba610a4c9efbda6d57e7f45, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6478101377928035737, guid: 81b946a92ba610a4c9efbda6d57e7f45, type: 3}
       propertyPath: m_Name
       value: __Gate Trigger

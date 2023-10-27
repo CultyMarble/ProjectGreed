@@ -67342,6 +67342,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentRoomType: 0
   roomVariant: B
+  added: 0
   roomType:
   - {fileID: 6513149241168145263}
   - {fileID: 4006767092898063754}
@@ -67400,6 +67401,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   openingDirection: 2
   spawned: 0
+  destroyer: 0
 --- !u!50 &4506294035325290245
 Rigidbody2D:
   serializedVersion: 4
@@ -135432,6 +135434,10 @@ PrefabInstance:
       propertyPath: roomVariants
       value: 
       objectReference: {fileID: 4306575210921574459}
+    - target: {fileID: 5758849717937450301, guid: 81b946a92ba610a4c9efbda6d57e7f45, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6478101377928035737, guid: 81b946a92ba610a4c9efbda6d57e7f45, type: 3}
       propertyPath: m_Name
       value: __Gate Trigger

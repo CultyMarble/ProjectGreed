@@ -41,13 +41,18 @@ public class GateManager : MonoBehaviour
         {
             ActiveGates(true);
         }
-        else
-        {
-            ActiveGates(false);
-        }
     }
     private void ActiveGates(bool active)
     {
+        if (locked)
+        {
+            SpriteRenderer[] sprites = gates.GetComponentsInChildren<SpriteRenderer>();
+            
+            foreach(SpriteRenderer gate in sprites)
+            {
+                gate.color = Color.yellow;
+            }
+        }
          gates.SetActive(active);
     }
 

@@ -595,6 +595,7 @@ GameObject:
   - component: {fileID: 7109318354627496508}
   - component: {fileID: 3013352444999147950}
   - component: {fileID: 7332462655960571095}
+  - component: {fileID: 6715554833569249681}
   m_Layer: 7
   m_Name: pfZombie
   m_TagString: Enemy
@@ -721,6 +722,7 @@ MonoBehaviour:
   keepDistance: 0
   patrolArea: 0
   patrolTransforms: {fileID: 0}
+  dontUpdateDestination: 0
 --- !u!114 &5097535545587337296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -812,7 +814,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8301459616188158172}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6bef9e0c6b9173749a9063029f75e4d9, type: 3}
   m_Name: 
@@ -855,6 +857,22 @@ MonoBehaviour:
   pfTempCurrency: {fileID: 2443823218653012819, guid: 3d947b54961e7fd49bec6bc289615a57, type: 3}
   minAmount: 0
   maxAmount: 0
+--- !u!114 &6715554833569249681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8301459616188158172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ce3bae96456c784c832b6298bb18343, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lungeActivateDistance: 4
+  damage: 1
+  coolDownTime: 3
+  chargeTime: 1
 --- !u!1 &8301459617392668569
 GameObject:
   m_ObjectHideFlags: 0
