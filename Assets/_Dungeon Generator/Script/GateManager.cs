@@ -13,8 +13,10 @@ public class GateManager : MonoBehaviour
 
     [Header("Gate Data")]
     public bool playerInsideRoom = false;
+    public bool playerInLockZone = false;
     public bool clearedRoom = false;
     public bool disableGate = false;
+    public bool locked = false;
 
     [Header("Gate Referance")]
     [SerializeField] private GameObject roomVariants;
@@ -23,10 +25,22 @@ public class GateManager : MonoBehaviour
     private void Awake()
     {
         roomController = GetComponentInParent<RoomController>();
-        randomSpawnManager = GameObject.Find("RandomSpawnManager").GetComponent<RandomSpawnManager>();
-
+        if (!locked)
+        {
+            randomSpawnManager = GameObject.Find("RandomSpawnManager").GetComponent<RandomSpawnManager>();
+        }
     }
-
+    private void Update()
+    {
+        if (locked)
+        {
+            ActiveGates(true);
+        }
+        else
+        {
+            ActiveGates(false);
+        }
+    }
     private void ActiveGates(bool active)
     {
          gates.SetActive(active);
@@ -45,7 +59,11 @@ public class GateManager : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player") && collision.GetType().ToString() != Tags.CAPSULECOLLIDER2D)
+        if (locked)
+        {
+            return;
+        }
+        if (collision.gameObject.CompareTag("Player") && collision.GetType().ToString() != Tags.CAPSULECOLLIDER2D && !playerInsideRoom)
         {
             playerInsideRoom = true;
 
@@ -76,7 +94,7 @@ public class GateManager : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player") && collision.GetType().ToString() != Tags.CAPSULECOLLIDER2D)
+        if (collision.gameObject.CompareTag("Player") && collision.GetType().ToString() != Tags.CAPSULECOLLIDER2D && clearedRoom)
         {
             playerInsideRoom = false;
         }
@@ -97,13 +115,5 @@ public class GateManager : MonoBehaviour
         {
             RoomCleared();
         }
-    }
-
-    private void RoomBossCheck()
-    {
-        if (roomController.currentRoomType != RoomType.boss) return;
-
-        //print("TEST");
-
     }
 }

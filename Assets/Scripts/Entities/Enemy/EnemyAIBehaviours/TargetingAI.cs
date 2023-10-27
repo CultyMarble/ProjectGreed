@@ -155,7 +155,7 @@ public class TargetingAI : MonoBehaviour
     }
     public bool CheckNoTarget()
     {
-        if(currentDestination.position == transform.position)
+        if(currentDestination.position == transform.position && !CheckLineOfSight())
         {
             return true;
         }

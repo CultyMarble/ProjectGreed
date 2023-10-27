@@ -44,7 +44,7 @@ public class ShootAI : MonoBehaviour
     //===========================================================================
     private void ShootCoolDown()
     {
-        if (targetingAI.CheckNoTarget() || isShooting == true)
+        if (isShooting == true)
             return;
 
         shootCoolDownTimer -= Time.deltaTime;

@@ -15,14 +15,11 @@ public class EnemyHealth : MonoBehaviour
     private float feedbackDamageTime = 0.10f;
     private float feedbackDamageTimer = default;
 
-    private RangeAbility player;
-
     //======================================================================
     private void Awake()
     {
         currentHealth = maxHealth;
         UpdateCurrentHealth();
-        player = GameObject.Find("Player").GetComponentInChildren<RangeAbility>();
     }
 
     private void Update()
@@ -55,7 +52,8 @@ public class EnemyHealth : MonoBehaviour
         currentHealth = maxHealth;
         OnHealthChanged?.Invoke(this, new OnHealthChangedEvenArgs { healthRatio = currentHealth / maxHealth });
         gameObject.SetActive(false);
-        player.UpdateCurrentRecharge(100);
+
+        Player.Instance.GetComponentInChildren<RangeAbility>().UpdateCurrentRecharge(100);
     }
 
     //======================================================================

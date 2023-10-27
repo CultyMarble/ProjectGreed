@@ -44,7 +44,6 @@ public class ShopKeeper : MonoBehaviour
                 if (listOfItem.Contains(randomItemIndex) == false)
                 {
                     listOfItem.Add(randomItemIndex);
-                    Debug.Log(randomItemIndex.ToString());
                     _isIndexNew = false;
                 }
             }

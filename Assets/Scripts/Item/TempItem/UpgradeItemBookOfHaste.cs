@@ -13,8 +13,6 @@ public class UpgradeItemBookOfHaste : UpgradeItem
 
     protected override void RemoveItemEffect()
     {
-        Player.Instance.GetComponent<PlayerMovement>().SetDashParameter(
-            Player.Instance.PlayerData.baseDashTime, 
-            Player.Instance.PlayerData.baseDashSpeed);
+
     }
 }
