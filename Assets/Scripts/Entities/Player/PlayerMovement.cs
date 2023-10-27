@@ -50,6 +50,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        if (SceneControlManager.Instance.GameState == GameState.PauseMenu ||
+            SceneControlManager.Instance.GameState == GameState.OptionMenu)
+            return;
+
         PlayerInput();
 
         UpdateAnimator();
@@ -66,6 +70,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (SceneControlManager.Instance.GameState == GameState.PauseMenu ||
+            SceneControlManager.Instance.GameState == GameState.OptionMenu)
+            return;
+
         MovePlayerPosition();
     }
 

@@ -64,15 +64,6 @@ public partial class @GreedControls : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Area"",
-                    ""type"": ""Button"",
-                    ""id"": ""bb6fd0d1-f790-4b78-94cf-56fc4db4445d"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Bomb"",
                     ""type"": ""Button"",
                     ""id"": ""931188b4-0f88-4dbf-9e49-7142c458120f"",
@@ -241,17 +232,6 @@ public partial class @GreedControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Joystick"",
                     ""action"": ""RightClick"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""89b9866f-67d4-42bc-b9e5-38cbae74ddc0"",
-                    ""path"": ""<Keyboard>/q"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad;Keyboard&Mouse"",
-                    ""action"": ""Area"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -898,7 +878,6 @@ public partial class @GreedControls : IInputActionCollection2, IDisposable
         m_Player_LeftClick = m_Player.FindAction("LeftClick", throwIfNotFound: true);
         m_Player_RightClick = m_Player.FindAction("RightClick", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
-        m_Player_Area = m_Player.FindAction("Area", throwIfNotFound: true);
         m_Player_Bomb = m_Player.FindAction("Bomb", throwIfNotFound: true);
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
         m_Player_Escape = m_Player.FindAction("Escape", throwIfNotFound: true);
@@ -977,7 +956,6 @@ public partial class @GreedControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_LeftClick;
     private readonly InputAction m_Player_RightClick;
     private readonly InputAction m_Player_Interact;
-    private readonly InputAction m_Player_Area;
     private readonly InputAction m_Player_Bomb;
     private readonly InputAction m_Player_Dash;
     private readonly InputAction m_Player_Escape;
@@ -989,7 +967,6 @@ public partial class @GreedControls : IInputActionCollection2, IDisposable
         public InputAction @LeftClick => m_Wrapper.m_Player_LeftClick;
         public InputAction @RightClick => m_Wrapper.m_Player_RightClick;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
-        public InputAction @Area => m_Wrapper.m_Player_Area;
         public InputAction @Bomb => m_Wrapper.m_Player_Bomb;
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
         public InputAction @Escape => m_Wrapper.m_Player_Escape;
@@ -1014,9 +991,6 @@ public partial class @GreedControls : IInputActionCollection2, IDisposable
                 @Interact.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                 @Interact.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                 @Interact.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
-                @Area.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnArea;
-                @Area.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnArea;
-                @Area.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnArea;
                 @Bomb.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBomb;
                 @Bomb.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBomb;
                 @Bomb.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBomb;
@@ -1042,9 +1016,6 @@ public partial class @GreedControls : IInputActionCollection2, IDisposable
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
-                @Area.started += instance.OnArea;
-                @Area.performed += instance.OnArea;
-                @Area.canceled += instance.OnArea;
                 @Bomb.started += instance.OnBomb;
                 @Bomb.performed += instance.OnBomb;
                 @Bomb.canceled += instance.OnBomb;
@@ -1214,7 +1185,6 @@ public partial class @GreedControls : IInputActionCollection2, IDisposable
         void OnLeftClick(InputAction.CallbackContext context);
         void OnRightClick(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
-        void OnArea(InputAction.CallbackContext context);
         void OnBomb(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
         void OnEscape(InputAction.CallbackContext context);

@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CurrencyShopTrigger : MonoBehaviour
@@ -12,20 +9,22 @@ public class CurrencyShopTrigger : MonoBehaviour
         playerCurrencies = FindObjectOfType<PlayerCurrencies>();
     }
 
-    //private void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    if (collision.gameObject.CompareTag("Player") && collision.GetType().ToString() != Tags.CAPSULECOLLIDER2D)
-    //    {
-    //        playerCurrencies.Open();
-    //    }
-    //}
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player") && collision.GetType().ToString() != Tags.CAPSULECOLLIDER2D)
+        {
+            // playerCurrencies.Open();
+            Debug.Log("Show Currencies");
+        }
+    }
 
-    //private void OnTriggerExit2D(Collider2D collision)
-    //{
-    //    if (collision.gameObject.CompareTag("Player") && collision.GetType().ToString() != Tags.CAPSULECOLLIDER2D)
-    //    {
-    //        playerCurrencies.Close();
-    //    }
-    //}
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player") && collision.GetType().ToString() != Tags.CAPSULECOLLIDER2D)
+        {
+            // playerCurrencies.Close();
+            Debug.Log("Hide Currencies");
+        }
+    }
 
 }

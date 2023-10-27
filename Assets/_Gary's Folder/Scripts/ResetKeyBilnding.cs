@@ -1,12 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class ResetKeyBilnding : MonoBehaviour
 {
     [SerializeField] private InputActionAsset inputActions;
-
 
     public void ResetAllBindings()
     {
@@ -17,6 +14,4 @@ public class ResetKeyBilnding : MonoBehaviour
 
         PlayerPrefs.DeleteKey("rebinds"); 
     }
-
-
 }

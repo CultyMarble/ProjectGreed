@@ -42,15 +42,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Area",
-                    "type": "Button",
-                    "id": "bb6fd0d1-f790-4b78-94cf-56fc4db4445d",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Bomb",
                     "type": "Button",
                     "id": "931188b4-0f88-4dbf-9e49-7142c458120f",
@@ -219,17 +210,6 @@
                     "processors": "",
                     "groups": "Joystick",
                     "action": "RightClick",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "89b9866f-67d4-42bc-b9e5-38cbae74ddc0",
-                    "path": "<Keyboard>/q",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad;Keyboard&Mouse",
-                    "action": "Area",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
