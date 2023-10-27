@@ -81,7 +81,6 @@ public class RoomManager : MonoBehaviour
 
     private void LoadScene()
     {
-        //Destroy(keys[loops]);
         shopSpawned = false;
         keySpawned = false;
 
@@ -92,7 +91,6 @@ public class RoomManager : MonoBehaviour
         }
         if (loops > 0)
         {
-            //loops--;
             StartNewBranch();
             delaySpawnRoomType = 0.75F;
             return;
@@ -170,7 +168,6 @@ public class RoomManager : MonoBehaviour
         }
         GameObject newShop;
         int randomIndex = Random.Range(0, currentRoomCount.Count);
-        //RoomType roomType = Random.value < abandonedShopChance ? RoomType.abandonShop : RoomType.shop;
         for(int i = currentRoomCount.Count/2; i < currentRoomCount.Count-1; i++)
         {
             if(currentRoomCount[randomIndex].currentRoomType != RoomType.normal)
@@ -302,7 +299,6 @@ public class RoomManager : MonoBehaviour
                 onRoomsGenerated();
             }
         }
-        //this.GetComponent<RoomManager>().enabled = false;
     }
 
     public void StartNewBranch()

@@ -14,7 +14,7 @@ public class LockTrigger : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F) && gateManager.playerInLockZone == true)
         {
-            gateManager.locked = false;
+            gateManager.disableGate = true;
             Player.Instance.SetInteractPromtTextActive(false);
         }
     }

@@ -32,7 +32,12 @@ public class GateManager : MonoBehaviour
     }
     private void Update()
     {
-        if (locked)
+        if (disableGate)
+        {
+            ActiveGates(false);
+            return;
+        }
+        else if (locked)
         {
             ActiveGates(true);
         }
@@ -59,15 +64,11 @@ public class GateManager : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (locked)
-        {
-            return;
-        }
         if (collision.gameObject.CompareTag("Player") && collision.GetType().ToString() != Tags.CAPSULECOLLIDER2D && !playerInsideRoom)
         {
             playerInsideRoom = true;
 
-            if (clearedRoom || disableGate)
+            if (clearedRoom || disableGate || locked)
             {
                 return;
             }
