@@ -328,6 +328,14 @@ public class RoomManager : MonoBehaviour
             if (newRoom != null)
             {
                 newRoom.gameObject.GetComponentInChildren<GateManager>().locked = true;
+                if(loops == 0)
+                {
+                    newRoom.gameObject.GetComponentInChildren<GateManager>().keytype = PlayerCurrencies.KeyType.Silver;
+                }
+                if(loops == 1)
+                {
+                    newRoom.gameObject.GetComponentInChildren<GateManager>().keytype = PlayerCurrencies.KeyType.Gold;
+                }
             }
             delaySpawnRoomCheck = false;
             delaySpawnRoomType = 0.05F;

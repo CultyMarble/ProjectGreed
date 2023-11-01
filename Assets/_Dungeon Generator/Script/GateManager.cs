@@ -17,6 +17,7 @@ public class GateManager : MonoBehaviour
     public bool clearedRoom = false;
     public bool disableGate = false;
     public bool locked = false;
+    public PlayerCurrencies.KeyType keytype;
 
     [Header("Gate Referance")]
     [SerializeField] private GameObject roomVariants;

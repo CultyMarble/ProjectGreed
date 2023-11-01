@@ -14,8 +14,23 @@ public class LockTrigger : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F) && gateManager.playerInLockZone == true)
         {
-            gateManager.disableGate = true;
-            Player.Instance.SetInteractPromtTextActive(false);
+            switch (gateManager.keytype)
+            {
+                case PlayerCurrencies.KeyType.Silver:
+                    if (PlayerCurrencies.Instance.hasSilverKey)
+                    {
+                        gateManager.disableGate = true;
+                        Player.Instance.SetInteractPromtTextActive(false);
+                    }
+                    break;
+                case PlayerCurrencies.KeyType.Gold:
+                    if (PlayerCurrencies.Instance.hasGoldKey)
+                    {
+                        gateManager.disableGate = true;
+                        Player.Instance.SetInteractPromtTextActive(false);
+                    }
+                    break;
+            }
         }
     }
 
