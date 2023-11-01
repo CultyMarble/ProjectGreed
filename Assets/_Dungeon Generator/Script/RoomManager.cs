@@ -77,6 +77,10 @@ public class RoomManager : MonoBehaviour
         {
             SpawnRoomTypes();
         }
+        else
+        {
+            SetBossRoom();
+        }
     }
 
     private void LoadScene()
@@ -119,7 +123,6 @@ public class RoomManager : MonoBehaviour
         }
         if (delaySpawnRoomType <= 0F && !delaySpawnRoomCheck)
         {
-            SetBossRoom();
             SetShopRoom();
             SetKeyRoom();
             SetTreasureRoom();
@@ -141,7 +144,7 @@ public class RoomManager : MonoBehaviour
 
     private void SetBossRoom()
     {
-        if (bossSpawned || loops < 2)
+        if (bossSpawned)
         {
             return;
         }
@@ -328,11 +331,11 @@ public class RoomManager : MonoBehaviour
             if (newRoom != null)
             {
                 newRoom.gameObject.GetComponentInChildren<GateManager>().locked = true;
-                if(loops == 0)
+                if(loops == 1)
                 {
                     newRoom.gameObject.GetComponentInChildren<GateManager>().keytype = PlayerCurrencies.KeyType.Silver;
                 }
-                if(loops == 1)
+                else if(loops == 2)
                 {
                     newRoom.gameObject.GetComponentInChildren<GateManager>().keytype = PlayerCurrencies.KeyType.Gold;
                 }
@@ -358,6 +361,14 @@ public class RoomManager : MonoBehaviour
                     if (newRoom != null)
                     {
                         newRoom.gameObject.GetComponentInChildren<GateManager>().locked = true;
+                        if (loops == 0)
+                        {
+                            newRoom.gameObject.GetComponentInChildren<GateManager>().keytype = PlayerCurrencies.KeyType.Silver;
+                        }
+                        else if (loops == 1)
+                        {
+                            newRoom.gameObject.GetComponentInChildren<GateManager>().keytype = PlayerCurrencies.KeyType.Gold;
+                        }
                     }
 
                     delaySpawnRoomCheck = false;

@@ -48,10 +48,19 @@ public class GateManager : MonoBehaviour
         if (locked)
         {
             SpriteRenderer[] sprites = gates.GetComponentsInChildren<SpriteRenderer>();
-            
-            foreach(SpriteRenderer gate in sprites)
+            if(keytype == PlayerCurrencies.KeyType.Silver)
             {
-                gate.color = Color.yellow;
+                foreach (SpriteRenderer gate in sprites)
+                {
+                    gate.color = Color.grey;
+                }
+            }
+            else if (keytype == PlayerCurrencies.KeyType.Gold)
+            {
+                foreach (SpriteRenderer gate in sprites)
+                {
+                    gate.color = Color.yellow;
+                }
             }
         }
          gates.SetActive(active);
