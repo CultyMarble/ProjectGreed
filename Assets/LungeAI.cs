@@ -79,7 +79,6 @@ public class LungeAI : MonoBehaviour
 
     private void Lunge()
     {
-        targetingAI.dontUpdateDestination = true;
         isLunging = true;
         animator.SetBool("isLunging", true);
         pathfinder.maxSpeed = 12;
@@ -89,6 +88,8 @@ public class LungeAI : MonoBehaviour
         isLunging = false;
         isCharging = false;
         targetingAI.isAttacking = false;
+        targetingAI.dontUpdateDestination = false;
+
         animator.SetBool("isLunging", false);
         animator.SetBool("isCharging", false);
         pathfinder.maxSpeed = 0;
@@ -107,7 +108,7 @@ public class LungeAI : MonoBehaviour
 
     public void CancelTargeting()
     {
-        targetingAI.dontUpdateDestination = false;
+        targetingAI.dontUpdateDestination = true;
     }
 
     public void DealLungeDamage()

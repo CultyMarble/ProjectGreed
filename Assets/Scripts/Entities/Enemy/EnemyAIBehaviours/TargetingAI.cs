@@ -55,6 +55,7 @@ public class TargetingAI : MonoBehaviour
     {
         if (dontUpdateDestination)
         {
+            currentDestination.position = lastKnownPosition;
             return;
         }
         LookForTarget();
