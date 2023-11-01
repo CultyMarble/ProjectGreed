@@ -19,7 +19,7 @@ public class SceneTransitZone : MonoBehaviour
             {
                 if (playFootStep)
                 {
-                    SoundManager.Instance.PlaySound(SoundManager.Sound.footstep);
+                    AudioManager.Instance.playSFXClip(AudioManager.SFXSound.footstep);
                     playFootStep = false;
                 }
 
