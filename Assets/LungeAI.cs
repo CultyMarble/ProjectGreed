@@ -32,11 +32,16 @@ public class LungeAI : MonoBehaviour
         canLunge = false;
         coolDownTimeCounter = coolDownTime;
         chargeTimeCounter = chargeTime;
-        pathfinder = GetComponent<Pathfinding.AIPath>();
+        pathfinder = targetingAI.pathfinder;
     }
 
     private void Update()
     {
+        if (SceneControlManager.Instance.GameState == GameState.PauseMenu ||
+            SceneControlManager.Instance.GameState == GameState.OptionMenu)
+        {
+            return;
+        }
         if (canLunge && !targetingAI.CheckNoTarget() && !isLunging && !isCharging)
         {
             if (Vector2.Distance(transform.position, targetingAI.currentTarget) <= lungeActivateDistance)

@@ -41,6 +41,9 @@ public class BasicAbilityBubble : MonoBehaviour
 
     private void Update()
     {
+        if (SceneControlManager.Instance.GameState == GameState.PauseMenu ||
+            SceneControlManager.Instance.GameState == GameState.OptionMenu)
+            return;
         // Update Moving Direction
         timeUntilChangeDirection -= Time.deltaTime;
         if (timeUntilChangeDirection <= 0)

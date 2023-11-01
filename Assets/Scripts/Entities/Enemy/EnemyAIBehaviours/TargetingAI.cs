@@ -24,17 +24,25 @@ public class TargetingAI : MonoBehaviour
     private Vector3 lastKnownPosition;
 
     public bool dontUpdateDestination = false;
+    public Pathfinding.AIPath pathfinder;
 
     private void Start()
     {
         currentTarget = Vector3.zero;
         currentDestination.position = transform.position;
         lastKnownPosition = transform.position;
+        pathfinder = GetComponent<Pathfinding.AIPath>();
     }
 
     //===========================================================================
     private void FixedUpdate()
     {
+        if (SceneControlManager.Instance.GameState == GameState.PauseMenu ||
+            SceneControlManager.Instance.GameState == GameState.OptionMenu)
+        {
+            pathfinder.maxSpeed = 0;
+            return;
+        }
         if (!holdMovement)
         {
             HandleTargeting();

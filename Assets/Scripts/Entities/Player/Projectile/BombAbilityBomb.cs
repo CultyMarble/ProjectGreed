@@ -9,6 +9,9 @@ public class BombAbilityBomb : MonoBehaviour
     //===========================================================================
     private void Update()
     {
+        if (SceneControlManager.Instance.GameState == GameState.PauseMenu ||
+            SceneControlManager.Instance.GameState == GameState.OptionMenu)
+            return;
         UpdateDelayTime();
 
         if (delayTime <= 0)

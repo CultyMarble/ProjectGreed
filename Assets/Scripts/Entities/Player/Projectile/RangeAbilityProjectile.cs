@@ -45,6 +45,9 @@ public class RangeAbilityProjectile : MonoBehaviour
     //===========================================================================
     private void Update()
     {
+        if (SceneControlManager.Instance.GameState == GameState.PauseMenu ||
+            SceneControlManager.Instance.GameState == GameState.OptionMenu)
+            return;
         transform.position += moveSpeed * Time.deltaTime * moveDirection;
 
         ProjectileAnimation();
