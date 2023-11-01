@@ -723,6 +723,7 @@ MonoBehaviour:
   patrolArea: 0
   patrolTransforms: {fileID: 0}
   dontUpdateDestination: 0
+  pathfinder: {fileID: 0}
 --- !u!114 &5097535545587337296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -856,7 +857,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pfTempCurrency: {fileID: 2443823218653012819, guid: 3d947b54961e7fd49bec6bc289615a57, type: 3}
   minAmount: 0
-  maxAmount: 0
+  maxAmount: 5
 --- !u!114 &6715554833569249681
 MonoBehaviour:
   m_ObjectHideFlags: 0

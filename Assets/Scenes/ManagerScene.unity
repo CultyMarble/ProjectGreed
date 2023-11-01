@@ -10328,6 +10328,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayPlayerCurrency: {fileID: 1837672666}
+  hasSilverKey: 0
+  hasGoldKey: 0
 --- !u!114 &1451012643
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11912,8 +11914,10 @@ MonoBehaviour:
   - {fileID: 2485148985364739039, guid: f38bc8c64a6f7db45a8a2915dcee6d83, type: 3}
   - {fileID: 2485148985364739039, guid: cd1ef8a7f7e07cb4ab6dba00b993954a, type: 3}
   - {fileID: 2485148985364739039, guid: 2fd83230e3dd22e46b9b40be74c9e534, type: 3}
+  chestList: []
   objectSpawnChance: 0.3
-  noteSpawnChance: 0.05
+  noteSpawnChance: 0.075
+  chestSpawnChance: 0.1
   spawnNum: 5
 --- !u!1 &1636369409
 GameObject:

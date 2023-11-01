@@ -179,6 +179,22 @@ PrefabInstance:
       propertyPath: npcList.Array.data[0]
       value: 
       objectReference: {fileID: 4123117941785069872, guid: 227bdb8fdf996ef49aacae88b09b155d, type: 3}
+    - target: {fileID: 4317000766357431429, guid: fb3a06f6d6e204a43b619d5eb2dd4e7d, type: 3}
+      propertyPath: treasureItems.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4317000766357431429, guid: fb3a06f6d6e204a43b619d5eb2dd4e7d, type: 3}
+      propertyPath: treasureItems.Array.data[5]
+      value: 
+      objectReference: {fileID: 6917886894744599027, guid: e35b9775be5e7eb448a154632cd2cb02, type: 3}
+    - target: {fileID: 4317000766357431429, guid: fb3a06f6d6e204a43b619d5eb2dd4e7d, type: 3}
+      propertyPath: treasureItems.Array.data[6]
+      value: 
+      objectReference: {fileID: 188694118197523721, guid: 52e461325db4ecc49bdd3ae2c2bff31d, type: 3}
+    - target: {fileID: 4317000766357431429, guid: fb3a06f6d6e204a43b619d5eb2dd4e7d, type: 3}
+      propertyPath: treasureItems.Array.data[7]
+      value: 
+      objectReference: {fileID: 8972429057144147082, guid: 71d17848d7a6bbb4391a075ad2ca213d, type: 3}
     - target: {fileID: 4317000767536815821, guid: fb3a06f6d6e204a43b619d5eb2dd4e7d, type: 3}
       propertyPath: m_RootOrder
       value: 1

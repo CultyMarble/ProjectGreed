@@ -27,7 +27,6 @@ public class RoomManager : MonoBehaviour
     public List<RoomController> currentRoomTotal;
     public List<RoomController> currentRoomCount;
     public List<RoomController> currentDeadEndRooms;
-    //public RoomManager newRoomManager;
 
     [Space]
 
@@ -38,10 +37,6 @@ public class RoomManager : MonoBehaviour
     [HideInInspector] public bool shopSpawned = false;
     [HideInInspector] public bool treasureSpawned = false;
     [HideInInspector] public bool keySpawned = false;
-
-    //[HideInInspector] public bool key1Spawned = false;
-    //[HideInInspector] public bool key2Spawned = false;
-    //[HideInInspector] public bool key3Spawned = false;
 
     [HideInInspector] public bool roomsFinished = false;
     public bool mapFinished = false;
@@ -171,6 +166,7 @@ public class RoomManager : MonoBehaviour
         }
         GameObject newShop;
         int randomIndex = Random.Range(0, currentRoomCount.Count);
+        int chance = Random.Range(0, 4);
         for(int i = currentRoomCount.Count/2; i < currentRoomCount.Count-1; i++)
         {
             if(currentRoomCount[randomIndex].currentRoomType != RoomType.normal)
@@ -180,8 +176,17 @@ public class RoomManager : MonoBehaviour
             else
             {
                 currentRoomCount[i].currentRoomType = RoomType.shop;
-                newShop = Instantiate(shop, currentRoomCount[i].transform.position, Quaternion.identity);
-                newShop.transform.parent = currentRoomCount[i].transform;
+                if(chance == 3)
+                {
+                    newShop = Instantiate(abandonedShop, currentRoomCount[i].transform.position, Quaternion.identity);
+                    newShop.transform.parent = currentRoomCount[i].transform;
+                }
+                else
+                {
+                    newShop = Instantiate(shop, currentRoomCount[i].transform.position, Quaternion.identity);
+                    newShop.transform.parent = currentRoomCount[i].transform;
+                }
+                
                 currentRoomCount[i].SetSpecialRoomActive();
                 shopSpawned = true;
                 return;

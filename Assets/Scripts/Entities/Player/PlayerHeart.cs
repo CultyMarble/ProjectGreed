@@ -85,6 +85,8 @@ public class PlayerHeart : MonoBehaviour
             TriggerDamageFeedBack();
 
         currentMaxHeart += amount;
+        currentHeart += amount;
+
         if (currentMaxHeart <= 0)
             currentMaxHeart = 0;
 
