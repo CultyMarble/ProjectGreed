@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/LockTrigger.cs.meta
+guid: a46bca973facaa44daccb7b8e0db8835
+========
+guid: f9e058e87388b674ba118e0f0b035db7
+>>>>>>>> Master:Assets/Scripts/Canvas/GameMenu/DemoOverMenuGUI.cs.meta
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

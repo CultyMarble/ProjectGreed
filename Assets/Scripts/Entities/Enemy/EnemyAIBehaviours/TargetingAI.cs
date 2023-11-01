@@ -23,6 +23,8 @@ public class TargetingAI : MonoBehaviour
     private float patrolTimeCounter;
     private Vector3 lastKnownPosition;
 
+    public bool dontUpdateDestination = false;
+
     private void Start()
     {
         currentTarget = Vector3.zero;
@@ -51,15 +53,11 @@ public class TargetingAI : MonoBehaviour
     //===========================================================================
     private void HandleTargeting()
     {
-        if (patrolArea)
+        if (dontUpdateDestination)
         {
-            LookForTarget();
-            
+            return;
         }
-        else
-        {
-            LookForTarget();
-        }
+        LookForTarget();
     }
     private void UpdateTargetTransform()
     {
@@ -155,7 +153,7 @@ public class TargetingAI : MonoBehaviour
     }
     public bool CheckNoTarget()
     {
-        if(currentDestination.position == transform.position)
+        if(currentDestination.position == transform.position && !CheckLineOfSight())
         {
             return true;
         }

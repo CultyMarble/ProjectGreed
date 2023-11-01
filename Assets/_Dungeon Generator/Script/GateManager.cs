@@ -13,8 +13,10 @@ public class GateManager : MonoBehaviour
 
     [Header("Gate Data")]
     public bool playerInsideRoom = false;
+    public bool playerInLockZone = false;
     public bool clearedRoom = false;
     public bool disableGate = false;
+    public bool locked = false;
 
     [Header("Gate Referance")]
     [SerializeField] private GameObject roomVariants;
@@ -23,12 +25,34 @@ public class GateManager : MonoBehaviour
     private void Awake()
     {
         roomController = GetComponentInParent<RoomController>();
-        randomSpawnManager = GameObject.Find("RandomSpawnManager").GetComponent<RandomSpawnManager>();
-
+        if (!locked)
+        {
+            randomSpawnManager = GameObject.Find("RandomSpawnManager").GetComponent<RandomSpawnManager>();
+        }
     }
-
+    private void Update()
+    {
+        if (disableGate)
+        {
+            ActiveGates(false);
+            return;
+        }
+        else if (locked)
+        {
+            ActiveGates(true);
+        }
+    }
     private void ActiveGates(bool active)
     {
+        if (locked)
+        {
+            SpriteRenderer[] sprites = gates.GetComponentsInChildren<SpriteRenderer>();
+            
+            foreach(SpriteRenderer gate in sprites)
+            {
+                gate.color = Color.yellow;
+            }
+        }
          gates.SetActive(active);
     }
 
@@ -49,7 +73,7 @@ public class GateManager : MonoBehaviour
         {
             playerInsideRoom = true;
 
-            if (clearedRoom || disableGate)
+            if (clearedRoom || disableGate || locked)
             {
                 return;
             }
@@ -97,13 +121,5 @@ public class GateManager : MonoBehaviour
         {
             RoomCleared();
         }
-    }
-
-    private void RoomBossCheck()
-    {
-        if (roomController.currentRoomType != RoomType.boss) return;
-
-        //print("TEST");
-
     }
 }

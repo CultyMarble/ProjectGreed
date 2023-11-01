@@ -48,6 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   openingDirection: 0
   spawned: 1
+  destroyer: 1
 --- !u!50 &2620995016167628659
 Rigidbody2D:
   serializedVersion: 4

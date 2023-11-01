@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Scripts/Canvas/GameMenu/DemoOverMenuGUI.cs.meta
 guid: f9e058e87388b674ba118e0f0b035db7
+========
+guid: ee6ec5cce5316df4bb52d2d78bc58270
+>>>>>>>> Master:Assets/Scripts/Canvas/GameMenu/SaveSelectMenuGUI.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2

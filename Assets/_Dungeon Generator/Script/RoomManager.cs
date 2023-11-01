@@ -8,7 +8,7 @@ public class RoomManager : MonoBehaviour
 {
     [SerializeField] private GameObject aStar;
 
-    [SerializeField] private GameObject entryRoom;
+    [SerializeField] public GameObject entryRoom;
     [SerializeField] public int minRooms;
     [SerializeField] public int maxRooms;
     [SerializeField] public float centerRoomChance;
@@ -24,34 +24,40 @@ public class RoomManager : MonoBehaviour
 
     [Space]
 
-    public List<RoomController> currentRooms;
+    public List<RoomController> currentRoomTotal;
+    public List<RoomController> currentRoomCount;
     public List<RoomController> currentDeadEndRooms;
+    //public RoomManager newRoomManager;
 
     [Space]
 
     [Header("Room Delay")]
-    public float delaySpawnRoomType = 0.75F;
+    public float delaySpawnRoomType = 0.0F;
     private bool delaySpawnRoomCheck = false;
     [HideInInspector] public bool bossSpawned = false;
     [HideInInspector] public bool shopSpawned = false;
+    [HideInInspector] public bool treasureSpawned = false;
+    [HideInInspector] public bool keySpawned = false;
 
-    [Header("Room Spawn Chance")]
-    public float npcRoomChance = 1.0F;
-    public float abandonedShopChance = 0.1F;
+    //[HideInInspector] public bool key1Spawned = false;
+    //[HideInInspector] public bool key2Spawned = false;
+    //[HideInInspector] public bool key3Spawned = false;
+
+    [HideInInspector] public bool roomsFinished = false;
+    public bool mapFinished = false;
 
     [Space]
 
-    [Header("Special Room")]
+    [Header("Special Rooms")]
     public GameObject[] treasureItems;
-    public GameObject[] npcList;
-
-    [Space]
-
-    [Header("Dead End Room")]
-    public GameObject key;
+    public List<GameObject> npcList;
+    public GameObject[] keys;
     public GameObject boss;
     public GameObject shop;
     public GameObject abandonedShop;
+
+    public int loops = 0;
+
 
     public delegate void OnRoomsGenerated();
     public static event OnRoomsGenerated onRoomsGenerated;
@@ -62,33 +68,39 @@ public class RoomManager : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            LoadScene();
-        }
+        //if (Input.GetKeyDown(KeyCode.R))
+        //{
+        //    LoadScene();
+        //}
 
-        SpawnRoomType();
-        if (bossSpawned && shopSpawned)
+        if (!mapFinished)
         {
-            //if (currentRooms.Count < 20)
-            //{
-            //    SceneControlManager.Instance.LoadScene("DemoSceneDungeon", Vector3.zero);
-            //}
-            //else
-            //{
-            //    aStar.SetActive(true);
-            //}
-            RoomsFinished();
+            SpawnRoomTypes();
         }
     }
 
     private void LoadScene()
     {
-        GameObject newEntryRoom;
-        foreach(Transform child in transform)
+        shopSpawned = false;
+        keySpawned = false;
+
+        if (loops == 2)
         {
-            Destroy(child.gameObject);
+            bossSpawned = false;
+            delaySpawnRoomCheck = false;
         }
+        if (loops > 0)
+        {
+            StartNewBranch();
+            delaySpawnRoomType = 0.75F;
+            return;
+        }
+        foreach (RoomController room in currentRoomCount)
+        {
+            Destroy(room.gameObject);
+        }
+        currentRoomCount.Clear();
+        GameObject newEntryRoom;
         newEntryRoom = Instantiate(entryRoom);
         newEntryRoom.transform.parent = this.transform;
 
@@ -96,34 +108,52 @@ public class RoomManager : MonoBehaviour
         delaySpawnRoomType = 0.75F;
     }
 
-    private void SpawnRoomType()
+    private void SpawnRoomTypes()
     {
+        if(currentRoomCount.Count == 0)
+        {
+            delaySpawnRoomCheck = true;
+            delaySpawnRoomType = 0F;
+            CheckBranchFinished();
+            return;
+        }
         if (delaySpawnRoomType <= 0F && !delaySpawnRoomCheck)
         {
             SetBossRoom();
-            SetDeadEndRoomType();
-            SetNormalRoomType();
             SetShopRoom();
+            SetKeyRoom();
+            SetTreasureRoom();
+            SetNPCRoom();
 
             delaySpawnRoomCheck = true;
             delaySpawnRoomType = 0F;
+            CheckBranchFinished();
         }
         else if (!delaySpawnRoomCheck)
         {
             delaySpawnRoomType -= Time.deltaTime;
         }
-    }
-    private void SetBossRoom() // LOOPS UNTIL FIND THE FIRST NON NULL ROOM
-    {
-        GameObject newBoss;
-        for (int i = currentRooms.Count - 1; i >= 0; i--)
+        else
         {
-            if (currentRooms[i].currentRoomType != RoomType.empty)
+            return;
+        }
+    }
+
+    private void SetBossRoom()
+    {
+        if (bossSpawned || loops < 2)
+        {
+            return;
+        }
+        GameObject newBoss;
+        for (int i = currentRoomTotal.Count - 1; i >= 0; i--)
+        {
+            if (currentRoomTotal[i].currentRoomType != RoomType.empty)
             {
-                currentRooms[i].currentRoomType = RoomType.boss;
-                newBoss = Instantiate(boss, currentRooms[i].transform.position, Quaternion.identity);
-                newBoss.transform.parent = currentRooms[i].transform;
-                currentRooms[i].SetSpecialRoomActive();
+                currentRoomTotal[i].currentRoomType = RoomType.boss;
+                newBoss = Instantiate(boss, currentRoomTotal[i].transform.position, Quaternion.identity);
+                newBoss.transform.parent = currentRoomTotal[i].transform;
+                currentRoomTotal[i].SetSpecialRoomActive();
 
                 break;
             }
@@ -132,106 +162,202 @@ public class RoomManager : MonoBehaviour
 
     private void SetShopRoom()
     {
+        if (shopSpawned)
+        {
+            return;
+        }
         GameObject newShop;
-        int randomIndex = Random.Range(0, currentRooms.Count);
-        RoomType roomType = Random.value < abandonedShopChance ? RoomType.abandonShop : RoomType.shop;
-
-        while (currentRooms[randomIndex].currentRoomType != RoomType.normal)
+        int randomIndex = Random.Range(0, currentRoomCount.Count);
+        for(int i = currentRoomCount.Count/2; i < currentRoomCount.Count-1; i++)
         {
-            randomIndex = Random.Range(0, currentRooms.Count);
-        }
-        currentRooms[randomIndex].currentRoomType = RoomType.shop;
-        if (roomType == RoomType.shop)
-        {
-            newShop = Instantiate(shop, currentRooms[randomIndex].transform.position, Quaternion.identity);
-            newShop.transform.parent = currentRooms[randomIndex].transform;
-        }
-        else if (roomType == RoomType.abandonShop)
-        {
-            newShop = Instantiate(abandonedShop, currentRooms[randomIndex].transform.position, Quaternion.identity);
-            newShop.transform.parent = currentRooms[randomIndex].transform;
-        }
-        currentRooms[randomIndex].SetSpecialRoomActive();
-    }
-
-    private void SetDeadEndRoomType()
-    {
-        List<RoomController> roomsList = new List<RoomController>();
-
-        foreach (RoomController room in currentDeadEndRooms)
-        {
-            if (room.currentRoomType == RoomType.normal)
+            if(currentRoomCount[randomIndex].currentRoomType != RoomType.normal)
             {
-                roomsList.Add(room);
+                continue;
             }
-        }
-
-        // SPAWN KEY ROOM
-        //if (roomsList.Count > 0)
-        //{
-        //    int randomIndex = Random.Range(0, roomsList.Count);
-        //    roomsList[randomIndex].currentRoomType = RoomType.key;
-        //    Instantiate(key, roomsList[randomIndex].transform.position, Quaternion.identity);
-        //    roomsList.RemoveAt(randomIndex);
-        //}
-        //else
-        //{
-        //    // NO DEAD-END ROOMS!!! SPAWN KEY ROOM IN A RANDOM ROOM!!!
-        //    int randomIndex = Random.Range(0, currentRooms.Count);
-        //    currentRooms[randomIndex].currentRoomType = RoomType.key;
-        //    Instantiate(key, currentRooms[randomIndex].transform.position, Quaternion.identity);
-        //    Debug.LogError("THERE IS NO KEY IN THE DUNGEON!");
-        //}
-    }
-
-    private void SetNormalRoomType()
-    {
-        List<RoomController> roomsList = new List<RoomController>();
-
-        foreach (RoomController room in currentRooms)
-        {
-            if (room.currentRoomType == RoomType.normal)
+            else
             {
-                roomsList.Add(room);
-            }
-        }
-
-        // SPAWN TREASURE ROOM
-        if (currentRooms.Count >= 6 && currentRooms.Count >= 10) // 6 Rooms or less (Gives a chance of spawn) | 6 Rooms or more (100%)
-        {
-            GameObject newTreasure;
-            int randomItemIndex = Random.Range(0, treasureItems.Length);  
-            int randomRoomIndex = Random.Range(0, roomsList.Count);
-            roomsList[randomRoomIndex].currentRoomType = RoomType.treasure;
-            newTreasure = Instantiate(treasureItems[randomItemIndex], roomsList[randomRoomIndex].transform.position, Quaternion.identity);
-            newTreasure.transform.parent = roomsList[randomRoomIndex].transform;
-
-            roomsList.RemoveAt(randomRoomIndex);
-        }
-        // SPAWN NPC ROOM
-        if (currentRooms.Count >= 6 && Random.value < npcRoomChance || currentRooms.Count >= 10) // 6 Rooms or less (Gives a chance of spawn) | 6 Rooms or more (100%)
-        {
-            GameObject newNPC;
-            int randomItemIndex = Random.Range(0, npcList.Length);
-            int randomRoomIndex = Random.Range(0, currentRooms.Count);
-            if (currentRooms[randomRoomIndex].currentRoomType == RoomType.entry)
-            {
+                currentRoomCount[i].currentRoomType = RoomType.shop;
+                newShop = Instantiate(shop, currentRoomCount[i].transform.position, Quaternion.identity);
+                newShop.transform.parent = currentRoomCount[i].transform;
+                currentRoomCount[i].SetSpecialRoomActive();
+                shopSpawned = true;
                 return;
             }
-            currentRooms[randomRoomIndex].currentRoomType = RoomType.npc;
-            newNPC = Instantiate(npcList[randomItemIndex], currentRooms[randomRoomIndex].transform.position, Quaternion.identity);
-            newNPC.transform.parent = roomsList[randomRoomIndex].transform;
+        }
+        
+    }
 
-            //roomsList.RemoveAt(randomRoomIndex);
-            currentRooms[randomRoomIndex].SetSpecialRoomActive();
+    public void SetTreasureRoom()
+    {
+        if (treasureSpawned)
+        {
+            return;
+        }
+        GameObject newTreasure;
+        int randomItemIndex = Random.Range(0, treasureItems.Length);
+        int randomRoomIndex = Random.Range(0, currentRoomCount.Count);
+
+        if (currentRoomCount[randomRoomIndex].currentRoomType != RoomType.normal)
+        {
+            return;
+        }
+
+        currentRoomCount[randomRoomIndex].currentRoomType = RoomType.treasure;
+        newTreasure = Instantiate(treasureItems[randomItemIndex], currentRoomCount[randomRoomIndex].transform.position, Quaternion.identity);
+        newTreasure.transform.parent = currentRoomCount[randomRoomIndex].transform;
+    }
+    public void SetKeyRoom()
+    {
+        if (keySpawned || loops == 2)
+        {
+            keySpawned = true;
+            return;
+        }
+        GameObject newKey;
+
+        for (int i = 0; i < currentRoomCount.Count; i++)
+        {
+            if (currentRoomCount[i].currentRoomType == RoomType.normal)
+            {
+                currentRoomCount[i].currentRoomType = RoomType.key;
+                newKey = Instantiate(keys[loops], currentRoomCount[i].transform.position, Quaternion.identity);
+                newKey.transform.parent = currentRoomCount[i].transform;
+                keySpawned = true;
+                return;
+            }
         }
     }
-    public void RoomsFinished()
+    public void SetNPCRoom()
     {
-        aStar.SetActive(true);
-        if(onRoomsGenerated != null)
+        if(npcList.Count == 0)
         {
-            onRoomsGenerated();
+            return;
+        }
+        GameObject newNPC;
+        int randomItemIndex = Random.Range(0, npcList.Count);
+        int randomRoomIndex = Random.Range(0, currentRoomCount.Count);
+
+        if (currentRoomCount[randomRoomIndex].currentRoomType != RoomType.normal || currentRoomCount.Count <=0)
+        {
+            return;
+        }
+
+        currentRoomCount[randomRoomIndex].currentRoomType = RoomType.npc;
+            
+        newNPC = Instantiate(npcList[randomItemIndex], currentRoomCount[randomRoomIndex].transform.position, Quaternion.identity);
+        newNPC.transform.parent = currentRoomCount[randomRoomIndex].transform;
+
+        npcList.RemoveAt(randomItemIndex);
+        currentRoomCount[randomRoomIndex].SetSpecialRoomActive();
+    }
+
+    public void CheckBranchFinished()
+    {
+        if (currentRoomCount.Count < minRooms || currentRoomCount.Count > maxRooms || !shopSpawned || !keySpawned)
+        {
+            LoadScene();
+            return;
+        }
+        else
+        {
+            foreach(RoomController room in currentRoomCount)
+            {
+                currentRoomTotal.Add(room);
+            }
+            currentRoomCount.Clear();
+            CheckMapFinished();
+
+            if (loops < 2 && !mapFinished)
+            {
+                StartNewBranch();
+                loops++;
+            }
+            delaySpawnRoomCheck = false;
+            roomsFinished = true;
+        }
+    }
+    public void CheckMapFinished()
+    {
+        if(loops != 2 || currentRoomTotal.Count < 3 * minRooms)
+        {
+            roomsFinished = false;
+            return;
+        }
+        else
+        {
+            foreach (RoomController room in currentRoomCount)
+            {
+                Destroy(room.gameObject);
+            }
+            currentRoomCount.Clear();
+            roomsFinished = true;
+            mapFinished = true;
+
+            aStar.SetActive(true);
+            if (onRoomsGenerated != null)
+            {
+                onRoomsGenerated();
+            }
+        }
+    }
+
+    public void StartNewBranch()
+    {
+        if(loops > 2)
+        {
+            return;
+        }
+        if (currentRoomCount.Count > 0)
+        {
+            Vector3 startLocation = currentRoomCount[0].transform.position;
+            foreach (RoomController room in currentRoomCount)
+            {
+                if (room.currentRoomType == RoomType.entry)
+                {
+                    startLocation = room.transform.position;
+                    break;
+                }
+            }
+            foreach (RoomController room in currentRoomCount)
+            {
+                Destroy(room.gameObject);
+            }
+            currentRoomCount.Clear();
+            RoomController newRoom = Instantiate(entryRoom, startLocation, Quaternion.identity).GetComponent<RoomController>();
+            newRoom.transform.parent = this.transform;
+            if (newRoom != null)
+            {
+                newRoom.gameObject.GetComponentInChildren<GateManager>().locked = true;
+            }
+            delaySpawnRoomCheck = false;
+            delaySpawnRoomType = 0.05F;
+            shopSpawned = false;
+            return;
+        }
+        else
+        {
+            for (int i = currentRoomTotal.Count - 2; i > 0; i--)
+            {
+                if (currentRoomTotal[i].currentRoomType == RoomType.normal)
+                {
+                    Destroy(currentRoomTotal[i].gameObject);
+                    currentRoomCount.Clear();
+                    RoomController newRoom = Instantiate(entryRoom, new Vector2(currentRoomTotal[i].transform.position.x, currentRoomTotal[i].transform.position.y), Quaternion.identity).GetComponent<RoomController>();
+                    
+                    currentRoomTotal.RemoveAt(i);
+                    newRoom.transform.parent = this.transform;
+                    newRoom.transform.GetComponent<RoomController>().added = true;
+                    if (newRoom != null)
+                    {
+                        newRoom.gameObject.GetComponentInChildren<GateManager>().locked = true;
+                    }
+
+                    delaySpawnRoomCheck = false;
+                    delaySpawnRoomType = 0.05F;
+                    shopSpawned = false;
+                    return;
+                }
+            }
         }
     }
 }
