@@ -63,6 +63,7 @@ public class TargetingAI : MonoBehaviour
     {
         if (dontUpdateDestination)
         {
+            currentDestination.position = lastKnownPosition;
             return;
         }
         LookForTarget();
@@ -169,6 +170,11 @@ public class TargetingAI : MonoBehaviour
         {
             return false;
         }
+    }
+    public void DontUpdateDestination(bool input)
+    {
+        dontUpdateDestination = input;
+        lastKnownPosition = currentDestination.position;
     }
     public void TogglePatrol(bool toggle)
     {

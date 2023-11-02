@@ -66,7 +66,7 @@ public class LungeAI : MonoBehaviour
         if (isLunging)
         {
             lungeTimer += Time.deltaTime;
-            pathfinder.maxSpeed = 12 * (1 + (lungeTimer / 0.3f));
+            pathfinder.maxSpeed = 8 / (lungeTimer/0.5f);
             DealLungeDamage();
             return;
         }
@@ -84,35 +84,36 @@ public class LungeAI : MonoBehaviour
 
     private void Lunge()
     {
-        targetingAI.dontUpdateDestination = true;
+        //targetingAI.dontUpdateDestination = true;
+        targetingAI.DontUpdateDestination(true);
         isLunging = true;
         animator.SetBool("isLunging", true);
         pathfinder.maxSpeed = 12;
     }
+
     public void EndLunge()
     {
         isLunging = false;
         isCharging = false;
         targetingAI.isAttacking = false;
+        targetingAI.DontUpdateDestination(false);
         animator.SetBool("isLunging", false);
         animator.SetBool("isCharging", false);
         pathfinder.maxSpeed = 0;
-        Invoke(nameof(ResetSpeed), 0.3f);
+        Invoke(nameof(ResetSpeed), 0.2f);
+        //ResetSpeed();
         lungeTimer = 0;
     }
+
     private void ChargeLunge()
     {
         isCharging = true;
         animator.SetBool("isCharging", true);
     }
+
     private void ResetSpeed()
     {
         pathfinder.maxSpeed = 2;
-    }
-
-    public void CancelTargeting()
-    {
-        targetingAI.dontUpdateDestination = false;
     }
 
     public void DealLungeDamage()

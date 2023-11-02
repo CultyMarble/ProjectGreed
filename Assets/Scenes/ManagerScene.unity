@@ -11914,7 +11914,10 @@ MonoBehaviour:
   - {fileID: 2485148985364739039, guid: f38bc8c64a6f7db45a8a2915dcee6d83, type: 3}
   - {fileID: 2485148985364739039, guid: cd1ef8a7f7e07cb4ab6dba00b993954a, type: 3}
   - {fileID: 2485148985364739039, guid: 2fd83230e3dd22e46b9b40be74c9e534, type: 3}
-  chestList: []
+  chestList:
+  - {fileID: 6917886894744599027, guid: e35b9775be5e7eb448a154632cd2cb02, type: 3}
+  - {fileID: 188694118197523721, guid: 52e461325db4ecc49bdd3ae2c2bff31d, type: 3}
+  - {fileID: 8972429057144147082, guid: 71d17848d7a6bbb4391a075ad2ca213d, type: 3}
   objectSpawnChance: 0.3
   noteSpawnChance: 0.075
   chestSpawnChance: 0.1

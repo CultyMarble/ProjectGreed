@@ -17,7 +17,7 @@ MonoBehaviour:
   baseDashPenalty: 0.1
   baseDashCooldown: 1
   baseDashTime: 0.25
-  baseDashSpeed: 20
+  baseDashSpeed: 40
   ba_baseCooldown: 0.05
   ba_baseMaxFuel: 100
   ba_fuelConsumePerTrigger: 1
