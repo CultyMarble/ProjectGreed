@@ -70,7 +70,7 @@ public class LungeAI : MonoBehaviour
             DealLungeDamage();
             return;
         }
-        if (isCharging)
+        else if (isCharging)
         {
             chargeTimeCounter -= Time.deltaTime;
             pathfinder.maxSpeed = 0;
@@ -86,7 +86,9 @@ public class LungeAI : MonoBehaviour
     {
         //targetingAI.dontUpdateDestination = true;
         targetingAI.DontUpdateDestination(true);
+        isCharging = false;
         isLunging = true;
+        animator.SetBool("isCharging", false);
         animator.SetBool("isLunging", true);
         pathfinder.maxSpeed = 12;
     }
@@ -99,6 +101,7 @@ public class LungeAI : MonoBehaviour
         targetingAI.DontUpdateDestination(false);
         animator.SetBool("isLunging", false);
         animator.SetBool("isCharging", false);
+        animator.SetBool("isIdle", true);
         pathfinder.maxSpeed = 0;
         Invoke(nameof(ResetSpeed), 0.2f);
         //ResetSpeed();

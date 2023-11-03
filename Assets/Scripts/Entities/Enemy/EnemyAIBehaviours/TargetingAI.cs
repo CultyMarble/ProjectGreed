@@ -22,7 +22,8 @@ public class TargetingAI : MonoBehaviour
     private readonly float patrolTime = 3f;
     private float patrolTimeCounter;
     private Vector3 lastKnownPosition;
-
+    private Animator animator;
+    private SpriteRenderer spriteRenderer;
     public bool dontUpdateDestination = false;
     public Pathfinding.AIPath pathfinder;
 
@@ -32,6 +33,8 @@ public class TargetingAI : MonoBehaviour
         currentDestination.position = transform.position;
         lastKnownPosition = transform.position;
         pathfinder = GetComponent<Pathfinding.AIPath>();
+        animator = GetComponent<Animator>();
+        spriteRenderer = transform.parent.GetComponentInChildren<SpriteRenderer>();
     }
 
     //===========================================================================
@@ -42,6 +45,29 @@ public class TargetingAI : MonoBehaviour
         {
             pathfinder.maxSpeed = 0;
             return;
+        }
+        if (!CheckNoTarget())
+        {
+            if (currentDestination.position.x > transform.position.x)
+            {
+                animator.SetBool("isWalkingRight", true);
+                animator.SetBool("isWalkingLeft", false);
+                animator.SetBool("isIdle", false);
+                spriteRenderer.flipX = true;
+            }
+            else if (currentDestination.position.x < transform.position.x)
+            {
+                animator.SetBool("isWalkingLeft", true);
+                animator.SetBool("isWalkingRight", false);
+                animator.SetBool("isIdle", false);
+                spriteRenderer.flipX = false;
+            }
+        }
+        else
+        {
+            animator.SetBool("isWalkingLeft", false);
+            animator.SetBool("isWalkingRight", false);
+            animator.SetBool("isIdle", true);
         }
         if (!holdMovement)
         {
@@ -162,7 +188,7 @@ public class TargetingAI : MonoBehaviour
     }
     public bool CheckNoTarget()
     {
-        if(currentDestination.position == transform.position && !CheckLineOfSight())
+        if(Vector2.Distance(currentDestination.position,transform.position) < 0.1f && !CheckLineOfSight())
         {
             return true;
         }
@@ -173,8 +199,16 @@ public class TargetingAI : MonoBehaviour
     }
     public void DontUpdateDestination(bool input)
     {
-        dontUpdateDestination = input;
-        lastKnownPosition = currentDestination.position;
+        if(input == true)
+        {
+            dontUpdateDestination = input;
+            lastKnownPosition = currentDestination.position;
+        }
+        else
+        {
+            dontUpdateDestination = input;
+            LookForTarget();
+        }
     }
     public void TogglePatrol(bool toggle)
     {
