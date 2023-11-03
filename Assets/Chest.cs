@@ -53,6 +53,10 @@ public class Chest : MonoBehaviour
                     GetComponent<BoxCollider2D>().enabled = false;
                     spawnCurrency.SpewOutCurrency();
                 }
+                else
+                {
+                    ActivateDialogueManager("Hmm... I think I need to find a specific key to open this.");
+                }
                 break;
             case ChestType.gold:
                 if (PlayerCurrencies.Instance.hasGoldKey)
@@ -63,8 +67,17 @@ public class Chest : MonoBehaviour
                     GetComponent<BoxCollider2D>().enabled = false;
                     spawnCurrency.SpewOutCurrency();
                 }
+                else
+                {
+                    ActivateDialogueManager("Hmm... I think I need to find a specific key to open this.");
+                }
                 break;
         }
+    }
+    private void ActivateDialogueManager(string text)
+    {
+        DialogManager.Instance.SetDialogLine(text);
+        DialogManager.Instance.SetDialogPanelActiveState(true);
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {

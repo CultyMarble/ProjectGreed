@@ -24,7 +24,14 @@ public class DialogManager : SingletonMonobehaviour<DialogManager>
         if (Input.GetMouseButtonUp(0))
         {
             lineIndex++;
+            if(dialogLines == null)
+            {
+                lineIndex = 0;
 
+                SetDialogPanelActiveState(false);
+
+                return;
+            }
             if (lineIndex >= dialogLines.Length)
             {
                 lineIndex = 0;
@@ -54,5 +61,9 @@ public class DialogManager : SingletonMonobehaviour<DialogManager>
         dialogLines = newDialogLines;
 
         dialogText.SetText(dialogLines[lineIndex]);
+    }
+    public void SetDialogLine(string newDialogLines)
+    {
+        dialogText.SetText(newDialogLines);
     }
 }

@@ -22,6 +22,10 @@ public class LockTrigger : MonoBehaviour
                         gateManager.disableGate = true;
                         Player.Instance.SetInteractPromtTextActive(false);
                     }
+                    else
+                    {
+                        ActivateDialogueManager("Hmm... I think I need to find a specific key to open this.");
+                    }
                     break;
                 case PlayerCurrencies.KeyType.Gold:
                     if (PlayerCurrencies.Instance.hasGoldKey)
@@ -29,9 +33,18 @@ public class LockTrigger : MonoBehaviour
                         gateManager.disableGate = true;
                         Player.Instance.SetInteractPromtTextActive(false);
                     }
+                    else
+                    {
+                        ActivateDialogueManager("Hmm... I think I need to find a specific key to open this.");
+                    }
                     break;
             }
         }
+    }
+    private void ActivateDialogueManager(string text)
+    {
+        DialogManager.Instance.SetDialogLine(text);
+        DialogManager.Instance.SetDialogPanelActiveState(true);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
