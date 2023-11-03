@@ -50,6 +50,10 @@ public class RoomManager : MonoBehaviour
     public GameObject boss;
     public GameObject shop;
     public GameObject abandonedShop;
+    public GameObject startRoomDialogue;
+    public GameObject silverRoomDialogue;
+    public GameObject goldRoomDialogue;
+
 
     public int loops = 0;
 
@@ -100,8 +104,11 @@ public class RoomManager : MonoBehaviour
         }
         currentRoomCount.Clear();
         GameObject newEntryRoom;
+        GameObject startDialogue;
         newEntryRoom = Instantiate(entryRoom);
         newEntryRoom.transform.parent = this.transform;
+        startDialogue = Instantiate(startRoomDialogue);
+        startDialogue.transform.parent = newEntryRoom.transform;
 
         delaySpawnRoomCheck = false;
         delaySpawnRoomType = 0.75F;
@@ -340,10 +347,18 @@ public class RoomManager : MonoBehaviour
                 if(loops == 1)
                 {
                     newRoom.gameObject.GetComponentInChildren<GateManager>().keytype = PlayerCurrencies.KeyType.Silver;
+                    GameObject silverDialogue;
+                    silverDialogue = Instantiate(silverRoomDialogue);
+                    silverDialogue.transform.parent = newRoom.gameObject.transform;
+                    silverDialogue.transform.position = newRoom.gameObject.transform.position;
                 }
                 else if(loops == 2)
                 {
                     newRoom.gameObject.GetComponentInChildren<GateManager>().keytype = PlayerCurrencies.KeyType.Gold;
+                    GameObject goldDialogue;
+                    goldDialogue = Instantiate(goldRoomDialogue);
+                    goldDialogue.transform.parent = newRoom.gameObject.transform;
+                    goldDialogue.transform.position = newRoom.gameObject.transform.position;
                 }
             }
             delaySpawnRoomCheck = false;
@@ -370,10 +385,19 @@ public class RoomManager : MonoBehaviour
                         if (loops == 0)
                         {
                             newRoom.gameObject.GetComponentInChildren<GateManager>().keytype = PlayerCurrencies.KeyType.Silver;
+                            GameObject silverDialogue;
+                            silverDialogue = Instantiate(silverRoomDialogue);
+                            silverDialogue.transform.parent = newRoom.gameObject.transform;
+                            silverDialogue.transform.position = newRoom.gameObject.transform.position;
                         }
                         else if (loops == 1)
                         {
                             newRoom.gameObject.GetComponentInChildren<GateManager>().keytype = PlayerCurrencies.KeyType.Gold;
+                            GameObject goldDialogue;
+                            goldDialogue = Instantiate(goldRoomDialogue);
+                            goldDialogue.transform.parent = newRoom.gameObject.transform;
+                            goldDialogue.transform.position = newRoom.gameObject.transform.position;
+
                         }
                     }
 
