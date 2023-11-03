@@ -71,7 +71,12 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         Player.Instance.transform.position = spawnPosition;
         Player.Instance.gameObject.SetActive(true);
 
-        yield return new WaitForSecondsRealtime(1.0f);
+        //yield return new WaitForSecondsRealtime(1.0f);
+        while (GameState != GameState.Dungeon)
+        {
+            yield return null;
+        }
+        DialogManager.Instance.activated = true;
         yield return StartCoroutine(LoadingScreen(0.0f));
         EventManager.CallAfterSceneLoadedLoadingScreenEvent();
 
@@ -184,10 +189,10 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
 
             StartCoroutine(UnloadAndSwitchScene(sceneName, spawnPosition));
 
-            if (sceneName == SceneName.DemoSceneDungeon.ToString())
-            {
-                GameState = GameState.Dungeon;
-            }
+            //if (sceneName == SceneName.DemoSceneDungeon.ToString())
+            //{
+            //    GameState = GameState.Dungeon;
+            //}
         }
     }
 }

@@ -43,8 +43,10 @@ public class DialogueActivator : MonoBehaviour
     //===========================================================================
     private void Update()
     {
-        //if (SceneControlManager.Instance.IsLoadingScene == true)
-        //    return;
+        if (!DialogManager.Instance.activated)
+        {
+            return;
+        }
 
         if (canActivateDialogBox == false)
             return;
@@ -103,12 +105,6 @@ public class DialogueActivator : MonoBehaviour
 
     private void AutoTriggerDialogHandler()
     {
-        if (SceneControlManager.Instance.GameState == GameState.PauseMenu ||
-            SceneControlManager.Instance.GameState == GameState.OptionMenu ||
-            SceneControlManager.Instance.GameState == GameState.Dialogue)
-        {
-            return;
-        }
         if (haveActivated)
             return;
 

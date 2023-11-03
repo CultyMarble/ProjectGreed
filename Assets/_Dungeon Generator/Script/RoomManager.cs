@@ -301,6 +301,7 @@ public class RoomManager : MonoBehaviour
             roomsFinished = true;
             mapFinished = true;
 
+            SceneControlManager.Instance.GameState = GameState.Dungeon;
             aStar.SetActive(true);
             if (onRoomsGenerated != null)
             {

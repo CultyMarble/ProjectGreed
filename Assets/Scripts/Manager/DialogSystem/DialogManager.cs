@@ -8,16 +8,21 @@ public class DialogManager : SingletonMonobehaviour<DialogManager>
 
     private string[] dialogLines;
     private int lineIndex;
+    public bool activated = false;
 
     //===========================================================================
     private void Start()
     {
-        SetDialogPanelActiveState(false);
+        //SetDialogPanelActiveState(false);
         //Time.timeScale = 1.0f;
     }
 
     private void Update()
     {
+        if (!activated)
+        {
+            return;
+        }
         if (dialogPanel.gameObject.activeSelf == false)
             return;
 
