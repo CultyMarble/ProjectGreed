@@ -37,4 +37,5 @@ public enum GameState
     Dungeon,
     PauseMenu,
     OptionMenu,
+    Dialogue
 }

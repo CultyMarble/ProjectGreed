@@ -38,7 +38,8 @@ public class LungeAI : MonoBehaviour
     private void Update()
     {
         if (SceneControlManager.Instance.GameState == GameState.PauseMenu ||
-            SceneControlManager.Instance.GameState == GameState.OptionMenu)
+            SceneControlManager.Instance.GameState == GameState.OptionMenu ||
+            SceneControlManager.Instance.GameState == GameState.Dialogue)
         {
             return;
         }
@@ -123,6 +124,11 @@ public class LungeAI : MonoBehaviour
     {
         if (targetingAI.currentDestination == null)
             return;
+        if (lungeTimer > 1.0f)
+        {
+            EndLunge();
+            return;
+        }
 
         Collider2D[] collider2DArray = Physics2D.OverlapCircleAll(transform.position, 0.5f);
         foreach (Collider2D collider2D in collider2DArray)

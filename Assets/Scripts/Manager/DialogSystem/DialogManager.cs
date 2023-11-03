@@ -13,7 +13,7 @@ public class DialogManager : SingletonMonobehaviour<DialogManager>
     private void Start()
     {
         SetDialogPanelActiveState(false);
-        Time.timeScale = 1.0f;
+        //Time.timeScale = 1.0f;
     }
 
     private void Update()
@@ -49,9 +49,9 @@ public class DialogManager : SingletonMonobehaviour<DialogManager>
     public void SetDialogPanelActiveState(bool newBool)
     {
         if (newBool == true)
-            Time.timeScale = 0.0f;
+            SceneControlManager.Instance.GameState = GameState.Dialogue;
         else
-            Time.timeScale = 1.0f;
+            SceneControlManager.Instance.GameState = GameState.Dungeon;
 
         dialogPanel.gameObject.SetActive(newBool);
     }

@@ -34,21 +34,26 @@ public class TargetingAI : MonoBehaviour
         lastKnownPosition = transform.position;
         pathfinder = GetComponent<Pathfinding.AIPath>();
         animator = GetComponent<Animator>();
-        spriteRenderer = transform.parent.GetComponentInChildren<SpriteRenderer>();
+        spriteRenderer = transform.GetComponentInChildren<SpriteRenderer>();
     }
 
     //===========================================================================
     private void FixedUpdate()
     {
         if (SceneControlManager.Instance.GameState == GameState.PauseMenu ||
-            SceneControlManager.Instance.GameState == GameState.OptionMenu)
+            SceneControlManager.Instance.GameState == GameState.OptionMenu ||
+            SceneControlManager.Instance.GameState == GameState.Dialogue)
         {
             pathfinder.maxSpeed = 0;
             return;
         }
         if (!CheckNoTarget())
         {
-            if (currentDestination.position.x > transform.position.x)
+            if (Vector3.Distance(transform.position,currentDestination.position) < 0.1f)
+            {
+                animator.SetBool("isIdle", true);
+            }
+            else if (currentDestination.position.x > transform.position.x)
             {
                 animator.SetBool("isWalkingRight", true);
                 animator.SetBool("isWalkingLeft", false);

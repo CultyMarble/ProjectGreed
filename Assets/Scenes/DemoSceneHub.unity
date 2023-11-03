@@ -2918,6 +2918,68 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
+--- !u!1001 &1019687907
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 5659956524709562738}
+    m_Modifications:
+    - target: {fileID: 7077340095497584965, guid: a45222f60fc2d2943bda8405af724d32, type: 3}
+      propertyPath: m_Name
+      value: AStar
+      objectReference: {fileID: 0}
+    - target: {fileID: 7077340095497584967, guid: a45222f60fc2d2943bda8405af724d32, type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7077340095497584967, guid: a45222f60fc2d2943bda8405af724d32, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7077340095497584967, guid: a45222f60fc2d2943bda8405af724d32, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7077340095497584967, guid: a45222f60fc2d2943bda8405af724d32, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7077340095497584967, guid: a45222f60fc2d2943bda8405af724d32, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7077340095497584967, guid: a45222f60fc2d2943bda8405af724d32, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7077340095497584967, guid: a45222f60fc2d2943bda8405af724d32, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7077340095497584967, guid: a45222f60fc2d2943bda8405af724d32, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7077340095497584967, guid: a45222f60fc2d2943bda8405af724d32, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7077340095497584967, guid: a45222f60fc2d2943bda8405af724d32, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7077340095497584967, guid: a45222f60fc2d2943bda8405af724d32, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a45222f60fc2d2943bda8405af724d32, type: 3}
+--- !u!4 &1019687908 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7077340095497584967, guid: a45222f60fc2d2943bda8405af724d32, type: 3}
+  m_PrefabInstance: {fileID: 1019687907}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1067412109
 GameObject:
   m_ObjectHideFlags: 0
@@ -5653,6 +5715,7 @@ GameObject:
   - component: {fileID: 4670885277616000272}
   - component: {fileID: 999458767541893775}
   - component: {fileID: 7936934806937322499}
+  - component: {fileID: 7936934806937322500}
   m_Layer: 7
   m_Name: pfSuicideBomber
   m_TagString: Enemy
@@ -15558,6 +15621,7 @@ Transform:
   - {fileID: 534553605}
   - {fileID: 323190639}
   - {fileID: 5659956525017867119}
+  - {fileID: 1019687908}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -19972,6 +20036,8 @@ MonoBehaviour:
   keepDistance: 0
   patrolArea: 0
   patrolTransforms: {fileID: 0}
+  dontUpdateDestination: 0
+  pathfinder: {fileID: 0}
 --- !u!114 &7936934806937322499
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19989,6 +20055,26 @@ MonoBehaviour:
   spawnProjectile: 1
   numberOfProjectile: 2
   projectileSpeed: 7
+--- !u!95 &7936934806937322500
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1956915271872968324}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 77c90e414fdb8094e9581f3ab790d4e6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &9017852204321316362
 GameObject:
   m_ObjectHideFlags: 0
