@@ -18,10 +18,9 @@ public class PauseMenuGUI : SingletonMonobehaviour<PauseMenuGUI>
         // Pause Menu
         pm_OptionsMenuButton.onClick.AddListener(() =>
         {
-            OptionMenuGUI.Instance.SetActive(true);
             SceneControlManager.Instance.GameState = GameState.OptionMenu;
-
-            SetActive(false);
+            OptionMenuGUI.Instance.SetActive(true);
+            //SetActive(false);
         });
 
         pm_AbandonRunButton.onClick.AddListener(() => SceneControlManager.Instance.RespawnPlayerAtHub());
@@ -38,10 +37,14 @@ public class PauseMenuGUI : SingletonMonobehaviour<PauseMenuGUI>
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            if (SceneControlManager.Instance.GameState == GameState.OptionMenu)
+            {
+                return;
+            }
             if (SceneControlManager.Instance.GameState == GameState.PauseMenu)
             {
-                SetActive(false);
                 SceneControlManager.Instance.GameState = priorGameState;
+                SetActive(false);
                 return;
             }
 

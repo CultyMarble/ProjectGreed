@@ -61,10 +61,9 @@ public class PlayerHeart : MonoBehaviour
         // Reset Parameters
         UpdateCurrentHeart(currentHeart);
 
-        Player.Instance.gameObject.SetActive(false);
-
         // Call OnDestroy Event
         OnDespawnPlayerEvent?.Invoke(this, EventArgs.Empty);
+        Player.Instance.gameObject.SetActive(false);
     }
 
     //======================================================================

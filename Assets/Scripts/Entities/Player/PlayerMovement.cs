@@ -173,6 +173,7 @@ public class PlayerMovement : MonoBehaviour
                 Rigidbody2D.MovePosition(Rigidbody2D.position + moveSpeed * Time.deltaTime * movementVector);
                 break;
         }
+        Debug.Log(movementVector.x);
     }
 
     private void DashCoolDownTimeCounter()

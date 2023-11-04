@@ -1,9 +1,10 @@
 using UnityEngine;
 
-public class ShowGameoverMenu : MonoBehaviour
+public class GameOverMenuGUI : SingletonMonobehaviour<GameOverMenuGUI>
 {
     [SerializeField] private PlayerHeart playerHeartManager;
-    [SerializeField] private GameObject gameOverMenu;
+    [SerializeField] private GameObject content;
+
 
     //===========================================================================
     private void OnEnable()
@@ -19,9 +20,14 @@ public class ShowGameoverMenu : MonoBehaviour
     //===========================================================================
     private void DisplayGameOverUI_OnDespawnEventHandler(object sender, System.EventArgs e)
     {
-        if (gameOverMenu.activeSelf)
+        if (content.activeSelf)
             return;
 
-        gameOverMenu.SetActive(true);
+        SetActive(true);
+    }
+
+    public void SetActive(bool active)
+    {
+        content.SetActive(active);
     }
 }

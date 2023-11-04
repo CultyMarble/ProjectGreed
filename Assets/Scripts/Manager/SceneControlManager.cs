@@ -18,10 +18,10 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
     [SerializeField] private PauseMenuGUI pauseMenu;
 
     [Header("Options Menu:")]
-    [SerializeField] private GameObject optionsMenu;
+    [SerializeField] private OptionMenuGUI optionsMenu;
 
     [Header("Gameover Menu")]
-    [SerializeField] private GameObject gameOverMenu;
+    [SerializeField] private GameOverMenuGUI gameOverMenu;
     [SerializeField] private Button gv_respawnButton;
     [SerializeField] private Button gv_mainMenuButton;
 

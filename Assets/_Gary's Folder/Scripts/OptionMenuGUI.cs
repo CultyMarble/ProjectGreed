@@ -13,8 +13,8 @@ public class OptionMenuGUI : SingletonMonobehaviour<OptionMenuGUI>
     {
         om_BackButton.onClick.AddListener(() =>
         {
+            SceneControlManager.Instance.GameState = GameState.PauseMenu;
             SetActive(false);
-            PauseMenuGUI.Instance.SetActive(true);
         });
     }
 
@@ -32,7 +32,6 @@ public class OptionMenuGUI : SingletonMonobehaviour<OptionMenuGUI>
                 return;
 
             SetActive(false);
-            SceneControlManager.Instance.GameState = GameState.PauseMenu;
         }
     }
 
@@ -42,6 +41,13 @@ public class OptionMenuGUI : SingletonMonobehaviour<OptionMenuGUI>
         content.SetActive(active);
 
         if (active)
+        {
             SceneControlManager.Instance.GameState = GameState.OptionMenu;
+        }
+        else
+        {
+            SceneControlManager.Instance.GameState = GameState.PauseMenu;
+        }
+
     }
 }
