@@ -163,7 +163,7 @@ MonoBehaviour:
   - {fileID: -508341197, guid: f8b6c993474269d4ab7bb5ad21e59a38, type: 3}
   animationSpeed: 0.075
   triggerIndex: 2
-  oneTimeTrigger: 0
+  oneTimeTrigger: 1
   reaimDuration: 5
   movementImpair: 1
   movementImpairDuration: 3

@@ -192,6 +192,8 @@ public class PlayerMovement : MonoBehaviour
             if (dashCooldownTimer <= 0 && movementVector != Vector2.zero)
             {
                 Player.Instance.actionState = PlayerActionState.IsDashing;
+                impairTimer = 0;
+                UpdateImpairTimer();
                 dashTimeCounter = dashTime;
                 dashCooldownTimer = dashCooldown;
                 dashVector = movementVector;
@@ -218,8 +220,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void UpdateImpairTimer()
     {
-        if (impairTimer <= 0)
-            return;
+        //if (impairTimer <= 0)
+        //    return;
 
         impairTimer -= Time.deltaTime;
         if (impairTimer <= 0)
