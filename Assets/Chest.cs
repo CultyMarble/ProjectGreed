@@ -17,7 +17,7 @@ public class Chest : MonoBehaviour
     public Sprite[] sprites;
     private SpriteRenderer spriteRenderer;
     private bool canOpen = false;
-    private bool opened = false;
+    //private bool opened = false;
     [SerializeField] private SpawnCurrency spawnCurrency = default;
     void Start()
     {

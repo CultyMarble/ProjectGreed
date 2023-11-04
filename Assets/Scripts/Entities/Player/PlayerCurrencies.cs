@@ -9,7 +9,7 @@ public class PlayerCurrencies : SingletonMonobehaviour<PlayerCurrencies>
     }
 
     [SerializeField] private DisplayPlayerCurrency displayPlayerCurrency;
-
+    [SerializeField] private PlayerHeart playerHeartManager;
     private int tempCurrencyAmount = 0;
     public bool hasSilverKey = false;
     public bool hasGoldKey = false;
@@ -20,6 +20,10 @@ public class PlayerCurrencies : SingletonMonobehaviour<PlayerCurrencies>
     public int PermCurrencyAmount => tempCurrencyAmount;
 
     //===========================================================================
+    private void OnEnable()
+    {
+        playerHeartManager.OnDespawnPlayerEvent += OnDespawnPlayer_ResetCurrencyWrapper;
+    }
     private void Start()
     {
         //UpdatePermCurrencyAmount();
@@ -49,7 +53,22 @@ public class PlayerCurrencies : SingletonMonobehaviour<PlayerCurrencies>
         hasGoldKey = true;
         UpdateKeys();
     }
-
+    public void ResetCurrency()
+    {
+        tempCurrencyAmount = 0;
+        hasSilverKey = false;
+        hasGoldKey = false;
+        PlayerInfoController.Instance.DisplayPlayerCurrency.UpdateTempCurrencyText(0);
+        PlayerInfoController.Instance.DisplayPlayerCurrency.UpdateSilverKeyIcon(false);
+        PlayerInfoController.Instance.DisplayPlayerCurrency.UpdateGoldKeyIcon(false);
+    }
+    public void OnDespawnPlayer_ResetCurrencyWrapper(object sender, System.EventArgs e)
+    {
+        ResetCurrency();
+        PlayerInfoController.Instance.DisplayPlayerCurrency.UpdateTempCurrencyText(tempCurrencyAmount);
+        PlayerInfoController.Instance.DisplayPlayerCurrency.UpdateSilverKeyIcon(hasSilverKey);
+        PlayerInfoController.Instance.DisplayPlayerCurrency.UpdateGoldKeyIcon(hasGoldKey);
+    }
 
     //public void UpdatePermCurrencyAmount(int amount = 0)
     //{

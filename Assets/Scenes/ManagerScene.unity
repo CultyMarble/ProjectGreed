@@ -468,7 +468,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 78889171}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5426,7 +5426,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 883989296}
-  - component: {fileID: 883989297}
   m_Layer: 5
   m_Name: GameMenu
   m_TagString: Untagged
@@ -5460,20 +5459,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &883989297
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 883989295}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2781e0d02d275d146b672ee0395dc66a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerHeartManager: {fileID: 1451012653}
-  gameOverMenu: {fileID: 1373151585}
 --- !u!1 &917003126
 GameObject:
   m_ObjectHideFlags: 0
@@ -9832,6 +9817,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1373151586}
+  - component: {fileID: 1373151587}
   m_Layer: 5
   m_Name: GameOverMenu
   m_TagString: Untagged
@@ -9860,6 +9846,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1373151587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1373151585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2781e0d02d275d146b672ee0395dc66a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerHeartManager: {fileID: 1451012653}
+  content: {fileID: 313606437}
 --- !u!1 &1374137810
 GameObject:
   m_ObjectHideFlags: 0
@@ -12726,8 +12726,8 @@ MonoBehaviour:
   startingScene: 2
   startingPosition: {fileID: 283330807}
   pauseMenu: {fileID: 422341}
-  optionsMenu: {fileID: 495351366}
-  gameOverMenu: {fileID: 1373151585}
+  optionsMenu: {fileID: 495351371}
+  gameOverMenu: {fileID: 1373151587}
   gv_respawnButton: {fileID: 1000790108}
   gv_mainMenuButton: {fileID: 1209075777}
   GameState: 0
@@ -14682,6 +14682,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogPanel: {fileID: 1951876960}
   dialogText: {fileID: 1412987679}
+  activated: 0
 --- !u!1 &2104737996
 GameObject:
   m_ObjectHideFlags: 0

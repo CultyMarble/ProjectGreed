@@ -23,7 +23,12 @@ public class PauseMenuGUI : SingletonMonobehaviour<PauseMenuGUI>
             //SetActive(false);
         });
 
-        pm_AbandonRunButton.onClick.AddListener(() => SceneControlManager.Instance.RespawnPlayerAtHub());
+        pm_AbandonRunButton.onClick.AddListener(() =>
+        {
+            SceneControlManager.Instance.RespawnPlayerAtHub();
+            //PlayerCurrencies.Instance.ResetCurrency();
+            SetActive(false);
+        });
         pm_MainMenuButton.onClick.AddListener(() => SceneControlManager.Instance.BackToMainMenuWrapper());
     }
 

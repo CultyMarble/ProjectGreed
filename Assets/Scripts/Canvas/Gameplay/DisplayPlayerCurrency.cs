@@ -21,10 +21,25 @@ public class DisplayPlayerCurrency : SingletonMonobehaviour<DisplayPlayerCurrenc
 
     public void UpdateSilverKeyIcon(bool hasSilverKey)
     {
-        if (hasSilverKey) { silverKeyIcon.SetActive(true); }
+        if (hasSilverKey) 
+        { 
+            silverKeyIcon.SetActive(true); 
+        }
+        else
+        {
+            silverKeyIcon.SetActive(false);
+
+        }
     }
     public void UpdateGoldKeyIcon(bool hasGoldKey)
     {
-        if (hasGoldKey) { goldKeyIcon.SetActive(true); }
+        if (hasGoldKey)
+        {
+            goldKeyIcon.SetActive(true);
+        }
+        else
+        {
+            goldKeyIcon.SetActive(false);
+        }
     }
 }

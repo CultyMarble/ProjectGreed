@@ -40,7 +40,13 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
     {
         // Gameover Menu
         gv_mainMenuButton.onClick.AddListener(() => StartCoroutine(BackToMainMenu()));
-        gv_respawnButton.onClick.AddListener(() => StartCoroutine(UnloadAndSwitchScene(SceneName.DemoSceneHub.ToString(), Vector3.zero)));
+        gv_respawnButton.onClick.AddListener(() => 
+        {
+            //StartCoroutine(LoadStartingScene());
+            //PlayerCurrencies.Instance.ResetCurrency();
+            RespawnPlayerAtHub();
+        }
+        );
     }
 
     private void Start()
@@ -120,6 +126,9 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         MainMenuGUI.Instance.SetActive(false);
         gameOverMenu.SetActive(false);
 
+        EventManager.CallBeforeSceneUnloadEvent();
+        yield return SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().buildIndex);
+
         yield return StartCoroutine(LoadSceneAndSetActive(startingScene.ToString()));
         EventManager.CallAfterSceneLoadEvent();
 
@@ -174,10 +183,11 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
             MainMenuGUI.Instance.SetActive(false);
             pauseMenu.SetActive(false);
             gameOverMenu.SetActive(false);
+            PlayerCurrencies.Instance.ResetCurrency();
 
             SaveDataManager.Instance.LoadPlayerDataToRuntimeData(SaveDataSlot.save01);
 
-            StartCoroutine(UnloadAndSwitchScene(SceneName.DemoSceneHub.ToString(), Vector3.zero));
+            StartCoroutine(LoadStartingScene());
         }
     }
 

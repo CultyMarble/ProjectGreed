@@ -202,6 +202,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GraveKeeper
       objectReference: {fileID: 0}
+    - target: {fileID: 4422130485644021212, guid: 056797ae4c473e348bd4644ce690fe32, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 5116916347280116894, guid: 056797ae4c473e348bd4644ce690fe32, type: 3}
       propertyPath: m_LocalPosition.y
       value: 2.76
@@ -270,6 +274,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: {fileID: 8788361}
+--- !u!114 &8788364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8788362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ccf02791f32d194d8582e354c83f3d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &561739716
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -280,6 +296,11 @@ PrefabInstance:
     - target: {fileID: 2471121758696812898, guid: bf8601242faae124b821d326a1d1167b, type: 3}
       propertyPath: m_Name
       value: BossDialogue
+      objectReference: {fileID: 0}
+    - target: {fileID: 7724952293990553105, guid: bf8601242faae124b821d326a1d1167b, type: 3}
+      propertyPath: quickText
+      value: What are you doing in MY domain?? No one enters here. No one LEAVES
+        here, and neither will YOU!
       objectReference: {fileID: 0}
     - target: {fileID: 8911960839656475275, guid: bf8601242faae124b821d326a1d1167b, type: 3}
       propertyPath: m_RootOrder
