@@ -1,33 +1,28 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameOverMenuGUI : SingletonMonobehaviour<GameOverMenuGUI>
 {
-    [SerializeField] private PlayerHeart playerHeartManager;
-    [SerializeField] private GameObject content;
+    [SerializeField] private GameObject content = default;
+    public GameObject Content => content;
 
+    [Header("Menu Content")]
+    [SerializeField] private Button go_ReturnHubButton = default;
+    [SerializeField] private Button go_MainMenuButton = default;
 
-    //===========================================================================
+    //======================================================================
     private void OnEnable()
     {
-        playerHeartManager.OnDespawnPlayerEvent += DisplayGameOverUI_OnDespawnEventHandler;
+        go_ReturnHubButton.onClick.AddListener(() => SceneControlManager.Instance.RespawnPlayerAtHub());
+        go_MainMenuButton.onClick.AddListener(() => SceneControlManager.Instance.LoadMainMenuWrapper());
     }
 
-    private void OnDisable()
-    {
-        playerHeartManager.OnDespawnPlayerEvent -= DisplayGameOverUI_OnDespawnEventHandler;
-    }
-
-    //===========================================================================
-    private void DisplayGameOverUI_OnDespawnEventHandler(object sender, System.EventArgs e)
-    {
-        if (content.activeSelf)
-            return;
-
-        SetActive(true);
-    }
-
-    public void SetActive(bool active)
+    //======================================================================
+    public void SetContentActive(bool active)
     {
         content.SetActive(active);
+
+        if (active)
+            SceneControlManager.Instance.CurrentGameplayState = GameplayState.Pause;
     }
 }

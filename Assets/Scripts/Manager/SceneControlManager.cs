@@ -10,21 +10,6 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
 
     [SerializeField] private GameObject player;
 
-    [Header("Starting Scene:")]
-    [SerializeField] private SceneName startingScene;
-    [SerializeField] private Transform startingPosition;
-
-    [Header("Pause Menu:")]
-    [SerializeField] private PauseMenuGUI pauseMenu;
-
-    [Header("Options Menu:")]
-    [SerializeField] private OptionMenuGUI optionsMenu;
-
-    [Header("Gameover Menu")]
-    [SerializeField] private GameOverMenuGUI gameOverMenu;
-    [SerializeField] private Button gv_respawnButton;
-    [SerializeField] private Button gv_mainMenuButton;
-
     private readonly float loadingScreenDuration = 0.75f;
 
     private bool isLoadingScreenActive = default;
@@ -33,29 +18,19 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
     private bool isLoadingScene = default;
     public bool IsLoadingScene => isLoadingScene;
 
-    public GameState GameState = default;
+    public SceneName CurrentActiveScene = default;
+    public GameplayState CurrentGameplayState = default;
 
     //===========================================================================
-    private void OnEnable()
-    {
-        // Gameover Menu
-        gv_mainMenuButton.onClick.AddListener(() => StartCoroutine(BackToMainMenu()));
-        gv_respawnButton.onClick.AddListener(() => 
-        {
-            //StartCoroutine(LoadStartingScene());
-            //PlayerCurrencies.Instance.ResetCurrency();
-            RespawnPlayerAtHub();
-        }
-        );
-    }
-
     private void Start()
     {
-        // First Time Load
+        // Initial loading sequences
         loadingScreenImage.color = new Color(0.0f, 0.0f, 0.0f, 1.0f);
         loadingScreenCanvasGroup.alpha = 1.0f;
 
-        MainMenuGUI.Instance.SetActive(true);
+        MainMenuGUI.Instance.SetContentActive(true);
+        CurrentActiveScene = SceneName.MainMenu;
+        CurrentGameplayState = GameplayState.Pause;
 
         StartCoroutine(LoadingScreen(0.0f));
     }
@@ -66,7 +41,7 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         EventManager.CallBeforeSceneUnloadLoadingScreenEvent();
         yield return StartCoroutine(LoadingScreen(1.0f));
 
-        gameOverMenu.SetActive(false);
+        GameOverMenuGUI.Instance.SetContentActive(false);
 
         EventManager.CallBeforeSceneUnloadEvent();
         yield return SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().buildIndex);
@@ -77,16 +52,12 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         Player.Instance.transform.position = spawnPosition;
         Player.Instance.gameObject.SetActive(true);
 
-        //yield return new WaitForSecondsRealtime(1.0f);
-        while (GameState != GameState.Dungeon)
-        {
-            yield return null;
-        }
-        DialogManager.Instance.activated = true;
+        yield return new WaitForSecondsRealtime(1.0f);
         yield return StartCoroutine(LoadingScreen(0.0f));
         EventManager.CallAfterSceneLoadedLoadingScreenEvent();
 
         isLoadingScene = false;
+        CurrentGameplayState = GameplayState.Ongoing;
     }
 
     //===========================================================================
@@ -118,61 +89,115 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
     }
 
     //===========================================================================
-    private IEnumerator LoadStartingScene()
+    private IEnumerator LoadDemoSceneHub()
     {
         EventManager.CallBeforeSceneUnloadLoadingScreenEvent();
         yield return StartCoroutine(LoadingScreen(1.0f));
 
-        MainMenuGUI.Instance.SetActive(false);
-        gameOverMenu.SetActive(false);
+        MainMenuGUI.Instance.SetContentActive(false);
+        SaveSelectMenuGUI.Instance.SetContentActive(false);
+        DemoOverMenuGUI.Instance.SetContentActive(false);
 
-        EventManager.CallBeforeSceneUnloadEvent();
-        yield return SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().buildIndex);
-
-        yield return StartCoroutine(LoadSceneAndSetActive(startingScene.ToString()));
+        yield return StartCoroutine(LoadSceneAndSetActive(SceneName.DemoSceneHub.ToString()));
         EventManager.CallAfterSceneLoadEvent();
+        CurrentActiveScene = SceneName.DemoSceneHub;
 
-        Player.Instance.transform.position = startingPosition.position;
+        Player.Instance.transform.position = Vector3.zero;
         Player.Instance.gameObject.SetActive(true);
 
         StartCoroutine(LoadingScreen(0.0f));
         EventManager.CallAfterSceneLoadedLoadingScreenEvent();
 
-        GameState = GameState.Hub;
+        CurrentGameplayState = GameplayState.Ongoing;
     }
 
-    private IEnumerator BackToMainMenu()
+    private IEnumerator LoadMainMenu()
     {
         EventManager.CallBeforeSceneUnloadLoadingScreenEvent();
         yield return StartCoroutine(LoadingScreen(1.0f));
 
-        MainMenuGUI.Instance.SetActive(true);
-        gameOverMenu.SetActive(false);
-        pauseMenu.SetActive(false);
+        PauseMenuGUI.Instance.SetContentActive(false);
+        GameOverMenuGUI.Instance.SetContentActive(false);
+        DemoOverMenuGUI.Instance.SetContentActive(false);
 
         EventManager.CallBeforeSceneUnloadEvent();
         yield return SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().buildIndex);
+        
+        MainMenuGUI.Instance.SetContentActive(true);
+        CurrentActiveScene = SceneName.MainMenu;
 
         yield return StartCoroutine(LoadingScreen(0.0f));
         EventManager.CallAfterSceneLoadedLoadingScreenEvent();
 
-        GameState = GameState.MainMenu;
+        CurrentGameplayState = GameplayState.Ongoing;
+    }
+
+    private IEnumerator LoadDemoDungeon()
+    {
+        EventManager.CallBeforeSceneUnloadLoadingScreenEvent();
+        yield return StartCoroutine(LoadingScreen(1.0f));
+
+        MainMenuGUI.Instance.SetContentActive(false);
+        SaveSelectMenuGUI.Instance.SetContentActive(false);
+
+        EventManager.CallBeforeSceneUnloadEvent();
+        yield return SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().buildIndex);
+        yield return StartCoroutine(LoadSceneAndSetActive(SceneName.DemoSceneDungeon.ToString()));
+        EventManager.CallAfterSceneLoadEvent();
+
+        CurrentActiveScene = SceneName.DemoSceneDungeon;
+
+        Player.Instance.transform.position = Vector3.zero;
+
+        // yield return StartCoroutine(LoadMap());
+
+        yield return StartCoroutine(LoadingScreen(0.0f));
+        EventManager.CallAfterSceneLoadedLoadingScreenEvent();
+
+        isLoadingScene = false;
+        CurrentGameplayState = GameplayState.Ongoing;
     }
 
     //===========================================================================
-    public void LoadStartingSceneWrapper()
+    //===== LIST OF SCENE LOAD WRAPPER ==========================================
+    //===========================================================================
+    public void LoadScene(string sceneName, Vector3 spawnPosition)
     {
         if (isLoadingScreenActive == false)
         {
-            StartCoroutine(LoadStartingScene());
+            isLoadingScene = true;
+            CurrentGameplayState = GameplayState.Pause;
+            StartCoroutine(UnloadAndSwitchScene(sceneName, spawnPosition));
         }
     }
 
-    public void BackToMainMenuWrapper()
+    public void LoadMainMenuWrapper()
     {
         if (isLoadingScreenActive == false)
         {
-            StartCoroutine(BackToMainMenu());
+            CurrentGameplayState = GameplayState.Pause;
+
+            StartCoroutine(LoadMainMenu());
+        }
+    }
+
+    public void LoadDemoSceneHubWrapper()
+    {
+        if (isLoadingScreenActive == false)
+        {
+            CurrentGameplayState = GameplayState.Pause;
+
+            StartCoroutine(LoadDemoSceneHub());
+        }
+    }
+
+    public void LoadDemoDungeonWrapper()
+    {
+        if (isLoadingScreenActive == false)
+        {
+            CurrentGameplayState = GameplayState.Pause;
+
+            StartCoroutine(LoadDemoDungeon());
         }
     }
 
@@ -180,29 +205,16 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
     {
         if (isLoadingScreenActive == false)
         {
-            MainMenuGUI.Instance.SetActive(false);
-            pauseMenu.SetActive(false);
-            gameOverMenu.SetActive(false);
-            PlayerCurrencies.Instance.ResetCurrency();
+            CurrentGameplayState = GameplayState.Pause;
+
+            MainMenuGUI.Instance.SetContentActive(false);
+            PauseMenuGUI.Instance.SetContentActive(false);
+            GameOverMenuGUI.Instance.SetContentActive(false);
+            DemoOverMenuGUI.Instance.SetContentActive(false);
 
             SaveDataManager.Instance.LoadPlayerDataToRuntimeData(SaveDataSlot.save01);
 
-            StartCoroutine(LoadStartingScene());
-        }
-    }
-
-    public void LoadScene(string sceneName, Vector3 spawnPosition)
-    {
-        if (isLoadingScreenActive == false)
-        {
-            isLoadingScene = true;
-
-            StartCoroutine(UnloadAndSwitchScene(sceneName, spawnPosition));
-
-            //if (sceneName == SceneName.DemoSceneDungeon.ToString())
-            //{
-            //    GameState = GameState.Dungeon;
-            //}
+            StartCoroutine(UnloadAndSwitchScene(SceneName.DemoSceneHub.ToString(), Vector3.zero));
         }
     }
 }

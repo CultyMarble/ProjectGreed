@@ -3,36 +3,25 @@ using UnityEngine.UI;
 
 public class DemoOverMenuGUI : SingletonMonobehaviour<DemoOverMenuGUI>
 {
-    [SerializeField] private GameObject content;
-    [SerializeField] private Button do_ReturnButton = default;
-    private BossCheck bossCheck;
+    [SerializeField] private GameObject content = default;
+
+    [Header("Menu Content")]
+    [SerializeField] private Button do_ReturnHubButton = default;
+    [SerializeField] private Button do_MainMenuButton = default;
 
     //===========================================================================
     private void OnEnable()
     {
-        bossCheck = GameObject.FindGameObjectWithTag("Boss").GetComponent<BossCheck>();
-        bossCheck.OnDespawnBossEvent += DisplayDemoOverUI_OnDespawnEventHandler;
-        do_ReturnButton.onClick.AddListener(() =>
-        {
-            SetMenuActive(false);
-            SceneControlManager.Instance.RespawnPlayerAtHub();
-        });
+        do_ReturnHubButton.onClick.AddListener(() => SceneControlManager.Instance.RespawnPlayerAtHub());
+        do_MainMenuButton.onClick.AddListener(() => SceneControlManager.Instance.LoadMainMenuWrapper());
     }
 
     //===========================================================================
-    public void SetMenuActive(bool newBool)
+    public void SetContentActive(bool active)
     {
-        if (content.activeSelf)
-            return;
-        content.SetActive(true);
-        do_ReturnButton.gameObject.SetActive(newBool);
-    }
-    private void DisplayDemoOverUI_OnDespawnEventHandler(object sender, System.EventArgs e)
-    {
-        if (content.activeSelf)
-            return;
+        content.SetActive(active);
 
-        SetMenuActive(true);
+        if (active)
+            SceneControlManager.Instance.CurrentGameplayState = GameplayState.Pause;
     }
-    
 }
