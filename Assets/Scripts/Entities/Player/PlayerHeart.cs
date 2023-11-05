@@ -65,6 +65,9 @@ public class PlayerHeart : MonoBehaviour
 
         // Call OnDestroy Event
         OnDespawnPlayerEvent?.Invoke(this, EventArgs.Empty);
+
+        // Trigger GameOver Menu
+        GameOverMenuGUI.Instance.SetContentActive(true);
     }
 
     //======================================================================

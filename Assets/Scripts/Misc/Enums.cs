@@ -22,19 +22,14 @@ public enum PlayerActionState
 
 public enum SceneName
 {
-    ManagerScene,
     MainMenu,
     DemoSceneHub,
     DemoSceneDungeon,
-    DemoSceneBossRoom1,
-    DemoSceneBossRoom2,
+    DemoSceneBossRoom,
 }
 
-public enum GameState
+public enum GameplayState
 {
-    MainMenu,
-    Hub,
-    Dungeon,
-    PauseMenu,
-    OptionMenu,
+    Pause,
+    Ongoing,
 }

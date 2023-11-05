@@ -673,6 +673,7 @@ GameObject:
   - component: {fileID: 7354470196024640532}
   - component: {fileID: 4164026267464041696}
   - component: {fileID: 7853001149924123840}
+  - component: {fileID: -96201394394079906}
   m_Layer: 7
   m_Name: GraveKeeper
   m_TagString: Enemy
@@ -775,7 +776,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08fa41e95d6ce67449ffced42205342d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 650
+  maxHealth: 1
 --- !u!114 &3907215426190761188
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -989,6 +990,19 @@ MonoBehaviour:
   haveActivated: {fileID: 11400000, guid: 064b4593e65fa84409f5a53b55c953d2, type: 2}
   dialogueEntryArray:
   - {fileID: 11400000, guid: 64523b3707502f34ea2269220321b7c1, type: 2}
+--- !u!114 &-96201394394079906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4460702311085162523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b5b2695708aa2b428cd77f6b687a8eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: {fileID: 4032364044040844961}
 --- !u!1 &4487804240398993784
 GameObject:
   m_ObjectHideFlags: 0

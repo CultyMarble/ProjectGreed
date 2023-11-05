@@ -50,8 +50,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (SceneControlManager.Instance.GameState == GameState.PauseMenu ||
-            SceneControlManager.Instance.GameState == GameState.OptionMenu)
+        if (SceneControlManager.Instance.CurrentGameplayState == GameplayState.Pause)
             return;
 
         PlayerInput();
@@ -70,8 +69,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (SceneControlManager.Instance.GameState == GameState.PauseMenu ||
-            SceneControlManager.Instance.GameState == GameState.OptionMenu)
+        if (SceneControlManager.Instance.CurrentGameplayState == GameplayState.Pause)
             return;
 
         MovePlayerPosition();

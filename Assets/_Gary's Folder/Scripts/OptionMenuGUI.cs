@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class OptionMenuGUI : SingletonMonobehaviour<OptionMenuGUI>
 {
     [SerializeField] private GameObject content = default;
+    public GameObject Content => content;
 
     [Header("Menu Content:")]
     [SerializeField] private Button om_BackButton = default;
@@ -13,8 +14,8 @@ public class OptionMenuGUI : SingletonMonobehaviour<OptionMenuGUI>
     {
         om_BackButton.onClick.AddListener(() =>
         {
-            SetActive(false);
-            PauseMenuGUI.Instance.SetActive(true);
+            SetContentActive(false);
+            PauseMenuGUI.Instance.SetContentActive(true);
         });
     }
 
@@ -23,25 +24,15 @@ public class OptionMenuGUI : SingletonMonobehaviour<OptionMenuGUI>
         if (SceneControlManager.Instance.IsLoadingScreenActive)
             return;
 
-        if (SceneControlManager.Instance.GameState == GameState.MainMenu)
-            return;
-
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (SceneControlManager.Instance.GameState != GameState.OptionMenu)
-                return;
-
-            SetActive(false);
-            SceneControlManager.Instance.GameState = GameState.PauseMenu;
+            SetContentActive(false);
         }
     }
 
     //===========================================================================
-    public void SetActive(bool active)
+    public void SetContentActive(bool active)
     {
         content.SetActive(active);
-
-        if (active)
-            SceneControlManager.Instance.GameState = GameState.OptionMenu;
     }
 }

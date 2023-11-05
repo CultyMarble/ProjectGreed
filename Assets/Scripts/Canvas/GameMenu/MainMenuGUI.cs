@@ -25,8 +25,8 @@ public class MainMenuGUI : SingletonMonobehaviour<MainMenuGUI>
         // Main Menu
         mm_startButton.onClick.AddListener(() =>
         {
-            SetActive(false);
-            SaveSelectMenuGUI.Instance.SetActive(true);
+            SetContentActive(false);
+            SaveSelectMenuGUI.Instance.SetContentActive(true);
         });
 
         mm_exitButton.onClick.AddListener(Application.Quit);
@@ -55,7 +55,7 @@ public class MainMenuGUI : SingletonMonobehaviour<MainMenuGUI>
     }
 
     //===========================================================================
-    public void SetActive(bool active)
+    public void SetContentActive(bool active)
     {
         content.SetActive(active);
     }

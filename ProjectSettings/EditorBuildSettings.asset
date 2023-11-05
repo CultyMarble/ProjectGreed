@@ -15,9 +15,6 @@ EditorBuildSettings:
     path: Assets/Scenes/DemoSceneDungeon.unity
     guid: 7440cef0911908a409e847e5858a9ae9
   - enabled: 1
-    path: Assets/Scenes/DemoSceneBossRoom1.unity
+    path: Assets/Scenes/DemoSceneBossRoom.unity
     guid: ea7b0e040215c6c47a596c8bc28d1cb7
-  - enabled: 1
-    path: Assets/Scenes/DemoSceneBossRoom2.unity
-    guid: 12655dd1734dbf343b23122c24656c61
   m_configObjects: {}

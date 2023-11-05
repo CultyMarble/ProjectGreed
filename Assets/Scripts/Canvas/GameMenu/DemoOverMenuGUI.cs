@@ -3,27 +3,25 @@ using UnityEngine.UI;
 
 public class DemoOverMenuGUI : SingletonMonobehaviour<DemoOverMenuGUI>
 {
-    [SerializeField] private GameObject do_BGImage = default;
-    [SerializeField] private GameObject do_Text = default;
-    [SerializeField] private GameObject do_ContentText = default;
-    [SerializeField] private Button do_ReturnButton = default;
+    [SerializeField] private GameObject content = default;
+
+    [Header("Menu Content")]
+    [SerializeField] private Button do_ReturnHubButton = default;
+    [SerializeField] private Button do_MainMenuButton = default;
 
     //===========================================================================
     private void OnEnable()
     {
-        do_ReturnButton.onClick.AddListener(() =>
-        {
-            SetMenuActive(false);
-            SceneControlManager.Instance.RespawnPlayerAtHub();
-        });
+        do_ReturnHubButton.onClick.AddListener(() => SceneControlManager.Instance.RespawnPlayerAtHub());
+        do_MainMenuButton.onClick.AddListener(() => SceneControlManager.Instance.LoadMainMenuWrapper());
     }
 
     //===========================================================================
-    public void SetMenuActive(bool newBool)
+    public void SetContentActive(bool active)
     {
-        do_BGImage.SetActive(newBool);
-        do_Text.SetActive(newBool);
-        do_ContentText.SetActive(newBool);
-        do_ReturnButton.gameObject.SetActive(newBool);
+        content.SetActive(active);
+
+        if (active)
+            SceneControlManager.Instance.CurrentGameplayState = GameplayState.Pause;
     }
 }
