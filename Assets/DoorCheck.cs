@@ -6,14 +6,12 @@ public class DoorCheck : MonoBehaviour
 {
     public bool isChecked = false;
     public bool active = false;
-
     public Transform doorCheck;
 
     void OnEnable()
     {
         if (!active)
         {
-            isChecked = true;
             EnableObstacle();
         }
         RoomManager.onRoomsGenerated += CheckForDoors;
@@ -28,25 +26,42 @@ public class DoorCheck : MonoBehaviour
         {
             return;
         }
+        
         Collider2D[] otherDoors = Physics2D.OverlapCircleAll(doorCheck.position, 1.0f);
+
         if (otherDoors == null)
         {
             EnableObstacle();
             isChecked = true;
             return;
         }
-        foreach(Collider2D collider in otherDoors)
+        if (active)
         {
-            if (collider.CompareTag("DoorCheck"))
+            foreach (Collider2D collider in otherDoors)
             {
-                if (collider.gameObject.GetComponent<DoorCheck>().active)
+                if (collider.CompareTag("DoorCheck"))
                 {
-                    DisableObstacle();
-                    isChecked = true;
-                    collider.gameObject.GetComponent<DoorCheck>().DisableObstacle();
-                    collider.gameObject.GetComponent<DoorCheck>().isChecked = true;
-                    return;
+                    if (collider.gameObject.GetComponent<DoorCheck>().active)
+                    {
+                        DisableObstacle();
+                        isChecked = true;
+                        collider.gameObject.GetComponent<DoorCheck>().DisableObstacle();
+                        collider.gameObject.GetComponent<DoorCheck>().isChecked = true;
+                        return;
+                    }
                 }
+
+            }
+        }
+        else
+        {
+            foreach (Collider2D collider in otherDoors)
+            {
+                if (collider.CompareTag("LockTrigger"))
+                {
+                    Destroy(collider.gameObject);
+                }
+
             }
         }
         EnableObstacle();

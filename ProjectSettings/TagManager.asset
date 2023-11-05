@@ -15,6 +15,7 @@ TagManager:
   - Breakable
   - DoorCheck
   - Boss
+  - LockTrigger
   layers:
   - Default
   - TransparentFX

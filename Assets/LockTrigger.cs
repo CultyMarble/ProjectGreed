@@ -8,7 +8,7 @@ public class LockTrigger : MonoBehaviour
     private GateManager gateManager;
     private void Awake()
     {
-        gateManager = transform.parent.GetComponent<GateManager>();
+        gateManager = transform.parent.parent.GetComponent<GateManager>();
     }
     private void Update()
     {
@@ -49,7 +49,7 @@ public class LockTrigger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player") && collision.GetType().ToString() != Tags.CAPSULECOLLIDER2D && gateManager.locked)
+        if (collision.gameObject.CompareTag("Player") && gateManager.locked)
         {
             Player.Instance.SetInteractPromtTextActive(true);
             gateManager.playerInLockZone = true;
@@ -58,7 +58,7 @@ public class LockTrigger : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player") && collision.GetType().ToString() != Tags.CAPSULECOLLIDER2D && gateManager.locked)
+        if (collision.gameObject.CompareTag("Player") && gateManager.locked)
         {
             Player.Instance.SetInteractPromtTextActive(false);
             gateManager.playerInLockZone = false;
