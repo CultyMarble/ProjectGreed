@@ -13,6 +13,8 @@ public class TargetingAI : MonoBehaviour
     [SerializeField] private bool requireLineOfSight = false;
     [SerializeField] private bool keepDistance;
     [SerializeField] private bool patrolArea;
+    [SerializeField] private bool flee;
+
     [SerializeField] GameObject patrolTransforms;
 
     private float targetDistance;
@@ -104,6 +106,20 @@ public class TargetingAI : MonoBehaviour
         if (!patrolArea && targetDistance >= searchRadius)
         {
             ClearTarget();
+        }
+        else if (flee && Mathf.Abs(targetDistance) < breakDistanceMin)
+        {
+            Vector3 newPosition;
+            newPosition.x = currentTarget.x + (-targetDir.x * breakDistanceMin);
+            newPosition.y = currentTarget.y + (-targetDir.y * breakDistanceMin);
+            newPosition.z = 0;
+            currentDestination.position = newPosition;
+        }
+        else if(flee && Mathf.Abs(targetDistance) > breakDistanceMin)
+        {
+            currentDestination.position = transform.position;
+
+            return;
         }
         else if(keepDistance && Mathf.Abs(targetDistance) < breakDistanceMax && Mathf.Abs(targetDistance) > breakDistanceMin)
         {
