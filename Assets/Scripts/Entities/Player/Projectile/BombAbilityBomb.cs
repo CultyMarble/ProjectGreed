@@ -11,7 +11,6 @@ public class BombAbilityBomb : MonoBehaviour
     {
         if (SceneControlManager.Instance.CurrentGameplayState == GameplayState.Pause)
             return;
-
         UpdateDelayTime();
 
         if (delayTime <= 0)

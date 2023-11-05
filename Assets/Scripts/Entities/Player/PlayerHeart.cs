@@ -61,14 +61,11 @@ public class PlayerHeart : MonoBehaviour
         // Reset Parameters
         UpdateCurrentHeart(currentHeart);
 
-        Player.Instance.gameObject.SetActive(false);
-
         // Call OnDestroy Event
         OnDespawnPlayerEvent?.Invoke(this, EventArgs.Empty);
-
-        // Trigger GameOver Menu
-        GameOverMenuGUI.Instance.SetContentActive(true);
-    }
+        Player.Instance.gameObject.SetActive(false);
+        //SceneControlManager.Instance.GameState = GameState.Hub;
+        }
 
     //======================================================================
     public void ResetPlayerHeart()
@@ -88,6 +85,8 @@ public class PlayerHeart : MonoBehaviour
             TriggerDamageFeedBack();
 
         currentMaxHeart += amount;
+        currentHeart += amount;
+
         if (currentMaxHeart <= 0)
             currentMaxHeart = 0;
 

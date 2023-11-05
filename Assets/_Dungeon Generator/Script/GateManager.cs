@@ -17,6 +17,7 @@ public class GateManager : MonoBehaviour
     public bool clearedRoom = false;
     public bool disableGate = false;
     public bool locked = false;
+    public PlayerCurrencies.KeyType keytype;
 
     [Header("Gate Referance")]
     [SerializeField] private GameObject roomVariants;
@@ -47,10 +48,19 @@ public class GateManager : MonoBehaviour
         if (locked)
         {
             SpriteRenderer[] sprites = gates.GetComponentsInChildren<SpriteRenderer>();
-            
-            foreach(SpriteRenderer gate in sprites)
+            if(keytype == PlayerCurrencies.KeyType.Silver)
             {
-                gate.color = Color.yellow;
+                foreach (SpriteRenderer gate in sprites)
+                {
+                    gate.color = Color.grey;
+                }
+            }
+            else if (keytype == PlayerCurrencies.KeyType.Gold)
+            {
+                foreach (SpriteRenderer gate in sprites)
+                {
+                    gate.color = Color.yellow;
+                }
             }
         }
          gates.SetActive(active);

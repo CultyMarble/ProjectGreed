@@ -13,6 +13,8 @@ public class TargetingAI : MonoBehaviour
     [SerializeField] private bool requireLineOfSight = false;
     [SerializeField] private bool keepDistance;
     [SerializeField] private bool patrolArea;
+    [SerializeField] private bool flee;
+
     [SerializeField] GameObject patrolTransforms;
 
     private float targetDistance;
@@ -22,19 +24,56 @@ public class TargetingAI : MonoBehaviour
     private readonly float patrolTime = 3f;
     private float patrolTimeCounter;
     private Vector3 lastKnownPosition;
-
+    private Animator animator;
+    private SpriteRenderer spriteRenderer;
     public bool dontUpdateDestination = false;
+    public Pathfinding.AIPath pathfinder;
 
     private void Start()
     {
         currentTarget = Vector3.zero;
         currentDestination.position = transform.position;
         lastKnownPosition = transform.position;
+        pathfinder = GetComponent<Pathfinding.AIPath>();
+        animator = GetComponent<Animator>();
+        spriteRenderer = transform.GetComponentInChildren<SpriteRenderer>();
     }
 
     //===========================================================================
     private void FixedUpdate()
     {
+        if (SceneControlManager.Instance.CurrentGameplayState == GameplayState.Pause)
+        {
+            pathfinder.maxSpeed = 0;
+            return;
+        }
+        if (!CheckNoTarget())
+        {
+            if (Vector3.Distance(transform.position,currentDestination.position) < 0.1f)
+            {
+                animator.SetBool("isIdle", true);
+            }
+            else if (currentDestination.position.x > transform.position.x)
+            {
+                animator.SetBool("isWalkingRight", true);
+                animator.SetBool("isWalkingLeft", false);
+                animator.SetBool("isIdle", false);
+                spriteRenderer.flipX = true;
+            }
+            else if (currentDestination.position.x < transform.position.x)
+            {
+                animator.SetBool("isWalkingLeft", true);
+                animator.SetBool("isWalkingRight", false);
+                animator.SetBool("isIdle", false);
+                spriteRenderer.flipX = false;
+            }
+        }
+        else
+        {
+            animator.SetBool("isWalkingLeft", false);
+            animator.SetBool("isWalkingRight", false);
+            animator.SetBool("isIdle", true);
+        }
         if (!holdMovement)
         {
             HandleTargeting();
@@ -65,6 +104,20 @@ public class TargetingAI : MonoBehaviour
         if (!patrolArea && targetDistance >= searchRadius)
         {
             ClearTarget();
+        }
+        else if (flee && Mathf.Abs(targetDistance) < breakDistanceMin)
+        {
+            Vector3 newPosition;
+            newPosition.x = currentTarget.x + (-targetDir.x * breakDistanceMin);
+            newPosition.y = currentTarget.y + (-targetDir.y * breakDistanceMin);
+            newPosition.z = 0;
+            currentDestination.position = newPosition;
+        }
+        else if(flee && Mathf.Abs(targetDistance) > breakDistanceMin)
+        {
+            currentDestination.position = transform.position;
+
+            return;
         }
         else if(keepDistance && Mathf.Abs(targetDistance) < breakDistanceMax && Mathf.Abs(targetDistance) > breakDistanceMin)
         {
@@ -154,13 +207,26 @@ public class TargetingAI : MonoBehaviour
     }
     public bool CheckNoTarget()
     {
-        if(currentDestination.position == transform.position && !CheckLineOfSight())
+        if(Vector2.Distance(currentDestination.position,transform.position) < 0.1f && !CheckLineOfSight())
         {
             return true;
         }
         else
         {
             return false;
+        }
+    }
+    public void DontUpdateDestination(bool input)
+    {
+        if(input == true)
+        {
+            dontUpdateDestination = input;
+            lastKnownPosition = currentDestination.position;
+        }
+        else
+        {
+            dontUpdateDestination = input;
+            LookForTarget();
         }
     }
     public void TogglePatrol(bool toggle)

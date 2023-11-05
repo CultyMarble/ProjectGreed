@@ -10,7 +10,7 @@ public class EnemyHealth : MonoBehaviour
 
     [SerializeField] private float maxHealth;
 
-    private float currentHealth;
+    public float currentHealth;
 
     private float feedbackDamageTime = 0.10f;
     private float feedbackDamageTimer = default;

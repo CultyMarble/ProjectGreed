@@ -9,12 +9,13 @@ public class RandomSpawnManager : MonoBehaviour
     [SerializeField] private Transform[] enemyTypePoolList;
     [SerializeField] private GameObject[] objectList;
     [SerializeField] private GameObject[] noteList;
+    [SerializeField] private GameObject[] chestList;
 
     [SerializeField] private float objectSpawnChance;
     [SerializeField] private float noteSpawnChance;
+    [SerializeField] private float chestSpawnChance;
     [SerializeField] private int spawnNum;
     private int totalSpawned = 0;
-
     private GameObject spawnPointList;
 
 
@@ -116,8 +117,14 @@ public class RandomSpawnManager : MonoBehaviour
         // Random Spawn
         foreach (int index in spawnPointIndexList)
         {
+            //Spawn Chest
+            if(Random.value < chestSpawnChance)
+            {
+                Instantiate(chestList[Random.Range(0, chestList.Length)], spawnPointList.transform.GetChild(index).transform.position, Quaternion.identity);
+                continue;
+            }
             // Spawn Item
-            if (Random.value < objectSpawnChance)
+            else if (Random.value < objectSpawnChance)
             {
                 Instantiate(objectList[Random.Range(0, objectList.Length)], spawnPointList.transform.GetChild(index).transform.position, Quaternion.identity);
                 continue;
@@ -135,7 +142,6 @@ public class RandomSpawnManager : MonoBehaviour
                 if (enemy.gameObject.activeSelf == false)
                 {
                     enemy.transform.position = spawnPointList.transform.GetChild(index).transform.position;
-                    //Debug.Log("Transform Position:" + spawnPointList.transform.GetChild(index).transform.position);
                     enemy.gameObject.SetActive(true);
                     totalSpawned++;
                     break;

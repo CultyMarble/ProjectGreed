@@ -633,8 +633,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.016983747, y: 0.30627608}
-  m_Size: {x: 0.91168463, y: 1.8026166}
+  m_Offset: {x: 0.093129575, y: 0.1741401}
+  m_Size: {x: 1.1319114, y: 2.0668886}
   m_Direction: 0
 --- !u!58 &6121733131684266011
 CircleCollider2D:
@@ -649,9 +649,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.0028576255}
+  m_Offset: {x: 0.029363573, y: 0.0028576255}
   serializedVersion: 2
-  m_Radius: 0.5935773
+  m_Radius: 0.62294084
 --- !u!50 &6121733131684266012
 Rigidbody2D:
   serializedVersion: 4
@@ -699,7 +699,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08fa41e95d6ce67449ffced42205342d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 1
+  maxHealth: 100
+  currentHealth: 0
 --- !u!114 &448461915141562970
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -723,6 +724,7 @@ MonoBehaviour:
   patrolArea: 0
   patrolTransforms: {fileID: 0}
   dontUpdateDestination: 0
+  pathfinder: {fileID: 0}
 --- !u!114 &5097535545587337296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -832,7 +834,7 @@ Animator:
   m_GameObject: {fileID: 8301459616188158172}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 056e3aec7164290478382d559bd87553, type: 2}
+  m_Controller: {fileID: 9100000, guid: 77c90e414fdb8094e9581f3ab790d4e6, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -856,7 +858,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pfTempCurrency: {fileID: 2443823218653012819, guid: 3d947b54961e7fd49bec6bc289615a57, type: 3}
   minAmount: 0
-  maxAmount: 0
+  maxAmount: 5
 --- !u!114 &6715554833569249681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -898,7 +900,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8301459617392668569}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.01, y: 0.73, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -946,7 +948,7 @@ SpriteRenderer:
   m_SortingLayerID: 237529647
   m_SortingLayer: 5
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 43755a9175bd3644e850de310f45b752, type: 3}
+  m_Sprite: {fileID: -1022919005, guid: 492aa651e8348bf4ba03d744e12e2ebc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

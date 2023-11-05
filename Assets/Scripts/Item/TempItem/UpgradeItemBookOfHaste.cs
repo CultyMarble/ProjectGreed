@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class UpgradeItemBookOfHaste : UpgradeItem
 {
-    public float newDashTime = default;
-    public float newDashSpeed = default;
+    public float increaseDashTime = default;
+    public float increaseDashSpeed = default;
 
     //===========================================================================
     protected override void AddItemEffect()
     {
-        Player.Instance.GetComponent<PlayerMovement>().SetDashParameter(newDashTime, newDashSpeed);
+        Player.Instance.GetComponent<PlayerMovement>().IncreaseDashParameter(increaseDashTime, increaseDashSpeed);
     }
 
     protected override void RemoveItemEffect()

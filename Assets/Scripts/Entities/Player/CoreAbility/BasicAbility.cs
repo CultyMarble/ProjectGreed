@@ -4,13 +4,13 @@ using UnityEngine.InputSystem;
 public class BasicAbility : PlayerAbility
 {
     // Utility
-    public readonly float moveSpeed = 2.0f;
-    public readonly float lifeTime = 0.75f;
+    public readonly float moveSpeed = 4.0f;
+    public readonly float lifeTime = 0.5f;
     public readonly float rechargeDelay = 1.0f;
 
     public readonly float timeUntilChangeDirectionMax = 0.2f;
     public readonly float timeUntilChangeDirectionMin = 0.1f;
-    public readonly float swingMagtitude = 0.8f;
+    public readonly float swingMagtitude = 0.2f;
     public readonly float growthRate = 0.75f;
     public readonly float size = 0.18f;
 
@@ -72,6 +72,9 @@ public class BasicAbility : PlayerAbility
 
     private void FixedUpdate()
     {
+        if (SceneControlManager.Instance.CurrentGameplayState == GameplayState.Pause)
+            return;
+
         CultyMarbleHelper.RotateGameObjectToMouseDirection(this.transform);
     }
 

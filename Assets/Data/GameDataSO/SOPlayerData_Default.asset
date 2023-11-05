@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseMaxHealth: 3
   baseMoveSpeed: 8
-  baseDashPenalty: 0.1
+  baseDashPenalty: 0.05
   baseDashCooldown: 1
   baseDashTime: 0.25
-  baseDashSpeed: 20
-  ba_baseCooldown: 0.05
+  baseDashSpeed: 40
+  ba_baseCooldown: 0.06
   ba_baseMaxFuel: 100
-  ba_fuelConsumePerTrigger: 1
+  ba_fuelConsumePerTrigger: 3
   ba_baseRechargeRate: 100
   ba_baseDamage: 3
   ba_basePlayerSpeedPenalty: 0.5

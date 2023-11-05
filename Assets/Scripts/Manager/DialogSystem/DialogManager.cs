@@ -8,23 +8,35 @@ public class DialogManager : SingletonMonobehaviour<DialogManager>
 
     private string[] dialogLines;
     private int lineIndex;
+    public bool activated = false;
 
     //===========================================================================
     private void Start()
     {
-        SetDialogPanelActiveState(false);
-        Time.timeScale = 1.0f;
+        //SetDialogPanelActiveState(false);
+        //Time.timeScale = 1.0f;
     }
 
     private void Update()
     {
+        if (!activated)
+        {
+            return;
+        }
         if (dialogPanel.gameObject.activeSelf == false)
             return;
 
         if (Input.GetMouseButtonUp(0))
         {
             lineIndex++;
+            if(dialogLines == null)
+            {
+                lineIndex = 0;
 
+                SetDialogPanelActiveState(false);
+
+                return;
+            }
             if (lineIndex >= dialogLines.Length)
             {
                 lineIndex = 0;
@@ -41,10 +53,10 @@ public class DialogManager : SingletonMonobehaviour<DialogManager>
     //===========================================================================
     public void SetDialogPanelActiveState(bool newBool)
     {
-        if (newBool == true)
-            Time.timeScale = 0.0f;
+        if (newBool)
+            SceneControlManager.Instance.CurrentGameplayState = GameplayState.Pause;
         else
-            Time.timeScale = 1.0f;
+            SceneControlManager.Instance.CurrentGameplayState = GameplayState.Ongoing;
 
         dialogPanel.gameObject.SetActive(newBool);
     }
@@ -54,5 +66,9 @@ public class DialogManager : SingletonMonobehaviour<DialogManager>
         dialogLines = newDialogLines;
 
         dialogText.SetText(dialogLines[lineIndex]);
+    }
+    public void SetDialogLine(string newDialogLines)
+    {
+        dialogText.SetText(newDialogLines);
     }
 }

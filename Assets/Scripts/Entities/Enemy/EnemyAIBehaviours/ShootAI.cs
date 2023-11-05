@@ -37,6 +37,8 @@ public class ShootAI : MonoBehaviour
 
     private void Update()
     {
+        if (SceneControlManager.Instance.CurrentGameplayState == GameplayState.Pause)
+            return;
         ShootCoolDown();
         Shoot();
     }

@@ -6,10 +6,13 @@ public class DialogueActivator : MonoBehaviour
 
     [Header("Set Dialogue Trigger Method:")]
     [SerializeField] private DialogueActivateType activateType = default;
-    [SerializeField] private SOBool haveActivated = default;
+    //[SerializeField] private SOBool haveActivated = default;
+    [SerializeField] private bool haveActivated = default;
+
 
     [Header("Dialog Entry Data:")]
     [SerializeField] private SODialogueEntry[] dialogueEntryArray = default;
+    [SerializeField] private string quickText;
 
     private int dialogueEntryIndex = default;
     private bool canActivateDialogBox = default;
@@ -40,8 +43,10 @@ public class DialogueActivator : MonoBehaviour
     //===========================================================================
     private void Update()
     {
-        if (SceneControlManager.Instance.IsLoadingScene == true)
+        if (!DialogManager.Instance.activated)
+        {
             return;
+        }
 
         if (canActivateDialogBox == false)
             return;
@@ -68,12 +73,21 @@ public class DialogueActivator : MonoBehaviour
         DialogManager.Instance.SetDialogLines(entry.dialogueLines);
         DialogManager.Instance.SetDialogPanelActiveState(true);
     }
-
+    private void ActivateDialogueManager(string entry)
+    {
+        DialogManager.Instance.SetDialogLine(entry);
+        DialogManager.Instance.SetDialogPanelActiveState(true);
+    }
     private void ManualTriggerDialogHandler()
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
-            foreach(SODialogueEntry entry in dialogueEntryArray)
+            if(quickText.Length != 0)
+            {
+                ActivateDialogueManager(quickText);
+                return;
+            }
+            foreach (SODialogueEntry entry in dialogueEntryArray)
             {
                 if (entry.hasBeenUsed == false)
                 {
@@ -91,11 +105,16 @@ public class DialogueActivator : MonoBehaviour
 
     private void AutoTriggerDialogHandler()
     {
-        if (haveActivated.value)
+        if (haveActivated || SceneControlManager.Instance.IsLoadingScene)
             return;
 
-        haveActivated.value = true;
+        haveActivated = true;
 
+        if (quickText.Length != 0)
+        {
+            ActivateDialogueManager(quickText);
+            return;
+        }
         dialogueEntryIndex = Random.Range(0, dialogueEntryArray.Length);
         ActivateDialogueManager(dialogueEntryArray[dialogueEntryIndex]);
     }

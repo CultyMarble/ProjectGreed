@@ -156,17 +156,29 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4317000766357431429, guid: fb3a06f6d6e204a43b619d5eb2dd4e7d, type: 3}
+      propertyPath: GoldRoomDialogue
+      value: 
+      objectReference: {fileID: 2471121758696812898, guid: c85f59f4e13e26f479871c32b1605986, type: 3}
+    - target: {fileID: 4317000766357431429, guid: fb3a06f6d6e204a43b619d5eb2dd4e7d, type: 3}
       propertyPath: centerRoomChance
       value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 4317000766357431429, guid: fb3a06f6d6e204a43b619d5eb2dd4e7d, type: 3}
+      propertyPath: goldRoomDialogue
+      value: 
+      objectReference: {fileID: 2471121758696812898, guid: c85f59f4e13e26f479871c32b1605986, type: 3}
+    - target: {fileID: 4317000766357431429, guid: fb3a06f6d6e204a43b619d5eb2dd4e7d, type: 3}
+      propertyPath: startRoomDialogue
+      value: 
+      objectReference: {fileID: 2471121758696812898, guid: ea4375912d3ce9247bf42dce04446c49, type: 3}
+    - target: {fileID: 4317000766357431429, guid: fb3a06f6d6e204a43b619d5eb2dd4e7d, type: 3}
       propertyPath: keys.Array.data[0]
       value: 
-      objectReference: {fileID: 4422130485644021212, guid: 3e337ec34c699ac44b0da2191163d8c0, type: 3}
+      objectReference: {fileID: 5567745467040105511, guid: b15e0f56bacbb594196dd7159181f8da, type: 3}
     - target: {fileID: 4317000766357431429, guid: fb3a06f6d6e204a43b619d5eb2dd4e7d, type: 3}
       propertyPath: keys.Array.data[1]
       value: 
-      objectReference: {fileID: 4422130485644021212, guid: 3009efd8c765e2e44a36549127609f88, type: 3}
+      objectReference: {fileID: 5567745467040105511, guid: eb15c768ea3be5e48a0a4967c23bb235, type: 3}
     - target: {fileID: 4317000766357431429, guid: fb3a06f6d6e204a43b619d5eb2dd4e7d, type: 3}
       propertyPath: keys.Array.data[2]
       value: 
@@ -176,9 +188,29 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4317000766357431429, guid: fb3a06f6d6e204a43b619d5eb2dd4e7d, type: 3}
+      propertyPath: silverRoomDialogue
+      value: 
+      objectReference: {fileID: 2471121758696812898, guid: a517b4a5a748d74468de385c04defd9d, type: 3}
+    - target: {fileID: 4317000766357431429, guid: fb3a06f6d6e204a43b619d5eb2dd4e7d, type: 3}
       propertyPath: npcList.Array.data[0]
       value: 
       objectReference: {fileID: 4123117941785069872, guid: 227bdb8fdf996ef49aacae88b09b155d, type: 3}
+    - target: {fileID: 4317000766357431429, guid: fb3a06f6d6e204a43b619d5eb2dd4e7d, type: 3}
+      propertyPath: treasureItems.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4317000766357431429, guid: fb3a06f6d6e204a43b619d5eb2dd4e7d, type: 3}
+      propertyPath: treasureItems.Array.data[5]
+      value: 
+      objectReference: {fileID: 6917886894744599027, guid: e35b9775be5e7eb448a154632cd2cb02, type: 3}
+    - target: {fileID: 4317000766357431429, guid: fb3a06f6d6e204a43b619d5eb2dd4e7d, type: 3}
+      propertyPath: treasureItems.Array.data[6]
+      value: 
+      objectReference: {fileID: 188694118197523721, guid: 52e461325db4ecc49bdd3ae2c2bff31d, type: 3}
+    - target: {fileID: 4317000766357431429, guid: fb3a06f6d6e204a43b619d5eb2dd4e7d, type: 3}
+      propertyPath: treasureItems.Array.data[7]
+      value: 
+      objectReference: {fileID: 8972429057144147082, guid: 71d17848d7a6bbb4391a075ad2ca213d, type: 3}
     - target: {fileID: 4317000767536815821, guid: fb3a06f6d6e204a43b619d5eb2dd4e7d, type: 3}
       propertyPath: m_RootOrder
       value: 1

@@ -44,8 +44,8 @@ public abstract class Trap : MonoBehaviour
             haveTriggered = true;
             playAnimation = true;
             currentAnimationIndex = 1;
-
-            if (movementImpair)
+            
+            if (movementImpair && Player.Instance.actionState != PlayerActionState.IsDashing)
                 Player.Instance.GetComponent<PlayerMovement>().SetImpairDuration(movementImpairDuration);
         }
     }

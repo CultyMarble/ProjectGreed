@@ -23,7 +23,7 @@ public class RoomSpawner : MonoBehaviour
    
     private void Spawn()
     {
-        if(roomManager.loops == 3)
+        if(roomManager.mapFinished)
         {
             return;
         }
@@ -31,7 +31,7 @@ public class RoomSpawner : MonoBehaviour
         {
             roomManager = FindObjectOfType<RoomManager>();
         }
-        if(roomManager.currentRoomCount.Count >= roomManager.maxRooms)
+        if(roomManager.currentRoomCount.Count > roomManager.maxRooms)
         {
             return;
         }

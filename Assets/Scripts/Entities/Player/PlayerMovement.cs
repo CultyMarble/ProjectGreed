@@ -156,7 +156,8 @@ public class PlayerMovement : MonoBehaviour
         switch (Player.Instance.actionState)
         {
             case PlayerActionState.IsDashing:
-                Rigidbody2D.MovePosition(Rigidbody2D.position + dashSpeed * Time.deltaTime * dashVector);
+                //Rigidbody2D.MovePosition(Rigidbody2D.position + dashSpeed * Time.deltaTime * dashVector);
+                Rigidbody2D.MovePosition(Rigidbody2D.position + (dashSpeed / (dashTime / dashTimeCounter)) * Time.deltaTime * dashVector);
                 break;
             case PlayerActionState.IsUsingBasicAbility:
                 Rigidbody2D.MovePosition(Rigidbody2D.position + (moveSpeed * PlayerDataManager.Instance.PlayerDataRuntime.Ba_basePlayerSpeedPenalty) * Time.deltaTime * movementVector);
@@ -186,6 +187,8 @@ public class PlayerMovement : MonoBehaviour
             if (dashCooldownTimer <= 0 && movementVector != Vector2.zero)
             {
                 Player.Instance.actionState = PlayerActionState.IsDashing;
+                impairTimer = 0;
+                UpdateImpairTimer();
                 dashTimeCounter = dashTime;
                 dashCooldownTimer = dashCooldown;
                 dashVector = movementVector;
@@ -202,7 +205,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 Player.Instance.actionState = PlayerActionState.none;
 
-                SetImpairDuration(dashPenalty);
+                //SetImpairDuration(dashPenalty);
 
                 // Player Collision
                 CapsuleCollider2D.enabled = !CapsuleCollider2D.enabled;
@@ -212,8 +215,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void UpdateImpairTimer()
     {
-        if (impairTimer <= 0)
-            return;
+        //if (impairTimer <= 0)
+        //    return;
 
         impairTimer -= Time.deltaTime;
         if (impairTimer <= 0)
@@ -256,5 +259,11 @@ public class PlayerMovement : MonoBehaviour
     {
         dashTime = newDashTime;
         dashSpeed = newDashSpeed;
+    }
+
+    public void IncreaseDashParameter(float newDashTime, float newDashSpeed)
+    {
+        dashTime += newDashTime;
+        dashSpeed += newDashSpeed;
     }
 }
