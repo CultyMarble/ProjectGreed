@@ -149,11 +149,12 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
 
         Player.Instance.transform.position = Vector3.zero;
 
-        yield return new WaitForSecondsRealtime(1.0f);
+        // yield return StartCoroutine(LoadMap());
+
         yield return StartCoroutine(LoadingScreen(0.0f));
         EventManager.CallAfterSceneLoadedLoadingScreenEvent();
-        isLoadingScene = false;
 
+        isLoadingScene = false;
         CurrentGameplayState = GameplayState.Ongoing;
     }
 
