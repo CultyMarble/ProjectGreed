@@ -1,11 +1,7 @@
 using UnityEngine;
 
-[RequireComponent(typeof(BoxCollider2D))]
-public class SceneTransitZone : MonoBehaviour
+public class SceneTransitEnterDungeon : MonoBehaviour
 {
-    [SerializeField] private SceneName sceneNameGoTo;
-    [SerializeField] private Transform spawnLocation;
-
     private bool playFootStep = true;
 
     //===========================================================================
@@ -23,12 +19,7 @@ public class SceneTransitZone : MonoBehaviour
                     playFootStep = false;
                 }
 
-                SceneControlManager.Instance.LoadScene(sceneNameGoTo.ToString(), Vector3.zero);
-
-                if (sceneNameGoTo == SceneName.DemoSceneBossRoom)
-                {
-                    SceneControlManager.Instance.CurrentActiveScene = SceneName.DemoSceneBossRoom;
-                }
+                SceneControlManager.Instance.LoadDemoDungeonWrapper();
             }
         }
     }

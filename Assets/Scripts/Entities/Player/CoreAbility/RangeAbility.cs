@@ -50,11 +50,11 @@ public class RangeAbility : MonoBehaviour
 
     private void Update()
     {
-        if (SceneControlManager.Instance.GameState == GameState.PauseMenu ||
-            SceneControlManager.Instance.GameState == GameState.OptionMenu)
+        if (SceneControlManager.Instance.CurrentGameplayState == GameplayState.Pause)
             return;
 
-        if (Player.Instance.actionState == PlayerActionState.none || Player.Instance.actionState == PlayerActionState.IsUsingRangeAbility)
+        if (Player.Instance.actionState == PlayerActionState.none ||
+            Player.Instance.actionState == PlayerActionState.IsUsingRangeAbility)
             InputHandler();
 
         if (channelTimer > 0)
@@ -73,10 +73,6 @@ public class RangeAbility : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (SceneControlManager.Instance.GameState == GameState.PauseMenu ||
-            SceneControlManager.Instance.GameState == GameState.OptionMenu)
-            return;
-
         CultyMarbleHelper.RotateGameObjectToMouseDirection(this.transform);
     }
 

@@ -18,37 +18,30 @@ public class SaveSelectMenuGUI : SingletonMonobehaviour<SaveSelectMenuGUI>
         ss_save01Button.onClick.AddListener(() =>
         {
             SaveDataManager.Instance.LoadPlayerDataToRuntimeData(SaveDataSlot.save01);
-            SceneControlManager.Instance.LoadStartingSceneWrapper();
-
-            SetActive(false);
+            SceneControlManager.Instance.LoadDemoSceneHubWrapper();
         });
 
         ss_save02Button.onClick.AddListener(() =>
         {
             SaveDataManager.Instance.LoadPlayerDataToRuntimeData(SaveDataSlot.save02);
-            SceneControlManager.Instance.LoadStartingSceneWrapper();
-
-            SetActive(false);
+            SceneControlManager.Instance.LoadDemoSceneHubWrapper();
         });
 
         ss_save03Button.onClick.AddListener(() =>
         {
             SaveDataManager.Instance.LoadPlayerDataToRuntimeData(SaveDataSlot.save03);
-            SceneControlManager.Instance.LoadStartingSceneWrapper();
-
-            SetActive(false);
+            SceneControlManager.Instance.LoadDemoSceneHubWrapper();
         });
 
         ss_backButton.onClick.AddListener(() =>
         {
-            this.SetActive(false);
-
-            MainMenuGUI.Instance.SetActive(true);
+            SetContentActive(false);
+            MainMenuGUI.Instance.SetContentActive(true);
         });
     }
 
     //===========================================================================
-    public void SetActive(bool active)
+    public void SetContentActive(bool active)
     {
         content.SetActive(active);
     }

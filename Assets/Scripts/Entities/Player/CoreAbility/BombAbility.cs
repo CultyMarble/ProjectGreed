@@ -34,8 +34,7 @@ public class BombAbility : MonoBehaviour
 
     private void Update()
     {
-        if (SceneControlManager.Instance.GameState == GameState.PauseMenu ||
-            SceneControlManager.Instance.GameState == GameState.OptionMenu)
+        if (SceneControlManager.Instance.CurrentGameplayState == GameplayState.Pause)
             return;
 
         UpdateInputDelay();

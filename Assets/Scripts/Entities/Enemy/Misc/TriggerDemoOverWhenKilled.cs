@@ -19,6 +19,6 @@ public class TriggerDemoOverWhenKilled : MonoBehaviour
     //===========================================================================
     private void Health_OnDespawnEvent(object sender, System.EventArgs e)
     {
-        DemoOverMenuGUI.Instance.SetMenuActive(true);
+        DemoOverMenuGUI.Instance.SetContentActive(true);
     }
 }
