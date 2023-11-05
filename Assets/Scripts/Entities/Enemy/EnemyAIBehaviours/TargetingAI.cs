@@ -42,9 +42,7 @@ public class TargetingAI : MonoBehaviour
     //===========================================================================
     private void FixedUpdate()
     {
-        if (SceneControlManager.Instance.GameState == GameState.PauseMenu ||
-            SceneControlManager.Instance.GameState == GameState.OptionMenu ||
-            SceneControlManager.Instance.GameState == GameState.Dialogue)
+        if (SceneControlManager.Instance.CurrentGameplayState == GameplayState.Pause)
         {
             pathfinder.maxSpeed = 0;
             return;

@@ -15,7 +15,6 @@ public class BasicAbilityBubble : MonoBehaviour
     private Vector3 moveDirection = default;
     private Animator animator;
 
-
     //===========================================================================
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -41,9 +40,7 @@ public class BasicAbilityBubble : MonoBehaviour
 
     private void Update()
     {
-        if (SceneControlManager.Instance.GameState == GameState.PauseMenu ||
-            SceneControlManager.Instance.GameState == GameState.OptionMenu ||
-            SceneControlManager.Instance.GameState == GameState.Dialogue)
+        if (SceneControlManager.Instance.CurrentGameplayState == GameplayState.Pause)
             return;
         // Update Moving Direction
         timeUntilChangeDirection -= Time.deltaTime;

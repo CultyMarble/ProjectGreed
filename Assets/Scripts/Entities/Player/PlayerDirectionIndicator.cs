@@ -4,9 +4,7 @@ public class PlayerDirectionIndicator : MonoBehaviour
 {
     private void FixedUpdate()
     {
-        if (SceneControlManager.Instance.GameState == GameState.PauseMenu ||
-            SceneControlManager.Instance.GameState == GameState.OptionMenu ||
-            SceneControlManager.Instance.GameState == GameState.Dialogue)
+        if (SceneControlManager.Instance.CurrentGameplayState == GameplayState.Pause)
             return;
 
         CultyMarbleHelper.RotateGameObjectToMouseDirection(this.transform);

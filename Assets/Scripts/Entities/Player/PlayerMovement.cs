@@ -50,9 +50,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (SceneControlManager.Instance.GameState == GameState.PauseMenu ||
-            SceneControlManager.Instance.GameState == GameState.OptionMenu ||
-            SceneControlManager.Instance.GameState == GameState.Dialogue)
+        if (SceneControlManager.Instance.CurrentGameplayState == GameplayState.Pause)
             return;
 
         PlayerInput();
@@ -71,9 +69,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (SceneControlManager.Instance.GameState == GameState.PauseMenu ||
-            SceneControlManager.Instance.GameState == GameState.OptionMenu ||
-            SceneControlManager.Instance.GameState == GameState.Dialogue)
+        if (SceneControlManager.Instance.CurrentGameplayState == GameplayState.Pause)
             return;
 
         MovePlayerPosition();
@@ -173,7 +169,6 @@ public class PlayerMovement : MonoBehaviour
                 Rigidbody2D.MovePosition(Rigidbody2D.position + moveSpeed * Time.deltaTime * movementVector);
                 break;
         }
-        Debug.Log(movementVector.x);
     }
 
     private void DashCoolDownTimeCounter()

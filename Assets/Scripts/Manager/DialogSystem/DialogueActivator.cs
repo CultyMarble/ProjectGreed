@@ -105,7 +105,7 @@ public class DialogueActivator : MonoBehaviour
 
     private void AutoTriggerDialogHandler()
     {
-        if (haveActivated)
+        if (haveActivated || SceneControlManager.Instance.IsLoadingScene)
             return;
 
         haveActivated = true;

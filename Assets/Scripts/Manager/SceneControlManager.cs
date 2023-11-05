@@ -146,16 +146,20 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         EventManager.CallAfterSceneLoadEvent();
 
         CurrentActiveScene = SceneName.DemoSceneDungeon;
+        CurrentGameplayState = GameplayState.Pause;
 
         Player.Instance.transform.position = Vector3.zero;
 
         // yield return StartCoroutine(LoadMap());
+        while (CurrentGameplayState != GameplayState.Ongoing)
+        {
+            yield return null;
+        }
 
         yield return StartCoroutine(LoadingScreen(0.0f));
         EventManager.CallAfterSceneLoadedLoadingScreenEvent();
 
         isLoadingScene = false;
-        CurrentGameplayState = GameplayState.Ongoing;
     }
 
     //===========================================================================
@@ -175,6 +179,7 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
     {
         if (isLoadingScreenActive == false)
         {
+            isLoadingScene = true;
             CurrentGameplayState = GameplayState.Pause;
 
             StartCoroutine(LoadMainMenu());
@@ -185,6 +190,7 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
     {
         if (isLoadingScreenActive == false)
         {
+            isLoadingScene = true;
             CurrentGameplayState = GameplayState.Pause;
 
             StartCoroutine(LoadDemoSceneHub());
@@ -195,6 +201,7 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
     {
         if (isLoadingScreenActive == false)
         {
+            isLoadingScene = true;
             CurrentGameplayState = GameplayState.Pause;
 
             StartCoroutine(LoadDemoDungeon());
@@ -205,6 +212,7 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
     {
         if (isLoadingScreenActive == false)
         {
+            isLoadingScene = true;
             CurrentGameplayState = GameplayState.Pause;
 
             MainMenuGUI.Instance.SetContentActive(false);

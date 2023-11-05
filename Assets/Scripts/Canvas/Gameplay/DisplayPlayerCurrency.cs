@@ -21,9 +21,9 @@ public class DisplayPlayerCurrency : SingletonMonobehaviour<DisplayPlayerCurrenc
 
     public void UpdateSilverKeyIcon(bool hasSilverKey)
     {
-        if (hasSilverKey) 
-        { 
-            silverKeyIcon.SetActive(true); 
+        if (hasSilverKey)
+        {
+            silverKeyIcon.SetActive(true);
         }
         else
         {

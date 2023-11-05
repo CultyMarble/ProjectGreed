@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class BossCheck : MonoBehaviour
 {
-    public event EventHandler OnDespawnBossEvent;
+    //public event EventHandler OnDespawnBossEvent;
 
     //private void OnCollisionEnter2D(Collision2D collision)
     //{

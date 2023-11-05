@@ -474,7 +474,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08fa41e95d6ce67449ffced42205342d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 1
+  maxHealth: 50
+  currentHealth: 0
 --- !u!114 &8621435385251548073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -496,6 +497,7 @@ MonoBehaviour:
   requireLineOfSight: 1
   keepDistance: 1
   patrolArea: 0
+  flee: 0
   patrolTransforms: {fileID: 0}
   dontUpdateDestination: 0
   pathfinder: {fileID: 0}

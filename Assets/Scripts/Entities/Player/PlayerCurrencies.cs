@@ -22,7 +22,7 @@ public class PlayerCurrencies : SingletonMonobehaviour<PlayerCurrencies>
     //===========================================================================
     private void OnEnable()
     {
-        playerHeartManager.OnDespawnPlayerEvent += OnDespawnPlayer_ResetCurrencyWrapper;
+        //playerHeartManager.OnDespawnPlayerEvent += OnDespawnPlayer_ResetCurrencyWrapper;
     }
     private void Start()
     {

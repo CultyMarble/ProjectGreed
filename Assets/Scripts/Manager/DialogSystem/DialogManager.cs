@@ -53,10 +53,10 @@ public class DialogManager : SingletonMonobehaviour<DialogManager>
     //===========================================================================
     public void SetDialogPanelActiveState(bool newBool)
     {
-        if (newBool == true)
-            SceneControlManager.Instance.GameState = GameState.Dialogue;
+        if (newBool)
+            SceneControlManager.Instance.CurrentGameplayState = GameplayState.Pause;
         else
-            SceneControlManager.Instance.GameState = GameState.Dungeon;
+            SceneControlManager.Instance.CurrentGameplayState = GameplayState.Ongoing;
 
         dialogPanel.gameObject.SetActive(newBool);
     }
