@@ -14,11 +14,14 @@ public class EnemyHealth : MonoBehaviour
 
     private float feedbackDamageTime = 0.10f;
     private float feedbackDamageTimer = default;
+    private SpawnCurrency spawnCurrency;
 
     //======================================================================
     private void Awake()
     {
         currentHealth = maxHealth;
+        spawnCurrency = GetComponent<SpawnCurrency>();
+
         UpdateCurrentHealth();
     }
 
@@ -52,6 +55,11 @@ public class EnemyHealth : MonoBehaviour
         currentHealth = maxHealth;
         OnHealthChanged?.Invoke(this, new OnHealthChangedEvenArgs { healthRatio = currentHealth / maxHealth });
         gameObject.SetActive(false);
+
+        if(spawnCurrency != null)
+        {
+            spawnCurrency.SpewOutCurrency();
+        }
 
         Player.Instance.GetComponentInChildren<RangeAbility>().UpdateCurrentRecharge(100);
     }
