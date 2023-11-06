@@ -31,7 +31,7 @@ public class RoomManager : MonoBehaviour
     [Space]
 
     [Header("Room Delay")]
-    public float delaySpawnRoomType = 0.0F;
+    public float delaySpawnRoomType = 0.75F;
     private bool delaySpawnRoomCheck = false;
     [HideInInspector] public bool bossSpawned = false;
     [HideInInspector] public bool shopSpawned = false;
@@ -98,9 +98,20 @@ public class RoomManager : MonoBehaviour
             delaySpawnRoomType = 0.75F;
             return;
         }
-        foreach (RoomController room in currentRoomCount)
+        if (currentRoomCount.Count == 0)
         {
-            Destroy(room.gameObject);
+            foreach (RoomController room in currentRoomTotal)
+            {
+                Destroy(room.gameObject);
+            }
+            currentRoomTotal.Clear();
+        }
+        else
+        {
+            foreach (RoomController room in currentRoomCount)
+            {
+                Destroy(room.gameObject);
+            }
         }
         currentRoomCount.Clear();
         GameObject newEntryRoom;
@@ -270,6 +281,7 @@ public class RoomManager : MonoBehaviour
     {
         if (currentRoomCount.Count < minRooms || currentRoomCount.Count > maxRooms || !shopSpawned || !keySpawned)
         {
+            //loops = 0;
             LoadScene();
             return;
         }

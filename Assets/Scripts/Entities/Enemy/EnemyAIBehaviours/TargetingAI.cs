@@ -3,6 +3,9 @@ using UnityEngine;
 public class TargetingAI : MonoBehaviour
 {
     [HideInInspector] public bool isAttacking;
+    [HideInInspector] public bool isLunging;
+    [HideInInspector] public bool isCharging;
+    [SerializeField] public int movementSpeed;
 
     [SerializeField] public Transform currentDestination;
     [HideInInspector] public Vector3 currentTarget;
@@ -46,6 +49,10 @@ public class TargetingAI : MonoBehaviour
         {
             pathfinder.maxSpeed = 0;
             return;
+        }
+        else if (!isCharging && !isLunging)
+        {
+            pathfinder.maxSpeed = movementSpeed;
         }
         if (!CheckNoTarget())
         {
@@ -116,7 +123,6 @@ public class TargetingAI : MonoBehaviour
         else if(flee && Mathf.Abs(targetDistance) > breakDistanceMin)
         {
             currentDestination.position = transform.position;
-
             return;
         }
         else if(keepDistance && Mathf.Abs(targetDistance) < breakDistanceMax && Mathf.Abs(targetDistance) > breakDistanceMin)
@@ -233,8 +239,8 @@ public class TargetingAI : MonoBehaviour
     {
         patrolArea = toggle;
     }
-    public void HoldMovement()
+    public void HoldMovement(bool input)
     {
-        holdMovement = true;
+        holdMovement = input;
     }
 }

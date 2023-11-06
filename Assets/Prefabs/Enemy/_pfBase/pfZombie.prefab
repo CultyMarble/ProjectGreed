@@ -714,6 +714,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isAttacking: 0
+  movementSpeed: 2
   currentDestination: {fileID: 4105315116686917796}
   currentTarget: {x: 0, y: 0, z: 0}
   searchRadius: 12
@@ -722,6 +723,7 @@ MonoBehaviour:
   requireLineOfSight: 1
   keepDistance: 0
   patrolArea: 0
+  flee: 0
   patrolTransforms: {fileID: 0}
   dontUpdateDestination: 0
   pathfinder: {fileID: 0}

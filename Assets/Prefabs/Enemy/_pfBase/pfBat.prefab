@@ -489,6 +489,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isAttacking: 0
+  movementSpeed: 5
   currentDestination: {fileID: 6186633300706691329}
   currentTarget: {x: 0, y: 0, z: 0}
   searchRadius: 20
