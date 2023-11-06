@@ -98,7 +98,7 @@ public class RoomManager : MonoBehaviour
             delaySpawnRoomType = 0.75F;
             return;
         }
-        if (currentRoomCount.Count == 0)
+        if (currentRoomCount.Count <= 3)
         {
             foreach (RoomController room in currentRoomTotal)
             {
