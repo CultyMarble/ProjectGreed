@@ -29,8 +29,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3187642801048505080}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.1518, y: -0.203, z: 0}
-  m_LocalScale: {x: 0.34780636, y: 0.33401912, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -77,8 +77,8 @@ SpriteRenderer:
   m_SortingLayerID: 237529647
   m_SortingLayer: 5
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: 15020403f7f42204ab3364b2ea858e67, type: 3}
-  m_Color: {r: 1, g: 0.033018887, b: 0.033018887, a: 1}
+  m_Sprite: {fileID: -1359823526, guid: 427cad3ca33e4eb48b1d173064db2143, type: 3}
+  m_Color: {r: 0.9811321, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -138,6 +138,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
+  abilityEffect: {fileID: 3187642801048505083}
+  effectSprites:
+  - {fileID: -1359823526, guid: 427cad3ca33e4eb48b1d173064db2143, type: 3}
+  - {fileID: 1347986634, guid: 427cad3ca33e4eb48b1d173064db2143, type: 3}
+  - {fileID: -1467332964, guid: 427cad3ca33e4eb48b1d173064db2143, type: 3}
+  - {fileID: 227220114, guid: 427cad3ca33e4eb48b1d173064db2143, type: 3}
 --- !u!96 &8024582988910888862
 TrailRenderer:
   serializedVersion: 2
@@ -188,8 +194,8 @@ TrailRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.021686554
-        value: 0.22872925
+        time: 0.027080536
+        value: 0.21322632
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -210,8 +216,8 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 0.27478102, b: 0, a: 1}
-      key1: {r: 1, g: 0.12481496, b: 0, a: 1}
+      key0: {r: 1, g: 0.27478102, b: 0, a: 0.7058824}
+      key1: {r: 1, g: 0.12481496, b: 0, a: 0.43137255}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
