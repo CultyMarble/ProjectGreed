@@ -42,6 +42,8 @@ public class Chest : MonoBehaviour
                 randomIndex = Random.Range(0, regularItems.Length);
                 Instantiate(regularItems[randomIndex], transform.position, Quaternion.identity);
                 GetComponent<BoxCollider2D>().enabled = false;
+                GetComponent<CircleCollider2D>().enabled = false;
+
                 spawnCurrency.SpewOutCurrency();
                 break;
             case ChestType.silver:
@@ -51,6 +53,8 @@ public class Chest : MonoBehaviour
                     randomIndex = Random.Range(0, silverItems.Length);
                     Instantiate(silverItems[randomIndex], transform.position, Quaternion.identity);
                     GetComponent<BoxCollider2D>().enabled = false;
+                    GetComponent<CircleCollider2D>().enabled = false;
+
                     spawnCurrency.SpewOutCurrency();
                 }
                 else
@@ -65,6 +69,8 @@ public class Chest : MonoBehaviour
                     randomIndex = Random.Range(0, goldItems.Length);
                     Instantiate(goldItems[randomIndex], transform.position, Quaternion.identity);
                     GetComponent<BoxCollider2D>().enabled = false;
+                    GetComponent<CircleCollider2D>().enabled = false;
+
                     spawnCurrency.SpewOutCurrency();
                 }
                 else
@@ -79,21 +85,20 @@ public class Chest : MonoBehaviour
         DialogManager.Instance.SetDialogLine(text);
         DialogManager.Instance.SetDialogPanelActiveState(true);
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.CompareTag("Player") && collision.GetType().ToString() == Tags.BOXCOLLIDER2D)
         {
             Player.Instance.SetInteractPromtTextActive(true);
             canOpen = true;
         }
     }
-    private void OnCollisionExit2D(Collision2D collision)
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.CompareTag("Player") && collision.GetType().ToString() == Tags.BOXCOLLIDER2D)
         {
             Player.Instance.SetInteractPromtTextActive(false);
             canOpen = false;
-
         }
     }
 }

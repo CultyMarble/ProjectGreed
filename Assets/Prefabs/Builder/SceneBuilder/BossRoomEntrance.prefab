@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6503859017374133300}
   - component: {fileID: 6503859017374133299}
   - component: {fileID: 6503859017374133298}
+  - component: {fileID: 1925337295150509884}
   m_Layer: 0
   m_Name: BossRoomEntrance
   m_TagString: Untagged
@@ -128,6 +129,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneNameGoTo: 4
   spawnLocation: {fileID: 6503859017440840517}
+--- !u!114 &1925337295150509884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6503859017374133296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95727d4fab1df964894941646191d157, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemName: Boss Room Entrance
+  itemDescription: No going back now.
 --- !u!1 &6503859017440840516
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,15 +6,14 @@ public abstract class UpgradeItem : MonoBehaviour
     [SerializeField] private string itemDescription;
 
     private bool canPickedUp;
+    private ToolTip toolTipMenu;
 
     //===========================================================================
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player") && collision.GetType().ToString() == Tags.BOXCOLLIDER2D)
         {
-            RunInfoController.Instance.SetItemInfoPanelActive(true);
-            RunInfoController.Instance.SetItemNameText(itemName);
-            RunInfoController.Instance.SetItemDescriptionText(itemDescription);
+            toolTipMenu.SetToolTip();
 
             Player.Instance.SetInteractPromtTextActive(true);
             canPickedUp = true;
@@ -25,9 +24,7 @@ public abstract class UpgradeItem : MonoBehaviour
     {
         if (collision.CompareTag("Player") && collision.GetType().ToString() == Tags.BOXCOLLIDER2D)
         {
-            RunInfoController.Instance.SetItemNameText("");
-            RunInfoController.Instance.SetItemDescriptionText("");
-            RunInfoController.Instance.SetItemInfoPanelActive(false);
+            toolTipMenu.ClearToolTip();
 
             Player.Instance.SetInteractPromtTextActive(false);
             canPickedUp = false;
@@ -35,6 +32,11 @@ public abstract class UpgradeItem : MonoBehaviour
     }
 
     //===========================================================================
+    private void OnEnable()
+    {
+        toolTipMenu = new ToolTip(itemName,itemDescription);
+    }
+
     private void Update()
     {
         if (canPickedUp == false)

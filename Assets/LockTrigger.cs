@@ -6,6 +6,8 @@ public class LockTrigger : MonoBehaviour
 {
     // Start is called before the first frame update
     private GateManager gateManager;
+    private ToolTip toolTipMenu;
+
     private void Awake()
     {
         gateManager = transform.parent.parent.GetComponent<GateManager>();
@@ -19,6 +21,8 @@ public class LockTrigger : MonoBehaviour
                 case PlayerCurrencies.KeyType.Silver:
                     if (PlayerCurrencies.Instance.hasSilverKey)
                     {
+                        toolTipMenu = new ToolTip("Silver Locked Gate", "All rusted. I'll have to find some way to unlock this.");
+                        toolTipMenu.SetToolTip();
                         gateManager.disableGate = true;
                         Player.Instance.SetInteractPromtTextActive(false);
                     }
@@ -30,6 +34,8 @@ public class LockTrigger : MonoBehaviour
                 case PlayerCurrencies.KeyType.Gold:
                     if (PlayerCurrencies.Instance.hasGoldKey)
                     {
+                        toolTipMenu = new ToolTip("Silver Locked Gate", "All rusted. I'll have to find some way to unlock this.");
+                        toolTipMenu.SetToolTip();
                         gateManager.disableGate = true;
                         Player.Instance.SetInteractPromtTextActive(false);
                     }
@@ -51,6 +57,17 @@ public class LockTrigger : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player") && gateManager.locked)
         {
+            switch (gateManager.keytype)
+            {
+                case PlayerCurrencies.KeyType.Silver:
+                    toolTipMenu = new ToolTip("Silver Locked Gate", "All rusted. I'll have to find some way to unlock this.");
+                    toolTipMenu.SetToolTip();
+                    break;
+                case PlayerCurrencies.KeyType.Gold:
+                    toolTipMenu = new ToolTip("Golden Locked Gate", "Quite magestic. Must be a key somewhere.");
+                    toolTipMenu.SetToolTip();
+                    break;
+            }
             Player.Instance.SetInteractPromtTextActive(true);
             gateManager.playerInLockZone = true;
         }
@@ -60,6 +77,7 @@ public class LockTrigger : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player") && gateManager.locked)
         {
+            toolTipMenu.ClearToolTip();
             Player.Instance.SetInteractPromtTextActive(false);
             gateManager.playerInLockZone = false;
         }
