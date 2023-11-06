@@ -188,10 +188,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activateType: 1
-  haveActivated: {fileID: 11400000, guid: 064b4593e65fa84409f5a53b55c953d2, type: 2}
+  haveActivated: 0
   dialogueEntryArray:
   - {fileID: 11400000, guid: fca9c0d96436caa4cb5c119648369605, type: 2}
   - {fileID: 11400000, guid: f26de5da92c0a804695c4e38e2139eb0, type: 2}
+  quickText: 
 --- !u!61 &742905753216389777
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -231,9 +232,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.3500663}
+  m_Offset: {x: 0, y: 1.2139802}
   serializedVersion: 2
-  m_Radius: 0.8203839
+  m_Radius: 3.1165376
 --- !u!1 &8439679028753260279
 GameObject:
   m_ObjectHideFlags: 0
