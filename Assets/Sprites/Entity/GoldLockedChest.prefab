@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 5625296524488561264}
   - component: {fileID: 5195209532524722936}
   - component: {fileID: -495070394481195551}
+  - component: {fileID: -4645143784777833778}
+  - component: {fileID: 8660265350654307173}
   m_Layer: 3
   m_Name: GoldLockedChest
   m_TagString: Untagged
@@ -162,3 +164,33 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.8125}
   m_EdgeRadius: 0
+--- !u!114 &-4645143784777833778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8972429057144147082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95727d4fab1df964894941646191d157, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemName: Golden Locked Chest
+  itemDescription: Gotta be some good stuff in there if I can find the key.
+--- !u!58 &8660265350654307173
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8972429057144147082}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.0017913183}
+  serializedVersion: 2
+  m_Radius: 0.68809384

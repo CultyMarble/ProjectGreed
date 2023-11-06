@@ -82,7 +82,9 @@ public class DialogueActivator : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
-            if(quickText.Length != 0)
+            Player.Instance.SetInteractPromtTextActive(false);
+
+            if (quickText.Length != 0)
             {
                 ActivateDialogueManager(quickText);
                 return;

@@ -11,7 +11,7 @@ public class SceneTransitZone : MonoBehaviour
     //===========================================================================
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.GetComponent<Player>() != null)
+        if (collision.CompareTag("Player") && collision.GetType().ToString() == Tags.BOXCOLLIDER2D)
         {
             Player.Instance.SetInteractPromtTextActive(true);
 
@@ -35,7 +35,7 @@ public class SceneTransitZone : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.GetComponent<Player>() != null)
+        if (collision.CompareTag("Player") && collision.GetType().ToString() == Tags.BOXCOLLIDER2D)
         {
             Player.Instance.SetInteractPromtTextActive(false);
         }

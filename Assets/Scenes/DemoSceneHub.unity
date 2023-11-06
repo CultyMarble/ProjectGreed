@@ -19017,8 +19017,9 @@ GameObject:
   - component: {fileID: 6469076770468749858}
   - component: {fileID: 6469076770468749852}
   - component: {fileID: 6469076770468749860}
+  - component: {fileID: 6469076770468749861}
   m_Layer: 0
-  m_Name: SceneTransitZone
+  m_Name: DungeonEntrance
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19036,6 +19037,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f91f63e1415be1409d7f3568b62520e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6469076770468749861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6469076770468749859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95727d4fab1df964894941646191d157, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemName: Dungeon Entrance
+  itemDescription: Enter at your own risk.
 --- !u!4 &6503859017095397446
 Transform:
   m_ObjectHideFlags: 0
@@ -19135,6 +19150,7 @@ GameObject:
   - component: {fileID: 6503859017699780407}
   - component: {fileID: 6503859017699780400}
   - component: {fileID: 6503859017699780401}
+  - component: {fileID: 6503859017699780408}
   m_Layer: 0
   m_Name: BossRoomEntrance
   m_TagString: Untagged
@@ -19194,6 +19210,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6503859017699780408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6503859017699780403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95727d4fab1df964894941646191d157, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemName: Boss Room Entrance
+  itemDescription: If you feel like cheating.
 --- !u!4 &7512056494534456669
 Transform:
   m_ObjectHideFlags: 0

@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: -415129727175345109}
   - component: {fileID: 2724825940765335433}
   - component: {fileID: -1887599600957257078}
+  - component: {fileID: 6289999607502721288}
+  - component: {fileID: 4614342875433226227}
   m_Layer: 3
   m_Name: SilverLockedChest
   m_TagString: Untagged
@@ -162,3 +164,33 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.875}
   m_EdgeRadius: 0
+--- !u!114 &6289999607502721288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 188694118197523721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95727d4fab1df964894941646191d157, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemName: Silver Locked Chest
+  itemDescription: Looks like it needs a key to open.
+--- !u!58 &4614342875433226227
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 188694118197523721}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.0017913183}
+  serializedVersion: 2
+  m_Radius: 0.68809384
