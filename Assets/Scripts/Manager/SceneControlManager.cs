@@ -36,7 +36,8 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
     }
 
     //===========================================================================
-    private IEnumerator UnloadAndSwitchScene(string sceneName, Vector3 spawnPosition)
+    private IEnumerator UnloadAndSwitchScene
+        (string sceneName, Vector3 spawnPosition)
     {
         EventManager.CallBeforeSceneUnloadLoadingScreenEvent();
         yield return StartCoroutine(LoadingScreen(1.0f));

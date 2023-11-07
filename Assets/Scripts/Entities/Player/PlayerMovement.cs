@@ -257,4 +257,13 @@ public class PlayerMovement : MonoBehaviour
         dashTime = newDashTime;
         dashSpeed = newDashSpeed;
     }
+<<<<<<< Updated upstream
+=======
+
+    public void UpdateDashParameter(float newDashTime, float newDashSpeed)
+    {
+        dashTime += newDashTime;
+        dashSpeed += newDashSpeed;
+    }
+>>>>>>> Stashed changes
 }

@@ -14,6 +14,12 @@ TagManager:
   - VCAMBoundsConfiner
   - Breakable
   - DoorCheck
+<<<<<<< Updated upstream
+=======
+  - Boss
+  - LockTrigger
+  - FinalBoss
+>>>>>>> Stashed changes
   layers:
   - Default
   - TransparentFX

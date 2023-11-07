@@ -3,7 +3,7 @@ using UnityEngine;
 
 public abstract class Trap : MonoBehaviour
 {
-    [SerializeField] private Sprite[] trapSprites = default;
+    [SerializeField] protected Sprite[] trapSprites = default;
     [SerializeField] private float animationSpeed = default;
     [SerializeField] private int triggerIndex = default;
 
@@ -16,7 +16,7 @@ public abstract class Trap : MonoBehaviour
     private SpriteRenderer trapSpriteRenderer = default;
     private bool playAnimation = default;
     private float effectAnimationTimer = default;
-    private int currentAnimationIndex = default;
+    protected int currentAnimationIndex = default;
     private float reaimTimer = default;
 
     private bool haveTriggered = default;
@@ -65,7 +65,7 @@ public abstract class Trap : MonoBehaviour
     }
 
     //===========================================================================
-    private void Update()
+    protected virtual void Update()
     {
         if (playAnimation)
         {
