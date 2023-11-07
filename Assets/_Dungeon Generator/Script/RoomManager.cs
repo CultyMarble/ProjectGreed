@@ -92,7 +92,7 @@ public class RoomManager : MonoBehaviour
             bossSpawned = false;
             delaySpawnRoomCheck = false;
         }
-        if (loops > 0)
+        if (loops > 0 && currentRoomCount.Count > 3)
         {
             StartNewBranch();
             delaySpawnRoomType = 0.75F;
