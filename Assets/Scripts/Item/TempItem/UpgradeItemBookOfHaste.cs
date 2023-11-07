@@ -7,15 +7,11 @@ public class UpgradeItemBookOfHaste : UpgradeItem
     //===========================================================================
     protected override void AddItemEffect()
     {
-<<<<<<< Updated upstream
         Player.Instance.GetComponent<PlayerMovement>().SetDashParameter(newDashTime, newDashSpeed);
-=======
-        Player.Instance.GetComponent<PlayerMovement>().UpdateDashParameter(increaseDashTime, increaseDashSpeed);
->>>>>>> Stashed changes
     }
 
     protected override void RemoveItemEffect()
     {
-        Player.Instance.GetComponent<PlayerMovement>().UpdateDashParameter(-increaseDashTime, -increaseDashSpeed);
+
     }
 }

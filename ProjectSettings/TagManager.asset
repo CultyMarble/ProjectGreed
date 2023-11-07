@@ -3,35 +3,19 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Zombie
-  - Currency
-  - DemoOverUI
-  - Enemy
-  - Collisions
-  - RoomSpawnPoint
-  - Destroyer
-  - VCAMBoundsConfiner
-  - Breakable
-  - DoorCheck
-<<<<<<< Updated upstream
-=======
-  - Boss
-  - LockTrigger
-  - FinalBoss
->>>>>>> Stashed changes
+  tags: []
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Obstacles
+  - 
   - Water
   - UI
-  - PlayerProjectiles
-  - Enemies
-  - Player
-  - EnemyProjectiles
-  - PiercingProjectiles
+  - 
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 
@@ -56,28 +40,4 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: Background1
-    uniqueID: 3448762353
-    locked: 0
-  - name: Background2
-    uniqueID: 839852185
-    locked: 0
-  - name: BackgroundDeco1
-    uniqueID: 1940940611
-    locked: 0
-  - name: BackgroundDeco2
-    uniqueID: 76381407
-    locked: 0
-  - name: Entity
-    uniqueID: 237529647
-    locked: 0
-  - name: Front1
-    uniqueID: 3025190747
-    locked: 0
-  - name: Front2
-    uniqueID: 2795954029
-    locked: 0
-  - name: Collisions
-    uniqueID: 1834127665
     locked: 0
