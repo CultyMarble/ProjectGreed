@@ -42,7 +42,7 @@ public class EnemyHealth : MonoBehaviour
     private void DamageFeedBack()
     {
         // Health Feedback
-        this.gameObject.GetComponentInChildren<SpriteRenderer>().color = new Color(255, 0, 0);
+        gameObject.GetComponentInChildren<SpriteRenderer>().color = new Color(255, 0, 0);
         feedbackDamageTimer = feedbackDamageTime;
     }
 

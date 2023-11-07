@@ -6,18 +6,18 @@ public class EnemyHealthBarUI : MonoBehaviour
     [SerializeField] private Transform healtBar;
 
     //===========================================================================
-    private void OnEnable()
+    private void Start()
     {
-        health.OnHealthChanged += Health_OnHealthChangedHandler;
+        health.OnHealthChanged += Health_OnHealthChanged1;
     }
 
     private void OnDisable()
     {
-        health.OnHealthChanged -= Health_OnHealthChangedHandler;
+        health.OnHealthChanged -= Health_OnHealthChanged1;
     }
 
     //===========================================================================
-    private void Health_OnHealthChangedHandler(object sender, EnemyHealth.OnHealthChangedEvenArgs e)
+    private void Health_OnHealthChanged1(object sender, EnemyHealth.OnHealthChangedEvenArgs e)
     {
         healtBar.localScale = new Vector3(e.healthRatio, 1.0f, 1.0f);
     }

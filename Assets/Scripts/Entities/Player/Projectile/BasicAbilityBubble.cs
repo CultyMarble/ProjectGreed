@@ -26,7 +26,12 @@ public class BasicAbilityBubble : MonoBehaviour
         {
             collision.gameObject.GetComponent<BreakableItem>().UpdateCurrentHealth(-particleDamage);
         }
-        
+
+        if (collision.gameObject.CompareTag("FinalBoss"))
+        {
+            collision.transform.parent.GetComponent<EnemyHealth>().UpdateCurrentHealth(-particleDamage);
+        }
+
         //StopMovement();
         animator.SetTrigger("Pop");
     }
