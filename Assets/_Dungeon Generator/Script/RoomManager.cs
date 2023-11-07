@@ -95,7 +95,7 @@ public class RoomManager : MonoBehaviour
         if (loops > 0 && currentRoomCount.Count > 3)
         {
             StartNewBranch();
-            delaySpawnRoomType = 0.75F;
+            delaySpawnRoomType = 1F;
             return;
         }
         else if (loops > 0)
@@ -123,7 +123,7 @@ public class RoomManager : MonoBehaviour
         startDialogue.transform.parent = newEntryRoom.transform;
 
         delaySpawnRoomCheck = false;
-        delaySpawnRoomType = 0.75F;
+        delaySpawnRoomType = 1F;
     }
 
     private void SpawnRoomTypes()
@@ -282,7 +282,10 @@ public class RoomManager : MonoBehaviour
     {
         if (currentRoomCount.Count < minRooms || currentRoomCount.Count > maxRooms || !shopSpawned || !keySpawned)
         {
-            //loops = 0;
+            if(currentRoomCount.Count <= 4)
+            {
+                loops = 0;
+            }
             LoadScene();
             return;
         }
@@ -375,7 +378,7 @@ public class RoomManager : MonoBehaviour
                 }
             }
             delaySpawnRoomCheck = false;
-            delaySpawnRoomType = 0.05F;
+            delaySpawnRoomType = 1F;
             shopSpawned = false;
             return;
         }
