@@ -69,7 +69,7 @@ public class ArmSlamAttackAI : FinalBossAttackAI
         {
             for (int i = 0; i < trapAmount; i++)
             {
-                int _index = Random.Range(0, 50);
+                int _index = Random.Range(0, trapSpawnPoint.childCount);
 
                 Transform _trap = Instantiate(pfBossTrap, parent);
                 _trap.transform.position = trapSpawnPoint.GetChild(_index).transform.position;

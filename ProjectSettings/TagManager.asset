@@ -3,7 +3,15 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - DoorCheck
+  - Collisions
+  - RoomSpawnPoint
+  - Destroyer
+  - Enemy
+  - VCAMBoundsConfiner
+  - FinalBoss
+  - Breakable
   layers:
   - Default
   - TransparentFX
@@ -40,4 +48,28 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background1
+    uniqueID: 2742417027
+    locked: 0
+  - name: Background2
+    uniqueID: 1264763913
+    locked: 0
+  - name: BackgroundDeco1
+    uniqueID: 1753377697
+    locked: 0
+  - name: BackgroundDeco2
+    uniqueID: 4125743305
+    locked: 0
+  - name: Entity
+    uniqueID: 914240475
+    locked: 0
+  - name: Front1
+    uniqueID: 2847367163
+    locked: 0
+  - name: Front2
+    uniqueID: 2839059485
+    locked: 0
+  - name: Collisions
+    uniqueID: 1559793147
     locked: 0
