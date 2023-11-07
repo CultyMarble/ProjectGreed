@@ -98,6 +98,10 @@ public class RoomManager : MonoBehaviour
             delaySpawnRoomType = 0.75F;
             return;
         }
+        else if (loops > 0)
+        {
+            loops = 0;
+        }
         if (currentRoomCount.Count <= 3)
         {
             foreach (RoomController room in currentRoomTotal)
@@ -106,12 +110,9 @@ public class RoomManager : MonoBehaviour
             }
             currentRoomTotal.Clear();
         }
-        else
+        foreach (RoomController room in currentRoomCount)
         {
-            foreach (RoomController room in currentRoomCount)
-            {
-                Destroy(room.gameObject);
-            }
+            Destroy(room.gameObject);
         }
         currentRoomCount.Clear();
         GameObject newEntryRoom;
