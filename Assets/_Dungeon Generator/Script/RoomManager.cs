@@ -31,7 +31,7 @@ public class RoomManager : MonoBehaviour
     [Space]
 
     [Header("Room Delay")]
-    public float delaySpawnRoomType = 0.75F;
+    public float delaySpawnRoomType = 0.1F;
     private bool delaySpawnRoomCheck = false;
     [HideInInspector] public bool bossSpawned = false;
     [HideInInspector] public bool shopSpawned = false;
@@ -123,7 +123,7 @@ public class RoomManager : MonoBehaviour
         startDialogue.transform.parent = newEntryRoom.transform;
 
         delaySpawnRoomCheck = false;
-        delaySpawnRoomType = 1F;
+        delaySpawnRoomType = 0.5F;
     }
 
     private void SpawnRoomTypes()
@@ -282,7 +282,7 @@ public class RoomManager : MonoBehaviour
     {
         if (currentRoomCount.Count < minRooms || currentRoomCount.Count > maxRooms || !shopSpawned || !keySpawned)
         {
-            if(currentRoomCount.Count <= 4)
+            if(currentRoomCount.Count <= 1)
             {
                 loops = 0;
             }
@@ -378,7 +378,7 @@ public class RoomManager : MonoBehaviour
                 }
             }
             delaySpawnRoomCheck = false;
-            delaySpawnRoomType = 1F;
+            delaySpawnRoomType = 0.1F;
             shopSpawned = false;
             return;
         }
@@ -418,7 +418,7 @@ public class RoomManager : MonoBehaviour
                     }
 
                     delaySpawnRoomCheck = false;
-                    delaySpawnRoomType = 0.05F;
+                    delaySpawnRoomType = 0.1F;
                     shopSpawned = false;
                     return;
                 }
