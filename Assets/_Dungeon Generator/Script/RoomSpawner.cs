@@ -73,7 +73,7 @@ public class RoomSpawner : MonoBehaviour
         {
             int random = Random.Range(1, length);
             newRoom = Instantiate(room[random], new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
-            newRoom.transform.parent = this.transform.parent.parent;
+            newRoom.transform.parent = this.transform.parent.parent.parent;
         }
     }
 

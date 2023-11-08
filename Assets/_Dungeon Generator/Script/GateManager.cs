@@ -74,6 +74,10 @@ public class GateManager : MonoBehaviour
 
     private void SpawnWithinTrigger()
     {
+        if(randomSpawnPoints == null)
+        {
+            return;
+        }
         randomSpawnManager.GetComponent<RandomSpawnManager>().SpawnRandom(randomSpawnPoints);
     }
 

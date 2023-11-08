@@ -14,7 +14,7 @@ public class SpawnCurrency : MonoBehaviour
         {
             Vector3 _position = this.transform.position + CultyMarbleHelper.GetRandomDirection() * UnityEngine.Random.Range(0.25f, 0.75f);
             Transform currency = Instantiate(pfTempCurrency, _position, Quaternion.identity);
-            currency.transform.parent = this.transform.parent;
+            //currency.transform.parent = this.transform;
         }
     }
 }

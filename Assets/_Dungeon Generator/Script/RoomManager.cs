@@ -6,44 +6,40 @@ using UnityEngine.Events;
 
 public class RoomManager : MonoBehaviour
 {
-    [SerializeField] private GameObject aStar;
+    [Header("Room Spawn Parameters")]
 
-    [SerializeField] public GameObject entryRoom;
-    [SerializeField] public int minRooms;
-    [SerializeField] public int maxRooms;
-    [SerializeField] public float centerRoomChance;
-    [HideInInspector] public int potentialRooms;
+    public GameObject aStar;
+    public GameObject entryRoom;
+    public int minRooms;
+    public int maxRooms;
 
-    [Header("Rooms")]
+    [Header("Room Variants")]
     public GameObject[] bottomRooms;
     public GameObject[] topRooms;
     public GameObject[] leftRooms;
     public GameObject[] rightRooms;
     public GameObject[] centerRoom;
-    public GameObject[] closedRooms;
 
-    [Space]
+    [Header("Active Rooms")]
 
     public List<RoomController> currentRoomTotal;
     public List<RoomController> currentRoomCount;
     public List<RoomController> currentDeadEndRooms;
 
-    [Space]
-
-    [Header("Room Delay")]
-    public float delaySpawnRoomType = 0.75F;
-    private bool delaySpawnRoomCheck = false;
+    [Header("Spawning")]
     [HideInInspector] public bool bossSpawned = false;
     [HideInInspector] public bool shopSpawned = false;
     [HideInInspector] public bool treasureSpawned = false;
     [HideInInspector] public bool keySpawned = false;
-
     [HideInInspector] public bool roomsFinished = false;
-    public bool mapFinished = false;
+    [HideInInspector] public bool mapFinished = false;
+    [HideInInspector] public int loops = 0;
+    private float delaySpawnRoomType = 0.1F;
+    private bool delaySpawnRoomCheck = false;
 
     [Space]
 
-    [Header("Special Rooms")]
+    [Header("Special Room Objects")]
     public GameObject[] treasureItems;
     public List<GameObject> npcList;
     public GameObject[] keys;
@@ -53,10 +49,6 @@ public class RoomManager : MonoBehaviour
     public GameObject startRoomDialogue;
     public GameObject silverRoomDialogue;
     public GameObject goldRoomDialogue;
-
-
-    public int loops = 0;
-
 
     public delegate void OnRoomsGenerated();
     public static event OnRoomsGenerated onRoomsGenerated;
@@ -92,11 +84,15 @@ public class RoomManager : MonoBehaviour
             bossSpawned = false;
             delaySpawnRoomCheck = false;
         }
-        if (loops > 0)
+        if (loops > 0 && currentRoomCount.Count > 3)
         {
             StartNewBranch();
-            delaySpawnRoomType = 0.75F;
+            delaySpawnRoomType = 1F;
             return;
+        }
+        else if (loops > 0)
+        {
+            loops = 0;
         }
         if (currentRoomCount.Count <= 3)
         {
@@ -106,12 +102,9 @@ public class RoomManager : MonoBehaviour
             }
             currentRoomTotal.Clear();
         }
-        else
+        foreach (RoomController room in currentRoomCount)
         {
-            foreach (RoomController room in currentRoomCount)
-            {
-                Destroy(room.gameObject);
-            }
+            Destroy(room.gameObject);
         }
         currentRoomCount.Clear();
         GameObject newEntryRoom;
@@ -122,7 +115,7 @@ public class RoomManager : MonoBehaviour
         startDialogue.transform.parent = newEntryRoom.transform;
 
         delaySpawnRoomCheck = false;
-        delaySpawnRoomType = 0.75F;
+        delaySpawnRoomType = 0.5F;
     }
 
     private void SpawnRoomTypes()
@@ -281,7 +274,10 @@ public class RoomManager : MonoBehaviour
     {
         if (currentRoomCount.Count < minRooms || currentRoomCount.Count > maxRooms || !shopSpawned || !keySpawned)
         {
-            //loops = 0;
+            if(currentRoomCount.Count <= 1)
+            {
+                loops = 0;
+            }
             LoadScene();
             return;
         }
@@ -374,7 +370,7 @@ public class RoomManager : MonoBehaviour
                 }
             }
             delaySpawnRoomCheck = false;
-            delaySpawnRoomType = 0.05F;
+            delaySpawnRoomType = 0.1F;
             shopSpawned = false;
             return;
         }
@@ -414,7 +410,7 @@ public class RoomManager : MonoBehaviour
                     }
 
                     delaySpawnRoomCheck = false;
-                    delaySpawnRoomType = 0.05F;
+                    delaySpawnRoomType = 0.1F;
                     shopSpawned = false;
                     return;
                 }

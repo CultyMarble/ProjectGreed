@@ -21,9 +21,10 @@ public class LockTrigger : MonoBehaviour
                 case PlayerCurrencies.KeyType.Silver:
                     if (PlayerCurrencies.Instance.hasSilverKey)
                     {
-                        toolTipMenu = new ToolTip("Silver Locked Gate", "All rusted. I'll have to find some way to unlock this.");
-                        toolTipMenu.SetToolTip();
                         gateManager.disableGate = true;
+                        gateManager.locked = false;
+                        toolTipMenu.ClearToolTip();
+
                         Player.Instance.SetInteractPromtTextActive(false);
                     }
                     else
@@ -34,9 +35,10 @@ public class LockTrigger : MonoBehaviour
                 case PlayerCurrencies.KeyType.Gold:
                     if (PlayerCurrencies.Instance.hasGoldKey)
                     {
-                        toolTipMenu = new ToolTip("Silver Locked Gate", "All rusted. I'll have to find some way to unlock this.");
-                        toolTipMenu.SetToolTip();
                         gateManager.disableGate = true;
+                        gateManager.locked = false;
+                        toolTipMenu.ClearToolTip();
+
                         Player.Instance.SetInteractPromtTextActive(false);
                     }
                     else
@@ -75,7 +77,7 @@ public class LockTrigger : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player") && gateManager.locked)
+        if (collision.gameObject.CompareTag("Player"))
         {
             toolTipMenu.ClearToolTip();
             Player.Instance.SetInteractPromtTextActive(false);

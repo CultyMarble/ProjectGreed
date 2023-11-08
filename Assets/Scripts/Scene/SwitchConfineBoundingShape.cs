@@ -1,7 +1,7 @@
 using UnityEngine;
 using Cinemachine;
 
-public class SwitchConfineBoundingShape : MonoBehaviour
+public class SwitchConfineBoundingShape : SingletonMonobehaviour<SwitchConfineBoundingShape>
 {
     private void OnEnable()
     {
