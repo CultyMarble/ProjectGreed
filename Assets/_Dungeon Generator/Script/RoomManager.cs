@@ -190,12 +190,12 @@ public class RoomManager : MonoBehaviour
                 if(chance == 3)
                 {
                     newShop = Instantiate(abandonedShop, currentRoomCount[i].transform.position, Quaternion.identity);
-                    newShop.transform.parent = currentRoomCount[i].transform;
+                    newShop.transform.SetParent(currentRoomCount[i].transform);
                 }
                 else
                 {
                     newShop = Instantiate(shop, currentRoomCount[i].transform.position, Quaternion.identity);
-                    newShop.transform.parent = currentRoomCount[i].transform;
+                    newShop.transform.SetParent(currentRoomCount[i].transform);
                 }
                 
                 currentRoomCount[i].SetSpecialRoomActive();

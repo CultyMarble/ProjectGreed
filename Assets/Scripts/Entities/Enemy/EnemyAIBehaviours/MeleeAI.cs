@@ -8,6 +8,8 @@ public class MeleeAI : MonoBehaviour
     [SerializeField] private float activateDistance;
     [SerializeField] private int damage;
     [SerializeField] private float coolDownTime;
+    [SerializeField] private bool dieAfter;
+
 
     private TargetingAI targetingAI;
     private Animator animator;
@@ -70,11 +72,14 @@ public class MeleeAI : MonoBehaviour
             if (collider2D.GetComponent<Player>() != null)
             {
                 collider2D.GetComponent<PlayerHeart>().UpdateCurrentHeart(-damage);
-                return;
+                break;
             }
         }
         targetingAI.isAttacking = false;
         animator.SetBool("isMeleeing", false);
-
+        if (dieAfter)
+        {
+            GetComponent<EnemyHealth>().Despawn();
+        }
     }
 }

@@ -53,6 +53,7 @@ public class EnemyHealth : MonoBehaviour
 
         // Reset Parameters
         currentHealth = maxHealth;
+        
         OnHealthChanged?.Invoke(this, new OnHealthChangedEvenArgs { healthRatio = currentHealth / maxHealth });
         gameObject.SetActive(false);
 
@@ -89,5 +90,9 @@ public class EnemyHealth : MonoBehaviour
     public float GetHealthPercentage()
     {
         return (currentHealth / maxHealth) * 100.0f;
+    }
+    public float GetCurrenHealth()
+    {
+        return currentHealth;
     }
 }

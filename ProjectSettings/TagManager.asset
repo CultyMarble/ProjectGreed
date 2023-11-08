@@ -16,6 +16,8 @@ TagManager:
   - DoorCheck
   - Boss
   - LockTrigger
+  - EnemyGroup
+  - FinalBoss
   layers:
   - Default
   - TransparentFX

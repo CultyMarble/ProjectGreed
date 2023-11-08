@@ -63,6 +63,7 @@ public class PlayerHeart : MonoBehaviour
 
         // Call OnDestroy Event
         OnDespawnPlayerEvent?.Invoke(this, EventArgs.Empty);
+        Player.Instance.actionState = PlayerActionState.none;
         Player.Instance.gameObject.SetActive(false);
         //SceneControlManager.Instance.GameState = GameState.Hub;
         }

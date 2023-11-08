@@ -340,7 +340,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 409081922130142283}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.804, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -372,7 +372,7 @@ GameObject:
   - component: {fileID: 5005157637052946536}
   - component: {fileID: -2194898716048574609}
   m_Layer: 7
-  m_Name: MiniMushroom
+  m_Name: pfPurpleMiniMush
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -408,8 +408,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.012360454, y: -0.012922051}
-  m_Size: {x: 1.3708066, y: 0.4871354}
+  m_Offset: {x: -0.013372479, y: 0.027583664}
+  m_Size: {x: 0.7449216, y: 0.7449216}
   m_Direction: 1
 --- !u!58 &4038241797528594043
 CircleCollider2D:
@@ -424,9 +424,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.09006972}
+  m_Offset: {x: 0, y: 0.03881085}
   serializedVersion: 2
-  m_Radius: 0.30114037
+  m_Radius: 0.3637396
 --- !u!50 &4038241797528594044
 Rigidbody2D:
   serializedVersion: 4
@@ -439,7 +439,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1000
+  m_Mass: 1
   m_LinearDrag: 1
   m_AngularDrag: 1
   m_GravityScale: 0
@@ -474,7 +474,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08fa41e95d6ce67449ffced42205342d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 40
+  maxHealth: 10
   currentHealth: 0
 --- !u!114 &8109134301088247973
 MonoBehaviour:
@@ -489,6 +489,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isAttacking: 0
+  isLunging: 0
+  isCharging: 0
+  movementSpeed: 5
   currentDestination: {fileID: 6186633300706691329}
   currentTarget: {x: 0, y: 0, z: 0}
   searchRadius: 20
@@ -556,7 +559,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 5
-  radius: 0.5
+  radius: 0.34
   height: 2
   canMove: 1
   maxSpeed: 5
@@ -599,7 +602,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activateDistance: 0.5
   damage: 1
-  coolDownTime: 0.3
+  coolDownTime: 2
+  dieAfter: 1
 --- !u!95 &5005157637052946536
 Animator:
   serializedVersion: 4
@@ -610,7 +614,7 @@ Animator:
   m_GameObject: {fileID: 2290856477104092860}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 3a1f534f3bf059641a91050c1f462ad0, type: 2}
+  m_Controller: {fileID: 9100000, guid: 96ca391cf336983418255c3bef267573, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -634,7 +638,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pfTempCurrency: {fileID: 2443823218653012819, guid: 3d947b54961e7fd49bec6bc289615a57, type: 3}
   minAmount: 0
-  maxAmount: 3
+  maxAmount: 2
 --- !u!1 &2290856477416486733
 GameObject:
   m_ObjectHideFlags: 0
@@ -661,7 +665,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2290856477416486733}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalPosition: {x: 0, y: 0.844, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -761,7 +765,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2290856478273489401}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.033, y: 0.463, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -809,7 +813,7 @@ SpriteRenderer:
   m_SortingLayerID: 237529647
   m_SortingLayer: 5
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1652052476, guid: a79f5bf46c9f05a4da1499688761254a, type: 3}
+  m_Sprite: {fileID: -667113893, guid: b55cc6291e81b094180c8e9bafe36aca, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

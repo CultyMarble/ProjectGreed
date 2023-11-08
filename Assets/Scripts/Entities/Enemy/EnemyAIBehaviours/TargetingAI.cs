@@ -243,4 +243,10 @@ public class TargetingAI : MonoBehaviour
     {
         holdMovement = input;
     }
+    private void OnDisable()
+    {
+        isLunging = false;
+        isCharging = false;
+        isAttacking = false;
+    }
 }
