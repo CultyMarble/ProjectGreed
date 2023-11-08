@@ -91,4 +91,8 @@ public class EnemyHealth : MonoBehaviour
     {
         return (currentHealth / maxHealth) * 100.0f;
     }
+    public float GetCurrenHealth()
+    {
+        return currentHealth;
+    }
 }

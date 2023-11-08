@@ -439,7 +439,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1000
+  m_Mass: 1
   m_LinearDrag: 1
   m_AngularDrag: 1
   m_GravityScale: 0
@@ -474,7 +474,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08fa41e95d6ce67449ffced42205342d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 1
+  maxHealth: 10
   currentHealth: 0
 --- !u!114 &8109134301088247973
 MonoBehaviour:
@@ -613,7 +613,7 @@ Animator:
   m_GameObject: {fileID: 2290856477104092860}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 3a1f534f3bf059641a91050c1f462ad0, type: 2}
+  m_Controller: {fileID: 9100000, guid: 96ca391cf336983418255c3bef267573, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -637,7 +637,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pfTempCurrency: {fileID: 2443823218653012819, guid: 3d947b54961e7fd49bec6bc289615a57, type: 3}
   minAmount: 0
-  maxAmount: 3
+  maxAmount: 2
 --- !u!1 &2290856477416486733
 GameObject:
   m_ObjectHideFlags: 0

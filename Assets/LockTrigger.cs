@@ -23,8 +23,10 @@ public class LockTrigger : MonoBehaviour
                     {
                         gateManager.disableGate = true;
                         gateManager.locked = false;
-                        toolTipMenu.ClearToolTip();
-
+                        if(toolTipMenu != null)
+                        {
+                            toolTipMenu.ClearToolTip();
+                        }
                         Player.Instance.SetInteractPromtTextActive(false);
                     }
                     else
@@ -37,8 +39,10 @@ public class LockTrigger : MonoBehaviour
                     {
                         gateManager.disableGate = true;
                         gateManager.locked = false;
-                        toolTipMenu.ClearToolTip();
-
+                        if (toolTipMenu != null)
+                        {
+                            toolTipMenu.ClearToolTip();
+                        }
                         Player.Instance.SetInteractPromtTextActive(false);
                     }
                     else
@@ -77,6 +81,10 @@ public class LockTrigger : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        if(toolTipMenu == null)
+        {
+            return;
+        }
         if (collision.gameObject.CompareTag("Player"))
         {
             toolTipMenu.ClearToolTip();

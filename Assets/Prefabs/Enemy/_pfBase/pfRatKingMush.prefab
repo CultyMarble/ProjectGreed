@@ -369,11 +369,12 @@ GameObject:
   - component: {fileID: 8579431991460649008}
   - component: {fileID: 7996541414153123053}
   - component: {fileID: -5756987273502110303}
-  - component: {fileID: 5005157637052946536}
   - component: {fileID: -2194898716048574609}
   - component: {fileID: 6094876810712862803}
+  - component: {fileID: 835765086079921745}
+  - component: {fileID: 5005157637052946536}
   m_Layer: 7
-  m_Name: pfGreenMiniMush
+  m_Name: pfRatKingMush
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -475,7 +476,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08fa41e95d6ce67449ffced42205342d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 1
+  maxHealth: 50
   currentHealth: 0
 --- !u!114 &8109134301088247973
 MonoBehaviour:
@@ -492,14 +493,14 @@ MonoBehaviour:
   isAttacking: 0
   isLunging: 0
   isCharging: 0
-  movementSpeed: 5
+  movementSpeed: 3
   currentDestination: {fileID: 6186633300706691329}
   currentTarget: {x: 0, y: 0, z: 0}
   searchRadius: 20
   breakDistanceMin: 10
   breakDistanceMax: 0
   requireLineOfSight: 1
-  keepDistance: 0
+  keepDistance: 1
   patrolArea: 0
   flee: 0
   patrolTransforms: {fileID: 0}
@@ -604,26 +605,6 @@ MonoBehaviour:
   activateDistance: 0.5
   damage: 1
   coolDownTime: 0.3
---- !u!95 &5005157637052946536
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2290856477104092860}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 3a1f534f3bf059641a91050c1f462ad0, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &-2194898716048574609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -691,6 +672,41 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &835765086079921745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2290856477104092860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb96e48a3ec1c5145a81441e7cd34e46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 2290856477104092857, guid: f1d997212b8b63a4694cc701159d83f6, type: 3}
+  numOfEnemies: 6
+  enemyDropTime: 3
+--- !u!95 &5005157637052946536
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2290856477104092860}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7571a24492c572544ac71c77b12d0986, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2290856477416486733
 GameObject:
   m_ObjectHideFlags: 0
@@ -717,7 +733,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2290856477416486733}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.844, z: 0}
+  m_LocalPosition: {x: 0, y: 1.581, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -817,8 +833,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2290856478273489401}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0.535, z: 0}
+  m_LocalScale: {x: 2.1667, y: 2.1667, z: 2.1667}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 409081922130142282}
@@ -866,7 +882,7 @@ SpriteRenderer:
   m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: -869148919, guid: 6ed1b85810ecd1d459f4ea30e34afa8c, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0.8167114, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
