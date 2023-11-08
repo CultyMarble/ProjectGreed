@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4317000766357431431
+--- !u!1 &1620090105696273330
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,85 +8,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4317000766357431428}
-  - component: {fileID: 4317000766357431429}
-  m_Layer: 0
-  m_Name: Room Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4317000766357431428
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4317000766357431431}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4317000767536815821}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4317000766357431429
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4317000766357431431}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d12d6590925dee74ba2bce55ed48d885, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entryRoom: {fileID: 0}
-  minRooms: 10
-  maxRooms: 15
-  potentialRooms: 0
-  bottomRooms:
-  - {fileID: 4506294034837938322, guid: 3f7fe1a09c04bcf4e999b6b8d225b726, type: 3}
-  - {fileID: 7741260060544441628, guid: c2de81c25ab7e6246a5b3a48e8a28e8f, type: 3}
-  - {fileID: 1338217176058572985, guid: 322208f13ee664b4c9f6efbcaf68af06, type: 3}
-  topRooms:
-  - {fileID: 4021261305634921458, guid: 958d74a2a0720c54f9fd34a51ba07f4a, type: 3}
-  - {fileID: 1338217176058572985, guid: 322208f13ee664b4c9f6efbcaf68af06, type: 3}
-  - {fileID: 2955065820043591103, guid: 929af46479afc7d4a99d007f6b8b318a, type: 3}
-  - {fileID: 5332306837567287648, guid: 74267c56a246b3241ac83e1b6b06fa77, type: 3}
-  leftRooms:
-  - {fileID: 1252217435931422123, guid: b362c60ca32bebe428da70389b3f07b2, type: 3}
-  - {fileID: 261532820643789861, guid: a53912b6b0b5cec4a8781f444d1b4a0b, type: 3}
-  - {fileID: 2955065820043591103, guid: 929af46479afc7d4a99d007f6b8b318a, type: 3}
-  rightRooms:
-  - {fileID: 4556654252960075518, guid: 86f3897a026db89428441203558d5cda, type: 3}
-  - {fileID: 261532820643789861, guid: a53912b6b0b5cec4a8781f444d1b4a0b, type: 3}
-  - {fileID: 7741260060544441628, guid: c2de81c25ab7e6246a5b3a48e8a28e8f, type: 3}
-  - {fileID: 5332306837567287648, guid: 74267c56a246b3241ac83e1b6b06fa77, type: 3}
-  closedRooms:
-  - {fileID: 8493812126719483124, guid: 6d0a22627429f274f8b1b9daf35c9872, type: 3}
-  currentRooms: []
-  currentDeadEndRooms: []
-  delaySpawnRoomType: 0.75
-  tresureRoomChance: 0.25
-  abandonShopChance: 0.1
-  treasure: {fileID: 4422130485644021212, guid: 933f06a9b51104540a8ddee8a72bc6ae, type: 3}
-  key: {fileID: 4422130485644021212, guid: 3e337ec34c699ac44b0da2191163d8c0, type: 3}
-  boss: {fileID: 4422130485644021212, guid: bc67c52f8c921bc438efeab25f755a2d, type: 3}
-  shop: {fileID: 4422130485644021212, guid: b98d4cd8232524f4c904daf97c2e9436, type: 3}
-  abandonShop: {fileID: 4422130485644021212, guid: 5e265e2fd525acc4ca57c09e913bafb4, type: 3}
---- !u!1 &4317000767536815822
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4317000767536815821}
+  - component: {fileID: 1620090105696273329}
+  - component: {fileID: 1620090105696273328}
   m_Layer: 0
   m_Name: Map
   m_TagString: Untagged
@@ -94,24 +17,89 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4317000767536815821
+--- !u!4 &1620090105696273329
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4317000767536815822}
+  m_GameObject: {fileID: 1620090105696273330}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4317000767816634780}
-  - {fileID: 4317000766357431428}
+  - {fileID: 1620090107190621865}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &4317000767816634783
+--- !u!114 &1620090105696273328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1620090105696273330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d12d6590925dee74ba2bce55ed48d885, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aStar: {fileID: 1620090107190621866}
+  entryRoom: {fileID: 399540625238344219, guid: 2747354fa09c2e2418e4a0f805802360, type: 3}
+  minRooms: 8
+  maxRooms: 10
+  bottomRooms:
+  - {fileID: 4506294034837938322, guid: a07d32b5e4b0eb043b6d2d47fa58826a, type: 3}
+  - {fileID: 7741260060544441628, guid: a3b33200f80704a4f86f5d1881dcab09, type: 3}
+  - {fileID: 1338217176058572985, guid: 11c8a4ca71dc8164d86cd8fa1a77a461, type: 3}
+  topRooms:
+  - {fileID: 4021261305634921458, guid: 1b9e9bf910f51e44e9bd42a0feac27d1, type: 3}
+  - {fileID: 1338217176058572985, guid: 11c8a4ca71dc8164d86cd8fa1a77a461, type: 3}
+  - {fileID: 2955065820043591103, guid: 84cf68ae261a84d47a608a8f882128d2, type: 3}
+  - {fileID: 5332306837567287648, guid: 25fac5fd9a9838642bb30f42e74252ed, type: 3}
+  leftRooms:
+  - {fileID: 1252217435931422123, guid: 70336c75691ec694ba6e4171827554ba, type: 3}
+  - {fileID: 261532820643789861, guid: c70725f3fa36c1c43a5e59e8735fb607, type: 3}
+  - {fileID: 2955065820043591103, guid: 84cf68ae261a84d47a608a8f882128d2, type: 3}
+  rightRooms:
+  - {fileID: 4556654252960075518, guid: 662120e19f4af524c98da5c0ad3477dd, type: 3}
+  - {fileID: 261532820643789861, guid: c70725f3fa36c1c43a5e59e8735fb607, type: 3}
+  - {fileID: 7741260060544441628, guid: a3b33200f80704a4f86f5d1881dcab09, type: 3}
+  - {fileID: 5332306837567287648, guid: 25fac5fd9a9838642bb30f42e74252ed, type: 3}
+  centerRoom:
+  - {fileID: 399540625238344219, guid: 2747354fa09c2e2418e4a0f805802360, type: 3}
+  currentRoomTotal: []
+  currentRoomCount: []
+  currentDeadEndRooms: []
+  bossSpawned: 0
+  shopSpawned: 0
+  treasureSpawned: 0
+  keySpawned: 0
+  roomsFinished: 0
+  mapFinished: 0
+  loops: 0
+  treasureItems:
+  - {fileID: 4446321246598847940, guid: d974aab052fa6db499b30ac557f012fe, type: 3}
+  - {fileID: 4536764660341095808, guid: ee4dfc2ed2ae5ef4e9e9ad90e01f7539, type: 3}
+  - {fileID: 468550890004570437, guid: 6c16ad1641df33041b6bbd485d64debd, type: 3}
+  - {fileID: 7128766739216337673, guid: bedf7cd3e1e901b4990168bcdf126b0d, type: 3}
+  - {fileID: 8864901915701653083, guid: 90767ee69fb143d4dafbee60cdace558, type: 3}
+  - {fileID: 6917886894744599027, guid: e35b9775be5e7eb448a154632cd2cb02, type: 3}
+  - {fileID: 188694118197523721, guid: 52e461325db4ecc49bdd3ae2c2bff31d, type: 3}
+  - {fileID: 8972429057144147082, guid: 71d17848d7a6bbb4391a075ad2ca213d, type: 3}
+  npcList:
+  - {fileID: 4123117941785069872, guid: 227bdb8fdf996ef49aacae88b09b155d, type: 3}
+  keys:
+  - {fileID: 5567745467040105511, guid: b15e0f56bacbb594196dd7159181f8da, type: 3}
+  - {fileID: 5567745467040105511, guid: eb15c768ea3be5e48a0a4967c23bb235, type: 3}
+  boss: {fileID: 6503859017374133296, guid: f0defaa3df4d4854ba674518f9ea3250, type: 3}
+  shop: {fileID: 8439679027966053120, guid: 174ff5aef0fe7df41b304cd6624c3040, type: 3}
+  abandonedShop: {fileID: 2485148985364739039, guid: 7f0c93ac1536411458ff32d00d195648, type: 3}
+  startRoomDialogue: {fileID: 2471121758696812898, guid: ea4375912d3ce9247bf42dce04446c49, type: 3}
+  silverRoomDialogue: {fileID: 2471121758696812898, guid: a517b4a5a748d74468de385c04defd9d, type: 3}
+  goldRoomDialogue: {fileID: 2471121758696812898, guid: c85f59f4e13e26f479871c32b1605986, type: 3}
+--- !u!1 &1620090107190621866
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -119,37 +107,37 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4317000767816634780}
-  - component: {fileID: 4317000767816634781}
+  - component: {fileID: 1620090107190621865}
+  - component: {fileID: 1620090107190621864}
   m_Layer: 0
   m_Name: AStar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4317000767816634780
+  m_IsActive: 0
+--- !u!4 &1620090107190621865
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4317000767816634783}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_GameObject: {fileID: 1620090107190621866}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2.2375, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4317000767536815821}
+  m_Father: {fileID: 1620090105696273329}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4317000767816634781
+--- !u!114 &1620090107190621864
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4317000767816634783}
+  m_GameObject: {fileID: 1620090107190621866}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 78396926cbbfc4ac3b48fc5fc34a87d1, type: 3}
@@ -157,12 +145,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1
   data:
-    dataString: UEsDBBQAAAgIAACAn+te0gESeAIAAC0FAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFlVE1z2jAQ/SuMziVjG4Lj3lpDSA9JmNBOLr4IeY01yJJHkgMkw3/vSjbYdU+I9/bj7dPKX4RLUwOzSq81z59VDuT7hLgz+TbpySc40b2SW/4J15h3ntvSBVEf80YtV4iHLs2oCqzm7IfcCxccINhIXihdrfI9pMpYg3BBhQGktLIuWyL0NSEn/JkmLuWMpyh2p088JcHkgkcG0oLuQ8NZFzmN7+ZJkjzMu/hpeDebh2EQRbPVNFj45EYyQasacjdJXyOOHroi93HoAyVO2cW4iZgSgptOIrHn2luQ0to0OCAG5JziyF4XtkWgBL4vrRtgmP5aFAZs54im5yXX6F1bl/xUraEVNYdW2wcVjev04DW1JZ//Y6et5EKr6unaNQxcB1tydnijZ0aNHfg9hJcD4d6gIxUHuhPwXoJ8UWutGpkjaXXjUhsD0bL/exssLYEderyVOgKbunf8er3B7bIml4uf/ZQKXu0cdTdvga1Q3m+/E6DxZn6hYL8xpiuBqFPxx8Bvuh+uVkc8cm0sUt2U0snbqUa7ULLynrlpGpsqLcHDnegaJBX2vMEydnyBI27QdsQ8UveIuuYdd30boxQP9/FBMKI26ni7LFOq4zOY8rWxgsthMce8oFGpkrJdMDNiXd620QVlw7x9w/N/l4vMFvEuuS9mBU1ovACYBvEijMLZLoqC+fyeMeK3j0uclIpNK7UzCO9N9lZK3LTr12Wy1rT2255relzzz0oNTOeyUFumAeRrW+GmHDQ2wXeZr3KOFm3BWi79jZOvjAjFDpBnt0KZH3V1sppmfZWM1PxDWYdkJPWfk4w4+LbNGw0fHI6u+bXYhVz+AlBLAwQUAAAICAAAgJ/rnutdMG0AAAB4AAAACQAkAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAatWKkstKs7Mz1OyUjDRM9IzNNdRUEovSizIKAaKGII4pZkpIHa0krGZeZKlaZpxWqJlorlZaqqugbmZoZGhcZKRkYGJiWlyslIsUH1JZUGqX2JuKkRPQGJJRlpmXkpmXrqee1FmijvIaKXYWgBQSwECLQAUAAAICAAAgJ/rXtIBEngCAAAtBQAACwAkAAAAAAAAAAAAAAAAAAAAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFQSwECLQAUAAAICAAAgJ/rnutdMG0AAAB4AAAACQAkAAAAAAAAAAAAAADFAgAAbWV0YS5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0BUEsFBgAAAAACAAIAuAAAAH0DAAAAAA==
+    dataString: UEsDBBQAAAgIAACAn+u0/T+hZwIAABgFAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQF1VE1z4jAM/SuMz0sngdKUve0GSvfQlim700suxlGIB8fO+KNAO/z3lZ2EpOzsCSE9SU9Pcj4Jl6YGZpVeaZ4/qRzI9xHxNvk26oOPcKQ7JTf8AzrMG89t6UE0YF6p5Qr9sU8zqgKrOfshd8KDI3Q6yQulq2W+g1QZa9BdUGEAQ1pZny3R9TkiR/wZz33KCa1J4q0PtObR6IwmA2lB99B42iLHyc2shTZIJ5mgVQ25p90nJJP7NmOWxAEocaQW4+kzJQQ3LR9iT3WYN6W1cTgNAnJOcb5AIr7x7Uvgu9J6tsP0l6IwYNvxNT0tuEahmrrkp2rUq6jZN9zeqXC+033g1JR8+ic6bigXWlWPXdc48h1sydn+lZ4YNXYg7tC9GBAPAh2o2NOtgLcS5LNaaeVkjkGrnU91BiaL/u9lsLQEtu/9DdUrp6t7xbtddpv0M5zD7MdU8GrrQze3jWMjVNA7HABo3MwvJBzOw7Ql0OtZ/DHwm+6Gd9QGHrg2FkPtlNLT2yqnPZQsg2Z+GmdTpSXoYYUaJBX2tMY69nqDV7H/Zz1Q/2Ta7m2sewlXKcHd46PoKrRWh8u2TKkOT2DKF2cFl9BL7QPPKFSqpGwOzHwN+qyN0wVlg6yd4/nX0yLTu2Q7nxXTgs5pcgcwjpK7eBJPt5NJdHs7Y4yE2+MSx6Ri3fBs1cGtyb64xDvrPiSjlaZ1uPVc08OKf1RqwI/LQm2YBpAvTYVOIQMam+CrzJc5R302YC2XYd/kMyNCsT3k2aVQFiZdHq2mWV8lIzV/V9Z7MpKGL0dGvPtyy2sN7xwOvnlX7EzOfwFQSwMEFAAACAgAAICf657rXTBtAAAAeAAAAAkAJABtZXRhLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQGrVipLLSrOzM9TslIw0TPSMzTXUVBKL0osyCgGihiCOKWZKSB2tJKxmXmSpWmacVqiZaK5WWqqroG5maGRoXGSkZGBiYlpcrJSLFB9SWVBql9ibipET0BiSUZaZl5KZl66nntRZoo7yGil2FoAUEsBAi0AFAAACAgAAICf67T9P6FnAgAAGAUAAAsAJAAAAAAAAAAAAAAAAAAAAGdyYXBoMC5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0BUEsBAi0AFAAACAgAAICf657rXTBtAAAAeAAAAAkAJAAAAAAAAAAAAAAAtAIAAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLBQYAAAAAAgACALgAAABsAwAAAAA=
     upgradeData: 
     file_cachedStartup: {fileID: 0}
     data_cachedStartup: 
     cacheStartup: 0
-  showNavGraphs: 1
+  showNavGraphs: 0
   showUnwalkableNodes: 1
   debugMode: 0
   debugFloor: 0
@@ -189,7 +177,7 @@ MonoBehaviour:
   heuristic: 2
   heuristicScale: 1
   threadCount: 1
-  maxFrameTime: 1
+  maxFrameTime: 10
   batchGraphUpdates: 0
   graphUpdateBatchingInterval: 0.2
   euclideanEmbedding:
