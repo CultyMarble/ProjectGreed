@@ -38,11 +38,13 @@ public class BasicAbility : PlayerAbility
     private PlayerInput playerInput;
     private bool leftClickButtonCheck = false;
 
+    PlayerHeart playerHeartManager;
+
     //===========================================================================
     private void Awake()
     {
         playerInput = FindObjectOfType<PlayerInput>();
-
+        playerHeartManager = GetComponentInParent<PlayerHeart>();
         PopulatePool();
     }
 
@@ -50,12 +52,17 @@ public class BasicAbility : PlayerAbility
     {
         playerInput.actions["LeftClick"].started += ActionPerformed;
         playerInput.actions["LeftClick"].canceled += ActionCanceled;
+        playerHeartManager.OnDespawnPlayerEvent += EmptyPool;
     }
 
     protected override void Update()
     {
         if (SceneControlManager.Instance.CurrentGameplayState == GameplayState.Pause)
+        {
+            Player.Instance.actionState = PlayerActionState.none;
+            leftClickButtonCheck = false;
             return;
+        }
 
         base.Update();
 
@@ -82,6 +89,7 @@ public class BasicAbility : PlayerAbility
     {
         playerInput.actions["LeftClick"].started -= ActionPerformed;
         playerInput.actions["LeftClick"].canceled -= ActionCanceled;
+        playerHeartManager.OnDespawnPlayerEvent -= EmptyPool;
     }
 
     //===========================================================================
@@ -195,5 +203,15 @@ public class BasicAbility : PlayerAbility
     public void UpdateFuelRechargeRate(float amount)
     {
         rechargeRate += amount;
+    }
+    public void EmptyPool(object sender, System.EventArgs e)
+    {
+        foreach (Transform projectile in basicAbilityProjectilePool)
+        {
+            if (projectile.gameObject.activeSelf == true)
+            {
+                projectile.GetComponent<BasicAbilityBubble>().Despawn();
+            }
+        }
     }
 }

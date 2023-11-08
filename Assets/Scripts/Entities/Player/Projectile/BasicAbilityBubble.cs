@@ -91,7 +91,7 @@ public class BasicAbilityBubble : MonoBehaviour
         }
     }
 
-    private void Despawn()
+    public void Despawn()
     {
         gameObject.SetActive(false);
         gameObject.transform.localPosition = Vector2.zero;

@@ -34,16 +34,20 @@ public class RangeAbility : MonoBehaviour
     private PlayerInput playerInput;
     private bool rightButtonCheck = false;
 
+    PlayerHeart playerHeartManager;
+
     //===========================================================================
     private void Awake()
     {
         playerInput = FindObjectOfType<PlayerInput>();
+        playerHeartManager = GetComponentInParent<PlayerHeart>();
     }
 
     private void OnEnable()
     {
         playerInput.actions["RightClick"].started += ActionPerformed;
         playerInput.actions["RightClick"].canceled += ActionCanceled;
+        playerHeartManager.OnDespawnPlayerEvent += EmptyPool;
 
         PopulatePool();
     }
@@ -51,7 +55,10 @@ public class RangeAbility : MonoBehaviour
     private void Update()
     {
         if (SceneControlManager.Instance.CurrentGameplayState == GameplayState.Pause)
-            return;
+        {
+            Player.Instance.actionState = PlayerActionState.none;
+            rightButtonCheck = false;
+        }
 
         if (Player.Instance.actionState == PlayerActionState.none ||
             Player.Instance.actionState == PlayerActionState.IsUsingRangeAbility)
@@ -80,6 +87,7 @@ public class RangeAbility : MonoBehaviour
     {
         playerInput.actions["RightClick"].started -= ActionPerformed;
         playerInput.actions["RightClick"].canceled -= ActionCanceled;
+        playerHeartManager.OnDespawnPlayerEvent -= EmptyPool;
     }
 
     //===========================================================================
@@ -310,6 +318,16 @@ public class RangeAbility : MonoBehaviour
         {
             currentRecharge -= maxRecharge;
             UpdateCurrentCharge(1);
+        }
+    }
+    public void EmptyPool(object sender, System.EventArgs e)
+    {
+        foreach (Transform projectile in rangeAbilityProjectilePool)
+        {
+            if (projectile.gameObject.activeSelf == true)
+            {
+                projectile.GetComponent<BasicAbilityBubble>().Despawn();
+            }
         }
     }
 }

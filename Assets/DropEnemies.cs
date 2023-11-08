@@ -41,8 +41,6 @@ public class DropEnemies : MonoBehaviour
         if(enemiesLeft <= 0)
         {
             GetComponent<EnemyHealth>().UpdateCurrentHealth(-100);
-            SpawnEnemy();
-            SpawnEnemy();
         }
         else if(GetComponent<EnemyHealth>().GetHealthPercentage() < 50 && enemiesLeft > 0)
         {

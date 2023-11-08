@@ -165,8 +165,15 @@ public class RandomSpawnManager : MonoBehaviour
             {
                 if (enemy.gameObject.activeSelf == true)
                 {
-                    enemy.GetComponent<Enemy>().ResetStatusEffects();
-                    enemy.GetComponent<EnemyHealth>().Despawn();
+                    if (enemy.CompareTag("EnemyGroup")) 
+                    { 
+                        enemy.gameObject.SetActive(false); 
+                    }
+                    else
+                    {
+                        enemy.GetComponent<Enemy>().ResetStatusEffects();
+                        enemy.GetComponent<EnemyHealth>().Despawn();
+                    }
                 }
             }
         }
