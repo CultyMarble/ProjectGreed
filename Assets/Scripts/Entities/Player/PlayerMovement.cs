@@ -266,4 +266,8 @@ public class PlayerMovement : MonoBehaviour
         dashTime += newDashTime;
         dashSpeed += newDashSpeed;
     }
+    public void AddMoveSpeed(float amount)
+    {
+        moveSpeed += amount;
+    }
 }

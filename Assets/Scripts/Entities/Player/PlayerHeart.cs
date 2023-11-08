@@ -99,11 +99,11 @@ public class PlayerHeart : MonoBehaviour
         //Invoke Event
         OnHeartChangedEvent?.Invoke(this, new OnHealthChangedEventArgs { currentHeart = currentHeart });
     }
-
     public void UpdateCurrentHeart(int amount = 0)
     {
         if (amount != 0)
         {
+
             feedbackDamageTimer = feedbackDamageTime;
 
             currentHeart += amount;
@@ -117,11 +117,9 @@ public class PlayerHeart : MonoBehaviour
                 currentHeart = currentMaxHeart;
             }
         }
-
         //Invoke Event
         OnHeartChangedEvent?.Invoke(this, new OnHealthChangedEventArgs { currentHeart = currentHeart });
     }
-
     public void UpdatePlayerHeartParameters()
     {
         currentMaxHeart = PlayerDataManager.Instance.PlayerDataRuntime.BaseMaxHealth;
