@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ff3c4f7f7d428845a057991df0c0973, type: 3}
+  m_Name: TutorialDialogue2
+  m_EditorClassIdentifier: 
+  hasBeenUsed: 0
+  dialogueLines:
+  - 'Barrel Cat: Woah! Who are you?!'
+  - 'You: Who am I? Well, I.. I don''t know, actually..'
+  - 'You: Who are you? Are you actually.. A Cat?'
+  - 'Barrel Cat: Whaddya mean you dont know who you are? How did you even get here?'
+  - 'You:'
+  - 'Barrel Cat:'
+  - 'You: I dunno.'
+  - 'Barrel Cat: Figures.'
+  - 'Barrel Cat: Well anyways, I''m Timothy. Nice to meet''cha. '
+  - 'Timothy: I gotta ask.. Whats the deal with your head? Is that a mushroom?'
+  - 'You: My head? Oh... I hadn''t noticed that.. I guess it is.'
+  - 'Timothy: You sure are a weird one...'
+  - 'You: You''re the talking cat!'
+  - 'Timothy: You''re the one talkin to the cat. Weirdo.'
+  - 'You: What is this place? I''m really not sure how I got here. Or anything else
+    for that matter.'
+  - 'Timothy: You''re on the outskirts of the city of GOLD in the once great Kingdom
+    of GOLD. Emphasis on the "once". It is not so much anymore,'

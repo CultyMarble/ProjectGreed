@@ -51,7 +51,13 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         if (SceneControlManager.Instance.CurrentGameplayState == GameplayState.Pause)
+        {
+            animator.SetBool("IsWalkingRight", false);
+            animator.SetBool("IsWalkingDown", false);
+            animator.SetBool("IsWalkingUp", false);
+            animator.SetBool("IsIdle", true);
             return;
+        }
 
         PlayerInput();
 

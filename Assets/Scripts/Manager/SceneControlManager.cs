@@ -110,6 +110,7 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         EventManager.CallAfterSceneLoadedLoadingScreenEvent();
 
         CurrentGameplayState = GameplayState.Ongoing;
+        isLoadingScene = false;
     }
 
     private IEnumerator LoadMainMenu()
@@ -131,6 +132,7 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         EventManager.CallAfterSceneLoadedLoadingScreenEvent();
 
         CurrentGameplayState = GameplayState.Ongoing;
+        isLoadingScene = false;
     }
 
     private IEnumerator LoadDemoDungeon()
