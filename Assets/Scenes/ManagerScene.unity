@@ -6204,7 +6204,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Right-mouse
+  m_Text: Shoot Spore
 --- !u!222 &5480196231906596453
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7276,7 +7276,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Left-Mouse
+  m_Text: Shoot Bubble
 --- !u!222 &5480196232155345401
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -10236,7 +10236,7 @@ GameObject:
   - component: {fileID: 5480196232764991074}
   - component: {fileID: 5480196232764991075}
   m_Layer: 5
-  m_Name: KB Left Click
+  m_Name: KB Bubble
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13015,7 +13015,7 @@ GameObject:
   - component: {fileID: 5480196233425092313}
   - component: {fileID: 5480196233425092314}
   m_Layer: 5
-  m_Name: KB Right Click
+  m_Name: KB Spore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

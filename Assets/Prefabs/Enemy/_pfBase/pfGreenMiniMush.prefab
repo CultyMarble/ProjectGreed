@@ -604,6 +604,8 @@ MonoBehaviour:
   damage: 1
   coolDownTime: 2
   dieAfter: 1
+  delayAttack: 1
+  attackDelayTime: 0.01
 --- !u!95 &5005157637052946536
 Animator:
   serializedVersion: 4

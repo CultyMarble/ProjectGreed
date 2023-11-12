@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class ShowToolTip : MonoBehaviour
 {
-    [SerializeField] private string itemName;
-    [SerializeField] private string itemDescription;
+    [SerializeField] private string _title;
+    [SerializeField] private string _description;
 
     private ToolTip toolTipMenu;
     private void OnEnable()
     {
-        toolTipMenu = new ToolTip(itemName,itemDescription);
+        toolTipMenu = new ToolTip(_title,_description);
     }
     private void Update()
     {

@@ -713,6 +713,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isAttacking: 0
+  isLunging: 0
+  isCharging: 0
+  movementSpeed: 0
   currentDestination: {fileID: 4105315116686917796}
   currentTarget: {x: 0, y: 0, z: 0}
   searchRadius: 12
@@ -721,6 +724,7 @@ MonoBehaviour:
   requireLineOfSight: 1
   keepDistance: 0
   patrolArea: 0
+  flee: 0
   patrolTransforms: {fileID: 0}
   dontUpdateDestination: 0
   pathfinder: {fileID: 0}
@@ -823,6 +827,7 @@ MonoBehaviour:
   activateDistance: 1
   damage: 1
   coolDownTime: 3
+  dieAfter: 0
 --- !u!95 &3013352444999147950
 Animator:
   serializedVersion: 4
@@ -931,12 +936,12 @@ SpriteRenderer:
   m_SortingLayerID: 237529647
   m_SortingLayer: 5
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1022919005, guid: 492aa651e8348bf4ba03d744e12e2ebc, type: 3}
+  m_Sprite: {fileID: -1633809334, guid: 0dd303aecdd9a7f49a362c3aeaad2c89, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.16, y: 0.32}
+  m_Size: {x: 1.5625, y: 2.0625}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

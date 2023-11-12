@@ -19847,8 +19847,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95727d4fab1df964894941646191d157, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: Dungeon Entrance
-  itemDescription: Enter at your own risk.
+  _title: 'Dungeon Entrance '
+  _description: Enter at your own risk.
 --- !u!4 &6503859017095397446
 Transform:
   m_ObjectHideFlags: 0
@@ -20020,8 +20020,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95727d4fab1df964894941646191d157, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: Boss Room Entrance
-  itemDescription: If you feel like cheating.
+  _title: Boss Room Entrance
+  _description: If you wanna cheat
 --- !u!4 &7512056494534456669
 Transform:
   m_ObjectHideFlags: 0

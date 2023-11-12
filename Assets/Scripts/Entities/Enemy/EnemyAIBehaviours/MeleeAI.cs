@@ -9,11 +9,13 @@ public class MeleeAI : MonoBehaviour
     [SerializeField] private int damage;
     [SerializeField] private float coolDownTime;
     [SerializeField] private bool dieAfter;
-
+    [SerializeField] private bool delayAttack;
+    [SerializeField] private float attackDelayTime;
 
     private TargetingAI targetingAI;
     private Animator animator;
     private float coolDownTimeCounter;
+    private float attackDelayTimer;
     private bool canMelee;
 
     //===========================================================================
@@ -27,6 +29,7 @@ public class MeleeAI : MonoBehaviour
     {
         canMelee = false;
         coolDownTimeCounter = coolDownTime;
+        attackDelayTimer = attackDelayTime;
     }
 
     private void Update()
@@ -64,22 +67,29 @@ public class MeleeAI : MonoBehaviour
         if (targetingAI.currentDestination == null)
             return;
 
-        //if (Vector2.Distance(transform.position, targetingAI.currentTargetTransform.position) <= activateDistance)
-
-        Collider2D[] collider2DArray = Physics2D.OverlapCircleAll(transform.position, activateDistance);
-        foreach (Collider2D collider2D in collider2DArray)
+        if(!delayAttack || attackDelayTimer <= 0)
         {
-            if (collider2D.GetComponent<Player>() != null)
+            Collider2D[] collider2DArray = Physics2D.OverlapCircleAll(transform.position, activateDistance);
+            foreach (Collider2D collider2D in collider2DArray)
             {
-                collider2D.GetComponent<PlayerHeart>().UpdateCurrentHeart(-damage);
-                break;
+                if (collider2D.GetComponent<Player>() != null)
+                {
+                    collider2D.GetComponent<PlayerHeart>().UpdateCurrentHeart(-damage);
+                    break;
+                }
             }
+            targetingAI.isAttacking = false;
+            animator.SetBool("isMeleeing", false);
+            if (dieAfter)
+            {
+                GetComponent<EnemyHealth>().Despawn();
+            }
+            attackDelayTimer = attackDelayTime;
         }
-        targetingAI.isAttacking = false;
-        animator.SetBool("isMeleeing", false);
-        if (dieAfter)
+        else if (delayAttack)
         {
-            GetComponent<EnemyHealth>().Despawn();
+            attackDelayTimer -= Time.deltaTime;
         }
+        
     }
 }

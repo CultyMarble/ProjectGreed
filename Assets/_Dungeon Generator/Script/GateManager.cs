@@ -91,6 +91,20 @@ public class GateManager : MonoBehaviour
             {
                 return;
             }
+            if (roomVariants == null)
+            {
+                enemyPool = GameObject.FindGameObjectsWithTag("Enemy");
+                if (enemyPool.Length == 0)
+                {
+                    RoomCleared();
+                }
+                else
+                {
+                    ActiveGates(true);
+                }
+                return;
+            }
+            
             for (int i = 0; i < roomVariants.transform.childCount; i++)
             {
                 GameObject variant = roomVariants.transform.GetChild(i).gameObject;
@@ -101,14 +115,12 @@ public class GateManager : MonoBehaviour
                 if (variant.transform.Find("SpawnPointList") != null)
                 {
                     randomSpawnPoints = variant.transform.Find("SpawnPointList").gameObject;
-                }
-                else
-                {
+                    ActiveGates(true);
+                    SpawnWithinTrigger();
                     return;
                 }
             }
-            ActiveGates(true);
-            SpawnWithinTrigger();
+            
         }
     }
 
