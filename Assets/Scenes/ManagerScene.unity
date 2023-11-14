@@ -1203,7 +1203,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   basicAbilityProjectilePool: {fileID: 2017241155}
-  pfBasicAbilityProjectile: {fileID: 7778423}
+  pfBasicAbilityProjectile: {fileID: 3187642801048505082, guid: c1cc9f6f696a4fb4592f6945effaa91e, type: 3}
 --- !u!1 &1311532885
 GameObject:
   m_ObjectHideFlags: 0
