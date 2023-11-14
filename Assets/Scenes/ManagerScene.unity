@@ -493,6 +493,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 630d42e927b929d4e83c32afad71aa7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  throwBomb: 1
   bombAbilityBombPool: {fileID: 7778423}
   pfBombAbilityBomb: {fileID: 3187642801048505082, guid: 3cfa34a8eb634a349b1dff68a79c8163, type: 3}
 --- !u!1 &760052194
@@ -1202,7 +1203,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   basicAbilityProjectilePool: {fileID: 2017241155}
-  pfBasicAbilityProjectile: {fileID: 3187642801048505082, guid: c1cc9f6f696a4fb4592f6945effaa91e, type: 3}
+  pfBasicAbilityProjectile: {fileID: 7778423}
 --- !u!1 &1311532885
 GameObject:
   m_ObjectHideFlags: 0

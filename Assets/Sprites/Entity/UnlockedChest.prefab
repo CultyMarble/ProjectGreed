@@ -177,8 +177,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95727d4fab1df964894941646191d157, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: Unlocked Chest
-  itemDescription: Open away.
+  _title: Unlocked Chest
+  _description: Should be able to open it no problem.
 --- !u!58 &4063152979116221301
 CircleCollider2D:
   m_ObjectHideFlags: 0

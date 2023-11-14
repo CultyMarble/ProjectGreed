@@ -30,7 +30,7 @@ TagManager:
   - Player
   - EnemyProjectiles
   - PiercingProjectiles
-  - 
+  - Movable
   - 
   - 
   - 

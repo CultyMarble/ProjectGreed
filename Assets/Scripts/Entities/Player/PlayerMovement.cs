@@ -276,4 +276,9 @@ public class PlayerMovement : MonoBehaviour
     {
         moveSpeed += amount;
     }
+    
+    public Vector3 GetMouseDirection()
+    {
+        return toMouseDirectionVector;
+    }
 }

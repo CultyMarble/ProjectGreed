@@ -176,8 +176,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95727d4fab1df964894941646191d157, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: Silver Locked Chest
-  itemDescription: Looks like it needs a key to open.
+  _title: Silver Locked Chest
+  _description: I think I'll need a key for that.
 --- !u!58 &4614342875433226227
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -176,8 +176,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95727d4fab1df964894941646191d157, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: Golden Locked Chest
-  itemDescription: Gotta be some good stuff in there if I can find the key.
+  _title: Golden Locked Chest
+  _description: I'm definitely gunna need to find a key for that.
 --- !u!58 &8660265350654307173
 CircleCollider2D:
   m_ObjectHideFlags: 0

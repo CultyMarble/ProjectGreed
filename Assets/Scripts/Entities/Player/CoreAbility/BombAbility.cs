@@ -5,13 +5,11 @@ public class BombAbility : MonoBehaviour
 {
     public struct OnChargeChangedEventArgs { public float charge; }
     public event System.EventHandler<OnChargeChangedEventArgs> OnChargeChangedEvent;
-
+    [SerializeField] public bool throwBomb = false;
     private int currentCharge = default;
-
     private float damage = default;
     private float radius = default;
     private float delayTime = default;
-
     private readonly float inputDelayDuration = 0.5f;
     private float inputDelayTimer = default;
 
@@ -28,7 +26,6 @@ public class BombAbility : MonoBehaviour
     private void Awake()
     {
         playerInput = FindObjectOfType<PlayerInput>();
-
         PopulatePool();
     }
 
@@ -87,8 +84,19 @@ public class BombAbility : MonoBehaviour
                 _bomb.SetRadius(radius);
                 _bomb.SetDelayTime(delayTime);
 
-                bomb.position = transform.position;
                 bomb.gameObject.SetActive(true);
+
+                if (throwBomb)
+                {
+                    Vector3 mouseDir = transform.parent.GetComponent<PlayerMovement>().GetMouseDirection().normalized;
+                    bomb.position = transform.position + 1.5f * (mouseDir);
+                    Vector2 velocity = mouseDir * 10f;
+                    bomb.gameObject.GetComponent<Rigidbody2D>().velocity = velocity;
+                }
+                else
+                {
+                    bomb.position = transform.position;
+                }
 
                 UpdateBombCharge(-1);
 
