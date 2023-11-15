@@ -181,5 +181,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95727d4fab1df964894941646191d157, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: Golden Key
-  itemDescription: Golden and glistening. Must open things just as shiny.
+  _title: Golden Key
+  _description: Woah. This must open something fancy.

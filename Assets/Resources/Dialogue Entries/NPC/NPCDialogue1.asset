@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ff3c4f7f7d428845a057991df0c0973, type: 3}
   m_Name: NPCDialogue1
   m_EditorClassIdentifier: 
-  hasBeenUsed: 1
+  hasBeenUsed: 0
   dialogueLines:
   - 'Confused Citizen: Hello there friend!'
   - 'You: Oh.. Hello. What are you doing in here?'

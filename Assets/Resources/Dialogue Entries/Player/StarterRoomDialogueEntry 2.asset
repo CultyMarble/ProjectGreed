@@ -10,11 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4ff3c4f7f7d428845a057991df0c0973, type: 3}
-  m_Name: TutorialDialogue1
+  m_Name: StarterRoomDialogueEntry 2
   m_EditorClassIdentifier: 
   hasBeenUsed: 0
   dialogueLines:
-  - Huh... Everythings fuzzy...
-  - ...
-  - What? Where... am I..?
-  - I can't remember anything.
+  - Hmm.. It seems different than last time.

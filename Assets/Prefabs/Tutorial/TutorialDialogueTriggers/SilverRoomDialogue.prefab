@@ -47,8 +47,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activateType: 0
   haveActivated: 0
-  dialogueEntryArray: []
-  quickText: This must lead to a new area
+  dialogueEntryArray:
+  - {fileID: 11400000, guid: 38125bbdad630634c932069019e69f50, type: 2}
+  - {fileID: 11400000, guid: 991f59be88e887d438884932face5c5b, type: 2}
+  - {fileID: 11400000, guid: c8620aed57a620247ac811830312a441, type: 2}
+  - {fileID: 11400000, guid: 39bc922da76426b449552906df52d3dc, type: 2}
+  quickText: 
+  newDialogueIndicator: {fileID: 0}
 --- !u!58 &4972311321628868608
 CircleCollider2D:
   m_ObjectHideFlags: 0

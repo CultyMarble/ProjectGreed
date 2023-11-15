@@ -47,8 +47,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activateType: 0
   haveActivated: 0
-  dialogueEntryArray: []
-  quickText: Hmm.. this place is not as I remember
+  dialogueEntryArray:
+  - {fileID: 11400000, guid: 1593181d505e65f4fa4d694149d503d3, type: 2}
+  - {fileID: 11400000, guid: 851d83893509123448ac034ff5f31df5, type: 2}
+  - {fileID: 11400000, guid: 1bec2ee9a43f98b4596cd7b1bbac246c, type: 2}
+  - {fileID: 11400000, guid: cc4e9d1395dd765499be8e8887824183, type: 2}
+  quickText: 
+  newDialogueIndicator: {fileID: 0}
 --- !u!58 &4972311321628868608
 CircleCollider2D:
   m_ObjectHideFlags: 0

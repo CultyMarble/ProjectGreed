@@ -181,5 +181,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95727d4fab1df964894941646191d157, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: Silver Key
-  itemDescription: Was likely shiny once. Should be able to open something.
+  _title: Silver Key
+  _description: It's all rusty. Should still work though.

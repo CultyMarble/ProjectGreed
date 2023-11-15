@@ -9,10 +9,10 @@ public class DialogueActivator : MonoBehaviour
     //[SerializeField] private SOBool haveActivated = default;
     [SerializeField] private bool haveActivated = default;
 
-
     [Header("Dialog Entry Data:")]
     [SerializeField] private SODialogueEntry[] dialogueEntryArray = default;
     [SerializeField] private string quickText;
+    [SerializeField] private GameObject newDialogueIndicator;
 
     private int dialogueEntryIndex = default;
     private bool canActivateDialogBox = default;
@@ -20,7 +20,7 @@ public class DialogueActivator : MonoBehaviour
     //===========================================================================
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player") == false)
+        if (collision.CompareTag("Player") == false || haveActivated)
             return;
 
         if (activateType == DialogueActivateType.ManualTrigger)
@@ -41,6 +41,30 @@ public class DialogueActivator : MonoBehaviour
     }
 
     //===========================================================================
+    private void Start()
+    {
+        //foreach (SODialogueEntry entry in dialogueEntryArray)
+        //{
+        //    if (entry.hasBeenUsed == false)
+        //    {
+        //        entry.hasBeenUsed = true;
+        //        return;
+        //    }
+        //}
+        if(dialogueEntryArray.Length == 0)
+        {
+            return;
+        }
+        dialogueEntryIndex = Random.Range(0, dialogueEntryArray.Length);
+        if (dialogueEntryArray[dialogueEntryIndex].hasBeenUsed || newDialogueIndicator == null)
+        {
+            newDialogueIndicator.SetActive(false);
+        }
+        else
+        {
+            newDialogueIndicator.SetActive(true);
+        }
+    }
     private void Update()
     {
         if (!DialogManager.Instance.activated)
@@ -80,7 +104,7 @@ public class DialogueActivator : MonoBehaviour
     }
     private void ManualTriggerDialogHandler()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F) && !haveActivated)
         {
             Player.Instance.SetInteractPromtTextActive(false);
 
@@ -89,19 +113,10 @@ public class DialogueActivator : MonoBehaviour
                 ActivateDialogueManager(quickText);
                 return;
             }
-            foreach (SODialogueEntry entry in dialogueEntryArray)
-            {
-                if (entry.hasBeenUsed == false)
-                {
-                    entry.hasBeenUsed = true;
-                    ActivateDialogueManager(entry);
-
-                    return;
-                }
-            }
-
-            dialogueEntryIndex = Random.Range(0, dialogueEntryArray.Length);
             ActivateDialogueManager(dialogueEntryArray[dialogueEntryIndex]);
+            newDialogueIndicator.SetActive(false);
+            dialogueEntryArray[dialogueEntryIndex].hasBeenUsed = true;
+            haveActivated = true;
         }
     }
 
@@ -117,7 +132,9 @@ public class DialogueActivator : MonoBehaviour
             ActivateDialogueManager(quickText);
             return;
         }
-        dialogueEntryIndex = Random.Range(0, dialogueEntryArray.Length);
         ActivateDialogueManager(dialogueEntryArray[dialogueEntryIndex]);
+        newDialogueIndicator.SetActive(false);
+        dialogueEntryArray[dialogueEntryIndex].hasBeenUsed = true;
+        haveActivated = true;
     }
 }
