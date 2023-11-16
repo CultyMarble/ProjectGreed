@@ -27,7 +27,9 @@ public class PrefabShockWave : MonoBehaviour
         }
 
         if (collision.gameObject.CompareTag("Collisions"))
-            Despawn();
+        {
+            Destroy(gameObject, 2);
+        }
     }
 
     //===========================================================================
