@@ -596,6 +596,7 @@ GameObject:
   - component: {fileID: 3013352444999147950}
   - component: {fileID: 7332462655960571095}
   - component: {fileID: 6715554833569249681}
+  - component: {fileID: 2362959895306964875}
   m_Layer: 7
   m_Name: pfZombie
   m_TagString: Enemy
@@ -829,6 +830,8 @@ MonoBehaviour:
   damage: 1
   coolDownTime: 1
   dieAfter: 0
+  delayAttack: 0
+  attackDelayTime: 0
 --- !u!95 &3013352444999147950
 Animator:
   serializedVersion: 4
@@ -880,6 +883,17 @@ MonoBehaviour:
   damage: 1
   coolDownTime: 3
   chargeTime: 1
+--- !u!210 &2362959895306964875
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8301459616188158172}
+  m_Enabled: 1
+  m_SortingLayerID: 237529647
+  m_SortingLayer: 5
+  m_SortingOrder: 0
 --- !u!1 &8301459617392668569
 GameObject:
   m_ObjectHideFlags: 0

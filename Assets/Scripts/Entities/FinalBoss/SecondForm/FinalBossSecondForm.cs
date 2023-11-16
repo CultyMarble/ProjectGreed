@@ -1,4 +1,3 @@
-using Unity.Burst.Intrinsics;
 using UnityEngine;
 
 public class FinalBossSecondForm : MonoBehaviour
@@ -7,6 +6,7 @@ public class FinalBossSecondForm : MonoBehaviour
     [SerializeField] private EnemyHealth health = default;
 
     [Header("Body part")]
+    [SerializeField] private FinalBossSecondStageHead head = default;
     [SerializeField] private FinalBossArm ArmL = default;
     [SerializeField] private FinalBossArm ArmR = default;
 
@@ -27,8 +27,14 @@ public class FinalBossSecondForm : MonoBehaviour
 
     private readonly int combo3TriggerTime = 1;
     private readonly int combo4TriggerTime = 4;
+    private readonly int combo5TriggerTime = 3;
 
     private int triggerCounter = default;
+
+    [Header("Put In Arm")]
+    [SerializeField] private Transform zombieSpawnPoints = default;
+    [SerializeField] private Transform parent = default;
+    [SerializeField] private Transform pfPutInArm = default;
 
     //===========================================================================
     private void FixedUpdate()
@@ -42,7 +48,12 @@ public class FinalBossSecondForm : MonoBehaviour
             GetComponent<Animator>().enabled = true;
         }
 
-        if (health.GetHealthPercentage() < 50)
+        if (health.GetHealthPercentage() <= 50)
+        {
+            if (head.gameObject.activeInHierarchy == false)
+                head.gameObject.SetActive(true);
+        }
+        else if (health.GetHealthPercentage() < 75)
         {
             animator.SetTrigger("Stage2");
 
@@ -106,7 +117,11 @@ public class FinalBossSecondForm : MonoBehaviour
         ArmSlamAttackAI _ArmL = ArmL.GetComponent<ArmSlamAttackAI>();
         ArmSlamAttackAI _ArmR = ArmR.GetComponent<ArmSlamAttackAI>();
 
-        comboIndex = Random.Range(comboMinStage2, comboMaxStage2);
+        if (health.GetHealthPercentage() < 50)
+            comboIndex = Random.Range(comboMinStage2, comboMaxStage2 + 1);
+        else
+            comboIndex = Random.Range(comboMinStage2, comboMaxStage2);
+
         switch (comboIndex)
         {
             case 0:
@@ -116,6 +131,10 @@ public class FinalBossSecondForm : MonoBehaviour
             case 1:
                 triggerCounter = combo4TriggerTime;
                 animator.SetBool("Combo4", true);
+                break;
+            case 2:
+                triggerCounter = combo5TriggerTime;
+                animator.SetBool("Combo5", true);
                 break;
             default:
                 break;
@@ -132,6 +151,13 @@ public class FinalBossSecondForm : MonoBehaviour
             animator.SetBool("Combo2", false);
             animator.SetBool("Combo3", false);
             animator.SetBool("Combo4", false);
+            animator.SetBool("Combo5", false);
+
+            if (ArmL.gameObject.activeSelf == false)
+                ArmL.gameObject.SetActive(true);
+
+            if (ArmR.gameObject.activeSelf == false)
+                ArmR.gameObject.SetActive(true);
         }
     }
 
@@ -175,5 +201,16 @@ public class FinalBossSecondForm : MonoBehaviour
         _ArmR.SetTriggerTrapWave(false);
 
         ArmR.SlamAttack.TriggerAttack();
+    }
+
+    public void SpawnPutInArm()
+    {
+        int _index = Random.Range(0, zombieSpawnPoints.childCount);
+        Instantiate(pfPutInArm, parent).transform.position = zombieSpawnPoints.GetChild(_index).transform.position;
+    }
+    public void DisableArms()
+    {
+        ArmL.gameObject.SetActive(false);
+        ArmR.gameObject.SetActive(false);
     }
 }

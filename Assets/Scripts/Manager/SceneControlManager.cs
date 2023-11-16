@@ -28,6 +28,9 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         loadingScreenImage.color = new Color(0.0f, 0.0f, 0.0f, 1.0f);
         loadingScreenCanvasGroup.alpha = 1.0f;
 
+        OptionMenuGUI.Instance.SetContentActive(true);
+        OptionMenuGUI.Instance.SetContentActive(false);
+
         MainMenuGUI.Instance.SetContentActive(true);
         CurrentActiveScene = SceneName.MainMenu;
         CurrentGameplayState = GameplayState.Pause;
@@ -99,6 +102,8 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         SaveSelectMenuGUI.Instance.SetContentActive(false);
         DemoOverMenuGUI.Instance.SetContentActive(false);
 
+        ObjectPoolingManager.Instance.SetAllObjectsActive(false);
+
         yield return StartCoroutine(LoadSceneAndSetActive(SceneName.DemoSceneHub.ToString()));
         EventManager.CallAfterSceneLoadEvent();
         CurrentActiveScene = SceneName.DemoSceneHub;
@@ -122,6 +127,8 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         GameOverMenuGUI.Instance.SetContentActive(false);
         DemoOverMenuGUI.Instance.SetContentActive(false);
 
+        ObjectPoolingManager.Instance.SetAllObjectsActive(false);
+
         EventManager.CallBeforeSceneUnloadEvent();
         yield return SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().buildIndex);
         
@@ -142,6 +149,8 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
 
         MainMenuGUI.Instance.SetContentActive(false);
         SaveSelectMenuGUI.Instance.SetContentActive(false);
+
+        ObjectPoolingManager.Instance.SetAllObjectsActive(false);
 
         EventManager.CallBeforeSceneUnloadEvent();
         yield return SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().buildIndex);

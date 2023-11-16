@@ -19,6 +19,10 @@ public class PlayerHeart : MonoBehaviour
     private readonly float feedbackDamageTime = 0.10f;
     private float feedbackDamageTimer = default;
 
+    // Player Buff
+    private readonly float recoveryCooldown = 10.0f;
+    private float recoveryCooldownTimer = default;
+
     //======================================================================
     private void OnEnable()
     {
@@ -32,6 +36,17 @@ public class PlayerHeart : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Home))
         {
             UpdateCurrentMaxHeart(1);
+        }
+
+        // Recovery
+        if (currentHeart < currentMaxHeart)
+        {
+            recoveryCooldownTimer-= Time.deltaTime;
+            if (recoveryCooldownTimer <= 0.0f)
+            {
+                recoveryCooldownTimer = recoveryCooldown;
+                UpdateCurrentHeart(1);
+            }
         }
     }
 

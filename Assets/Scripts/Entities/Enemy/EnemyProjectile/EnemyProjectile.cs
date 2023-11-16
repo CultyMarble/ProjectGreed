@@ -24,6 +24,7 @@ public class EnemyProjectile : MonoBehaviour
             collision.gameObject.GetComponent<PlayerHeart>().UpdateCurrentHeart(-damage);
             Despawn();
         }
+
         if (collision.gameObject.CompareTag("Collisions"))
         {
             Despawn();

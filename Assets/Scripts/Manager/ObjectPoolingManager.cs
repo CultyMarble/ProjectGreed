@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectPoolingManager : MonoBehaviour
+public class ObjectPoolingManager : SingletonMonobehaviour<ObjectPoolingManager>
 {
     [Header("Pool Transform List:")]
     [SerializeField] private List<Transform> poolTranformList;
@@ -31,6 +31,18 @@ public class ObjectPoolingManager : MonoBehaviour
             }
 
             currentPool++;
+        }
+    }
+
+    //===========================================================================
+    public void SetAllObjectsActive(bool active)
+    {
+        foreach (Transform pool in poolTranformList)
+        {
+            foreach (Transform obj in pool)
+            {
+                obj.gameObject.SetActive(active);
+            }
         }
     }
 }

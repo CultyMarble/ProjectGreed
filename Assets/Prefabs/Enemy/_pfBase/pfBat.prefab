@@ -371,6 +371,7 @@ GameObject:
   - component: {fileID: -5756987273502110303}
   - component: {fileID: 5005157637052946536}
   - component: {fileID: -2194898716048574609}
+  - component: {fileID: 5550568038270448118}
   m_Layer: 7
   m_Name: pfBat
   m_TagString: Enemy
@@ -489,6 +490,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isAttacking: 0
+  isLunging: 0
+  isCharging: 0
   movementSpeed: 5
   currentDestination: {fileID: 6186633300706691329}
   currentTarget: {x: 0, y: 0, z: 0}
@@ -601,6 +604,9 @@ MonoBehaviour:
   activateDistance: 0.5
   damage: 1
   coolDownTime: 0.3
+  dieAfter: 0
+  delayAttack: 0
+  attackDelayTime: 0
 --- !u!95 &5005157637052946536
 Animator:
   serializedVersion: 4
@@ -636,6 +642,17 @@ MonoBehaviour:
   pfTempCurrency: {fileID: 2443823218653012819, guid: 3d947b54961e7fd49bec6bc289615a57, type: 3}
   minAmount: 0
   maxAmount: 3
+--- !u!210 &5550568038270448118
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2290856477104092860}
+  m_Enabled: 1
+  m_SortingLayerID: 237529647
+  m_SortingLayer: 5
+  m_SortingOrder: 0
 --- !u!1 &2290856477416486733
 GameObject:
   m_ObjectHideFlags: 0

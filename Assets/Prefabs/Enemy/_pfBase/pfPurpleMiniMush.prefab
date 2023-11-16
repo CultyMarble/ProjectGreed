@@ -371,6 +371,7 @@ GameObject:
   - component: {fileID: -5756987273502110303}
   - component: {fileID: 5005157637052946536}
   - component: {fileID: -2194898716048574609}
+  - component: {fileID: 6631313663059854920}
   m_Layer: 7
   m_Name: pfPurpleMiniMush
   m_TagString: Enemy
@@ -641,6 +642,17 @@ MonoBehaviour:
   pfTempCurrency: {fileID: 2443823218653012819, guid: 3d947b54961e7fd49bec6bc289615a57, type: 3}
   minAmount: 0
   maxAmount: 2
+--- !u!210 &6631313663059854920
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2290856477104092860}
+  m_Enabled: 1
+  m_SortingLayerID: 237529647
+  m_SortingLayer: 5
+  m_SortingOrder: 0
 --- !u!1 &2290856477416486733
 GameObject:
   m_ObjectHideFlags: 0
