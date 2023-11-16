@@ -40,6 +40,11 @@ public class RangeAbilityProjectile : MonoBehaviour
             gameObject.SetActive(false);
             gameObject.transform.localPosition = Vector2.zero;
         }
+
+        if (collision.gameObject.CompareTag("FinalBoss"))
+        {
+            collision.transform.parent.GetComponent<EnemyHealth>().UpdateCurrentHealth(-damage);
+        }
     }
 
     //===========================================================================

@@ -43,6 +43,11 @@ public class BombAbilityBomb : MonoBehaviour
                 // Deal Damage
                 collider2D.GetComponent<EnemyHealth>().UpdateCurrentHealth(-damage);
             }
+
+            if (collider2D.CompareTag("FinalBoss"))
+            {
+                collider2D.transform.parent.GetComponent<EnemyHealth>().UpdateCurrentHealth(-damage);
+            }
         }
     }
 
