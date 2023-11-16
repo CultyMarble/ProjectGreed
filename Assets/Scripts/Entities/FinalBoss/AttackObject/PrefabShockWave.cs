@@ -3,6 +3,7 @@ using UnityEngine;
 public class PrefabShockWave : MonoBehaviour
 {
     private readonly int damage = 1;
+    private int hitCount = 1;
     private readonly float moveSpeed = 7;
     private readonly float sizeScaleFactorX = 0.008f;
     private readonly float sizeScaleFactorY = 0.015f;
@@ -14,16 +15,19 @@ public class PrefabShockWave : MonoBehaviour
         if (SceneControlManager.Instance.CurrentGameplayState == GameplayState.Pause)
             return;
 
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player" && Player.Instance.actionState != PlayerActionState.IsDashing)
         {
-            if (Player.Instance.actionState != PlayerActionState.IsDashing)
+            if (hitCount > 0)
+            {
+                hitCount--;
                 collision.gameObject.GetComponent<PlayerHeart>().UpdateCurrentHeart(-damage);
+            }
+
+            Despawn();
         }
 
         if (collision.gameObject.CompareTag("Collisions"))
-        {
             Despawn();
-        }
     }
 
     //===========================================================================

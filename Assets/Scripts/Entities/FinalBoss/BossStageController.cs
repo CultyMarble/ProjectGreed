@@ -6,6 +6,10 @@ public class BossStageController : MonoBehaviour
     [SerializeField] private EnemyHealth firstFormHealth = default;
     [SerializeField] private GameObject secondForm = default;
 
+    private bool transitToSecondBoss = false;
+    private float transitDuration = 3.0f;
+    private float durationTimer = default;
+
     //======================================================================
     private void OnEnable()
     {
@@ -18,25 +22,33 @@ public class BossStageController : MonoBehaviour
     }
 
     //======================================================================
+    private void Update()
+    {
+        if (transitToSecondBoss)
+        {
+            StartCoroutine(SummonSecondStageBoss());
+            transitToSecondBoss = false;
+        }
+    }
+
+    //======================================================================
     private void Stage1Health_OnDespawnEvent(object sender, System.EventArgs e)
     {
-        StartCoroutine(SummonSecondStageBoss());
+        transitToSecondBoss = true;
+        durationTimer = transitDuration;
+
+        CameraShake.Instance.SetCameraShakeOn();
     }
 
     //======================================================================
     private IEnumerator SummonSecondStageBoss()
     {
-        SceneControlManager.Instance.CurrentGameplayState = GameplayState.Pause;
         secondForm.SetActive(true);
 
-        while (secondForm.transform.position != Vector3.zero)
+        while (durationTimer > 0.0f)
         {
-            secondForm.transform.position =
-                Vector3.MoveTowards(secondForm.transform.position, Vector3.zero, Time.deltaTime * 10);
-
+            durationTimer -= Time.deltaTime;
             yield return null;
         }
-
-        SceneControlManager.Instance.CurrentGameplayState = GameplayState.Ongoing;
     }
 }

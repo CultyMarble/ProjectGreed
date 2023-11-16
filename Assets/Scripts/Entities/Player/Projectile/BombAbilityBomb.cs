@@ -5,12 +5,11 @@ public class BombAbilityBomb : MonoBehaviour
     private float damage;
     private float radius;
     private float delayTime;
-    private Rigidbody2D rigidbody;
     private Animator animator;
+
     //===========================================================================
     private void Awake()
     {
-        rigidbody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
     }
     private void Update()
@@ -53,6 +52,7 @@ public class BombAbilityBomb : MonoBehaviour
         gameObject.SetActive(false);
         gameObject.transform.position = Vector3.zero;
     }
+
     //===========================================================================
     public void SetDamage(float newDamage) { damage = newDamage; }
 
