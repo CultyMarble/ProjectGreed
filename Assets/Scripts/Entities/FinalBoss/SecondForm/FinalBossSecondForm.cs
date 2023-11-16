@@ -1,6 +1,4 @@
-using Unity.Burst.Intrinsics;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
 
 public class FinalBossSecondForm : MonoBehaviour
 {
