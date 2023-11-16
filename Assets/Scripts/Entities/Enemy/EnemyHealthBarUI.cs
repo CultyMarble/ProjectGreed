@@ -6,7 +6,7 @@ public class EnemyHealthBarUI : MonoBehaviour
     [SerializeField] private Transform healtBar;
 
     //===========================================================================
-    private void Start()
+    private void OnEnable()
     {
         health.OnHealthChanged += Health_OnHealthChanged1;
     }
