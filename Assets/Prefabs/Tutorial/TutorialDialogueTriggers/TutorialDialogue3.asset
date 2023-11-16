@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ff3c4f7f7d428845a057991df0c0973, type: 3}
+  m_Name: TutorialDialogue3
+  m_EditorClassIdentifier: 
+  hasBeenUsed: 0
+  dialogueLines:
+  - 'Timothy: Hey! Looks like you made it! It wasn''t that bad was it?'
+  - 'You: Yeah it was  pretty easy'
+  - 'Timothy: Well we are at the edge of the kingdom so the curse here is very weak.
+    Once you continue past this point it will be much more difficult'
+  - 'Timothy: There are more enemies to find and even the GraveKeeper.. He''s really
+    tough, trust me. '
+  - 'You: Oh...'
+  - 'Timothy: Good luck!'

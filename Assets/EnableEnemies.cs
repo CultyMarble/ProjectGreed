@@ -8,6 +8,9 @@ public class EnableEnemies : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        enemies.gameObject.SetActive(true);
+        if (collision.CompareTag("Player"))
+        {
+            enemies.gameObject.SetActive(true);
+        }
     }
 }

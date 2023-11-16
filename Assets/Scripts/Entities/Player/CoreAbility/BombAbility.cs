@@ -12,6 +12,7 @@ public class BombAbility : MonoBehaviour
     private float delayTime = default;
     private readonly float inputDelayDuration = 0.5f;
     private float inputDelayTimer = default;
+    [HideInInspector] public bool infAmmo = false;
 
     // Pooling
     [Header("Pooling Settings:")]
@@ -97,8 +98,10 @@ public class BombAbility : MonoBehaviour
                 {
                     bomb.position = transform.position;
                 }
-
-                UpdateBombCharge(-1);
+                if (!infAmmo)
+                {
+                    UpdateBombCharge(-1);
+                }
 
                 break;
             }
