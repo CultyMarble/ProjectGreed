@@ -14,6 +14,7 @@ public class LockTrigger : MonoBehaviour
     // Start is called before the first frame update
     private GateManager gateManager;
     private ToolTip toolTipMenu;
+    private string roomVariant;
     [SerializeField] private Direction doorSide;
     private void Awake()
     {
@@ -94,6 +95,41 @@ public class LockTrigger : MonoBehaviour
 
     private void DrawRoomOnMap()
     {
+        RoomShape roomShape = RoomShape.CenterFourWay;
+        roomVariant = transform.parent.parent.parent.parent.GetComponent<RoomController>().roomVariant;
+        switch (roomVariant)
+        {
+            case "Entry":
+                roomShape = RoomShape.CenterFourWay;
+                break;
+            case "L":
+                roomShape = RoomShape.LineOneWay4;
+                break;
+            case "B":
+                roomShape = RoomShape.LineOneWay3;
+                break;
+            case "T":
+                roomShape = RoomShape.LineOneWay1;
+                break;
+            case "R":
+                roomShape = RoomShape.LineOneWay2;
+                break;
+            case "LR":
+                roomShape = RoomShape.LShapeTwoWay24;
+                break;
+            case "TL":
+                roomShape = RoomShape.LShapeTwoWay14;
+                break;
+            case "RB":
+                roomShape = RoomShape.LShapeTwoWay23;
+                break;
+            case "TR":
+                roomShape = RoomShape.LShapeTwoWay12;
+                break;
+            case "TB":
+                roomShape = RoomShape.LShapeTwoWay13;
+                break;
+        }
         if (gateManager.roomDrawn)
         {
             return;
@@ -101,16 +137,16 @@ public class LockTrigger : MonoBehaviour
         switch (doorSide)
         {
             case Direction.North:
-                MapGenerator.Instance.CreateRoomLayout(CreateDirection.Down, RoomShape.CenterFourWay);
+                MapGenerator.Instance.CreateRoomLayout(CreateDirection.Down, roomShape);
                 break;
             case Direction.East:
-                MapGenerator.Instance.CreateRoomLayout(CreateDirection.Left, RoomShape.CenterFourWay);
+                MapGenerator.Instance.CreateRoomLayout(CreateDirection.Left, roomShape);
                 break;
             case Direction.South:
-                MapGenerator.Instance.CreateRoomLayout(CreateDirection.Up, RoomShape.CenterFourWay);
+                MapGenerator.Instance.CreateRoomLayout(CreateDirection.Up, roomShape);
                 break;
             case Direction.West:
-                MapGenerator.Instance.CreateRoomLayout(CreateDirection.Right, RoomShape.CenterFourWay);
+                MapGenerator.Instance.CreateRoomLayout(CreateDirection.Right, roomShape);
                 break;
         }
         gateManager.roomDrawn = true;

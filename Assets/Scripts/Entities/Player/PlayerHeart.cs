@@ -102,6 +102,10 @@ public class PlayerHeart : MonoBehaviour
     }
     public void UpdateCurrentHeart(int amount = 0)
     {
+        if (!this.enabled)
+        {
+            return;
+        }
         if (amount != 0)
         {
 

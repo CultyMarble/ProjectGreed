@@ -13,6 +13,7 @@ public enum Ability
     Ranged,
     Bomb,
     Dash,
+    Health,
 }
 public class AbilityEnabler : MonoBehaviour
 {
@@ -79,6 +80,17 @@ public class AbilityEnabler : MonoBehaviour
                 else
                 {
                     player.GetComponent<PlayerMovement>().dashEnabled = false;
+                }
+                break;
+            case Ability.Health:
+                if (mode == Mode.Enable)
+                {
+                    player.GetComponent<PlayerHeart>().enabled = true;
+                }
+                else
+                {
+                    player.GetComponent<PlayerHeart>().enabled = false;
+
                 }
                 break;
         }
