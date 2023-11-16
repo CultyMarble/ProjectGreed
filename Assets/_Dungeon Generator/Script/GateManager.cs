@@ -29,9 +29,14 @@ public class GateManager : MonoBehaviour
         roomController = GetComponentInParent<RoomController>();
         if (!locked)
         {
-            randomSpawnManager = GameObject.Find("RandomSpawnManager").GetComponent<RandomSpawnManager>();
+            GameObject newObject = GameObject.Find("RandomSpawnManager");
+            if (newObject != null)
+            {
+                randomSpawnManager = newObject.GetComponent<RandomSpawnManager>();
+            }
         }
     }
+
     private void Update()
     {
         if (disableGate)

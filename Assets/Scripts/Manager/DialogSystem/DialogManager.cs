@@ -42,7 +42,7 @@ public class DialogManager : SingletonMonobehaviour<DialogManager>
                 lineIndex = 0;
 
                 SetDialogPanelActiveState(false);
-
+                dialogLines = new string[0];
                 return;
             }
 

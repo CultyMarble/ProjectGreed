@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5768776049682388011}
   - component: {fileID: 6034491126609140462}
   m_Layer: 0
-  m_Name: barrelCat
+  m_Name: pfBarrelCat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -52,8 +52,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.029006988, y: 0.28669116}
-  m_Size: {x: 0.63714975, y: 0.63714975}
+  m_Offset: {x: -0.0883459, y: -0.11712951}
+  m_Size: {x: 0.63715005, y: 0.9982362}
   m_Direction: 0
 --- !u!58 &4123117941785069887
 CircleCollider2D:
@@ -68,9 +68,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.30305478}
+  m_Offset: {x: -0.08900811, y: -0.10076581}
   serializedVersion: 2
-  m_Radius: 1.2712436
+  m_Radius: 0.94488
 --- !u!114 &4123117941785069885
 MonoBehaviour:
   m_ObjectHideFlags: 0

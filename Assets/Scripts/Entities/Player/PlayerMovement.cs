@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
     private float dashCooldown = default;
     private float dashTime = default;
     private float dashSpeed = default;
+    [HideInInspector] public bool dashEnabled = true;
 
     [Header("Animation")]
     [SerializeField] private Animator animator;
@@ -64,8 +65,10 @@ public class PlayerMovement : MonoBehaviour
         UpdateAnimator();
 
         DashCoolDownTimeCounter();
-
-        DashHandler();
+        if (dashEnabled)
+        {
+            DashHandler();
+        }
 
         UpdateImpairTimer();
 
