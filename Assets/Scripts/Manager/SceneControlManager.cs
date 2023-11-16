@@ -28,6 +28,9 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         loadingScreenImage.color = new Color(0.0f, 0.0f, 0.0f, 1.0f);
         loadingScreenCanvasGroup.alpha = 1.0f;
 
+        OptionMenuGUI.Instance.SetContentActive(true);
+        OptionMenuGUI.Instance.SetContentActive(false);
+
         MainMenuGUI.Instance.SetContentActive(true);
         CurrentActiveScene = SceneName.MainMenu;
         CurrentGameplayState = GameplayState.Pause;
