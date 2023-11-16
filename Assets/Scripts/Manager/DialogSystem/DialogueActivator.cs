@@ -56,7 +56,11 @@ public class DialogueActivator : MonoBehaviour
             return;
         }
         dialogueEntryIndex = Random.Range(0, dialogueEntryArray.Length);
-        if (dialogueEntryArray[dialogueEntryIndex].hasBeenUsed || newDialogueIndicator == null)
+        if (newDialogueIndicator == null)
+        {
+            return;
+        }
+        if (dialogueEntryArray[dialogueEntryIndex].hasBeenUsed)
         {
             newDialogueIndicator.SetActive(false);
         }
@@ -133,7 +137,10 @@ public class DialogueActivator : MonoBehaviour
             return;
         }
         ActivateDialogueManager(dialogueEntryArray[dialogueEntryIndex]);
-        newDialogueIndicator.SetActive(false);
+        if (newDialogueIndicator != null)
+        {
+            newDialogueIndicator.SetActive(false);
+        }
         dialogueEntryArray[dialogueEntryIndex].hasBeenUsed = true;
         haveActivated = true;
     }

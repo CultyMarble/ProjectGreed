@@ -24,7 +24,7 @@ public enum CreateDirection
     Up, Down, Left, Right
 }
 
-public class MapGenerator : MonoBehaviour
+public class MapGenerator : SingletonMonobehaviour<MapGenerator>
 {
     [SerializeField] private Transform parent = default;
     [SerializeField] private RectTransform positionMarker = default;
@@ -79,7 +79,7 @@ public class MapGenerator : MonoBehaviour
     }
 
     //===========================================================================
-    private void MovePositionMarker(CreateDirection direction)
+    public void MovePositionMarker(CreateDirection direction)
     {
         switch (direction)
         {
@@ -164,18 +164,22 @@ public class MapGenerator : MonoBehaviour
             case CreateDirection.Up:
                 MovePositionMarker(CreateDirection.Up);
                 CreateRoom(shape);
+                MovePositionMarker(CreateDirection.Down);
                 break;
             case CreateDirection.Down:
                 MovePositionMarker(CreateDirection.Down);
                 CreateRoom(shape);
+                MovePositionMarker(CreateDirection.Up);
                 break;
             case CreateDirection.Left:
                 MovePositionMarker(CreateDirection.Left);
                 CreateRoom(shape);
+                MovePositionMarker(CreateDirection.Right);
                 break;
             case CreateDirection.Right:
                 MovePositionMarker(CreateDirection.Right);
                 CreateRoom(shape);
+                MovePositionMarker(CreateDirection.Left);
                 break;
             default:
                 break;

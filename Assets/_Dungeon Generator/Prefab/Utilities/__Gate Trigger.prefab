@@ -71,6 +71,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a46bca973facaa44daccb7b8e0db8835, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  doorSide: 1
 --- !u!1 &2718324830665705771
 GameObject:
   m_ObjectHideFlags: 0
@@ -142,6 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a46bca973facaa44daccb7b8e0db8835, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  doorSide: 3
 --- !u!1 &3225049575093342435
 GameObject:
   m_ObjectHideFlags: 0
@@ -213,6 +215,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a46bca973facaa44daccb7b8e0db8835, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  doorSide: 2
 --- !u!1 &4628829824945007377
 GameObject:
   m_ObjectHideFlags: 0
@@ -395,6 +398,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a46bca973facaa44daccb7b8e0db8835, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  doorSide: 0
 --- !u!1 &5758849717937450301
 GameObject:
   m_ObjectHideFlags: 0
@@ -538,6 +542,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81c3e297373d9cd44890b77849fff060, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roomDrawn: 0
   playerInsideRoom: 0
   playerInLockZone: 0
   clearedRoom: 0

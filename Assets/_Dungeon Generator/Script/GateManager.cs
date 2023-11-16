@@ -12,6 +12,7 @@ public class GateManager : MonoBehaviour
     private GameObject[] enemyPool;
 
     [Header("Gate Data")]
+    public bool roomDrawn = false;
     public bool playerInsideRoom = false;
     public bool playerInLockZone = false;
     public bool clearedRoom = false;
@@ -86,7 +87,7 @@ public class GateManager : MonoBehaviour
         if (collision.gameObject.CompareTag("Player") && collision.GetType().ToString() != Tags.CAPSULECOLLIDER2D && !playerInsideRoom)
         {
             playerInsideRoom = true;
-
+            UpdatePlayerPositionOnMap(collision.transform.position);
             if (clearedRoom || disableGate || locked)
             {
                 return;
@@ -139,6 +140,34 @@ public class GateManager : MonoBehaviour
         if (!playerInsideRoom) return;
 
         RoomEnemyCheckDelay();
+    }
+
+    private void UpdatePlayerPositionOnMap(Vector3 playerPosition)
+    {
+        if(transform.position == playerPosition)
+        {
+            roomDrawn = true;
+            return;
+        }
+        Vector2 direction = transform.position - playerPosition;
+        float angle = Vector2.SignedAngle(transform.right, direction);
+        if(angle > -135 && angle < -45) //entering from North side
+        {
+            MapGenerator.Instance.MovePositionMarker(CreateDirection.Down);
+        }
+        if (angle > 135 && angle <= 180 || angle < -135 && angle > -180) //entering from East side
+        {
+            MapGenerator.Instance.MovePositionMarker(CreateDirection.Left);
+        }
+        if (angle > 45 && angle < 135) //entering from South side
+        {
+            MapGenerator.Instance.MovePositionMarker(CreateDirection.Up);
+        }
+        if (angle >= 0 && angle < 45 || angle <= 0 && angle > -45) //entering from West side
+        {
+            MapGenerator.Instance.MovePositionMarker(CreateDirection.Right);
+        }
+        roomDrawn = true;
     }
     private void RoomEnemyCheckDelay()
     {

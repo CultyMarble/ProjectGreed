@@ -2,12 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum Direction
+{
+    North,
+    East,
+    South,
+    West,
+}
 public class LockTrigger : MonoBehaviour
 {
     // Start is called before the first frame update
     private GateManager gateManager;
     private ToolTip toolTipMenu;
-
+    [SerializeField] private Direction doorSide;
     private void Awake()
     {
         gateManager = transform.parent.parent.GetComponent<GateManager>();
@@ -61,7 +68,13 @@ public class LockTrigger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player") && gateManager.locked)
+        if (!collision.gameObject.CompareTag("Player")) 
+        {
+            return;
+        }
+        DrawRoomOnMap();
+            
+        if(gateManager.locked)
         {
             switch (gateManager.keytype)
             {
@@ -77,6 +90,30 @@ public class LockTrigger : MonoBehaviour
             Player.Instance.SetInteractPromtTextActive(true);
             gateManager.playerInLockZone = true;
         }
+    }
+
+    private void DrawRoomOnMap()
+    {
+        if (gateManager.roomDrawn)
+        {
+            return;
+        }
+        switch (doorSide)
+        {
+            case Direction.North:
+                MapGenerator.Instance.CreateRoomLayout(CreateDirection.Down, RoomShape.CenterFourWay);
+                break;
+            case Direction.East:
+                MapGenerator.Instance.CreateRoomLayout(CreateDirection.Left, RoomShape.CenterFourWay);
+                break;
+            case Direction.South:
+                MapGenerator.Instance.CreateRoomLayout(CreateDirection.Up, RoomShape.CenterFourWay);
+                break;
+            case Direction.West:
+                MapGenerator.Instance.CreateRoomLayout(CreateDirection.Right, RoomShape.CenterFourWay);
+                break;
+        }
+        gateManager.roomDrawn = true;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
