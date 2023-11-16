@@ -85,11 +85,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activateType: 1
   haveActivated: 0
-  dialogueEntryArray:
-  - {fileID: 11400000, guid: 0aa1032180527f745bfb8aa926efaf59, type: 2}
-  - {fileID: 11400000, guid: 0ddefee82eb92c3449e3e8e694c035f1, type: 2}
-  - {fileID: 11400000, guid: 1f0f2eecda0b6b941ba3580cf062ae51, type: 2}
-  quickText: 
+  dialogueEntryArray: []
+  quickText: Hey its good to see you! Be careful. It's dangerous in here
   newDialogueIndicator: {fileID: 1978341169995838140}
 --- !u!95 &5768776049682388011
 Animator:

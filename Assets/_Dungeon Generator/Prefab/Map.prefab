@@ -89,7 +89,7 @@ MonoBehaviour:
   - {fileID: 188694118197523721, guid: 52e461325db4ecc49bdd3ae2c2bff31d, type: 3}
   - {fileID: 8972429057144147082, guid: 71d17848d7a6bbb4391a075ad2ca213d, type: 3}
   npcList:
-  - {fileID: 4123117941785069872, guid: 227bdb8fdf996ef49aacae88b09b155d, type: 3}
+  - {fileID: 4123117941785069872, guid: 8d72eddc6ea8e1f41816b964f744f397, type: 3}
   keys:
   - {fileID: 5567745467040105511, guid: b15e0f56bacbb594196dd7159181f8da, type: 3}
   - {fileID: 5567745467040105511, guid: eb15c768ea3be5e48a0a4967c23bb235, type: 3}
