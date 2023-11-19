@@ -1846,15 +1846,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentRoomType: 1
-  roomVariant: Entry
+  roomShape: 0
   added: 0
-  roomType:
+  roomVariants:
   - {fileID: 2074592799500452435}
   - {fileID: 3917943721383927243}
   - {fileID: 7951873728128702815}
   - {fileID: 7904318155989173060}
   - {fileID: 6641977382574645916}
   specialRoom: {fileID: 0}
+  activeRoomVariant: {fileID: 0}
 --- !u!1 &399540625320073863
 GameObject:
   m_ObjectHideFlags: 0

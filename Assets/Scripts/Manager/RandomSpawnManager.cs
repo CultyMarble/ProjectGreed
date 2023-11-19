@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RandomSpawnManager : MonoBehaviour
+public class RandomSpawnManager : SingletonMonobehaviour<RandomSpawnManager>
 {
     //[SerializeField] private int spawnAmount;
     private int spawnAmount;

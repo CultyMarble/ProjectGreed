@@ -20059,9 +20059,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentRoomType: 0
-  roomVariant: TB
+  roomShape: 6
   added: 0
-  roomType:
+  roomVariants:
   - {fileID: 4629390161651250776}
   - {fileID: 3055981327814916729}
   - {fileID: 6251600712829328477}
@@ -20071,6 +20071,7 @@ MonoBehaviour:
   - {fileID: 349775667475430731}
   - {fileID: 3895037764081182585}
   specialRoom: {fileID: 5834923999332218285}
+  activeRoomVariant: {fileID: 0}
 --- !u!1 &1689125610543266716
 GameObject:
   m_ObjectHideFlags: 0

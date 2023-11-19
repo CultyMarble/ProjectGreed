@@ -457,7 +457,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parent: {fileID: 404357996}
   positionMarker: {fileID: 8229442}
-  centerFourWay: {fileID: 4236749272123626485, guid: 2ec03b8da5684a944a97140f4acfc85b, type: 3}
+  centerFourWay: {fileID: 568281206}
   lineOneWay1: {fileID: 8686941605015621883, guid: 9497d3bcb5abf5c4d8e7352b5992e3c4, type: 3}
   lineOneWay2: {fileID: 5143984639439634375, guid: 7a956e4451835374c8d6d7f6b7862ead, type: 3}
   lineOneWay3: {fileID: 4103662296219507394, guid: 9c71a587be081e448bdad22516b8625f, type: 3}
@@ -820,6 +820,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   throwBomb: 1
+  infAmmo: 0
   bombAbilityBombPool: {fileID: 7778423}
   pfBombAbilityBomb: {fileID: 3187642801048505082, guid: 3cfa34a8eb634a349b1dff68a79c8163, type: 3}
 --- !u!1 &760052194

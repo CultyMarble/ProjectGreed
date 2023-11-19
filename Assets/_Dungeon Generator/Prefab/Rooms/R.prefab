@@ -52741,9 +52741,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentRoomType: 0
-  roomVariant: R
+  roomShape: 2
   added: 0
-  roomType:
+  roomVariants:
   - {fileID: 1135569877761301472}
   - {fileID: 4274779946716322020}
   - {fileID: 6591816537711220780}

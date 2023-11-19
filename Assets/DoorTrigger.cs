@@ -4,21 +4,20 @@ using UnityEngine;
 
 public enum Direction
 {
-    North,
-    East,
-    South,
-    West,
+    Top,
+    Right,
+    Bottom,
+    Left,
 }
-public class LockTrigger : MonoBehaviour
+public class DoorTrigger : MonoBehaviour
 {
-    // Start is called before the first frame update
-    private GateManager gateManager;
+    [SerializeField] private GateManager gateManager;
     private ToolTip toolTipMenu;
-    private string roomVariant;
+    private RoomController roomController;
     [SerializeField] private Direction doorSide;
     private void Awake()
     {
-        gateManager = transform.parent.parent.GetComponent<GateManager>();
+        roomController = transform.parent.parent.parent.parent.GetComponent<RoomController>();
     }
     private void Update()
     {
@@ -95,58 +94,23 @@ public class LockTrigger : MonoBehaviour
 
     private void DrawRoomOnMap()
     {
-        RoomShape roomShape = RoomShape.CenterFourWay;
-        roomVariant = transform.parent.parent.parent.parent.GetComponent<RoomController>().roomVariant;
-        switch (roomVariant)
-        {
-            case "Entry":
-                roomShape = RoomShape.CenterFourWay;
-                break;
-            case "L":
-                roomShape = RoomShape.LineOneWay4;
-                break;
-            case "B":
-                roomShape = RoomShape.LineOneWay3;
-                break;
-            case "T":
-                roomShape = RoomShape.LineOneWay1;
-                break;
-            case "R":
-                roomShape = RoomShape.LineOneWay2;
-                break;
-            case "LR":
-                roomShape = RoomShape.LShapeTwoWay24;
-                break;
-            case "TL":
-                roomShape = RoomShape.LShapeTwoWay14;
-                break;
-            case "RB":
-                roomShape = RoomShape.LShapeTwoWay23;
-                break;
-            case "TR":
-                roomShape = RoomShape.LShapeTwoWay12;
-                break;
-            case "TB":
-                roomShape = RoomShape.LShapeTwoWay13;
-                break;
-        }
         if (gateManager.roomDrawn)
         {
             return;
         }
         switch (doorSide)
         {
-            case Direction.North:
-                MapGenerator.Instance.CreateRoomLayout(CreateDirection.Down, roomShape);
+            case Direction.Top:
+                MapGenerator.Instance.CreateRoomLayout(CreateDirection.Down, roomController.roomShape);
                 break;
-            case Direction.East:
-                MapGenerator.Instance.CreateRoomLayout(CreateDirection.Left, roomShape);
+            case Direction.Right:
+                MapGenerator.Instance.CreateRoomLayout(CreateDirection.Left, roomController.roomShape);
                 break;
-            case Direction.South:
-                MapGenerator.Instance.CreateRoomLayout(CreateDirection.Up, roomShape);
+            case Direction.Bottom:
+                MapGenerator.Instance.CreateRoomLayout(CreateDirection.Up, roomController.roomShape);
                 break;
-            case Direction.West:
-                MapGenerator.Instance.CreateRoomLayout(CreateDirection.Right, roomShape);
+            case Direction.Left:
+                MapGenerator.Instance.CreateRoomLayout(CreateDirection.Right, roomController.roomShape);
                 break;
         }
         gateManager.roomDrawn = true;

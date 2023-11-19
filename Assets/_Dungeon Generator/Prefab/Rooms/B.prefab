@@ -67210,9 +67210,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentRoomType: 0
-  roomVariant: B
+  roomShape: 3
   added: 0
-  roomType:
+  roomVariants:
   - {fileID: 6513149241168145263}
   - {fileID: 4006767092898063754}
   - {fileID: 5102930570307562405}
@@ -67222,6 +67222,7 @@ MonoBehaviour:
   - {fileID: 5737837578700800373}
   - {fileID: 5315821179355954980}
   specialRoom: {fileID: 912631011329898324}
+  activeRoomVariant: {fileID: 0}
 --- !u!1 &4506294035325290247
 GameObject:
   m_ObjectHideFlags: 0
@@ -135206,17 +135207,49 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4037577086296709996}
     m_Modifications:
+    - target: {fileID: 153882698962264143, guid: 81b946a92ba610a4c9efbda6d57e7f45, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 652434581073750935, guid: 81b946a92ba610a4c9efbda6d57e7f45, type: 3}
       propertyPath: roomVariants
       value: 
       objectReference: {fileID: 4306575210921574459}
+    - target: {fileID: 1392869289399815409, guid: 81b946a92ba610a4c9efbda6d57e7f45, type: 3}
+      propertyPath: m_Name
+      value: Right Gate
+      objectReference: {fileID: 0}
+    - target: {fileID: 2083694081130609222, guid: 81b946a92ba610a4c9efbda6d57e7f45, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2718324830665705771, guid: 81b946a92ba610a4c9efbda6d57e7f45, type: 3}
+      propertyPath: m_Name
+      value: Left Gate
+      objectReference: {fileID: 0}
+    - target: {fileID: 3225049575093342435, guid: 81b946a92ba610a4c9efbda6d57e7f45, type: 3}
+      propertyPath: m_Name
+      value: Bottom Gate
+      objectReference: {fileID: 0}
+    - target: {fileID: 5235910869315926673, guid: 81b946a92ba610a4c9efbda6d57e7f45, type: 3}
+      propertyPath: m_Name
+      value: Top Gate
+      objectReference: {fileID: 0}
     - target: {fileID: 5758849717937450301, guid: 81b946a92ba610a4c9efbda6d57e7f45, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6375341565740274857, guid: 81b946a92ba610a4c9efbda6d57e7f45, type: 3}
+      propertyPath: m_Name
+      value: DoorTrigger
+      objectReference: {fileID: 0}
     - target: {fileID: 6478101377928035737, guid: 81b946a92ba610a4c9efbda6d57e7f45, type: 3}
       propertyPath: m_Name
       value: __Gate Trigger
+      objectReference: {fileID: 0}
+    - target: {fileID: 7183308040293570990, guid: 81b946a92ba610a4c9efbda6d57e7f45, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7898106784794814315, guid: 81b946a92ba610a4c9efbda6d57e7f45, type: 3}
       propertyPath: m_RootOrder
@@ -135262,6 +135295,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8763073082487573183, guid: 81b946a92ba610a4c9efbda6d57e7f45, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 81b946a92ba610a4c9efbda6d57e7f45, type: 3}
 --- !u!4 &1271847983977426214 stripped
@@ -135269,3 +135306,20 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7898106784794814315, guid: 81b946a92ba610a4c9efbda6d57e7f45, type: 3}
   m_PrefabInstance: {fileID: 8952370212880599629}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2613484329656000228 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6375341565740274857, guid: 81b946a92ba610a4c9efbda6d57e7f45, type: 3}
+  m_PrefabInstance: {fileID: 8952370212880599629}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5464942082563248113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2613484329656000228}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a46bca973facaa44daccb7b8e0db8835, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

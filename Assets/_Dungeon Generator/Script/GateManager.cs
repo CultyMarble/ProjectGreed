@@ -7,7 +7,6 @@ public class GateManager : MonoBehaviour
     private RoomController roomController;
 
     [Header("Enemy Spawn")]
-    private RandomSpawnManager randomSpawnManager;
     private GameObject randomSpawnPoints;
     private GameObject[] enemyPool;
 
@@ -24,17 +23,13 @@ public class GateManager : MonoBehaviour
     [SerializeField] private GameObject roomVariants;
     [SerializeField] private GameObject gates;
 
+    private RoomController activeRoomVariant;
+
     private void Awake()
     {
         roomController = GetComponentInParent<RoomController>();
-        if (!locked)
-        {
-            GameObject newObject = GameObject.Find("RandomSpawnManager");
-            if (newObject != null)
-            {
-                randomSpawnManager = newObject.GetComponent<RandomSpawnManager>();
-            }
-        }
+        
+        //RoomManager.onRoomsGenerated += CheckForDoors;
     }
 
     private void Update()
@@ -84,7 +79,7 @@ public class GateManager : MonoBehaviour
         {
             return;
         }
-        randomSpawnManager.GetComponent<RandomSpawnManager>().SpawnRandom(randomSpawnPoints);
+        RandomSpawnManager.Instance.SpawnRandom(randomSpawnPoints);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -111,20 +106,12 @@ public class GateManager : MonoBehaviour
                 return;
             }
             
-            for (int i = 0; i < roomVariants.transform.childCount; i++)
+            if (roomController.activeRoomVariant.transform.Find("SpawnPointList") != null)
             {
-                GameObject variant = roomVariants.transform.GetChild(i).gameObject;
-                if (!variant.activeSelf)
-                {
-                    continue;
-                }
-                if (variant.transform.Find("SpawnPointList") != null)
-                {
-                    randomSpawnPoints = variant.transform.Find("SpawnPointList").gameObject;
-                    ActiveGates(true);
-                    SpawnWithinTrigger();
-                    return;
-                }
+                randomSpawnPoints = roomController.activeRoomVariant.transform.Find("SpawnPointList").gameObject;
+                ActiveGates(true);
+                SpawnWithinTrigger();
+                return;
             }
             
         }
@@ -182,4 +169,5 @@ public class GateManager : MonoBehaviour
             RoomCleared();
         }
     }
+
 }

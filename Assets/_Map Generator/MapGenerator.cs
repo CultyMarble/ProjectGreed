@@ -2,21 +2,21 @@ using UnityEngine;
 
 public enum RoomShape
 {
-    CenterFourWay,
-    LineOneWay1,
-    LineOneWay2,
-    LineOneWay3,
-    LineOneWay4,
-    LShapeTwoWay12,
-    LShapeTwoWay13,
-    LShapeTwoWay14,
-    LShapeTwoWay23,
-    LShapeTwoWay24,
-    LShapeTwoWay34,
-    TShapeThreeWay123,
-    TShapeThreeWay124,
-    TShapeThreeWay134,
-    TShapeThreeWay234,
+    Centre,
+    T,
+    R,
+    B,
+    L,
+    TR,
+    TB,
+    TL,
+    RB,
+    LR,
+    LB,
+    TRB,
+    TRL,
+    TBL,
+    RBL,
 }
 
 public enum CreateDirection
@@ -66,16 +66,16 @@ public class MapGenerator : SingletonMonobehaviour<MapGenerator>
 
         // TODO DELETE
         if (Input.GetKeyDown(KeyCode.UpArrow))
-            CreateRoomLayout(CreateDirection.Up, RoomShape.CenterFourWay);
+            CreateRoomLayout(CreateDirection.Up, RoomShape.Centre);
 
         if (Input.GetKeyDown(KeyCode.DownArrow))
-            CreateRoomLayout(CreateDirection.Down, RoomShape.CenterFourWay);
+            CreateRoomLayout(CreateDirection.Down, RoomShape.Centre);
 
         if (Input.GetKeyDown(KeyCode.LeftArrow))
-            CreateRoomLayout(CreateDirection.Left, RoomShape.CenterFourWay);
+            CreateRoomLayout(CreateDirection.Left, RoomShape.Centre);
 
         if (Input.GetKeyDown(KeyCode.RightArrow))
-            CreateRoomLayout(CreateDirection.Right, RoomShape.CenterFourWay);
+            CreateRoomLayout(CreateDirection.Right, RoomShape.Centre);
     }
 
     //===========================================================================
@@ -104,56 +104,54 @@ public class MapGenerator : SingletonMonobehaviour<MapGenerator>
     {
         switch (shape)
         {
-            case RoomShape.CenterFourWay:
+            case RoomShape.Centre:
                 Instantiate(centerFourWay, parent).GetComponent<RectTransform>().localPosition = positionMarker.localPosition;
                 break;
-            case RoomShape.LineOneWay1:
+            case RoomShape.T:
                 Instantiate(lineOneWay1, parent).GetComponent<RectTransform>().localPosition = positionMarker.localPosition;
                 break;
-            case RoomShape.LineOneWay2:
+            case RoomShape.R:
                 Instantiate(lineOneWay2, parent).GetComponent<RectTransform>().localPosition = positionMarker.localPosition;
                 break;
-            case RoomShape.LineOneWay3:
+            case RoomShape.B:
                 Instantiate(lineOneWay3, parent).GetComponent<RectTransform>().localPosition = positionMarker.localPosition;
                 break;
-            case RoomShape.LineOneWay4:
+            case RoomShape.L:
                 Instantiate(lineOneWay4, parent).GetComponent<RectTransform>().localPosition = positionMarker.localPosition;
                 break;
-            case RoomShape.LShapeTwoWay12:
+            case RoomShape.TR:
                 Instantiate(lShapeTwoWay12, parent).GetComponent<RectTransform>().localPosition = positionMarker.localPosition;
                 break;
-            case RoomShape.LShapeTwoWay13:
+            case RoomShape.TB:
                 Instantiate(lShapeTwoWay13, parent).GetComponent<RectTransform>().localPosition = positionMarker.localPosition;
                 break;
-            case RoomShape.LShapeTwoWay14:
+            case RoomShape.TL:
                 Instantiate(lShapeTwoWay14, parent).GetComponent<RectTransform>().localPosition = positionMarker.localPosition;
                 break;
-            case RoomShape.LShapeTwoWay23:
+            case RoomShape.RB:
                 Instantiate(lShapeTwoWay23, parent).GetComponent<RectTransform>().localPosition = positionMarker.localPosition;
                 break;
-            case RoomShape.LShapeTwoWay24:
+            case RoomShape.LR:
                 Instantiate(lShapeTwoWay24, parent).GetComponent<RectTransform>().localPosition = positionMarker.localPosition;
                 break;
-            case RoomShape.LShapeTwoWay34:
+            case RoomShape.LB:
                 Instantiate(lShapeTwoWay34, parent).GetComponent<RectTransform>().localPosition = positionMarker.localPosition;
                 break;
-            case RoomShape.TShapeThreeWay123:
+            case RoomShape.TRB:
                 Instantiate(tShapeThreeWay123, parent).GetComponent<RectTransform>().localPosition = positionMarker.localPosition;
                 break;
-            case RoomShape.TShapeThreeWay124:
+            case RoomShape.TRL:
                 Instantiate(tShapeThreeWay124, parent).GetComponent<RectTransform>().localPosition = positionMarker.localPosition;
                 break;
-            case RoomShape.TShapeThreeWay134:
+            case RoomShape.TBL:
                 Instantiate(tShapeThreeWay134, parent).GetComponent<RectTransform>().localPosition = positionMarker.localPosition;
                 break;
-            case RoomShape.TShapeThreeWay234:
+            case RoomShape.RBL:
                 Instantiate(tShapeThreeWay234, parent).GetComponent<RectTransform>().localPosition = positionMarker.localPosition;
                 break;
             default:
                 break;
         }
-
-        //
     }
 
     //===========================================================================
