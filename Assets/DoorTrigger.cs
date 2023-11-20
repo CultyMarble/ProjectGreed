@@ -12,12 +12,15 @@ public enum Direction
 public class DoorTrigger : MonoBehaviour
 {
     [SerializeField] private GateManager gateManager;
+    [SerializeField] private Direction doorSide;
+
     private ToolTip toolTipMenu;
     private RoomController roomController;
-    [SerializeField] private Direction doorSide;
+    public bool doorChecked = false;
     private void Awake()
     {
         roomController = transform.parent.parent.parent.parent.GetComponent<RoomController>();
+        RoomManager.onRoomsGenerated += CheckForDoors;
     }
     private void Update()
     {
@@ -129,5 +132,259 @@ public class DoorTrigger : MonoBehaviour
             gateManager.playerInLockZone = false;
         }
     }
+    public void CheckForDoors()
+    {
+        if (doorChecked)
+        {
+            return;
+        }
 
+        Collider2D[] otherDoors = Physics2D.OverlapCircleAll(transform.position, 1.0f);
+
+        if (otherDoors == null || otherDoors.Length == 1)
+        {
+            switch (roomController.roomShape)
+            {
+                case RoomShape.TR:
+                    if(doorSide == Direction.Right)
+                    {
+                        roomController.rightDoorState = DoorState.closed;
+                    }
+                    else if (doorSide == Direction.Top)
+                    {
+                        roomController.topDoorState = DoorState.closed;
+                    }
+                    break;
+                case RoomShape.TB:
+                    if (doorSide == Direction.Bottom)
+                    {
+                        roomController.bottomDoorState = DoorState.closed;
+                    }
+                    else if (doorSide == Direction.Top)
+                    {
+                        roomController.topDoorState = DoorState.closed;
+                    }
+                    break;
+                case RoomShape.TL:
+                    if (doorSide == Direction.Left)
+                    {
+                        roomController.leftDoorState = DoorState.closed;
+                    }
+                    else if (doorSide == Direction.Top)
+                    {
+                        roomController.topDoorState = DoorState.closed;
+                    }
+                    break;
+                case RoomShape.RB:
+                    if (doorSide == Direction.Right)
+                    {
+                        roomController.rightDoorState = DoorState.closed;
+                    }
+                    else if (doorSide == Direction.Bottom)
+                    {
+                        roomController.bottomDoorState = DoorState.closed;
+                    }
+                    break;
+                case RoomShape.LR:
+                    if (doorSide == Direction.Right)
+                    {
+                        roomController.rightDoorState = DoorState.closed;
+                    }
+                    else if (doorSide == Direction.Left)
+                    {
+                        roomController.leftDoorState = DoorState.closed;
+                    }
+                    break;
+                case RoomShape.LB:
+                    if (doorSide == Direction.Left)
+                    {
+                        roomController.leftDoorState = DoorState.closed;
+                    }
+                    else if (doorSide == Direction.Bottom)
+                    {
+                        roomController.bottomDoorState = DoorState.closed;
+                    }
+                    break;
+            }
+            roomController.doorsChecked++;
+            doorChecked = true;
+            return;
+        }
+        else
+        {
+            foreach (Collider2D collider in otherDoors)
+            {
+                if(collider.gameObject == this.gameObject)
+                {
+                    continue;
+                }
+                if (collider.CompareTag("LockTrigger"))
+                {
+                    switch (roomController.roomShape)
+                    {
+                        case RoomShape.TR:
+                            if (doorSide == Direction.Right && collider.GetComponent<DoorTrigger>().doorSide == Direction.Left)
+                            {
+                                collider.GetComponent<DoorTrigger>().roomController.leftDoorState = DoorState.open;
+                                collider.GetComponent<DoorTrigger>().roomController.openRooms++;
+                                collider.GetComponent<DoorTrigger>().roomController.doorsChecked++;
+                                collider.GetComponent<DoorTrigger>().doorChecked = true;
+                                roomController.rightDoorState = DoorState.open;
+                                roomController.openRooms++;
+                            }
+                            else if (doorSide == Direction.Top && collider.GetComponent<DoorTrigger>().doorSide == Direction.Bottom)
+                            {
+                                collider.GetComponent<DoorTrigger>().roomController.bottomDoorState = DoorState.open;
+                                collider.GetComponent<DoorTrigger>().roomController.openRooms++;
+                                collider.GetComponent<DoorTrigger>().roomController.doorsChecked++;
+                                collider.GetComponent<DoorTrigger>().doorChecked = true;
+                                roomController.topDoorState = DoorState.open;
+                                roomController.openRooms++;
+                            }
+                            break;
+                        case RoomShape.TB:
+                            if (doorSide == Direction.Bottom && collider.GetComponent<DoorTrigger>().doorSide == Direction.Top)
+                            {
+                                collider.GetComponent<DoorTrigger>().roomController.topDoorState = DoorState.open;
+                                collider.GetComponent<DoorTrigger>().roomController.openRooms++;
+                                collider.GetComponent<DoorTrigger>().roomController.doorsChecked++;
+                                collider.GetComponent<DoorTrigger>().doorChecked = true;
+                                roomController.bottomDoorState = DoorState.open;
+                                roomController.openRooms++;
+                            }
+                            else if (doorSide == Direction.Top && collider.GetComponent<DoorTrigger>().doorSide == Direction.Bottom)
+                            {
+                                collider.GetComponent<DoorTrigger>().roomController.bottomDoorState = DoorState.open;
+                                collider.GetComponent<DoorTrigger>().roomController.openRooms++;
+                                collider.GetComponent<DoorTrigger>().roomController.doorsChecked++;
+                                collider.GetComponent<DoorTrigger>().doorChecked = true;
+                                roomController.topDoorState = DoorState.open;
+                                roomController.openRooms++;
+                            }
+                            break;
+                        case RoomShape.TL:
+                            if (doorSide == Direction.Left && collider.GetComponent<DoorTrigger>().doorSide == Direction.Right)
+                            {
+                                collider.GetComponent<DoorTrigger>().roomController.rightDoorState = DoorState.open;
+                                collider.GetComponent<DoorTrigger>().roomController.openRooms++;
+                                collider.GetComponent<DoorTrigger>().roomController.doorsChecked++;
+                                collider.GetComponent<DoorTrigger>().doorChecked = true;
+                                roomController.leftDoorState = DoorState.open;
+                                roomController.openRooms++;
+                            }
+                            else if (doorSide == Direction.Top && collider.GetComponent<DoorTrigger>().doorSide == Direction.Bottom)
+                            {
+                                collider.GetComponent<DoorTrigger>().roomController.bottomDoorState = DoorState.open;
+                                collider.GetComponent<DoorTrigger>().roomController.openRooms++;
+                                collider.GetComponent<DoorTrigger>().roomController.doorsChecked++;
+                                collider.GetComponent<DoorTrigger>().doorChecked = true;
+                                roomController.topDoorState = DoorState.open;
+                                roomController.openRooms++;
+                            }
+                            break;
+                        case RoomShape.RB:
+                            if (doorSide == Direction.Right && collider.GetComponent<DoorTrigger>().doorSide == Direction.Left)
+                            {
+                                collider.GetComponent<DoorTrigger>().roomController.leftDoorState = DoorState.open;
+                                collider.GetComponent<DoorTrigger>().roomController.openRooms++;
+                                collider.GetComponent<DoorTrigger>().roomController.doorsChecked++;
+                                collider.GetComponent<DoorTrigger>().doorChecked = true;
+                                roomController.rightDoorState = DoorState.open;
+                                roomController.openRooms++;
+                            }
+                            else if (doorSide == Direction.Bottom && collider.GetComponent<DoorTrigger>().doorSide == Direction.Top)
+                            {
+                                collider.GetComponent<DoorTrigger>().roomController.topDoorState = DoorState.open;
+                                collider.GetComponent<DoorTrigger>().roomController.openRooms++;
+                                collider.GetComponent<DoorTrigger>().roomController.doorsChecked++;
+                                collider.GetComponent<DoorTrigger>().doorChecked = true;
+                                roomController.bottomDoorState = DoorState.open;
+                                roomController.openRooms++;
+                            }
+                            break;
+                        case RoomShape.LR:
+                            if (doorSide == Direction.Right && collider.GetComponent<DoorTrigger>().doorSide == Direction.Left)
+                            {
+                                collider.GetComponent<DoorTrigger>().roomController.leftDoorState = DoorState.open;
+                                collider.GetComponent<DoorTrigger>().roomController.openRooms++;
+                                collider.GetComponent<DoorTrigger>().roomController.doorsChecked++;
+                                collider.GetComponent<DoorTrigger>().doorChecked = true;
+                                roomController.rightDoorState = DoorState.open;
+                                roomController.openRooms++;
+                            }
+                            else if (doorSide == Direction.Left && collider.GetComponent<DoorTrigger>().doorSide == Direction.Right)
+                            {
+                                collider.GetComponent<DoorTrigger>().roomController.rightDoorState = DoorState.open;
+                                collider.GetComponent<DoorTrigger>().roomController.openRooms++;
+                                collider.GetComponent<DoorTrigger>().roomController.doorsChecked++;
+                                collider.GetComponent<DoorTrigger>().doorChecked = true;
+                                roomController.leftDoorState = DoorState.open;
+                                roomController.openRooms++;
+                            }
+                            break;
+                        case RoomShape.LB:
+                            if (doorSide == Direction.Left && collider.GetComponent<DoorTrigger>().doorSide == Direction.Right)
+                            {
+                                collider.GetComponent<DoorTrigger>().roomController.rightDoorState = DoorState.open;
+                                collider.GetComponent<DoorTrigger>().roomController.openRooms++;
+                                collider.GetComponent<DoorTrigger>().roomController.doorsChecked++;
+                                collider.GetComponent<DoorTrigger>().doorChecked = true;
+                                roomController.leftDoorState = DoorState.open;
+                                roomController.openRooms++;
+                            }
+                            else if (doorSide == Direction.Bottom && collider.GetComponent<DoorTrigger>().doorSide == Direction.Top)
+                            {
+                                collider.GetComponent<DoorTrigger>().roomController.topDoorState = DoorState.open;
+                                collider.GetComponent<DoorTrigger>().roomController.openRooms++;
+                                collider.GetComponent<DoorTrigger>().roomController.doorsChecked++;
+                                collider.GetComponent<DoorTrigger>().doorChecked = true;
+                                roomController.bottomDoorState = DoorState.open;
+                                roomController.openRooms++;
+                            }
+                            break;
+                    }
+                    
+                }
+
+            }
+            roomController.doorsChecked++;
+            doorChecked = true;
+            return;
+        }
+        //if (active)
+        //{
+        //    foreach (Collider2D collider in otherDoors)
+        //    {
+        //        if (collider.CompareTag("DoorCheck"))
+        //        {
+        //            if (collider.gameObject.GetComponent<DoorCheck>().active)
+        //            {
+        //                DisableObstacle();
+        //                isChecked = true;
+        //                collider.gameObject.GetComponent<DoorCheck>().DisableObstacle();
+        //                collider.gameObject.GetComponent<DoorCheck>().isChecked = true;
+        //                return;
+        //            }
+        //        }
+
+        //    }
+        //}
+        //else
+        //{
+        //    foreach (Collider2D collider in otherDoors)
+        //    {
+        //        if (collider.CompareTag("LockTrigger"))
+        //        {
+        //            Destroy(collider.gameObject);
+        //        }
+
+        //    }
+        //}
+        //EnableObstacle();
+        //isChecked = true;
+    }
+    private void OnDisable()
+    {
+        RoomManager.onRoomsGenerated -= CheckForDoors;
+    }
 }

@@ -29,6 +29,7 @@ public class RandomSpawnManager : SingletonMonobehaviour<RandomSpawnManager>
     {
         //EventManager.AfterSceneLoadEvent += EventManager_AfterSceneLoadEventHandler;
         EventManager.BeforeSceneUnloadEvent += EventManager_BeforeSceneUnloadEventHandler;
+        spawnPointIndexList = new();
     }
 
     private void OnDisable()
@@ -38,11 +39,6 @@ public class RandomSpawnManager : SingletonMonobehaviour<RandomSpawnManager>
     }
 
     //===========================================================================
-    private void Awake()
-    {
-        spawnPointIndexList = new();
-    }
-
     //===========================================================================
     public void SpawnRandom(GameObject spawnPoints)
     {
