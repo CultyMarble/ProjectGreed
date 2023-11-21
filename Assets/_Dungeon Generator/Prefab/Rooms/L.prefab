@@ -12207,10 +12207,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3836215532889836906}
   - {fileID: 4550527367757989435}
   - {fileID: 5822767765868870502}
   - {fileID: 760349365706747544}
+  - {fileID: 3836215532889836906}
   m_Father: {fileID: 7874498068858685497}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -20748,7 +20748,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2119804848774523698}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1839735485 &760349365706747550
 Tilemap:
@@ -26124,7 +26124,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1252217435931422121
 Transform:
   m_ObjectHideFlags: 0
@@ -26169,7 +26169,15 @@ MonoBehaviour:
   currentRoomType: 0
   roomShape: 0
   added: 0
-  roomVariants: []
+  roomVariants:
+  - {fileID: 544859041811037717}
+  - {fileID: 5436934860466966407}
+  - {fileID: 2190277350825231166}
+  - {fileID: 996554861755509938}
+  - {fileID: 8048898166770270933}
+  - {fileID: 2019836497435948552}
+  - {fileID: 3645713182791801760}
+  - {fileID: 8433866145687493229}
   specialRoom: {fileID: 7529464858508260912}
   activeRoomVariant: {fileID: 0}
   topDoorState: 0
@@ -26225,6 +26233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 417b4e4d101612f45aaf088d5f43fd5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  room: {fileID: 0}
   openingDirection: 4
   spawned: 0
   destroyer: 0
@@ -56030,7 +56039,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2119804848774523698}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1839735485 &4550527367757989424
 Tilemap:
@@ -57595,33 +57604,7 @@ CompositeCollider2D:
   m_GeometryType: 0
   m_GenerationType: 0
   m_EdgeRadius: 0
-  m_ColliderPaths:
-  - m_Collider: {fileID: 4550527367757989430}
-    m_ColliderPaths:
-    - - X: -140000000
-        Y: 30000000
-      - X: -140000000
-        Y: 140000000
-      - X: 140000000
-        Y: 140000000
-      - X: 140000000
-        Y: -140000000
-      - X: -140000000
-        Y: -140000000
-      - X: -140000000
-        Y: -30000000
-      - X: -150000000
-        Y: -30000000
-      - X: -150000000
-        Y: -150000000
-      - X: 150000000
-        Y: -150000000
-      - X: 150000000
-        Y: 150000000
-      - X: -150000000
-        Y: 150000000
-      - X: -150000000
-        Y: 30000000
+  m_ColliderPaths: []
   m_CompositePaths:
     m_Paths:
     - - {x: 14.999971, y: -15}
@@ -75515,7 +75498,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2119804848774523698}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1839735485 &5822767765868870496
 Tilemap:
@@ -84936,7 +84919,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3836215532889836906}
   m_Layer: 0
-  m_Name: SpawnPoints
+  m_Name: SpawnPointList
   m_TagString: Untagged
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -84960,7 +84943,7 @@ Transform:
   - {fileID: 2387851417613385894}
   - {fileID: 2177532854896539234}
   m_Father: {fileID: 2119804848774523698}
-  m_RootOrder: 0
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5841439717132900103
 GameObject:

@@ -60884,7 +60884,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4021261305634921460
 Transform:
   m_ObjectHideFlags: 0
@@ -60929,7 +60929,15 @@ MonoBehaviour:
   currentRoomType: 0
   roomShape: 0
   added: 0
-  roomVariants: []
+  roomVariants:
+  - {fileID: 308356325753888109}
+  - {fileID: 3149317485818222560}
+  - {fileID: 2956833233005755923}
+  - {fileID: 3976875882483182020}
+  - {fileID: 1919570129085160459}
+  - {fileID: 4723029823828407659}
+  - {fileID: 421554818376094136}
+  - {fileID: 4048937506540142631}
   specialRoom: {fileID: 847855793759852863}
   activeRoomVariant: {fileID: 0}
   topDoorState: 0
@@ -60985,6 +60993,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 417b4e4d101612f45aaf088d5f43fd5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  room: {fileID: 0}
   openingDirection: 1
   spawned: 0
   destroyer: 0
@@ -118079,33 +118088,7 @@ CompositeCollider2D:
   m_GeometryType: 0
   m_GenerationType: 0
   m_EdgeRadius: 0
-  m_ColliderPaths:
-  - m_Collider: {fileID: 8511069421939823755}
-    m_ColliderPaths:
-    - - X: -150000000
-        Y: -150000000
-      - X: 150000000
-        Y: -150000000
-      - X: 150000000
-        Y: 150000000
-      - X: 30000000
-        Y: 150000000
-      - X: 30000000
-        Y: 140000000
-      - X: 140000000
-        Y: 140000000
-      - X: 140000000
-        Y: -140000000
-      - X: -140000000
-        Y: -140000000
-      - X: -140000000
-        Y: 140000000
-      - X: -30000000
-        Y: 140000000
-      - X: -30000000
-        Y: 150000000
-      - X: -150000000
-        Y: 150000000
+  m_ColliderPaths: []
   m_CompositePaths:
     m_Paths:
     - - {x: 14.999971, y: -15}

@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 417b4e4d101612f45aaf088d5f43fd5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  room: {fileID: 0}
   openingDirection: 4
   spawned: 0
   destroyer: 0
@@ -142,6 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 417b4e4d101612f45aaf088d5f43fd5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  room: {fileID: 0}
   openingDirection: 3
   spawned: 0
   destroyer: 0
@@ -209,7 +211,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &261532820643789863
 Transform:
   m_ObjectHideFlags: 0
@@ -255,7 +257,16 @@ MonoBehaviour:
   currentRoomType: 0
   roomShape: 0
   added: 0
-  roomVariants: []
+  roomVariants:
+  - {fileID: 8007321556730321113}
+  - {fileID: 492057751436077308}
+  - {fileID: 1264456616082955004}
+  - {fileID: 1091370128707553112}
+  - {fileID: 5069745891068784328}
+  - {fileID: 1125840020144534345}
+  - {fileID: 4372251520982788575}
+  - {fileID: 3333441252347489122}
+  - {fileID: 2814950529965001804}
   specialRoom: {fileID: 1819933987717843417}
   activeRoomVariant: {fileID: 0}
   topDoorState: 0
@@ -49572,41 +49583,7 @@ CompositeCollider2D:
   m_GeometryType: 0
   m_GenerationType: 0
   m_EdgeRadius: 0
-  m_ColliderPaths:
-  - m_Collider: {fileID: 2920449639210340901}
-    m_ColliderPaths:
-    - - X: -140000000
-        Y: 140000000
-      - X: 140000000
-        Y: 140000000
-      - X: 140000000
-        Y: 30000000
-      - X: 150000000
-        Y: 30000000
-      - X: 150000000
-        Y: 150000000
-      - X: -150000000
-        Y: 150000000
-      - X: -150000000
-        Y: 30000000
-      - X: -140000000
-        Y: 30000000
-    - - X: 150000000
-        Y: -30000000
-      - X: 140000000
-        Y: -30000000
-      - X: 140000000
-        Y: -140000000
-      - X: -140000000
-        Y: -140000000
-      - X: -140000000
-        Y: -30000000
-      - X: -150000000
-        Y: -30000000
-      - X: -150000000
-        Y: -150000000
-      - X: 150000000
-        Y: -150000000
+  m_ColliderPaths: []
   m_CompositePaths:
     m_Paths:
     - - {x: -14.000029, y: 3}

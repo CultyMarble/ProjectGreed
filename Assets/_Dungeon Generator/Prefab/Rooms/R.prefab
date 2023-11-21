@@ -5558,33 +5558,7 @@ CompositeCollider2D:
   m_GeometryType: 0
   m_GenerationType: 0
   m_EdgeRadius: 0
-  m_ColliderPaths:
-  - m_Collider: {fileID: 977774309766813973}
-    m_ColliderPaths:
-    - - X: -140000000
-        Y: -140000000
-      - X: -140000000
-        Y: 140000000
-      - X: 140000000
-        Y: 140000000
-      - X: 140000000
-        Y: 30000000
-      - X: 150000000
-        Y: 30000000
-      - X: 150000000
-        Y: 150000000
-      - X: -150000000
-        Y: 150000000
-      - X: -150000000
-        Y: -150000000
-      - X: 150000000
-        Y: -150000000
-      - X: 150000000
-        Y: -30000000
-      - X: 140000000
-        Y: -30000000
-      - X: 140000000
-        Y: -140000000
+  m_ColliderPaths: []
   m_CompositePaths:
     m_Paths:
     - - {x: 14.999971, y: -15}
@@ -52662,7 +52636,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4556654252960075512
 Transform:
   m_ObjectHideFlags: 0
@@ -52707,7 +52681,15 @@ MonoBehaviour:
   currentRoomType: 0
   roomShape: 0
   added: 0
-  roomVariants: []
+  roomVariants:
+  - {fileID: 1135569877761301472}
+  - {fileID: 4274779946716322020}
+  - {fileID: 6591816537711220780}
+  - {fileID: 3053589646023475252}
+  - {fileID: 5377146584330402923}
+  - {fileID: 4501132227503956590}
+  - {fileID: 4996449104855421260}
+  - {fileID: 5535374905347546437}
   specialRoom: {fileID: 996202397046601544}
   activeRoomVariant: {fileID: 0}
   topDoorState: 0
@@ -52763,6 +52745,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 417b4e4d101612f45aaf088d5f43fd5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  room: {fileID: 0}
   openingDirection: 3
   spawned: 0
   destroyer: 0

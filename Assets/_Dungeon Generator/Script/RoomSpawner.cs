@@ -7,9 +7,11 @@ public class RoomSpawner : MonoBehaviour
     private RoomManager roomManager;
 
     [Tooltip(" 1 --> Need Bottom Door\r\n 2 --> Need Top Door\r\n 3 --> Need Left Door\r\n 4 --> Need Right Door")]
-    [SerializeField] private int openingDirection;
+    [SerializeField] private GameObject room;
+    [SerializeField] private Direction openingDirection;
     [SerializeField] public bool spawned = false;
     [SerializeField] public bool destroyer;
+
 
     private void Start()
     {
@@ -37,23 +39,8 @@ public class RoomSpawner : MonoBehaviour
         }
         if (!spawned)
         {
-            if (openingDirection == 1)
-            {
-                InstantiateRandomRoom(roomManager.bottomRooms.Length, roomManager.bottomRooms);
-            }
-            else if (openingDirection == 2)
-            {
-                InstantiateRandomRoom(roomManager.topRooms.Length, roomManager.topRooms);
-            }
-            else if (openingDirection == 3)
-            {
-                InstantiateRandomRoom(roomManager.leftRooms.Length, roomManager.leftRooms);
-            }
-            else if (openingDirection == 4)
-            {
-                InstantiateRandomRoom(roomManager.rightRooms.Length, roomManager.rightRooms);
-            }
-
+            GameObject newRoom = Instantiate(room, transform.position, Quaternion.identity);
+            newRoom.GetComponent<Room>().SetActiveRoomRandom(openingDirection);
             spawned = true;
         }
     }

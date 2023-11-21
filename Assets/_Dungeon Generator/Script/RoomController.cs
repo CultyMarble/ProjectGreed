@@ -38,7 +38,7 @@ public class RoomController : MonoBehaviour
     [Space]
 
     [Header("Normal Rooms")]
-    [SerializeField] private GameObject[] roomVariants;
+    [SerializeField] public GameObject[] roomVariants;
 
     [Space]
 
@@ -70,117 +70,117 @@ public class RoomController : MonoBehaviour
 
     private void Update()
     {
-        if(doorsChecked == 4 && !allChecked)
-        {
-            switch (roomShape)
-            {
-                case RoomShape.TR:
-                    if(openRooms < 2)
-                    {
-                        if(topDoorState == DoorState.closed && rightDoorState == DoorState.open)
-                        {
-                            GameObject newRoom = Instantiate(roomManager.rightRooms[0], transform.position, Quaternion.identity);
-                            newRoom.transform.parent = this.transform.parent;
-                        }
-                        else if (topDoorState == DoorState.open && rightDoorState == DoorState.closed)
-                        {
-                            GameObject newRoom = Instantiate(roomManager.topRooms[0], transform.position, Quaternion.identity);
-                            newRoom.transform.parent = this.transform.parent;
-                        }
-                        Destroy(this.gameObject);
-                    }
-                    break;
-                case RoomShape.TB:
-                    if (openRooms < 2)
-                    {
-                        if (topDoorState == DoorState.closed && bottomDoorState == DoorState.open)
-                        {
-                            GameObject newRoom = Instantiate(roomManager.rightRooms[0], transform.position, Quaternion.identity);
-                            newRoom.transform.parent = this.transform.parent;
-                        }
-                        else if (topDoorState == DoorState.open && bottomDoorState == DoorState.closed)
-                        {
-                            GameObject newRoom = Instantiate(roomManager.bottomRooms[0], transform.position, Quaternion.identity);
-                            newRoom.transform.parent = this.transform.parent;
-                        }
-                        Destroy(this.gameObject);
-                    }
-                    break;
-                case RoomShape.TL:
-                    if (openRooms < 2)
-                    {
-                        if (topDoorState == DoorState.closed && leftDoorState == DoorState.open)
-                        {
-                            GameObject newRoom = Instantiate(roomManager.rightRooms[0], transform.position, Quaternion.identity);
-                            newRoom.transform.parent = this.transform.parent;
-                        }
-                        else if (topDoorState == DoorState.open && leftDoorState == DoorState.closed)
-                        {
-                            GameObject newRoom = Instantiate(roomManager.leftRooms[0], transform.position, Quaternion.identity);
-                            newRoom.transform.parent = this.transform.parent;
-                        }
-                        Destroy(this.gameObject);
-                    }
-                    break;
-                case RoomShape.RB:
-                    if (openRooms < 2)
-                    {
-                        if (rightDoorState == DoorState.closed && bottomDoorState == DoorState.open)
-                        {
-                            GameObject newRoom = Instantiate(roomManager.bottomRooms[0], transform.position, Quaternion.identity);
-                            newRoom.transform.parent = this.transform.parent;
-                        }
-                        else if (rightDoorState == DoorState.open && bottomDoorState == DoorState.closed)
-                        {
-                            GameObject newRoom = Instantiate(roomManager.rightRooms[0],transform.position, Quaternion.identity);
-                            newRoom.transform.parent = this.transform.parent;
-                        }
-                        Destroy(this.gameObject);
-                    }
-                    break;
-                case RoomShape.LR:
-                    if (openRooms < 2)
-                    {
-                        if (leftDoorState == DoorState.closed && rightDoorState == DoorState.open)
-                        {
-                            GameObject newRoom = Instantiate(roomManager.rightRooms[0], transform.position, Quaternion.identity);
-                            newRoom.transform.parent = this.transform.parent;
-                        }
-                        else if (leftDoorState == DoorState.open && rightDoorState == DoorState.closed)
-                        {
-                            GameObject newRoom = Instantiate(roomManager.leftRooms[0], transform.position, Quaternion.identity);
-                            newRoom.transform.parent = this.transform.parent;
-                        }
-                        Destroy(this.gameObject);
-                    }
-                    break;
-                case RoomShape.LB:
-                    if (openRooms < 2)
-                    {
-                        if (leftDoorState == DoorState.closed && bottomDoorState == DoorState.open)
-                        {
-                            GameObject newRoom = Instantiate(roomManager.bottomRooms[0], transform.position, Quaternion.identity);
-                            newRoom.transform.parent = this.transform.parent;
-                        }
-                        else if (leftDoorState == DoorState.open && bottomDoorState == DoorState.closed)
-                        {
-                            GameObject newRoom = Instantiate(roomManager.leftRooms[0], transform.position, Quaternion.identity);
-                            newRoom.transform.parent = this.transform.parent;
-                        }
-                        Destroy(this.gameObject);
-                    }
-                    break;
-                //case RoomShape.TRB:
-                //    break;
-                //case RoomShape.TRL:
-                //    break;
-                //case RoomShape.TBL:
-                //    break;
-                //case RoomShape.RBL:
-                //    break;
-            }
-            allChecked = true;
-        }
+        //if(doorsChecked == 4 && !allChecked)
+        //{
+        //    switch (roomShape)
+        //    {
+        //        case RoomShape.TR:
+        //            if(openRooms < 2)
+        //            {
+        //                if(topDoorState == DoorState.closed && rightDoorState == DoorState.open)
+        //                {
+        //                    GameObject newRoom = Instantiate(roomManager.rightRooms[0], transform.position, Quaternion.identity);
+        //                    newRoom.transform.parent = this.transform.parent;
+        //                }
+        //                else if (topDoorState == DoorState.open && rightDoorState == DoorState.closed)
+        //                {
+        //                    GameObject newRoom = Instantiate(roomManager.topRooms[0], transform.position, Quaternion.identity);
+        //                    newRoom.transform.parent = this.transform.parent;
+        //                }
+        //                Destroy(this.gameObject);
+        //            }
+        //            break;
+        //        case RoomShape.TB:
+        //            if (openRooms < 2)
+        //            {
+        //                if (topDoorState == DoorState.closed && bottomDoorState == DoorState.open)
+        //                {
+        //                    GameObject newRoom = Instantiate(roomManager.rightRooms[0], transform.position, Quaternion.identity);
+        //                    newRoom.transform.parent = this.transform.parent;
+        //                }
+        //                else if (topDoorState == DoorState.open && bottomDoorState == DoorState.closed)
+        //                {
+        //                    GameObject newRoom = Instantiate(roomManager.bottomRooms[0], transform.position, Quaternion.identity);
+        //                    newRoom.transform.parent = this.transform.parent;
+        //                }
+        //                Destroy(this.gameObject);
+        //            }
+        //            break;
+        //        case RoomShape.TL:
+        //            if (openRooms < 2)
+        //            {
+        //                if (topDoorState == DoorState.closed && leftDoorState == DoorState.open)
+        //                {
+        //                    GameObject newRoom = Instantiate(roomManager.rightRooms[0], transform.position, Quaternion.identity);
+        //                    newRoom.transform.parent = this.transform.parent;
+        //                }
+        //                else if (topDoorState == DoorState.open && leftDoorState == DoorState.closed)
+        //                {
+        //                    GameObject newRoom = Instantiate(roomManager.leftRooms[0], transform.position, Quaternion.identity);
+        //                    newRoom.transform.parent = this.transform.parent;
+        //                }
+        //                Destroy(this.gameObject);
+        //            }
+        //            break;
+        //        case RoomShape.RB:
+        //            if (openRooms < 2)
+        //            {
+        //                if (rightDoorState == DoorState.closed && bottomDoorState == DoorState.open)
+        //                {
+        //                    GameObject newRoom = Instantiate(roomManager.bottomRooms[0], transform.position, Quaternion.identity);
+        //                    newRoom.transform.parent = this.transform.parent;
+        //                }
+        //                else if (rightDoorState == DoorState.open && bottomDoorState == DoorState.closed)
+        //                {
+        //                    GameObject newRoom = Instantiate(roomManager.rightRooms[0],transform.position, Quaternion.identity);
+        //                    newRoom.transform.parent = this.transform.parent;
+        //                }
+        //                Destroy(this.gameObject);
+        //            }
+        //            break;
+        //        case RoomShape.LR:
+        //            if (openRooms < 2)
+        //            {
+        //                if (leftDoorState == DoorState.closed && rightDoorState == DoorState.open)
+        //                {
+        //                    GameObject newRoom = Instantiate(roomManager.rightRooms[0], transform.position, Quaternion.identity);
+        //                    newRoom.transform.parent = this.transform.parent;
+        //                }
+        //                else if (leftDoorState == DoorState.open && rightDoorState == DoorState.closed)
+        //                {
+        //                    GameObject newRoom = Instantiate(roomManager.leftRooms[0], transform.position, Quaternion.identity);
+        //                    newRoom.transform.parent = this.transform.parent;
+        //                }
+        //                Destroy(this.gameObject);
+        //            }
+        //            break;
+        //        case RoomShape.LB:
+        //            if (openRooms < 2)
+        //            {
+        //                if (leftDoorState == DoorState.closed && bottomDoorState == DoorState.open)
+        //                {
+        //                    GameObject newRoom = Instantiate(roomManager.bottomRooms[0], transform.position, Quaternion.identity);
+        //                    newRoom.transform.parent = this.transform.parent;
+        //                }
+        //                else if (leftDoorState == DoorState.open && bottomDoorState == DoorState.closed)
+        //                {
+        //                    GameObject newRoom = Instantiate(roomManager.leftRooms[0], transform.position, Quaternion.identity);
+        //                    newRoom.transform.parent = this.transform.parent;
+        //                }
+        //                Destroy(this.gameObject);
+        //            }
+        //            break;
+        //        //case RoomShape.TRB:
+        //        //    break;
+        //        //case RoomShape.TRL:
+        //        //    break;
+        //        //case RoomShape.TBL:
+        //        //    break;
+        //        //case RoomShape.RBL:
+        //        //    break;
+        //    }
+        //    allChecked = true;
+        //}
     }
 
     private void SetAllRoomActiveFalse() // TURN ALL ROOMS FALSE

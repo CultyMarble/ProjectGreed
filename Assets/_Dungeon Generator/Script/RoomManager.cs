@@ -9,16 +9,9 @@ public class RoomManager : MonoBehaviour
     [Header("Room Spawn Parameters")]
 
     public GameObject aStar;
-    public GameObject entryRoom;
+    public GameObject room;
     public int minRooms;
     public int maxRooms;
-
-    [Header("Room Variants")]
-    public GameObject[] bottomRooms;
-    public GameObject[] topRooms;
-    public GameObject[] leftRooms;
-    public GameObject[] rightRooms;
-    public GameObject[] centerRoom;
 
     [Header("Active Rooms")]
 
@@ -109,7 +102,7 @@ public class RoomManager : MonoBehaviour
         currentRoomCount.Clear();
         GameObject newEntryRoom;
         GameObject startDialogue;
-        newEntryRoom = Instantiate(entryRoom);
+        newEntryRoom = Instantiate(room);
         newEntryRoom.transform.parent = this.transform;
         startDialogue = Instantiate(startRoomDialogue);
         startDialogue.transform.parent = newEntryRoom.transform;
@@ -347,7 +340,7 @@ public class RoomManager : MonoBehaviour
                 Destroy(room.gameObject);
             }
             currentRoomCount.Clear();
-            RoomController newRoom = Instantiate(entryRoom, startLocation, Quaternion.identity).GetComponent<RoomController>();
+            RoomController newRoom = Instantiate(room, startLocation, Quaternion.identity).GetComponent<RoomController>();
             newRoom.transform.parent = this.transform;
             if (newRoom != null)
             {
@@ -382,7 +375,7 @@ public class RoomManager : MonoBehaviour
                 {
                     Destroy(currentRoomTotal[i].gameObject);
                     currentRoomCount.Clear();
-                    RoomController newRoom = Instantiate(entryRoom, new Vector2(currentRoomTotal[i].transform.position.x, currentRoomTotal[i].transform.position.y), Quaternion.identity).GetComponent<RoomController>();
+                    RoomController newRoom = Instantiate(room, new Vector2(currentRoomTotal[i].transform.position.x, currentRoomTotal[i].transform.position.y), Quaternion.identity).GetComponent<RoomController>();
                     
                     currentRoomTotal.RemoveAt(i);
                     newRoom.transform.parent = this.transform;
