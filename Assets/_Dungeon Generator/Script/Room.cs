@@ -30,7 +30,10 @@ public class Room : MonoBehaviour
     public void SetActiveRoom(RoomShape roomShape)
     {
         //DisableAllRooms();
-        activeRoom.SetActive(false);
+        if (activeRoom != null)
+        {
+            activeRoom.SetActive(false);
+        }
         switch (roomShape)
         {
             case RoomShape.Centre:
@@ -73,9 +76,15 @@ public class Room : MonoBehaviour
     {
         int random;
         //DisableAllRooms();
-        activeRoom.SetActive(false);
+        if (activeRoom != null)
+        {
+            activeRoom.SetActive(false);
+        }
         switch (direction)
         {
+            case Direction.Centre:
+                activeRoom = centreRoom.gameObject;
+                break;
             case Direction.Top:
                 random = Random.Range(0, 4);
                 activeRoom = bottomRooms[random];

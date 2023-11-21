@@ -524,6 +524,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Utilities
       objectReference: {fileID: 0}
+    - target: {fileID: 1791819375432190245, guid: 2cb3f5cda68f07743804fb4b7f74a704, type: 3}
+      propertyPath: gateManager
+      value: 
+      objectReference: {fileID: 4146808686490486422}
+    - target: {fileID: 5913537230742508634, guid: 2cb3f5cda68f07743804fb4b7f74a704, type: 3}
+      propertyPath: room
+      value: 
+      objectReference: {fileID: 194884576636689591}
     - target: {fileID: 7710961989403581880, guid: 2cb3f5cda68f07743804fb4b7f74a704, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -570,6 +578,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2cb3f5cda68f07743804fb4b7f74a704, type: 3}
+--- !u!114 &4146808686490486422 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2754603635443099406, guid: 2cb3f5cda68f07743804fb4b7f74a704, type: 3}
+  m_PrefabInstance: {fileID: 2285081957212676504}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81c3e297373d9cd44890b77849fff060, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &8409604779921144864 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7710961989403581880, guid: 2cb3f5cda68f07743804fb4b7f74a704, type: 3}
@@ -946,6 +965,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5338450792224167971}
     m_Modifications:
+    - target: {fileID: 399540624452557192, guid: 2747354fa09c2e2418e4a0f805802360, type: 3}
+      propertyPath: room
+      value: 
+      objectReference: {fileID: 194884576636689591}
+    - target: {fileID: 399540624970252305, guid: 2747354fa09c2e2418e4a0f805802360, type: 3}
+      propertyPath: room
+      value: 
+      objectReference: {fileID: 194884576636689591}
+    - target: {fileID: 399540625113987413, guid: 2747354fa09c2e2418e4a0f805802360, type: 3}
+      propertyPath: room
+      value: 
+      objectReference: {fileID: 194884576636689591}
     - target: {fileID: 399540625238344219, guid: 2747354fa09c2e2418e4a0f805802360, type: 3}
       propertyPath: m_Name
       value: Center
@@ -994,6 +1025,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 399540625320073858, guid: 2747354fa09c2e2418e4a0f805802360, type: 3}
+      propertyPath: room
+      value: 
+      objectReference: {fileID: 194884576636689591}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2747354fa09c2e2418e4a0f805802360, type: 3}
 --- !u!114 &1711684529619207989 stripped

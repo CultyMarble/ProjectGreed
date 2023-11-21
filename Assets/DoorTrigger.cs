@@ -4,6 +4,7 @@ using UnityEngine;
 
 public enum Direction
 {
+    Centre,
     Top,
     Right,
     Bottom,
