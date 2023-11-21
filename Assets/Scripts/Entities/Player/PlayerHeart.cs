@@ -16,12 +16,18 @@ public class PlayerHeart : MonoBehaviour
 
     private int currentHeart = default;
 
-    private readonly float feedbackDamageTime = 0.10f;
+    private readonly float feedbackDamageDuration = 0.10f;
     private float feedbackDamageTimer = default;
 
-    // Player Buff
-    private readonly float recoveryCooldown = 10.0f;
-    private float recoveryCooldownTimer = default;
+    // Player Regen
+    //private readonly float recoveryCooldown = 10.0f;
+    //private float recoveryCooldownTimer = default;
+
+    // IFrame
+    [SerializeField] private Animator bodySpriteAnimator = default;
+    [SerializeField] private float iFrameDuration = default;
+    private float iFrameTimer = default;
+    private bool damageImmune = default;
 
     //======================================================================
     private void OnEnable()
@@ -32,21 +38,22 @@ public class PlayerHeart : MonoBehaviour
     private void Update()
     {
         UpdateDamageFeedBackTimer();
+        UpdateIFrameTimer();
+
+        // Recovery
+        //if (currentHeart < currentMaxHeart)
+        //{
+        //    recoveryCooldownTimer-= Time.deltaTime;
+        //    if (recoveryCooldownTimer <= 0.0f)
+        //    {
+        //        recoveryCooldownTimer = recoveryCooldown;
+        //        UpdateCurrentHeart(1);
+        //    }
+        //}
 
         if (Input.GetKeyDown(KeyCode.Home))
         {
-            UpdateCurrentMaxHeart(1);
-        }
-
-        // Recovery
-        if (currentHeart < currentMaxHeart)
-        {
-            recoveryCooldownTimer-= Time.deltaTime;
-            if (recoveryCooldownTimer <= 0.0f)
-            {
-                recoveryCooldownTimer = recoveryCooldown;
-                UpdateCurrentHeart(1);
-            }
+            Debug.Log(currentHeart + "/" + currentMaxHeart);
         }
     }
 
@@ -55,7 +62,7 @@ public class PlayerHeart : MonoBehaviour
     {
         // Health Feedback
         GetComponentInChildren<SpriteRenderer>().color = new Color(255, 0, 0);
-        feedbackDamageTimer = feedbackDamageTime;
+        feedbackDamageTimer = feedbackDamageDuration;
     }
 
     private void UpdateDamageFeedBackTimer()
@@ -71,17 +78,31 @@ public class PlayerHeart : MonoBehaviour
         }
     }
 
+    private void UpdateIFrameTimer()
+    {
+        if (iFrameTimer <= 0.0f)
+            return;
+
+        iFrameTimer -= Time.deltaTime;
+        if (iFrameTimer <= 0.0f)
+        {
+            bodySpriteAnimator.SetBool("IFrame", false);
+
+            damageImmune = false;
+        }
+    }
+
     private void DespawnPlayer()
     {
         // Reset Parameters
-        UpdateCurrentHeart(currentHeart);
+        ResetPlayerHeart();
 
         // Call OnDestroy Event
         OnDespawnPlayerEvent?.Invoke(this, EventArgs.Empty);
+
         Player.Instance.actionState = PlayerActionState.none;
         Player.Instance.gameObject.SetActive(false);
-        //SceneControlManager.Instance.GameState = GameState.Hub;
-        }
+    }
 
     //======================================================================
     public void ResetPlayerHeart()
@@ -97,9 +118,6 @@ public class PlayerHeart : MonoBehaviour
 
     public void UpdateCurrentMaxHeart(int amount = 0)
     {
-        if (amount > 0)
-            TriggerDamageFeedBack();
-
         currentMaxHeart += amount;
         currentHeart += amount;
 
@@ -115,31 +133,33 @@ public class PlayerHeart : MonoBehaviour
         //Invoke Event
         OnHeartChangedEvent?.Invoke(this, new OnHealthChangedEventArgs { currentHeart = currentHeart });
     }
+
     public void UpdateCurrentHeart(int amount = 0)
     {
-        if (!this.enabled)
-        {
+        if (amount < 0 && damageImmune == true)
             return;
-        }
-        if (amount != 0)
+
+        if (amount < 0)
         {
-
-            feedbackDamageTimer = feedbackDamageTime;
-
-            currentHeart += amount;
-            if (currentHeart <= 0)
-            {
-                currentHeart = 0;
-                DespawnPlayer();
-            }
-            else if (currentHeart > currentMaxHeart)
-            {
-                currentHeart = currentMaxHeart;
-            }
+            TriggerDamageFeedBack();
+            IFrameActive();
         }
+
+        currentHeart += amount;
+        if (currentHeart <= 0)
+        {
+            currentHeart = 0;
+            DespawnPlayer();
+        }
+        else if (currentHeart > currentMaxHeart)
+        {
+            currentHeart = currentMaxHeart;
+        }
+
         //Invoke Event
         OnHeartChangedEvent?.Invoke(this, new OnHealthChangedEventArgs { currentHeart = currentHeart });
     }
+
     public void UpdatePlayerHeartParameters()
     {
         currentMaxHeart = PlayerDataManager.Instance.PlayerDataRuntime.BaseMaxHealth;
@@ -147,5 +167,15 @@ public class PlayerHeart : MonoBehaviour
 
         UpdateCurrentMaxHeart();
         UpdateCurrentHeart();
+    }
+
+    //======================================================================
+    // IFrame
+    private void IFrameActive()
+    {
+        iFrameTimer = iFrameDuration;
+        bodySpriteAnimator.SetBool("IFrame", true);
+
+        damageImmune = true;
     }
 }

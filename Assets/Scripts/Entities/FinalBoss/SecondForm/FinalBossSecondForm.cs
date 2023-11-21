@@ -51,16 +51,21 @@ public class FinalBossSecondForm : MonoBehaviour
         if (health.GetHealthPercentage() <= 50)
         {
             if (head.gameObject.activeInHierarchy == false)
+            {
                 head.gameObject.SetActive(true);
+
+                ArmL.GetComponent<ArmSlamAttackAI>().SetProjectileAmount(9);
+                ArmR.GetComponent<ArmSlamAttackAI>().SetProjectileAmount(9);
+            }
         }
         else if (health.GetHealthPercentage() < 75)
         {
             animator.SetTrigger("Stage2");
 
-            ArmL.GetComponent<ArmSlamAttackAI>().SetProjectileAmount(11);
+            ArmL.GetComponent<ArmSlamAttackAI>().SetProjectileAmount(7);
             ArmL.GetComponent<ArmSlamAttackAI>().SetTrapAmount(5);
 
-            ArmR.GetComponent<ArmSlamAttackAI>().SetProjectileAmount(11);
+            ArmR.GetComponent<ArmSlamAttackAI>().SetProjectileAmount(7);
             ArmR.GetComponent<ArmSlamAttackAI>().SetTrapAmount(5);
         }
     }

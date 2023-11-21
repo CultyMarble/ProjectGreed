@@ -1,4 +1,3 @@
-using UnityEngine;
 
 public class TierOneLeftButton : UpgradeMenuButton
 {
@@ -9,8 +8,8 @@ public class TierOneLeftButton : UpgradeMenuButton
         _playerHeart.UpdateCurrentMaxHeart(1);
         _playerHeart.ResetPlayerHeart();
 
-        PlayerDataManager.Instance.PlayerDataRuntime.SetBaseMaxHealth(_playerHeart.CurrentMaxHeart);
-        PlayerDataManager.Instance.SaveRunTimeDataToPlayerDataSlot();
+        //PlayerDataManager.Instance.PlayerDataRuntime.SetBaseMaxHealth(_playerHeart.CurrentMaxHeart);
+        //PlayerDataManager.Instance.SaveRunTimeDataToPlayerDataSlot();
     }
 
     public override void RemoveEffect()
@@ -20,7 +19,7 @@ public class TierOneLeftButton : UpgradeMenuButton
         _playerHeart.UpdateCurrentMaxHeart(-1);
         _playerHeart.ResetPlayerHeart();
 
-        PlayerDataManager.Instance.PlayerDataRuntime.SetBaseMaxHealth(_playerHeart.CurrentMaxHeart);
-        PlayerDataManager.Instance.SaveRunTimeDataToPlayerDataSlot();
+        //PlayerDataManager.Instance.PlayerDataRuntime.SetBaseMaxHealth(_playerHeart.CurrentMaxHeart);
+        //PlayerDataManager.Instance.SaveRunTimeDataToPlayerDataSlot();
     }
 }

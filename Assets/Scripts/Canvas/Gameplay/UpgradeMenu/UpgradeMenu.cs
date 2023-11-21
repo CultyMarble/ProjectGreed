@@ -13,14 +13,16 @@ public class UpgradeMenu : SingletonMonobehaviour<UpgradeMenu>
     //===========================================================================
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
             SetActive(true);
+            SceneControlManager.Instance.CurrentGameplayState = GameplayState.Pause;
         }
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             SetActive(false);
+            SceneControlManager.Instance.CurrentGameplayState = GameplayState.Ongoing;
         }
     }
 

@@ -5,8 +5,8 @@ public class PrefabShockWave : MonoBehaviour
     private readonly int damage = 1;
     private int hitCount = 1;
     private readonly float moveSpeed = 7;
-    private readonly float sizeScaleFactorX = 0.008f;
-    private readonly float sizeScaleFactorY = 0.015f;
+    private readonly float sizeScaleFactorX = 0.005f;
+    private readonly float sizeScaleFactorY = 0.01f;
     private Vector3 moveDirection;
 
     //===========================================================================

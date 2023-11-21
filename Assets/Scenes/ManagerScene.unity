@@ -820,6 +820,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   throwBomb: 1
+  infAmmo: 0
   bombAbilityBombPool: {fileID: 7778423}
   pfBombAbilityBomb: {fileID: 3187642801048505082, guid: 3cfa34a8eb634a349b1dff68a79c8163, type: 3}
 --- !u!1 &760052194
@@ -1306,6 +1307,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1185049635}
   - component: {fileID: 1185049634}
+  - component: {fileID: 1185049636}
   m_Layer: 8
   m_Name: bodySprite
   m_TagString: Untagged
@@ -1383,6 +1385,26 @@ Transform:
   m_Father: {fileID: 1451012652}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1185049636
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1185049633}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f5b6288d3a0cb174e94f2a0d48bdfc40, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1255419172
 GameObject:
   m_ObjectHideFlags: 0
@@ -2163,6 +2185,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f468e3097abe11141a22bcad2b40e12c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bodySpriteAnimator: {fileID: 1185049636}
+  iFrameDuration: 3
 --- !u!1 &1571879911
 GameObject:
   m_ObjectHideFlags: 3
@@ -9427,7 +9451,7 @@ RectTransform:
   - {fileID: 1623370298}
   - {fileID: 5480196233839705763}
   m_Father: {fileID: 5480196233891957203}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -11477,7 +11501,7 @@ RectTransform:
   - {fileID: 5480196233624433447}
   - {fileID: 5480196233776301492}
   m_Father: {fileID: 5480196233891957203}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -16092,8 +16116,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5480196232573587797}
   - {fileID: 5480196232970821200}
+  - {fileID: 5480196232573587797}
   - {fileID: 5480196233126546988}
   m_Father: {fileID: 0}
   m_RootOrder: 3
