@@ -21,30 +21,16 @@ public class RangeAbilityProjectile : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy") && collision.GetType().ToString() != Tags.CIRCLECOLLIDER2D)
-        {
-            // Deal Damage
             collision.gameObject.GetComponent<EnemyHealth>().UpdateCurrentHealth(-damage);
 
-            // Deal Status Effect
-
-        }
-
         if (collision.gameObject.CompareTag("Breakable"))
-        {
             collision.gameObject.GetComponent<BreakableItem>().UpdateCurrentHealth(-damage);
 
-        }
+        if (collision.gameObject.CompareTag("FinalBoss"))
+            collision.transform.parent.GetComponent<EnemyHealth>().UpdateCurrentHealth(-damage);
 
         if (collision.gameObject.CompareTag("Collisions"))
-        {
-            gameObject.SetActive(false);
-            gameObject.transform.localPosition = Vector2.zero;
-        }
-
-        if (collision.gameObject.CompareTag("FinalBoss"))
-        {
-            collision.transform.parent.GetComponent<EnemyHealth>().UpdateCurrentHealth(-damage);
-        }
+            Despawn();
     }
 
     //===========================================================================
@@ -52,6 +38,7 @@ public class RangeAbilityProjectile : MonoBehaviour
     {
         if (SceneControlManager.Instance.CurrentGameplayState == GameplayState.Pause)
             return;
+
         transform.position += moveSpeed * Time.deltaTime * moveDirection;
 
         ProjectileAnimation();
@@ -74,6 +61,12 @@ public class RangeAbilityProjectile : MonoBehaviour
     }
 
     //===========================================================================
+    public void Despawn()
+    {
+        gameObject.SetActive(false);
+        gameObject.transform.localPosition = Vector2.zero;
+    }
+
     public void ProjectileConfig(float newMoveSpeed, Transform startPositionTransform, float newDamage)
     {
         damage = newDamage;

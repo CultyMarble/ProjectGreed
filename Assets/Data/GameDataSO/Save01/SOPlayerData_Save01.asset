@@ -22,7 +22,7 @@ MonoBehaviour:
   ba_baseMaxFuel: 100
   ba_fuelConsumePerTrigger: 3
   ba_baseRechargeRate: 100
-  ba_baseDamage: 3
+  ba_baseDamage: 5
   ba_basePlayerSpeedPenalty: 0.5
   ra_baseMaxCharge: 2
   ra_baseMaxRecharge: 100

@@ -20,8 +20,8 @@ public class PlayerHeart : MonoBehaviour
     private float feedbackDamageTimer = default;
 
     // Player Regen
-    //private readonly float recoveryCooldown = 10.0f;
-    //private float recoveryCooldownTimer = default;
+    private readonly float recoveryCooldown = 10.0f;
+    private float recoveryCooldownTimer = default;
 
     // IFrame
     [SerializeField] private Animator bodySpriteAnimator = default;
@@ -41,19 +41,14 @@ public class PlayerHeart : MonoBehaviour
         UpdateIFrameTimer();
 
         // Recovery
-        //if (currentHeart < currentMaxHeart)
-        //{
-        //    recoveryCooldownTimer-= Time.deltaTime;
-        //    if (recoveryCooldownTimer <= 0.0f)
-        //    {
-        //        recoveryCooldownTimer = recoveryCooldown;
-        //        UpdateCurrentHeart(1);
-        //    }
-        //}
-
-        if (Input.GetKeyDown(KeyCode.Home))
+        if (currentHeart < currentMaxHeart)
         {
-            Debug.Log(currentHeart + "/" + currentMaxHeart);
+            recoveryCooldownTimer -= Time.deltaTime;
+            if (recoveryCooldownTimer <= 0.0f)
+            {
+                recoveryCooldownTimer = recoveryCooldown;
+                UpdateCurrentHeart(1);
+            }
         }
     }
 

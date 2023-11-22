@@ -797,7 +797,7 @@ MonoBehaviour:
   pfShockWave: {fileID: 8678543846512994556, guid: 41fccc11df0dccc4ca40694bc0fab242, type: 3}
   pfProjectile: {fileID: 3187642801048505082, guid: bf12e8b65b1a3eb48a9fa65e23a6eec4, type: 3}
   shootingPoint: {fileID: 2116960520}
-  projectileAmount: 5
+  projectileAmount: 3
   bulletSpeed: 5
   pfBossTrap: {fileID: 2793409580839121383, guid: 8625f4aeca3e16047a017ea68aa69a69, type: 3}
   trapSpawnPoint: {fileID: 577289469}
@@ -1788,7 +1788,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08fa41e95d6ce67449ffced42205342d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 750
+  maxHealth: 700
   currentHealth: 0
 --- !u!114 &616005810
 MonoBehaviour:
@@ -2051,7 +2051,7 @@ MonoBehaviour:
   pfShockWave: {fileID: 8678543846512994556, guid: 41fccc11df0dccc4ca40694bc0fab242, type: 3}
   pfProjectile: {fileID: 3187642801048505082, guid: bf12e8b65b1a3eb48a9fa65e23a6eec4, type: 3}
   shootingPoint: {fileID: 556615728}
-  projectileAmount: 5
+  projectileAmount: 3
   bulletSpeed: 5
   pfBossTrap: {fileID: 2793409580839121383, guid: 8625f4aeca3e16047a017ea68aa69a69, type: 3}
   trapSpawnPoint: {fileID: 577289469}
