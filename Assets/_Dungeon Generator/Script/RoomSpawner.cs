@@ -33,14 +33,15 @@ public class RoomSpawner : MonoBehaviour
         {
             roomManager = FindObjectOfType<RoomManager>();
         }
-        if(roomManager.currentRoomCount.Count > roomManager.maxRooms)
+        if(roomManager.currentRoomCount.Count >= roomManager.maxRooms)
         {
             return;
         }
         if (!spawned)
         {
-            GameObject newRoom = Instantiate(room, transform.position, Quaternion.identity);
+            GameObject newRoom = Instantiate(roomManager.room, transform.position, Quaternion.identity);
             newRoom.GetComponent<Room>().SetActiveRoomRandom(openingDirection);
+            newRoom.transform.parent = roomManager.transform;
             spawned = true;
         }
     }
@@ -72,7 +73,11 @@ public class RoomSpawner : MonoBehaviour
         }
         if (collision.CompareTag("RoomSpawnPoint"))
         {
-            if (collision.GetComponent<RoomSpawner>().spawned == true && spawned == false && transform.position.x != 0 && transform.position.y != 0)
+            if (this.CompareTag("Destroyer"))
+            {
+                Destroy(collision.gameObject);
+            }
+            else if (collision.GetComponent<RoomSpawner>().spawned == true && spawned == false && transform.position.x != 0 && transform.position.y != 0)
             {
                 Destroy(gameObject);
             }
@@ -85,7 +90,11 @@ public class RoomSpawner : MonoBehaviour
         }
         if (collision.CompareTag("Destroyer"))
         {
-            Destroy(gameObject);
+            if(this.CompareTag("Destroyer") && spawned)
+            {
+                Destroy(gameObject);
+            }
+            Destroy(this);
 
             spawned = true;
         }

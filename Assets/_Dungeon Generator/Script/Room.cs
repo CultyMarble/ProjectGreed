@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Room : MonoBehaviour
 {
-    public GameObject[] topRooms;
-    public GameObject[] rightRooms;
-    public GameObject[] bottomRooms;
-    public GameObject[] leftRooms;
+    public RoomController[] topRooms;
+    public RoomController[] rightRooms;
+    public RoomController[] bottomRooms;
+    public RoomController[] leftRooms;
 
     public RoomController centreRoom;
     public RoomController topRoom;
@@ -21,76 +21,77 @@ public class Room : MonoBehaviour
     public RoomController topLeftRoom;
     public RoomController topRightRoom;
     public Direction spawnDirection;
-    private GameObject activeRoom;
-   
+    public RoomController activeRoom;
+
+    private RoomManager roomManager;
+
+    private void Awake()
+    {
+        roomManager = FindObjectOfType<RoomManager>();
+        roomManager.currentRoomCount.Add(this);
+    }
     private void OnEnable()
     {
     }
 
     public void SetActiveRoom(RoomShape roomShape)
     {
-        //DisableAllRooms();
-        if (activeRoom != null)
-        {
-            activeRoom.SetActive(false);
-        }
+        DisableAllRooms();
         switch (roomShape)
         {
             case RoomShape.Centre:
-                activeRoom = centreRoom.gameObject;
+                activeRoom = centreRoom;
+                spawnDirection = Direction.Centre; 
                 break;
             case RoomShape.T:
-                activeRoom = topRoom.gameObject;
+                activeRoom = topRoom;
                 break;
             case RoomShape.R:
-                activeRoom = rightRoom.gameObject;
+                activeRoom = rightRoom;
                 break;
             case RoomShape.B:
-                activeRoom = bottomRoom.gameObject;
+                activeRoom = bottomRoom;
                 break;
             case RoomShape.L:
-                activeRoom = leftRoom.gameObject;
+                activeRoom = leftRoom;
                 break;
             case RoomShape.TR:
-                activeRoom = topRightRoom.gameObject;
+                activeRoom = topRightRoom;
                 break;
             case RoomShape.TB:
-                activeRoom = topBottomRoom.gameObject;
+                activeRoom = topBottomRoom;
                 break;
             case RoomShape.TL:
-                activeRoom = topLeftRoom.gameObject;
+                activeRoom = topLeftRoom;
                 break;
             case RoomShape.RB:
-                activeRoom = rightBottomRoom.gameObject;
+                activeRoom = rightBottomRoom;
                 break;
             case RoomShape.LR:
-                activeRoom = leftRightRoom.gameObject;
+                activeRoom = leftRightRoom;
                 break;
             case RoomShape.LB:
-                activeRoom = leftBottomRoom.gameObject;
+                activeRoom = leftBottomRoom;
                 break;
         }
-        activeRoom.SetActive(true);
+        activeRoom.gameObject.SetActive(true);
     }
     public void SetActiveRoomRandom(Direction direction)
     {
         int random;
-        //DisableAllRooms();
-        if (activeRoom != null)
-        {
-            activeRoom.SetActive(false);
-        }
+        DisableAllRooms();
+
         switch (direction)
         {
             case Direction.Centre:
-                activeRoom = centreRoom.gameObject;
+                activeRoom = centreRoom;
                 break;
             case Direction.Top:
-                random = Random.Range(0, 4);
+                random = Random.Range(0, 3);
                 activeRoom = bottomRooms[random];
                 break;
             case Direction.Right:
-                random = Random.Range(0, 4);
+                random = Random.Range(0, 3);
                 activeRoom = leftRooms[random];
                 break;
             case Direction.Bottom:
@@ -103,7 +104,7 @@ public class Room : MonoBehaviour
                 break;
         }
         spawnDirection = direction;
-        activeRoom.SetActive(true);
+        activeRoom.gameObject.SetActive(true);
     }
     void DisableAllRooms()
     {
