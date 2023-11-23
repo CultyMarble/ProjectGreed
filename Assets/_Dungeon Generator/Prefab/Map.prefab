@@ -47,8 +47,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aStar: {fileID: 1620090107190621866}
   room: {fileID: 194884576636689591, guid: 520418a93d14b4f43b685aaf2a9c7048, type: 3}
-  minRooms: 8
-  maxRooms: 10
+  minRooms: 6
+  maxRooms: 12
   currentRoomTotal: []
   currentRoomCount: []
   currentDeadEndRooms: []

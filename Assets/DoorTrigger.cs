@@ -19,6 +19,7 @@ public class DoorTrigger : MonoBehaviour
 
     private ToolTip toolTipMenu;
     public bool doorChecked = false;
+
     private void Awake()
     {
         RoomManager.onRoomsGenerated += CheckForDoors;
@@ -134,15 +135,20 @@ public class DoorTrigger : MonoBehaviour
             gateManager.playerInLockZone = false;
         }
     }
+
     public void CheckForDoors()
     {
         if (doorChecked)
         {
             return;
         }
-
-        Collider2D[] otherDoors = Physics2D.OverlapCircleAll(transform.position, 1.0f);
-
+        if (!gateManager.activated)
+        {
+            gateManager.SetDoorsActive();
+        }
+        
+        Collider2D[] otherDoors = Physics2D.OverlapCircleAll(transform.position, 1.0f,LayerMask.GetMask("DoorTrigger"));
+        
         if (otherDoors.Length > 1)
         {
             foreach (Collider2D collider in otherDoors)
@@ -153,157 +159,99 @@ public class DoorTrigger : MonoBehaviour
                 }
                 if (collider.CompareTag("LockTrigger"))
                 {
-                    switch (gateManager.room.activeRoom.roomShape)
+                    if (!collider.transform.parent.GetComponentInParent<GateManager>().activated)
                     {
-                        case RoomShape.TR:
-                            if (doorSide == Direction.Right && collider.GetComponent<DoorTrigger>().doorSide == Direction.Left)
+                        collider.transform.parent.GetComponentInParent<GateManager>().SetDoorsActive();
+                    }
+                    switch (doorSide)
+                    {
+                        case Direction.Top:
+                            if(gateManager.topDoorState == DoorState.closed)
                             {
-                                gateManager.rightDoorState = DoorState.open;
-                                gateManager.openRooms++;
+                                break;
                             }
-                            else if (doorSide == Direction.Top && collider.GetComponent<DoorTrigger>().doorSide == Direction.Bottom)
+                            if (collider.transform.parent.GetComponentInParent<GateManager>().bottomDoorState != DoorState.open)
+                            {
+                                gateManager.topDoorState = DoorState.closed;
+                            }
+                            else
                             {
                                 gateManager.topDoorState = DoorState.open;
                                 gateManager.openRooms++;
                             }
                             break;
-                        case RoomShape.TB:
-                            if (doorSide == Direction.Bottom && collider.GetComponent<DoorTrigger>().doorSide == Direction.Top)
+                        case Direction.Right:
+                            if (gateManager.rightDoorState == DoorState.closed)
                             {
-                                gateManager.bottomDoorState = DoorState.open;
-                                gateManager.openRooms++;
+                                break;
                             }
-                            else if (doorSide == Direction.Top && collider.GetComponent<DoorTrigger>().doorSide == Direction.Bottom)
+                            if (collider.transform.parent.GetComponentInParent<GateManager>().leftDoorState != DoorState.open)
                             {
-                                gateManager.topDoorState = DoorState.open;
-                                gateManager.openRooms++;
+                                gateManager.rightDoorState = DoorState.closed;
                             }
-                            break;
-                        case RoomShape.TL:
-                            if (doorSide == Direction.Left && collider.GetComponent<DoorTrigger>().doorSide == Direction.Right)
-                            {
-                                gateManager.leftDoorState = DoorState.open;
-                                gateManager.openRooms++;
-                            }
-                            else if (doorSide == Direction.Top && collider.GetComponent<DoorTrigger>().doorSide == Direction.Bottom)
-                            {
-                                gateManager.topDoorState = DoorState.open;
-                                gateManager.openRooms++;
-                            }
-                            break;
-                        case RoomShape.RB:
-                            if (doorSide == Direction.Right && collider.GetComponent<DoorTrigger>().doorSide == Direction.Left)
+                            else
                             {
                                 gateManager.rightDoorState = DoorState.open;
                                 gateManager.openRooms++;
                             }
-                            else if (doorSide == Direction.Bottom && collider.GetComponent<DoorTrigger>().doorSide == Direction.Top)
+                            break;
+                        case Direction.Bottom:
+                            if (gateManager.bottomDoorState == DoorState.closed)
+                            {
+                                break;
+                            }
+                            if (collider.transform.parent.GetComponentInParent<GateManager>().topDoorState != DoorState.open)
+                            {
+                                gateManager.bottomDoorState = DoorState.closed;
+                            }
+                            else
                             {
                                 gateManager.bottomDoorState = DoorState.open;
                                 gateManager.openRooms++;
                             }
                             break;
-                        case RoomShape.LR:
-                            if (doorSide == Direction.Right && collider.GetComponent<DoorTrigger>().doorSide == Direction.Left)
+                        case Direction.Left:
+                            if (gateManager.leftDoorState == DoorState.closed)
                             {
-                                gateManager.rightDoorState = DoorState.open;
-                                gateManager.openRooms++;
+                                break;
                             }
-                            else if (doorSide == Direction.Left && collider.GetComponent<DoorTrigger>().doorSide == Direction.Right)
+                            if (collider.transform.parent.GetComponentInParent<GateManager>().rightDoorState != DoorState.open)
+                            {
+                                gateManager.leftDoorState = DoorState.closed;
+                            }
+                            else
                             {
                                 gateManager.leftDoorState = DoorState.open;
-                                gateManager.openRooms++;
-                            }
-                            break;
-                        case RoomShape.LB:
-                            if (doorSide == Direction.Left && collider.GetComponent<DoorTrigger>().doorSide == Direction.Right)
-                            {
-                                gateManager.leftDoorState = DoorState.open;
-                                gateManager.openRooms++;
-                            }
-                            else if (doorSide == Direction.Bottom && collider.GetComponent<DoorTrigger>().doorSide == Direction.Top)
-                            {
-                                gateManager.bottomDoorState = DoorState.open;
                                 gateManager.openRooms++;
                             }
                             break;
                     }
-                    gateManager.doorsChecked++;
                     doorChecked = true;
+                    gateManager.doorsChecked++;
                     return;
                 }
             }
         }
-        else
+
+        switch (doorSide)
         {
-            switch (gateManager.room.activeRoom.roomShape)
-            {
-                case RoomShape.TR:
-                    if (doorSide == Direction.Right)
-                    {
-                        gateManager.rightDoorState = DoorState.closed;
-                    }
-                    else if (doorSide == Direction.Top)
-                    {
-                        gateManager.topDoorState = DoorState.closed;
-                    }
-                    break;
-                case RoomShape.TB:
-                    if (doorSide == Direction.Bottom)
-                    {
-                        gateManager.bottomDoorState = DoorState.closed;
-                    }
-                    else if (doorSide == Direction.Top)
-                    {
-                        gateManager.topDoorState = DoorState.closed;
-                    }
-                    break;
-                case RoomShape.TL:
-                    if (doorSide == Direction.Left)
-                    {
-                        gateManager.leftDoorState = DoorState.closed;
-                    }
-                    else if (doorSide == Direction.Top)
-                    {
-                        gateManager.topDoorState = DoorState.closed;
-                    }
-                    break;
-                case RoomShape.RB:
-                    if (doorSide == Direction.Right)
-                    {
-                        gateManager.rightDoorState = DoorState.closed;
-                    }
-                    else if (doorSide == Direction.Bottom)
-                    {
-                        gateManager.bottomDoorState = DoorState.closed;
-                    }
-                    break;
-                case RoomShape.LR:
-                    if (doorSide == Direction.Right)
-                    {
-                        gateManager.rightDoorState = DoorState.closed;
-                    }
-                    else if (doorSide == Direction.Left)
-                    {
-                        gateManager.leftDoorState = DoorState.closed;
-                    }
-                    break;
-                case RoomShape.LB:
-                    if (doorSide == Direction.Left)
-                    {
-                        gateManager.leftDoorState = DoorState.closed;
-                    }
-                    else if (doorSide == Direction.Bottom)
-                    {
-                        gateManager.bottomDoorState = DoorState.closed;
-                    }
-                    break;
-            }
+            case Direction.Top:
+                gateManager.topDoorState = DoorState.closed;
+                break;
+            case Direction.Right:
+                gateManager.rightDoorState = DoorState.closed;
+                break;
+            case Direction.Bottom:
+                gateManager.bottomDoorState = DoorState.closed;
+                break;
+            case Direction.Left:
+                gateManager.leftDoorState = DoorState.closed;
+                break;
         }
-        gateManager.doorsChecked++;
         doorChecked = true;
-        return;
+        gateManager.doorsChecked++;
     }
+
     private void OnDestroy()
     {
         RoomManager.onRoomsGenerated -= CheckForDoors;

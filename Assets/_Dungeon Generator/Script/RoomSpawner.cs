@@ -12,17 +12,16 @@ public class RoomSpawner : MonoBehaviour
     [SerializeField] public bool spawned = false;
     [SerializeField] public bool destroyer;
 
-
     private void Start()
     {
         roomManager = FindObjectOfType<RoomManager>();
         if (!destroyer)
         {
-            Invoke("Spawn", 0.05F);
+            Invoke("Spawn", 0.025F);
         }
         RoomManager.onRoomsGenerated += DeleteRoom;
     }
-   
+
     private void Spawn()
     {
         if(roomManager.mapFinished)
@@ -85,6 +84,10 @@ public class RoomSpawner : MonoBehaviour
             {
                 Destroy(collision.gameObject);
             }
+            else if (collision.GetComponent<RoomSpawner>().spawned == false && spawned == true && transform.position.x != 0 && transform.position.y != 0)
+            {
+                Destroy(collision.gameObject);
+            }
 
             spawned = true;
         }
@@ -92,9 +95,12 @@ public class RoomSpawner : MonoBehaviour
         {
             if(this.CompareTag("Destroyer") && spawned)
             {
+                Destroy(collision.gameObject);
+            }
+            else
+            {
                 Destroy(gameObject);
             }
-            Destroy(this);
 
             spawned = true;
         }

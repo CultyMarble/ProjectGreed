@@ -20061,6 +20061,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07b42ee8c7df08745973f3a5452a1c4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gateManager: {fileID: 0}
   currentRoomType: 0
   roomShape: 0
   added: 0
@@ -20075,13 +20076,6 @@ MonoBehaviour:
   - {fileID: 3895037764081182585}
   specialRoom: {fileID: 5834923999332218285}
   activeRoomVariant: {fileID: 0}
-  topDoorState: 0
-  rightDoorState: 0
-  bottomDoorState: 0
-  leftDoorState: 0
-  doorsChecked: 0
-  openRooms: 0
-  allChecked: 0
 --- !u!1 &1689125610543266716
 GameObject:
   m_ObjectHideFlags: 0

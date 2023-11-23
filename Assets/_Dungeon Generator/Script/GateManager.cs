@@ -38,6 +38,7 @@ public class GateManager : MonoBehaviour
     public int doorsChecked = 0;
     public int openRooms = 0;
     public bool allChecked = false;
+    public bool activated = false;
 
     private RoomController activeRoomVariant;
 
@@ -112,16 +113,10 @@ public class GateManager : MonoBehaviour
                     if (topDoorState == DoorState.closed && rightDoorState == DoorState.open)
                     {
                         room.SetActiveRoom(RoomShape.R);
-
-                    //GameObject newRoom = Instantiate(roomManager.rightRooms[0], transform.position, Quaternion.identity);
-                    //    newRoom.transform.parent = this.transform.parent;
                     }
                     else if (topDoorState == DoorState.open && rightDoorState == DoorState.closed)
                     {
                         room.SetActiveRoom(RoomShape.T);
-
-                        //GameObject newRoom = Instantiate(roomManager.topRooms[0], transform.position, Quaternion.identity);
-                        //newRoom.transform.parent = this.transform.parent;
                     }
                 }
                 break;
@@ -131,16 +126,10 @@ public class GateManager : MonoBehaviour
                     if (topDoorState == DoorState.closed && bottomDoorState == DoorState.open)
                     {
                         room.SetActiveRoom(RoomShape.B);
-
-                        //GameObject newRoom = Instantiate(roomManager.rightRooms[0], transform.position, Quaternion.identity);
-                        //newRoom.transform.parent = this.transform.parent;
                     }
                     else if (topDoorState == DoorState.open && bottomDoorState == DoorState.closed)
                     {
                         room.SetActiveRoom(RoomShape.T);
-
-                        //GameObject newRoom = Instantiate(roomManager.bottomRooms[0], transform.position, Quaternion.identity);
-                        //newRoom.transform.parent = this.transform.parent;
                     }
                 }
                 break;
@@ -150,16 +139,10 @@ public class GateManager : MonoBehaviour
                     if (topDoorState == DoorState.closed && leftDoorState == DoorState.open)
                     {
                         room.SetActiveRoom(RoomShape.L);
-
-                        //GameObject newRoom = Instantiate(roomManager.rightRooms[0], transform.position, Quaternion.identity);
-                        //newRoom.transform.parent = this.transform.parent;
                     }
                     else if (topDoorState == DoorState.open && leftDoorState == DoorState.closed)
                     {
                         room.SetActiveRoom(RoomShape.T);
-
-                        //GameObject newRoom = Instantiate(roomManager.leftRooms[0], transform.position, Quaternion.identity);
-                        //newRoom.transform.parent = this.transform.parent;
                     }
                 }
                 break;
@@ -169,16 +152,10 @@ public class GateManager : MonoBehaviour
                     if (rightDoorState == DoorState.closed && bottomDoorState == DoorState.open)
                     {
                         room.SetActiveRoom(RoomShape.B);
-
-                        //GameObject newRoom = Instantiate(roomManager.bottomRooms[0], transform.position, Quaternion.identity);
-                        //newRoom.transform.parent = this.transform.parent;
                     }
                     else if (rightDoorState == DoorState.open && bottomDoorState == DoorState.closed)
                     {
                         room.SetActiveRoom(RoomShape.R);
-
-                        //GameObject newRoom = Instantiate(roomManager.rightRooms[0], transform.position, Quaternion.identity);
-                        //newRoom.transform.parent = this.transform.parent;
                     }
                 }
                 break;
@@ -188,16 +165,10 @@ public class GateManager : MonoBehaviour
                     if (leftDoorState == DoorState.closed && rightDoorState == DoorState.open)
                     {
                         room.SetActiveRoom(RoomShape.R);
-
-                        //GameObject newRoom = Instantiate(roomManager.rightRooms[0], transform.position, Quaternion.identity);
-                        //newRoom.transform.parent = this.transform.parent;
                     }
                     else if (leftDoorState == DoorState.open && rightDoorState == DoorState.closed)
                     {
                         room.SetActiveRoom(RoomShape.L);
-
-                        //GameObject newRoom = Instantiate(roomManager.leftRooms[0], transform.position, Quaternion.identity);
-                        //newRoom.transform.parent = this.transform.parent;
                     }
                 }
                 break;
@@ -207,16 +178,10 @@ public class GateManager : MonoBehaviour
                     if (leftDoorState == DoorState.closed && bottomDoorState == DoorState.open)
                     {
                         room.SetActiveRoom(RoomShape.B);
-
-                        //GameObject newRoom = Instantiate(roomManager.bottomRooms[0], transform.position, Quaternion.identity);
-                        //newRoom.transform.parent = this.transform.parent;
                     }
                     else if (leftDoorState == DoorState.open && bottomDoorState == DoorState.closed)
                     {
                         room.SetActiveRoom(RoomShape.L);
-
-                        //GameObject newRoom = Instantiate(roomManager.leftRooms[0], transform.position, Quaternion.identity);
-                        //newRoom.transform.parent = this.transform.parent;
                     }
                 }
                 break;
@@ -310,6 +275,66 @@ public class GateManager : MonoBehaviour
         {
             RoomCleared();
         }
+    }
+    public void SetDoorsActive()
+    {
+        if (activated)
+        {
+            return;
+        }
+        topDoorState = DoorState.closed;
+        rightDoorState = DoorState.closed;
+        leftDoorState = DoorState.closed;
+        bottomDoorState = DoorState.closed;
+
+        switch (room.activeRoom.roomShape)
+        {
+            case RoomShape.Centre:
+                topDoorState = DoorState.open;
+                rightDoorState = DoorState.open;
+                leftDoorState = DoorState.open;
+                bottomDoorState = DoorState.open;
+                doorsChecked = 4;
+                allChecked = true;
+                break;
+            case RoomShape.T:
+                topDoorState = DoorState.open;
+                break;
+            case RoomShape.R:
+                rightDoorState = DoorState.open;
+                break;
+            case RoomShape.B:
+                bottomDoorState = DoorState.open;
+                break;
+            case RoomShape.L:
+                leftDoorState = DoorState.open;
+                break;
+            case RoomShape.TR:
+                topDoorState = DoorState.open;
+                rightDoorState = DoorState.open;
+                break;
+            case RoomShape.TB:
+                topDoorState = DoorState.open;
+                bottomDoorState = DoorState.open;
+                break;
+            case RoomShape.TL:
+                topDoorState = DoorState.open;
+                leftDoorState = DoorState.open;
+                break;
+            case RoomShape.RB:
+                rightDoorState = DoorState.open;
+                bottomDoorState = DoorState.open;
+                break;
+            case RoomShape.LR:
+                leftDoorState = DoorState.open;
+                rightDoorState = DoorState.open;
+                break;
+            case RoomShape.LB:
+                leftDoorState = DoorState.open;
+                bottomDoorState = DoorState.open;
+                break;
+        }
+        activated = true;
     }
 
 }
