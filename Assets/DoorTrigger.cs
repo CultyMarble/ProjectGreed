@@ -104,19 +104,36 @@ public class DoorTrigger : MonoBehaviour
         {
             return;
         }
+        Color color = Color.white;
+        if (gateManager.locked && gateManager.keytype == PlayerCurrencies.KeyType.Silver)
+        {
+            color = Color.gray;
+        }
+        else if (gateManager.locked && gateManager.keytype == PlayerCurrencies.KeyType.Gold)
+        {
+            color = Color.blue;
+        }
+        else if(gateManager.room.activeRoom.currentRoomType == RoomType.boss)
+        {
+            color = Color.magenta;
+        }
+        else if (gateManager.room.activeRoom.currentRoomType == RoomType.shop || gateManager.room.activeRoom.currentRoomType == RoomType.abandonShop)
+        {
+            color = Color.green;
+        }
         switch (doorSide)
         {
             case Direction.Top:
-                MapGenerator.Instance.CreateRoomLayout(CreateDirection.Down, gateManager.room.activeRoom.roomShape);
+                MapGenerator.Instance.CreateRoomLayout(CreateDirection.Down, gateManager.room.activeRoom.roomShape,color);
                 break;
             case Direction.Right:
-                MapGenerator.Instance.CreateRoomLayout(CreateDirection.Left, gateManager.room.activeRoom.roomShape);
+                MapGenerator.Instance.CreateRoomLayout(CreateDirection.Left, gateManager.room.activeRoom.roomShape, color);
                 break;
             case Direction.Bottom:
-                MapGenerator.Instance.CreateRoomLayout(CreateDirection.Up, gateManager.room.activeRoom.roomShape);
+                MapGenerator.Instance.CreateRoomLayout(CreateDirection.Up, gateManager.room.activeRoom.roomShape, color);
                 break;
             case Direction.Left:
-                MapGenerator.Instance.CreateRoomLayout(CreateDirection.Right, gateManager.room.activeRoom.roomShape);
+                MapGenerator.Instance.CreateRoomLayout(CreateDirection.Right, gateManager.room.activeRoom.roomShape, color);
                 break;
         }
         gateManager.roomDrawn = true;

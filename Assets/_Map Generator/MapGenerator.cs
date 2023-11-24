@@ -1,5 +1,6 @@
 using UnityEngine;
-
+using UnityEngine.UI;
+using System.Collections;
 public enum RoomShape
 {
     Centre,
@@ -49,8 +50,9 @@ public class MapGenerator : SingletonMonobehaviour<MapGenerator>
     [SerializeField] private Transform tShapeThreeWay134 = default;
     [SerializeField] private Transform tShapeThreeWay234 = default;
 
+
     // Map Offset
-    private readonly float offsetDistance = 12.0f;
+    private readonly float offsetDistance = 36.0f;
 
     //===========================================================================
     private void Update()
@@ -64,18 +66,25 @@ public class MapGenerator : SingletonMonobehaviour<MapGenerator>
         if (Input.GetKeyDown(KeyCode.Tab))
             MapGUI.Instance.ToggleMapUI();
 
-        // TODO DELETE
+        if (Input.GetAxisRaw("Mouse ScrollWheel") > 0)
+        {
+            parent.transform.localScale *= 0.5f;
+        }
+        else if (Input.GetAxisRaw("Mouse ScrollWheel") < 0)
+        {
+            parent.transform.localScale *= 1.5f;
+        }
         if (Input.GetKeyDown(KeyCode.UpArrow))
-            CreateRoomLayout(CreateDirection.Up, RoomShape.Centre);
-
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-            CreateRoomLayout(CreateDirection.Down, RoomShape.Centre);
+            parent.transform.position = new Vector3(parent.transform.position.x, parent.transform.position.y + offsetDistance);
+            if (Input.GetKeyDown(KeyCode.DownArrow))
+            parent.transform.position = new Vector3(parent.transform.position.x, parent.transform.position.y - offsetDistance);
 
         if (Input.GetKeyDown(KeyCode.LeftArrow))
-            CreateRoomLayout(CreateDirection.Left, RoomShape.Centre);
+            parent.transform.position = new Vector3(parent.transform.position.x - offsetDistance, parent.transform.position.y);
 
         if (Input.GetKeyDown(KeyCode.RightArrow))
-            CreateRoomLayout(CreateDirection.Right, RoomShape.Centre);
+            parent.transform.position = new Vector3(parent.transform.position.x + offsetDistance, parent.transform.position.y);
+
     }
 
     //===========================================================================
@@ -100,83 +109,115 @@ public class MapGenerator : SingletonMonobehaviour<MapGenerator>
         }
     }
 
-    private void CreateRoom(RoomShape shape)
+    private void CreateRoom(RoomShape shape,Color color)
     {
+        Transform newRoom;
         switch (shape)
         {
             case RoomShape.Centre:
-                Instantiate(centerFourWay, parent).GetComponent<RectTransform>().localPosition = positionMarker.localPosition;
+                newRoom = Instantiate(centerFourWay, parent);
+                newRoom.GetComponent<RectTransform>().localPosition = positionMarker.localPosition;
+                newRoom.GetComponent<Image>().color = color;
                 break;
             case RoomShape.T:
-                Instantiate(lineOneWay1, parent).GetComponent<RectTransform>().localPosition = positionMarker.localPosition;
+                newRoom = Instantiate(lineOneWay1, parent);
+                newRoom.GetComponent<RectTransform>().localPosition = positionMarker.localPosition;
+                newRoom.GetComponent<Image>().color = color;
                 break;
             case RoomShape.R:
-                Instantiate(lineOneWay2, parent).GetComponent<RectTransform>().localPosition = positionMarker.localPosition;
+                newRoom = Instantiate(lineOneWay2, parent);
+                newRoom.GetComponent<RectTransform>().localPosition = positionMarker.localPosition;
+                newRoom.GetComponent<Image>().color = color;
                 break;
             case RoomShape.B:
-                Instantiate(lineOneWay3, parent).GetComponent<RectTransform>().localPosition = positionMarker.localPosition;
+                newRoom = Instantiate(lineOneWay3, parent);
+                newRoom.GetComponent<RectTransform>().localPosition = positionMarker.localPosition;
+                newRoom.GetComponent<Image>().color = color;
                 break;
             case RoomShape.L:
-                Instantiate(lineOneWay4, parent).GetComponent<RectTransform>().localPosition = positionMarker.localPosition;
+                newRoom = Instantiate(lineOneWay4, parent);
+                newRoom.GetComponent<RectTransform>().localPosition = positionMarker.localPosition;
+                newRoom.GetComponent<Image>().color = color;
                 break;
             case RoomShape.TR:
-                Instantiate(lShapeTwoWay12, parent).GetComponent<RectTransform>().localPosition = positionMarker.localPosition;
+                newRoom = Instantiate(lShapeTwoWay12, parent);
+                newRoom.GetComponent<RectTransform>().localPosition = positionMarker.localPosition;
+                newRoom.GetComponent<Image>().color = color;
                 break;
             case RoomShape.TB:
-                Instantiate(lShapeTwoWay13, parent).GetComponent<RectTransform>().localPosition = positionMarker.localPosition;
+                newRoom = Instantiate(lShapeTwoWay13, parent);
+                newRoom.GetComponent<RectTransform>().localPosition = positionMarker.localPosition;
+                newRoom.GetComponent<Image>().color = color;
                 break;
             case RoomShape.TL:
-                Instantiate(lShapeTwoWay14, parent).GetComponent<RectTransform>().localPosition = positionMarker.localPosition;
+                newRoom = Instantiate(lShapeTwoWay14, parent);
+                newRoom.GetComponent<RectTransform>().localPosition = positionMarker.localPosition;
+                newRoom.GetComponent<Image>().color = color;
                 break;
             case RoomShape.RB:
-                Instantiate(lShapeTwoWay23, parent).GetComponent<RectTransform>().localPosition = positionMarker.localPosition;
+                newRoom = Instantiate(lShapeTwoWay23, parent);
+                newRoom.GetComponent<RectTransform>().localPosition = positionMarker.localPosition;
+                newRoom.GetComponent<Image>().color = color;
                 break;
             case RoomShape.LR:
-                Instantiate(lShapeTwoWay24, parent).GetComponent<RectTransform>().localPosition = positionMarker.localPosition;
-                break;
+                newRoom = Instantiate(lShapeTwoWay24, parent);
+                newRoom.GetComponent<RectTransform>().localPosition = positionMarker.localPosition;
+                newRoom.GetComponent<Image>().color = color;
+                break; 
             case RoomShape.LB:
-                Instantiate(lShapeTwoWay34, parent).GetComponent<RectTransform>().localPosition = positionMarker.localPosition;
+                newRoom = Instantiate(lShapeTwoWay34, parent);
+                newRoom.GetComponent<RectTransform>().localPosition = positionMarker.localPosition;
+                newRoom.GetComponent<Image>().color = color;
                 break;
             case RoomShape.TRB:
-                Instantiate(tShapeThreeWay123, parent).GetComponent<RectTransform>().localPosition = positionMarker.localPosition;
+                newRoom = Instantiate(tShapeThreeWay123, parent);
+                newRoom.GetComponent<RectTransform>().localPosition = positionMarker.localPosition;
+                newRoom.GetComponent<Image>().color = color;
                 break;
             case RoomShape.TRL:
-                Instantiate(tShapeThreeWay124, parent).GetComponent<RectTransform>().localPosition = positionMarker.localPosition;
+                newRoom = Instantiate(tShapeThreeWay124, parent);
+                newRoom.GetComponent<RectTransform>().localPosition = positionMarker.localPosition;
+                newRoom.GetComponent<Image>().color = color;
                 break;
             case RoomShape.TBL:
-                Instantiate(tShapeThreeWay134, parent).GetComponent<RectTransform>().localPosition = positionMarker.localPosition;
+                newRoom = Instantiate(tShapeThreeWay134, parent);
+                newRoom.GetComponent<RectTransform>().localPosition = positionMarker.localPosition;
+                newRoom.GetComponent<Image>().color = color;
                 break;
             case RoomShape.RBL:
-                Instantiate(tShapeThreeWay234, parent).GetComponent<RectTransform>().localPosition = positionMarker.localPosition;
+                newRoom = Instantiate(tShapeThreeWay234, parent);
+                newRoom.GetComponent<RectTransform>().localPosition = positionMarker.localPosition;
+                newRoom.GetComponent<Image>().color = color;
                 break;
             default:
                 break;
         }
+        
     }
 
     //===========================================================================
-    public void CreateRoomLayout(CreateDirection direction, RoomShape shape)
+    public void CreateRoomLayout(CreateDirection direction, RoomShape shape, Color color)
     {
         switch (direction)
         {
             case CreateDirection.Up:
                 MovePositionMarker(CreateDirection.Up);
-                CreateRoom(shape);
+                CreateRoom(shape, color);
                 MovePositionMarker(CreateDirection.Down);
                 break;
             case CreateDirection.Down:
                 MovePositionMarker(CreateDirection.Down);
-                CreateRoom(shape);
+                CreateRoom(shape, color);
                 MovePositionMarker(CreateDirection.Up);
                 break;
             case CreateDirection.Left:
                 MovePositionMarker(CreateDirection.Left);
-                CreateRoom(shape);
+                CreateRoom(shape, color);
                 MovePositionMarker(CreateDirection.Right);
                 break;
             case CreateDirection.Right:
                 MovePositionMarker(CreateDirection.Right);
-                CreateRoom(shape);
+                CreateRoom(shape, color);
                 MovePositionMarker(CreateDirection.Left);
                 break;
             default:
