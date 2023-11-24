@@ -75,7 +75,7 @@ MonoBehaviour:
   - {fileID: 5567745467040105511, guid: eb15c768ea3be5e48a0a4967c23bb235, type: 3}
   boss: {fileID: 6078217297577339867, guid: f0defaa3df4d4854ba674518f9ea3250, type: 3}
   shop: {fileID: 8439679027966053120, guid: 174ff5aef0fe7df41b304cd6624c3040, type: 3}
-  abandonedShop: {fileID: 1079070743949656306, guid: bc316498d6a38944cb08c7231d6faa16, type: 3}
+  abandonedShop: {fileID: 4384084567026414767, guid: bc316498d6a38944cb08c7231d6faa16, type: 3}
   startRoomDialogue: {fileID: 2471121758696812898, guid: ea4375912d3ce9247bf42dce04446c49, type: 3}
   silverRoomDialogue: {fileID: 2471121758696812898, guid: a517b4a5a748d74468de385c04defd9d, type: 3}
   goldRoomDialogue: {fileID: 2471121758696812898, guid: c85f59f4e13e26f479871c32b1605986, type: 3}

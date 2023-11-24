@@ -281,7 +281,7 @@ public class RoomManager : MonoBehaviour
             SetTreasureRoom();
             SetNPCRoom();
         }
-        if (currentRoomCount.Count < minRooms|| !shopSpawned || !keySpawned)
+        if (currentRoomCount.Count < minRooms || currentRoomCount.Count > maxRooms || !shopSpawned || !keySpawned)
         {
             if(currentRoomCount.Count <= 1)
             {
@@ -290,14 +290,6 @@ public class RoomManager : MonoBehaviour
             Debug.Log(currentRoomCount.Count + " rooms");
             LoadScene();
             return;
-        }
-        else if (currentRoomCount.Count > maxRooms || !shopSpawned || !keySpawned)
-        {
-            Debug.Log("Deleting" + (maxRooms - currentRoomCount.Count) + " rooms");
-            for (int i = 1; i < maxRooms - currentRoomCount.Count; i++)
-            {
-                currentRoomCount.RemoveAt(currentRoomCount.Count - i);
-            }
         }
 
         foreach (Room room in currentRoomCount)
