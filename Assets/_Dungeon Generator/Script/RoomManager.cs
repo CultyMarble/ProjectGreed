@@ -81,7 +81,7 @@ public class RoomManager : MonoBehaviour
         if (loops > 0 && currentRoomCount.Count > 3)
         {
             StartNewBranch();
-            delaySpawnRoomType = 0.5f;
+            //delaySpawnRoomType = 0.5f;
             return;
         }
         else if (loops > 0)
@@ -229,10 +229,13 @@ public class RoomManager : MonoBehaviour
     }
     public void SetKeyRoom()
     {
-        if (keySpawned || loops == 2)
+        if(loops == 2)
+        {
+            return;
+        }
+        if (keySpawned && loops == 1)
         {
             keySpawned = true;
-            return;
         }
         GameObject newKey;
 

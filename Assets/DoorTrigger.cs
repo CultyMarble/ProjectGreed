@@ -107,11 +107,11 @@ public class DoorTrigger : MonoBehaviour
         Color color = Color.white;
         if (gateManager.locked && gateManager.keytype == PlayerCurrencies.KeyType.Silver)
         {
-            color = Color.gray;
+            color = Color.blue;
         }
         else if (gateManager.locked && gateManager.keytype == PlayerCurrencies.KeyType.Gold)
         {
-            color = Color.blue;
+            color = Color.yellow;
         }
         else if(gateManager.room.activeRoom.currentRoomType == RoomType.boss)
         {
