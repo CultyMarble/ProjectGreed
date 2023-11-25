@@ -63,31 +63,40 @@ public class MapGenerator : SingletonMonobehaviour<MapGenerator>
         if (SceneControlManager.Instance.IsLoadingScreenActive == true)
             return;
 
-        if (Input.GetKeyDown(KeyCode.Tab))
-            MapGUI.Instance.ToggleMapUI();
-
-        if (Input.GetAxisRaw("Mouse ScrollWheel") > 0)
-        {
-            parent.transform.localScale *= 0.5f;
-        }
-        else if (Input.GetAxisRaw("Mouse ScrollWheel") < 0)
-        {
-            parent.transform.localScale *= 1.5f;
-        }
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-            parent.transform.position = new Vector3(parent.transform.position.x, parent.transform.position.y + offsetDistance);
-            if (Input.GetKeyDown(KeyCode.DownArrow))
-            parent.transform.position = new Vector3(parent.transform.position.x, parent.transform.position.y - offsetDistance);
-
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
-            parent.transform.position = new Vector3(parent.transform.position.x - offsetDistance, parent.transform.position.y);
-
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-            parent.transform.position = new Vector3(parent.transform.position.x + offsetDistance, parent.transform.position.y);
-
+        InputHandler();
     }
 
     //===========================================================================
+
+    private void InputHandler()
+    {
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            MapGUI.Instance.ToggleMapUI();
+        }
+
+        if (MapGUI.Instance.CheckMapOpen())
+        {
+            if (Input.GetAxisRaw("Mouse ScrollWheel") > 0)
+            {
+                parent.transform.localScale *= 0.5f;
+            }
+            else if (Input.GetAxisRaw("Mouse ScrollWheel") < 0)
+            {
+                parent.transform.localScale *= 1.5f;
+            }
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+                parent.transform.position = new Vector3(parent.transform.position.x, parent.transform.position.y + offsetDistance);
+            if (Input.GetKeyDown(KeyCode.DownArrow))
+                parent.transform.position = new Vector3(parent.transform.position.x, parent.transform.position.y - offsetDistance);
+
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
+                parent.transform.position = new Vector3(parent.transform.position.x - offsetDistance, parent.transform.position.y);
+
+            if (Input.GetKeyDown(KeyCode.RightArrow))
+                parent.transform.position = new Vector3(parent.transform.position.x + offsetDistance, parent.transform.position.y);
+        }
+    }
     public void MovePositionMarker(CreateDirection direction)
     {
         switch (direction)
