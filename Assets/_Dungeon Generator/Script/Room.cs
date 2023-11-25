@@ -87,19 +87,19 @@ public class Room : MonoBehaviour
                 activeRoom = centreRoom;
                 break;
             case Direction.Top:
-                random = Random.Range(0, 3);
+                random = Random.Range(0, 2);
                 activeRoom = bottomRooms[random];
                 break;
             case Direction.Right:
-                random = Random.Range(0, 3);
+                random = Random.Range(0, 2);
                 activeRoom = leftRooms[random];
                 break;
             case Direction.Bottom:
-                random = Random.Range(0, 4);
+                random = Random.Range(0, 3);
                 activeRoom = topRooms[random];
                 break;
             case Direction.Left:
-                random = Random.Range(0, 4);
+                random = Random.Range(0, 3);
                 activeRoom = rightRooms[random];
                 break;
         }

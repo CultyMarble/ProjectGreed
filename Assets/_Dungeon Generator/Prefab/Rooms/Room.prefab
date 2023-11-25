@@ -47,21 +47,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   topRooms:
-  - {fileID: 9094340600761987476}
   - {fileID: 4999649405521171233}
   - {fileID: 8709139398540115774}
   - {fileID: 5959265490156569303}
   rightRooms:
-  - {fileID: 716857186999532215}
   - {fileID: 6370608220929527185}
   - {fileID: 7170721705724571793}
   - {fileID: 5959265490156569303}
   bottomRooms:
-  - {fileID: 7486789962479862825}
   - {fileID: 7170721705724571793}
   - {fileID: 4999649405521171233}
   leftRooms:
-  - {fileID: 3526873357372544968}
   - {fileID: 6370608220929527185}
   - {fileID: 8709139398540115774}
   centreRoom: {fileID: 1711684529619207989}
