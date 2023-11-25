@@ -44,20 +44,18 @@ public class RoomManager : MonoBehaviour
     public GameObject silverRoomDialogue;
     public GameObject goldRoomDialogue;
 
+    private List<GameObject> currentNPCList;
+
     public delegate void OnRoomsGenerated();
     public static event OnRoomsGenerated onRoomsGenerated;
 
     private void Start()
     {
+        currentNPCList = npcList;
         LoadScene();
     }
     private void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.R))
-        //{
-        //    LoadScene();
-        //}
-
         if (!mapFinished)
         {
             SpawnRoomTypes();
@@ -81,7 +79,6 @@ public class RoomManager : MonoBehaviour
         if (loops > 0 && currentRoomCount.Count > 3)
         {
             StartNewBranch();
-            //delaySpawnRoomType = 0.5f;
             return;
         }
         else if (loops > 0)
@@ -108,6 +105,7 @@ public class RoomManager : MonoBehaviour
         newEntryRoom.GetComponent<Room>().SetActiveRoom(RoomShape.Centre);
         startDialogue = Instantiate(startRoomDialogue);
         startDialogue.transform.parent = newEntryRoom.transform;
+        currentNPCList = npcList;
 
         delaySpawnRoomCheck = false;
         delaySpawnRoomType = 0.5f;
@@ -115,13 +113,6 @@ public class RoomManager : MonoBehaviour
 
     private void SpawnRoomTypes()
     {
-        //if(currentRoomCount.Count == 0)
-        //{
-        //    delaySpawnRoomCheck = true;
-        //    delaySpawnRoomType = 0F;
-        //    CheckBranchFinished();
-        //    return;
-        //}
         if (delaySpawnRoomType <= 0F && !delaySpawnRoomCheck)
         {
             SetShopRoom();
@@ -253,12 +244,12 @@ public class RoomManager : MonoBehaviour
     }
     public void SetNPCRoom()
     {
-        if(npcList.Count == 0)
+        if(currentNPCList.Count == 0)
         {
             return;
         }
         GameObject newNPC;
-        int randomItemIndex = Random.Range(0, npcList.Count);
+        int randomItemIndex = Random.Range(0, currentNPCList.Count);
         int randomRoomIndex = Random.Range(0, currentRoomCount.Count);
 
         if (currentRoomCount[randomRoomIndex].activeRoom.currentRoomType != RoomType.normal || currentRoomCount.Count <=0)
@@ -268,10 +259,10 @@ public class RoomManager : MonoBehaviour
 
         currentRoomCount[randomRoomIndex].activeRoom.currentRoomType = RoomType.npc;
             
-        newNPC = Instantiate(npcList[randomItemIndex], currentRoomCount[randomRoomIndex].transform.position, Quaternion.identity);
+        newNPC = Instantiate(currentNPCList[randomItemIndex], currentRoomCount[randomRoomIndex].transform.position, Quaternion.identity);
         newNPC.transform.parent = currentRoomCount[randomRoomIndex].transform;
 
-        npcList.RemoveAt(randomItemIndex);
+        currentNPCList.RemoveAt(randomItemIndex);
         currentRoomCount[randomRoomIndex].activeRoom.SetSpecialRoomActive();
     }
 
@@ -388,18 +379,12 @@ public class RoomManager : MonoBehaviour
                 {
                     Debug.Log("Starting New Branch");
 
-                    //Destroy(currentRoomTotal[i].gameObject);
                     Room newRoom = currentRoomTotal[i].GetComponent<Room>();
                     newRoom.SetActiveRoom(RoomShape.Centre);
                     currentRoomTotal.RemoveAt(i);
                     currentRoomCount.Clear();
                     currentRoomCount.Add(newRoom);
                     lastBranch = newRoom.transform.position;
-                    //GameObject newRoom = Instantiate(room, new Vector2(currentRoomTotal[i].transform.position.x, currentRoomTotal[i].transform.position.y), Quaternion.identity);
-
-                    //currentRoomTotal.RemoveAt(i);
-                    //newRoom.transform.parent = this.transform;
-                    //newRoom.transform.GetComponent<RoomController>().added = true;
 
                    newRoom.gameObject.GetComponentInChildren<GateManager>().locked = true;
                     if (loops == 0)
