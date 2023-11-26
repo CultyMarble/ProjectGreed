@@ -1460,7 +1460,7 @@ GameObject:
   - component: {fileID: 399540624452557192}
   - component: {fileID: 399540624452557199}
   - component: {fileID: 2324487726570806978}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: SpawnPoint (2)
   m_TagString: RoomSpawnPoint
   m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
@@ -1654,7 +1654,7 @@ GameObject:
   - component: {fileID: 399540625113987413}
   - component: {fileID: 399540625113987412}
   - component: {fileID: 8172689692666666291}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: SpawnPoint (1)
   m_TagString: RoomSpawnPoint
   m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
@@ -1756,7 +1756,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &399540625238344229
 Transform:
   m_ObjectHideFlags: 0
@@ -1825,7 +1825,7 @@ GameObject:
   - component: {fileID: 399540625320073858}
   - component: {fileID: 399540625320073857}
   - component: {fileID: 2526056129367201533}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: SpawnPoint (3)
   m_TagString: RoomSpawnPoint
   m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}

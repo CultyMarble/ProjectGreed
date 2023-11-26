@@ -16,14 +16,12 @@ public class DoorTrigger : MonoBehaviour
     [SerializeField] private Direction doorSide;
     [SerializeField] private bool active;
 
-
     private ToolTip toolTipMenu;
     public bool doorChecked = false;
 
     private void Awake()
     {
         RoomManager.onRoomsGenerated += CheckForDoors;
-
     }
     private void Update()
     {
@@ -77,6 +75,33 @@ public class DoorTrigger : MonoBehaviour
         if (!collision.gameObject.CompareTag("Player")) 
         {
             return;
+        }
+        switch (doorSide)
+        {
+            case Direction.Top:
+                if (gateManager.topDoorState != DoorState.open)
+                {
+                    return;
+                }
+                break;
+            case Direction.Right:
+                if (gateManager.rightDoorState != DoorState.open)
+                {
+                    return;
+                }
+                break;
+            case Direction.Bottom:
+                if (gateManager.bottomDoorState != DoorState.open)
+                {
+                    return;
+                }
+                break;
+            case Direction.Left:
+                if (gateManager.leftDoorState != DoorState.open)
+                {
+                    return;
+                }
+                break;
         }
         DrawRoomOnMap();
             

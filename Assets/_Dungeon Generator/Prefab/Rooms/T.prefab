@@ -70411,7 +70411,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4021261305634921460
 Transform:
   m_ObjectHideFlags: 0
@@ -70455,7 +70455,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gateManager: {fileID: 0}
   currentRoomType: 0
-  roomShape: 0
+  roomShape: 1
   added: 0
   roomVariants:
   - {fileID: 308356325753888109}

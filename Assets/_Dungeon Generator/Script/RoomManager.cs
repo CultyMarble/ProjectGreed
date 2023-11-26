@@ -102,7 +102,7 @@ public class RoomManager : MonoBehaviour
         GameObject startDialogue;
         newEntryRoom = Instantiate(room);
         newEntryRoom.transform.parent = this.transform;
-        newEntryRoom.GetComponent<Room>().SetActiveRoom(RoomShape.Centre);
+        newEntryRoom.GetComponent<Room>().SetCentreRoom();
         startDialogue = Instantiate(startRoomDialogue);
         startDialogue.transform.parent = newEntryRoom.transform;
         currentNPCList = npcList;
@@ -344,7 +344,7 @@ public class RoomManager : MonoBehaviour
             }
             currentRoomCount.Clear();
             GameObject newRoom = Instantiate(room, startLocation, Quaternion.identity);
-            newRoom.GetComponent<Room>().SetActiveRoom(RoomShape.Centre);
+            newRoom.GetComponent<Room>().SetCentreRoom();
             newRoom.transform.parent = this.transform;
             if (newRoom != null)
             {
@@ -380,7 +380,7 @@ public class RoomManager : MonoBehaviour
                     Debug.Log("Starting New Branch");
 
                     Room newRoom = currentRoomTotal[i].GetComponent<Room>();
-                    newRoom.SetActiveRoom(RoomShape.Centre);
+                    newRoom.SetCentreRoom();
                     currentRoomTotal.RemoveAt(i);
                     currentRoomCount.Clear();
                     currentRoomCount.Add(newRoom);

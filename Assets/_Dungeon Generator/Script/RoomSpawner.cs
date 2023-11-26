@@ -34,6 +34,7 @@ public class RoomSpawner : MonoBehaviour
         }
         if(roomManager.currentRoomCount.Count >= roomManager.maxRooms)
         {
+            Destroy(gameObject);
             return;
         }
         if (!spawned)
@@ -49,18 +50,6 @@ public class RoomSpawner : MonoBehaviour
         if (!destroyer)
         {
             Destroy(gameObject);
-        }
-    }
-
-    private void InstantiateRandomRoom(int length, GameObject[] room)
-    {
-        GameObject newRoom;
-        
-        if (roomManager.currentRoomCount.Count < roomManager.maxRooms)
-        {
-            int random = Random.Range(1, length);
-            newRoom = Instantiate(room[random], new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
-            newRoom.transform.parent = this.transform.parent.parent.parent;
         }
     }
 

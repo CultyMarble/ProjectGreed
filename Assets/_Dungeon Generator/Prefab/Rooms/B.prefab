@@ -79311,7 +79311,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4506294034837938320
 Transform:
   m_ObjectHideFlags: 0
@@ -79355,7 +79355,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gateManager: {fileID: 0}
   currentRoomType: 0
-  roomShape: 0
+  roomShape: 3
   added: 0
   roomVariants:
   - {fileID: 6513149241168145263}
@@ -79381,7 +79381,7 @@ GameObject:
   - component: {fileID: 4506294035325290244}
   - component: {fileID: 4506294035325290245}
   - component: {fileID: 3989734745919455233}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: SpawnPoint
   m_TagString: RoomSpawnPoint
   m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
@@ -79416,7 +79416,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   room: {fileID: 0}
-  openingDirection: 2
+  openingDirection: 3
   spawned: 0
   destroyer: 0
 --- !u!50 &4506294035325290245

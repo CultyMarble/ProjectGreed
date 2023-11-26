@@ -20,6 +20,11 @@ public class Room : MonoBehaviour
     public RoomController topBottomRoom;
     public RoomController topLeftRoom;
     public RoomController topRightRoom;
+    public RoomController topRightLeftRoom;
+    public RoomController topRightBottomRoom;
+    public RoomController topBottomLeftRoom;
+    public RoomController rightBottomLeftRoom;
+
     public Direction spawnDirection;
     public RoomController activeRoom;
 
@@ -41,7 +46,7 @@ public class Room : MonoBehaviour
         {
             case RoomShape.Centre:
                 activeRoom = centreRoom;
-                spawnDirection = Direction.Centre; 
+                spawnDirection = Direction.Centre;
                 break;
             case RoomShape.T:
                 activeRoom = topRoom;
@@ -73,7 +78,25 @@ public class Room : MonoBehaviour
             case RoomShape.LB:
                 activeRoom = leftBottomRoom;
                 break;
+            case RoomShape.TRB:
+                activeRoom = topRightBottomRoom;
+                break;
+            case RoomShape.TRL:
+                activeRoom = topRightLeftRoom;
+                break;
+            case RoomShape.TBL:
+                activeRoom = topBottomLeftRoom;
+                break;
+            case RoomShape.RBL:
+                activeRoom = rightBottomLeftRoom;
+                break;
         }
+        activeRoom.gameObject.SetActive(true);
+    }
+    public void SetCentreRoom()
+    {
+        DisableAllRooms();
+        activeRoom = centreRoom;
         activeRoom.gameObject.SetActive(true);
     }
     public void SetActiveRoomRandom(Direction direction)
@@ -87,19 +110,19 @@ public class Room : MonoBehaviour
                 activeRoom = centreRoom;
                 break;
             case Direction.Top:
-                random = Random.Range(0, 2);
+                random = Random.Range(0, bottomRooms.Length);
                 activeRoom = bottomRooms[random];
                 break;
             case Direction.Right:
-                random = Random.Range(0, 2);
+                random = Random.Range(0, leftRooms.Length);
                 activeRoom = leftRooms[random];
                 break;
             case Direction.Bottom:
-                random = Random.Range(0, 3);
+                random = Random.Range(0, topRooms.Length);
                 activeRoom = topRooms[random];
                 break;
             case Direction.Left:
-                random = Random.Range(0, 3);
+                random = Random.Range(0, rightRooms.Length);
                 activeRoom = rightRooms[random];
                 break;
         }
@@ -118,6 +141,10 @@ public class Room : MonoBehaviour
         topBottomRoom.gameObject.SetActive(false);
         topLeftRoom.gameObject.SetActive(false);
         topRightRoom.gameObject.SetActive(false);
+        topRightLeftRoom.gameObject.SetActive(false);
+        topRightBottomRoom.gameObject.SetActive(false);
+        topBottomLeftRoom.gameObject.SetActive(false);
+        rightBottomLeftRoom.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
