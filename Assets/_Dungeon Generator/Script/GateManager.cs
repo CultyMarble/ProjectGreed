@@ -47,7 +47,10 @@ public class GateManager : MonoBehaviour
 
     private void Awake()
     {
-        room = transform.parent.GetComponentInParent<Room>();
+        if (!standalone)
+        {
+            room = transform.parent.GetComponentInParent<Room>();
+        }
     }
 
     private void Update()
@@ -86,7 +89,7 @@ public class GateManager : MonoBehaviour
                 }
             }
         }
-         gates.SetActive(active);
+        gates.SetActive(active);
     }
 
     public void RoomCleared()
@@ -389,6 +392,7 @@ public class GateManager : MonoBehaviour
             }
             if (standalone)
             {
+                ActiveGates(true);
                 enemyPool = GameObject.FindGameObjectsWithTag("Enemy");
                 if (enemyPool.Length == 0)
                 {
