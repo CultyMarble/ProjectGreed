@@ -222,6 +222,7 @@ public class RoomManager : MonoBehaviour
     {
         if(loops == 2)
         {
+            keySpawned = true;
             return;
         }
         if (keySpawned && loops == 1)

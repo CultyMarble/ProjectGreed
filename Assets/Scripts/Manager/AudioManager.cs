@@ -21,6 +21,15 @@ public class AudioManager : SingletonMonobehaviour<AudioManager>
         batDeath,
         maleDeathSound,
         footstep,
+        playerDamage,
+        enemyDamage,
+        explosion,
+        zombieIdle1,
+        zombieIdle2,
+        projectile,
+        wood,
+        spikes,
+        dash,
     }
     public enum musicSound
     {

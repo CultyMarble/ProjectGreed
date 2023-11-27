@@ -87,8 +87,10 @@ public abstract class Trap : MonoBehaviour
             effectAnimationTimer -= animationSpeed;
 
             if (currentAnimationIndex == triggerIndex)
+            {
                 TriggerTrapEffect();
-
+                AudioManager.Instance.playSFXClip(AudioManager.SFXSound.spikes);
+            }
             if (currentAnimationIndex == trapSprites.Length)
             {
                 playAnimation = false;

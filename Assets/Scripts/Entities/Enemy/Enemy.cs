@@ -1,14 +1,28 @@
 using UnityEngine;
 
+public enum EnemyType
+{
+    zombie,
+    archer,
+    bat,
+    miniMushroom,
+    boss,
+}
 public class Enemy : MonoBehaviour
 {
     [HideInInspector] public bool isPushBack;
     [SerializeField] private Animator animator;
+    [SerializeField] private EnemyType enemyType;
+
     //[SerializeField] private Stun stunStatusEffect;
 
     private float stunImmuneTime = 1.5f;
     private float stunImmuneTimer = 0.0f;
     private float pushBackTime = 1.0f;
+
+    private float idleAudioTime = 3f;
+    private float idleAudioTimer = default;
+
 
     //======================================================================
     private void OnCollisionEnter2D(Collision2D collision)
@@ -32,14 +46,19 @@ public class Enemy : MonoBehaviour
         if (isPushBack)
         {
             pushBackTime -= Time.deltaTime;
-            if(pushBackTime <= 0)
+            if (pushBackTime <= 0)
             {
                 isPushBack = false;
             }
         }
+        if(idleAudioTimer <= 0)
+        {
+            idleAudioTimer = 0;
+        }
+        IdleAudioHandler();
     }
 
-    //======================================================================
+        //======================================================================
     private void UpdateStunImmuneTime()
     {
         if (stunImmuneTimer <= 0.0f)
@@ -49,7 +68,7 @@ public class Enemy : MonoBehaviour
             return;
         }
 
-        stunImmuneTimer -= Time.deltaTime;
+    stunImmuneTimer -= Time.deltaTime;
     }
 
     public void InflictStatusEffect(AbilityStatusEffect statusEffect, int stackAmount)
@@ -94,5 +113,33 @@ public class Enemy : MonoBehaviour
         {
             gameObject.GetComponentInChildren<Rot>().Deactivate();
         }
+    }
+
+    private void IdleAudioHandler()
+    {
+        if (idleAudioTimer > 0)
+        {
+            idleAudioTimer -= Time.deltaTime;
+            return;
+        }
+        switch (enemyType)
+        {
+            case EnemyType.zombie:
+                if(Random.Range(0,2) == 1)
+                {
+                    AudioManager.Instance.playSFXClip(AudioManager.SFXSound.zombieIdle1);
+                }
+                else {
+                    AudioManager.Instance.playSFXClip(AudioManager.SFXSound.zombieIdle2);
+                }
+                break;
+            case EnemyType.archer:
+                break;
+            case EnemyType.miniMushroom:
+                break;
+            case EnemyType.boss:
+                break;
+        }
+        idleAudioTimer = idleAudioTime;
     }
 }

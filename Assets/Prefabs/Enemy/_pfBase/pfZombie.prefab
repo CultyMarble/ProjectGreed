@@ -688,6 +688,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPushBack: 0
   animator: {fileID: 3013352444999147950}
+  enemyType: 0
 --- !u!114 &6121733131684266000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -720,7 +721,7 @@ MonoBehaviour:
   movementSpeed: 2
   currentDestination: {fileID: 4105315116686917796}
   currentTarget: {x: 0, y: 0, z: 0}
-  searchRadius: 12
+  searchRadius: 15
   breakDistanceMin: 0
   breakDistanceMax: 0
   requireLineOfSight: 1
