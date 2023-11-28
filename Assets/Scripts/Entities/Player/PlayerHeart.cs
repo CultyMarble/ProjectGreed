@@ -19,29 +19,35 @@ public class PlayerHeart : MonoBehaviour
     private readonly float feedbackDamageTime = 0.10f;
     private float feedbackDamageTimer = default;
 
-    // Player Buff
-    private readonly float recoveryCooldown = 10.0f;
+    // Player Regen
+    private bool canRegen = default;
+    private readonly float recoveryCooldown = 15.0f;
     private float recoveryCooldownTimer = default;
+
+    // IFrame
+    [SerializeField] private Animator bodySpriteAnimator = default;
+    private readonly float iFrameDuration = 1.0f;
+    private float iFrameTimer = default;
+    private bool damageImmune = default;
 
     //======================================================================
     private void OnEnable()
     {
         ResetPlayerHeart();
+        recoveryCooldownTimer = recoveryCooldown;
     }
 
     private void Update()
     {
         UpdateDamageFeedBackTimer();
+        UpdateIFrameTimer();
 
-        if (Input.GetKeyDown(KeyCode.Home))
-        {
-            UpdateCurrentMaxHeart(1);
-        }
+        if (canRegen == false)
+            return;
 
-        // Recovery
         if (currentHeart < currentMaxHeart)
         {
-            recoveryCooldownTimer-= Time.deltaTime;
+            recoveryCooldownTimer -= Time.deltaTime;
             if (recoveryCooldownTimer <= 0.0f)
             {
                 recoveryCooldownTimer = recoveryCooldown;
@@ -51,11 +57,33 @@ public class PlayerHeart : MonoBehaviour
     }
 
     //======================================================================
+    private void IFrameActive()
+    {
+        iFrameTimer = iFrameDuration;
+        bodySpriteAnimator.SetBool("IFrame", true);
+
+        damageImmune = true;
+    }
+
+    private void UpdateIFrameTimer()
+    {
+        if (iFrameTimer <= 0.0f)
+            return;
+
+        iFrameTimer -= Time.deltaTime;
+        if (iFrameTimer <= 0.0f)
+        {
+            bodySpriteAnimator.SetBool("IFrame", false);
+            damageImmune = false;
+        }
+    }
+
     private void TriggerDamageFeedBack()
     {
         // Health Feedback
         GetComponentInChildren<SpriteRenderer>().color = new Color(255, 0, 0);
         feedbackDamageTimer = feedbackDamageTime;
+
         AudioManager.Instance.playSFXClip(AudioManager.SFXSound.playerDamage);
     }
 
@@ -85,6 +113,11 @@ public class PlayerHeart : MonoBehaviour
         }
 
     //======================================================================
+    public void SetCanRegenActive(bool active)
+    {
+        canRegen = active;
+    }
+
     public void ResetPlayerHeart()
     {
         currentHeart = currentMaxHeart;
@@ -113,34 +146,36 @@ public class PlayerHeart : MonoBehaviour
         //Invoke Event
         OnHeartChangedEvent?.Invoke(this, new OnHealthChangedEventArgs { currentHeart = currentHeart });
     }
+
     public void UpdateCurrentHeart(int amount = 0)
     {
-        if (!this.enabled)
-        {
+        if (amount < 0 && damageImmune == true)
             return;
-        }
+
         if (amount < 0)
-            TriggerDamageFeedBack();
-
-        if (amount != 0)
         {
-
-            feedbackDamageTimer = feedbackDamageTime;
-
-            currentHeart += amount;
-            if (currentHeart <= 0)
-            {
-                currentHeart = 0;
-                DespawnPlayer();
-            }
-            else if (currentHeart > currentMaxHeart)
-            {
-                currentHeart = currentMaxHeart;
-            }
+            TriggerDamageFeedBack();
+            IFrameActive();
         }
+
+        currentHeart += amount;
+
+        if (currentHeart <= 0)
+        {
+            currentHeart = 0;
+            DespawnPlayer();
+
+            recoveryCooldownTimer = recoveryCooldown;
+        }
+        else if (currentHeart > currentMaxHeart)
+            currentHeart = currentMaxHeart;
+
+        feedbackDamageTimer = feedbackDamageTime;
+
         //Invoke Event
         OnHeartChangedEvent?.Invoke(this, new OnHealthChangedEventArgs { currentHeart = currentHeart });
     }
+
     public void UpdatePlayerHeartParameters()
     {
         currentMaxHeart = PlayerDataManager.Instance.PlayerDataRuntime.BaseMaxHealth;
