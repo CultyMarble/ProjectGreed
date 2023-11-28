@@ -17,41 +17,46 @@ public class RangeAbilityProjectile : MonoBehaviour
     private float animationTimer;
     private int currentAnimationIndex;
 
+    [Header("Poison Pool")]
+    [SerializeField] private Transform pfPoisonPool = default;
+    private bool canCreatePoisonPool = default;
+    private int amount = default;
+
     //===========================================================================
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Enemy") && collision.GetType().ToString() != Tags.CIRCLECOLLIDER2D)
+        if (canCreatePoisonPool)
         {
-            // Deal Damage
+            if (collision.gameObject.CompareTag("Enemy") ||collision.gameObject.CompareTag("Breakable") ||
+                collision.gameObject.CompareTag("FinalBoss") ||collision.gameObject.CompareTag("Collisions"))
+                Despawn();
+            return;
+        }
+
+        if (collision.gameObject.CompareTag("Enemy") && collision.GetType().ToString() != Tags.CIRCLECOLLIDER2D)
             collision.gameObject.GetComponent<EnemyHealth>().UpdateCurrentHealth(-damage);
 
-            // Deal Status Effect
-
-        }
-
         if (collision.gameObject.CompareTag("Breakable"))
-        {
             collision.gameObject.GetComponent<BreakableItem>().UpdateCurrentHealth(-damage);
 
-        }
+        if (collision.gameObject.CompareTag("FinalBoss"))
+            collision.transform.parent.GetComponent<EnemyHealth>().UpdateCurrentHealth(-damage);
 
         if (collision.gameObject.CompareTag("Collisions"))
-        {
-            gameObject.SetActive(false);
-            gameObject.transform.localPosition = Vector2.zero;
-        }
-
-        if (collision.gameObject.CompareTag("FinalBoss"))
-        {
-            collision.transform.parent.GetComponent<EnemyHealth>().UpdateCurrentHealth(-damage);
-        }
+            Despawn();
     }
 
     //===========================================================================
+    private void OnEnable()
+    {
+        amount = 1;
+    }
+
     private void Update()
     {
         if (SceneControlManager.Instance.CurrentGameplayState == GameplayState.Pause)
             return;
+
         transform.position += moveSpeed * Time.deltaTime * moveDirection;
 
         ProjectileAnimation();
@@ -74,6 +79,22 @@ public class RangeAbilityProjectile : MonoBehaviour
     }
 
     //===========================================================================
+    public void Despawn()
+    {
+        if (canCreatePoisonPool && amount == 1)
+        {
+            amount--;
+            Transform _parent = GameObject.Find("AbilityPool").transform;
+            Transform _pool = Instantiate(pfPoisonPool, _parent);
+            _pool.position = transform.position;
+
+            Destroy(_pool.gameObject, 3.0f);
+        }
+
+        gameObject.SetActive(false);
+        gameObject.transform.localPosition = Vector2.zero;
+    }
+
     public void ProjectileConfig(float newMoveSpeed, Transform startPositionTransform, float newDamage)
     {
         damage = newDamage;
@@ -81,5 +102,10 @@ public class RangeAbilityProjectile : MonoBehaviour
 
         moveDirection = (CultyMarbleHelper.GetMouseToWorldPosition() - startPositionTransform.position).normalized;
         transform.up = moveDirection;
+    }
+
+    public void CanCreatePoisonPool(bool active)
+    {
+        canCreatePoisonPool = active;
     }
 }

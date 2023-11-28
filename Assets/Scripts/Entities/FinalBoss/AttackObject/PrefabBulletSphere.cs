@@ -9,7 +9,7 @@ public class PrefabBulletSphere : MonoBehaviour
 
     private float speed = 2.0f;
     private float bulletSpeed = 4.0f;
-    private readonly float cooldown = 1.5f;
+    private readonly float cooldown = 3.0f;
     private float cooldownTimer = default;
 
     //===========================================================================
@@ -36,8 +36,7 @@ public class PrefabBulletSphere : MonoBehaviour
     //===========================================================================
     private void Start()
     {
-        cooldownTimer = cooldown;
-
+        cooldownTimer = Random.Range(0, cooldown);
         projectileParent = GameObject.Find("Prefabs").transform;
     }
 

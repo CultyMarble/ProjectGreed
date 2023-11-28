@@ -5,20 +5,22 @@ public class BombAbility : MonoBehaviour
 {
     public struct OnChargeChangedEventArgs { public float charge; }
     public event System.EventHandler<OnChargeChangedEventArgs> OnChargeChangedEvent;
+
+    [SerializeField] private Transform bombAbilityBombPool = default;
+    [SerializeField] private Transform pfBombAbilityBomb = default;
+
     [SerializeField] public bool throwBomb = false;
+    [HideInInspector] public bool infAmmo = false;
+
     private int currentCharge = default;
     private float damage = default;
     private float radius = default;
     private float delayTime = default;
     private readonly float inputDelayDuration = 0.5f;
     private float inputDelayTimer = default;
-    [HideInInspector] public bool infAmmo = false;
 
-    // Pooling
-    [Header("Pooling Settings:")]
-    [SerializeField] private Transform bombAbilityBombPool = default;
-    [SerializeField] private Transform pfBombAbilityBomb = default;
-    private readonly int poolSize = 10;
+    // Ability Upgrade
+    private bool bombManualTrigger = default;
 
     // NEW INPUT SYSTEM
     private PlayerInput playerInput = default;
@@ -27,7 +29,6 @@ public class BombAbility : MonoBehaviour
     private void Awake()
     {
         playerInput = FindObjectOfType<PlayerInput>();
-        PopulatePool();
     }
 
     private void Update()
@@ -45,14 +46,6 @@ public class BombAbility : MonoBehaviour
     }
 
     //===========================================================================
-    private void PopulatePool()
-    {
-        for (int i = 0; i < poolSize; i++)
-        {
-            Instantiate(pfBombAbilityBomb, bombAbilityBombPool).gameObject.SetActive(false);
-        }
-    }
-
     private void UpdateInputDelay()
     {
         if (inputDelayTimer <= 0)
@@ -76,36 +69,40 @@ public class BombAbility : MonoBehaviour
 
     private void PlaceBomb()
     {
-        foreach (Transform bomb in bombAbilityBombPool)
+        BombAbilityBomb _bomb = Instantiate(pfBombAbilityBomb, bombAbilityBombPool).GetComponent<BombAbilityBomb>();
+
+        if (bombManualTrigger == true)
         {
-            if (bomb.gameObject.activeInHierarchy == false)
-            {
-                BombAbilityBomb _bomb = bomb.GetComponent<BombAbilityBomb>();
-                _bomb.SetDamage(damage);
-                _bomb.SetRadius(radius);
-                _bomb.SetDelayTime(delayTime);
+            _bomb.SetManualTrigger(bombManualTrigger);
 
-                bomb.gameObject.SetActive(true);
+            _bomb.SetDamage(damage * 2);
+            _bomb.SetRadius(radius * 2);
 
-                if (throwBomb)
-                {
-                    Vector3 mouseDir = transform.parent.GetComponent<PlayerMovement>().GetMouseDirection().normalized;
-                    bomb.position = transform.position + 1.5f * (mouseDir);
-                    Vector2 velocity = mouseDir * 10f;
-                    bomb.gameObject.GetComponent<Rigidbody2D>().velocity = velocity;
-                }
-                else
-                {
-                    bomb.position = transform.position;
-                }
-                if (!infAmmo)
-                {
-                    UpdateBombCharge(-1);
-                }
-
-                break;
-            }
+            _bomb.transform.localScale = new Vector3(2.0f, 2.0f, 1.0f);
         }
+        else
+        {
+            _bomb.SetDamage(damage);
+            _bomb.SetRadius(radius);
+            _bomb.SetDelayTime(delayTime);
+        }
+
+        _bomb.gameObject.SetActive(true);
+
+        if (throwBomb)
+        {
+            Vector3 mouseDir = transform.parent.GetComponent<PlayerMovement>().GetMouseDirection().normalized;
+            _bomb.transform.position = transform.position + 1.5f * (mouseDir);
+            Vector2 velocity = mouseDir * 10f;
+            _bomb.gameObject.GetComponent<Rigidbody2D>().velocity = velocity;
+        }
+        else
+        {
+            _bomb.transform.position = transform.position;
+        }
+
+        if (!infAmmo)
+            UpdateBombCharge(-1);
     }
 
     //===========================================================================
@@ -127,5 +124,10 @@ public class BombAbility : MonoBehaviour
 
         // Invoke Event
         OnChargeChangedEvent?.Invoke(this, new OnChargeChangedEventArgs { charge = currentCharge });
+    }
+
+    public void SetBombManualTrigger(bool active)
+    {
+        bombManualTrigger = active;
     }
 }

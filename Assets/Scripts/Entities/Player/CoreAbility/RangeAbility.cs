@@ -36,6 +36,8 @@ public class RangeAbility : MonoBehaviour
 
     PlayerHeart playerHeartManager;
 
+    private bool canCreatePoisonPool = default;
+
     //===========================================================================
     private void Awake()
     {
@@ -241,6 +243,7 @@ public class RangeAbility : MonoBehaviour
                 AudioManager.Instance.playSFXClip(AudioManager.SFXSound.projectile);
                 RangeAbilityProjectile _projectile = projectile.GetComponent<RangeAbilityProjectile>();
                 _projectile.ProjectileConfig(projectileSpeed, transform, projectileDamage);
+                _projectile.CanCreatePoisonPool(canCreatePoisonPool);
 
                 projectile.gameObject.SetActive(true);
                 break;
@@ -321,6 +324,12 @@ public class RangeAbility : MonoBehaviour
             UpdateCurrentCharge(1);
         }
     }
+
+    public void CanCreatePoisonPool(bool active)
+    {
+        canCreatePoisonPool = active;
+    }
+
     public void EmptyPool(object sender, System.EventArgs e)
     {
         foreach (Transform projectile in rangeAbilityProjectilePool)

@@ -21,9 +21,7 @@ public class SaveDataManager : SingletonMonobehaviour<SaveDataManager>
     private void CheckIfNewSaveSlot(SOPlayerData saveData)
     {
         if (saveData.BaseMaxHealth == 0)
-        {
             saveData.TransferData(playerDataDefault);
-        }
     }
 
     //===========================================================================

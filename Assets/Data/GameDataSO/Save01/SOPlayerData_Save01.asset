@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ef50ec0a2bd4f44097faee1635ab648, type: 3}
   m_Name: SOPlayerData_Save01
   m_EditorClassIdentifier: 
-  baseMaxHealth: 5
+  baseMaxHealth: 3
   baseMoveSpeed: 8
   baseDashPenalty: 0.05
   baseDashCooldown: 1
@@ -22,7 +22,7 @@ MonoBehaviour:
   ba_baseMaxFuel: 100
   ba_fuelConsumePerTrigger: 3
   ba_baseRechargeRate: 100
-  ba_baseDamage: 3
+  ba_baseDamage: 5
   ba_basePlayerSpeedPenalty: 0.5
   ra_baseMaxCharge: 2
   ra_baseMaxRecharge: 100

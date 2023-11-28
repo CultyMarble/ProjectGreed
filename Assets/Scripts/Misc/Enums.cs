@@ -26,6 +26,7 @@ public enum SceneName
     DemoSceneHub,
     DemoSceneDungeon,
     DemoSceneBossRoom,
+    Tutorial,
 }
 
 public enum GameplayState

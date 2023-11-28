@@ -162,15 +162,42 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
 
         Player.Instance.transform.position = Vector3.zero;
 
-        // yield return StartCoroutine(LoadMap());
         while (CurrentGameplayState != GameplayState.Ongoing)
-        {
             yield return null;
-        }
 
         yield return StartCoroutine(LoadingScreen(0.0f));
         EventManager.CallAfterSceneLoadedLoadingScreenEvent();
 
+        isLoadingScene = false;
+    }
+
+    private IEnumerator LoadTutorial()
+    {
+        EventManager.CallBeforeSceneUnloadLoadingScreenEvent();
+        yield return StartCoroutine(LoadingScreen(1.0f));
+
+        ObjectPoolingManager.Instance.SetAllObjectsActive(false);
+
+        EventManager.CallBeforeSceneUnloadEvent();
+        yield return SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().buildIndex);
+        yield return StartCoroutine(LoadSceneAndSetActive(SceneName.Tutorial.ToString()));
+        EventManager.CallAfterSceneLoadEvent();
+
+        CurrentActiveScene = SceneName.Tutorial;
+        CurrentGameplayState = GameplayState.Pause;
+
+        Player.Instance.transform.position = Vector3.zero;
+
+        // START LOAD TUTORIAL
+
+
+
+        // END LOAD TUTORIAL
+
+        yield return StartCoroutine(LoadingScreen(0.0f));
+        EventManager.CallAfterSceneLoadedLoadingScreenEvent();
+
+        CurrentGameplayState = GameplayState.Ongoing;
         isLoadingScene = false;
     }
 
@@ -217,6 +244,17 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
             CurrentGameplayState = GameplayState.Pause;
 
             StartCoroutine(LoadDemoDungeon());
+        }
+    }
+
+    public void LoadTutorialWrapper()
+    {
+        if (isLoadingScreenActive == false)
+        {
+            isLoadingScene = true;
+            CurrentGameplayState = GameplayState.Pause;
+
+            StartCoroutine(LoadTutorial());
         }
     }
 

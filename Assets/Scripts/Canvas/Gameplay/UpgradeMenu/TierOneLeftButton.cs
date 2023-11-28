@@ -1,16 +1,31 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class TierOneLeftButton : UpgradeMenuButton
+public class TierOneLeftButton : UpgradeMenuButton, IPointerEnterHandler, IPointerExitHandler
 {
+    [SerializeField] private string upgradeName = default;
+    [SerializeField] private string upgradeDescription = default;
+
+    //===========================================================================
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        UpgradeMenu.Instance.SetUpgradeInfoPanelActive(true);
+        UpgradeMenu.Instance.SetUpgradeNameText(upgradeName);
+        UpgradeMenu.Instance.SetUpgradeDescriptionText(upgradeDescription);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        UpgradeMenu.Instance.SetUpgradeInfoPanelActive(false);
+    }
+
+    //===========================================================================
     public override void AppliedEffect()
     {
         PlayerHeart _playerHeart = Player.Instance.GetComponent<PlayerHeart>();
 
         _playerHeart.UpdateCurrentMaxHeart(1);
         _playerHeart.ResetPlayerHeart();
-
-        PlayerDataManager.Instance.PlayerDataRuntime.SetBaseMaxHealth(_playerHeart.CurrentMaxHeart);
-        PlayerDataManager.Instance.SaveRunTimeDataToPlayerDataSlot();
     }
 
     public override void RemoveEffect()
@@ -19,8 +34,5 @@ public class TierOneLeftButton : UpgradeMenuButton
 
         _playerHeart.UpdateCurrentMaxHeart(-1);
         _playerHeart.ResetPlayerHeart();
-
-        PlayerDataManager.Instance.PlayerDataRuntime.SetBaseMaxHealth(_playerHeart.CurrentMaxHeart);
-        PlayerDataManager.Instance.SaveRunTimeDataToPlayerDataSlot();
     }
 }
