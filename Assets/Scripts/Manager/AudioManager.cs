@@ -25,6 +25,8 @@ public class AudioManager : SingletonMonobehaviour<AudioManager>
     public enum musicSound
     {
         BGMusic,
+        BossBattleFirstForm,
+        BossBattleSecondForm,
     }
     private Dictionary<SFXSound, AudioClip> SFXSoundAudioClipDictionary;
     private Dictionary<musicSound, AudioClip> musicSoundAudioClipDictionary;

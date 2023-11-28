@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using static AudioManager;
 
 public class BossStageController : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class BossStageController : MonoBehaviour
     private void OnEnable()
     {
         firstFormHealth.OnDespawnEvent += Stage1Health_OnDespawnEvent;
+
+        AudioManager.Instance.playMusicClip(musicSound.BossBattleFirstForm);
     }
 
     private void OnDisable()
@@ -27,6 +30,7 @@ public class BossStageController : MonoBehaviour
         if (transitToSecondBoss)
         {
             StartCoroutine(SummonSecondStageBoss());
+            AudioManager.Instance.playMusicClip(musicSound.BossBattleSecondForm);
             transitToSecondBoss = false;
         }
     }
