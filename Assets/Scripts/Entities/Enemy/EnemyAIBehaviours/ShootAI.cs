@@ -73,7 +73,7 @@ public class ShootAI : MonoBehaviour
                 return;
             }
             SpawnBullet();
-            AudioManager.Instance.playSFXClip(AudioManager.SFXSound.archerShot);
+            AudioManager.Instance.playSFXClip(AudioManager.SFXSound.projectile);
 
             --shootTimeCounter;
             if (shootTimeCounter <= 0)
