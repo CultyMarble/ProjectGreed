@@ -28,7 +28,6 @@ public class AudioManager : SingletonMonobehaviour<AudioManager>
         openLockDoors,
         playerDamage,
         enemyDamage,
-        explosion,
         zombieIdle1,
         zombieIdle2,
         projectile,
