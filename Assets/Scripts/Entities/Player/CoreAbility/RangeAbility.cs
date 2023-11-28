@@ -240,6 +240,7 @@ public class RangeAbility : MonoBehaviour
         {
             if (projectile.gameObject.activeInHierarchy == false)
             {
+                AudioManager.Instance.playSFXClip(AudioManager.SFXSound.archerShot);
                 RangeAbilityProjectile _projectile = projectile.GetComponent<RangeAbilityProjectile>();
                 _projectile.ProjectileConfig(projectileSpeed, transform, projectileDamage);
                 _projectile.CanCreatePoisonPool(canCreatePoisonPool);

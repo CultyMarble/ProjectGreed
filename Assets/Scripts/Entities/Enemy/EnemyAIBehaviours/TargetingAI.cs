@@ -39,6 +39,7 @@ public class TargetingAI : MonoBehaviour
         lastKnownPosition = transform.position;
         pathfinder = GetComponent<Pathfinding.AIPath>();
         animator = GetComponent<Animator>();
+        animator.keepAnimatorControllerStateOnDisable = true;
         spriteRenderer = transform.GetComponentInChildren<SpriteRenderer>();
     }
 

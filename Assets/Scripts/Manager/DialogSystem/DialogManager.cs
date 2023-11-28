@@ -11,12 +11,6 @@ public class DialogManager : SingletonMonobehaviour<DialogManager>
     public bool activated = false;
 
     //===========================================================================
-    private void Start()
-    {
-        //SetDialogPanelActiveState(false);
-        //Time.timeScale = 1.0f;
-    }
-
     private void Update()
     {
         if (!activated)
@@ -26,7 +20,7 @@ public class DialogManager : SingletonMonobehaviour<DialogManager>
         if (dialogPanel.gameObject.activeSelf == false)
             return;
 
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0) || Input.GetKeyDown(KeyCode.Space))
         {
             lineIndex++;
             if(dialogLines == null)

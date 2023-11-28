@@ -8,9 +8,6 @@ public class MapGUI : SingletonMonobehaviour<MapGUI>
 
     //===========================================================================
 
-
-
-    //===========================================================================
     public void ToggleMapUI()
     {
         content.SetActive(!content.activeSelf);
@@ -23,5 +20,14 @@ public class MapGUI : SingletonMonobehaviour<MapGUI>
         {
             SceneControlManager.Instance.CurrentGameplayState = GameplayState.Ongoing;
         }
+    }
+
+    public bool CheckMapOpen()
+    {
+        if (content.activeSelf == true)
+        {
+            return true;
+        }
+        return false;
     }
 }

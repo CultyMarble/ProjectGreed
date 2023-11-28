@@ -46,29 +46,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aStar: {fileID: 1620090107190621866}
-  entryRoom: {fileID: 399540625238344219, guid: 2747354fa09c2e2418e4a0f805802360, type: 3}
-  minRooms: 8
-  maxRooms: 10
-  bottomRooms:
-  - {fileID: 4506294034837938322, guid: a07d32b5e4b0eb043b6d2d47fa58826a, type: 3}
-  - {fileID: 7741260060544441628, guid: a3b33200f80704a4f86f5d1881dcab09, type: 3}
-  - {fileID: 1338217176058572985, guid: 11c8a4ca71dc8164d86cd8fa1a77a461, type: 3}
-  topRooms:
-  - {fileID: 4021261305634921458, guid: 1b9e9bf910f51e44e9bd42a0feac27d1, type: 3}
-  - {fileID: 1338217176058572985, guid: 11c8a4ca71dc8164d86cd8fa1a77a461, type: 3}
-  - {fileID: 2955065820043591103, guid: 84cf68ae261a84d47a608a8f882128d2, type: 3}
-  - {fileID: 5332306837567287648, guid: 25fac5fd9a9838642bb30f42e74252ed, type: 3}
-  leftRooms:
-  - {fileID: 1252217435931422123, guid: 70336c75691ec694ba6e4171827554ba, type: 3}
-  - {fileID: 261532820643789861, guid: c70725f3fa36c1c43a5e59e8735fb607, type: 3}
-  - {fileID: 2955065820043591103, guid: 84cf68ae261a84d47a608a8f882128d2, type: 3}
-  rightRooms:
-  - {fileID: 4556654252960075518, guid: 662120e19f4af524c98da5c0ad3477dd, type: 3}
-  - {fileID: 261532820643789861, guid: c70725f3fa36c1c43a5e59e8735fb607, type: 3}
-  - {fileID: 7741260060544441628, guid: a3b33200f80704a4f86f5d1881dcab09, type: 3}
-  - {fileID: 5332306837567287648, guid: 25fac5fd9a9838642bb30f42e74252ed, type: 3}
-  centerRoom:
-  - {fileID: 399540625238344219, guid: 2747354fa09c2e2418e4a0f805802360, type: 3}
+  room: {fileID: 194884576636689591, guid: 520418a93d14b4f43b685aaf2a9c7048, type: 3}
+  minRooms: 6
+  maxRooms: 12
   currentRoomTotal: []
   currentRoomCount: []
   currentDeadEndRooms: []
@@ -93,9 +73,9 @@ MonoBehaviour:
   keys:
   - {fileID: 5567745467040105511, guid: b15e0f56bacbb594196dd7159181f8da, type: 3}
   - {fileID: 5567745467040105511, guid: eb15c768ea3be5e48a0a4967c23bb235, type: 3}
-  boss: {fileID: 6503859017374133296, guid: f0defaa3df4d4854ba674518f9ea3250, type: 3}
+  boss: {fileID: 6078217297577339867, guid: f0defaa3df4d4854ba674518f9ea3250, type: 3}
   shop: {fileID: 8439679027966053120, guid: 174ff5aef0fe7df41b304cd6624c3040, type: 3}
-  abandonedShop: {fileID: 2485148985364739039, guid: 7f0c93ac1536411458ff32d00d195648, type: 3}
+  abandonedShop: {fileID: 4384084567026414767, guid: bc316498d6a38944cb08c7231d6faa16, type: 3}
   startRoomDialogue: {fileID: 2471121758696812898, guid: ea4375912d3ce9247bf42dce04446c49, type: 3}
   silverRoomDialogue: {fileID: 2471121758696812898, guid: a517b4a5a748d74468de385c04defd9d, type: 3}
   goldRoomDialogue: {fileID: 2471121758696812898, guid: c85f59f4e13e26f479871c32b1605986, type: 3}

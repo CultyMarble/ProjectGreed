@@ -195,6 +195,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (dashCooldownTimer <= 0 && movementVector != Vector2.zero)
             {
+                AudioManager.Instance.playSFXClip(AudioManager.SFXSound.dash);
                 Player.Instance.actionState = PlayerActionState.IsDashing;
                 impairTimer = 0;
                 UpdateImpairTimer();

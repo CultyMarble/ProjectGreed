@@ -29,7 +29,7 @@ public class BreakableItem : MonoBehaviour
         if (itemHealth < 0)
         {
             SpawnItem();
-
+            AudioManager.Instance.playSFXClip(AudioManager.SFXSound.wood);
             gameObject.SetActive(false);
             Destroy(gameObject);
         }

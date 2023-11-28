@@ -23,39 +23,47 @@ public enum RoomType
 
 public class RoomController : MonoBehaviour
 {
-    private RoomManager roomManager;
+    [SerializeField] private GateManager gateManager;
 
     [Header("Rooms ID")]
     public RoomType currentRoomType = RoomType.normal;
-    public string roomVariant;
+    public RoomShape roomShape;
     public bool added = false;
 
     [Space]
 
     [Header("Normal Rooms")]
-    [SerializeField] private GameObject[] roomType;
+    [SerializeField] public GameObject[] roomVariants;
 
     [Space]
 
     [Header("Special Rooms")]
     [SerializeField] private GameObject specialRoom;
 
+    [HideInInspector] public GameObject activeRoomVariant;
+
+    
+    private RoomManager roomManager;
+
     private void Awake()
     {
         roomManager = FindObjectOfType<RoomManager>();
-        roomManager.currentRoomCount.Add(this);
-
-        if (roomVariant == "T" || roomVariant == "L" || roomVariant == "R" || roomVariant == "B")
-        {
-            roomManager.currentDeadEndRooms.Add(this);
-        }
+        //if (roomShape == RoomShape.T || roomShape == RoomShape.L|| roomShape == RoomShape.R|| roomShape == RoomShape.B)
+        //{
+        //    roomManager.currentDeadEndRooms.Add(this);
+        //}
 
         SetRandomRoomType();
     }
 
+    private void Update()
+    {
+        
+    }
+
     private void SetAllRoomActiveFalse() // TURN ALL ROOMS FALSE
     {
-        foreach (var room in roomType)
+        foreach (var room in roomVariants)
         {
             room.SetActive(false);
         }
@@ -65,8 +73,9 @@ public class RoomController : MonoBehaviour
     {
         SetAllRoomActiveFalse();
 
-        int random = Random.Range(0, roomType.Length);
-        roomType[random].SetActive(true);
+        int random = Random.Range(0, roomVariants.Length);
+        activeRoomVariant = roomVariants[random];
+        activeRoomVariant.SetActive(true);
     }
 
     public void SetSpecialRoomActive()
@@ -89,6 +98,7 @@ public class RoomController : MonoBehaviour
         }
         SetAllRoomActiveFalse();
         if (specialRoom != null) specialRoom.SetActive(true);
-        GetComponentInChildren<GateManager>().disableGate = true;
+        gateManager = transform.parent.parent.GetComponentInChildren<GateManager>();
+        gateManager.disableGate = true;
     }
 }

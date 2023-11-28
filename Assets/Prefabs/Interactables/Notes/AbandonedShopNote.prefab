@@ -8,7 +8,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7650846737875935544}
+  - component: {fileID: 3868596768628617767}
   - component: {fileID: 2485148985364739027}
   - component: {fileID: 2485148985364739024}
   - component: {fileID: 2485148985364739026}
@@ -20,8 +20,8 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &7650846737875935544
-RectTransform:
+--- !u!4 &3868596768628617767
+Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -36,11 +36,6 @@ RectTransform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 15.98, y: 2.57}
-  m_SizeDelta: {x: 1, y: 0.444}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!70 &2485148985364739027
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -70,9 +65,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.5}
+  m_Offset: {x: 0, y: -0.024746817}
   serializedVersion: 2
-  m_Radius: 0.75
+  m_Radius: 0.72772235
 --- !u!114 &2485148985364739026
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -90,6 +85,7 @@ MonoBehaviour:
   dialogueEntryArray: []
   quickText: This shop has been permanently closed. Please do not my remaining wares
     - Shopkeeper
+  newDialogueIndicator: {fileID: 0}
 --- !u!114 &3802144579809581164
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -102,8 +98,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95727d4fab1df964894941646191d157, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: Scribbled Note
-  itemDescription: Could be something interesting.
+  _title: Shopkeeper's Note
+  _description: A note left by the shopkeeper.
 --- !u!1 &6640207986461867672
 GameObject:
   m_ObjectHideFlags: 0
@@ -133,7 +129,7 @@ RectTransform:
   m_LocalScale: {x: 0.99, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7650846737875935544}
+  m_Father: {fileID: 3868596768628617767}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}

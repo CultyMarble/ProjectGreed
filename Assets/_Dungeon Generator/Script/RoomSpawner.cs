@@ -7,7 +7,8 @@ public class RoomSpawner : MonoBehaviour
     private RoomManager roomManager;
 
     [Tooltip(" 1 --> Need Bottom Door\r\n 2 --> Need Top Door\r\n 3 --> Need Left Door\r\n 4 --> Need Right Door")]
-    [SerializeField] private int openingDirection;
+    [SerializeField] private GameObject room;
+    [SerializeField] private Direction openingDirection;
     [SerializeField] public bool spawned = false;
     [SerializeField] public bool destroyer;
 
@@ -16,11 +17,11 @@ public class RoomSpawner : MonoBehaviour
         roomManager = FindObjectOfType<RoomManager>();
         if (!destroyer)
         {
-            Invoke("Spawn", 0.05F);
+            Invoke("Spawn", 0.025F);
         }
         RoomManager.onRoomsGenerated += DeleteRoom;
     }
-   
+
     private void Spawn()
     {
         if(roomManager.mapFinished)
@@ -31,29 +32,16 @@ public class RoomSpawner : MonoBehaviour
         {
             roomManager = FindObjectOfType<RoomManager>();
         }
-        if(roomManager.currentRoomCount.Count > roomManager.maxRooms)
+        if(roomManager.currentRoomCount.Count >= roomManager.maxRooms)
         {
+            Destroy(gameObject);
             return;
         }
         if (!spawned)
         {
-            if (openingDirection == 1)
-            {
-                InstantiateRandomRoom(roomManager.bottomRooms.Length, roomManager.bottomRooms);
-            }
-            else if (openingDirection == 2)
-            {
-                InstantiateRandomRoom(roomManager.topRooms.Length, roomManager.topRooms);
-            }
-            else if (openingDirection == 3)
-            {
-                InstantiateRandomRoom(roomManager.leftRooms.Length, roomManager.leftRooms);
-            }
-            else if (openingDirection == 4)
-            {
-                InstantiateRandomRoom(roomManager.rightRooms.Length, roomManager.rightRooms);
-            }
-
+            GameObject newRoom = Instantiate(roomManager.room, transform.position, Quaternion.identity);
+            newRoom.GetComponent<Room>().SetActiveRoomRandom(openingDirection);
+            newRoom.transform.parent = roomManager.transform;
             spawned = true;
         }
     }
@@ -65,18 +53,6 @@ public class RoomSpawner : MonoBehaviour
         }
     }
 
-    private void InstantiateRandomRoom(int length, GameObject[] room)
-    {
-        GameObject newRoom;
-        
-        if (roomManager.currentRoomCount.Count < roomManager.maxRooms)
-        {
-            int random = Random.Range(1, length);
-            newRoom = Instantiate(room[random], new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
-            newRoom.transform.parent = this.transform.parent.parent.parent;
-        }
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (roomManager == null)
@@ -85,9 +61,17 @@ public class RoomSpawner : MonoBehaviour
         }
         if (collision.CompareTag("RoomSpawnPoint"))
         {
-            if (collision.GetComponent<RoomSpawner>().spawned == true && spawned == false && transform.position.x != 0 && transform.position.y != 0)
+            if (this.CompareTag("Destroyer"))
+            {
+                Destroy(collision.gameObject);
+            }
+            else if (collision.GetComponent<RoomSpawner>().spawned == true && spawned == false && transform.position.x != 0 && transform.position.y != 0)
             {
                 Destroy(gameObject);
+            }
+            else if (collision.GetComponent<RoomSpawner>().spawned == false && spawned == true && transform.position.x != 0 && transform.position.y != 0)
+            {
+                Destroy(collision.gameObject);
             }
             else if (collision.GetComponent<RoomSpawner>().spawned == false && spawned == true && transform.position.x != 0 && transform.position.y != 0)
             {
@@ -98,7 +82,14 @@ public class RoomSpawner : MonoBehaviour
         }
         if (collision.CompareTag("Destroyer"))
         {
-            Destroy(gameObject);
+            if(this.CompareTag("Destroyer") && spawned)
+            {
+                Destroy(collision.gameObject);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
 
             spawned = true;
         }

@@ -9,22 +9,15 @@ public class RoomManager : MonoBehaviour
     [Header("Room Spawn Parameters")]
 
     public GameObject aStar;
-    public GameObject entryRoom;
+    public GameObject room;
     public int minRooms;
     public int maxRooms;
 
-    [Header("Room Variants")]
-    public GameObject[] bottomRooms;
-    public GameObject[] topRooms;
-    public GameObject[] leftRooms;
-    public GameObject[] rightRooms;
-    public GameObject[] centerRoom;
-
     [Header("Active Rooms")]
 
-    public List<RoomController> currentRoomTotal;
-    public List<RoomController> currentRoomCount;
-    public List<RoomController> currentDeadEndRooms;
+    public List<Room> currentRoomTotal;
+    public List<Room> currentRoomCount;
+    public List<Room> currentDeadEndRooms;
 
     [Header("Spawning")]
     [HideInInspector] public bool bossSpawned = false;
@@ -34,8 +27,9 @@ public class RoomManager : MonoBehaviour
     [HideInInspector] public bool roomsFinished = false;
     [HideInInspector] public bool mapFinished = false;
     [HideInInspector] public int loops = 0;
-    private float delaySpawnRoomType = 0.1F;
+    private float delaySpawnRoomType = 0.5f;
     private bool delaySpawnRoomCheck = false;
+    private Vector3 lastBranch;
 
     [Space]
 
@@ -50,20 +44,18 @@ public class RoomManager : MonoBehaviour
     public GameObject silverRoomDialogue;
     public GameObject goldRoomDialogue;
 
+    private List<GameObject> currentNPCList;
+
     public delegate void OnRoomsGenerated();
     public static event OnRoomsGenerated onRoomsGenerated;
 
     private void Start()
     {
+        currentNPCList = npcList;
         LoadScene();
     }
     private void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.R))
-        //{
-        //    LoadScene();
-        //}
-
         if (!mapFinished)
         {
             SpawnRoomTypes();
@@ -87,7 +79,6 @@ public class RoomManager : MonoBehaviour
         if (loops > 0 && currentRoomCount.Count > 3)
         {
             StartNewBranch();
-            delaySpawnRoomType = 1F;
             return;
         }
         else if (loops > 0)
@@ -96,37 +87,32 @@ public class RoomManager : MonoBehaviour
         }
         if (currentRoomCount.Count <= 3)
         {
-            foreach (RoomController room in currentRoomTotal)
+            foreach (Room room in currentRoomTotal)
             {
                 Destroy(room.gameObject);
             }
             currentRoomTotal.Clear();
         }
-        foreach (RoomController room in currentRoomCount)
+        foreach (Room room in currentRoomCount)
         {
             Destroy(room.gameObject);
         }
         currentRoomCount.Clear();
         GameObject newEntryRoom;
         GameObject startDialogue;
-        newEntryRoom = Instantiate(entryRoom);
+        newEntryRoom = Instantiate(room);
         newEntryRoom.transform.parent = this.transform;
+        newEntryRoom.GetComponent<Room>().SetCentreRoom();
         startDialogue = Instantiate(startRoomDialogue);
         startDialogue.transform.parent = newEntryRoom.transform;
+        currentNPCList = npcList;
 
         delaySpawnRoomCheck = false;
-        delaySpawnRoomType = 0.5F;
+        delaySpawnRoomType = 0.5f;
     }
 
     private void SpawnRoomTypes()
     {
-        if(currentRoomCount.Count == 0)
-        {
-            delaySpawnRoomCheck = true;
-            delaySpawnRoomType = 0F;
-            CheckBranchFinished();
-            return;
-        }
         if (delaySpawnRoomType <= 0F && !delaySpawnRoomCheck)
         {
             SetShopRoom();
@@ -157,12 +143,12 @@ public class RoomManager : MonoBehaviour
         GameObject newBoss;
         for (int i = currentRoomTotal.Count - 1; i >= 0; i--)
         {
-            if (currentRoomTotal[i].currentRoomType != RoomType.empty)
+            if (currentRoomTotal[i].activeRoom.currentRoomType != RoomType.empty)
             {
-                currentRoomTotal[i].currentRoomType = RoomType.boss;
+                currentRoomTotal[i].activeRoom.currentRoomType = RoomType.boss;
                 newBoss = Instantiate(boss, currentRoomTotal[i].transform.position, Quaternion.identity);
                 newBoss.transform.parent = currentRoomTotal[i].transform;
-                currentRoomTotal[i].SetSpecialRoomActive();
+                currentRoomTotal[i].activeRoom.SetSpecialRoomActive();
 
                 break;
             }
@@ -180,13 +166,13 @@ public class RoomManager : MonoBehaviour
         int chance = Random.Range(0, 4);
         for(int i = currentRoomCount.Count/2; i < currentRoomCount.Count-1; i++)
         {
-            if(currentRoomCount[randomIndex].currentRoomType != RoomType.normal)
+            if(currentRoomCount[randomIndex].activeRoom.currentRoomType != RoomType.normal)
             {
                 continue;
             }
             else
             {
-                currentRoomCount[i].currentRoomType = RoomType.shop;
+                currentRoomCount[i].activeRoom.currentRoomType = RoomType.shop;
                 if(chance == 3)
                 {
                     newShop = Instantiate(abandonedShop, currentRoomCount[i].transform.position, Quaternion.identity);
@@ -198,7 +184,7 @@ public class RoomManager : MonoBehaviour
                     newShop.transform.SetParent(currentRoomCount[i].transform);
                 }
                 
-                currentRoomCount[i].SetSpecialRoomActive();
+                currentRoomCount[i].activeRoom.SetSpecialRoomActive();
                 shopSpawned = true;
                 return;
             }
@@ -215,30 +201,41 @@ public class RoomManager : MonoBehaviour
         GameObject newTreasure;
         int randomItemIndex = Random.Range(0, treasureItems.Length);
         int randomRoomIndex = Random.Range(0, currentRoomCount.Count);
-
-        if (currentRoomCount[randomRoomIndex].currentRoomType != RoomType.normal)
+        if(currentRoomCount.Count == 0)
+        {
+            return;
+        }
+        if (currentRoomCount[randomRoomIndex].activeRoom == null)
+        {
+            return;
+        }
+        if (currentRoomCount[randomRoomIndex].activeRoom.currentRoomType != RoomType.normal)
         {
             return;
         }
 
-        currentRoomCount[randomRoomIndex].currentRoomType = RoomType.treasure;
+        currentRoomCount[randomRoomIndex].activeRoom.currentRoomType = RoomType.treasure;
         newTreasure = Instantiate(treasureItems[randomItemIndex], currentRoomCount[randomRoomIndex].transform.position, Quaternion.identity);
         newTreasure.transform.parent = currentRoomCount[randomRoomIndex].transform;
     }
     public void SetKeyRoom()
     {
-        if (keySpawned || loops == 2)
+        if(loops == 2)
         {
             keySpawned = true;
             return;
+        }
+        if (keySpawned && loops == 1)
+        {
+            keySpawned = true;
         }
         GameObject newKey;
 
         for (int i = 0; i < currentRoomCount.Count; i++)
         {
-            if (currentRoomCount[i].currentRoomType == RoomType.normal)
+            if (currentRoomCount[i].activeRoom.currentRoomType == RoomType.normal)
             {
-                currentRoomCount[i].currentRoomType = RoomType.key;
+                currentRoomCount[i].activeRoom.currentRoomType = RoomType.key;
                 newKey = Instantiate(keys[loops], currentRoomCount[i].transform.position, Quaternion.identity);
                 newKey.transform.parent = currentRoomCount[i].transform;
                 keySpawned = true;
@@ -248,56 +245,62 @@ public class RoomManager : MonoBehaviour
     }
     public void SetNPCRoom()
     {
-        if(npcList.Count == 0)
+        if(currentNPCList.Count == 0)
         {
             return;
         }
         GameObject newNPC;
-        int randomItemIndex = Random.Range(0, npcList.Count);
+        int randomItemIndex = Random.Range(0, currentNPCList.Count);
         int randomRoomIndex = Random.Range(0, currentRoomCount.Count);
 
-        if (currentRoomCount[randomRoomIndex].currentRoomType != RoomType.normal || currentRoomCount.Count <=0)
+        if (currentRoomCount[randomRoomIndex].activeRoom.currentRoomType != RoomType.normal || currentRoomCount.Count <=0)
         {
             return;
         }
 
-        currentRoomCount[randomRoomIndex].currentRoomType = RoomType.npc;
+        currentRoomCount[randomRoomIndex].activeRoom.currentRoomType = RoomType.npc;
             
-        newNPC = Instantiate(npcList[randomItemIndex], currentRoomCount[randomRoomIndex].transform.position, Quaternion.identity);
+        newNPC = Instantiate(currentNPCList[randomItemIndex], currentRoomCount[randomRoomIndex].transform.position, Quaternion.identity);
         newNPC.transform.parent = currentRoomCount[randomRoomIndex].transform;
 
-        npcList.RemoveAt(randomItemIndex);
-        currentRoomCount[randomRoomIndex].SetSpecialRoomActive();
+        currentNPCList.RemoveAt(randomItemIndex);
+        currentRoomCount[randomRoomIndex].activeRoom.SetSpecialRoomActive();
     }
 
     public void CheckBranchFinished()
     {
+        if (!shopSpawned || !keySpawned)
+        {
+            SetShopRoom();
+            SetKeyRoom();
+            SetTreasureRoom();
+            SetNPCRoom();
+        }
         if (currentRoomCount.Count < minRooms || currentRoomCount.Count > maxRooms || !shopSpawned || !keySpawned)
         {
             if(currentRoomCount.Count <= 1)
             {
                 loops = 0;
             }
+            Debug.Log(currentRoomCount.Count + " rooms");
             LoadScene();
             return;
         }
-        else
-        {
-            foreach(RoomController room in currentRoomCount)
-            {
-                currentRoomTotal.Add(room);
-            }
-            currentRoomCount.Clear();
-            CheckMapFinished();
 
-            if (loops < 2 && !mapFinished)
-            {
-                StartNewBranch();
-                loops++;
-            }
-            delaySpawnRoomCheck = false;
-            roomsFinished = true;
+        foreach (Room room in currentRoomCount)
+        {
+            currentRoomTotal.Add(room);
         }
+        currentRoomCount.Clear();
+        CheckMapFinished();
+
+        if (loops < 2 && !mapFinished)
+        {
+            StartNewBranch();
+            loops++;
+        }
+        delaySpawnRoomCheck = false;
+        roomsFinished = true;
     }
     public void CheckMapFinished()
     {
@@ -308,7 +311,7 @@ public class RoomManager : MonoBehaviour
         }
         else
         {
-            foreach (RoomController room in currentRoomCount)
+            foreach (Room room in currentRoomCount)
             {
                 Destroy(room.gameObject);
             }
@@ -333,44 +336,39 @@ public class RoomManager : MonoBehaviour
         }
         if (currentRoomCount.Count > 0)
         {
-            Vector3 startLocation = currentRoomCount[0].transform.position;
-            foreach (RoomController room in currentRoomCount)
-            {
-                if (room.currentRoomType == RoomType.entry)
-                {
-                    startLocation = room.transform.position;
-                    break;
-                }
-            }
-            foreach (RoomController room in currentRoomCount)
+            Debug.Log("Restarting Branch");
+            Vector3 startLocation = lastBranch;
+
+            foreach (Room room in currentRoomCount)
             {
                 Destroy(room.gameObject);
             }
             currentRoomCount.Clear();
-            RoomController newRoom = Instantiate(entryRoom, startLocation, Quaternion.identity).GetComponent<RoomController>();
+            GameObject newRoom = Instantiate(room, startLocation, Quaternion.identity);
+            newRoom.GetComponent<Room>().SetCentreRoom();
             newRoom.transform.parent = this.transform;
             if (newRoom != null)
             {
                 newRoom.gameObject.GetComponentInChildren<GateManager>().locked = true;
                 if(loops == 1)
                 {
-                    newRoom.gameObject.GetComponentInChildren<GateManager>().keytype = PlayerCurrencies.KeyType.Silver;
+                    newRoom.GetComponentInChildren<GateManager>().keytype = PlayerCurrencies.KeyType.Silver;
                     GameObject silverDialogue;
                     silverDialogue = Instantiate(silverRoomDialogue);
-                    silverDialogue.transform.parent = newRoom.gameObject.transform;
-                    silverDialogue.transform.position = newRoom.gameObject.transform.position;
+                    silverDialogue.transform.parent = newRoom.transform;
+                    silverDialogue.transform.position = newRoom.transform.position;
                 }
                 else if(loops == 2)
                 {
-                    newRoom.gameObject.GetComponentInChildren<GateManager>().keytype = PlayerCurrencies.KeyType.Gold;
+                    newRoom.GetComponentInChildren<GateManager>().keytype = PlayerCurrencies.KeyType.Gold;
                     GameObject goldDialogue;
                     goldDialogue = Instantiate(goldRoomDialogue);
-                    goldDialogue.transform.parent = newRoom.gameObject.transform;
-                    goldDialogue.transform.position = newRoom.gameObject.transform.position;
+                    goldDialogue.transform.parent = newRoom.transform;
+                    goldDialogue.transform.position = newRoom.transform.position;
                 }
             }
             delaySpawnRoomCheck = false;
-            delaySpawnRoomType = 0.1F;
+            delaySpawnRoomType = 0.5f;
             shopSpawned = false;
             return;
         }
@@ -378,39 +376,37 @@ public class RoomManager : MonoBehaviour
         {
             for (int i = currentRoomTotal.Count - 2; i > 0; i--)
             {
-                if (currentRoomTotal[i].currentRoomType == RoomType.normal)
+                if (currentRoomTotal[i].activeRoom.currentRoomType == RoomType.normal)
                 {
-                    Destroy(currentRoomTotal[i].gameObject);
-                    currentRoomCount.Clear();
-                    RoomController newRoom = Instantiate(entryRoom, new Vector2(currentRoomTotal[i].transform.position.x, currentRoomTotal[i].transform.position.y), Quaternion.identity).GetComponent<RoomController>();
-                    
-                    currentRoomTotal.RemoveAt(i);
-                    newRoom.transform.parent = this.transform;
-                    newRoom.transform.GetComponent<RoomController>().added = true;
-                    if (newRoom != null)
-                    {
-                        newRoom.gameObject.GetComponentInChildren<GateManager>().locked = true;
-                        if (loops == 0)
-                        {
-                            newRoom.gameObject.GetComponentInChildren<GateManager>().keytype = PlayerCurrencies.KeyType.Silver;
-                            GameObject silverDialogue;
-                            silverDialogue = Instantiate(silverRoomDialogue);
-                            silverDialogue.transform.parent = newRoom.gameObject.transform;
-                            silverDialogue.transform.position = newRoom.gameObject.transform.position;
-                        }
-                        else if (loops == 1)
-                        {
-                            newRoom.gameObject.GetComponentInChildren<GateManager>().keytype = PlayerCurrencies.KeyType.Gold;
-                            GameObject goldDialogue;
-                            goldDialogue = Instantiate(goldRoomDialogue);
-                            goldDialogue.transform.parent = newRoom.gameObject.transform;
-                            goldDialogue.transform.position = newRoom.gameObject.transform.position;
+                    Debug.Log("Starting New Branch");
 
-                        }
+                    Room newRoom = currentRoomTotal[i].GetComponent<Room>();
+                    newRoom.SetCentreRoom();
+                    currentRoomTotal.RemoveAt(i);
+                    currentRoomCount.Clear();
+                    currentRoomCount.Add(newRoom);
+                    lastBranch = newRoom.transform.position;
+
+                   newRoom.gameObject.GetComponentInChildren<GateManager>().locked = true;
+                    if (loops == 0)
+                    {
+                        newRoom.gameObject.GetComponentInChildren<GateManager>().keytype = PlayerCurrencies.KeyType.Silver;
+                        GameObject silverDialogue;
+                        silverDialogue = Instantiate(silverRoomDialogue);
+                        silverDialogue.transform.parent = newRoom.transform;
+                        silverDialogue.transform.position = newRoom.transform.position;
+                    }
+                    else if (loops == 1)
+                    {
+                        newRoom.gameObject.GetComponentInChildren<GateManager>().keytype = PlayerCurrencies.KeyType.Gold;
+                        GameObject goldDialogue;
+                        goldDialogue = Instantiate(goldRoomDialogue);
+                        goldDialogue.transform.parent = newRoom.transform;
+                        goldDialogue.transform.position = newRoom.transform.position;
                     }
 
                     delaySpawnRoomCheck = false;
-                    delaySpawnRoomType = 0.1F;
+                    delaySpawnRoomType = 0.5f;
                     shopSpawned = false;
                     return;
                 }
