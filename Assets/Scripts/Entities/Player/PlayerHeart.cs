@@ -56,6 +56,7 @@ public class PlayerHeart : MonoBehaviour
         // Health Feedback
         GetComponentInChildren<SpriteRenderer>().color = new Color(255, 0, 0);
         feedbackDamageTimer = feedbackDamageTime;
+        AudioManager.Instance.playSFXClip(AudioManager.SFXSound.playerDamage);
     }
 
     private void UpdateDamageFeedBackTimer()
@@ -97,9 +98,6 @@ public class PlayerHeart : MonoBehaviour
 
     public void UpdateCurrentMaxHeart(int amount = 0)
     {
-        if (amount > 0)
-            TriggerDamageFeedBack();
-
         currentMaxHeart += amount;
         currentHeart += amount;
 
@@ -121,6 +119,9 @@ public class PlayerHeart : MonoBehaviour
         {
             return;
         }
+        if (amount < 0)
+            TriggerDamageFeedBack();
+
         if (amount != 0)
         {
 

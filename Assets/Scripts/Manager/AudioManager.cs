@@ -26,6 +26,15 @@ public class AudioManager : SingletonMonobehaviour<AudioManager>
         coinPickup,
         workingFootSteps,
         openLockDoors,
+        playerDamage,
+        enemyDamage,
+        explosion,
+        zombieIdle1,
+        zombieIdle2,
+        projectile,
+        wood,
+        spikes,
+        dash,
     }
     public enum musicSound
     {

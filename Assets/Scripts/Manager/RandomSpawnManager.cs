@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RandomSpawnManager : MonoBehaviour
+public class RandomSpawnManager : SingletonMonobehaviour<RandomSpawnManager>
 {
     //[SerializeField] private int spawnAmount;
     private int spawnAmount;
@@ -29,6 +29,7 @@ public class RandomSpawnManager : MonoBehaviour
     {
         //EventManager.AfterSceneLoadEvent += EventManager_AfterSceneLoadEventHandler;
         EventManager.BeforeSceneUnloadEvent += EventManager_BeforeSceneUnloadEventHandler;
+        spawnPointIndexList = new();
     }
 
     private void OnDisable()
@@ -38,11 +39,6 @@ public class RandomSpawnManager : MonoBehaviour
     }
 
     //===========================================================================
-    private void Awake()
-    {
-        spawnPointIndexList = new();
-    }
-
     //===========================================================================
     public void SpawnRandom(GameObject spawnPoints)
     {

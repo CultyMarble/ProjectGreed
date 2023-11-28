@@ -14,6 +14,8 @@ public class EnemyHealth : MonoBehaviour
 
     private float feedbackDamageTime = 0.10f;
     private float feedbackDamageTimer = default;
+    private float damageAudioDelayTime = 0.10f;
+    private float damageAudioDelayTimer = default;
     private SpawnCurrency spawnCurrency;
 
     //======================================================================
@@ -36,6 +38,14 @@ public class EnemyHealth : MonoBehaviour
                 this.gameObject.GetComponentInChildren<SpriteRenderer>().color = new Color(255, 255, 255);
             }
         }
+        if (damageAudioDelayTimer > 0)
+        {
+            damageAudioDelayTimer -= Time.deltaTime;
+            if (damageAudioDelayTimer <= 0)
+            {
+                damageAudioDelayTimer = 0;
+            }
+        }
     }
 
     //======================================================================
@@ -44,6 +54,11 @@ public class EnemyHealth : MonoBehaviour
         // Health Feedback
         gameObject.GetComponentInChildren<SpriteRenderer>().color = new Color(255, 0, 0);
         feedbackDamageTimer = feedbackDamageTime;
+        if(damageAudioDelayTimer <= 0)
+        {
+            AudioManager.Instance.playSFXClip(AudioManager.SFXSound.enemyDamage);
+            damageAudioDelayTimer = damageAudioDelayTime;
+        }
     }
 
     public void Despawn()

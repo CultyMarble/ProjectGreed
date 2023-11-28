@@ -291,9 +291,6 @@ AnimatorStateMachine:
     m_State: {fileID: 2853164565576784760}
     m_Position: {x: 610, y: 80, z: 0}
   - serializedVersion: 1
-    m_State: {fileID: 5997353465350482388}
-    m_Position: {x: 0, y: 0, z: 0}
-  - serializedVersion: 1
     m_State: {fileID: 6692994870512336796}
     m_Position: {x: 530, y: 160, z: 0}
   m_ChildStateMachines: []
@@ -456,32 +453,6 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: 7400000, guid: cb0f819dfc58aa04e88ede800d5a82fc, type: 2}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &5997353465350482388
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: zombie_walkingLeft 0
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 6fee86a0d12df284d9d7fbc341201518, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
