@@ -28,6 +28,11 @@ public class BombAbilityBomb : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
+    private void OnEnable()
+    {
+        EventManager.BeforeSceneUnloadEvent += EventManager_BeforeSceneUnloadEvent;
+    }
+
     private void Update()
     {
         if (SceneControlManager.Instance.CurrentGameplayState == GameplayState.Pause)
@@ -40,6 +45,17 @@ public class BombAbilityBomb : MonoBehaviour
 
         if (delayTime <= 0)
             animator.SetBool("isExploding", true);
+    }
+
+    private void OnDisable()
+    {
+        EventManager.BeforeSceneUnloadEvent -= EventManager_BeforeSceneUnloadEvent;
+    }
+
+    //===========================================================================
+    private void EventManager_BeforeSceneUnloadEvent()
+    {
+        Destroy();
     }
 
     //===========================================================================

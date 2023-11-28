@@ -1,9 +1,11 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UpgradeMenu : SingletonMonobehaviour<UpgradeMenu>
 {
     [SerializeField] private GameObject um_BGImage = default;
+    [SerializeField] private Button um_CloseButton = default;
 
     [Header("Tier 1 Upgrade")]
     [SerializeField] private Button um_Tier1UpgradeLeftButton = default;
@@ -18,25 +20,20 @@ public class UpgradeMenu : SingletonMonobehaviour<UpgradeMenu>
     private UpgradePath currentUpgradePathTier1 = UpgradePath.none;
     private UpgradePath currentUpgradePathTier2 = UpgradePath.none;
 
-    //===========================================================================
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Home))
-        {
-            SetActive(true);
-            SceneControlManager.Instance.CurrentGameplayState = GameplayState.Pause;
-        }
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            SetActive(false);
-            SceneControlManager.Instance.CurrentGameplayState = GameplayState.Ongoing;
-        }
-    }
+    [Header("Ability Info Panel")]
+    [SerializeField] private Transform upgradeInfoPanel = default;
+    [SerializeField] private TextMeshProUGUI upgradeNameText = default;
+    [SerializeField] private TextMeshProUGUI upgradeDescriptionText = default;
 
     //===========================================================================
     private void OnEnable()
     {
+        um_CloseButton.onClick.AddListener(() =>
+        {
+            um_BGImage.SetActive(false);
+            SceneControlManager.Instance.CurrentGameplayState = GameplayState.Ongoing;
+        });
+
         // Tier 1
         um_Tier1UpgradeLeftButton.onClick.AddListener(() =>
         {
@@ -86,6 +83,15 @@ public class UpgradeMenu : SingletonMonobehaviour<UpgradeMenu>
             um_Tier2UpgradeRightButton.GetComponent<Image>().enabled = true;
             currentUpgradePathTier2 = UpgradePath.Right;
         });
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SetContentActive(false);
+            SceneControlManager.Instance.CurrentGameplayState = GameplayState.Ongoing;
+        }
     }
 
     //===========================================================================
@@ -138,8 +144,23 @@ public class UpgradeMenu : SingletonMonobehaviour<UpgradeMenu>
     }
 
     //===========================================================================
-    public void SetActive(bool newBool)
+    public void SetContentActive(bool newBool)
     {
         um_BGImage.SetActive(newBool);
+    }
+
+    public void SetUpgradeInfoPanelActive(bool active)
+    {
+        upgradeInfoPanel.gameObject.SetActive(active);
+    }
+
+    public void SetUpgradeNameText(string text)
+    {
+        upgradeNameText.SetText(text);
+    }
+
+    public void SetUpgradeDescriptionText(string text)
+    {
+        upgradeDescriptionText.SetText(text);
     }
 }

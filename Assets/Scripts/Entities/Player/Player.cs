@@ -21,10 +21,8 @@ public class Player : SingletonMonobehaviour<Player>
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F5))
-        {
-            SceneControlManager.Instance.LoadScene(SceneName.DemoSceneHub.ToString(), Vector3.zero);
-        }
+        if (Input.GetKeyDown(KeyCode.End))
+            GetComponent<PlayerHeart>().UpdateCurrentHeart(-1);
     }
 
     private void OnDisable()

@@ -20,12 +20,13 @@ public class PlayerHeart : MonoBehaviour
     private float feedbackDamageTimer = default;
 
     // Player Regen
-    private readonly float recoveryCooldown = 10.0f;
+    private bool canRegen = default;
+    private readonly float recoveryCooldown = 15.0f;
     private float recoveryCooldownTimer = default;
 
     // IFrame
     [SerializeField] private Animator bodySpriteAnimator = default;
-    [SerializeField] private float iFrameDuration = default;
+    private readonly float iFrameDuration = 1.0f;
     private float iFrameTimer = default;
     private bool damageImmune = default;
 
@@ -33,6 +34,7 @@ public class PlayerHeart : MonoBehaviour
     private void OnEnable()
     {
         ResetPlayerHeart();
+        recoveryCooldownTimer = recoveryCooldown;
     }
 
     private void Update()
@@ -40,7 +42,9 @@ public class PlayerHeart : MonoBehaviour
         UpdateDamageFeedBackTimer();
         UpdateIFrameTimer();
 
-        // Recovery
+        if (canRegen == false)
+            return;
+
         if (currentHeart < currentMaxHeart)
         {
             recoveryCooldownTimer -= Time.deltaTime;
@@ -100,6 +104,20 @@ public class PlayerHeart : MonoBehaviour
     }
 
     //======================================================================
+    private void IFrameActive()
+    {
+        iFrameTimer = iFrameDuration;
+        bodySpriteAnimator.SetBool("IFrame", true);
+
+        damageImmune = true;
+    }
+
+    //======================================================================
+    public void SetCanRegenActive(bool active)
+    {
+        canRegen = active;
+    }
+
     public void ResetPlayerHeart()
     {
         currentHeart = currentMaxHeart;
@@ -145,11 +163,11 @@ public class PlayerHeart : MonoBehaviour
         {
             currentHeart = 0;
             DespawnPlayer();
+
+            recoveryCooldownTimer = recoveryCooldown;
         }
         else if (currentHeart > currentMaxHeart)
-        {
             currentHeart = currentMaxHeart;
-        }
 
         //Invoke Event
         OnHeartChangedEvent?.Invoke(this, new OnHealthChangedEventArgs { currentHeart = currentHeart });
@@ -162,15 +180,5 @@ public class PlayerHeart : MonoBehaviour
 
         UpdateCurrentMaxHeart();
         UpdateCurrentHeart();
-    }
-
-    //======================================================================
-    // IFrame
-    private void IFrameActive()
-    {
-        iFrameTimer = iFrameDuration;
-        bodySpriteAnimator.SetBool("IFrame", true);
-
-        damageImmune = true;
     }
 }
