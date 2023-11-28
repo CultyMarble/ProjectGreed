@@ -118,7 +118,10 @@ public class DialogueActivator : MonoBehaviour
                 return;
             }
             ActivateDialogueManager(dialogueEntryArray[dialogueEntryIndex]);
-            newDialogueIndicator.SetActive(false);
+            if(newDialogueIndicator != null)
+            {
+                newDialogueIndicator.SetActive(false);
+            }
             dialogueEntryArray[dialogueEntryIndex].hasBeenUsed = true;
             haveActivated = true;
         }

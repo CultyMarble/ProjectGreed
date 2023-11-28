@@ -463,6 +463,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPushBack: 0
   animator: {fileID: -247924249735247293}
+  enemyType: 1
 --- !u!114 &4038241797528594032
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -90,6 +90,7 @@ MonoBehaviour:
   dialogueEntryArray:
   - {fileID: 11400000, guid: f0b097d964bca864f822dd953f9b2e70, type: 2}
   quickText: 
+  newDialogueIndicator: {fileID: 0}
 --- !u!114 &960319892805390298
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -102,8 +103,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95727d4fab1df964894941646191d157, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: Scribbled Note
-  itemDescription: Could be something interesting.
+  _title: Note
+  _description: Might have something helpful
 --- !u!1 &6640207986461867672
 GameObject:
   m_ObjectHideFlags: 0
