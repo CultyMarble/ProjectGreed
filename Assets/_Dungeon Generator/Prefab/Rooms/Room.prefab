@@ -373,6 +373,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5338450792224167971}
     m_Modifications:
+    - target: {fileID: 3666184453804569779, guid: a3b33200f80704a4f86f5d1881dcab09, type: 3}
+      propertyPath: m_ColliderPaths.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7741260060544441618, guid: a3b33200f80704a4f86f5d1881dcab09, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -420,6 +424,10 @@ PrefabInstance:
     - target: {fileID: 7741260060544441628, guid: a3b33200f80704a4f86f5d1881dcab09, type: 3}
       propertyPath: m_Name
       value: RB
+      objectReference: {fileID: 0}
+    - target: {fileID: 7741260060544441628, guid: a3b33200f80704a4f86f5d1881dcab09, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7741260060605708442, guid: a3b33200f80704a4f86f5d1881dcab09, type: 3}
       propertyPath: room
@@ -579,6 +587,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RTB
       objectReference: {fileID: 0}
+    - target: {fileID: 5426122416466066410, guid: 7799b3b09774e2141a6b61fb4ac362fc, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7799b3b09774e2141a6b61fb4ac362fc, type: 3}
 --- !u!4 &1127410241522900410 stripped
@@ -615,6 +627,10 @@ PrefabInstance:
     - target: {fileID: 261532820643789861, guid: c70725f3fa36c1c43a5e59e8735fb607, type: 3}
       propertyPath: m_Name
       value: LR
+      objectReference: {fileID: 0}
+    - target: {fileID: 261532820643789861, guid: c70725f3fa36c1c43a5e59e8735fb607, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 261532820643789863, guid: c70725f3fa36c1c43a5e59e8735fb607, type: 3}
       propertyPath: m_RootOrder
@@ -1164,6 +1180,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5338450792224167971}
     m_Modifications:
+    - target: {fileID: 2103912872003887839, guid: 84cf68ae261a84d47a608a8f882128d2, type: 3}
+      propertyPath: m_ColliderPaths.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2955065819632050099, guid: 84cf68ae261a84d47a608a8f882128d2, type: 3}
       propertyPath: room
       value: 
@@ -1215,6 +1235,10 @@ PrefabInstance:
     - target: {fileID: 2955065820043591103, guid: 84cf68ae261a84d47a608a8f882128d2, type: 3}
       propertyPath: m_Name
       value: TL
+      objectReference: {fileID: 0}
+    - target: {fileID: 2955065820043591103, guid: 84cf68ae261a84d47a608a8f882128d2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2955065820239788663, guid: 84cf68ae261a84d47a608a8f882128d2, type: 3}
       propertyPath: room

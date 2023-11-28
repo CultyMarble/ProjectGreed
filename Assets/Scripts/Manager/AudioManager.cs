@@ -21,9 +21,13 @@ public class AudioManager : SingletonMonobehaviour<AudioManager>
         batDeath,
         maleDeathSound,
         footstep,
+        purchase,
+        explosion,
+        coinPickup,
+        workingFootSteps,
+        openLockDoors,
         playerDamage,
         enemyDamage,
-        explosion,
         zombieIdle1,
         zombieIdle2,
         projectile,
@@ -110,9 +114,18 @@ public class AudioManager : SingletonMonobehaviour<AudioManager>
         musicSource.clip = musicSoundAudioClipDictionary[sound];
         musicSource.Play();
     }
+    public void stopMusicClip()
+    {
+        musicSource.Stop();
+    }
     public void playSFXClip(SFXSound sound)
     {
         SFXSource.clip = SFXSoundAudioClipDictionary[sound];
         SFXSource.Play();
+    }
+    public void playSFXClip(SFXSound sound, AudioSource source)
+    {
+        source.clip = SFXSoundAudioClipDictionary[sound];
+        source.Play();
     }
 }
