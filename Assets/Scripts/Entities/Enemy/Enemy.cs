@@ -125,13 +125,14 @@ public class Enemy : MonoBehaviour
         switch (enemyType)
         {
             case EnemyType.zombie:
-                if(Random.Range(0,2) == 1)
-                {
-                    AudioManager.Instance.playSFXClip(AudioManager.SFXSound.zombieIdle1);
-                }
-                else {
-                    AudioManager.Instance.playSFXClip(AudioManager.SFXSound.zombieIdle2);
-                }
+                //if(Random.Range(0,2) == 1)
+                //{
+                //    AudioManager.Instance.playSFXClip(AudioManager.SFXSound.zombieIdle1);
+                //}
+                //else {
+                //    AudioManager.Instance.playSFXClip(AudioManager.SFXSound.zombieIdle2);
+                //}
+                AudioManager.Instance.playSFXClip(AudioManager.SFXSound.zombieIdle1);
                 break;
             case EnemyType.archer:
                 break;

@@ -13825,7 +13825,7 @@ MonoBehaviour:
   roomVariants:
   - {fileID: 4633974792267995867}
   - {fileID: 7611257290073781553}
-  specialRoom: {fileID: 0}
+  specialRoom: {fileID: 4232634374380601224}
   activeRoomVariant: {fileID: 0}
 --- !u!1 &1419315259767584967
 GameObject:

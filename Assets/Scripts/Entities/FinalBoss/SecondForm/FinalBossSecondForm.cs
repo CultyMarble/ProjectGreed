@@ -27,7 +27,7 @@ public class FinalBossSecondForm : MonoBehaviour
 
     private readonly int combo3TriggerTime = 1;
     private readonly int combo4TriggerTime = 4;
-    private readonly int combo5TriggerTime = 3;
+    private readonly int combo5TriggerTime = 2;
 
     private int triggerCounter = default;
 

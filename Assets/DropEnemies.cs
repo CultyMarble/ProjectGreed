@@ -22,6 +22,10 @@ public class DropEnemies : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (SceneControlManager.Instance.CurrentGameplayState == GameplayState.Pause)
+        {
+            return;
+        }
         activated = true;
         if (targetingAI.CheckNoTarget())
         {
