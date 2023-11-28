@@ -21,6 +21,11 @@ public class AudioManager : SingletonMonobehaviour<AudioManager>
         batDeath,
         maleDeathSound,
         footstep,
+        purchase,
+        explosion,
+        coinPickup,
+        workingFootSteps,
+        openLockDoors,
     }
     public enum musicSound
     {
@@ -99,7 +104,17 @@ public class AudioManager : SingletonMonobehaviour<AudioManager>
         musicSource.clip = musicSoundAudioClipDictionary[sound];
         musicSource.Play();
     }
+    public void playMusicClip(musicSound sound, AudioSource source)
+    {
+        musicSource.clip = musicSoundAudioClipDictionary[sound];
+        musicSource.Play();
+    }
     public void playSFXClip(SFXSound sound)
+    {
+        SFXSource.clip = SFXSoundAudioClipDictionary[sound];
+        SFXSource.Play();
+    }
+    public void playSFXClip(SFXSound sound, AudioSource source)
     {
         SFXSource.clip = SFXSoundAudioClipDictionary[sound];
         SFXSource.Play();
