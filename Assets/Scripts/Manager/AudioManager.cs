@@ -120,12 +120,11 @@ public class AudioManager : SingletonMonobehaviour<AudioManager>
     }
     public void playSFXClip(SFXSound sound)
     {
-        SFXSource.clip = SFXSoundAudioClipDictionary[sound];
-        SFXSource.Play();
+        SFXSource.PlayOneShot(SFXSoundAudioClipDictionary[sound]);
     }
     public void playSFXClip(SFXSound sound, AudioSource source)
     {
-        source.clip = SFXSoundAudioClipDictionary[sound];
-        source.Play();
+        SFXSource.clip = SFXSoundAudioClipDictionary[sound];
+        SFXSource.Play();
     }
 }

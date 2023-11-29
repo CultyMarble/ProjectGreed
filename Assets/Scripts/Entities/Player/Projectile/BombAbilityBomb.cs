@@ -70,7 +70,7 @@ public class BombAbilityBomb : MonoBehaviour
     private void TriggerBombEffect()
     {
         GetComponent<Rigidbody2D>().isKinematic = true;
-
+        AudioManager.Instance.playSFXClip(AudioManager.SFXSound.explosion);
         Collider2D[] collider2DArray = Physics2D.OverlapCircleAll(transform.position, radius);
         foreach (Collider2D collider2D in collider2DArray)
         {

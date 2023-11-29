@@ -67,7 +67,11 @@ public abstract class UpgradeItem : MonoBehaviour
         if (PlayerCurrencies.Instance.TempCurrencyAmount >= GetComponent<ItemCost>().itemCost)
         {
             PlayerCurrencies.Instance.UpdateTempCurrencyAmount(-(GetComponent<ItemCost>().itemCost));
-            return true;
+            if (GetComponent<ItemCost>().itemCost > 0)
+            {
+                AudioManager.Instance.playSFXClip(AudioManager.SFXSound.purchase);
+            }
+                return true;
         }
 
         return false;
