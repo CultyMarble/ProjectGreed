@@ -34,7 +34,6 @@ public class GateManager : MonoBehaviour
     [SerializeField] private GameObject bottomDoor;
     [SerializeField] private GameObject leftDoor;
 
-
     public DoorState topDoorState = DoorState.none;
     public DoorState rightDoorState = DoorState.none;
     public DoorState bottomDoorState = DoorState.none;
@@ -104,7 +103,7 @@ public class GateManager : MonoBehaviour
         {
             return;
         }
-        RandomSpawnManager.Instance.SpawnRandom(randomSpawnPoints);
+        RandomSpawnManager.Instance.SpawnRandom(randomSpawnPoints,room.difficulty);
     }
 
     private void DeadEndHandler()

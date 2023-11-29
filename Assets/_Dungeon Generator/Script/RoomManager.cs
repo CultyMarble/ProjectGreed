@@ -103,6 +103,8 @@ public class RoomManager : MonoBehaviour
         newEntryRoom = Instantiate(room);
         newEntryRoom.transform.parent = this.transform;
         newEntryRoom.GetComponent<Room>().SetCentreRoom();
+        newEntryRoom.GetComponent<Room>().SetCentreRoom();
+
         startDialogue = Instantiate(startRoomDialogue);
         startDialogue.transform.parent = newEntryRoom.transform;
         currentNPCList = npcList;
@@ -346,6 +348,14 @@ public class RoomManager : MonoBehaviour
             currentRoomCount.Clear();
             GameObject newRoom = Instantiate(room, startLocation, Quaternion.identity);
             newRoom.GetComponent<Room>().SetCentreRoom();
+            if(loops == 1)
+            {
+                newRoom.GetComponent<Room>().difficulty = Difficulty.medium;
+            }
+            else if (loops == 2)
+            {
+                newRoom.GetComponent<Room>().difficulty = Difficulty.hard;
+            }
             newRoom.transform.parent = this.transform;
             if (newRoom != null)
             {

@@ -41,6 +41,7 @@ public class RoomSpawner : MonoBehaviour
         {
             GameObject newRoom = Instantiate(roomManager.room, transform.position, Quaternion.identity);
             newRoom.GetComponent<Room>().SetActiveRoomRandom(openingDirection);
+            newRoom.GetComponent<Room>().difficulty = room.GetComponent<Room>().difficulty;
             newRoom.transform.parent = roomManager.transform;
             spawned = true;
         }

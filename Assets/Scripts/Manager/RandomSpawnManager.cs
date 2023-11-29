@@ -40,7 +40,7 @@ public class RandomSpawnManager : SingletonMonobehaviour<RandomSpawnManager>
 
     //===========================================================================
     //===========================================================================
-    public void SpawnRandom(GameObject spawnPoints)
+    public void SpawnRandom(GameObject spawnPoints,Difficulty difficulty)
     {
         if (spawnPoints != null)
         {
@@ -48,7 +48,7 @@ public class RandomSpawnManager : SingletonMonobehaviour<RandomSpawnManager>
             if (spawnNum == 0) { return; }
             spawnAmount = spawnNum;
         }
-        Spawn();
+        Spawn(difficulty);
     }
 
     private void EventManager_BeforeSceneUnloadEventHandler()
@@ -69,7 +69,7 @@ public class RandomSpawnManager : SingletonMonobehaviour<RandomSpawnManager>
     //    else { return false; }
     //}
 
-    private void Spawn()
+    private void Spawn(Difficulty difficulty)
     {
         spawnPointIndexList.Clear();
 
@@ -109,7 +109,18 @@ public class RandomSpawnManager : SingletonMonobehaviour<RandomSpawnManager>
                 }
             }
         }
-
+        switch (difficulty)
+        {
+            case Difficulty.easy:
+                spawnAmount = spawnNum;
+                break;
+            case Difficulty.medium:
+                spawnAmount = (int)(spawnNum * 1.25);
+                break;
+            case Difficulty.hard:
+                spawnAmount = (int)(spawnNum * 1.5);
+                break;
+        }
         // Random Spawn
         foreach (int index in spawnPointIndexList)
         {
@@ -139,6 +150,17 @@ public class RandomSpawnManager : SingletonMonobehaviour<RandomSpawnManager>
                 {
                     enemy.transform.position = spawnPointList.transform.GetChild(index).transform.position;
                     enemy.gameObject.SetActive(true);
+                    switch (difficulty)
+                    {
+                        case Difficulty.easy:
+                            break;
+                        case Difficulty.medium:
+                            enemy.GetComponent<EnemyHealth>().currentHealth = 1.25f * enemy.GetComponent<EnemyHealth>().baseHealth;
+                            break;
+                        case Difficulty.hard:
+                            enemy.GetComponent<EnemyHealth>().currentHealth = 1.5f * enemy.GetComponent<EnemyHealth>().baseHealth;
+                            break;
+                    }
                     totalSpawned++;
                     break;
                 }

@@ -2,6 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum Difficulty
+{
+    easy,
+    medium,
+    hard,
+}
 public class Room : MonoBehaviour
 {
     public RoomController[] topRooms;
@@ -27,7 +33,7 @@ public class Room : MonoBehaviour
 
     public Direction spawnDirection;
     public RoomController activeRoom;
-
+    public Difficulty difficulty = Difficulty.easy;
     private RoomManager roomManager;
 
     private void Awake()

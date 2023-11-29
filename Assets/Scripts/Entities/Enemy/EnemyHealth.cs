@@ -8,7 +8,7 @@ public class EnemyHealth : MonoBehaviour
 
     public event EventHandler OnDespawnEvent;
 
-    [SerializeField] private float maxHealth;
+    [SerializeField] public float baseHealth;
 
     public float currentHealth;
 
@@ -21,7 +21,7 @@ public class EnemyHealth : MonoBehaviour
     //======================================================================
     private void Awake()
     {
-        currentHealth = maxHealth;
+        currentHealth = baseHealth;
         spawnCurrency = GetComponent<SpawnCurrency>();
 
         UpdateCurrentHealth();
@@ -67,9 +67,9 @@ public class EnemyHealth : MonoBehaviour
         OnDespawnEvent?.Invoke(this, EventArgs.Empty);
 
         // Reset Parameters
-        currentHealth = maxHealth;
+        currentHealth = baseHealth;
         
-        OnHealthChanged?.Invoke(this, new OnHealthChangedEvenArgs { healthRatio = currentHealth / maxHealth });
+        OnHealthChanged?.Invoke(this, new OnHealthChangedEvenArgs { healthRatio = currentHealth / baseHealth });
         gameObject.SetActive(false);
 
         if(spawnCurrency != null)
@@ -86,13 +86,13 @@ public class EnemyHealth : MonoBehaviour
         if (amount != 0)
         {
             currentHealth += amount;
-            currentHealth = Mathf.Clamp(currentHealth, 0.0f, maxHealth);
+            currentHealth = Mathf.Clamp(currentHealth, 0.0f, baseHealth);
 
             if (amount < 0)
                 DamageFeedBack();
 
             // Call OnHitPointChanged Event
-            OnHealthChanged?.Invoke(this, new OnHealthChangedEvenArgs { healthRatio = currentHealth / maxHealth });
+            OnHealthChanged?.Invoke(this, new OnHealthChangedEvenArgs { healthRatio = currentHealth / baseHealth });
 
             if (currentHealth <= 0)
             {
@@ -104,7 +104,7 @@ public class EnemyHealth : MonoBehaviour
 
     public float GetHealthPercentage()
     {
-        return (currentHealth / maxHealth) * 100.0f;
+        return (currentHealth / baseHealth) * 100.0f;
     }
     public float GetCurrenHealth()
     {
