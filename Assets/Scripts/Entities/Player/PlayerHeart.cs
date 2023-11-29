@@ -28,7 +28,7 @@ public class PlayerHeart : MonoBehaviour
     [SerializeField] private Animator bodySpriteAnimator = default;
     private readonly float iFrameDuration = 1.0f;
     private float iFrameTimer = default;
-    private bool damageImmune = default;
+    public bool damageImmune = default;
 
     //======================================================================
     private void OnEnable()
