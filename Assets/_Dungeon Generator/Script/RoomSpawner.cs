@@ -6,10 +6,9 @@ public class RoomSpawner : MonoBehaviour
 {
     private RoomManager roomManager;
 
-    [Tooltip(" 1 --> Need Bottom Door\r\n 2 --> Need Top Door\r\n 3 --> Need Left Door\r\n 4 --> Need Right Door")]
     [SerializeField] private GameObject room;
     [SerializeField] private Direction openingDirection;
-    [SerializeField] public bool spawned = false;
+    [HideInInspector] public bool spawned = false;
     [SerializeField] public bool destroyer;
 
     private void Start()

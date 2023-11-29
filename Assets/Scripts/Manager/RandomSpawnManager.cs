@@ -155,10 +155,12 @@ public class RandomSpawnManager : SingletonMonobehaviour<RandomSpawnManager>
                         case Difficulty.easy:
                             break;
                         case Difficulty.medium:
-                            enemy.GetComponent<EnemyHealth>().currentHealth = 1.25f * enemy.GetComponent<EnemyHealth>().baseHealth;
+                            enemy.GetComponent<EnemyHealth>().currentMaxHealth = 1.25f * enemy.GetComponent<EnemyHealth>().baseMaxHealth;
+                            enemy.GetComponent<EnemyHealth>().currentHealth = enemy.GetComponent<EnemyHealth>().currentMaxHealth;
                             break;
                         case Difficulty.hard:
-                            enemy.GetComponent<EnemyHealth>().currentHealth = 1.5f * enemy.GetComponent<EnemyHealth>().baseHealth;
+                            enemy.GetComponent<EnemyHealth>().currentMaxHealth = 1.5f * enemy.GetComponent<EnemyHealth>().baseMaxHealth;
+                            enemy.GetComponent<EnemyHealth>().currentHealth = enemy.GetComponent<EnemyHealth>().currentMaxHealth;
                             break;
                     }
                     totalSpawned++;

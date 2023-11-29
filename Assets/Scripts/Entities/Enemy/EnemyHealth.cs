@@ -8,9 +8,10 @@ public class EnemyHealth : MonoBehaviour
 
     public event EventHandler OnDespawnEvent;
 
-    [SerializeField] public float baseHealth;
+    [SerializeField] public float baseMaxHealth;
 
-    public float currentHealth;
+    [HideInInspector] public float currentHealth;
+    [HideInInspector] public float currentMaxHealth;
 
     private float feedbackDamageTime = 0.10f;
     private float feedbackDamageTimer = default;
@@ -21,7 +22,8 @@ public class EnemyHealth : MonoBehaviour
     //======================================================================
     private void Awake()
     {
-        currentHealth = baseHealth;
+        currentMaxHealth = baseMaxHealth;
+        currentHealth = currentMaxHealth;
         spawnCurrency = GetComponent<SpawnCurrency>();
 
         UpdateCurrentHealth();
@@ -67,9 +69,10 @@ public class EnemyHealth : MonoBehaviour
         OnDespawnEvent?.Invoke(this, EventArgs.Empty);
 
         // Reset Parameters
-        currentHealth = baseHealth;
+        currentMaxHealth = baseMaxHealth;
+        currentHealth = currentMaxHealth;
         
-        OnHealthChanged?.Invoke(this, new OnHealthChangedEvenArgs { healthRatio = currentHealth / baseHealth });
+        OnHealthChanged?.Invoke(this, new OnHealthChangedEvenArgs { healthRatio = currentHealth / currentMaxHealth });
         gameObject.SetActive(false);
 
         if(spawnCurrency != null)
@@ -86,13 +89,13 @@ public class EnemyHealth : MonoBehaviour
         if (amount != 0)
         {
             currentHealth += amount;
-            currentHealth = Mathf.Clamp(currentHealth, 0.0f, baseHealth);
+            currentHealth = Mathf.Clamp(currentHealth, 0.0f, currentMaxHealth);
 
             if (amount < 0)
                 DamageFeedBack();
 
             // Call OnHitPointChanged Event
-            OnHealthChanged?.Invoke(this, new OnHealthChangedEvenArgs { healthRatio = currentHealth / baseHealth });
+            OnHealthChanged?.Invoke(this, new OnHealthChangedEvenArgs { healthRatio = currentHealth / currentMaxHealth });
 
             if (currentHealth <= 0)
             {
@@ -104,7 +107,7 @@ public class EnemyHealth : MonoBehaviour
 
     public float GetHealthPercentage()
     {
-        return (currentHealth / baseHealth) * 100.0f;
+        return (currentHealth / currentMaxHealth) * 100.0f;
     }
     public float GetCurrenHealth()
     {

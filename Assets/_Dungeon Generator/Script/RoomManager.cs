@@ -15,9 +15,9 @@ public class RoomManager : MonoBehaviour
 
     [Header("Active Rooms")]
 
-    public List<Room> currentRoomTotal;
+    [HideInInspector] public List<Room> currentRoomTotal;
     public List<Room> currentRoomCount;
-    public List<Room> currentDeadEndRooms;
+    [HideInInspector] public List<Room> currentDeadEndRooms;
 
     [Header("Spawning")]
     [HideInInspector] public bool bossSpawned = false;
@@ -348,20 +348,13 @@ public class RoomManager : MonoBehaviour
             currentRoomCount.Clear();
             GameObject newRoom = Instantiate(room, startLocation, Quaternion.identity);
             newRoom.GetComponent<Room>().SetCentreRoom();
-            if(loops == 1)
-            {
-                newRoom.GetComponent<Room>().difficulty = Difficulty.medium;
-            }
-            else if (loops == 2)
-            {
-                newRoom.GetComponent<Room>().difficulty = Difficulty.hard;
-            }
             newRoom.transform.parent = this.transform;
             if (newRoom != null)
             {
                 newRoom.gameObject.GetComponentInChildren<GateManager>().locked = true;
                 if(loops == 1)
                 {
+                    newRoom.GetComponent<Room>().difficulty = Difficulty.medium;
                     newRoom.GetComponentInChildren<GateManager>().keytype = PlayerCurrencies.KeyType.Silver;
                     GameObject silverDialogue;
                     silverDialogue = Instantiate(silverRoomDialogue);
@@ -370,6 +363,7 @@ public class RoomManager : MonoBehaviour
                 }
                 else if(loops == 2)
                 {
+                    newRoom.GetComponent<Room>().difficulty = Difficulty.hard;
                     newRoom.GetComponentInChildren<GateManager>().keytype = PlayerCurrencies.KeyType.Gold;
                     GameObject goldDialogue;
                     goldDialogue = Instantiate(goldRoomDialogue);
@@ -400,6 +394,7 @@ public class RoomManager : MonoBehaviour
                    newRoom.gameObject.GetComponentInChildren<GateManager>().locked = true;
                     if (loops == 0)
                     {
+                        newRoom.GetComponent<Room>().difficulty = Difficulty.medium;
                         newRoom.gameObject.GetComponentInChildren<GateManager>().keytype = PlayerCurrencies.KeyType.Silver;
                         GameObject silverDialogue;
                         silverDialogue = Instantiate(silverRoomDialogue);
@@ -408,6 +403,7 @@ public class RoomManager : MonoBehaviour
                     }
                     else if (loops == 1)
                     {
+                        newRoom.GetComponent<Room>().difficulty = Difficulty.hard;
                         newRoom.gameObject.GetComponentInChildren<GateManager>().keytype = PlayerCurrencies.KeyType.Gold;
                         GameObject goldDialogue;
                         goldDialogue = Instantiate(goldRoomDialogue);
