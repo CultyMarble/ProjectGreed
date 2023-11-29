@@ -173,6 +173,8 @@ MonoBehaviour:
   - {fileID: 468550890004570433, guid: 6c16ad1641df33041b6bbd485d64debd, type: 3}
   - {fileID: 7128766739216337674, guid: bedf7cd3e1e901b4990168bcdf126b0d, type: 3}
   - {fileID: 8864901915701653087, guid: 90767ee69fb143d4dafbee60cdace558, type: 3}
+  - {fileID: 468550890004570433, guid: 661e883d2d10db64f952f4427806feb0, type: 3}
+  - {fileID: 468550890004570433, guid: 98162e29a47c9d04f8438c47b11ee1a3, type: 3}
   itemPositionList:
   - {fileID: 8439679026911376411}
   - {fileID: 8439679028753260272}

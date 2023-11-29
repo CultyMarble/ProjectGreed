@@ -150,18 +150,43 @@ public class RandomSpawnManager : SingletonMonobehaviour<RandomSpawnManager>
                 {
                     enemy.transform.position = spawnPointList.transform.GetChild(index).transform.position;
                     enemy.gameObject.SetActive(true);
-                    switch (difficulty)
+                    if (enemy.CompareTag("EnemyGroup"))
                     {
-                        case Difficulty.easy:
-                            break;
-                        case Difficulty.medium:
-                            enemy.GetComponent<EnemyHealth>().currentMaxHealth = 1.25f * enemy.GetComponent<EnemyHealth>().baseMaxHealth;
-                            enemy.GetComponent<EnemyHealth>().currentHealth = enemy.GetComponent<EnemyHealth>().currentMaxHealth;
-                            break;
-                        case Difficulty.hard:
-                            enemy.GetComponent<EnemyHealth>().currentMaxHealth = 1.5f * enemy.GetComponent<EnemyHealth>().baseMaxHealth;
-                            enemy.GetComponent<EnemyHealth>().currentHealth = enemy.GetComponent<EnemyHealth>().currentMaxHealth;
-                            break;
+                        switch (difficulty)
+                        {
+                            case Difficulty.easy:
+                                break;
+                            case Difficulty.medium:
+                                foreach (EnemyHealth child in enemy.transform.GetComponentsInChildren<EnemyHealth>())
+                                {
+                                    child.currentMaxHealth = 1.25f * child.baseMaxHealth;
+                                    child.currentHealth = child.currentMaxHealth;
+                                }
+                                break;
+                            case Difficulty.hard:
+                                foreach (EnemyHealth child in enemy.transform.GetComponentsInChildren<EnemyHealth>())
+                                {
+                                    child.currentMaxHealth = 1.5f * child.baseMaxHealth;
+                                    child.currentHealth = child.currentMaxHealth;
+                                }
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        switch (difficulty)
+                        {
+                            case Difficulty.easy:
+                                break;
+                            case Difficulty.medium:
+                                enemy.GetComponent<EnemyHealth>().currentMaxHealth = 1.25f * enemy.GetComponent<EnemyHealth>().baseMaxHealth;
+                                enemy.GetComponent<EnemyHealth>().currentHealth = enemy.GetComponent<EnemyHealth>().currentMaxHealth;
+                                break;
+                            case Difficulty.hard:
+                                enemy.GetComponent<EnemyHealth>().currentMaxHealth = 1.5f * enemy.GetComponent<EnemyHealth>().baseMaxHealth;
+                                enemy.GetComponent<EnemyHealth>().currentHealth = enemy.GetComponent<EnemyHealth>().currentMaxHealth;
+                                break;
+                        }
                     }
                     totalSpawned++;
                     break;

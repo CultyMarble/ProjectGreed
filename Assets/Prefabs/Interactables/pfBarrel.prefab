@@ -100,19 +100,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemAndDropChances:
-  - item: {fileID: 7565985644124066583, guid: e389fcd3ca0d2c246825ae68b52252cf, type: 3}
-    chance: 25
   - item: {fileID: 4446321246598847943, guid: d974aab052fa6db499b30ac557f012fe, type: 3}
     chance: 10
   - item: {fileID: 4536764660341095812, guid: ee4dfc2ed2ae5ef4e9e9ad90e01f7539, type: 3}
     chance: 10
+  - item: {fileID: 468550890004570433, guid: 98162e29a47c9d04f8438c47b11ee1a3, type: 3}
+    chance: 15
   - item: {fileID: 468550890004570433, guid: 6c16ad1641df33041b6bbd485d64debd, type: 3}
     chance: 10
+  - item: {fileID: 468550890004570433, guid: 661e883d2d10db64f952f4427806feb0, type: 3}
+    chance: 25
   - item: {fileID: 7128766739216337674, guid: bedf7cd3e1e901b4990168bcdf126b0d, type: 3}
     chance: 10
   - item: {fileID: 8864901915701653087, guid: 90767ee69fb143d4dafbee60cdace558, type: 3}
     chance: 10
   - item: {fileID: 3149911069759178359, guid: 6bbf2c19df10b0b429c4d3397145783f, type: 3}
+    chance: 25
+  - item: {fileID: 7565985644124066583, guid: e389fcd3ca0d2c246825ae68b52252cf, type: 3}
     chance: 25
   spawnCurrency: {fileID: 6063696349042203140}
 --- !u!114 &6063696349042203140
@@ -130,6 +134,9 @@ MonoBehaviour:
   pfTempCurrency: {fileID: 2443823218653012819, guid: 3d947b54961e7fd49bec6bc289615a57, type: 3}
   minAmount: 0
   maxAmount: 5
+  spawnHealth: 0
+  healthSpawnChance: 0
+  pfHealthPickup: {fileID: 0}
 --- !u!70 &746111255636794340
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

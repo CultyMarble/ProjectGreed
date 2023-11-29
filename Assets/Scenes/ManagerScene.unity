@@ -3151,6 +3151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bodySpriteAnimator: {fileID: 1185049636}
+  damageImmune: 0
 --- !u!1 &1501222726
 GameObject:
   m_ObjectHideFlags: 0
@@ -3479,16 +3480,20 @@ MonoBehaviour:
   objectList:
   - {fileID: 7565985644124066584, guid: e389fcd3ca0d2c246825ae68b52252cf, type: 3}
   - {fileID: 9030462796631019687, guid: c7e45db25b76ecd4e9bc45807842e78c, type: 3}
+  - {fileID: 9030462796631019687, guid: c7e45db25b76ecd4e9bc45807842e78c, type: 3}
   noteList:
   - {fileID: 2485148985364739039, guid: 3504d16640fe27a48a6ec58f6ef1780e, type: 3}
   - {fileID: 2485148985364739039, guid: 3bdb86f22e744fc42a2843d1b11a36ab, type: 3}
   - {fileID: 2485148985364739039, guid: f38bc8c64a6f7db45a8a2915dcee6d83, type: 3}
   - {fileID: 2485148985364739039, guid: cd1ef8a7f7e07cb4ab6dba00b993954a, type: 3}
   - {fileID: 2485148985364739039, guid: 2fd83230e3dd22e46b9b40be74c9e534, type: 3}
-  chestList: []
+  chestList:
+  - {fileID: 6917886894744599027, guid: e35b9775be5e7eb448a154632cd2cb02, type: 3}
+  - {fileID: 188694118197523721, guid: 52e461325db4ecc49bdd3ae2c2bff31d, type: 3}
+  - {fileID: 8972429057144147082, guid: 71d17848d7a6bbb4391a075ad2ca213d, type: 3}
   objectSpawnChance: 0.3
   noteSpawnChance: 0.05
-  chestSpawnChance: 0
+  chestSpawnChance: 0.1
   spawnNum: 5
 --- !u!1 &1664445428
 GameObject:

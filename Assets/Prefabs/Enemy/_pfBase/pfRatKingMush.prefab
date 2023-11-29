@@ -626,6 +626,9 @@ MonoBehaviour:
   pfTempCurrency: {fileID: 2443823218653012819, guid: 3d947b54961e7fd49bec6bc289615a57, type: 3}
   minAmount: 0
   maxAmount: 3
+  spawnHealth: 1
+  healthSpawnChance: 10
+  pfHealthPickup: {fileID: 1758731385964282022, guid: b1db5f650ec9c1a4ba21142fcebda982, type: 3}
 --- !u!212 &6094876810712862803
 SpriteRenderer:
   m_ObjectHideFlags: 0
