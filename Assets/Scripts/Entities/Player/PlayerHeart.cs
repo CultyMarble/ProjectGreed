@@ -98,6 +98,11 @@ public class PlayerHeart : MonoBehaviour
         // Reset Parameters
         ResetPlayerHeart();
 
+        UpgradeMenu.Instance.RemoveCurrentUpgradePath_Tier1Effect(true);
+        UpgradeMenu.Instance.RemoveCurrentUpgradePath_Tier2Effect(true);
+
+        DisplayItemUpgradeIcon.Instance.Clear();
+
         // Call OnDestroy Event
         OnDespawnPlayerEvent?.Invoke(this, EventArgs.Empty);
 

@@ -4,7 +4,7 @@ using TMPro;
 public class DisplayPlayerCurrency : SingletonMonobehaviour<DisplayPlayerCurrency>
 {
     [SerializeField] private TextMeshProUGUI tempCurrencyText;
-    //[SerializeField] private TextMeshProUGUI permCurrencyText;
+    [SerializeField] private TextMeshProUGUI permCurrencyText;
     [SerializeField] private GameObject silverKeyIcon;
     [SerializeField] private GameObject goldKeyIcon;
 
@@ -14,10 +14,10 @@ public class DisplayPlayerCurrency : SingletonMonobehaviour<DisplayPlayerCurrenc
         tempCurrencyText.SetText(amount.ToString());
     }
 
-    //public void UpdatePermCurrencyText(int amount)
-    //{
-    //    permCurrencyText.SetText(amount.ToString());
-    //}
+    public void UpdatePermCurrencyText(int amount)
+    {
+        permCurrencyText.SetText(amount.ToString());
+    }
 
     public void UpdateSilverKeyIcon(bool hasSilverKey)
     {

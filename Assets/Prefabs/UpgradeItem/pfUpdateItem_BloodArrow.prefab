@@ -288,6 +288,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Blood Arrow
   itemDescription: +1 Max Range Ability Charge
+  itemID: 101
   increaseMaxRangeAbilityCharge: 1
 --- !u!114 &8905288112917768220
 MonoBehaviour:

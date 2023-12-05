@@ -119,6 +119,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Health Candy
   itemDescription: Heal Player Health
+  itemID: 104
   increaseCurrentHeart: 1
 --- !u!114 &-787980104314602020
 MonoBehaviour:

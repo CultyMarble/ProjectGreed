@@ -119,6 +119,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Speed Candy
   itemDescription: Add More Speed
+  itemID: 107
   increaSpeed: 1
 --- !u!114 &-787980104314602020
 MonoBehaviour:

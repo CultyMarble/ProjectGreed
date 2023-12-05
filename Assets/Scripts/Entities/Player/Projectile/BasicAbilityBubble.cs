@@ -41,6 +41,8 @@ public class BasicAbilityBubble : MonoBehaviour
     {
         timeUntilChangeDirection = Random.Range(timeUntilChangeDirectionMin, timeUntilChangeDirectionMax);
         animator = GetComponent<Animator>();
+
+        EventManager.BeforeSceneUnloadEvent += Despawn;
     }
 
     private void Update()
@@ -89,6 +91,11 @@ public class BasicAbilityBubble : MonoBehaviour
         {
             animator.SetTrigger("Pop");
         }
+    }
+
+    private void OnDisable()
+    {
+        EventManager.BeforeSceneUnloadEvent -= Despawn;
     }
 
     public void Despawn()

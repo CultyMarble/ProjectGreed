@@ -22,6 +22,8 @@ public class BossStageController : MonoBehaviour
     private void OnDisable()
     {
         firstFormHealth.OnDespawnEvent -= Stage1Health_OnDespawnEvent;
+
+        AudioManager.Instance.playMusicClip(musicSound.BGMusic);
     }
 
     //======================================================================

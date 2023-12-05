@@ -119,6 +119,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Energized Candy
   itemDescription: Increase Fuel Recharge Rate
+  itemID: 103
   increaseRechargeRate: 100
 --- !u!114 &-787980104314602020
 MonoBehaviour:
