@@ -14,6 +14,9 @@ public class AudioManager : SingletonMonobehaviour<AudioManager>
     [SerializeField] private AudioSource musicSource;
     [SerializeField] private AudioSource SFXSource;
 
+    [SerializeField] private AudioMixerGroup musicMixerGroup;
+    [SerializeField] private AudioMixerGroup SFXMixerGroup;
+
     public enum SFXSound
     {
         magicSplash,
@@ -111,6 +114,7 @@ public class AudioManager : SingletonMonobehaviour<AudioManager>
     }
     public void playMusicClip(musicSound sound)
     {
+        musicSource.outputAudioMixerGroup = musicMixerGroup;
         musicSource.clip = musicSoundAudioClipDictionary[sound];
         musicSource.Play();
     }
@@ -120,11 +124,25 @@ public class AudioManager : SingletonMonobehaviour<AudioManager>
     }
     public void playSFXClip(SFXSound sound)
     {
+        SFXSource.outputAudioMixerGroup = SFXMixerGroup;
         SFXSource.PlayOneShot(SFXSoundAudioClipDictionary[sound]);
     }
     public void playSFXClip(SFXSound sound, AudioSource source)
     {
+        SFXSource.outputAudioMixerGroup = SFXMixerGroup;
         SFXSource.clip = SFXSoundAudioClipDictionary[sound];
         SFXSource.Play();
+    }
+    public void StopAllAudio()
+    {
+        AudioSource[] allAudioSources = FindObjectsOfType<AudioSource>() as AudioSource[];
+
+        foreach (var audioS in allAudioSources)
+        {
+            if (!audioS.loop)
+            {
+                audioS.Stop();
+            }
+        }
     }
 }
