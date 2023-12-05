@@ -105,15 +105,17 @@ MonoBehaviour:
   regularItems:
   - {fileID: 3149911069759178313, guid: 6bbf2c19df10b0b429c4d3397145783f, type: 3}
   - {fileID: 468550890004570437, guid: 6c16ad1641df33041b6bbd485d64debd, type: 3}
+  - {fileID: 468550890004570437, guid: 98162e29a47c9d04f8438c47b11ee1a3, type: 3}
   silverItems:
   - {fileID: 468550890004570437, guid: 6c16ad1641df33041b6bbd485d64debd, type: 3}
   - {fileID: 8864901915701653083, guid: 90767ee69fb143d4dafbee60cdace558, type: 3}
+  - {fileID: 468550890004570437, guid: 98162e29a47c9d04f8438c47b11ee1a3, type: 3}
   goldItems:
   - {fileID: 4446321246598847940, guid: d974aab052fa6db499b30ac557f012fe, type: 3}
   - {fileID: 4536764660341095808, guid: ee4dfc2ed2ae5ef4e9e9ad90e01f7539, type: 3}
   - {fileID: 468550890004570437, guid: 6c16ad1641df33041b6bbd485d64debd, type: 3}
   - {fileID: 7128766739216337673, guid: bedf7cd3e1e901b4990168bcdf126b0d, type: 3}
-  - {fileID: 8864901915701653083, guid: 90767ee69fb143d4dafbee60cdace558, type: 3}
+  - {fileID: 468550890004570437, guid: 98162e29a47c9d04f8438c47b11ee1a3, type: 3}
   sprites:
   - {fileID: -1226069206, guid: f8e7661ee2474bc4493e2725952462aa, type: 3}
   - {fileID: 1047848506, guid: f8e7661ee2474bc4493e2725952462aa, type: 3}
@@ -139,6 +141,9 @@ MonoBehaviour:
   pfTempCurrency: {fileID: 2443823218653012819, guid: 3d947b54961e7fd49bec6bc289615a57, type: 3}
   minAmount: 5
   maxAmount: 10
+  spawnHealth: 1
+  healthSpawnChance: 10
+  pfHealthPickup: {fileID: 1758731385964282022, guid: b1db5f650ec9c1a4ba21142fcebda982, type: 3}
 --- !u!61 &-7123524486768493871
 BoxCollider2D:
   m_ObjectHideFlags: 0

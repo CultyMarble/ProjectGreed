@@ -12,14 +12,16 @@ public class GateManager : MonoBehaviour
     public Room room;
 
     [Header("Enemy Spawn")]
+    [SerializeField] private int baseSpawnNum;
     private GameObject randomSpawnPoints;
     private GameObject[] enemyPool;
 
+
     [Header("Gate Data")]
-    public bool roomDrawn = false;
-    public bool playerInsideRoom = false;
-    public bool playerInLockZone = false;
-    public bool clearedRoom = false;
+    [HideInInspector] public bool roomDrawn = false;
+    [HideInInspector] public bool playerInsideRoom = false;
+    [HideInInspector] public bool playerInLockZone = false;
+    [HideInInspector] public bool clearedRoom = false;
     public bool disableGate = false;
     public bool locked = false;
     public bool standalone = false;
@@ -34,16 +36,15 @@ public class GateManager : MonoBehaviour
     [SerializeField] private GameObject bottomDoor;
     [SerializeField] private GameObject leftDoor;
 
-
     public DoorState topDoorState = DoorState.none;
     public DoorState rightDoorState = DoorState.none;
     public DoorState bottomDoorState = DoorState.none;
     public DoorState leftDoorState = DoorState.none;
 
-    public int doorsChecked = 0;
-    public int openRooms = 0;
-    public bool allChecked = false;
-    public bool activated = false;
+    [HideInInspector] public int doorsChecked = 0;
+    [HideInInspector] public int openRooms = 0;
+    [HideInInspector] public bool allChecked = false;
+    [HideInInspector] public bool activated = false;
 
     private void Awake()
     {
@@ -104,7 +105,9 @@ public class GateManager : MonoBehaviour
         {
             return;
         }
-        RandomSpawnManager.Instance.SpawnRandom(randomSpawnPoints);
+        int spawnNum = 0;
+        
+        RandomSpawnManager.Instance.SpawnRandom(randomSpawnPoints,room.difficulty);
     }
 
     private void DeadEndHandler()

@@ -701,8 +701,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08fa41e95d6ce67449ffced42205342d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  baseMaxHealth: 100
   currentHealth: 0
+  currentMaxHealth: 0
 --- !u!114 &448461915141562970
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -868,6 +869,9 @@ MonoBehaviour:
   pfTempCurrency: {fileID: 2443823218653012819, guid: 3d947b54961e7fd49bec6bc289615a57, type: 3}
   minAmount: 0
   maxAmount: 5
+  spawnHealth: 1
+  healthSpawnChance: 10
+  pfHealthPickup: {fileID: 1758731385964282022, guid: b1db5f650ec9c1a4ba21142fcebda982, type: 3}
 --- !u!114 &6715554833569249681
 MonoBehaviour:
   m_ObjectHideFlags: 0

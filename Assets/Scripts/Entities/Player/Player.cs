@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using TMPro;
 public class Player : SingletonMonobehaviour<Player>
 {
     [HideInInspector] public PlayerActionState actionState;
@@ -46,6 +46,7 @@ public class Player : SingletonMonobehaviour<Player>
         if (fpromtText == null)
             return;
 
+        fpromtText.gameObject.GetComponent<TextMeshPro>().text = PlayerInteractTrigger.Instance.GetInteractKey().ToString();
         fpromtText.gameObject.SetActive(newBool);
     }
 }

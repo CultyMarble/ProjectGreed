@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerInteractTrigger : MonoBehaviour
+public class PlayerInteractTrigger : SingletonMonobehaviour<PlayerInteractTrigger>
 {
     public event System.EventHandler OnPlayerInteractTrigger;
 
@@ -9,8 +9,9 @@ public class PlayerInteractTrigger : MonoBehaviour
     private PlayerInput playerInput;
 
     //===========================================================================
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         playerInput = FindObjectOfType<PlayerInput>();
     }
 
@@ -18,5 +19,14 @@ public class PlayerInteractTrigger : MonoBehaviour
     {
         if (playerInput.actions["Interact"].triggered)
             OnPlayerInteractTrigger?.Invoke(this, System.EventArgs.Empty);
+    }
+
+    //===========================================================================
+    public string GetInteractKey()
+    {
+        if (playerInput == null)
+            return string.Empty;
+
+        return playerInput.actions["Interact"].GetBindingDisplayString(0);
     }
 }
