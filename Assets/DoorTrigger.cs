@@ -32,6 +32,8 @@ public class DoorTrigger : MonoBehaviour
                 case PlayerCurrencies.KeyType.Silver:
                     if (PlayerCurrencies.Instance.hasSilverKey)
                     {
+                        AudioManager.Instance.playSFXClip(AudioManager.SFXSound.openLockDoors);
+
                         gateManager.disableGate = true;
                         gateManager.locked = false;
                         if(toolTipMenu != null)
@@ -48,6 +50,8 @@ public class DoorTrigger : MonoBehaviour
                 case PlayerCurrencies.KeyType.Gold:
                     if (PlayerCurrencies.Instance.hasGoldKey)
                     {
+                        AudioManager.Instance.playSFXClip(AudioManager.SFXSound.openLockDoors);
+
                         gateManager.disableGate = true;
                         gateManager.locked = false;
                         if (toolTipMenu != null)

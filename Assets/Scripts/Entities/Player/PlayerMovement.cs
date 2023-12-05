@@ -36,6 +36,8 @@ public class PlayerMovement : MonoBehaviour
     // Components
     private CapsuleCollider2D CapsuleCollider2D;
 
+    [SerializeField] private AudioSource audioSource;
+
     //===========================================================================
     // NEW INPUT SYSTEM
     private PlayerInput playerInput;
@@ -95,6 +97,18 @@ public class PlayerMovement : MonoBehaviour
         movementVector.x = input.x;
         movementVector.y = input.y;
         movementVector = movementVector.normalized;
+
+        if (input.x == 0 && input.y == 0)
+        {
+            audioSource.Stop();
+        }
+        else
+        {
+            if (!audioSource.isPlaying)
+            {
+                audioSource.Play();
+            }
+        }
     }
 
     private void UpdateAnimator()
