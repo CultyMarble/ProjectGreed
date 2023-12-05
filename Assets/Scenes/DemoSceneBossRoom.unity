@@ -1804,6 +1804,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPushBack: 0
   animator: {fileID: 616005811}
+  enemyType: 4
 --- !u!95 &616005811
 Animator:
   serializedVersion: 4
@@ -17362,6 +17363,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPushBack: 0
   animator: {fileID: 2957386732626548641}
+  enemyType: 4
 --- !u!95 &2957386732626548641
 Animator:
   serializedVersion: 4

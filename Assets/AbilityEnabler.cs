@@ -86,12 +86,11 @@ public class AbilityEnabler : MonoBehaviour
             case Ability.Health:
                 if (mode == Mode.Enable)
                 {
-                    player.GetComponent<PlayerHeart>().enabled = true;
+                    player.GetComponent<PlayerHeart>().damageImmune = false;
                 }
                 else
                 {
-                    player.GetComponent<PlayerHeart>().enabled = false;
-
+                    player.GetComponent<PlayerHeart>().damageImmune = true;
                 }
                 break;
             case Ability.All:
@@ -101,7 +100,7 @@ public class AbilityEnabler : MonoBehaviour
                     player.GetComponentInChildren<RangeAbility>().enabled = true;
                     player.GetComponentInChildren<BombAbility>().enabled = true;
                     player.GetComponent<PlayerMovement>().dashEnabled = true;
-                    player.GetComponent<PlayerHeart>().enabled = true;
+                    player.GetComponent<PlayerHeart>().damageImmune = false;
                 }
                 else
                 {
@@ -109,7 +108,7 @@ public class AbilityEnabler : MonoBehaviour
                     player.GetComponentInChildren<RangeAbility>().enabled = false;
                     player.GetComponentInChildren<BombAbility>().enabled = false;
                     player.GetComponent<PlayerMovement>().dashEnabled = false;
-                    player.GetComponent<PlayerHeart>().enabled = false;
+                    player.GetComponent<PlayerHeart>().damageImmune = true;
                 }
                 break;
         }

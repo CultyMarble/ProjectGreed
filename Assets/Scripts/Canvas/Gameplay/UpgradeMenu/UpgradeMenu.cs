@@ -87,6 +87,10 @@ public class UpgradeMenu : SingletonMonobehaviour<UpgradeMenu>
 
     private void Update()
     {
+        if(um_BGImage.activeSelf == false)
+        {
+            return;
+        }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             SetContentActive(false);

@@ -28,7 +28,7 @@ public class PlayerHeart : MonoBehaviour
     [SerializeField] private Animator bodySpriteAnimator = default;
     private readonly float iFrameDuration = 1.0f;
     private float iFrameTimer = default;
-    private bool damageImmune = default;
+    public bool damageImmune = default;
 
     //======================================================================
     private void OnEnable()
@@ -61,6 +61,8 @@ public class PlayerHeart : MonoBehaviour
     {
         // Health Feedback
         GetComponentInChildren<SpriteRenderer>().color = new Color(255, 0, 0);
+        AudioManager.Instance.playSFXClip(AudioManager.SFXSound.playerDamage);
+
         feedbackDamageTimer = feedbackDamageDuration;
     }
 
