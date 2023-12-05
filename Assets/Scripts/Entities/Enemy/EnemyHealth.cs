@@ -73,6 +73,10 @@ public class EnemyHealth : MonoBehaviour
         currentHealth = currentMaxHealth;
         
         OnHealthChanged?.Invoke(this, new OnHealthChangedEvenArgs { healthRatio = currentHealth / currentMaxHealth });
+        if(gameObject.GetComponent<DropEnemies>() != null)
+        {
+            gameObject.GetComponent<DropEnemies>().SpawnOnDeath();
+        }
         gameObject.SetActive(false);
 
         if(spawnCurrency != null)

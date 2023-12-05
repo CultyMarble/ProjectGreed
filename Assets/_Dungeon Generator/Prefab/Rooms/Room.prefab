@@ -742,6 +742,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Utilities
       objectReference: {fileID: 0}
+    - target: {fileID: 2754603635443099406, guid: 2cb3f5cda68f07743804fb4b7f74a704, type: 3}
+      propertyPath: baseSpawnNum
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 3585337933851540006, guid: 2cb3f5cda68f07743804fb4b7f74a704, type: 3}
       propertyPath: m_IsActive
       value: 0

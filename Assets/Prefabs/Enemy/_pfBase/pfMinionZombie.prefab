@@ -700,8 +700,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08fa41e95d6ce67449ffced42205342d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 45
+  baseMaxHealth: 0
   currentHealth: 0
+  currentMaxHealth: 0
 --- !u!114 &448461915141562970
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -720,7 +721,7 @@ MonoBehaviour:
   movementSpeed: 3
   currentDestination: {fileID: 4105315116686917796}
   currentTarget: {x: 0, y: 0, z: 0}
-  searchRadius: 12
+  searchRadius: 15
   breakDistanceMin: 0
   breakDistanceMax: 0
   requireLineOfSight: 1
@@ -867,6 +868,9 @@ MonoBehaviour:
   pfTempCurrency: {fileID: 2443823218653012819, guid: 3d947b54961e7fd49bec6bc289615a57, type: 3}
   minAmount: 0
   maxAmount: 0
+  spawnHealth: 0
+  healthSpawnChance: 0
+  pfHealthPickup: {fileID: 0}
 --- !u!210 &6108834649531143232
 SortingGroup:
   m_ObjectHideFlags: 0

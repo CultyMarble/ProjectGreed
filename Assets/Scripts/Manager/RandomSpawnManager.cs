@@ -40,13 +40,12 @@ public class RandomSpawnManager : SingletonMonobehaviour<RandomSpawnManager>
 
     //===========================================================================
     //===========================================================================
-    public void SpawnRandom(GameObject spawnPoints,Difficulty difficulty)
+    public void SpawnRandom(GameObject spawnPoints, Difficulty difficulty)
     {
         if (spawnPoints != null)
         {
             spawnPointList = spawnPoints;
             if (spawnNum == 0) { return; }
-            spawnAmount = spawnNum;
         }
         Spawn(difficulty);
     }
@@ -57,99 +56,72 @@ public class RandomSpawnManager : SingletonMonobehaviour<RandomSpawnManager>
     }
 
     //===========================================================================
-    //private bool LoadEnemySpawnPointList()
-    //{
-    //    if (GameObject.Find("EnemySpawnPointList")!= null){
-    //        enemySpawnPointList = GameObject.Find("EnemySpawnPointList");
-    //        int spawnNum = enemySpawnPointList.GetComponent<SpawnPointList>().GetSpawnAmount();
-    //        if (spawnNum == 0) { return false; }
-    //        spawnAmount = spawnNum;
-    //        return true;
-    //    }
-    //    else { return false; }
-    //}
 
     private void Spawn(Difficulty difficulty)
     {
-        spawnPointIndexList.Clear();
-
-        // Get Random Spawn Points
-        for (int i = 0; i < spawnAmount; i++)
-        {
-            spawnPointIndex = Random.Range(0, spawnPointList.transform.childCount);
-
-            if (spawnPointIndexList.Count == 0)
-            {
-                spawnPointIndexList.Add(spawnPointIndex);
-            }
-            else
-            {
-                bool _addIndex = true;
-                if (spawnPointIndexList.Count == spawnPointList.transform.childCount)
-                {
-                    break;
-                }
-
-                // Check for unique Spawn Point Index
-                for (int index = 0; index < spawnPointIndexList.Count; index++)
-                {
-                    if (spawnPointIndex == spawnPointIndexList[index])
-                    {
-                        _addIndex = false;
-                    }
-                }
-
-                if (_addIndex)
-                {
-                    spawnPointIndexList.Add(spawnPointIndex);
-                }
-                else
-                {
-                    i--;
-                }
-            }
-        }
+        bool spawnItems = true;
         switch (difficulty)
         {
             case Difficulty.easy:
                 spawnAmount = spawnNum;
                 break;
             case Difficulty.medium:
-                spawnAmount = (int)(spawnNum * 1.25);
+                spawnAmount = (int)Mathf.Clamp(spawnNum * 1.5f, 0f, 2f * spawnPointList.transform.childCount);
                 break;
             case Difficulty.hard:
-                spawnAmount = (int)(spawnNum * 1.5);
+                spawnAmount = (int)Mathf.Clamp(spawnNum * 2f, 0f, 2f * spawnPointList.transform.childCount);
                 break;
         }
+        bool noteSpawned = false;
         // Random Spawn
-        foreach (int index in spawnPointIndexList)
+        for (int index = 0; index < spawnPointList.transform.childCount; index++)
         {
-            //Spawn Chest
-            if(Random.value < chestSpawnChance)
+            int offSetX = Random.Range(-1, 1);
+            int offSetY = Random.Range(-1, 1);
+            Vector3 offset = new Vector3(offSetX, offSetY, 0);
+
+            if (index == spawnPointList.transform.childCount - 1 && totalSpawned < spawnAmount)
             {
-                Instantiate(chestList[Random.Range(0, chestList.Length)], spawnPointList.transform.GetChild(index).transform.position, Quaternion.identity);
-                continue;
+                index = 0;
+                spawnItems = false;
             }
-            // Spawn Item
-            else if (Random.value < objectSpawnChance)
+            if (spawnItems)
             {
-                Instantiate(objectList[Random.Range(0, objectList.Length)], spawnPointList.transform.GetChild(index).transform.position, Quaternion.identity);
-                continue;
+                //Spawn Chest
+                if (Random.value < chestSpawnChance)
+                {
+                    Instantiate(chestList[Random.Range(0, chestList.Length)], spawnPointList.transform.GetChild(index).transform.position, Quaternion.identity);
+                    continue;
+                }
+                // Spawn Item
+                else if (Random.value < objectSpawnChance)
+                {
+                    Instantiate(objectList[Random.Range(0, objectList.Length)], spawnPointList.transform.GetChild(index).transform.position, Quaternion.identity);
+                    continue;
+                }
+                // Spawn Note
+                if (Random.value < noteSpawnChance && !noteSpawned)
+                {
+                    Instantiate(noteList[Random.Range(0, noteList.Length)], spawnPointList.transform.GetChild(index).transform.position, Quaternion.identity);
+                    noteSpawned = true;
+                }
             }
+
             // Random Enemy Type Pool
             poolIndex = Random.Range(0, enemyTypePoolList.Length);
 
             // Spawn Enemy
-            foreach(Transform enemy in enemyTypePoolList[poolIndex])
+            foreach (Transform enemy in enemyTypePoolList[poolIndex])
             {
-                if(totalSpawned >= spawnNum)
+                if (totalSpawned >= spawnAmount)
                 {
                     break;
                 }
                 if (enemy.gameObject.activeSelf == false)
                 {
-                    enemy.transform.position = spawnPointList.transform.GetChild(index).transform.position;
+                    enemy.transform.position = spawnPointList.transform.GetChild(index).transform.position + offset;
                     enemy.gameObject.SetActive(true);
+                    totalSpawned++;
                     if (enemy.CompareTag("EnemyGroup"))
                     {
                         switch (difficulty)
@@ -171,6 +143,7 @@ public class RandomSpawnManager : SingletonMonobehaviour<RandomSpawnManager>
                                 }
                                 break;
                         }
+                        break;
                     }
                     else
                     {
@@ -187,19 +160,13 @@ public class RandomSpawnManager : SingletonMonobehaviour<RandomSpawnManager>
                                 enemy.GetComponent<EnemyHealth>().currentHealth = enemy.GetComponent<EnemyHealth>().currentMaxHealth;
                                 break;
                         }
+                        break;
                     }
-                    totalSpawned++;
-                    break;
                 }
             }
-            // Spawn Note
-            if (Random.value < noteSpawnChance)
-            {
-                Instantiate(noteList[Random.Range(0, noteList.Length)], spawnPointList.transform.GetChild(index).transform.position, Quaternion.identity);
-                continue;
-            }
-            totalSpawned = 0;
+
         }
+        totalSpawned = 0;
     }
     private void DespawnEnemies()
     {
@@ -225,3 +192,4 @@ public class RandomSpawnManager : SingletonMonobehaviour<RandomSpawnManager>
         
     }
 }
+

@@ -500,7 +500,7 @@ MonoBehaviour:
   searchRadius: 20
   breakDistanceMin: 10
   breakDistanceMax: 0
-  requireLineOfSight: 0
+  requireLineOfSight: 1
   keepDistance: 0
   patrolArea: 0
   flee: 1
@@ -644,6 +644,9 @@ MonoBehaviour:
   pfTempCurrency: {fileID: 2443823218653012819, guid: 3d947b54961e7fd49bec6bc289615a57, type: 3}
   minAmount: 0
   maxAmount: 2
+  spawnHealth: 0
+  healthSpawnChance: 0
+  pfHealthPickup: {fileID: 0}
 --- !u!210 &6631313663059854920
 SortingGroup:
   m_ObjectHideFlags: 0

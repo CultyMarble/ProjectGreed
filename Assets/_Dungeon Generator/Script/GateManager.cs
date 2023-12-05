@@ -12,8 +12,10 @@ public class GateManager : MonoBehaviour
     public Room room;
 
     [Header("Enemy Spawn")]
+    [SerializeField] private int baseSpawnNum;
     private GameObject randomSpawnPoints;
     private GameObject[] enemyPool;
+
 
     [Header("Gate Data")]
     [HideInInspector] public bool roomDrawn = false;
@@ -103,6 +105,8 @@ public class GateManager : MonoBehaviour
         {
             return;
         }
+        int spawnNum = 0;
+        
         RandomSpawnManager.Instance.SpawnRandom(randomSpawnPoints,room.difficulty);
     }
 

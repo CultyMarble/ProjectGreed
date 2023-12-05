@@ -62,7 +62,7 @@ public class DropEnemies : MonoBehaviour
 
         Instantiate(enemy, new Vector3 (transform.position.x + randomX, transform.position.y + randomY, transform.position.z), Quaternion.identity);
     }
-    private void OnDisable()
+    public void SpawnOnDeath()
     {
         if (!activated)
         {
