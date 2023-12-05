@@ -372,6 +372,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Book Of Haste
   itemDescription: Dash Faster and Farther
+  itemID: 102
   increaseDashTime: 0.017
   increaseDashSpeed: 2.5
 --- !u!114 &6190910729052278090

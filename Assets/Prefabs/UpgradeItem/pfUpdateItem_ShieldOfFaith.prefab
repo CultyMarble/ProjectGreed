@@ -372,6 +372,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Shield Of Faith
   itemDescription: Max Health +1
+  itemID: 105
   increaseMaxHeart: 1
 --- !u!114 &6861999084529177918
 MonoBehaviour:

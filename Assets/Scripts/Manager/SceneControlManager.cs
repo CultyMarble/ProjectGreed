@@ -10,7 +10,7 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
 
     [SerializeField] private GameObject player;
 
-    private readonly float loadingScreenDuration = 0.75f;
+    private readonly float loadingScreenDuration = 1.0f;
 
     private bool isLoadingScreenActive = default;
     public bool IsLoadingScreenActive => isLoadingScreenActive;
@@ -39,8 +39,7 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
     }
 
     //===========================================================================
-    private IEnumerator UnloadAndSwitchScene
-        (string sceneName, Vector3 spawnPosition)
+    private IEnumerator UnloadAndSwitchScene(string sceneName, Vector3 spawnPosition)
     {
         EventManager.CallBeforeSceneUnloadLoadingScreenEvent();
         yield return StartCoroutine(LoadingScreen(1.0f));
@@ -56,7 +55,8 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         Player.Instance.transform.position = spawnPosition;
         Player.Instance.gameObject.SetActive(true);
 
-        yield return new WaitForSecondsRealtime(1.0f);
+        SaveDataManager.Instance.LoadUpdateSaveData();
+
         yield return StartCoroutine(LoadingScreen(0.0f));
         EventManager.CallAfterSceneLoadedLoadingScreenEvent();
 
@@ -110,6 +110,8 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
 
         Player.Instance.transform.position = Vector3.zero;
         Player.Instance.gameObject.SetActive(true);
+
+        SaveDataManager.Instance.LoadUpdateSaveData();
 
         StartCoroutine(LoadingScreen(0.0f));
         EventManager.CallAfterSceneLoadedLoadingScreenEvent();
@@ -187,12 +189,6 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         CurrentGameplayState = GameplayState.Pause;
 
         Player.Instance.transform.position = Vector3.zero;
-
-        // START LOAD TUTORIAL
-
-
-
-        // END LOAD TUTORIAL
 
         yield return StartCoroutine(LoadingScreen(0.0f));
         EventManager.CallAfterSceneLoadedLoadingScreenEvent();

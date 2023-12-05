@@ -372,6 +372,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Shield Of Soul
   itemDescription: Max Fuel +25
+  itemID: 106
   increaseMaxFuel: 25
 --- !u!114 &1651899601601955903
 MonoBehaviour:

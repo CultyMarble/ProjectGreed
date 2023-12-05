@@ -43,6 +43,7 @@ public class PlayerDataManager : SingletonMonobehaviour<PlayerDataManager>
         Player.Instance.GetComponentInChildren<BasicAbility>().UpdateAbilityParameters();
         Player.Instance.GetComponentInChildren<RangeAbility>().UpdateAbilityParameters();
         Player.Instance.GetComponentInChildren<BombAbility>().UpdateAbilityParameters();
+
         PlayerCurrencies.Instance.ResetCurrency();
     }
 }

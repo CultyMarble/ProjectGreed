@@ -4,6 +4,7 @@ public abstract class UpgradeItem : MonoBehaviour
 {
     [SerializeField] private string itemName;
     [SerializeField] private string itemDescription;
+    public int itemID;
 
     private bool canPickedUp;
     private ToolTip toolTipMenu;
@@ -51,6 +52,7 @@ public abstract class UpgradeItem : MonoBehaviour
 
             AddItemEffect();
 
+            DisplayItemUpgradeIcon.Instance.AddItemUpdateIcon(GetComponent<SpriteRenderer>().sprite, itemID);
             Player.Instance.SetInteractPromtTextActive(false);
 
             this.gameObject.SetActive(false);
