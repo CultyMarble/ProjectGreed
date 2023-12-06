@@ -103,6 +103,8 @@ public class PlayerHeart : MonoBehaviour
 
         DisplayItemUpgradeIcon.Instance.Clear();
 
+        MapGenerator.Instance.ClearMap();
+
         // Call OnDestroy Event
         OnDespawnPlayerEvent?.Invoke(this, EventArgs.Empty);
 

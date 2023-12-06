@@ -73,6 +73,8 @@ public class MapGenerator : SingletonMonobehaviour<MapGenerator>
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             MapGUI.Instance.ToggleMapUI();
+            parent.transform.localScale = Vector3.one;
+            parent.transform.localPosition = Vector3.zero;
         }
 
         if (MapGUI.Instance.CheckMapOpen())
@@ -85,38 +87,23 @@ public class MapGenerator : SingletonMonobehaviour<MapGenerator>
             {
                 parent.transform.localScale *= 1.5f;
             }
-            if (Input.GetKeyDown(KeyCode.UpArrow))
-                parent.transform.position = new Vector3(parent.transform.position.x, parent.transform.position.y + offsetDistance);
-            if (Input.GetKeyDown(KeyCode.DownArrow))
-                parent.transform.position = new Vector3(parent.transform.position.x, parent.transform.position.y - offsetDistance);
+            if (Input.GetKeyDown(KeyCode.W))
+                parent.transform.localPosition = new Vector3(parent.transform.localPosition.x, parent.transform.position.y + offsetDistance);
+            if (Input.GetKeyDown(KeyCode.S))
+                parent.transform.localPosition = new Vector3(parent.transform.localPosition.x, parent.transform.localPosition.y - offsetDistance);
 
-            if (Input.GetKeyDown(KeyCode.LeftArrow))
-                parent.transform.position = new Vector3(parent.transform.position.x - offsetDistance, parent.transform.position.y);
+            if (Input.GetKeyDown(KeyCode.A))
+                parent.transform.localPosition = new Vector3(parent.transform.localPosition.x - offsetDistance, parent.transform.localPosition.y);
 
-            if (Input.GetKeyDown(KeyCode.RightArrow))
-                parent.transform.position = new Vector3(parent.transform.position.x + offsetDistance, parent.transform.position.y);
+            if (Input.GetKeyDown(KeyCode.D))
+                parent.transform.localPosition = new Vector3(parent.transform.localPosition.x + offsetDistance, parent.transform.localPosition.y);
+
+            float _size = Mathf.Clamp(parent.transform.localScale.x, 0.5f, 3);
+
+            parent.transform.localScale = new Vector3(_size, _size, 1.0f);
         }
     }
-    public void MovePositionMarker(CreateDirection direction)
-    {
-        switch (direction)
-        {
-            case CreateDirection.Up:
-                positionMarker.localPosition = new Vector2(positionMarker.localPosition.x, positionMarker.localPosition.y + offsetDistance);
-                break;
-            case CreateDirection.Down:
-                positionMarker.localPosition = new Vector2(positionMarker.localPosition.x, positionMarker.localPosition.y - offsetDistance);
-                break;
-            case CreateDirection.Left:
-                positionMarker.localPosition = new Vector2(positionMarker.localPosition.x - offsetDistance, positionMarker.localPosition.y);
-                break;
-            case CreateDirection.Right:
-                positionMarker.localPosition = new Vector2(positionMarker.localPosition.x + offsetDistance, positionMarker.localPosition.y);
-                break;
-            default:
-                break;
-        }
-    }
+
 
     private void CreateRoom(RoomShape shape,Color color)
     {
@@ -205,6 +192,27 @@ public class MapGenerator : SingletonMonobehaviour<MapGenerator>
     }
 
     //===========================================================================
+    public void MovePositionMarker(CreateDirection direction)
+    {
+        switch (direction)
+        {
+            case CreateDirection.Up:
+                positionMarker.localPosition = new Vector2(positionMarker.localPosition.x, positionMarker.localPosition.y + offsetDistance);
+                break;
+            case CreateDirection.Down:
+                positionMarker.localPosition = new Vector2(positionMarker.localPosition.x, positionMarker.localPosition.y - offsetDistance);
+                break;
+            case CreateDirection.Left:
+                positionMarker.localPosition = new Vector2(positionMarker.localPosition.x - offsetDistance, positionMarker.localPosition.y);
+                break;
+            case CreateDirection.Right:
+                positionMarker.localPosition = new Vector2(positionMarker.localPosition.x + offsetDistance, positionMarker.localPosition.y);
+                break;
+            default:
+                break;
+        }
+    }
+
     public void CreateRoomLayout(CreateDirection direction, RoomShape shape, Color color)
     {
         switch (direction)
@@ -231,6 +239,21 @@ public class MapGenerator : SingletonMonobehaviour<MapGenerator>
                 break;
             default:
                 break;
+        }
+    }
+    
+    public void ClearMap()
+    {
+        foreach (Transform room in parent)
+        {
+            if(room.GetSiblingIndex()==0 || room.GetSiblingIndex() == 1)
+            {
+                room.localPosition = Vector3.zero;
+                room.localScale = Vector3.one;
+
+                continue;
+            }
+            Destroy(room.gameObject);
         }
     }
 }

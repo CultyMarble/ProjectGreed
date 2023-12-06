@@ -266,6 +266,8 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
             GameOverMenuGUI.Instance.SetContentActive(false);
             DemoOverMenuGUI.Instance.SetContentActive(false);
 
+            MapGenerator.Instance.ClearMap();
+
             SaveDataManager.Instance.LoadPlayerDataToRuntimeData(SaveDataSlot.save01);
 
             StartCoroutine(UnloadAndSwitchScene(SceneName.DemoSceneHub.ToString(), Vector3.zero));

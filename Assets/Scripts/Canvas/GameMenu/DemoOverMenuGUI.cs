@@ -12,8 +12,29 @@ public class DemoOverMenuGUI : SingletonMonobehaviour<DemoOverMenuGUI>
     //===========================================================================
     private void OnEnable()
     {
-        do_ReturnHubButton.onClick.AddListener(() => SceneControlManager.Instance.RespawnPlayerAtHub());
-        do_MainMenuButton.onClick.AddListener(() => SceneControlManager.Instance.LoadMainMenuWrapper());
+        do_ReturnHubButton.onClick.AddListener(() =>
+        {
+            UpgradeMenu.Instance.RemoveCurrentUpgradePath_Tier1Effect(true);
+            UpgradeMenu.Instance.RemoveCurrentUpgradePath_Tier2Effect(true);
+
+            DisplayItemUpgradeIcon.Instance.Clear();
+
+            MapGenerator.Instance.ClearMap();
+
+            SceneControlManager.Instance.RespawnPlayerAtHub();
+        });
+
+        do_MainMenuButton.onClick.AddListener(() =>
+        {
+            UpgradeMenu.Instance.RemoveCurrentUpgradePath_Tier1Effect(true);
+            UpgradeMenu.Instance.RemoveCurrentUpgradePath_Tier2Effect(true);
+
+            DisplayItemUpgradeIcon.Instance.Clear();
+
+            MapGenerator.Instance.ClearMap();
+
+            SceneControlManager.Instance.LoadMainMenuWrapper();
+        });
     }
 
     //===========================================================================
