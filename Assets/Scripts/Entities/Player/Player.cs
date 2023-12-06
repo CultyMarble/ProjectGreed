@@ -46,7 +46,7 @@ public class Player : SingletonMonobehaviour<Player>
         if (fpromtText == null)
             return;
 
-        fpromtText.gameObject.GetComponent<TextMeshPro>().text = PlayerInteractTrigger.Instance.GetInteractKey().ToString();
+        fpromtText.gameObject.GetComponent<TextMeshPro>().text = PlayerInteractTrigger.Instance.GetInteractKey(KeyAction.Interact);
         fpromtText.gameObject.SetActive(newBool);
     }
 }

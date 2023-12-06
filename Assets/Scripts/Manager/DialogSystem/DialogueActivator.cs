@@ -98,14 +98,26 @@ public class DialogueActivator : MonoBehaviour
     //===========================================================================
     private void ActivateDialogueManager(SODialogueEntry entry)
     {
+        if ((SODialogueTutorial)entry)
+        {
+            ((SODialogueTutorial)entry).UpdateDisplayText();
+
+            DialogManager.Instance.SetDialogLines(entry.dialogueLines);
+            DialogManager.Instance.SetDialogPanelActiveState(true);
+
+            return;
+        }
+
         DialogManager.Instance.SetDialogLines(entry.dialogueLines);
         DialogManager.Instance.SetDialogPanelActiveState(true);
     }
+
     private void ActivateDialogueManager(string entry)
     {
         DialogManager.Instance.SetDialogLine(entry);
         DialogManager.Instance.SetDialogPanelActiveState(true);
     }
+
     private void ManualTriggerDialogHandler()
     {
         if (Input.GetKeyDown(KeyCode.F) && !haveActivated)

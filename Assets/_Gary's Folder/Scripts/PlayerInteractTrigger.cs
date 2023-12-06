@@ -1,6 +1,12 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+public enum KeyAction
+{
+    Dash,
+    Interact,
+}
+
 public class PlayerInteractTrigger : SingletonMonobehaviour<PlayerInteractTrigger>
 {
     public event System.EventHandler OnPlayerInteractTrigger;
@@ -22,11 +28,8 @@ public class PlayerInteractTrigger : SingletonMonobehaviour<PlayerInteractTrigge
     }
 
     //===========================================================================
-    public string GetInteractKey()
+    public string GetInteractKey(KeyAction key)
     {
-        if (playerInput == null)
-            return string.Empty;
-
-        return playerInput.actions["Interact"].GetBindingDisplayString(0);
+        return playerInput.actions[key.ToString()].GetBindingDisplayString(0);
     }
 }
