@@ -884,7 +884,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ce3bae96456c784c832b6298bb18343, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lungeActivateDistance: 4
+  lungeActivateDistance: 6
   damage: 1
   coolDownTime: 3
   chargeTime: 1

@@ -476,7 +476,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08fa41e95d6ce67449ffced42205342d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseMaxHealth: 20
+  baseMaxHealth: 30
   currentHealth: 0
   currentMaxHealth: 0
 --- !u!114 &8109134301088247973
@@ -494,10 +494,10 @@ MonoBehaviour:
   isAttacking: 0
   isLunging: 0
   isCharging: 0
-  movementSpeed: 5
+  movementSpeed: 6
   currentDestination: {fileID: 6186633300706691329}
   currentTarget: {x: 0, y: 0, z: 0}
-  searchRadius: 20
+  searchRadius: 40
   breakDistanceMin: 0
   breakDistanceMax: 0
   requireLineOfSight: 0

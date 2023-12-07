@@ -32,6 +32,15 @@ public class LungeAI : MonoBehaviour
         coolDownTimeCounter = coolDownTime;
         chargeTimeCounter = chargeTime;
         pathfinder = targetingAI.pathfinder;
+        lungeTimer = 0;
+    }
+
+    private void OnEnable()
+    {
+        canLunge = false;
+        coolDownTimeCounter = coolDownTime;
+        chargeTimeCounter = chargeTime;
+        lungeTimer = 0;
     }
 
     private void Update()
@@ -136,6 +145,22 @@ public class LungeAI : MonoBehaviour
                 EndLunge();
                 return;
             }
+        }
+    }
+    private void OnDisable()
+    {
+        targetingAI.isLunging = false;
+        targetingAI.isCharging = false;
+        targetingAI.isAttacking = false;
+        targetingAI.DontUpdateDestination(false);
+        animator.SetBool("isLunging", false);
+        animator.SetBool("isCharging", false);
+        animator.SetBool("isIdle", true);
+        lungeTimer = 0;
+
+        if (pathfinder != null)
+        {
+            pathfinder.maxSpeed = targetingAI.movementSpeed;
         }
     }
 }

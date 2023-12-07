@@ -3,24 +3,14 @@ using UnityEngine;
 public class SceneTransitEnterTutorial : MonoBehaviour
 {
     private bool playFootStep = true;
-
+    private bool canEnter = false;
     //===========================================================================
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player") && collision.GetType().ToString() == Tags.BOXCOLLIDER2D)
         {
             Player.Instance.SetInteractPromtTextActive(true);
-
-            if (Input.GetKey(KeyCode.F))
-            {
-                if (playFootStep)
-                {
-                    AudioManager.Instance.playSFXClip(AudioManager.SFXSound.footstep);
-                    playFootStep = false;
-                }
-
-                SceneControlManager.Instance.LoadTutorialWrapper();
-            }
+            canEnter = true;
         }
     }
 
@@ -29,6 +19,28 @@ public class SceneTransitEnterTutorial : MonoBehaviour
         if (collision.CompareTag("Player") && collision.GetType().ToString() == Tags.BOXCOLLIDER2D)
         {
             Player.Instance.SetInteractPromtTextActive(false);
+            canEnter = false;
+        }
+    }
+
+    //===========================================================================
+
+    private void Awake()
+    {
+        Player.Instance.GetComponent<PlayerInteractTrigger>().OnPlayerInteractTrigger += SceneTransitEnterTutorial_OnPlayerInteractTrigger;
+    }
+
+    private void SceneTransitEnterTutorial_OnPlayerInteractTrigger(object sender, System.EventArgs e)
+    {
+        if (canEnter)
+        {
+            if (playFootStep)
+            {
+                AudioManager.Instance.playSFXClip(AudioManager.SFXSound.footstep);
+                playFootStep = false;
+            }
+            canEnter = false;
+            SceneControlManager.Instance.LoadTutorialWrapper();
         }
     }
 }
