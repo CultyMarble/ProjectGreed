@@ -130,4 +130,12 @@ public class BombAbility : MonoBehaviour
     {
         bombManualTrigger = active;
     }
+
+    public void ResetBombAmount()
+    {
+        currentCharge = 3;
+
+        // Invoke Event
+        OnChargeChangedEvent?.Invoke(this, new OnChargeChangedEventArgs { charge = currentCharge });
+    }
 }

@@ -15,23 +15,9 @@ public class SaveSelectMenuGUI : SingletonMonobehaviour<SaveSelectMenuGUI>
     //===========================================================================
     private void OnEnable()
     {
-        ss_save01Button.onClick.AddListener(() =>
-        {
-            SaveDataManager.Instance.LoadPlayerDataToRuntimeData(SaveDataSlot.save01);
-            SceneControlManager.Instance.LoadDemoSceneHubWrapper();
-        });
-
-        ss_save02Button.onClick.AddListener(() =>
-        {
-            SaveDataManager.Instance.LoadPlayerDataToRuntimeData(SaveDataSlot.save02);
-            SceneControlManager.Instance.LoadDemoSceneHubWrapper();
-        });
-
-        ss_save03Button.onClick.AddListener(() =>
-        {
-            SaveDataManager.Instance.LoadPlayerDataToRuntimeData(SaveDataSlot.save03);
-            SceneControlManager.Instance.LoadDemoSceneHubWrapper();
-        });
+        ss_save01Button.onClick.AddListener(SceneControlManager.Instance.LoadDemoSceneHubWrapper);
+        ss_save02Button.onClick.AddListener(SceneControlManager.Instance.LoadDemoSceneHubWrapper);
+        ss_save03Button.onClick.AddListener(SceneControlManager.Instance.LoadDemoSceneHubWrapper);
 
         ss_backButton.onClick.AddListener(() =>
         {

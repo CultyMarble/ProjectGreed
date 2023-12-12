@@ -271,7 +271,6 @@ public class RangeAbility : MonoBehaviour
 
     public void ResetAbilityCharge()
     {
-        currentMaxCharge = PlayerDataManager.Instance.PlayerDataRuntime.Ra_baseMaxCharge;
         currentCharge = currentMaxCharge;
 
         //Invoke Event

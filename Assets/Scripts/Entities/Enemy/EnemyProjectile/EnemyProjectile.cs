@@ -17,9 +17,9 @@ public class EnemyProjectile : MonoBehaviour
     private int currentAnimationIndex;
 
     //===========================================================================
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player" && collision.GetType().ToString() == Tags.CAPSULECOLLIDER2D)
         {
             collision.gameObject.GetComponent<PlayerHeart>().UpdateCurrentHeart(-damage);
             Despawn();
@@ -29,8 +29,8 @@ public class EnemyProjectile : MonoBehaviour
         {
             Despawn();
         }
-        
     }
+
     //===========================================================================
     private void Update()
     {

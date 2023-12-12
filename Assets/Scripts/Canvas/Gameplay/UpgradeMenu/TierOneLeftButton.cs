@@ -22,17 +22,25 @@ public class TierOneLeftButton : UpgradeMenuButton, IPointerEnterHandler, IPoint
     //===========================================================================
     public override void AppliedEffect()
     {
+        Debug.Log("Before Applied!: " + Player.Instance.GetComponent<PlayerHeart>().CurrentMaxHeart);
+
         PlayerHeart _playerHeart = Player.Instance.GetComponent<PlayerHeart>();
 
         _playerHeart.UpdateCurrentMaxHeart(1);
         _playerHeart.ResetPlayerHeart();
+
+        Debug.Log("Applied!: " + Player.Instance.GetComponent<PlayerHeart>().CurrentMaxHeart);
     }
 
     public override void RemoveEffect()
     {
+        Debug.Log("Before Remove!: " + Player.Instance.GetComponent<PlayerHeart>().CurrentMaxHeart);
+
         PlayerHeart _playerHeart = Player.Instance.GetComponent<PlayerHeart>();
 
         _playerHeart.UpdateCurrentMaxHeart(-1);
         _playerHeart.ResetPlayerHeart();
+
+        Debug.Log("Removed!: " + Player.Instance.GetComponent<PlayerHeart>().CurrentMaxHeart);
     }
 }

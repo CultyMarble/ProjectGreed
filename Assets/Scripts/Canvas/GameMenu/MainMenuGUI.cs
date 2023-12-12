@@ -22,11 +22,7 @@ public class MainMenuGUI : SingletonMonobehaviour<MainMenuGUI>
     private void Start()
     {
         // Main Menu
-        mm_startButton.onClick.AddListener(() =>
-        {
-            SetContentActive(false);
-            SaveSelectMenuGUI.Instance.SetContentActive(true);
-        });
+        mm_startButton.onClick.AddListener(SceneControlManager.Instance.LoadDemoSceneHubWrapper);
 
         mm_exitButton.onClick.AddListener(Application.Quit);
     }
