@@ -145,6 +145,10 @@ public class RoomManager : MonoBehaviour
         GameObject newBoss;
         for (int i = currentRoomTotal.Count - 1; i >= 0; i--)
         {
+            if(currentRoomTotal[i].activeRoom.currentRoomType == RoomType.shop || currentRoomTotal[i].activeRoom.currentRoomType == RoomType.treasure)
+            {
+                continue;
+            }
             if (currentRoomTotal[i].activeRoom.currentRoomType != RoomType.empty)
             {
                 currentRoomTotal[i].activeRoom.currentRoomType = RoomType.boss;
