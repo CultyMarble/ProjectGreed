@@ -1788,7 +1788,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08fa41e95d6ce67449ffced42205342d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseMaxHealth: 20
+  baseMaxHealth: 700
   currentHealth: 0
   currentMaxHealth: 0
 --- !u!114 &616005810
@@ -17348,7 +17348,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08fa41e95d6ce67449ffced42205342d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseMaxHealth: 20
+  baseMaxHealth: 700
   currentHealth: 0
   currentMaxHealth: 0
 --- !u!114 &2957386732626548640

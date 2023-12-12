@@ -324,9 +324,8 @@ public class RoomManager : MonoBehaviour
             currentRoomCount.Clear();
             roomsFinished = true;
             mapFinished = true;
-
+            Invoke(nameof(SetAStar), 0.5f);
             SceneControlManager.Instance.CurrentGameplayState = GameplayState.Ongoing;
-            aStar.SetActive(true);
             if (onRoomsGenerated != null)
             {
                 onRoomsGenerated();
@@ -422,5 +421,10 @@ public class RoomManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void SetAStar()
+    {
+        aStar.SetActive(true);
     }
 }

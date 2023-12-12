@@ -49,7 +49,7 @@ public class LungeAI : MonoBehaviour
         {
             return;
         }
-        if (canLunge && !targetingAI.CheckNoTarget() && !targetingAI.isLunging && !targetingAI.isCharging)
+        if (canLunge && !targetingAI.CheckNoTarget() && !targetingAI.isLunging && !targetingAI.isCharging && !targetingAI.isAttacking)
         {
             if (Vector2.Distance(transform.position, targetingAI.currentTarget) <= lungeActivateDistance)
             {

@@ -34,7 +34,7 @@ public class MeleeAI : MonoBehaviour
 
     private void Update()
     {
-        if (canMelee && !targetingAI.CheckNoTarget())
+        if (canMelee && !targetingAI.CheckNoTarget()&& !targetingAI.isLunging && !targetingAI.isCharging && !targetingAI.isAttacking)
         {
             if (Vector2.Distance(transform.position, targetingAI.currentTarget) <= activateDistance)
             {
