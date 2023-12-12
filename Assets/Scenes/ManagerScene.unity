@@ -5659,7 +5659,10 @@ MonoBehaviour:
   - {fileID: 2485148985364739039, guid: 85e0f902c8b652f42aa4f2a4f6f68760, type: 3}
   - {fileID: 2485148985364739039, guid: 879a897a2cbb787488ced4aa15c5d46a, type: 3}
   - {fileID: 2485148985364739039, guid: cb0b9d0e4e226544ab7548b557ee401f, type: 3}
-  chestList: []
+  chestList:
+  - {fileID: 6917886894744599027, guid: e35b9775be5e7eb448a154632cd2cb02, type: 3}
+  - {fileID: 188694118197523721, guid: 52e461325db4ecc49bdd3ae2c2bff31d, type: 3}
+  - {fileID: 8972429057144147082, guid: 71d17848d7a6bbb4391a075ad2ca213d, type: 3}
   objectSpawnChance: 0.3
   noteSpawnChance: 0.05
   chestSpawnChance: 0
@@ -9868,7 +9871,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: F
+  m_Text: Num 2
 --- !u!114 &5015212859665798229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9902,7 +9905,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: LMB
+  m_Text: MMB
 --- !u!114 &5015212859916304290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10038,7 +10041,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: G
+  m_Text: T
 --- !u!1 &5021918093196348568
 GameObject:
   m_ObjectHideFlags: 0

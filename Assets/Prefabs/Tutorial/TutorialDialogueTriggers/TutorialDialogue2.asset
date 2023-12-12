@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ff3c4f7f7d428845a057991df0c0973, type: 3}
   m_Name: TutorialDialogue2
   m_EditorClassIdentifier: 
-  hasBeenUsed: 0
+  hasBeenUsed: 1
   dialogueLines:
   - 'Barrel Cat: Woah! Who are you?!'
   - 'You: Who am I? Well, I.. I don''t know, actually..'
   - 'You: Who are you? Are you actually.. A Cat?'
-  - 'Barrel Cat: Whaddya mean you dont know who you are? How did you even get here?'
+  - 'Barrel Cat: Whaddya mean you don''t know who you are? How did you even get here?'
   - 'You: ...'
   - 'Barrel Cat: ...'
   - 'You: I dunno.'

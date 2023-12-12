@@ -5,6 +5,9 @@ public enum KeyAction
 {
     Dash,
     Interact,
+    LeftClick,
+    RightClick,
+    Bomb,
 }
 
 public class PlayerInteractTrigger : SingletonMonobehaviour<PlayerInteractTrigger>
@@ -30,6 +33,7 @@ public class PlayerInteractTrigger : SingletonMonobehaviour<PlayerInteractTrigge
     //===========================================================================
     public string GetInteractKey(KeyAction key)
     {
-        return playerInput.actions[key.ToString()].GetBindingDisplayString(0);
+        string name = playerInput.actions[key.ToString()].GetBindingDisplayString(0);
+        return name;
     }
 }

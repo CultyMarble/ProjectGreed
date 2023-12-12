@@ -21,8 +21,8 @@ public class Player : SingletonMonobehaviour<Player>
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.End))
-            GetComponent<PlayerHeart>().UpdateCurrentHeart(-1);
+        //if (Input.GetKeyDown(KeyCode.End))
+        //    GetComponent<PlayerHeart>().UpdateCurrentHeart(-1);
     }
 
     private void OnDisable()

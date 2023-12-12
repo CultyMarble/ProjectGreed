@@ -88,13 +88,11 @@ public class MapGenerator : SingletonMonobehaviour<MapGenerator>
                 parent.transform.localScale *= 1.5f;
             }
             if (Input.GetKeyDown(KeyCode.W))
-                parent.transform.localPosition = new Vector3(parent.transform.localPosition.x, parent.transform.position.y + offsetDistance);
+                parent.transform.localPosition = new Vector3(parent.transform.localPosition.x, parent.transform.localPosition.y + offsetDistance);
             if (Input.GetKeyDown(KeyCode.S))
                 parent.transform.localPosition = new Vector3(parent.transform.localPosition.x, parent.transform.localPosition.y - offsetDistance);
-
             if (Input.GetKeyDown(KeyCode.A))
                 parent.transform.localPosition = new Vector3(parent.transform.localPosition.x - offsetDistance, parent.transform.localPosition.y);
-
             if (Input.GetKeyDown(KeyCode.D))
                 parent.transform.localPosition = new Vector3(parent.transform.localPosition.x + offsetDistance, parent.transform.localPosition.y);
 

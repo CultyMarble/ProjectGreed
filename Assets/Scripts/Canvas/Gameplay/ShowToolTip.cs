@@ -6,10 +6,16 @@ public class ShowToolTip : MonoBehaviour
 {
     [SerializeField] private string _title;
     [SerializeField] private string _description;
+    [SerializeField] private SODialogueTutorial dialogueEntryArray;
 
     private ToolTip toolTipMenu;
     private void OnEnable()
     {
+        if (dialogueEntryArray != null)
+        {
+            dialogueEntryArray.UpdateDisplayText();
+            _description = dialogueEntryArray.dialogueLines[0];
+        }
         toolTipMenu = new ToolTip(_title,_description);
     }
     private void Update()

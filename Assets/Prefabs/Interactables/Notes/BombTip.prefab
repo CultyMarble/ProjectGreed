@@ -88,7 +88,7 @@ MonoBehaviour:
   activateType: 1
   haveActivated: 0
   dialogueEntryArray: []
-  quickText: Boms are quite powerful but are very limited. They only drop occasionally
+  quickText: Bombs are quite powerful but are very limited. They only drop occasionally
     by barrels or chests. Use them wisely!
   newDialogueIndicator: {fileID: 0}
 --- !u!114 &3322375214783148913
