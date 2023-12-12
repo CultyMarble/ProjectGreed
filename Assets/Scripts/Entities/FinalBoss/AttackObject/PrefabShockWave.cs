@@ -15,7 +15,8 @@ public class PrefabShockWave : MonoBehaviour
         if (SceneControlManager.Instance.CurrentGameplayState == GameplayState.Pause)
             return;
 
-        if (collision.gameObject.tag == "Player" && Player.Instance.actionState != PlayerActionState.IsDashing)
+        if (collision.gameObject.tag == "Player" && collision.GetType().ToString() == Tags.CAPSULECOLLIDER2D &&
+            Player.Instance.actionState != PlayerActionState.IsDashing)
         {
             if (hitCount > 0)
             {

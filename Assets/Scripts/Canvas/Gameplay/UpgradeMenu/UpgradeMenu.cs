@@ -160,7 +160,6 @@ public class UpgradeMenu : SingletonMonobehaviour<UpgradeMenu>
     //===========================================================================
     public void AppliedTier1LeftUpgrade()
     {
-        RemoveCurrentUpgradePath_Tier1Effect(true);
         um_Tier1UpgradeLeftButton.GetComponent<UpgradeMenuButton>().AppliedEffect();
         um_Tier1UpgradeLeftButton.GetComponent<Image>().enabled = true;
         currentUpgradePathTier1 = UpgradePath.Left;
@@ -169,7 +168,6 @@ public class UpgradeMenu : SingletonMonobehaviour<UpgradeMenu>
 
     public void AppliedTier1MiddleUpgrade()
     {
-        RemoveCurrentUpgradePath_Tier1Effect(true);
         um_Tier1UpgradeMiddleButton.GetComponent<UpgradeMenuButton>().AppliedEffect();
         um_Tier1UpgradeMiddleButton.GetComponent<Image>().enabled = true;
         currentUpgradePathTier1 = UpgradePath.Middle;
@@ -178,7 +176,6 @@ public class UpgradeMenu : SingletonMonobehaviour<UpgradeMenu>
 
     public void AppliedTier1RightUpgrade()
     {
-        RemoveCurrentUpgradePath_Tier1Effect(true);
         um_Tier1UpgradeRightButton.GetComponent<UpgradeMenuButton>().AppliedEffect();
         um_Tier1UpgradeRightButton.GetComponent<Image>().enabled = true;
         currentUpgradePathTier1 = UpgradePath.Right;
@@ -187,7 +184,6 @@ public class UpgradeMenu : SingletonMonobehaviour<UpgradeMenu>
 
     public void AppliedTier2LeftUpgrade()
     {
-        RemoveCurrentUpgradePath_Tier2Effect(true);
         um_Tier2UpgradeLeftButton.GetComponent<UpgradeMenuButton>().AppliedEffect();
         um_Tier2UpgradeLeftButton.GetComponent<Image>().enabled = true;
         currentUpgradePathTier2 = UpgradePath.Left;
@@ -196,7 +192,6 @@ public class UpgradeMenu : SingletonMonobehaviour<UpgradeMenu>
 
     public void AppliedTier2MiddleUpgrade()
     {
-        RemoveCurrentUpgradePath_Tier2Effect(true);
         um_Tier2UpgradeMiddleButton.GetComponent<UpgradeMenuButton>().AppliedEffect();
         um_Tier2UpgradeMiddleButton.GetComponent<Image>().enabled = true;
         currentUpgradePathTier2 = UpgradePath.Middle;
@@ -205,7 +200,6 @@ public class UpgradeMenu : SingletonMonobehaviour<UpgradeMenu>
 
     public void AppliedTier2RightUpgrade()
     {
-        RemoveCurrentUpgradePath_Tier2Effect(true);
         um_Tier2UpgradeRightButton.GetComponent<UpgradeMenuButton>().AppliedEffect();
         um_Tier2UpgradeRightButton.GetComponent<Image>().enabled = true;
         currentUpgradePathTier2 = UpgradePath.Right;

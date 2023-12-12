@@ -41,14 +41,8 @@ public class SaveDataManager : SingletonMonobehaviour<SaveDataManager>
                 PlayerDataManager.Instance.SetActiveSlot(SaveDataSlot.save01);
                 break;
             case SaveDataSlot.save02:
-                CheckIfNewSaveSlot(playerDataSave02);
-                PlayerDataManager.Instance.TransferData(playerDataSave02);
-                PlayerDataManager.Instance.SetActiveSlot(SaveDataSlot.save02);
                 break;
             case SaveDataSlot.save03:
-                CheckIfNewSaveSlot(playerDataSave03);
-                PlayerDataManager.Instance.TransferData(playerDataSave03);
-                PlayerDataManager.Instance.SetActiveSlot(SaveDataSlot.save03);
                 break;
         }
     }
@@ -71,9 +65,8 @@ public class SaveDataManager : SingletonMonobehaviour<SaveDataManager>
 
     public void SaveCurrencyData() { upgradeData01.UpdateCurrencyAmount(); }
 
-    public void LoadUpdateSaveData()
+    public void LoadUpgradeSaveData()
     {
-        UpgradeMenu.Instance.RemoveCurrentUpgradePath_Tier1Effect(false);
         switch (upgradeData01.Tier1Choice)
         {
             case UpgradeChoice.Left:
@@ -89,7 +82,6 @@ public class SaveDataManager : SingletonMonobehaviour<SaveDataManager>
                 break;
         }
 
-        UpgradeMenu.Instance.RemoveCurrentUpgradePath_Tier2Effect(false);
         switch (upgradeData01.Tier2Choice)
         {
             case UpgradeChoice.Left:

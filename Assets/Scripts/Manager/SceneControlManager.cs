@@ -52,16 +52,21 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         yield return StartCoroutine(LoadSceneAndSetActive(sceneName));
         EventManager.CallAfterSceneLoadEvent();
 
-        Player.Instance.transform.position = spawnPosition;
+        Player.Instance.transform.position = Vector3.zero;
         Player.Instance.gameObject.SetActive(true);
 
-        SaveDataManager.Instance.LoadUpdateSaveData();
+        if (sceneName == SceneName.DemoSceneHub.ToString())
+        {
+            Player.Instance.GetComponent<PlayerHeart>().ResetPlayerHeart();
+            Player.Instance.GetComponentInChildren<RangeAbility>().ResetAbilityCharge();
+            Player.Instance.GetComponentInChildren<BombAbility>().ResetBombAmount();
+        }
 
         yield return StartCoroutine(LoadingScreen(0.0f));
         EventManager.CallAfterSceneLoadedLoadingScreenEvent();
 
-        isLoadingScene = false;
         CurrentGameplayState = GameplayState.Ongoing;
+        isLoadingScene = false;
     }
 
     //===========================================================================
@@ -111,7 +116,8 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         Player.Instance.transform.position = Vector3.zero;
         Player.Instance.gameObject.SetActive(true);
 
-        SaveDataManager.Instance.LoadUpdateSaveData();
+        SaveDataManager.Instance.LoadPlayerDataToRuntimeData(SaveDataSlot.save01);
+        SaveDataManager.Instance.LoadUpgradeSaveData();
 
         StartCoroutine(LoadingScreen(0.0f));
         EventManager.CallAfterSceneLoadedLoadingScreenEvent();
@@ -130,6 +136,9 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         DemoOverMenuGUI.Instance.SetContentActive(false);
 
         ObjectPoolingManager.Instance.SetAllObjectsActive(false);
+
+        DisplayItemUpgradeIcon.Instance.Clear();
+        MapGenerator.Instance.ClearMap();
 
         EventManager.CallBeforeSceneUnloadEvent();
         yield return SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().buildIndex);
@@ -266,9 +275,8 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
             GameOverMenuGUI.Instance.SetContentActive(false);
             DemoOverMenuGUI.Instance.SetContentActive(false);
 
+            DisplayItemUpgradeIcon.Instance.Clear();
             MapGenerator.Instance.ClearMap();
-
-            SaveDataManager.Instance.LoadPlayerDataToRuntimeData(SaveDataSlot.save01);
 
             StartCoroutine(UnloadAndSwitchScene(SceneName.DemoSceneHub.ToString(), Vector3.zero));
         }
