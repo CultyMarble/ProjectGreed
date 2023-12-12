@@ -275,6 +275,7 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
             PauseMenuGUI.Instance.SetContentActive(false);
             GameOverMenuGUI.Instance.SetContentActive(false);
             DemoOverMenuGUI.Instance.SetContentActive(false);
+            SaveDataManager.Instance.LoadPlayerDataToRuntimeData(SaveDataSlot.save01);
             Player.Instance.GetComponent<PlayerCurrencies>().ResetCurrency();
 
             DisplayItemUpgradeIcon.Instance.Clear();
