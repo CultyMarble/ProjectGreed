@@ -18,8 +18,8 @@ MonoBehaviour:
   - 'You: Who am I? Well, I.. I don''t know, actually..'
   - 'You: Who are you? Are you actually.. A Cat?'
   - 'Barrel Cat: Whaddya mean you dont know who you are? How did you even get here?'
-  - 'You:'
-  - 'Barrel Cat:'
+  - 'You: ...'
+  - 'Barrel Cat: ...'
   - 'You: I dunno.'
   - 'Barrel Cat: Figures.'
   - 'Barrel Cat: Well anyways, I''m Timothy. Nice to meet''cha. '
@@ -31,4 +31,14 @@ MonoBehaviour:
   - 'You: What is this place? I''m really not sure how I got here. Or anything else
     for that matter.'
   - 'Timothy: You''re on the outskirts of the city of GOLD in the once great Kingdom
-    of GOLD. Emphasis on the "once". It is not so much anymore,'
+    of GOLD. Emphasis on the "once". It is not so much anymore.'
+  - 'You: What happened?'
+  - 'Timothy: The curse of course. The king''s greed caused the kingdom to be cursed.
+    It affects nearly everyone, warping their minds and their memories. Now the king
+    just hides in the castle while everyone suffers.'
+  - 'You: Can I help?'
+  - 'Timothy: Taking out the gravekeeper surely couldn''t hurt.'
+  - 'Timothy: Keep heading forward and you''ll get to his crypt. He''s somewhere
+    deep within it'
+  - 'You: Alright, I''ll head there now. Thanks.'
+  - 'Timothy: See you later!'
