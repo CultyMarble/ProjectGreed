@@ -19,7 +19,7 @@ public class DialogueActivator : MonoBehaviour
     //===========================================================================
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player") == false)
+        if (!collision.CompareTag("Player"))
             return;
 
         if (activateType == DialogueActivateType.ManualTrigger)
@@ -30,7 +30,7 @@ public class DialogueActivator : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player") == false)
+        if (!collision.CompareTag("Player"))
             return;
 
         if (activateType == DialogueActivateType.ManualTrigger)
@@ -118,6 +118,7 @@ public class DialogueActivator : MonoBehaviour
             dialogueEntryArray[dialogueEntryIndex].hasBeenUsed = true;
             haveActivated = true;
         }
+        canActivateDialogBox = false;
     }
 
     private void AutoTriggerDialogHandler()
@@ -139,5 +140,6 @@ public class DialogueActivator : MonoBehaviour
         }
         dialogueEntryArray[dialogueEntryIndex].hasBeenUsed = true;
         haveActivated = true;
+        canActivateDialogBox = false;
     }
 }

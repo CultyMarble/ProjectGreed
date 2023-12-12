@@ -6,24 +6,29 @@ public class SpawnCurrency : MonoBehaviour
     [SerializeField] private Transform pfTempCurrency = default;
     [SerializeField] private GameObject pfHealthPickup = default;
     [SerializeField] private bool canSpawnHealthPickup = default;
+    [SerializeField] private bool canSpawnPermCurrency = default;
 
-    private readonly int minAmount = 3;
-    private readonly int maxAmount = 8;
+
+    [SerializeField] private int minAmount = 3;
+    [SerializeField] private int maxAmount = 8;
 
     //===========================================================================
     public void SpewOutCurrency()
     {
         int _dropRate = Random.Range(0, 100);
 
-        if (_dropRate < 5)
+        if (_dropRate < 3)
         {
             if (canSpawnHealthPickup)
                 Instantiate(pfHealthPickup, transform.position, Quaternion.identity);
         }
-        else if (_dropRate < 15)
+        else if (_dropRate < 10)
         {
-            Vector3 _position = this.transform.position + CultyMarbleHelper.GetRandomDirection() * UnityEngine.Random.Range(0.25f, 0.75f);
-            Transform currency = Instantiate(pfPermCurrency, _position, Quaternion.identity);
+            if (canSpawnPermCurrency)
+            {
+                Vector3 _position = this.transform.position + CultyMarbleHelper.GetRandomDirection() * UnityEngine.Random.Range(0.25f, 0.75f);
+                Transform currency = Instantiate(pfPermCurrency, _position, Quaternion.identity);
+            }
         }
         else
         {

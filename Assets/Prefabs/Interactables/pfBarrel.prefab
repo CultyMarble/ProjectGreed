@@ -108,8 +108,6 @@ MonoBehaviour:
     chance: 15
   - item: {fileID: 468550890004570433, guid: 6c16ad1641df33041b6bbd485d64debd, type: 3}
     chance: 10
-  - item: {fileID: 468550890004570433, guid: 661e883d2d10db64f952f4427806feb0, type: 3}
-    chance: 25
   - item: {fileID: 7128766739216337674, guid: bedf7cd3e1e901b4990168bcdf126b0d, type: 3}
     chance: 10
   - item: {fileID: 8864901915701653087, guid: 90767ee69fb143d4dafbee60cdace558, type: 3}
@@ -131,12 +129,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b299df1f3d90e540a5774715e49d214, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pfPermCurrency: {fileID: 0}
   pfTempCurrency: {fileID: 2443823218653012819, guid: 3d947b54961e7fd49bec6bc289615a57, type: 3}
+  pfHealthPickup: {fileID: 0}
+  canSpawnHealthPickup: 0
+  canSpawnPermCurrency: 0
   minAmount: 0
   maxAmount: 5
-  spawnHealth: 0
-  healthSpawnChance: 0
-  pfHealthPickup: {fileID: 0}
 --- !u!70 &746111255636794340
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

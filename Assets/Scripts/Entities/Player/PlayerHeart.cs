@@ -98,6 +98,8 @@ public class PlayerHeart : MonoBehaviour
         // Reset Parameters
         ResetPlayerHeart();
 
+        SaveDataManager.Instance.LoadPlayerDataToRuntimeData(SaveDataSlot.save01);
+
         UpgradeMenu.Instance.RemoveCurrentUpgradePath_Tier1Effect(true);
         UpgradeMenu.Instance.RemoveCurrentUpgradePath_Tier2Effect(true);
 

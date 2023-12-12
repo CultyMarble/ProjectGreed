@@ -22,10 +22,12 @@ public class DoorTrigger : MonoBehaviour
     private void Awake()
     {
         RoomManager.onRoomsGenerated += CheckForDoors;
+        Player.Instance.GetComponent<PlayerInteractTrigger>().OnPlayerInteractTrigger += UnlockDoorTrigger;
+
     }
-    private void Update()
+    private void UnlockDoorTrigger(object sender, System.EventArgs e)
     {
-        if (Input.GetKeyDown(KeyCode.F) && gateManager.playerInLockZone == true)
+        if (gateManager.playerInLockZone == true)
         {
             switch (gateManager.keytype)
             {
@@ -36,7 +38,7 @@ public class DoorTrigger : MonoBehaviour
 
                         gateManager.disableGate = true;
                         gateManager.locked = false;
-                        if(toolTipMenu != null)
+                        if (toolTipMenu != null)
                         {
                             toolTipMenu.ClearToolTip();
                         }
@@ -68,6 +70,7 @@ public class DoorTrigger : MonoBehaviour
             }
         }
     }
+    
     private void ActivateDialogueManager(string text)
     {
         DialogManager.Instance.SetDialogLine(text);
@@ -297,7 +300,10 @@ public class DoorTrigger : MonoBehaviour
         doorChecked = true;
         gateManager.doorsChecked++;
     }
-
+    private void OnDisable()
+    {
+        Player.Instance.GetComponent<PlayerInteractTrigger>().OnPlayerInteractTrigger -= UnlockDoorTrigger;
+    }
     private void OnDestroy()
     {
         RoomManager.onRoomsGenerated -= CheckForDoors;

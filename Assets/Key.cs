@@ -8,9 +8,9 @@ public class Key : MonoBehaviour
     public PlayerCurrencies.KeyType keyType;
     private bool canPickup = false;
 
-    private void Update()
+    private void Start()
     {
-        PickupKey();
+        Player.Instance.GetComponent<PlayerInteractTrigger>().OnPlayerInteractTrigger += PickupKey;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -30,23 +30,25 @@ public class Key : MonoBehaviour
         }
     }
 
-    public void PickupKey()
+    private void PickupKey(object sender, System.EventArgs e)
     {
         if (canPickup)
         {
-            if (Input.GetKeyDown(KeyCode.F))
+            switch (keyType)
             {
-                switch (keyType)
-                {
-                    case PlayerCurrencies.KeyType.Silver:
-                        PlayerCurrencies.Instance.AddSilverKey();
-                        break;
-                    case PlayerCurrencies.KeyType.Gold:
-                        PlayerCurrencies.Instance.AddGoldKey();
-                        break;
-                }
-                Destroy(this.gameObject);
+                case PlayerCurrencies.KeyType.Silver:
+                    PlayerCurrencies.Instance.AddSilverKey();
+                    break;
+                case PlayerCurrencies.KeyType.Gold:
+                    PlayerCurrencies.Instance.AddGoldKey();
+                    break;
             }
+            Destroy(this.gameObject);
         }
+    }
+    private void OnDisable()
+    {
+        Player.Instance.GetComponent<PlayerInteractTrigger>().OnPlayerInteractTrigger -= PickupKey;
+
     }
 }
