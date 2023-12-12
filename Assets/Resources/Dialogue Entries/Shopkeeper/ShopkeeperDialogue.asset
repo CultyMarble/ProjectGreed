@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ff3c4f7f7d428845a057991df0c0973, type: 3}
   m_Name: ShopkeeperDialogue
   m_EditorClassIdentifier: 
-  hasBeenUsed: 1
+  hasBeenUsed: 0
   dialogueLines:
   - 'Shopkeeper: Hello, welcome to my shop!'
   - 'You: Oh.. Hello there..'
-  - Please take a look! My items are best prrice
+  - Please take a look! My items are best price
   - 'You: Sure.. thanks.'
