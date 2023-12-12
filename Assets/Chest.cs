@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 public class Chest : MonoBehaviour
 {
     public enum ChestType
@@ -9,29 +10,43 @@ public class Chest : MonoBehaviour
         silver,
         gold
     }
+    [SerializeField] private SpawnCurrency spawnCurrency = default;
     public ChestType chestType;
     public GameObject[] regularItems;
     public GameObject[] silverItems;
     public GameObject[] goldItems;
-
     public Sprite[] sprites;
     private SpriteRenderer spriteRenderer;
     private bool canOpen = false;
-    //private bool opened = false;
-    [SerializeField] private SpawnCurrency spawnCurrency = default;
-    void Start()
-    {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-    }
+    private PlayerInput playerInput;
+    //===========================================================================
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (Input.GetKeyDown(KeyCode.F) && canOpen)
+        if (collision.CompareTag("Player") && collision.GetType().ToString() == Tags.BOXCOLLIDER2D)
         {
-            OpenChest();
+            Player.Instance.SetInteractPromtTextActive(true);
+            canOpen = true;
         }
     }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player") && collision.GetType().ToString() == Tags.BOXCOLLIDER2D)
+        {
+            Player.Instance.SetInteractPromtTextActive(false);
+            canOpen = false;
+        }
+    }
+    //===========================================================================
+    private void Start()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        playerInput = FindObjectOfType<PlayerInput>();
+        Player.Instance.GetComponent<PlayerInteractTrigger>().OnPlayerInteractTrigger += Chest_OnPlayerInteractTrigger;
+    }
+
+    //===========================================================================
+
     private void OpenChest()
     {
         int randomIndex;
@@ -89,20 +104,12 @@ public class Chest : MonoBehaviour
         DialogManager.Instance.SetDialogLine(text);
         DialogManager.Instance.SetDialogPanelActiveState(true);
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+
+    private void Chest_OnPlayerInteractTrigger(object sender, System.EventArgs e)
     {
-        if (collision.CompareTag("Player") && collision.GetType().ToString() == Tags.BOXCOLLIDER2D)
+        if (canOpen)
         {
-            Player.Instance.SetInteractPromtTextActive(true);
-            canOpen = true;
-        }
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player") && collision.GetType().ToString() == Tags.BOXCOLLIDER2D)
-        {
-            Player.Instance.SetInteractPromtTextActive(false);
-            canOpen = false;
+            OpenChest();
         }
     }
 }

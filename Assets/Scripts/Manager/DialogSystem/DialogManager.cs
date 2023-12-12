@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.InputSystem;
 
 public class DialogManager : SingletonMonobehaviour<DialogManager>
 {
@@ -9,8 +10,15 @@ public class DialogManager : SingletonMonobehaviour<DialogManager>
     private string[] dialogLines;
     private int lineIndex;
     public bool activated = false;
+    private PlayerInput playerInput;
 
     //===========================================================================
+    protected override void Awake()
+    {
+        base.Awake();
+        playerInput = FindObjectOfType<PlayerInput>();
+    }
+
     private void Update()
     {
         if (!activated)
@@ -18,9 +26,12 @@ public class DialogManager : SingletonMonobehaviour<DialogManager>
             return;
         }
         if (dialogPanel.gameObject.activeSelf == false)
+        {
+            dialogLines = new string[0];
             return;
+        }
 
-        if (Input.GetMouseButtonUp(0) || Input.GetKeyDown(KeyCode.Space))
+        if (playerInput.actions["LeftClick"].triggered)
         {
             lineIndex++;
             if(dialogLines == null)
@@ -57,6 +68,7 @@ public class DialogManager : SingletonMonobehaviour<DialogManager>
 
     public void SetDialogLines(string[] newDialogLines)
     {
+        
         dialogLines = newDialogLines;
 
         dialogText.SetText(dialogLines[lineIndex]);

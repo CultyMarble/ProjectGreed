@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ff3c4f7f7d428845a057991df0c0973, type: 3}
+  m_Name: BarrelCatDungeon 3
+  m_EditorClassIdentifier: 
+  hasBeenUsed: 0
+  dialogueLines:
+  - 'Timothy: Man those ranged mushrooms are annoying. Watch out for those guys.'
+  - 'You: Will do.'
+  - 'Timothy: Take one of em out for me. I won''t forget what they did to me.'
+  - 'You: What did they do to you?'
+  - 'Timothy: Looked at me funny.'
+  - 'You: Were you not in your barrel?'
+  - 'Timothy: Well, yeah.'
+  - 'You: Well then how did they look at you funny?'
+  - 'Timothy: Vibes, man.'

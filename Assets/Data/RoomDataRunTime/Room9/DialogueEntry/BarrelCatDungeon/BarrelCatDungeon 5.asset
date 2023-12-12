@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ff3c4f7f7d428845a057991df0c0973, type: 3}
+  m_Name: BarrelCatDungeon 5
+  m_EditorClassIdentifier: 
+  hasBeenUsed: 0
+  dialogueLines:
+  - 'Timothy: I remember what it was like before the curse. When the king was happy...'
+  - 'You: What was it like? '
+  - 'Timothy: Great! I got pets ALL the time.'
+  - 'You: Yeah I don''t ecpect the zombies to be all that great at petting cats.'
+  - 'Timothy: So true.'

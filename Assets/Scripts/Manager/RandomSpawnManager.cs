@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class RandomSpawnManager : SingletonMonobehaviour<RandomSpawnManager>
 {
-    //[SerializeField] private int spawnAmount;
     private int spawnAmount;
 
     [SerializeField] private Transform[] enemyTypePoolList;
@@ -17,24 +16,16 @@ public class RandomSpawnManager : SingletonMonobehaviour<RandomSpawnManager>
     [SerializeField] private int spawnNum;
     private int totalSpawned = 0;
     private GameObject spawnPointList;
-
-
     private int poolIndex = default;
-
-    private List<int> spawnPointIndexList = default;
-    private int spawnPointIndex = default;
 
     //===========================================================================
     private void OnEnable()
     {
-        //EventManager.AfterSceneLoadEvent += EventManager_AfterSceneLoadEventHandler;
         EventManager.BeforeSceneUnloadEvent += EventManager_BeforeSceneUnloadEventHandler;
-        spawnPointIndexList = new();
     }
 
     private void OnDisable()
     {
-        //EventManager.AfterSceneLoadEvent -= EventManager_AfterSceneLoadEventHandler;
         EventManager.BeforeSceneUnloadEvent -= EventManager_BeforeSceneUnloadEventHandler;
     }
 
@@ -170,7 +161,6 @@ public class RandomSpawnManager : SingletonMonobehaviour<RandomSpawnManager>
     }
     private void DespawnEnemies()
     {
-        //int survivingEnemies = 0;
         for (int i = 0; i < enemyTypePoolList.Length; i++)
         {
             foreach (Transform enemy in enemyTypePoolList[i])

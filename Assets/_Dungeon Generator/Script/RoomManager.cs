@@ -145,6 +145,10 @@ public class RoomManager : MonoBehaviour
         GameObject newBoss;
         for (int i = currentRoomTotal.Count - 1; i >= 0; i--)
         {
+            if(currentRoomTotal[i].activeRoom.currentRoomType == RoomType.shop || currentRoomTotal[i].activeRoom.currentRoomType == RoomType.treasure)
+            {
+                continue;
+            }
             if (currentRoomTotal[i].activeRoom.currentRoomType != RoomType.empty)
             {
                 currentRoomTotal[i].activeRoom.currentRoomType = RoomType.boss;
@@ -320,9 +324,8 @@ public class RoomManager : MonoBehaviour
             currentRoomCount.Clear();
             roomsFinished = true;
             mapFinished = true;
-
+            Invoke(nameof(SetAStar), 0.5f);
             SceneControlManager.Instance.CurrentGameplayState = GameplayState.Ongoing;
-            aStar.SetActive(true);
             if (onRoomsGenerated != null)
             {
                 onRoomsGenerated();
@@ -418,5 +421,10 @@ public class RoomManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void SetAStar()
+    {
+        aStar.SetActive(true);
     }
 }

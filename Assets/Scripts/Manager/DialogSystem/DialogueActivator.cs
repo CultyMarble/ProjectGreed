@@ -1,5 +1,4 @@
 using UnityEngine;
-
 public class DialogueActivator : MonoBehaviour
 {
     private enum DialogueActivateType { AutoTrigger, ManualTrigger, }
@@ -20,7 +19,7 @@ public class DialogueActivator : MonoBehaviour
     //===========================================================================
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player") == false || haveActivated)
+        if (collision.CompareTag("Player") == false)
             return;
 
         if (activateType == DialogueActivateType.ManualTrigger)
@@ -43,15 +42,8 @@ public class DialogueActivator : MonoBehaviour
     //===========================================================================
     private void Start()
     {
-        //foreach (SODialogueEntry entry in dialogueEntryArray)
-        //{
-        //    if (entry.hasBeenUsed == false)
-        //    {
-        //        entry.hasBeenUsed = true;
-        //        return;
-        //    }
-        //}
-        if(dialogueEntryArray.Length == 0)
+        Player.Instance.GetComponent<PlayerInteractTrigger>().OnPlayerInteractTrigger += ManualTriggerDialogHandler;
+        if (dialogueEntryArray.Length == 0)
         {
             return;
         }
@@ -78,15 +70,9 @@ public class DialogueActivator : MonoBehaviour
 
         if (canActivateDialogBox == false)
             return;
-
-        switch (activateType)
+        if(activateType == DialogueActivateType.AutoTrigger)
         {
-            case DialogueActivateType.ManualTrigger:
-                ManualTriggerDialogHandler();
-                break;
-            case DialogueActivateType.AutoTrigger:
-                AutoTriggerDialogHandler();
-                break;
+            AutoTriggerDialogHandler();
         }
     }
 
@@ -113,9 +99,9 @@ public class DialogueActivator : MonoBehaviour
         DialogManager.Instance.SetDialogLines(entry.dialogueLines);
         DialogManager.Instance.SetDialogPanelActiveState(true);
     }
-    private void ManualTriggerDialogHandler()
+    private void ManualTriggerDialogHandler(object sender, System.EventArgs e)
     {
-        if (Input.GetKeyDown(KeyCode.F) && !haveActivated)
+        if (canActivateDialogBox && activateType != DialogueActivateType.AutoTrigger)
         {
             Player.Instance.SetInteractPromtTextActive(false);
 

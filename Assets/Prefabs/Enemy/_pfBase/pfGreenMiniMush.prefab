@@ -497,7 +497,7 @@ MonoBehaviour:
   movementSpeed: 5
   currentDestination: {fileID: 6186633300706691329}
   currentTarget: {x: 0, y: 0, z: 0}
-  searchRadius: 20
+  searchRadius: 30
   breakDistanceMin: 10
   breakDistanceMax: 0
   requireLineOfSight: 0

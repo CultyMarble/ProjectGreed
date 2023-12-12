@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using UnityEngine.InputSystem;
 public abstract class UpgradeItem : MonoBehaviour
 {
     [SerializeField] private string itemName;
@@ -8,6 +8,7 @@ public abstract class UpgradeItem : MonoBehaviour
 
     private bool canPickedUp;
     private ToolTip toolTipMenu;
+    private PlayerInput playerInput;
 
     //===========================================================================
     private void OnTriggerEnter2D(Collider2D collision)
@@ -33,6 +34,10 @@ public abstract class UpgradeItem : MonoBehaviour
     }
 
     //===========================================================================
+    private void Awake()
+    {
+        playerInput = FindObjectOfType<PlayerInput>();
+    }
     private void OnEnable()
     {
         toolTipMenu = new ToolTip(itemName,itemDescription);
@@ -43,7 +48,7 @@ public abstract class UpgradeItem : MonoBehaviour
         if (canPickedUp == false)
             return;
 
-        if (Input.GetKeyDown(KeyCode.F))
+        if (playerInput.actions["Interact"].triggered)
         {
             if (ItemCostCheck() == false)
                 return;
