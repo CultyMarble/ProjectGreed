@@ -9,14 +9,20 @@ public class UpgradeStatue : MonoBehaviour
     //===========================================================================
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        canOpenUpgradeMenu = true;
-        Player.Instance.SetInteractPromtTextActive(true);
+        if (collision.CompareTag("Player"))
+        {
+            canOpenUpgradeMenu = true;
+            Player.Instance.SetInteractPromtTextActive(true);
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        canOpenUpgradeMenu = false;
-        Player.Instance.SetInteractPromtTextActive(false);
+        if (collision.CompareTag("Player"))
+        {
+            canOpenUpgradeMenu = false;
+            Player.Instance.SetInteractPromtTextActive(false);
+        }
     }
 
     //===========================================================================

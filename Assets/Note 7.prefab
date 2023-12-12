@@ -88,7 +88,7 @@ MonoBehaviour:
   activateType: 1
   haveActivated: 0
   dialogueEntryArray:
-  - {fileID: 11400000, guid: b4b1ff6a16ce10d43bca6df18568e434, type: 2}
+  - {fileID: 11400000, guid: 749382c826d22ac4497ec7e1412e8c13, type: 2}
   quickText: 
   newDialogueIndicator: {fileID: 0}
 --- !u!114 &3479550968970311961
