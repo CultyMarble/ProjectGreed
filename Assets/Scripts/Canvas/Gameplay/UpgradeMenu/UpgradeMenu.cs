@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class UpgradeMenu : SingletonMonobehaviour<UpgradeMenu>
 {
     [SerializeField] private GameObject um_BGImage = default;
+    public GameObject UM_BGImage => um_BGImage;
     [SerializeField] private Button um_CloseButton = default;
 
     [Header("Tier 1 Upgrade")]
@@ -49,6 +50,7 @@ public class UpgradeMenu : SingletonMonobehaviour<UpgradeMenu>
                 if (currentUpgradePathTier1 == UpgradePath.none)
                     PlayerCurrencies.Instance.UpdatePermCurrencyAmount(-1);
 
+                RemoveCurrentUpgradePath_Tier1Effect(true);
                 AppliedTier1LeftUpgrade();
             }
         });
@@ -67,6 +69,7 @@ public class UpgradeMenu : SingletonMonobehaviour<UpgradeMenu>
                 if (currentUpgradePathTier1 == UpgradePath.none)
                     PlayerCurrencies.Instance.UpdatePermCurrencyAmount(-1);
 
+                RemoveCurrentUpgradePath_Tier1Effect(true);
                 AppliedTier1MiddleUpgrade();
             }
         });
@@ -85,6 +88,7 @@ public class UpgradeMenu : SingletonMonobehaviour<UpgradeMenu>
                 if (currentUpgradePathTier1 == UpgradePath.none)
                     PlayerCurrencies.Instance.UpdatePermCurrencyAmount(-1);
 
+                RemoveCurrentUpgradePath_Tier1Effect(true);
                 AppliedTier1RightUpgrade();
             }
         });
@@ -104,6 +108,7 @@ public class UpgradeMenu : SingletonMonobehaviour<UpgradeMenu>
                 if (currentUpgradePathTier2 == UpgradePath.none)
                     PlayerCurrencies.Instance.UpdatePermCurrencyAmount(-2);
 
+                RemoveCurrentUpgradePath_Tier2Effect(true);
                 AppliedTier2LeftUpgrade();
             }
         });
@@ -122,6 +127,7 @@ public class UpgradeMenu : SingletonMonobehaviour<UpgradeMenu>
                 if (currentUpgradePathTier2 == UpgradePath.none)
                     PlayerCurrencies.Instance.UpdatePermCurrencyAmount(-2);
 
+                RemoveCurrentUpgradePath_Tier2Effect(true);
                 AppliedTier2MiddleUpgrade();
             }
         });
@@ -140,6 +146,7 @@ public class UpgradeMenu : SingletonMonobehaviour<UpgradeMenu>
                 if (currentUpgradePathTier2 == UpgradePath.none)
                     PlayerCurrencies.Instance.UpdatePermCurrencyAmount(-2);
 
+                RemoveCurrentUpgradePath_Tier2Effect(true);
                 AppliedTier2RightUpgrade();
             }
         });
@@ -153,6 +160,7 @@ public class UpgradeMenu : SingletonMonobehaviour<UpgradeMenu>
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             SetContentActive(false);
+            SetUpgradeInfoPanelActive(false);
             SceneControlManager.Instance.CurrentGameplayState = GameplayState.Ongoing;
         }
     }

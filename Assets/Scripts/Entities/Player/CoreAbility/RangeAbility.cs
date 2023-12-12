@@ -28,7 +28,7 @@ public class RangeAbility : MonoBehaviour
     [Header("Pooling Settings:")]
     [SerializeField] private Transform rangeAbilityProjectilePool = default;
     [SerializeField] private Transform pfRangeAbilityProjectile = default;
-    private readonly int poolSize = 10;
+    private readonly int poolSize = 100;
 
     // NEW INPUT SYSTEM
     private PlayerInput playerInput;
@@ -334,9 +334,7 @@ public class RangeAbility : MonoBehaviour
         foreach (Transform projectile in rangeAbilityProjectilePool)
         {
             if (projectile.gameObject.activeSelf == true)
-            {
                 projectile.GetComponent<BasicAbilityBubble>().Despawn();
-            }
         }
     }
 }

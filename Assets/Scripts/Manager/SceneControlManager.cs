@@ -10,7 +10,7 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
 
     [SerializeField] private GameObject player;
 
-    private readonly float loadingScreenDuration = 1.0f;
+    private readonly float loadingScreenDuration = 0.5f;
 
     private bool isLoadingScreenActive = default;
     public bool IsLoadingScreenActive => isLoadingScreenActive;
@@ -106,8 +106,8 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         MainMenuGUI.Instance.SetContentActive(false);
         SaveSelectMenuGUI.Instance.SetContentActive(false);
         DemoOverMenuGUI.Instance.SetContentActive(false);
-
         ObjectPoolingManager.Instance.SetAllObjectsActive(false);
+        Player.Instance.GetComponent<PlayerCurrencies>().ResetCurrency();
 
         yield return StartCoroutine(LoadSceneAndSetActive(SceneName.DemoSceneHub.ToString()));
         EventManager.CallAfterSceneLoadEvent();
@@ -134,8 +134,9 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         PauseMenuGUI.Instance.SetContentActive(false);
         GameOverMenuGUI.Instance.SetContentActive(false);
         DemoOverMenuGUI.Instance.SetContentActive(false);
-
         ObjectPoolingManager.Instance.SetAllObjectsActive(false);
+        Player.Instance.GetComponent<PlayerCurrencies>().ResetCurrency();
+
 
         DisplayItemUpgradeIcon.Instance.Clear();
         MapGenerator.Instance.ClearMap();
@@ -160,7 +161,6 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
 
         MainMenuGUI.Instance.SetContentActive(false);
         SaveSelectMenuGUI.Instance.SetContentActive(false);
-
         ObjectPoolingManager.Instance.SetAllObjectsActive(false);
 
         EventManager.CallBeforeSceneUnloadEvent();
@@ -188,6 +188,7 @@ public class SceneControlManager : SingletonMonobehaviour<SceneControlManager>
         yield return StartCoroutine(LoadingScreen(1.0f));
 
         ObjectPoolingManager.Instance.SetAllObjectsActive(false);
+        Player.Instance.GetComponent<PlayerCurrencies>().ResetCurrency();
 
         EventManager.CallBeforeSceneUnloadEvent();
         yield return SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().buildIndex);

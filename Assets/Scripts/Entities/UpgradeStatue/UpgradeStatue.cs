@@ -23,8 +23,15 @@ public class UpgradeStatue : MonoBehaviour
     private void OnEnable()
     {
         upgradeMenu = GameObject.Find("UpgradeMenu").GetComponent<UpgradeMenu>();
-
         Player.Instance.GetComponent<PlayerInteractTrigger>().OnPlayerInteractTrigger += UpgradeStatue_OnPlayerInteractTrigger;
+    }
+
+    private void OnDisable()
+    {
+        if (Player.Instance == null)
+            return;
+
+        Player.Instance.GetComponent<PlayerInteractTrigger>().OnPlayerInteractTrigger -= UpgradeStatue_OnPlayerInteractTrigger;
     }
 
     //===========================================================================

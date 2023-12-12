@@ -641,12 +641,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b299df1f3d90e540a5774715e49d214, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pfPermCurrency: {fileID: 2443823218653012819, guid: b35f4acc464f9fb4fa2bfb64cc4a7bf9, type: 3}
   pfTempCurrency: {fileID: 2443823218653012819, guid: 3d947b54961e7fd49bec6bc289615a57, type: 3}
-  minAmount: 0
-  maxAmount: 3
-  spawnHealth: 1
-  healthSpawnChance: 10
   pfHealthPickup: {fileID: 1758731385964282022, guid: b1db5f650ec9c1a4ba21142fcebda982, type: 3}
+  canSpawnHealthPickup: 1
 --- !u!210 &5550568038270448118
 SortingGroup:
   m_ObjectHideFlags: 0

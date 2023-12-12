@@ -740,6 +740,7 @@ GameObject:
   - component: {fileID: 348142612}
   - component: {fileID: 348142616}
   - component: {fileID: 348142615}
+  - component: {fileID: 348142617}
   - component: {fileID: 348142613}
   - component: {fileID: 348142614}
   m_Layer: 7
@@ -838,6 +839,17 @@ CapsuleCollider2D:
   m_Offset: {x: 0.25, y: 1.25}
   m_Size: {x: 2.75, y: 2}
   m_Direction: 1
+--- !u!210 &348142617
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 348142611}
+  m_Enabled: 1
+  m_SortingLayerID: 237529647
+  m_SortingLayer: 5
+  m_SortingOrder: 0
 --- !u!1 &364502408
 GameObject:
   m_ObjectHideFlags: 0
@@ -1170,7 +1182,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 431821777}
+  - component: {fileID: 431821783}
   - component: {fileID: 431821780}
+  - component: {fileID: 431821784}
   - component: {fileID: 431821782}
   m_Layer: 7
   m_Name: Head
@@ -1230,6 +1244,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pfBulletSphere: {fileID: 2119729153689308387, guid: b3a6526830f9e8e44a4233ca92541a7d, type: 3}
   parent: {fileID: 1044400530}
+--- !u!58 &431821783
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 431821776}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 2.5}
+  serializedVersion: 2
+  m_Radius: 2
+--- !u!210 &431821784
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 431821776}
+  m_Enabled: 1
+  m_SortingLayerID: 237529647
+  m_SortingLayer: 5
+  m_SortingOrder: 0
 --- !u!1 &456939582
 GameObject:
   m_ObjectHideFlags: 0
@@ -1764,7 +1805,6 @@ GameObject:
   m_Component:
   - component: {fileID: 616005812}
   - component: {fileID: 616005811}
-  - component: {fileID: 616005815}
   - component: {fileID: 616005810}
   - component: {fileID: 616005809}
   - component: {fileID: 616005813}
@@ -1879,17 +1919,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: {fileID: 616005809}
---- !u!210 &616005815
-SortingGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 616005805}
-  m_Enabled: 1
-  m_SortingLayerID: 237529647
-  m_SortingLayer: 5
-  m_SortingOrder: 0
 --- !u!1 &620930364
 GameObject:
   m_ObjectHideFlags: 0
@@ -1994,6 +2023,7 @@ GameObject:
   - component: {fileID: 670577490}
   - component: {fileID: 670577491}
   - component: {fileID: 670577494}
+  - component: {fileID: 670577495}
   - component: {fileID: 670577493}
   - component: {fileID: 670577492}
   m_Layer: 7
@@ -2092,6 +2122,17 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!210 &670577495
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 670577489}
+  m_Enabled: 1
+  m_SortingLayerID: 237529647
+  m_SortingLayer: 5
+  m_SortingOrder: 0
 --- !u!1 &728585997
 GameObject:
   m_ObjectHideFlags: 0
@@ -3005,7 +3046,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1409905001}
-  - component: {fileID: 1409905003}
   - component: {fileID: 1409905002}
   m_Layer: 7
   m_Name: sprite
@@ -3081,22 +3121,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &1409905003
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1409905000}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 2.5}
-  serializedVersion: 2
-  m_Radius: 1.75
 --- !u!1 &1424791970
 GameObject:
   m_ObjectHideFlags: 0

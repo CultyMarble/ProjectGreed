@@ -141,7 +141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _title: Boss Room Entrance
-  _description: If you wanna cheat
+  _description: Warning! Danger Ahead!
 --- !u!1 &6078217298315660463
 GameObject:
   m_ObjectHideFlags: 0

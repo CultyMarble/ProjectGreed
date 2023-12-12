@@ -4740,8 +4740,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d80c37a20b276754f8045be15a8f8e5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  displayPlayerCurrency: {fileID: 0}
-  playerHeartManager: {fileID: 0}
+  displayPlayerCurrency: {fileID: 5480196232281386426}
+  playerHeartManager: {fileID: 1451012653}
   hasSilverKey: 0
   hasGoldKey: 0
 --- !u!114 &1451012643
@@ -4898,7 +4898,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.45}
-  m_Size: {x: 0.5, y: 0.75}
+  m_Size: {x: 0.75, y: 0.75}
   m_Direction: 0
 --- !u!4 &1451012652
 Transform:

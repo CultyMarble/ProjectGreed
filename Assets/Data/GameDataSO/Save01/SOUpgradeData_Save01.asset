@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tier1Choice: 3
   tier2Choice: 3
-  permCurrencyAmount: 20
+  permCurrencyAmount: 0

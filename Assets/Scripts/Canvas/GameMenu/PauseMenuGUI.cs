@@ -34,6 +34,9 @@ public class PauseMenuGUI : SingletonMonobehaviour<PauseMenuGUI>
             if (OptionMenuGUI.Instance.Content.activeInHierarchy)
                 return;
 
+            if (UpgradeMenu.Instance.UM_BGImage.activeInHierarchy)
+                return;
+
             SetContentActive(!content.gameObject.activeInHierarchy);
 
             if (content.gameObject.activeInHierarchy == true)
